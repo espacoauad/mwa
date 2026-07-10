@@ -1,0 +1,576 @@
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { supabase } from '../lib/supabase.js'
+import { calcularMetas, dataHojeISO, diaDoPrograma } from '../utils/calculos.js'
+import { registrarSessao } from '../lib/sessoes.js'
+import { calcularEstrelas } from '../utils/hallDaFama.js'
+import {
+  carregarGame,
+  concederSementes,
+  comprarSkinDb,
+  equiparSkinDb,
+  registrarAcessoDiario,
+  carregarTarefasHoje,
+} from '../lib/game.js'
+
+const AppContext = createContext(null)
+
+// ── Mapeamento entre as linhas do banco (snake_case) e o formato do app ──
+
+function perfilParaUsuario(p) {
+  return {
+    nome: p.nome,
+    email: p.email,
+    whatsapp: p.whatsapp,
+    sexo: p.sexo,
+    idade: p.idade,
+    peso: Number(p.peso),
+    altura: Number(p.altura),
+    nivelAtividade: p.nivel_atividade,
+    objetivo: p.objetivo,
+    medidas: p.medidas ?? {},
+    consentimentoLgpd: p.consentimento_lgpd,
+    cienteAvisoCrn: p.ciente_aviso_crn,
+    consentimentoRegistradoEm: p.consentimento_registrado_em,
+    dataInicio: p.data_inicio,
+    role: p.role ?? 'user',
+    fotoUrl: p.foto_url ?? null,
+  }
+}
+
+function refeicaoDoBanco(r) {
+  return {
+    id: r.id,
+    data: r.data,
+    horario: r.horario,
+    tipo: r.tipo,
+    nome: r.nome,
+    calorias: Number(r.calorias),
+    proteina: Number(r.proteina),
+    carbos: Number(r.carbos),
+    gordura: Number(r.gordura),
+    fibras: Number(r.fibras),
+    ...(r.detalhes ?? {}),
+  }
+}
+
+function refeicaoParaBanco(ref) {
+  const { id, data, horario, tipo, nome, calorias, proteina, carbos, gordura, fibras, ...detalhes } = ref
+  return {
+    horario,
+    tipo,
+    nome: nome ?? null,
+    calorias: calorias ?? 0,
+    proteina: proteina ?? 0,
+    carbos: carbos ?? 0,
+    gordura: gordura ?? 0,
+    fibras: fibras ?? 0,
+    detalhes,
+  }
+}
+
+function exercicioDoBanco(e) {
+  return {
+    id: e.id,
+    data: e.data,
+    tipo: e.tipo,
+    emoji: e.emoji,
+    intensidade: e.intensidade,
+    duracaoMin: e.duracao_min,
+    gastoCalorico: Number(e.gasto_calorico),
+  }
+}
+
+function pesagemDoBanco(p) {
+  return {
+    id: p.id,
+    data: p.data,
+    semana: p.semana,
+    peso: Number(p.peso),
+    medidas: p.medidas ?? {},
+    fotos: p.fotos ?? {},
+  }
+}
+
+export function AppProvider({ children }) {
+  const [sessao, setSessao] = useState(null)
+  const [carregando, setCarregando] = useState(true)
+  const [usuario, setUsuario] = useState(null)
+  const [refeicoes, setRefeicoes] = useState([])
+  const [exercicios, setExercicios] = useState([])
+  const [pesagens, setPesagens] = useState([])
+  const [aguaMl, setAguaMl] = useState(0)
+  const [modalRefeicao, setModalRefeicao] = useState({ aberto: false, inicial: null })
+  // Modo demonstração: permite pré-visualizar qualquer dia do programa (ofertas, informativos)
+  const [simuladorDia, setSimuladorDia] = useState(null)
+  // Gamificação: sementes, avatar equipado e skins compradas
+  const [game, setGame] = useState(null)
+  // Aviso "+N 🌱" exibido brevemente quando uma tarefa é recompensada
+  const [ganhoSementes, setGanhoSementes] = useState(null)
+  // Tarefas centrais do dia (refeição, água, dica, exercício) e sementes ganhas hoje
+  const [tarefasHoje, setTarefasHoje] = useState({ refeicao: false, agua: false, dica: false, exercicio: false, sementesHoje: 0 })
+  // Tela de "dia concluído" (compartilhável)
+  const [conclusaoDiaAberta, setConclusaoDiaAberta] = useState(false)
+
+  const hoje = dataHojeISO()
+  const userId = sessao?.user?.id ?? null
+  const metas = useMemo(() => (usuario ? calcularMetas(usuario) : null), [usuario])
+  const diaAtual = usuario ? (simuladorDia ?? diaDoPrograma(usuario.dataInicio)) : 1
+
+  // Sessão do Supabase Auth
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setSessao(data.session)
+      if (!data.session) setCarregando(false)
+    })
+    const { data: sub } = supabase.auth.onAuthStateChange(async (_evento, novaSessao) => {
+      setSessao(novaSessao)
+      if (novaSessao && _evento === 'SIGNED_IN') {
+        await registrarSessao(novaSessao.user.id, 'login', { email: novaSessao.user.email })
+      }
+      if (!novaSessao && _evento === 'SIGNED_OUT') {
+        const userId = sub.subscription.user?.id
+        if (userId) {
+          await registrarSessao(userId, 'logout')
+        }
+      }
+      if (!novaSessao) {
+        setUsuario(null)
+        setRefeicoes([])
+        setExercicios([])
+        setPesagens([])
+        setAguaMl(0)
+        setCarregando(false)
+      }
+    })
+    return () => sub.subscription.unsubscribe()
+  }, [])
+
+  // Carrega perfil e dados quando a sessão muda
+  useEffect(() => {
+    if (!userId) return
+    let cancelado = false
+
+    async function carregar() {
+      setCarregando(true)
+      const [perfil, refs, exs, pesos, agua] = await Promise.all([
+        supabase.from('mwa_perfis').select('*').eq('id', userId).maybeSingle(),
+        supabase.from('mwa_refeicoes').select('*').eq('user_id', userId).eq('data', hoje),
+        supabase.from('mwa_exercicios').select('*').eq('user_id', userId).eq('data', hoje),
+        supabase.from('mwa_pesagens').select('*').eq('user_id', userId).order('data'),
+        supabase.from('mwa_agua').select('ml').eq('user_id', userId).eq('data', hoje).maybeSingle(),
+      ])
+      if (cancelado) return
+      setUsuario(perfil.data ? perfilParaUsuario(perfil.data) : null)
+      setRefeicoes((refs.data ?? []).map(refeicaoDoBanco))
+      setExercicios((exs.data ?? []).map(exercicioDoBanco))
+      setPesagens((pesos.data ?? []).map(pesagemDoBanco))
+      setAguaMl(agua.data?.ml ?? 0)
+      setCarregando(false)
+      // Gamificação carrega depois, sem segurar a tela
+      carregarGame(userId).then(async (g) => {
+        if (cancelado || !g) return
+        // Acelerador de sementes: bônus por acessar em dias seguidos, sem falhar
+        const { game: gAtualizado, bonus } = await registrarAcessoDiario(userId, g, hoje)
+        if (cancelado) return
+        setGame(gAtualizado)
+        if (bonus > 0) {
+          setGanhoSementes({ qtd: bonus, tipo: 'streak' })
+          setTimeout(() => setGanhoSementes(null), 3000)
+        }
+        const tarefas = await carregarTarefasHoje(userId, hoje)
+        if (!cancelado) setTarefasHoje(tarefas)
+      })
+    }
+
+    carregar()
+    return () => {
+      cancelado = true
+    }
+  }, [userId, hoje])
+
+  const diaCompleto = tarefasHoje.refeicao && tarefasHoje.agua && tarefasHoje.dica
+
+  // Ao completar as tarefas centrais do dia, abre a tela de celebração — só 1x por dia
+  useEffect(() => {
+    if (!diaCompleto || !userId) return
+    const chave = `mwa_dia_concluido_${userId}_${hoje}`
+    if (localStorage.getItem(chave)) return
+    localStorage.setItem(chave, '1')
+    setConclusaoDiaAberta(true)
+  }, [diaCompleto, userId, hoje])
+
+  const refeicoesHoje = useMemo(
+    () => refeicoes.filter((r) => r.data === hoje).sort((a, b) => (a.horario ?? '').localeCompare(b.horario ?? '')),
+    [refeicoes, hoje],
+  )
+
+  const exerciciosHoje = useMemo(() => exercicios.filter((e) => e.data === hoje), [exercicios, hoje])
+
+  const totaisHoje = useMemo(() => {
+    const t = { calorias: 0, proteina: 0, carbos: 0, gordura: 0, fibras: 0 }
+    for (const r of refeicoesHoje) {
+      t.calorias += r.calorias
+      t.proteina += r.proteina
+      t.carbos += r.carbos
+      t.gordura += r.gordura
+      t.fibras += r.fibras
+    }
+    return {
+      calorias: Math.round(t.calorias),
+      proteina: Math.round(t.proteina * 10) / 10,
+      carbos: Math.round(t.carbos * 10) / 10,
+      gordura: Math.round(t.gordura * 10) / 10,
+      fibras: Math.round(t.fibras * 10) / 10,
+    }
+  }, [refeicoesHoje])
+
+  const gastoExercicios = useMemo(
+    () => exerciciosHoje.reduce((s, e) => s + e.gastoCalorico, 0),
+    [exerciciosHoje],
+  )
+
+  // ── Gamificação ──
+
+  // Recompensa uma tarefa (a ref evita recompensa duplicada) e mostra o aviso "+N 🌱"
+  async function premiar(tipo, ref) {
+    if (!userId) return
+    const ganho = await concederSementes(userId, tipo, ref)
+    if (ganho > 0) {
+      setGame((g) => (g ? { ...g, sementes: g.sementes + ganho } : g))
+      setGanhoSementes({ qtd: ganho, tipo })
+      setTimeout(() => setGanhoSementes(null), 3000)
+      // Tarefas centrais do dia (refeição, água, dica, exercício) atualizam a tela de conclusão
+      if (['refeicao', 'agua', 'dica', 'exercicio'].includes(tipo)) {
+        setTarefasHoje((t) => ({ ...t, [tipo]: true, sementesHoje: t.sementesHoje + ganho }))
+      } else {
+        setTarefasHoje((t) => ({ ...t, sementesHoje: t.sementesHoje + ganho }))
+      }
+    }
+  }
+
+  function abrirConclusaoDia() {
+    setConclusaoDiaAberta(true)
+  }
+
+  function fecharConclusaoDia() {
+    setConclusaoDiaAberta(false)
+  }
+
+  async function marcarDicaLida(dia) {
+    await premiar('dica', `dia-${dia}`)
+  }
+
+  // +15 🌱 por compartilhar o app (1x por dia)
+  async function registrarCompartilhamento() {
+    await premiar('divulgacao', hoje)
+  }
+
+  // +10 🌱 por fazer 300+ pontos no Jogo da Colheita (1x por dia)
+  async function registrarJoguinho() {
+    await premiar('joguinho', hoje)
+  }
+
+  // +10 🌱 por fazer 300+ pontos no Jogo das Escolhas (1x por dia)
+  async function registrarJogoAvatar() {
+    await premiar('jogo_avatar', hoje)
+  }
+
+  // +10 🌱 por fazer 300+ pontos no Jogo do Treino (1x por dia)
+  async function registrarJogoTreino() {
+    await premiar('jogo_treino', hoje)
+  }
+
+  // +15 🌱 por revelar todas as cartas do Jardim de Afirmações (1x por dia)
+  async function registrarJogoMente() {
+    await premiar('jogo_mente', hoje)
+  }
+
+  // +10 🌱 por fazer 300+ pontos no Restaurante Saudável (1x por dia)
+  async function registrarJogoRestaurante() {
+    await premiar('jogo_restaurante', hoje)
+  }
+
+  async function comprarSkin(categoria, skinId, preco) {
+    if (!game || game.skins.includes(skinId)) return false
+    const atualizado = await comprarSkinDb(userId, game, categoria, skinId, preco)
+    if (atualizado) setGame(atualizado)
+    return !!atualizado
+  }
+
+  async function equiparSkin(categoria, skinId) {
+    if (!game || !game.skins.includes(skinId)) return
+    const atualizado = await equiparSkinDb(userId, game, categoria, skinId)
+    if (atualizado) setGame(atualizado)
+  }
+
+  async function concluirOnboarding(dados) {
+    const agora = new Date().toISOString()
+    const { data, error } = await supabase
+      .from('mwa_perfis')
+      .insert({
+        id: userId,
+        nome: dados.nome,
+        email: dados.email,
+        whatsapp: dados.whatsapp,
+        sexo: dados.sexo,
+        idade: dados.idade,
+        peso: dados.peso,
+        altura: dados.altura,
+        nivel_atividade: dados.nivelAtividade,
+        objetivo: dados.objetivo,
+        medidas: dados.medidas ?? {},
+        consentimento_lgpd: dados.consentimentoLgpd,
+        ciente_aviso_crn: dados.cienteAvisoCrn,
+        consentimento_registrado_em: agora,
+        data_inicio: agora,
+      })
+      .select()
+      .single()
+    if (error) throw error
+    // Trilha de auditoria LGPD do consentimento
+    await supabase.from('mwa_lgpd_auditoria').insert({
+      user_id: userId,
+      tipo_acao: 'consentimento',
+      detalhes: { consentimento_lgpd: true, ciente_aviso_crn: true },
+    })
+    setUsuario(perfilParaUsuario(data))
+    // +50 🌱 de boas-vindas
+    await premiar('boas_vindas', 'unico')
+  }
+
+  // LGPD: direito de portabilidade — busca no banco tudo que existe sobre a pessoa
+  async function exportarDados() {
+    const [perfil, refs, exs, pesos, agua, auditoria] = await Promise.all([
+      supabase.from('mwa_perfis').select('*').eq('id', userId).maybeSingle(),
+      supabase.from('mwa_refeicoes').select('*').eq('user_id', userId).order('data'),
+      supabase.from('mwa_exercicios').select('*').eq('user_id', userId).order('data'),
+      supabase.from('mwa_pesagens').select('*').eq('user_id', userId).order('data'),
+      supabase.from('mwa_agua').select('*').eq('user_id', userId).order('data'),
+      supabase.from('mwa_lgpd_auditoria').select('*').eq('user_id', userId).order('criado_em'),
+    ])
+    await supabase.from('mwa_lgpd_auditoria').insert({ user_id: userId, tipo_acao: 'exportacao', detalhes: {} })
+    return {
+      exportadoEm: new Date().toISOString(),
+      conta: { email: sessao.user.email, criadaEm: sessao.user.created_at },
+      perfil: perfil.data,
+      refeicoes: refs.data ?? [],
+      exercicios: exs.data ?? [],
+      pesagens: pesos.data ?? [],
+      agua: agua.data ?? [],
+      auditoriaLgpd: auditoria.data ?? [],
+    }
+  }
+
+  // Apaga todos os dados do programa (mantém o login). Usado por "refazer cadastro".
+  async function apagarDadosPrograma(tipoAcao) {
+    await supabase.from('mwa_lgpd_auditoria').insert({ user_id: userId, tipo_acao: tipoAcao, detalhes: {} })
+    await Promise.all([
+      supabase.from('mwa_refeicoes').delete().eq('user_id', userId),
+      supabase.from('mwa_exercicios').delete().eq('user_id', userId),
+      supabase.from('mwa_pesagens').delete().eq('user_id', userId),
+      supabase.from('mwa_agua').delete().eq('user_id', userId),
+    ])
+    await supabase.from('mwa_perfis').delete().eq('id', userId)
+    setUsuario(null)
+    setRefeicoes([])
+    setExercicios([])
+    setPesagens([])
+    setAguaMl(0)
+  }
+
+  async function reiniciar() {
+    await apagarDadosPrograma('correcao')
+  }
+
+  // LGPD: direito de exclusão — apaga os dados e encerra a sessão
+  async function deletarConta() {
+    await apagarDadosPrograma('exclusao')
+    await supabase.auth.signOut()
+  }
+
+  async function sair() {
+    await supabase.auth.signOut()
+  }
+
+  // Foto de perfil real (a pessoa escolhe do celular; já vem redimensionada em base64)
+  async function atualizarFotoPerfil(dataUrl) {
+    setUsuario((u) => (u ? { ...u, fotoUrl: dataUrl } : u))
+    await supabase.from('mwa_perfis').update({ foto_url: dataUrl }).eq('id', userId)
+  }
+
+  async function adicionarRefeicao(refeicao) {
+    const { data, error } = await supabase
+      .from('mwa_refeicoes')
+      .insert({ user_id: userId, data: hoje, ...refeicaoParaBanco(refeicao) })
+      .select()
+      .single()
+    if (!error) {
+      setRefeicoes((rs) => [...rs, refeicaoDoBanco(data)])
+      await registrarSessao(userId, 'atividade', { acao: 'refeicao_adicionada', tipo: refeicao.tipo })
+      // +5 🌱 por tipo de refeição por dia (café, almoço, jantar...)
+      await premiar('refeicao', `${hoje}:${refeicao.tipo}`)
+    }
+  }
+
+  async function atualizarRefeicao(id, dados) {
+    setRefeicoes((rs) => rs.map((r) => (r.id === id ? { ...r, ...dados } : r)))
+    await supabase.from('mwa_refeicoes').update(refeicaoParaBanco(dados)).eq('id', id)
+  }
+
+  async function removerRefeicao(id) {
+    setRefeicoes((rs) => rs.filter((r) => r.id !== id))
+    await supabase.from('mwa_refeicoes').delete().eq('id', id)
+  }
+
+  async function adicionarExercicio(exercicio) {
+    const { data, error } = await supabase
+      .from('mwa_exercicios')
+      .insert({
+        user_id: userId,
+        data: hoje,
+        tipo: exercicio.tipo,
+        emoji: exercicio.emoji,
+        intensidade: exercicio.intensidade,
+        duracao_min: exercicio.duracaoMin,
+        gasto_calorico: exercicio.gastoCalorico,
+      })
+      .select()
+      .single()
+    if (!error) {
+      setExercicios((es) => [...es, exercicioDoBanco(data)])
+      await registrarSessao(userId, 'atividade', { acao: 'exercicio_adicionado', tipo: exercicio.tipo })
+      // +10 🌱 uma vez por dia
+      await premiar('exercicio', hoje)
+    }
+  }
+
+  async function removerExercicio(id) {
+    setExercicios((es) => es.filter((e) => e.id !== id))
+    await supabase.from('mwa_exercicios').delete().eq('id', id)
+  }
+
+  async function adicionarPesagem(pesagem) {
+    // Hall da Fama: compara com o checkpoint anterior ANTES de inserir a nova pesagem
+    const checkpointAnterior = calcularEstrelas(usuario, pesagens).find((c) => c.semana === pesagem.semana)
+
+    const { data, error } = await supabase
+      .from('mwa_pesagens')
+      .insert({
+        user_id: userId,
+        data: hoje,
+        semana: pesagem.semana,
+        peso: pesagem.peso,
+        medidas: pesagem.medidas ?? {},
+        fotos: pesagem.fotos ?? {},
+      })
+      .select()
+      .single()
+    if (!error) {
+      const novasPesagens = [...pesagens, pesagemDoBanco(data)]
+      setPesagens(novasPesagens)
+      await registrarSessao(userId, 'atividade', { acao: 'pesagem_adicionada', peso: pesagem.peso })
+      // +30 🌱 por semana de pesagem
+      await premiar('pesagem', `semana-${pesagem.semana}`)
+
+      // +25 🌱 e estrela no Hall da Fama se o resultado foi positivo (perdeu peso ou medida)
+      if (!checkpointAnterior?.feita) {
+        const checkpointNovo = calcularEstrelas(usuario, novasPesagens).find((c) => c.semana === pesagem.semana)
+        if (checkpointNovo?.estrela) {
+          await premiar('hall_fama', `semana-${pesagem.semana}`)
+        }
+      }
+    }
+  }
+
+  // Indica uma amiga pelo WhatsApp — recompensa limitada a 3x por dia
+  async function registrarIndicacao() {
+    if (!userId) return 0
+    for (let i = 1; i <= 3; i++) {
+      const ganho = await concederSementes(userId, 'indicacao', `${hoje}:${i}`)
+      if (ganho > 0) {
+        setGame((g) => (g ? { ...g, sementes: g.sementes + ganho } : g))
+        setGanhoSementes({ qtd: ganho, tipo: 'indicacao' })
+        setTimeout(() => setGanhoSementes(null), 3000)
+        setTarefasHoje((t) => ({ ...t, sementesHoje: t.sementesHoje + ganho }))
+        return ganho
+      }
+    }
+    return 0
+  }
+
+  async function adicionarAgua(ml) {
+    const novo = Math.max(0, aguaMl + ml)
+    setAguaMl(novo)
+    await supabase.from('mwa_agua').upsert({ user_id: userId, data: hoje, ml: novo })
+    // +10 🌱 quando bate a meta de água do dia
+    if (metas && novo >= metas.aguaL * 1000) {
+      await premiar('agua', hoje)
+    }
+  }
+
+  function abrirModalRefeicao(inicial = null) {
+    setModalRefeicao({ aberto: true, inicial })
+  }
+
+  function fecharModalRefeicao() {
+    setModalRefeicao({ aberto: false, inicial: null })
+  }
+
+  const valor = {
+    sessao,
+    carregando,
+    usuario,
+    metas,
+    diaAtual,
+    hoje,
+    refeicoesHoje,
+    exerciciosHoje,
+    totaisHoje,
+    gastoExercicios,
+    pesagens,
+    aguaMl,
+    modalRefeicao,
+    simuladorDia,
+    setSimuladorDia,
+    concluirOnboarding,
+    exportarDados,
+    reiniciar,
+    deletarConta,
+    sair,
+    adicionarRefeicao,
+    atualizarRefeicao,
+    removerRefeicao,
+    adicionarExercicio,
+    removerExercicio,
+    adicionarPesagem,
+    adicionarAgua,
+    abrirModalRefeicao,
+    fecharModalRefeicao,
+    atualizarFotoPerfil,
+    game,
+    ganhoSementes,
+    tarefasHoje,
+    diaCompleto,
+    conclusaoDiaAberta,
+    abrirConclusaoDia,
+    fecharConclusaoDia,
+    marcarDicaLida,
+    registrarCompartilhamento,
+    registrarJoguinho,
+    registrarJogoAvatar,
+    registrarJogoTreino,
+    registrarJogoMente,
+    registrarJogoRestaurante,
+    registrarIndicacao,
+    comprarSkin,
+    equiparSkin,
+  }
+
+  return <AppContext.Provider value={valor}>{children}</AppContext.Provider>
+}
+
+export function useApp() {
+  const ctx = useContext(AppContext)
+  if (!ctx) throw new Error('useApp deve ser usado dentro de <AppProvider>')
+  return ctx
+}

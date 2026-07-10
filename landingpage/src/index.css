@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  /* Cores oficiais MWA */
+  --color-forest: #344528;        /* verde profundo — cor principal */
+  --color-forest-deep: #263219;   /* verde escuro — fundos e textos */
+  --color-gold: #c49b62;          /* dourado — detalhe premium */
+  --color-gold-soft: #d4af7a;     /* dourado claro */
+  --color-cream: #f5f1e8;         /* off-white — base */
+  --color-sand: #e8e4dc;          /* bege suave — seções alternadas */
+  --color-ink: #2b3524;           /* texto principal */
+  --color-mist: #6f7a66;          /* texto secundário */
+
+  /* Tipografia oficial */
+  --font-display: "Lora", Georgia, serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-gold);
+  color: white;
+}

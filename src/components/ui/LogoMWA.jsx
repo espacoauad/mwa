@@ -1,0 +1,44 @@
+import logoOficial from '../../assets/logo-mwa.png'
+import logoClara from '../../assets/logo-mwa-clara.png'
+import simboloOficial from '../../assets/simbolo-mwa.png'
+import simboloClaro from '../../assets/simbolo-mwa-claro.png'
+
+// Logo oficial MWA (arquivo enviado por Wanessa — ver branding/LEIA-ME.md).
+// variante: 'completa' (símbolo + MWA + tagline), 'simbolo' (só o ícone), 'wordmark' (MWA + tagline, sem ícone)
+// tema: 'escuro' (traços verde-escuro, para fundo claro) | 'claro' (traços creme, para fundo verde/escuro)
+export default function LogoMWA({ variante = 'completa', tema = 'escuro', className = '' }) {
+  if (variante === 'simbolo') {
+    return (
+      <img
+        src={tema === 'claro' ? simboloClaro : simboloOficial}
+        alt="MWA"
+        className={`object-contain ${className}`}
+      />
+    )
+  }
+
+  if (variante === 'wordmark') {
+    const corPrincipal = tema === 'claro' ? '#F5F1E8' : '#344528'
+    const corTagline = tema === 'claro' ? '#D4AF7A' : '#879b55'
+    return (
+      <div className={`text-center ${className}`}>
+        <p className="font-serif text-4xl font-bold tracking-wide">
+          <span style={{ color: corPrincipal }}>M</span>
+          <span style={{ color: '#c49b62' }}>W</span>
+          <span style={{ color: corPrincipal }}>A</span>
+        </p>
+        <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.25em]" style={{ color: corTagline }}>
+          My Wellness Approach
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <img
+      src={tema === 'claro' ? logoClara : logoOficial}
+      alt="MWA — My Wellness Approach"
+      className={`w-36 object-contain ${className}`}
+    />
+  )
+}

@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta do programa */
+  --color-verde: #344528;
+  --color-verde-escuro: #263219;
+  --color-sage: #879b55;
+  --color-sage-claro: #eef2e2;
+  --color-ouro: #d4af7a;
+  --color-ouro-claro: #f6ecdd;
+  --color-creme: #f5f1e8;
+  --color-cinza: #e8e4dc;
+
+  --font-sans: "Poppins", system-ui, -apple-system, sans-serif;
+  --font-serif: "Lora", Georgia, serif;
+}
+
+body {
+  background-color: var(--color-creme);
+  color: var(--color-verde);
+}
