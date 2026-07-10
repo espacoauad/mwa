@@ -5,11 +5,13 @@ import { DICAS_90 } from '../../data/dicas90.js'
 import { INFORMATIVOS } from '../../data/informativos.js'
 import { linkWhatsApp } from '../../utils/ofertas.js'
 import InformativoDoDia from '../informativos/InformativoDoDia.jsx'
+import LenteConsciencia from '../ferramentas/LenteConsciencia.jsx'
 
 export default function Dicas({ irPara }) {
   const { diaAtual, marcarDicaLida } = useApp()
   const [diaAberto, setDiaAberto] = useState(diaAtual)
   const [secao, setSecao] = useState('informativo')
+  const [lenteAberta, setLenteAberta] = useState(false)
 
   // +10 🌱 ao abrir a dica do dia atual (só conta 1x por dia)
   useEffect(() => {
@@ -53,18 +55,27 @@ export default function Dicas({ irPara }) {
         })}
       </div>
 
-      {/* Alternância informativo / dica */}
-      <div className="mt-2 grid grid-cols-2 gap-1 rounded-lg bg-cinza p-1">
+      {/* Alternância informativo / dica / lente (a partir do dia 30) */}
+      <div className={`mt-2 grid gap-1 rounded-lg bg-cinza p-1 ${diaAtual >= 30 ? 'grid-cols-3' : 'grid-cols-2'}`}>
         {[
           { id: 'informativo', label: '📊 Informativo' },
           { id: 'dica', label: '💡 Dica educativa' },
+          ...(diaAtual >= 30 ? [{ id: 'lente', label: '🔍 Pausa consciente' }] : []),
         ].map((op) => (
           <button
             key={op.id}
             type="button"
-            onClick={() => setSecao(op.id)}
+            onClick={() => {
+              if (op.id === 'lente') {
+                setLenteAberta(true)
+              } else {
+                setSecao(op.id)
+              }
+            }}
             className={`rounded-md py-2 text-sm font-semibold transition-colors ${
-              secao === op.id ? 'bg-white text-verde shadow-sm' : 'text-verde/50'
+              (op.id === 'lente' ? lenteAberta : secao === op.id)
+                ? 'bg-white text-verde shadow-sm'
+                : 'text-verde/50'
             }`}
           >
             {op.label}
@@ -75,6 +86,18 @@ export default function Dicas({ irPara }) {
       <div className="mt-4 pb-4">
         {secao === 'informativo' && informativo && (
           <InformativoDoDia informativo={informativo} dia={diaAtual} irPara={irPara} />
+        )}
+        {secao === 'informativo' && !informativo && (
+          <article className="rounded-2xl bg-white p-6 text-center shadow-sm shadow-verde/5">
+            <p className="text-3xl">🌿</p>
+            <p className="mt-3 font-serif text-lg font-semibold italic text-verde">
+              Novo informativo em preparação
+            </p>
+            <p className="mt-1 text-sm text-verde/60">
+              O conteúdo comparativo deste dia está sendo finalizado pela equipe MWA. Enquanto isso,
+              aproveite a dica educativa do dia.
+            </p>
+          </article>
         )}
 
         {secao === 'dica' && dica && (
@@ -112,6 +135,9 @@ export default function Dicas({ irPara }) {
           </article>
         )}
       </div>
+
+      {/* A Lente da Consciência - disponível a partir do Dia 30 */}
+      {lenteAberta && <LenteConsciencia onFechar={() => setLenteAberta(false)} />}
     </div>
   )
 }

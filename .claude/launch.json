@@ -7,6 +7,13 @@
       "runtimeArgs": ["node_modules/vite/bin/vite.js"],
       "port": 5173,
       "autoPort": true
+    },
+    {
+      "name": "mwa-landingpage",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "runtimeArgs": ["../node_modules/vite/bin/vite.js", "--config", "landingpage/vite.config.js", "--root", "landingpage"],
+      "port": 5174,
+      "autoPort": true
     }
   ]
 }

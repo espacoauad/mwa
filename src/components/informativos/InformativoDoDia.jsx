@@ -1,5 +1,5 @@
 import { Sparkles } from 'lucide-react'
-import { linkCompraUpgrade } from '../../utils/ofertas.js'
+import { linkCompraUpgrade, linkSessao } from '../../utils/ofertas.js'
 
 const TONS = {
   bom: { borda: 'border-sage', badge: 'bg-sage text-white' },
@@ -40,6 +40,7 @@ export default function InformativoDoDia({ informativo, dia, irPara }) {
 
   function acaoCta() {
     if (informativo.cta.tipo === 'progresso') irPara?.('progresso')
+    else if (informativo.cta.tipo === 'sessao') window.open(linkSessao(dia), '_blank', 'noopener')
     else window.open(linkCompraUpgrade(dia), '_blank', 'noopener')
   }
 

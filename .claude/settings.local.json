@@ -17,7 +17,12 @@
       "Bash(git config *)",
       "mcp__visualize__read_me",
       "mcp__visualize__show_widget",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(npx vite *)",
+      "Bash(git commit -m 'docs: Add GitHub setup and backup instructions *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)"
     ]
   }
 }

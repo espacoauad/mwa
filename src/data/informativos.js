@@ -613,13 +613,13 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Ordem de boas escolhas: 1º ÁGUA (sempre!), 2º chá Herbalife, 3º café/chá verde. Refrigerante: nunca. Você já sabe escolher! 💚',
+    dica: 'Ordem de boas escolhas: 1º água (sempre!), 2º chá, 3º café/chá verde. Refrigerante: evite sempre que possível. Você já sabe escolher! 💚',
     cta: null,
   },
   {
     dia: 21,
     emoji: '🏆',
-    titulo: 'VOCÊ COMPLETOU 21 DIAS! PARABÉNS!',
+    titulo: 'Você completou sua Jornada de 21 Dias!',
     opcoes: [
       {
         nome: 'Seu resultado em 21 dias',
@@ -628,13 +628,13 @@ export const INFORMATIVOS = [
           ['Como contar calorias', '✅'],
           ['Proteína é a chave', '✅'],
           ['Pequenas mudanças = resultado', '✅'],
-          ['Você consegue TUDO', '✅'],
+          ['Uma nova forma de viver', '✅'],
         ],
-        extras: ['Registre a pesagem final e compare as fotos do dia 1 com as de hoje!'],
+        extras: ['Registre a pesagem final e compare as fotos do dia 1 com as de hoje.'],
       },
     ],
-    dica: 'Você fez isso! Agora escolha: parar aqui, ou continuar 90 dias e transformar resultado em estilo de vida. A escolha é SUA. Mas sabemos qual é a inteligente... 💚',
-    cta: { label: 'Quero Continuar 90 Dias', tipo: 'upgrade' },
+    dica: 'Mais importante do que chegar até aqui é perceber que a transformação não depende de perfeição. Ela nasce da repetição, da consciência e das escolhas que você decide continuar fazendo. Este pode ser apenas o começo — o MWA | Programa de 90 Dias está disponível para você aprofundar sua evolução, com 20% OFF. 💚',
+    cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
   },
 ]
 
