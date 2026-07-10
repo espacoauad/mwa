@@ -10,6 +10,7 @@ import JogoEscolhas from '../game/JogoEscolhas.jsx'
 import JogoTreino from '../game/JogoTreino.jsx'
 import JogoMente from '../game/JogoMente.jsx'
 import JogoRestaurante from '../game/JogoRestaurante.jsx'
+import LenteConsciencia from './LenteConsciencia.jsx'
 
 function CalculadoraMacros() {
   const { abrirModalRefeicao } = useApp()
@@ -219,6 +220,7 @@ export default function Ferramentas() {
   const [treinoAberto, setTreinoAberto] = useState(false)
   const [menteAberto, setMenteAberto] = useState(false)
   const [restauranteAberto, setRestauranteAberto] = useState(false)
+  const [lenteAberta, setLenteAberta] = useState(false)
 
   return (
     <div className="px-5 pt-10">
@@ -302,11 +304,32 @@ export default function Ferramentas() {
         </span>
       </button>
 
+      {/* A Lente da Consciência: ferramenta de pausa guiada */}
+      <section className="mt-6 rounded-2xl border-2 border-verde/20 bg-gradient-to-br from-verde/5 to-sage-claro/30 p-6">
+        <div className="mb-4">
+          <h2 className="font-serif text-lg font-semibold italic text-verde">🔍 A Lente da Consciência</h2>
+          <p className="mt-1 text-sm text-verde/70">
+            Uma ferramenta de pausa guiada para sair do automático e escolher com clareza.
+          </p>
+        </div>
+        <p className="mb-4 text-xs text-verde/60">
+          <span className="italic">"Consciência não é controle rígido. É aprender a se escutar antes de agir no automático."</span>
+        </p>
+        <button
+          type="button"
+          onClick={() => setLenteAberta(true)}
+          className="w-full rounded-full bg-verde px-6 py-3 font-semibold text-white transition-all active:scale-95"
+        >
+          Abrir ferramenta
+        </button>
+      </section>
+
       {jogoAberto && <JogoColheita onFechar={() => setJogoAberto(false)} />}
       {restauranteAberto && <JogoRestaurante onFechar={() => setRestauranteAberto(false)} />}
       {escolhasAberto && <JogoEscolhas onFechar={() => setEscolhasAberto(false)} />}
       {treinoAberto && <JogoTreino onFechar={() => setTreinoAberto(false)} />}
       {menteAberto && <JogoMente onFechar={() => setMenteAberto(false)} />}
+      {lenteAberta && <LenteConsciencia onFechar={() => setLenteAberta(false)} />}
     </div>
   )
 }
