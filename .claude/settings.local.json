@@ -58,7 +58,22 @@
       "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__list_projects",
       "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__get_advisors",
       "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__list_tables",
-      "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__list_edge_functions"
+      "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__list_edge_functions",
+      "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__execute_sql",
+      "Bash(gh pr create --title 'feat: implement Seu Progresso and A Lente da Consciência components' --body ' *)",
+      "Bash(xargs grep -l \"aria-label\\\\|role=\\\\|ariaLabel\")",
+      "Bash(grep -n \"//\\\\|/\\\\*\\\\|TODO\\\\|FIXME\" /c/Users/wanes/OneDrive/Desktop/MWA/src/components/hoje/SeuProgresso.jsx /c/Users/wanes/OneDrive/Desktop/MWA/src/components/ferramentas/LenteConsciencia.jsx)",
+      "Bash(npm list *)",
+      "PowerShell(npm audit --json 2>$null | ConvertFrom-Json | ForEach-Object { $_.metadata.vulnerabilities } | ConvertTo-Json -Compress; npm outdated)",
+      "Bash(xargs grep -l \"mwa_\\\\|schema\\\\|database\")",
+      "PowerShell(git tag pre-auditoria-seguranca)",
+      "PowerShell(git checkout -b security/correcoes-criticas)",
+      "Bash(git commit -q -m 'chore\\(seg\\): migrations versionadas + estado anterior e rollback *)",
+      "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__apply_migration",
+      "Bash(git rm *)",
+      "Bash(mkdir -p docs)",
+      "Bash(git mv *)",
+      "Bash(git commit -q -m 'chore\\(repo\\): versiona assets, corrige .gitignore, organiza docs *)"
     ]
   }
 }
