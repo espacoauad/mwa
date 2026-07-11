@@ -22,7 +22,26 @@
       "Bash(git commit -m 'docs: Add GitHub setup and backup instructions *)",
       "Bash(git remote *)",
       "Bash(git branch *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(timeout 180 git push -u origin main)",
+      "mcp__claude-in-chrome__computer",
+      "mcp__claude-in-chrome__navigate",
+      "Bash(sort -t: -k2 -n)",
+      "Bash(awk '$1>1 {print \"DUPLICADO:\", $0}')",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "Bash(xargs -I{} stat -c \"%Y %n\" {})",
+      "Bash(grep -rln \"foto-wanessa\\\\|fotoWanessa\\\\|Foto Wanessa\\\\|wanessa foto\\\\|foto wanessa\" --include=\"*.jsx\" --include=\"*.js\" src landingpage/src)",
+      "Bash(file \"wanessa foto 1.png\" landingpage/src/assets/foto-wanessa.png landingpage/src/assets/foto-wanessa-story.png branding/foto-wanessa-sem-fundo.png)",
+      "Bash(magick -version)",
+      "Bash(convert -version)",
+      "Bash(node -e \"console.log\\(1\\)\")",
+      "Bash(grep -iE \"^sharp$|^jimp$|^rembg|canvas\")",
+      "Bash(/c/Windows/system32/convert.exe /?)",
+      "Bash(npm install *)",
+      "Bash(node -e \"const {version}=require\\('jimp/package.json'\\); console.log\\(version\\)\")",
+      "Bash(node scratch_process_photo.cjs)",
+      "Bash(node -e ' *)",
+      "Bash(rm -f scratch_about_preview.png scratch_process_photo.cjs)"
     ]
   }
 }
