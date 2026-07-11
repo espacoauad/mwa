@@ -41,7 +41,24 @@
       "Bash(node -e \"const {version}=require\\('jimp/package.json'\\); console.log\\(version\\)\")",
       "Bash(node scratch_process_photo.cjs)",
       "Bash(node -e ' *)",
-      "Bash(rm -f scratch_about_preview.png scratch_process_photo.cjs)"
+      "Bash(rm -f scratch_about_preview.png scratch_process_photo.cjs)",
+      "Bash(gh pr create --title 'chore: complete 90-day informativos content and dev config updates' --body ' *)",
+      "Read(//c/Program Files/**)",
+      "Bash(where.exe gh *)",
+      "Bash(env)",
+      "Bash(winget --version)",
+      "Bash(npm --version)",
+      "Bash(winget install *)",
+      "PowerShell(Get-ChildItem -Recurse src, landingpage, public, branding, dist -File | Select-Object FullName, Length | ForEach-Object { $_.FullName.Replace\\('C:\\\\Users\\\\wanes\\\\OneDrive\\\\Desktop\\\\MWA\\\\',''\\) + ' \\(' + $_.Length + '\\)' })",
+      "PowerShell(npm run build)",
+      "Read(//c/Program Files/GitHub CLI/**)",
+      "Read(//c/Users/wanes/AppData/Local/Microsoft/**)",
+      "Bash(git credential-manager *)",
+      "Bash(git credential *)",
+      "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__list_projects",
+      "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__get_advisors",
+      "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__list_tables",
+      "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__list_edge_functions"
     ]
   }
 }
