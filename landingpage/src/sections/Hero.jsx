@@ -4,51 +4,55 @@ import { BRAND } from '../config.js'
 
 export default function Hero() {
   return (
-    <header className="relative overflow-hidden bg-cream px-6 pb-24 pt-20 md:pb-32 md:pt-28">
-      {/* detalhe decorativo sutil */}
+    <header className="relative overflow-hidden bg-cream px-6 py-16 md:py-24">
       <div className="pointer-events-none absolute -right-40 -top-40 h-96 w-96 rounded-full border border-gold/15" />
       <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full border border-gold/10" />
 
-      <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
-        {/* Marca — logo oficial */}
-        <img src={logoMWA} alt="MWA — My Wellness Approach" className="w-52 md:w-64" />
-        <p className="mt-4 font-display text-lg italic text-forest md:text-xl">
-          {BRAND.method}
-        </p>
-
-        <GoldRule className="my-10" />
-
-        {/* Headline */}
-        <h2 className="max-w-3xl font-display text-3xl leading-snug text-forest-deep md:text-5xl md:leading-tight">
-          Não é uma dieta.
-          <br />
-          <span className="italic text-forest">É uma nova forma de viver.</span>
-        </h2>
-
-        <p className="mt-6 text-sm font-light uppercase tracking-[0.2em] text-mist md:text-base">
-          Transforme hábitos, conquiste resultados, mude sua vida.
-        </p>
-
-        {/* Texto de apoio */}
-        <div className="mt-10 max-w-2xl space-y-4 text-base leading-relaxed text-ink/80 md:text-lg">
-          <p>
-            Aprenda, em <strong className="font-semibold text-forest">21 dias</strong>, a organizar
-            sua alimentação, transformar seus hábitos e construir uma rotina mais saudável com o
-            acompanhamento diário de uma nutricionista no seu bolso.
-          </p>
-          <p>
-            O MWA nasceu da abordagem que permitiu a Wanessa Auad eliminar 26 kg após a gestação e
-            manter sua transformação por 14 anos.
-          </p>
+      <div className="mx-auto grid max-w-6xl items-start gap-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+        <div className="flex justify-center md:justify-end">
+          <img
+            src={logoMWA}
+            alt="MWA — My Wellness Approach"
+            className="w-72 max-w-full drop-shadow-[0_18px_28px_rgba(52,69,40,0.12)] sm:w-80 md:w-full md:max-w-[30rem]"
+          />
         </div>
 
-        <CtaButton className="mt-12">Quero começar meus 21 dias</CtaButton>
+        <div className="text-center md:text-left">
+          <p className="font-display text-xl italic text-forest md:text-2xl">
+            {BRAND.method}
+          </p>
 
-        {/* Selo de confiança */}
-        <p className="mt-8 max-w-md text-xs leading-relaxed text-mist">
-          Desenvolvido por Wanessa Auad — nutricionista, empreendedora e especialista em
-          emagrecimento há mais de 20 anos. CRN-1/27939.
-        </p>
+          <GoldRule className="mx-auto my-8 md:mx-0" />
+
+          <h2 className="font-display text-3xl leading-snug text-forest-deep md:text-5xl md:leading-tight">
+            Seu bem-estar,
+            <br />
+            <span className="italic text-forest">organizado em um único app.</span>
+          </h2>
+
+          <p className="mt-6 text-sm font-light uppercase tracking-[0.2em] text-mist md:text-base">
+            Educação, motivação e diversão para hábitos que cabem na vida real.
+          </p>
+
+          <div className="mt-8 space-y-4 text-base leading-relaxed text-ink/80 md:text-lg">
+            <p>
+              Tenha, em <strong className="font-semibold text-forest">21 dias</strong>, um ecossistema
+              completo para organizar sua alimentação, acompanhar sua rotina e construir hábitos de
+              bem-estar com clareza sobre cada escolha do seu dia.
+            </p>
+            <p>
+              Registre suas refeições e veja em tempo real quanto já consumiu, o que ainda precisa e
+              como ajustar a próxima escolha — sem adivinhação e sem culpa.
+            </p>
+          </div>
+
+          <CtaButton className="mt-10">Quero começar meus 21 dias</CtaButton>
+
+          <p className="mt-7 max-w-xl text-xs leading-relaxed text-mist md:text-sm">
+            Minha expertise em bem-estar, transformada em monitoramento, educação, motivação e jogos
+            na palma da sua mão — para tornar o processo simples, mágico e divertido.
+          </p>
+        </div>
       </div>
     </header>
   )

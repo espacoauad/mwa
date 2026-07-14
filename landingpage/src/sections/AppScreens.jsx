@@ -1,4 +1,4 @@
-import { Plus, GlassWater, Camera, Pencil, Trash2, TrendingDown, Flame, Calculator, Search, Lock } from 'lucide-react'
+import { Plus, GlassWater, Camera, Pencil, Trash2, TrendingDown, Flame, Calculator, Search, Lock, Gamepad2, Sprout, Brain } from 'lucide-react'
 import { Section, Eyebrow, Title, GoldRule } from '../components/ui.jsx'
 
 function Phone({ children, label }) {
@@ -225,6 +225,74 @@ function TelaDicas() {
   )
 }
 
+function TelaJogos() {
+  return (
+    <div className="px-4 py-5">
+      <p className="flex items-center gap-1.5 font-display text-sm font-semibold text-forest">
+        <Gamepad2 size={14} className="text-gold" /> Jogos e conquistas
+      </p>
+      <div className="mt-3 flex items-center gap-3 rounded-xl bg-forest p-3 text-cream">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gold/20 text-2xl">🌿</div>
+        <div>
+          <p className="flex items-center gap-1 text-xs font-semibold text-gold-soft">
+            <Sprout size={11} /> 185 sementes
+          </p>
+          <p className="mt-0.5 text-[9px] text-cream/60">Cuide da rotina e personalize seu avatar</p>
+        </div>
+      </div>
+      <div className="mt-3 grid grid-cols-2 gap-2">
+        {[
+          ['🍓', 'Colheita', 'Liberado'],
+          ['🥗', 'Escolhas', 'Liberado'],
+          ['🍽️', 'Restaurante', 'Dia 10'],
+          ['🌷', 'Afirmações', 'Dia 16'],
+        ].map(([emoji, name, status], index) => (
+          <div key={name} className="rounded-xl bg-white p-2.5 shadow-sm">
+            <p className="text-lg">{index > 1 ? '🔒' : emoji}</p>
+            <p className="mt-1 text-[10px] font-semibold text-forest">{name}</p>
+            <p className="text-[8px] text-forest/50">{status}</p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 rounded-xl bg-gold/15 p-3 text-center">
+        <p className="text-[9px] font-semibold text-forest">Complete hábitos e ganhe recompensas 🌱</p>
+      </div>
+    </div>
+  )
+}
+
+function TelaConsciencia() {
+  return (
+    <div className="px-4 py-5">
+      <p className="flex items-center gap-1.5 font-display text-sm font-semibold text-forest">
+        <Brain size={14} className="text-gold" /> Lente da Consciência
+      </p>
+      <p className="mt-1 text-[9px] text-forest/60">Uma pausa guiada para sair do automático.</p>
+      <div className="mt-4 rounded-2xl bg-forest p-4 text-cream">
+        <p className="text-[8px] font-semibold uppercase tracking-widest text-gold-soft">Pare por um instante</p>
+        <p className="mt-2 font-display text-base italic">O que você está sentindo agora?</p>
+        <div className="mt-3 grid grid-cols-2 gap-1.5 text-[9px]">
+          {['Fome física', 'Ansiedade', 'Cansaço', 'Vontade'].map((item) => (
+            <span key={item} className="rounded-lg bg-white/10 px-2 py-2 text-center">{item}</span>
+          ))}
+        </div>
+      </div>
+      <div className="mt-3 rounded-xl bg-white p-3 shadow-sm">
+        <p className="text-[9px] font-semibold text-forest">Escolha com clareza</p>
+        <p className="mt-1 text-[9px] leading-relaxed text-forest/60">
+          Reconheça o momento, respire e decida o próximo passo sem culpa.
+        </p>
+      </div>
+      <div className="mt-2 rounded-xl border border-gold/30 bg-gold/10 p-3">
+        <p className="text-[8px] font-semibold uppercase tracking-widest text-gold">✨ Inspiração do dia</p>
+        <p className="mt-1 font-display text-[11px] italic leading-relaxed text-forest">
+          Uma palavra de edificação para fortalecer sua mente, sua fé e seu propósito.
+        </p>
+      </div>
+    </div>
+  )
+}
+
 export default function AppScreens() {
   return (
     <Section className="bg-white">
@@ -240,6 +308,8 @@ export default function AppScreens() {
         <Phone label="Calculadora de macros"><TelaCalculadora /></Phone>
         <Phone label="Atividade física"><TelaExercicio /></Phone>
         <Phone label="Dicas e conteúdos diários"><TelaDicas /></Phone>
+        <Phone label="Jogos, sementes e avatar"><TelaJogos /></Phone>
+        <Phone label="Consciência e inspiração"><TelaConsciencia /></Phone>
       </div>
       <p className="mx-auto mt-10 max-w-md text-center text-xs italic leading-relaxed text-mist">
         Telas ilustrativas do aplicativo. Os conteúdos completos são liberados dia a dia, exclusivamente para as alunas.

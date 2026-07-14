@@ -8,11 +8,11 @@ const faqs = [
   ['É um PDF ou e-book?', 'Não. O MWA é uma experiência guiada pelo aplicativo, com acompanhamento diário, registros, conteúdos e metas.'],
   ['Por quanto tempo terei acesso?', 'O acesso inicial é de 21 dias.'],
   ['Posso continuar depois dos 21 dias?', 'Sim. Dentro do aplicativo, você poderá receber a oferta para continuar no Programa de 90 Dias.'],
-  ['Quanto custa o programa inicial?', 'O investimento para a Jornada de 21 Dias é de R$ 127, em pagamento único.'],
+  ['Quanto custa o programa inicial?', 'O investimento para a Jornada de 21 Dias é de R$ 97, em pagamento único.'],
   ['Existe mensalidade?', 'Não. O programa inicial é pagamento único.'],
   ['E se eu não gostar?', 'Você tem 7 dias de garantia incondicional. Se sentir que não é para você, pode solicitar reembolso.'],
   ['Posso compartilhar meu acesso?', 'Não. O acesso é individual e pessoal.'],
-  ['A sessão individual está inclusa?', 'Não. A Sessão Estratégica MWA é uma oferta opcional dentro do aplicativo, no valor de R$ 297.'],
+  ['A sessão individual está inclusa?', 'Não. A Sessão Estratégica MWA é uma oferta opcional dentro do aplicativo, com condições apresentadas diretamente por lá.'],
 ]
 
 function FaqItem({ question, answer }) {

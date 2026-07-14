@@ -3,7 +3,7 @@ import { Section, Eyebrow, Title } from '../components/ui.jsx'
 
 const items = [
   { icon: Award, text: 'Mais de 20 anos de experiência real em emagrecimento' },
-  { icon: ShieldCheck, text: 'Método criado por nutricionista com registro profissional' },
+  { icon: ShieldCheck, text: 'Conteúdo criado com orientação nutricional profissional' },
   { icon: Smartphone, text: 'Acompanhamento diário pelo aplicativo' },
   { icon: Sparkles, text: 'Não é PDF. Não é e-book. É uma experiência guiada' },
   { icon: Zap, text: 'Acesso imediato após a compra' },
@@ -15,7 +15,7 @@ export default function TrustBar() {
     <Section className="bg-white">
       <div className="text-center">
         <Eyebrow>Por que confiar</Eyebrow>
-        <Title>Uma abordagem criada por quem vive o que ensina.</Title>
+        <Title>Um app completo para transformar intenção em hábitos.</Title>
       </div>
       <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map(({ icon: Icon, text }) => (

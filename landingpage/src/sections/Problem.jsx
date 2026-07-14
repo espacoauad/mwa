@@ -15,11 +15,11 @@ export default function Problem() {
             para a sua vida real.
           </p>
           <p className="font-display text-xl italic text-forest md:text-2xl">
-            O problema não é falta de força de vontade. O problema é tentar mudar sem método, sem
+            O problema não é falta de força de vontade. O problema é tentar mudar sem clareza, sem
             acompanhamento e sem uma rotina possível de sustentar.
           </p>
           <p>
-            O MWA foi criado para ensinar você a entender seu corpo, organizar sua alimentação e
+            O My Wellness App ajuda você a entender seu corpo, organizar sua alimentação e
             construir hábitos que podem acompanhar você depois dos 21 dias.
           </p>
         </div>

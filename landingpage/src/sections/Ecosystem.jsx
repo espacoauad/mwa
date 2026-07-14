@@ -30,7 +30,7 @@ export default function Ecosystem() {
           <h3 className="mt-4 font-display text-xl text-forest-deep">Sessão Estratégica MWA</h3>
           <p className="mt-3 text-sm leading-relaxed text-ink/75">
             Deseja uma orientação individual? Dentro do aplicativo, você poderá agendar uma sessão
-            online com Wanessa Auad para olhar sua rotina, dificuldades e objetivos de forma
+            online com a mentora do plano para olhar sua rotina, dificuldades e objetivos de forma
             personalizada. Ideal para quem deseja clareza, direcionamento e ajustes individuais.
           </p>
           <p className="mt-4 flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-gold">

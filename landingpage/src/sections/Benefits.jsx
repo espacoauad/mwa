@@ -49,11 +49,11 @@ export default function Benefits() {
         <div className="grid items-start gap-12 md:grid-cols-2">
           <div>
             <Eyebrow light>O diferencial</Eyebrow>
-            <Title light>Por que esse método funciona?</Title>
+            <Title light>Por que o My Wellness App funciona?</Title>
             <GoldRule className="my-8" />
             <p className="text-base leading-relaxed text-cream/85">
-              Porque ele não foi criado para fazer você emagrecer apenas durante 21 dias. Ele foi
-              criado para ensinar você a continuar evoluindo depois do programa.
+              Porque ele une educação, prática e acompanhamento real do dia. Você aprende enquanto faz e
+              constrói autonomia para continuar evoluindo depois do programa.
             </p>
             <p className="mt-8 font-display text-2xl italic leading-snug text-gold-soft">
               O MWA não entrega apenas informação. Ele organiza a prática.

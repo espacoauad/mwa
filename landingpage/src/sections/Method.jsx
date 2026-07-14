@@ -1,30 +1,30 @@
-import { Brain, Salad, CalendarCheck, HeartHandshake } from 'lucide-react'
+import { Gauge, BookOpen, Sparkles, Gamepad2, Smartphone } from 'lucide-react'
 import { Section, Eyebrow, Title, GoldRule } from '../components/ui.jsx'
 
 const pillars = [
   {
-    icon: Brain,
+    icon: Gauge,
     number: '01',
-    title: 'Mentalidade',
-    text: 'Nenhuma transformação começa no prato. Ela começa na forma como você pensa, decide e se compromete com a sua própria saúde. No MWA, você aprende a sair do ciclo da culpa e construir uma relação mais consciente com o processo.',
+    title: 'Monitoramento real',
+    text: 'Ao registrar suas refeições, água e movimento, você enxerga seu dia como ele realmente é. O app mostra quanto já consumiu, o que ainda precisa e ajuda a ajustar a próxima escolha.',
   },
   {
-    icon: Salad,
+    icon: BookOpen,
     number: '02',
-    title: 'Nutrição Inteligente',
-    text: 'Você aprende a montar refeições equilibradas, controlar calorias sem sofrimento, consumir proteínas de forma estratégica e fazer escolhas que cabem na vida real. Sem modismos. Sem dietas extremas. Sem terrorismo alimentar.',
+    title: 'Educação',
+    text: 'Conteúdos e dicas ajudam você a entender o que comer, quanto comer e por quê. O conhecimento transforma números em escolhas conscientes e cria autonomia.',
   },
   {
-    icon: CalendarCheck,
+    icon: Sparkles,
     number: '03',
-    title: 'Rotina Sustentável',
-    text: 'São os hábitos diários que sustentam os resultados. Por isso, o MWA ajuda você a organizar alimentação, água, metas, evolução e movimento em uma rotina possível.',
+    title: 'Motivação',
+    text: 'Metas, evolução visível e pequenas conquistas mantêm o foco no que você já avançou. Cada dia oferece um próximo passo claro e possível.',
   },
   {
-    icon: HeartHandshake,
+    icon: Gamepad2,
     number: '04',
-    title: 'Acompanhamento',
-    text: 'Informação sem prática não gera transformação. Durante os 21 dias, você terá uma experiência guiada pelo aplicativo, com registros, conteúdos, metas e acompanhamento para manter você no caminho.',
+    title: 'Diversão',
+    text: 'Jogos, desafios e recompensas tornam o cuidado mais leve. Você aprende brincando e transforma a construção de hábitos em uma experiência simples, mágica e divertida.',
   },
 ]
 
@@ -33,27 +33,56 @@ export default function Method() {
     <Section className="bg-cream">
       <div className="mx-auto max-w-3xl text-center">
         <Eyebrow>A abordagem</Eyebrow>
-        <Title>MWA significa Método Wanessa Auad. Mas representa muito mais.</Title>
+        <Title>MWA é My Wellness App: seu ecossistema completo de bem-estar.</Title>
         <GoldRule className="mx-auto my-8" />
         <div className="space-y-4 text-base leading-relaxed text-ink/80">
           <p>
-            MWA também significa <em className="font-display text-forest">My Wellness Approach</em>:
-            uma abordagem completa de bem-estar, que une conhecimento nutricional, mentalidade,
-            rotina e acompanhamento diário.
+            <em className="font-display text-forest">Approach</em> significa abordagem: uma forma
+            própria de enxergar, organizar e conduzir o bem-estar. Por isso,{' '}
+            <em className="font-display text-forest">My Wellness Approach</em> pode ser entendido
+            como <strong className="font-semibold text-forest">Minha Abordagem de Bem-Estar</strong>.
           </p>
           <p>
-            O objetivo não é fazer você depender de uma dieta pronta. O objetivo é ensinar você a
-            construir uma rotina que faça sentido para sua vida.
+            Essa abordagem reúne mais de 20 anos de experiência em nutrição, comportamento,
+            mudança de hábitos e qualidade de vida. No app, essa expertise deixa de estar restrita
+            ao consultório e passa a acompanhar você nas escolhas reais de cada dia.
+          </p>
+          <p>
+            O objetivo não é entregar regras rígidas ou fazer você depender de uma dieta pronta.
+            É ensinar você a compreender seu corpo, interpretar sua rotina e tomar decisões com
+            mais autonomia.
           </p>
           <p className="font-display italic text-forest">
             Quando você entende o caminho, o resultado deixa de ser uma tentativa e passa a ser uma
             consequência.
           </p>
         </div>
+
+        <div className="mt-10 rounded-3xl border border-gold/30 bg-white p-7 text-left shadow-sm md:p-9">
+          <div className="flex items-start gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-forest text-gold-soft">
+              <Smartphone className="h-6 w-6" strokeWidth={1.5} />
+            </div>
+            <div>
+              <p className="font-display text-xl italic leading-relaxed text-forest md:text-2xl">
+                “Minha expertise em bem-estar, traduzida em orientação simples e presente na palma
+                da sua mão.”
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-ink/70">
+                O app transforma experiência profissional em acompanhamento diário: você registra,
+                entende, aprende e recebe direção para escolher melhor — onde estiver e no momento
+                em que realmente precisa.
+              </p>
+              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
+                Criadora e mentora do My Wellness App
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="mt-20 text-center">
-        <Title className="text-2xl md:text-3xl">Os 4 pilares do My Wellness Approach</Title>
+        <Title className="text-2xl md:text-3xl">Os 4 pilares do My Wellness App</Title>
       </div>
       <div className="mt-12 grid gap-6 md:grid-cols-2">
         {pillars.map(({ icon: Icon, number, title, text }) => (
