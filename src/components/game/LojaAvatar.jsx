@@ -3,14 +3,16 @@ import { X, Check, Lock } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { CATALOGO, RECOMPENSAS } from '../../data/skins.js'
 import Avatar from './Avatar.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 const CATEGORIAS = [
-  { id: 'personagem', label: 'Personagens' },
-  { id: 'fundo', label: 'Fundos' },
-  { id: 'moldura', label: 'Molduras' },
+  { id: 'personagem', pt: 'Personagens', en: 'Characters' },
+  { id: 'fundo', pt: 'Fundos', en: 'Backgrounds' },
+  { id: 'moldura', pt: 'Molduras', en: 'Frames' },
 ]
 
 export default function LojaAvatar({ onFechar }) {
+  const { ingles } = useIdioma()
   const { game, comprarSkin, equiparSkin } = useApp()
   const [categoria, setCategoria] = useState('personagem')
   const [aviso, setAviso] = useState(null)
@@ -26,13 +28,13 @@ export default function LojaAvatar({ onFechar }) {
       return
     }
     if (game.sementes < item.preco) {
-      setAviso(`Faltam ${item.preco - game.sementes} sementes. Complete tarefas para ganhar mais! 🌱`)
+      setAviso(ingles ? `You need ${item.preco - game.sementes} more seeds. Complete tasks to earn more! 🌱` : `Faltam ${item.preco - game.sementes} sementes. Complete tarefas para ganhar mais! 🌱`)
       setTimeout(() => setAviso(null), 3000)
       return
     }
     const ok = await comprarSkin(categoria, item.id, item.preco)
     if (ok) {
-      setAviso(`${item.nome} é sua! ✨`)
+      setAviso(ingles ? `${item.nome} is yours! ✨` : `${item.nome} é sua! ✨`)
       setTimeout(() => setAviso(null), 2500)
     }
   }
@@ -43,7 +45,7 @@ export default function LojaAvatar({ onFechar }) {
         {/* Cabeçalho com avatar e saldo */}
         <div className="rounded-t-3xl bg-verde p-5 text-white sm:rounded-t-3xl">
           <div className="flex items-start justify-between">
-            <h2 className="font-serif text-xl font-semibold italic">Seu avatar</h2>
+            <h2 className="font-serif text-xl font-semibold italic">{ingles ? 'Your avatar' : 'Seu avatar'}</h2>
             <button type="button" onClick={onFechar} className="rounded-full bg-white/15 p-1.5 hover:bg-white/25">
               <X size={18} />
             </button>
@@ -51,10 +53,16 @@ export default function LojaAvatar({ onFechar }) {
           <div className="mt-3 flex items-center gap-4">
             <Avatar avatar={game.avatar} tamanho="lg" />
             <div>
-              <p className="text-sm text-white/70">Suas sementes</p>
+              <p className="text-sm text-white/70">{ingles ? 'Your seeds' : 'Suas sementes'}</p>
               <p className="text-3xl font-bold text-ouro">{game.sementes} 🌱</p>
             </div>
           </div>
+          <p className="mt-3 rounded-xl bg-white/10 p-3 text-xs leading-relaxed text-white/80">
+            {ingles ? 'Each seed represents a habit you are planting — a logged meal, a completed weigh-in, or a mindful pause. They are proof that you are nurturing your transformation day after day. The harvest is not only what you see in the mirror — it is lasting change. ' : 'Cada semente é um hábito que você está plantando — uma refeição registrada, uma pesagem feita, uma pausa consciente. Elas não são só pontos: são a prova de que você está regando sua própria transformação, dia após dia. A colheita não é só o resultado no espelho — é a mudança de vida que vai ficar. '}
+            <strong className="font-semibold text-ouro">
+              {ingles ? 'Collecting seeds means you are moving toward your goal.' : 'Acumular sementes significa que você está no caminho certo para conquistar seu resultado.'}
+            </strong>
+          </p>
         </div>
 
         {aviso && (
@@ -72,13 +80,14 @@ export default function LojaAvatar({ onFechar }) {
                 categoria === c.id ? 'bg-white text-verde shadow-sm' : 'text-verde/50'
               }`}
             >
-              {c.label}
+              {ingles ? c.en : c.pt}
             </button>
           ))}
         </div>
 
-        {/* Grade de skins */}
-        <div className="grid flex-1 grid-cols-3 gap-3 overflow-y-auto p-5">
+        {/* Conteúdo rolável: grade de skins + como ganhar sementes, juntos num só scroll */}
+        <div className="flex-1 overflow-y-auto">
+        <div className="grid grid-cols-3 gap-3 p-5">
           {itens.map((item) => {
             const possui = game.skins.includes(item.id)
             const equipada = game.avatar[categoria] === item.id
@@ -114,11 +123,11 @@ export default function LojaAvatar({ onFechar }) {
 
                 {equipada ? (
                   <span className="flex items-center gap-1 rounded-full bg-verde px-2 py-0.5 text-[10px] font-bold text-white">
-                    <Check size={10} /> Em uso
+                    <Check size={10} /> {ingles ? 'Equipped' : 'Em uso'}
                   </span>
                 ) : possui ? (
                   <span className="rounded-full bg-sage-claro px-2 py-0.5 text-[10px] font-bold text-verde">
-                    Equipar
+                    {ingles ? 'Equip' : 'Equipar'}
                   </span>
                 ) : (
                   <span
@@ -137,7 +146,7 @@ export default function LojaAvatar({ onFechar }) {
 
         {/* Como ganhar sementes */}
         <div className="border-t border-cinza bg-white p-4">
-          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-verde/50">Como ganhar sementes</p>
+          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-verde/50">{ingles ? 'How to earn seeds' : 'Como ganhar sementes'}</p>
           <div className="grid grid-cols-2 gap-x-3 gap-y-1">
             {Object.entries(RECOMPENSAS)
               .filter(([tipo]) => tipo !== 'boas_vindas')
@@ -147,6 +156,7 @@ export default function LojaAvatar({ onFechar }) {
                 </p>
               ))}
           </div>
+        </div>
         </div>
       </div>
     </div>
