@@ -1,47 +1,51 @@
-import { Section, Eyebrow, Title, GoldRule } from '../components/ui.jsx'
-import { BRAND } from '../config.js'
-import fotoWanessaFinal from '../assets/foto-wanessa-final.jpg'
+import { GraduationCap } from 'lucide-react'
+import { Section, Eyebrow, Title } from '../components/ui.jsx'
+import Reveal from '../components/Reveal.jsx'
+import fotoWanessa from '../assets/foto-wanessa-final.jpg'
+
+const learnings = [
+  'Montar refeições equilibradas',
+  'Controlar calorias sem sofrimento',
+  'Consumir proteínas corretamente',
+  'Manter o metabolismo ativo',
+  'Lidar com a fome',
+  'Evitar o efeito sanfona',
+  'Criar hábitos que permanecem',
+]
 
 export default function About() {
   return (
-    <Section className="bg-white">
-      <div className="grid items-center gap-12 md:grid-cols-5">
-        <div className="md:col-span-2">
-          {/* Espaço reservado para foto profissional */}
-          <div className="overflow-hidden rounded-3xl border border-gold/30 bg-sand/60 shadow-xl shadow-forest/10">
-            <img
-              src={fotoWanessaFinal}
-              alt="Wanessa Auad — nutricionista"
-              className="aspect-square h-auto w-full object-cover"
-            />
+    <Section className="bg-cream" wide>
+      <div className="grid items-center gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
+        <Reveal className="mx-auto w-full max-w-sm">
+          <div className="overflow-hidden rounded-3xl border border-gold/30 shadow-xl shadow-forest/10">
+            <img src={fotoWanessa} alt="Wanessa Auad" loading="lazy" className="h-auto w-full" />
           </div>
-        </div>
-        <div className="md:col-span-3">
-          <Eyebrow>Criadora e mentora</Eyebrow>
-          <Title>Wanessa Auad</Title>
-          <p className="mt-3 text-sm font-medium tracking-wide text-gold">
-            Criadora e mentora do My Wellness App | Nutricionista
-          </p>
-          <GoldRule className="my-8" />
-          <div className="space-y-4 text-base leading-relaxed text-ink/80">
-            <p>
-              Há mais de 20 anos, ajudo pessoas a conquistarem saúde, autoestima e qualidade de vida
-              através da educação alimentar. Antes de transformar esse conhecimento em um aplicativo,
-              vivi minha própria jornada.
+        </Reveal>
+        <div>
+          <Reveal>
+            <Eyebrow>Quem guia você</Eyebrow>
+            <Title>Criado por Wanessa Auad</Title>
+            <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-gold">
+              Nutricionista · CRN-1/27939 · 20+ anos de experiência
             </p>
+          </Reveal>
+          <Reveal delay={120} className="mt-6 space-y-4 text-base leading-relaxed text-ink/80">
             <p>
-              Depois da gestação, eliminei 26 kg e aprendi que o maior desafio não era perder peso,
-              mas manter uma vida saudável sem viver presa a dietas.
+              Há mais de 20 anos ajudo pessoas a conquistarem saúde, autoestima e qualidade de vida
+              através da educação alimentar. Antes de virar método, essa abordagem foi a minha
+              própria jornada.
             </p>
-            <p>
-              Há 14 anos, mantenho esse resultado com a mesma abordagem que hoje ensino no MWA:
-              mentalidade, nutrição inteligente, rotina e consistência.
-            </p>
-            <p>
-              Agora, reuni minha expertise em bem-estar em um programa acessível, prático e guiado pelo
-              aplicativo, para que você também possa começar sua transformação.
-            </p>
-          </div>
+            <p>Durante os 30 dias, você aprende comigo a:</p>
+          </Reveal>
+          <Reveal delay={180} className="mt-4 grid gap-2 sm:grid-cols-2">
+            {learnings.map((item) => (
+              <div key={item} className="flex items-center gap-2.5">
+                <GraduationCap size={16} aria-hidden="true" className="shrink-0 text-sage" />
+                <p className="text-sm text-ink/80">{item}</p>
+              </div>
+            ))}
+          </Reveal>
         </div>
       </div>
     </Section>
