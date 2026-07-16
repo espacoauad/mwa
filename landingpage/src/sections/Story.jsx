@@ -1,7 +1,9 @@
 import { Section, Eyebrow, Title } from '../components/ui.jsx'
 import Reveal from '../components/Reveal.jsx'
 import CountUp from '../components/CountUp.jsx'
-import fotoWanessaStory from '../assets/foto-wanessa-story-final.jpg'
+import fotoStory480 from '../assets/foto-wanessa-story-final-480.webp'
+import fotoStory800 from '../assets/foto-wanessa-story-final-800.webp'
+import fotoStory1200 from '../assets/foto-wanessa-story-final-1200.webp'
 
 const stats = [
   { value: 26, suffix: ' kg', label: 'eliminados após a gestação' },
@@ -16,7 +18,9 @@ export default function Story() {
         <Reveal className="order-2 md:order-1">
           <div className="overflow-hidden rounded-3xl border border-gold/25 shadow-2xl shadow-black/30">
             <img
-              src={fotoWanessaStory}
+              src={fotoStory800}
+              srcSet={`${fotoStory480} 480w, ${fotoStory800} 800w, ${fotoStory1200} 1200w`}
+              sizes="(min-width: 768px) 45vw, 90vw"
               alt="Wanessa Auad, nutricionista e criadora do MWA"
               loading="lazy"
               className="h-auto w-full"

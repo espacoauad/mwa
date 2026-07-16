@@ -1,7 +1,9 @@
 import { GraduationCap } from 'lucide-react'
 import { Section, Eyebrow, Title } from '../components/ui.jsx'
 import Reveal from '../components/Reveal.jsx'
-import fotoWanessa from '../assets/foto-wanessa-final.jpg'
+import fotoWanessa480 from '../assets/foto-wanessa-final-480.webp'
+import fotoWanessa800 from '../assets/foto-wanessa-final-800.webp'
+import fotoWanessa1200 from '../assets/foto-wanessa-final-1200.webp'
 
 const learnings = [
   'Montar refeições equilibradas',
@@ -19,7 +21,14 @@ export default function About() {
       <div className="grid items-center gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
         <Reveal className="mx-auto w-full max-w-sm">
           <div className="overflow-hidden rounded-3xl border border-gold/30 shadow-xl shadow-forest/10">
-            <img src={fotoWanessa} alt="Wanessa Auad" loading="lazy" className="h-auto w-full" />
+            <img
+              src={fotoWanessa800}
+              srcSet={`${fotoWanessa480} 480w, ${fotoWanessa800} 800w, ${fotoWanessa1200} 1200w`}
+              sizes="(min-width: 768px) 35vw, 90vw"
+              alt="Wanessa Auad"
+              loading="lazy"
+              className="h-auto w-full"
+            />
           </div>
         </Reveal>
         <div>
