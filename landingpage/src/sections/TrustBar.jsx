@@ -1,33 +1,24 @@
-import { Award, Smartphone, ShieldCheck, Sparkles, Zap, CreditCard } from 'lucide-react'
-import { Section, Eyebrow, Title } from '../components/ui.jsx'
+import { Award, BadgeCheck, ShieldCheck, CreditCard } from 'lucide-react'
+import Reveal from '../components/Reveal.jsx'
 
 const items = [
-  { icon: Award, text: 'Mais de 20 anos de experiência real em emagrecimento' },
-  { icon: ShieldCheck, text: 'Conteúdo criado com orientação nutricional profissional' },
-  { icon: Smartphone, text: 'Acompanhamento diário pelo aplicativo' },
-  { icon: Sparkles, text: 'Não é PDF. Não é e-book. É uma experiência guiada' },
-  { icon: Zap, text: 'Acesso imediato após a compra' },
-  { icon: CreditCard, text: 'Pagamento único, sem mensalidade — e garantia de 7 dias' },
+  { icon: Award, label: '20+ anos de experiência' },
+  { icon: BadgeCheck, label: 'Nutricionista · CRN-1/27939' },
+  { icon: ShieldCheck, label: 'Garantia incondicional de 7 dias' },
+  { icon: CreditCard, label: 'Pagamento único, sem mensalidade' },
 ]
 
 export default function TrustBar() {
   return (
-    <Section className="bg-white">
-      <div className="text-center">
-        <Eyebrow>Por que confiar</Eyebrow>
-        <Title>Um app completo para transformar intenção em hábitos.</Title>
-      </div>
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map(({ icon: Icon, text }) => (
-          <div
-            key={text}
-            className="flex items-start gap-4 rounded-2xl border border-sand bg-cream/60 p-6"
-          >
-            <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" strokeWidth={1.5} />
-            <p className="text-sm leading-relaxed text-ink/80">{text}</p>
-          </div>
+    <div className="border-y border-forest/10 bg-cream px-6 py-8">
+      <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 md:grid-cols-4">
+        {items.map(({ icon: Icon, label }, i) => (
+          <Reveal key={label} delay={i * 90} className="flex items-center justify-center gap-2.5 text-center md:text-left">
+            <Icon size={20} aria-hidden="true" className="shrink-0 text-gold" strokeWidth={1.8} />
+            <p className="text-xs font-medium leading-snug text-forest md:text-sm">{label}</p>
+          </Reveal>
         ))}
       </div>
-    </Section>
+    </div>
   )
 }
