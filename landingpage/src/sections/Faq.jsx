@@ -10,6 +10,23 @@ const faqs = [
   ['Existe mensalidade?', 'Não. A Jornada de 30 Dias é pagamento único de R$ 97.'],
   ['E se eu não gostar?', 'Você tem 7 dias de garantia incondicional. Basta pedir reembolso e devolvemos 100% do valor, sem perguntas.'],
   ['Posso compartilhar meu acesso?', 'Não. O acesso é individual e pessoal.'],
+  [
+    'Como falo com vocês se tiver problema?',
+    (
+      <>
+        Suporte direto pelo WhatsApp — respondemos em horário comercial.{' '}
+        <a
+          href={`https://wa.me/5562994246775?text=${encodeURIComponent('Olá! Estou na página do MWA | Jornada de 30 Dias e tenho uma dúvida.')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-forest hover:text-forest-deep"
+        >
+          Clique aqui para conversar
+        </a>
+        .
+      </>
+    ),
+  ],
 ]
 
 export default function Faq() {
@@ -28,7 +45,7 @@ export default function Faq() {
                   {q}
                   <span aria-hidden="true" className="text-gold transition-transform duration-300 group-open:rotate-45">+</span>
                 </summary>
-                <p className="mt-3 text-sm leading-relaxed text-ink/75">{a}</p>
+                <div className="mt-3 text-sm leading-relaxed text-ink/75">{a}</div>
               </details>
             </Reveal>
           ))}
