@@ -1,7 +1,9 @@
+import { useEffect, useRef } from 'react'
 import { Check, ShieldCheck, Sparkles } from 'lucide-react'
 import { Section, Eyebrow, CtaButton } from '../components/ui.jsx'
 import Reveal from '../components/Reveal.jsx'
 import { BRAND } from '../config.js'
+import { track } from '../lib/analytics.js'
 
 const included = [
   'Acesso completo ao aplicativo durante 30 dias',
@@ -15,8 +17,27 @@ const included = [
 ]
 
 export default function Offer() {
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          track('ViewContent')
+          io.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
     <Section id="oferta" className="bg-offwhite">
+      <div ref={sectionRef}>
       <Reveal className="mx-auto mb-10 max-w-2xl space-y-2 text-center">
         <p className="font-display text-xl italic text-forest md:text-2xl">
           Quanto vale parar de recomeçar toda segunda-feira?
@@ -62,6 +83,7 @@ export default function Offer() {
           </div>
         </div>
       </Reveal>
+      </div>
     </Section>
   )
 }

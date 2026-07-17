@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { CHECKOUT_URL } from '../config.js'
+import { track } from '../lib/analytics.js'
 import logoMWA from '../assets/logo-mwa.png'
 
 export default function Header() {
@@ -36,6 +37,7 @@ export default function Header() {
             href={CHECKOUT_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track('InitiateCheckout')}
             className="rounded-full bg-forest px-5 py-2 text-sm font-semibold text-cream transition-all duration-300 hover:bg-forest-deep hover:shadow-lg hover:shadow-forest/20"
           >
             Começar agora

@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { CHECKOUT_URL } from '../config.js'
+import { track } from '../lib/analytics.js'
 
 /* ---------- Botão CTA (link para checkout Hotmart) ---------- */
 export function CtaButton({ children, variant = 'primary', href = CHECKOUT_URL, className = '' }) {
@@ -16,7 +17,13 @@ export function CtaButton({ children, variant = 'primary', href = CHECKOUT_URL, 
       'bg-cream text-forest hover:bg-white hover:shadow-xl hover:shadow-black/10 hover:-translate-y-0.5',
   }
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={`${base} ${variants[variant]} ${className}`}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={() => track('InitiateCheckout')}
+      className={`${base} ${variants[variant]} ${className}`}
+    >
       {children}
       <ArrowRight
         size={18}
