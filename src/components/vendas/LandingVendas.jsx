@@ -464,7 +464,7 @@ export default function LandingVendas() {
                 </div>
                 <div className="mt-2 rounded-lg bg-white p-2 text-left">
                   <p className="text-[9px] font-bold text-verde">🔒 Conteúdo exclusivo para alunas</p>
-                  <p className="mt-0.5 text-[9px] text-verde/60">Educação para escolhas mais conscientes</p>
+                  <p className="mt-0.5 text-[9px] text-verde/60">Por Wanessa Auad · Nutricionista</p>
                 </div>
               </div>
               <h4 className="mt-5 font-bold text-white">Aprenda todos os dias</h4>
