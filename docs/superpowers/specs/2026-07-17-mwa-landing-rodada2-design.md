@@ -55,6 +55,16 @@
 - Lighthouse Performance ≥ 90 mobile (ou platô documentado), Accessibility ≥ 96.
 - Build limpo; nenhuma regressão visual nas seções existentes.
 
+## 6. Limpeza de marcas no conteúdo do app (aprovada 2026-07-17)
+
+Motivo: código de ética CFN veda vincular a orientação da nutricionista a marcas comerciais — especialmente Herbalife, da qual Wanessa é distribuidora (conflito de interesse). Aplicar em `src/data/*` e componentes:
+
+- **Textos**: nomes comerciais → termos funcionais genéricos: "Shake Herbalife/Fórmula 1" → "shake proteico"; "Chá Herbal Concentrate/NRG" → "chá de ervas concentrado"/"chá com guaraná"; "Active Fiber" → "fibras solúveis"; "Herbalifeline" → "ômega 3 (óleo de peixe)"; "Barra de Proteína Herbalife" → "barra de proteína"; "PDM" → "bebida proteica em pó"; "CR7 Drive" → "bebida isotônica"; **"Whey 3W" → "whey protein"** (mesmo princípio, marca Probiótica). Macros mantidos como valores médios; fonte "Rótulo do produto"/link herbalife.com → "Valores médios da categoria — conferir rótulo do produto escolhido", sem URL de marca.
+- **Categoria** "Herbalife" no banco de alimentos → "Suplementos"; badge "🌿 Aliado Herbalife" → "🌿 Opção prática"; flag interna `herbalife:` → `suplemento:` (com atualização dos componentes e testes que a leem).
+- **Fotos**: remover as fotos de embalagem com marca de `public/produtos/` (shake-herbalife.jpg, barra-proteina.jpg, cha-herbal.png, fiber-concentrate.webp, whey-3w.jpg, whey.webp, "shake + whey dia 8.png"); a UI (`LancheProteico.jsx`) já oculta o bloco de foto quando o arquivo não existe. Campos `produto.imagem` → caminhos genéricos documentados (ex.: `/produtos/shake-proteico.jpg`) para quando a Wanessa fornecer fotos do alimento pronto, sem embalagem.
+- **CTA crítico**: remover/neutralizar o botão de WhatsApp "quero saber mais sobre o suplemento Herbalifeline" em `informativos.js` → orientação genérica sobre fontes de ômega 3, sem canal de venda.
+- Validação jurídica final com o advogado (fora do escopo técnico).
+
 ## Fora do escopo
 
-- Política de privacidade/termos (jurídico), sequência de e-mails, webhook Purchase, mudanças no app, campanhas pagas.
+- Política de privacidade/termos (jurídico), sequência de e-mails, webhook Purchase, mudanças de lógica do app (21→30), campanhas pagas.
