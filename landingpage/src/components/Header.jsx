@@ -28,6 +28,12 @@ export default function Header() {
         </a>
         <div className="flex items-center gap-6">
           <a
+            href="#quiz"
+            className="hidden text-sm font-medium text-forest/80 transition-colors hover:text-forest md:block"
+          >
+            Descubra seu perfil
+          </a>
+          <a
             href="#app"
             className="hidden text-sm font-medium text-forest/80 transition-colors hover:text-forest sm:block"
           >

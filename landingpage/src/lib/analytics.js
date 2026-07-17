@@ -72,7 +72,7 @@ export function initAnalytics() {
 
   const schedule =
     typeof window.requestIdleCallback === 'function'
-      ? window.requestIdleCallback
+      ? (cb) => window.requestIdleCallback(cb, { timeout: 2000 })
       : (cb) => setTimeout(cb, 2000)
 
   schedule(() => {

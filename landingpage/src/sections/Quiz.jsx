@@ -143,7 +143,7 @@ export default function Quiz() {
   }
 
   return (
-    <Section className="bg-cream">
+    <Section id="quiz" className="bg-cream">
       <div className="mx-auto max-w-2xl text-center">
         <Reveal>
           <Eyebrow>Mini-diagnóstico</Eyebrow>

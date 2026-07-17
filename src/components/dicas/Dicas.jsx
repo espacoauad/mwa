@@ -147,10 +147,10 @@ export default function Dicas({ irPara }) {
           <article className="rounded-2xl bg-white p-6 text-center shadow-sm shadow-verde/5">
             <p className="text-3xl">🥪</p>
             <p className="mt-3 font-serif text-lg font-semibold italic text-verde">
-              {ingles ? 'Protein snacks available on days 1–21' : 'Lanches proteicos disponíveis nos dias 1 a 21'}
+              {ingles ? 'No protein snack for this day' : 'Este dia não tem lanche proteico'}
             </p>
             <p className="mt-1 text-sm text-verde/60">
-              {ingles ? 'Revisit any day from 1 to 21 to see its protein snack.' : 'Volte a qualquer dia de 1 a 21 para rever o lanche proteico daquele dia.'}
+              {ingles ? 'Revisit any previous day to see its protein snack.' : 'Volte a qualquer dia anterior para rever o lanche proteico daquele dia.'}
             </p>
           </article>
         )}
