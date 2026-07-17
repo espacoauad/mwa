@@ -25,14 +25,14 @@ export const INFORMATIVOS = [
         itens: [
           ['Shake MWA', '210 cal · 20g prot'],
           ['Maçã', '80 cal · 0g prot'],
-          ['Chá Herbalife', '5 cal · 0g'],
+          ['Chá de ervas', '5 cal · 0g'],
         ],
         total: '295 cal · 20g proteína',
         extras: ['Saciedade: 4–5 horas ✅', 'Economia: 185 calorias!'],
       },
     ],
-    dica: 'Mais que o dobro de proteína, menos calorias e o dobro da saciedade. Você já sabe qual escolher! 💚',
-    cta: null,
+    dica: 'Densidade nutricional é a quantidade de nutrientes que cabe em cada caloria — e o shake proteico é campeão nisso. Em cerca de 200 kcal ele entrega ~20g de proteína e um conjunto de vitaminas e minerais, algo que o café da manhã tradicional (pão, manteiga e café com açúcar) não oferece nem perto. Por isso é um grande aliado do emagrecimento: prolonga a saciedade, ajuda a preservar a massa muscular enquanto você perde gordura, é rápido de preparar e facilita o controle exato de calorias e macros aqui no app. 💚',
+    cta: { label: 'Quer saber mais? Chame no WhatsApp', tipo: 'whatsapp', mensagem: 'Olá! Vi o informativo do Dia 1 do MWA sobre o shake proteico e quero saber mais.' },
   },
   {
     dia: 2,
@@ -61,37 +61,41 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Três ovos puros são nutritivos, mas sozinhos ficam sem graça e deixam a desejar em outros nutrientes. Já o shake, preparado com leite ou Nutrev, entrega mais proteína, sabor agradável e uma dose completa de vitaminas e minerais — uma ótima opção para o café da manhã! 💪',
+    dica: 'Os ovos são um dos alimentos mais completos que existem — poucas calorias carregando proteína de altíssimo valor biológico, colina, vitamina D e B12. A diferença aqui não é qualidade, é densidade nutricional aplicada à sua rotina: em 2 minutos de preparo, o shake entrega uma dose comparável de proteína, ainda mais vitaminas e minerais agregados, e libera seu tempo pela manhã. Em dias corridos, essa praticidade sem perda nutricional é o que sustenta a constância — e constância, mais do que qualquer alimento isolado, é o que gera resultado. 💪',
     cta: null,
   },
   {
     dia: 3,
-    emoji: '🌱',
-    titulo: 'Sua jornada além dos 21 dias',
+    emoji: '🐟',
+    titulo: 'Peixe: Proteína Premium com Ômega 3',
     opcoes: [
       {
-        nome: 'Fase Inicial (Dias 1–21)',
+        nome: '150g salmão grelhado',
         tom: 'neutro',
         itens: [
-          ['Objetivo', 'Aprender o método'],
-          ['Foco', 'Construir consciência'],
-          ['Duração', '21 dias'],
-          ['Resultado', 'Despertar (novo hábito)'],
+          ['Calorias', '280'],
+          ['Proteína', '25g ✅'],
+          ['Ômega 3', 'ALTO'],
+          ['Saciedade', '5h'],
+          ['Custo', 'R$ 45–50/prato'],
         ],
+        extras: ['Mais calorias porque tem mais gordura boa — e é ela que carrega o ômega 3'],
       },
       {
-        nome: 'Consolidação (Dias 22–90)',
+        nome: '200g peixe branco (tilápia)',
         tom: 'bom',
         itens: [
-          ['Objetivo', 'Transformar em estilo de vida'],
-          ['Foco', 'Automatizar o método'],
-          ['Duração', '69 dias adicionais'],
-          ['Resultado', 'Permanência (nova forma de viver)'],
+          ['Calorias', '200'],
+          ['Proteína', '30g ✅✅'],
+          ['Ômega 3', 'baixo'],
+          ['Saciedade', '5h'],
+          ['Custo', 'R$ 15–20/prato'],
         ],
+        extras: ['Mais proteína por caloria e mais leve no bolso'],
       },
     ],
-    dica: 'Você já deu os primeiros passos. Agora, imagine transformar esse esforço inicial em um estilo de vida que não exige recomeços. Essa é a proposta do Programa de 90 Dias: consolidar o que você aprendeu em hábitos automáticos que duram a vida toda 💚',
-    cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
+    dica: 'Peixe é uma das proteínas mais nobres e completas que existem — e aqui não há escolha errada. O salmão é mais calórico justamente por ter mais gordura, e é essa gordura que carrega o ômega 3 (EPA e DHA), um dos nutrientes mais valiosos para o seu corpo. Já o peixe branco entrega mais proteína por caloria e pesa menos no orçamento. Se o bolso pede, fique tranquila: escolha o peixe branco no dia a dia e garanta o ômega 3 de outra forma — os benefícios se aproximam. Outras boas fontes são sardinha, atum e, na versão vegetal, chia e linhaça (ALA). Se peixe não faz parte da sua rotina, um suplemento de óleo de peixe (cápsulas de EPA e DHA) é uma alternativa prática e econômica, que ajuda a reduzir a inflamação, proteger o coração, apoiar o cérebro e até favorecer a recuperação muscular — vale conversar com sua nutricionista sobre a dose certa para você. Assim você tem o melhor dos dois mundos: proteína acessível no prato e ômega 3 garantido. 🐟',
+    cta: null,
   },
   {
     dia: 4,
@@ -121,7 +125,7 @@ export const INFORMATIVOS = [
         extras: ['Problema: SEM proteína', 'Causa: fome 1h depois'],
       },
     ],
-    dica: 'A salada não emagrece. A PROTEÍNA emagrece. Adicione frango/ovos/peixe e vá devagar no azeite. Salada inteligente = proteína + verdura + pouco azeite 💚',
+    dica: 'Não é a salada em si que emagrece — é comer de forma equilibrada, sempre com foco na proteína. Uma salada só de folhas não sustenta e você sente fome logo depois, exatamente porque falta o macro que mais pesa no seu controle de macros diário. Monte uma salada inteligente: proteína (frango, ovos ou peixe) + verduras + pouco azeite. E atenção aos vilões escondidos: azeite despejado sem medir e molhos prontos (maionese, mostarda-e-mel, caesar) podem dobrar as calorias do prato. Meça o azeite na colher e prefira temperar com limão, vinagre e ervas 💚',
     cta: null,
   },
   {
@@ -152,39 +156,37 @@ export const INFORMATIVOS = [
         extras: ['Saciedade: 5+ horas', 'Mais saudável? SIM!'],
       },
     ],
-    dica: 'Frango + batata-doce = escolha inteligente. Arroz branco = caloria vazia. Qual você escolhe? 🍗',
+    dica: 'Não existe alimento proibido — existe a escolha que rende mais por caloria. A batata-doce entrega quase a mesma energia do arroz branco, mas com vantagens reais: mais fibra (segura a fome por mais tempo e alimenta o intestino) e índice glicêmico mais baixo, liberando energia aos poucos, sem o pico e a queda que dão fome de novo em 1-2h. Ainda traz betacaroteno (vitamina A), potássio e vitamina C. O arroz branco não é vilão, mas é refinado: energia rápida, pouca fibra e menos micronutrientes — se fizer parte do seu dia, prefira o integral e cuide da porção. E lembre: o que sustenta a saciedade e preserva seu músculo em qualquer prato é sempre a PROTEÍNA. 🍗',
     cta: null,
   },
   {
     dia: 6,
-    emoji: '🐟',
-    titulo: 'Peixe: Proteína Premium com Ômega 3',
+    emoji: '🌱',
+    titulo: 'Sua jornada além dos 21 dias',
     opcoes: [
       {
-        nome: '150g salmão grelhado',
+        nome: 'Fase Inicial (Dias 1–21)',
         tom: 'neutro',
         itens: [
-          ['Calorias', '280'],
-          ['Proteína', '25g ✅'],
-          ['Ômega 3', 'ALTO (saúde!)'],
-          ['Saciedade', '5h'],
-          ['Custo', 'R$ 45–50/prato'],
+          ['Objetivo', 'Aprender o método'],
+          ['Foco', 'Construir consciência'],
+          ['Duração', '21 dias'],
+          ['Resultado', 'Despertar (novo hábito)'],
         ],
       },
       {
-        nome: '200g peixe branco (tilápia)',
+        nome: 'Consolidação (Dias 22–90)',
         tom: 'bom',
         itens: [
-          ['Calorias', '200'],
-          ['Proteína', '30g ✅✅'],
-          ['Ômega 3', 'baixo'],
-          ['Saciedade', '5h'],
-          ['Custo', 'R$ 15–20/prato'],
+          ['Objetivo', 'Transformar em estilo de vida'],
+          ['Foco', 'Automatizar o método'],
+          ['Duração', '69 dias adicionais'],
+          ['Resultado', 'Permanência (nova forma de viver)'],
         ],
       },
     ],
-    dica: 'Tanto salmão quanto peixe branco são excelentes. Salmão = mais ômega 3. Peixe branco = mais proteína, mais barato. Escolha conforme seu bolso! 🐟',
-    cta: null,
+    dica: 'Você já deu os primeiros passos. Agora, imagine transformar esse esforço inicial em um estilo de vida que não exige recomeços. Essa é a proposta do Programa de 90 Dias: consolidar o que você aprendeu em hábitos automáticos que duram a vida toda. A partir de hoje, você tem uma condição especial de continuidade por R$ 97 — disponível até o dia 10 💚',
+    cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
   },
   {
     dia: 7,
@@ -203,7 +205,7 @@ export const INFORMATIVOS = [
         extras: ['Você já venceu a etapa mais difícil: começar.'],
       },
     ],
-    dica: 'Você venceu a parte mais difícil! Registre sua pesagem e suas fotos hoje. Hoje também é o último dia da condição especial do MWA | Programa de 90 Dias por R$ 127 — depois de hoje, essa continuidade passa a ter outro valor. Continue assim! 💪💚',
+    dica: 'Uma semana completa é muito mais do que parece, querida. Nesses 7 dias, seu corpo reduziu a retenção de líquidos (por isso a barriga menos inchada), começou a se adaptar ao maior consumo de proteína e já registra os primeiros sinais de flexibilidade metabólica — sua energia mais estável ao longo do dia é prova disso. Registre sua pesagem e suas fotos hoje: elas contam uma história que o espelho sozinho não mostra. E se você já sente que quer ir além dos 21 dias, saiba que a condição especial do MWA | Programa de 90 Dias por R$ 97 está ativa até o dia 10 — quero que você tenha essa oportunidade enquanto ainda está disponível. Siga firme, você está exatamente onde precisa estar. 💪💚',
     cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
   },
   {
@@ -235,7 +237,7 @@ export const INFORMATIVOS = [
         extras: ['Diferença: 140 calorias!'],
       },
     ],
-    dica: 'Precisa de lanche? Escolha proteína! Iogurte grego > Brownie. Seu corpo agradece! 😋',
+    dica: 'Repare que a diferença não está só nas calorias — está no que elas fazem dentro do seu corpo. O iogurte grego entrega 15g de proteína, que ativa hormônios de saciedade (como o GLP-1) e mantém você satisfeita por horas. O brownie tem quase a mesma caloria, mas quase nenhuma proteína: o açúcar entra rápido na corrente sanguínea, gera um pico de glicose seguido de uma queda brusca, e é exatamente essa queda que te deixa com fome de novo em 30 minutos. Não é falta de força de vontade, querida — é fisiologia. Escolher proteína no lanche é escolher a favor do seu próprio corpo. 😋',
     cta: null,
   },
   {
@@ -267,7 +269,7 @@ export const INFORMATIVOS = [
         extras: ['Preço: R$ 25–30', 'Saúde: 4/10'],
       },
     ],
-    dica: 'Açaí é lindo, mas é SOBREMESA, não lanche. Banana com aveia = inteligente, barato e rápido. Qual você escolhe? 🍌',
+    dica: 'O problema da tigela de açaí não é o açaí em si — é o que colocamos ao redor dele. A polpa pura tem gordura boa e antioxidantes valiosos, mas quando some granola açucarada, mel e leite condensado, o prato triplica de calorias e ainda assim sacia menos, porque o açúcar simples não sustenta a glicemia. A banana com aveia funciona ao contrário: a fibra da aveia forma um gel no estômago que retarda o esvaziamento gástrico e estabiliza a glicose por horas. Açaí pode entrar na sua rotina, sim — mas como sobremesa ocasional, com moderação nos acompanhamentos, não como lanche do dia a dia.\n\n"Ah, Wanessa, mas hoje eu quero muito um açaí!" Ótimo, eu te entendo — e lembre que você está em um desafio de 21 dias, priorizando algumas escolhas, não se privando para sempre. Mas, quando for comer açaí, escolha a polpa sem adição de açúcares, prefira toppings de frutas frescas em vez de doces, e tenha cuidado especial com a granola: ela é bem calórica e, na maioria das vezes, vem com açúcar adicionado, mesmo parecendo uma opção "saudável". Se for comer açaí, preste atenção se ele tem açúcar na polpa e muito cuidado com os toppings — é ali que a conta realmente explode. 🍌',
     cta: null,
   },
   {
@@ -296,8 +298,8 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Mesma caloria, resultado diferente: mais fibras significam mais saciedade e menos pico de açúcar no sangue. Pequenas trocas, grandes resultados. 🌾',
-    cta: null,
+    dica: 'Note que a caloria dos dois pães é quase idêntica — a diferença real está na fibra. No pão francês, o processo de refino remove o farelo e o gérmen do trigo, levando embora a maior parte da fibra e deixando um carboidrato que vira glicose rapidamente. No integral, a fibra remanescente forma uma barreira física que desacelera a digestão, prolonga a saciedade e evita o pico glicêmico que, horas depois, se transforma em fome novamente. É uma troca simples que, mantida todos os dias, faz diferença real na balança e na disposição.\n\n⚠️ Ponto de atenção: não é porque é integral que emagrece. Ser integral já favorece e beneficia — mais fibra, mais saciedade, glicemia mais estável — mas o alimento ainda contém calorias, e é essa conta que precisa ser lembrada e contabilizada para que você atinja o déficit calórico. Troque o pão francês pelo integral com consciência do benefício, mas continue registrando a porção aqui no app. Escolha melhor SEM esquecer de contar.\n\n⏰ E hoje é também o último dia da condição especial do MWA | Programa de 90 Dias por R$ 97 — se seu coração já sabe que quer continuar, esta é a hora de decidir. Depois de hoje, esse valor não estará mais disponível. 🌾',
+    cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
   },
   {
     dia: 11,
@@ -327,7 +329,7 @@ export const INFORMATIVOS = [
         extras: ['Economia: 80 calorias', 'Saúde: 8/10'],
       },
     ],
-    dica: 'Mude do leite integral para o desnatado. 80 calorias por dia = 560 por semana. Pequenas mudanças = grandes resultados! ☕',
+    dica: 'A gordura do leite integral não é vilã — mas em quem busca déficit calórico, ela pesa mais do que parece. Como a gordura tem 9 kcal por grama (mais que o dobro da proteína e do carboidrato, que têm 4), pequenas trocas na gordura do dia a dia geram grande economia calórica sem cortar volume nem sacrifício. Aqui, são 80 calorias por xícara — multiplicadas por um cafezinho ao dia, viram quase 560 calorias por semana, o equivalente a uma refeição inteira que você "devolve" ao seu corpo sem perceber. É esse tipo de ajuste fino, discreto e sustentável, que separa quem emagrece com consistência de quem vive de dietas radicais. ☕',
     cta: null,
   },
   {
@@ -356,7 +358,7 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Mesma caloria, resultado diferente! Chocolate amargo = polifenóis = saúde do coração. Chocolate ao leite = açúcar = inchaço. Escolha inteligente! 🍫',
+    dica: 'Duas versões, mesma caloria, efeitos completamente diferentes no seu corpo — e a chave está na concentração de cacau. O cacau é rico em flavonoides, um tipo de polifenol com ação antioxidante que ajuda a proteger os vasos sanguíneos e favorece a saúde cardiovascular. Quanto maior o percentual de cacau, mais flavonoides e menos espaço sobra para o açúcar. No chocolate ao leite, a lógica se inverte: pouco cacau, muito açúcar, e o resultado é um pico glicêmico sem nenhum benefício de compensação. Se o desejo por doce aparecer, prefira sempre a versão com maior percentual de cacau — seu paladar se adapta em poucos dias, e seu coração agradece todos os dias. 🍫',
     cta: null,
   },
   {
@@ -383,7 +385,7 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Molhos prontos costumam esconder açúcar e sódio em excesso. Fazer o seu leva poucos minutos a mais e coloca você no controle do que come. 🍅',
+    dica: 'Os molhos industrializados usam açúcar e sódio como "atalhos de sabor" — eles disfarçam a acidez do tomate e prolongam a validade do produto, mas em excesso, o sódio favorece a retenção de líquidos (aquela sensação de inchaço no dia seguinte) e o açúcar extra soma calorias que não aparecem no seu radar. O molho caseiro, com tomate, alho e azeite, entrega o mesmo prazer sensorial com metade das calorias e zero aditivos — e o melhor: leva de 10 a 15 minutos para ficar pronto. Pequenos hábitos como esse, repetidos ao longo dos 21 dias, é o que constrói controle real sobre o seu prato, sem depender de força de vontade a cada refeição. 🍅',
     cta: null,
   },
   {
@@ -403,7 +405,7 @@ export const INFORMATIVOS = [
         extras: ['Agora é reta final. Faltam só 7 dias!'],
       },
     ],
-    dica: 'Registre a pesagem da semana 2 e compare com a semana 1. Você consegue! 💚',
+    dica: 'Duas semanas de constância mudam a bioquímica do seu corpo, querida — não é força de vontade, é adaptação real. Sua sensibilidade à insulina melhora, seus níveis de inflamação tendem a cair e seu cérebro começa a associar as novas escolhas alimentares a menos esforço, porque elas viram rotina. É por isso que roupas folgam e o rosto afina antes mesmo de o número da balança mudar muito: seu corpo está redistribuindo líquido e gordura antes de "revelar" o resultado final. Registre a pesagem da semana 2 e compare com a semana 1 — olhe para a tendência, não para o número isolado de um único dia. Faltam 7 dias e você já provou que consegue sustentar isso. 💚',
     cta: { label: 'Ver Meu Progresso', tipo: 'progresso' },
   },
   {
@@ -432,7 +434,7 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Você já percorreu 14 dias de aprendizado. Neste ponto, a teoria é clara — mas a prática começa a revelar os desafios específicos da SUA rotina. Uma sessão estratégica individual te ajuda a desenhar o mapa personalizado de sucesso. Esse é o diferencial: transformar método em hábito SEU 💚',
+    dica: 'Você já percorreu 14 dias de aprendizado sólido — sabe calcular macros, entende o papel da proteína, já sente na pele os efeitos da hidratação e do sono. Mas nenhum método genérico, por melhor que seja, conhece sua rotina de trabalho, sua relação histórica com a comida ou os obstáculos específicos que só aparecem quando a teoria encontra o seu dia a dia real. É exatamente aí que entra o olhar individual: uma sessão estratégica comigo permite ajustar o método ao SEU contexto, identificar o que está te travando e acelerar resultados com segurança, sem tentativa e erro. Conhecimento aplicado de forma personalizada é o que transforma informação em transformação duradoura. 💚',
     cta: { label: 'Agendar minha sessão estratégica', tipo: 'sessao' },
   },
   {
@@ -461,7 +463,7 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Suco emagrece? Não — suco é açúcar líquido. Fruta inteira = fibra = saciedade = emagrecimento. Escolha sempre a fruta inteira! 🍊',
+    dica: 'A diferença entre o suco e a fruta inteira não está apenas na fibra — está em como o seu corpo absorve o açúcar. Na fruta inteira, a fibra forma uma espécie de rede que retém o açúcar natural e libera essa energia devagar na corrente sanguínea. Quando você espreme a fruta, essa rede se rompe: o açúcar fica livre e é absorvido quase tão rápido quanto um refrigerante, gerando pico glicêmico e fome precoce. Reparou que precisa de duas laranjas inteiras para sentir saciedade, mas um copo de suco (com o dobro de laranjas espremidas) já não sacia da mesma forma? Essa é a fibra trabalhando a seu favor. Prefira sempre mastigar a fruta — seu pâncreas agradece. 🍊',
     cta: null,
   },
   {
@@ -501,7 +503,7 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Ranking: 1º batata-doce (menos caloria, mais fibra e vitamina), 2º arroz integral, 3º arroz branco (vazio, não sacia). Qual você escolhe? 🥔',
+    dica: 'Aqui o critério que mais importa é o índice glicêmico — a velocidade com que o carboidrato eleva sua glicose no sangue. A batata-doce libera energia de forma lenta e gradual, graças à sua fibra e ao tipo de amido que contém, e ainda chega com uma dose generosa de vitamina A, essencial para pele, visão e imunidade. O arroz integral fica no meio do caminho: mantém o farelo (fibra), mas ainda é um carboidrato de absorção moderada. Já o arroz branco, refinado, entrega energia rápida e pouca saciedade — não é proibido, mas se seu objetivo é emagrecer com conforto, ele não deveria ser sua base diária. Ranking real: batata-doce, arroz integral, arroz branco. Escolha pensando em como você quer se sentir daqui a duas horas. 🥔',
     cta: null,
   },
   {
@@ -540,7 +542,7 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Se vai beber: vinho tinto > destilado > cerveja. Cerveja = inchaço + açúcar. Vinho = menos açúcar, mais polifenóis. Moderação sempre! 🍇',
+    dica: 'Nenhuma bebida alcoólica é "livre" de efeito metabólico, mas existem escolhas mais inteligentes dentro do que já é seu hábito social. O álcool é processado pelo fígado com prioridade absoluta sobre qualquer outra função metabólica — enquanto seu corpo cuida dele, a queima de gordura fica em segundo plano. A cerveja soma a esse efeito seus carboidratos residuais e o gás, que juntos explicam aquele inchaço característico do dia seguinte. O vinho tinto, além de ter menos açúcar, carrega resveratrol e outros polifenóis com propriedade antioxidante. Se for beber, vinho tinto é a escolha mais equilibrada; destilado puro (sem refrigerante) vem em seguida; cerveja é a que mais atrapalha. E o combinado que nunca falha: sempre um copo de água entre uma dose e outra. Moderação é liberdade com consciência. 🍇',
     cta: null,
   },
   {
@@ -571,13 +573,13 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Proteína em pó é conveniente, não é melhor. Comida de verdade = mais vitaminas + maior saciedade. Ideal: 70% comida real + 30% suplemento. Você consegue! 💪',
+    dica: 'O whey protein é proteína de altíssima qualidade — não é isso que está em jogo aqui. A diferença real está no que vem junto com ela. O peito de frango, além da proteína, entrega ferro, zinco, vitaminas do complexo B e fibras (se acompanhado de vegetais), e ainda exige mais mastigação e digestão, o que prolonga a sensação de saciedade por mais tempo. O suplemento é rápido, prático e tem seu lugar — principalmente no pós-treino ou em dias corridos — mas não deveria substituir a maior parte das suas refeições. Minha recomendação como nutricionista é a proporção 70/30: a maioria da sua proteína vindo de comida de verdade, com o suplemento como um aliado estratégico, não como base. Assim você tem o melhor dos dois mundos: praticidade quando precisa e nutrição completa no dia a dia. 💪',
     cta: null,
   },
   {
     dia: 20,
     emoji: '🥤',
-    titulo: 'Refrigerante vs Chá Herbalife vs Água',
+    titulo: 'Refrigerante vs Chá vs Água',
     opcoes: [
       {
         nome: 'Refrigerante (lata 350ml)',
@@ -591,7 +593,7 @@ export const INFORMATIVOS = [
         ],
       },
       {
-        nome: 'Chá Herbalife (1 dose)',
+        nome: 'Chá de ervas (1 dose)',
         tom: 'bom',
         itens: [
           ['Calorias', '5'],
@@ -613,7 +615,7 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Ordem de boas escolhas: 1º água (sempre!), 2º chá, 3º café/chá verde. Refrigerante: evite sempre que possível. Você já sabe escolher! 💚',
+    dica: 'Os 40g de açúcar de uma única lata de refrigerante equivalem a cerca de 8 colheres de chá — um volume que, sozinho, já ultrapassa o limite diário recomendado de açúcar adicionado. E o efeito não para na caloria: esse açúcar gera um pico de insulina seguido de uma queda brusca de glicose, que se manifesta como fome, irritabilidade e vontade de doce logo depois. O chá, além de zero caloria, tem compostos bioativos que apoiam o controle do apetite e ainda contam para sua meta de hidratação do dia. E a água continua sendo, sempre, a base inegociável: é o solvente de todas as reações metabólicas do seu corpo, inclusive da queima de gordura. Priorize sempre água, use o chá como aliado estratégico e reserve o refrigerante para exceções raras e conscientes. 💚',
     cta: null,
   },
   {
@@ -633,7 +635,7 @@ export const INFORMATIVOS = [
         extras: ['Registre a pesagem final e compare as fotos do dia 1 com as de hoje.'],
       },
     ],
-    dica: 'Mais importante do que chegar até aqui é perceber que a transformação não depende de perfeição. Ela nasce da repetição, da consciência e das escolhas que você decide continuar fazendo. Este pode ser apenas o começo — o MWA | Programa de 90 Dias está disponível para você aprofundar sua evolução, com 20% OFF. 💚',
+    dica: 'Em 21 dias, você não seguiu uma dieta — você começou a reconstruir. Cada vez que contabilizou macros, respeitou seu déficit calórico, escolheu densidade nutricional, honrou a fibra, e pausou antes de comer, você fortaleceu circuitos neurais. E 21 repetições transformam-se em automação. Mas aqui está a verdade que a ciência do comportamento comprova: 21 dias criam o gatilho, e 90 dias consolidam a identidade. Você já quebrou a inércia. Você já provou que consegue. Os próximos 69 dias não vão repetir o que você aprendeu aqui — vão aprofundá-lo até que ele se torne tão parte de você que recuar fique impossível. Hábitos mudam vidas. Repetição constrói excelência. E excelência é escolher continuar, não porque você tem que ser perfeita, mas porque agora você sabe que merecia isso desde o início. 💚',
     cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
   },
 
@@ -646,7 +648,7 @@ export const INFORMATIVOS = [
       { nome: 'Sem planejamento', tom: 'ruim', itens: [['Decisão alimentar', 'toda hora, com fome'], ['Compras', 'sem lista'], ['Resultado', 'escolhas por impulso']] },
       { nome: 'Com planejamento', tom: 'bom', itens: [['Decisão alimentar', 'feita com calma, antes'], ['Compras', 'com lista'], ['Resultado', 'menos esforço mental por dia']] },
     ],
-    dica: 'Planejar 3-4 refeições da semana elimina a decisão repetida todo dia — e decisão repetida é o que mais cansa e leva ao improviso. Reserve 15 minutos no fim de semana para isso.',
+    dica: 'Cada decisão alimentar que você adia para a hora da fome consome uma reserva mental chamada "energia de decisão" — e ela se esgota ao longo do dia, assim como um músculo cansa. Planejar 3-4 refeições da semana elimina essa decisão repetida diariamente, protegendo justamente a energia que você mais precisa no fim do dia. Reserve 15 minutos no fim de semana, com calma, e sinta a diferença já na primeira semana.',
     cta: null,
   },
   {
@@ -657,7 +659,7 @@ export const INFORMATIVOS = [
       { nome: '"Quero emagrecer"', tom: 'ruim', itens: [['Clareza', 'baixa'], ['Prazo', 'nenhum'], ['Ação', 'difícil de começar']] },
       { nome: '"Quero perder 1kg até dia 30, com 3 treinos/semana"', tom: 'bom', itens: [['Clareza', 'alta'], ['Prazo', 'definido'], ['Ação', 'fica óbvio o próximo passo']] },
     ],
-    dica: 'Metas específicas guiam decisões; metas vagas só geram ansiedade. Escreva sua meta da semana com número e prazo.',
+    dica: 'Metas específicas ativam áreas do cérebro ligadas ao planejamento de ação; metas vagas só geram ansiedade, porque não dão ao cérebro nada concreto para executar. Escreva sua meta da semana com número e prazo — clareza é combustível para constância.',
     cta: null,
   },
   {
@@ -668,7 +670,7 @@ export const INFORMATIVOS = [
       { nome: 'Batata frita (porção média)', tom: 'ruim', itens: [['Calorias', '365'], ['Gordura', '17g'], ['Densidade nutricional', 'baixa']] },
       { nome: 'Batata assada com casca', tom: 'bom', itens: [['Calorias', '160'], ['Gordura', '0,2g'], ['Densidade nutricional', 'alta (fibra, potássio)']] },
     ],
-    dica: 'Mesmo alimento, preparo diferente, resultado nutricional muito diferente. O método de preparo pesa tanto quanto o ingrediente.',
+    dica: 'Mesmo alimento, preparo diferente, resultado nutricional completamente distinto: a fritura em óleo praticamente dobra as calorias e adiciona gordura sem agregar nutriente algum, enquanto a casca da batata assada preserva fibra e potássio. O método de preparo pesa tanto quanto o ingrediente escolhido.',
     cta: null,
   },
   {
@@ -679,7 +681,7 @@ export const INFORMATIVOS = [
       { nome: 'Iogurte "sabor morango" comum', tom: 'ruim', itens: [['Açúcar', '~15g por pote'], ['Proteína', '4g'], ['Rótulo', 'corante + aroma artificial']] },
       { nome: 'Iogurte natural + fruta de verdade', tom: 'bom', itens: [['Açúcar', 'o da fruta, sem adição'], ['Proteína', '8-10g'], ['Rótulo', 'leite + fermento']] },
     ],
-    dica: 'O iogurte "de frutas" muitas vezes tem mais açúcar que proteína. Iogurte natural + fruta picada entrega o mesmo prazer com mais nutriente.',
+    dica: 'O iogurte "de frutas" industrializado costuma ter mais açúcar adicionado do que proteína — o oposto do que o marketing sugere. Iogurte natural com fruta picada de verdade entrega o dobro de proteína, o mesmo prazer no paladar, e o açúcar vem só da fruta, com fibra junto para desacelerar a absorção.',
     cta: null,
   },
   {
@@ -690,7 +692,7 @@ export const INFORMATIVOS = [
       { nome: 'Embutidos (salsicha, presunto, bacon)', tom: 'ruim', itens: [['Sódio', 'muito alto'], ['Conservantes', 'sim'], ['Frequência recomendada', 'ocasional']] },
       { nome: 'Carne fresca magra grelhada', tom: 'bom', itens: [['Sódio', 'controlado por você'], ['Conservantes', 'nenhum'], ['Frequência recomendada', 'regular']] },
     ],
-    dica: 'Não é preciso cortar embutidos por completo — é preciso torná-los exceção, não rotina. Priorize a carne fresca no dia a dia.',
+    dica: 'Carnes processadas concentram sódio e conservantes muito acima do que qualquer tempero caseiro alcançaria, e são associadas, na literatura científica, a maior risco cardiovascular quando consumidas com frequência. Não é preciso cortar embutidos por completo — é preciso torná-los exceção ocasional, não rotina, priorizando a carne fresca no dia a dia.',
     cta: null,
   },
   {
@@ -701,7 +703,7 @@ export const INFORMATIVOS = [
       { nome: '"Pão integral" (rótulo com farinha branca + corante)', tom: 'ruim', itens: [['1º ingrediente', 'farinha de trigo refinada'], ['Fibras', 'baixas'], ['Cor escura', 'de corante, não de fibra']] },
       { nome: 'Pão 100% integral (1º ingrediente = farinha integral)', tom: 'bom', itens: [['1º ingrediente', 'farinha integral'], ['Fibras', '3g+ por fatia'], ['Cor escura', 'natural do grão']] },
     ],
-    dica: 'A cor do pão não garante nada. Vire a embalagem: se "farinha de trigo" vem antes de "farinha integral" na lista, ele não é o que parece.',
+    dica: 'A cor escura de um pão não garante fibra nenhuma — muitas marcas usam corante caramelo para simular a aparência integral em uma base de farinha branca refinada. Vire a embalagem: se "farinha de trigo" vem antes de "farinha integral" na lista de ingredientes, o produto não é o que a cor sugere.',
     cta: null,
   },
   {
@@ -712,7 +714,7 @@ export const INFORMATIVOS = [
       { nome: 'Maçã (alimento)', tom: 'bom', itens: [['Ingredientes', '1 (a própria maçã)'], ['Fibra', 'sim'], ['Processamento', 'nenhum']] },
       { nome: 'Suco de maçã industrializado (produto)', tom: 'ruim', itens: [['Ingredientes', 'vários, incluindo açúcar'], ['Fibra', 'perdida no processo'], ['Processamento', 'alto']] },
     ],
-    dica: 'Regra simples: quanto mais próximo do estado natural, mais "alimento" e menos "produto". Prefira a fruta inteira sempre que possível.',
+    dica: 'O processo industrial que transforma a maçã em suco remove praticamente toda a fibra e concentra o açúcar natural em uma forma líquida de absorção muito mais rápida. Regra simples que uso com minhas pacientes: quanto mais próximo do estado natural, mais "alimento" e menos "produto". Prefira a fruta inteira sempre que possível.',
     cta: null,
   },
   {
@@ -723,7 +725,7 @@ export const INFORMATIVOS = [
       { nome: 'Cereal matinal colorido', tom: 'ruim', itens: [['Açúcar', 'entre os 3 primeiros ingredientes'], ['Fibra', 'baixa'], ['Marketing', '"integral" em destaque']] },
       { nome: 'Aveia em flocos pura', tom: 'bom', itens: [['Açúcar', 'zero adicionado'], ['Fibra', 'alta'], ['Marketing', 'nenhum — é só aveia']] },
     ],
-    dica: 'Ingredientes são listados por quantidade, do maior para o menor. Se açúcar está no topo da lista, o produto é basicamente açúcar com sabor.',
+    dica: 'Por lei, os ingredientes são listados em ordem decrescente de quantidade. Se açúcar aparece entre os 3 primeiros de um cereal matinal, esse produto é, na prática, basicamente açúcar com sabor e textura de cereal. Aprender a ler essa ordem é uma das habilidades mais valiosas que você pode levar para o supermercado.',
     cta: null,
   },
   {
@@ -734,7 +736,7 @@ export const INFORMATIVOS = [
       { nome: 'Corredores centrais', tom: 'ruim', itens: [['Tipo de alimento', 'ultraprocessados'], ['Prateleira', 'produtos de longa validade'], ['Decisão', 'guiada pela embalagem']] },
       { nome: 'Perímetro do mercado (hortifruti, açougue, laticínios)', tom: 'bom', itens: [['Tipo de alimento', 'in natura e frescos'], ['Prateleira', 'produtos perecíveis'], ['Decisão', 'guiada pelo alimento em si']] },
     ],
-    dica: 'Um mês! A maioria dos alimentos de verdade fica nas bordas do supermercado. Comece sua compra por ali.',
+    dica: 'Um mês de jornada! A maioria dos alimentos de verdade — frutas, verduras, carnes, laticínios frescos — fica nas bordas do supermercado, porque são produtos perecíveis. O corredor central concentra o que dura na prateleira, que costuma ser também o mais processado. Comece sua compra pelas bordas.',
     cta: { label: 'Ver Meu Progresso', tipo: 'progresso' },
   },
   {
@@ -745,7 +747,7 @@ export const INFORMATIVOS = [
       { nome: 'Gordura trans (industrializada, frituras prontas)', tom: 'ruim', itens: [['Origem', 'processo industrial'], ['Efeito no coração', 'desfavorável'], ['Onde aparece', 'biscoitos, salgadinhos, margarinas duras']] },
       { nome: 'Gordura insaturada (azeite, abacate, castanhas)', tom: 'bom', itens: [['Origem', 'natural'], ['Efeito no coração', 'favorável'], ['Onde aparece', 'alimentos in natura']] },
     ],
-    dica: 'Nem toda gordura é igual. A trans é a única que vale evitar de forma consistente — leia o rótulo por "gordura vegetal hidrogenada".',
+    dica: 'Nem toda gordura é igual — essa é uma das confusões mais comuns na nutrição popular. A gordura trans industrial é a única categoria de gordura que a ciência recomenda evitar de forma consistente, por seu efeito comprovadamente desfavorável no perfil de colesterol. Leia o rótulo por "gordura vegetal hidrogenada" para identificá-la.',
     cta: null,
   },
   {
@@ -757,7 +759,7 @@ export const INFORMATIVOS = [
       { nome: '"Light"', tom: 'neutro', itens: [['Significa', 'redução de 25%+ em algum nutriente'], ['Para quem', 'varia — leia qual nutriente']] },
       { nome: '"Zero"', tom: 'neutro', itens: [['Significa', 'ausência de um componente (ex: açúcar)'], ['Para quem', 'depende do rótulo']] },
     ],
-    dica: 'Nenhum desses selos significa "saudável" por padrão. Sempre olhe a tabela nutricional, não a palavra na embalagem.',
+    dica: 'Nenhum desses três selos significa "saudável" por padrão — são termos regulados que descrevem a redução de um único nutriente específico, não o alimento como um todo. Sempre olhe a tabela nutricional completa, não a palavra em destaque na embalagem.',
     cta: null,
   },
   {
@@ -768,7 +770,7 @@ export const INFORMATIVOS = [
       { nome: 'Arroz branco', tom: 'neutro', itens: [['Índice glicêmico', 'mais alto'], ['Fibra', 'baixa'], ['Sabor/textura', 'neutro, versátil']] },
       { nome: 'Arroz integral', tom: 'bom', itens: [['Índice glicêmico', 'mais moderado'], ['Fibra', 'alta'], ['Sabor/textura', 'mais firme']] },
     ],
-    dica: 'Os dois têm lugar na rotina. O integral sacia mais e libera energia de forma mais estável — ótimo para o dia a dia, não uma obrigação.',
+    dica: 'O farelo preservado no arroz integral é responsável pela fibra extra e pelo índice glicêmico mais estável, que sustenta energia por mais tempo. Os dois têm lugar na rotina — o integral sacia mais e libera energia de forma mais gradual, ótimo para o dia a dia, sem precisar virar uma obrigação rígida.',
     cta: null,
   },
   {
@@ -779,7 +781,7 @@ export const INFORMATIVOS = [
       { nome: 'Suco de laranja (2 laranjas espremidas)', tom: 'ruim', itens: [['Fibra', 'quase toda perdida'], ['Velocidade de absorção', 'rápida (pico de açúcar no sangue)'], ['Saciedade', 'baixa']] },
       { nome: '2 laranjas inteiras', tom: 'bom', itens: [['Fibra', 'preservada'], ['Velocidade de absorção', 'mais lenta'], ['Saciedade', 'alta']] },
     ],
-    dica: 'A fibra da fruta desacelera a entrada do açúcar na corrente sanguínea. Prefira comer a fruta a espremê-la, sempre que der.',
+    dica: 'A fibra da fruta funciona como uma rede que desacelera a entrada do açúcar natural na corrente sanguínea, evitando picos de glicose seguidos de queda brusca de energia. Ao espremer a fruta, essa rede se perde. Prefira comer a fruta inteira a espremê-la, sempre que der.',
     cta: null,
   },
   {
@@ -790,7 +792,7 @@ export const INFORMATIVOS = [
       { nome: 'Reprimir o desejo totalmente', tom: 'ruim', itens: [['Resultado comum', 'compulsão depois'], ['Sensação', 'restrição e culpa']] },
       { nome: 'Fruta + canela ou 1 quadrado de chocolate 70%', tom: 'bom', itens: [['Resultado comum', 'satisfação sem exagero'], ['Sensação', 'escolha consciente']] },
     ],
-    dica: 'Proibir gera vontade maior. Ter uma opção doce "de bolso" (fruta, chocolate amargo) evita o efeito sanfona do "tudo ou nada".',
+    dica: 'Proibir um alimento por completo tende a aumentar sua saliência psicológica — quanto mais você tenta não pensar nele, mais ele ocupa espaço mental, e isso frequentemente termina em compulsão. Ter uma opção doce "de bolso", como fruta com canela ou um quadrado de chocolate 70%, evita o efeito sanfona do tudo ou nada.',
     cta: null,
   },
   {
@@ -801,7 +803,7 @@ export const INFORMATIVOS = [
       { nome: 'Rigidez 100% do tempo', tom: 'ruim', itens: [['Sustentabilidade', 'baixa a médio prazo'], ['Vida social', 'fica mais difícil']] },
       { nome: '80% alinhado, 20% flexível', tom: 'bom', itens: [['Sustentabilidade', 'alta'], ['Vida social', 'cabe pizza com amigos']] },
     ],
-    dica: 'Consistência flexível dura mais que perfeição rígida. A regra 80/20 é o que torna um estilo de vida sustentável de verdade.',
+    dica: 'A regra 80/20 tem respaldo em programas de mudança de comportamento alimentar de longo prazo: consistência flexível dura muito mais do que perfeição rígida, porque não cria a sensação de privação que antecede a maioria das desistências. É o que torna um estilo de vida sustentável de verdade — cabe até a pizza com as amigas.',
     cta: null,
   },
   {
@@ -812,7 +814,7 @@ export const INFORMATIVOS = [
       { nome: 'Refeição em 5 minutos', tom: 'ruim', itens: [['Sinal de saciedade', 'chega tarde demais'], ['Quantidade comida', 'tende a ser maior']] },
       { nome: 'Refeição em 20 minutos, sem tela', tom: 'bom', itens: [['Sinal de saciedade', 'chega a tempo'], ['Quantidade comida', 'tende a ser menor, naturalmente']] },
     ],
-    dica: 'O cérebro leva cerca de 20 minutos para registrar saciedade. Comer rápido demais ignora esse sinal — e você come mais do que precisa.',
+    dica: 'O cérebro leva, em média, cerca de 20 minutos para registrar os sinais hormonais de saciedade enviados pelo estômago. Comer rápido demais ignora esse intervalo por completo — e você acaba comendo mais do que precisa antes mesmo de sentir que já está satisfeita.',
     cta: null,
   },
   {
@@ -823,7 +825,7 @@ export const INFORMATIVOS = [
       { nome: 'Iogurte comum', tom: 'neutro', itens: [['Proteína', 'sim'], ['Probióticos vivos', 'variável']] },
       { nome: 'Kefir ou iogurte com culturas vivas', tom: 'bom', itens: [['Proteína', 'sim'], ['Probióticos vivos', 'sim, em quantidade relevante']] },
     ],
-    dica: 'Alimentos funcionais somam um benefício além de nutrir — não são milagrosos, mas são bons aliados quando somados a hábitos consistentes.',
+    dica: 'Alimentos funcionais, como o kefir e iogurtes com culturas vivas comprovadas, somam um benefício à saúde intestinal além de nutrir — não são milagrosos isoladamente, mas são bons aliados quando somados a uma rotina alimentar já consistente.',
     cta: null,
   },
   {
@@ -834,7 +836,7 @@ export const INFORMATIVOS = [
       { nome: 'Servir "no olho"', tom: 'ruim', itens: [['Precisão', 'baixa'], ['Consistência entre dias', 'baixa']] },
       { nome: 'Usar mão/colher como referência (1 punho = 1 porção de carbo)', tom: 'bom', itens: [['Precisão', 'boa, sem balança'], ['Consistência entre dias', 'alta']] },
     ],
-    dica: 'Você não precisa de balança de cozinha para ter noção de porção. A palma da mão, o punho e a colher de sopa já dão uma boa referência.',
+    dica: 'Você não precisa de balança de cozinha para ter uma noção confiável de porção. A palma da mão para proteínas, o punho fechado para carboidratos e a colher de sopa para gorduras já oferecem uma referência prática e consistente, validada em orientação nutricional no consultório.',
     cta: null,
   },
   {
@@ -845,7 +847,7 @@ export const INFORMATIVOS = [
       { nome: 'Jantar tarde e pesado', tom: 'ruim', itens: [['Digestão', 'compete com o sono'], ['Qualidade do sono', 'tende a piorar']] },
       { nome: 'Jantar 2-3h antes de dormir', tom: 'bom', itens: [['Digestão', 'concluída antes de deitar'], ['Qualidade do sono', 'tende a melhorar']] },
     ],
-    dica: 'Seu corpo segue um ciclo. Comer muito perto de dormir atrapalha tanto a digestão quanto o sono profundo — tente antecipar o jantar.',
+    dica: 'Seu corpo segue um ciclo circadiano que também regula a digestão — comer muito perto de dormir mantém o sistema digestivo ativo justamente quando ele deveria estar desacelerando para o sono profundo. Tente antecipar o jantar em 2 a 3 horas antes de deitar.',
     cta: null,
   },
   {
@@ -856,7 +858,7 @@ export const INFORMATIVOS = [
       { nome: 'Refrigerante comum (lata)', tom: 'ruim', itens: [['Açúcar', '~35g (7 colheres de chá)'], ['Saciedade', 'zero'], ['Nutriente', 'zero']] },
       { nome: 'Água com gás e limão', tom: 'bom', itens: [['Açúcar', '0g'], ['Saciedade', 'ajuda a hidratar'], ['Nutriente', 'vitamina C do limão']] },
     ],
-    dica: 'Uma lata de refrigerante por dia soma quase 1kg de açúcar por mês, sem entregar nenhuma saciedade em troca. A troca é simples e o impacto é grande.',
+    dica: 'Uma lata de refrigerante por dia soma quase 1kg de açúcar por mês, sem entregar nenhuma saciedade em troca — o açúcar líquido não ativa os mesmos sinais de saciedade que o açúcar de um alimento sólido. A troca por água com gás e limão é simples, e o impacto acumulado é grande.',
     cta: null,
   },
   {
@@ -867,7 +869,7 @@ export const INFORMATIVOS = [
       { nome: 'Ceder ao impulso todos os dias', tom: 'ruim', itens: [['Circuito de recompensa', 'reforçado com frequência'], ['Controle percebido', 'baixo']] },
       { nome: 'Entender o gatilho e escolher quando ceder', tom: 'bom', itens: [['Circuito de recompensa', 'ainda ativo, mas administrado'], ['Controle percebido', 'alto']] },
     ],
-    dica: 'Gostar de doce é biologia, não falta de força de vontade. Saber disso tira o peso da culpa e abre espaço para decidir com mais clareza.',
+    dica: 'Gostar de doce é biologia evolutiva, não falta de força de vontade — o cérebro humano é programado para buscar açúcar como fonte rápida de energia desde os tempos em que comida era escassa. Saber disso tira o peso da culpa e abre espaço para decidir com mais clareza quando e como ceder.',
     cta: null,
   },
   {
@@ -878,7 +880,7 @@ export const INFORMATIVOS = [
       { nome: 'Alimentos ultraprocessados (sopa de pacote, embutidos)', tom: 'ruim', itens: [['Sódio', 'muito acima do recomendado'], ['Controle', 'baixo — está escondido']] },
       { nome: 'Tempero natural em casa (ervas, alho, limão)', tom: 'bom', itens: [['Sódio', 'controlado por você'], ['Controle', 'alto']] },
     ],
-    dica: 'A maior parte do sal que consumimos não vem do saleiro — vem de produtos prontos. Cozinhar em casa é o maior controle que você tem sobre isso.',
+    dica: 'A maior parte do sal que consumimos não vem do saleiro — vem de produtos prontos, onde o sódio funciona também como conservante, escondido em quantidades muito acima do que qualquer tempero caseiro alcançaria. Cozinhar em casa, com ervas, alho e limão, é o maior controle que você tem sobre isso.',
     cta: null,
   },
   {
@@ -889,7 +891,7 @@ export const INFORMATIVOS = [
       { nome: 'Drink adoçado (caipirinha, cerveja em excesso)', tom: 'ruim', itens: [['Calorias', 'altas e "vazias"'], ['Efeito no apetite', 'costuma abrir demais']] },
       { nome: 'Consumo moderado e consciente', tom: 'neutro', itens: [['Calorias', 'controladas pela quantidade'], ['Efeito no apetite', 'previsível quando planejado']] },
     ],
-    dica: 'Não se trata de nunca beber, e sim de decidir com consciência quando e quanto — encaixando na sua meta calórica do dia, se fizer sentido para você.',
+    dica: 'O álcool entrega calorias sem nutriente algum em troca, e ainda tende a reduzir a inibição nas próximas escolhas alimentares da noite. Não se trata de nunca beber, e sim de decidir com consciência quando e quanto — encaixando na sua meta calórica do dia, se fizer sentido para você.',
     cta: null,
   },
   {
@@ -900,7 +902,7 @@ export const INFORMATIVOS = [
       { nome: '"Ovo faz mal ao coração" (mito antigo)', tom: 'ruim', itens: [['Evidência atual', 'não sustenta essa afirmação isolada'], ['Contexto', 'ignorado']] },
       { nome: 'Ovo dentro de uma alimentação equilibrada', tom: 'bom', itens: [['Evidência atual', 'alimento nutritivo e versátil'], ['Contexto', 'considerado']] },
     ],
-    dica: 'O que mais impacta o coração é o padrão alimentar como um todo — ultraprocessados, gordura trans e excesso de açúcar — não um ovo isolado.',
+    dica: 'A ciência da nutrição já revisou esse mito antigo: para a maioria das pessoas, o colesterol dietético tem impacto muito menor no colesterol sanguíneo do que se pensava décadas atrás. O que mais impacta o coração é o padrão alimentar como um todo — ultraprocessados, gordura trans e excesso de açúcar — não um ovo isolado.',
     cta: null,
   },
   {
@@ -911,7 +913,7 @@ export const INFORMATIVOS = [
       { nome: 'Prato monocromático (arroz, frango, batata)', tom: 'neutro', itens: [['Variedade de antioxidantes', 'baixa'], ['Visual', 'sem cor']] },
       { nome: 'Prato colorido (folhas, tomate, cenoura, roxo)', tom: 'bom', itens: [['Variedade de antioxidantes', 'alta'], ['Visual', 'convidativo']] },
     ],
-    dica: 'Cada cor de vegetal carrega compostos protetores diferentes. Quanto mais cores no prato, mais variado o benefício — sem precisar contar nada.',
+    dica: 'Cada cor de vegetal carrega uma família diferente de compostos antioxidantes — o vermelho do tomate, o laranja da cenoura e o roxo da beterraba protegem as células de formas complementares, não iguais. Quanto mais cores no prato, mais variado o benefício — sem precisar contar nada.',
     cta: null,
   },
   {
@@ -922,7 +924,7 @@ export const INFORMATIVOS = [
       { nome: 'Refeição única e grande, comida rápido', tom: 'ruim', itens: [['Digestão', 'sobrecarregada'], ['Inchaço', 'mais comum']] },
       { nome: 'Porções menores, mastigadas com calma', tom: 'bom', itens: [['Digestão', 'facilitada'], ['Inchaço', 'menos frequente']] },
     ],
-    dica: 'Inchaço nem sempre é sobre o que você come — muitas vezes é sobre como você come. Comer devagar e em porções menores já ajuda bastante.',
+    dica: 'Comer rápido faz você engolir mais ar junto com a comida, e sobrecarrega de uma vez o sistema digestivo que preferia receber o alimento aos poucos. Inchaço nem sempre é sobre o que você come — muitas vezes é sobre como você come. Comer devagar e em porções menores já ajuda bastante.',
     cta: null,
   },
   {
@@ -933,7 +935,7 @@ export const INFORMATIVOS = [
       { nome: 'Pouca fibra + pouca água', tom: 'ruim', itens: [['Trânsito intestinal', 'lento'], ['Bem-estar', 'prejudicado']] },
       { nome: 'Fibra adequada + água na meta', tom: 'bom', itens: [['Trânsito intestinal', 'regular'], ['Bem-estar', 'melhora']] },
     ],
-    dica: 'Fibra sem água suficiente pode até piorar o desconforto. As duas coisas caminham juntas — mantenha ambas na meta.',
+    dica: 'Fibra sem água suficiente pode até piorar o desconforto intestinal, porque ela precisa de líquido para formar o volume que facilita o trânsito. As duas coisas caminham juntas — mantenha ambas na meta.',
     cta: null,
   },
   {
@@ -944,7 +946,7 @@ export const INFORMATIVOS = [
       { nome: 'Focar só em restringir', tom: 'ruim', itens: [['Foco', 'no que tirar'], ['Sustentação', 'baixa']] },
       { nome: 'Focar em adicionar o que falta (proteína, fibra, água)', tom: 'bom', itens: [['Foco', 'no que somar'], ['Sustentação', 'alta']] },
     ],
-    dica: 'Muitas vezes o ajuste mais fácil não é tirar algo, e sim adicionar proteína ou fibra que estava faltando. Comece por aí.',
+    dica: 'Mudar o foco de "o que tirar" para "o que somar" altera completamente a experiência psicológica de ajustar a alimentação — deixa de parecer perda e passa a parecer ganho. Muitas vezes o ajuste mais fácil não é tirar algo, e sim adicionar proteína ou fibra que estava faltando. Comece por aí.',
     cta: null,
   },
   {
@@ -955,7 +957,7 @@ export const INFORMATIVOS = [
       { nome: '"Dieta restritiva radical acelera o metabolismo"', tom: 'ruim', itens: [['Evidência', 'o oposto costuma acontecer'], ['Efeito real', 'metabolismo tende a desacelerar']] },
       { nome: 'Proteína adequada + músculo + refeições regulares', tom: 'bom', itens: [['Evidência', 'sustenta gasto energético'], ['Efeito real', 'metabolismo mais estável']] },
     ],
-    dica: 'Cortar calorias demais costuma desacelerar o metabolismo, não acelerar. Manter massa muscular com proteína é a estratégia que realmente funciona.',
+    dica: 'O corpo interpreta um corte calórico muito agressivo como um sinal de escassez e responde reduzindo o gasto energético basal para se proteger — o oposto do que se busca. Cortar calorias demais costuma desacelerar o metabolismo, não acelerar. Manter massa muscular com proteína adequada é a estratégia que realmente sustenta um metabolismo ativo.',
     cta: null,
   },
   {
@@ -966,7 +968,7 @@ export const INFORMATIVOS = [
       { nome: 'Menos de 6h de sono', tom: 'ruim', itens: [['Hormônio da fome (grelina)', 'aumenta'], ['Hormônio de saciedade (leptina)', 'diminui']] },
       { nome: '7-8h de sono', tom: 'bom', itens: [['Hormônio da fome (grelina)', 'equilibrado'], ['Hormônio de saciedade (leptina)', 'equilibrado']] },
     ],
-    dica: 'Dormir mal literalmente aumenta a fome no dia seguinte — é hormonal, não fraqueza. Priorizar o sono é parte do método, não um extra.',
+    dica: 'Estudos de privação de sono mostram que dormir menos de 6 horas eleva a grelina e reduz a leptina de forma mensurável já na noite seguinte. Dormir mal literalmente aumenta a fome no dia seguinte — é hormonal, não fraqueza. Priorizar o sono é parte do método, não um extra.',
     cta: null,
   },
   {
@@ -977,7 +979,7 @@ export const INFORMATIVOS = [
       { nome: '"Sem açúcar" no rótulo', tom: 'ruim', itens: [['Pode conter', 'maltodextrina, xarope de milho'], ['Confiança no selo', 'baixa sem checar']] },
       { nome: 'Lista de ingredientes conferida', tom: 'bom', itens: [['Pode conter', 'você já sabe, porque leu'], ['Confiança no selo', 'baseada em fato']] },
     ],
-    dica: 'Selos na frente da embalagem são marketing. A lista de ingredientes no verso é o que realmente conta a verdade.',
+    dica: 'Selos na frente da embalagem existem para vender, não para informar — eles destacam o que interessa ao marketing, não necessariamente o que interessa à sua saúde. A lista de ingredientes no verso é o que realmente conta a verdade.',
     cta: null,
   },
   {
@@ -988,7 +990,7 @@ export const INFORMATIVOS = [
       { nome: 'Comer para aliviar o stress, no piloto automático', tom: 'ruim', itens: [['Consciência da escolha', 'baixa'], ['Cortisol elevado', 'favorece acúmulo abdominal']] },
       { nome: 'Pausa de 2 minutos antes de decidir comer', tom: 'bom', itens: [['Consciência da escolha', 'alta'], ['Cortisol', 'tende a reduzir com a pausa']] },
     ],
-    dica: 'Stress crônico afeta o corpo além da alimentação. Uma pausa consciente antes de comer por impulso já muda o resultado do dia.',
+    dica: 'O cortisol elevado de forma crônica favorece o acúmulo de gordura na região abdominal e aumenta o apetite por alimentos calóricos — o stress afeta o corpo muito além da alimentação em si. Uma pausa consciente de 2 minutos antes de comer por impulso já muda o resultado do dia.',
     cta: null,
   },
   {
@@ -999,7 +1001,7 @@ export const INFORMATIVOS = [
       { nome: 'Dieta pobre em vegetais e frutas', tom: 'ruim', itens: [['Vitamina C', 'insuficiente'], ['Zinco', 'insuficiente']] },
       { nome: 'Dieta rica em frutas cítricas, folhas e castanhas', tom: 'bom', itens: [['Vitamina C', 'adequada'], ['Zinco', 'adequado']] },
     ],
-    dica: 'A imunidade se constrói todo dia, no prato — não apenas quando você já está gripada. Vegetais e frutas variados são a base disso.',
+    dica: 'Vitamina C e zinco são cofatores diretos na produção e atividade das células de defesa do sistema imunológico. A imunidade se constrói todo dia, no prato — não apenas quando você já está gripada. Vegetais e frutas variados são a base disso.',
     cta: null,
   },
   {
@@ -1010,7 +1012,7 @@ export const INFORMATIVOS = [
       { nome: 'Ultraprocessado descartável (embalagem individual)', tom: 'ruim', itens: [['Resíduo gerado', 'alto'], ['Origem', 'cadeia industrial longa']] },
       { nome: 'Comida de verdade, feita em casa', tom: 'bom', itens: [['Resíduo gerado', 'menor'], ['Origem', 'mais direta']] },
     ],
-    dica: 'Cuidar da sua alimentação e cuidar do planeta muitas vezes andam juntos — comida de verdade costuma gerar menos desperdício.',
+    dica: 'Cuidar da sua alimentação e cuidar do planeta muitas vezes andam juntos — comida de verdade percorre uma cadeia produtiva mais curta e gera bem menos resíduo de embalagem do que um ultraprocessado individual.',
     cta: null,
   },
   {
@@ -1021,7 +1023,7 @@ export const INFORMATIVOS = [
       { nome: 'Seu início (dia 1)', tom: 'neutro', itens: [['Consciência alimentar', 'em construção'], ['Rotina', 'ainda incerta']] },
       { nome: 'Você hoje (dia 56)', tom: 'bom', itens: [['Consciência alimentar', 'consolidada'], ['Rotina', 'já é seu novo normal']] },
     ],
-    dica: 'Pare 5 minutos e compare quem você era no dia 1 com quem você é hoje. O quanto mudou na sua relação com a comida?',
+    dica: 'Pare 5 minutos e compare, com honestidade e carinho, quem você era no dia 1 com quem você é hoje. O quanto mudou na sua relação com a comida — não só no que você come, mas em como você decide?',
     cta: { label: 'Ver Meu Progresso', tipo: 'progresso' },
   },
   {
@@ -1032,7 +1034,7 @@ export const INFORMATIVOS = [
       { nome: 'Buscar 100% todos os dias', tom: 'ruim', itens: [['Sustentabilidade', 'baixa'], ['Reação a um deslize', 'costuma ser desistir']] },
       { nome: 'Buscar constância na maioria dos dias', tom: 'bom', itens: [['Sustentabilidade', 'alta'], ['Reação a um deslize', 'segue em frente']] },
     ],
-    dica: 'Um dia fora da meta não apaga semanas de constância. O que constrói resultado é a média dos seus dias, não a perfeição de um único dia.',
+    dica: 'O resultado de longo prazo é definido pela média dos seus dias, não pela perfeição de um único dia. Um dia fora da meta não apaga semanas de constância — o que constrói resultado é o padrão predominante, não a exceção pontual.',
     cta: null,
   },
   {
@@ -1043,7 +1045,7 @@ export const INFORMATIVOS = [
       { nome: 'Seguir achismos e modismos', tom: 'ruim', itens: [['Fonte', 'redes sociais sem checagem'], ['Resultado', 'confusão']] },
       { nome: 'Buscar informação com base e checar com sua nutricionista', tom: 'bom', itens: [['Fonte', 'orientação profissional'], ['Resultado', 'clareza']] },
     ],
-    dica: 'Quanto mais você entende o porquê por trás de cada orientação, menos precisa depender de força de vontade — e mais decide com consciência.',
+    dica: 'Quanto mais você entende o porquê por trás de cada orientação, menos precisa depender de força de vontade — e mais decide com consciência, porque a decisão passa a fazer sentido para você, não a ser apenas uma regra a obedecer.',
     cta: null,
   },
   {
@@ -1054,7 +1056,7 @@ export const INFORMATIVOS = [
       { nome: 'Meta única e distante ("perder 15kg")', tom: 'ruim', itens: [['Sensação de progresso', 'demora a aparecer'], ['Motivação no meio do caminho', 'oscila']] },
       { nome: 'Microgoals semanais ("beber a meta de água por 7 dias")', tom: 'bom', itens: [['Sensação de progresso', 'constante'], ['Motivação no meio do caminho', 'sustentada']] },
     ],
-    dica: 'Metas pequenas e alcançáveis mantêm a motivação viva entre uma conquista grande e outra. Celebre as pequenas vitórias — elas somam.',
+    dica: 'Metas pequenas e alcançáveis mantêm o circuito de recompensa do cérebro ativo com mais frequência, sustentando a motivação entre uma conquista grande e a próxima. Celebre as pequenas vitórias — elas somam.',
     cta: null,
   },
   {
@@ -1065,7 +1067,7 @@ export const INFORMATIVOS = [
       { nome: 'Só alimentação, sem movimento', tom: 'neutro', itens: [['Resultado', 'existe, mas é mais lento'], ['Composição corporal', 'menos definição muscular']] },
       { nome: 'Alimentação + movimento regular', tom: 'bom', itens: [['Resultado', 'mais rápido e visível'], ['Composição corporal', 'mais firmeza e definição']] },
     ],
-    dica: 'Dois terços do caminho! Movimento não precisa ser academia pesada — caminhar, subir escada e se alongar já potencializam o que você já está construindo na alimentação.',
+    dica: 'Dois terços do caminho! Movimento não precisa ser academia pesada — caminhar, subir escada e se alongar já potencializam o que você está construindo na alimentação, somando gasto calórico e preservando massa muscular.',
     cta: { label: 'Ver Meu Progresso', tipo: 'progresso' },
   },
   {
@@ -1076,7 +1078,7 @@ export const INFORMATIVOS = [
       { nome: '"Queimador de gordura" milagroso', tom: 'ruim', itens: [['Evidência científica', 'fraca ou nenhuma'], ['Função', 'promete substituir hábito']] },
       { nome: 'Proteína em pó ou creatina, se fizer sentido', tom: 'bom', itens: [['Evidência científica', 'sólida para essas duas'], ['Função', 'complementa uma dieta já boa']] },
     ],
-    dica: 'Suplemento é a palavra-chave: ele complementa uma base já boa, nunca substitui. Dieta ruim mais suplemento continua sendo resultado ruim.',
+    dica: 'Suplemento é a palavra-chave: ele complementa uma base alimentar já boa, nunca a substitui. Proteína em pó e creatina têm respaldo científico sólido dentro desse papel de apoio — mas dieta ruim mais suplemento continua sendo resultado ruim.',
     cta: null,
   },
   {
@@ -1087,7 +1089,7 @@ export const INFORMATIVOS = [
       { nome: 'Jornada isolada, sem compartilhar', tom: 'neutro', itens: [['Suporte nos dias difíceis', 'só você'], ['Troca de experiências', 'nenhuma']] },
       { nome: 'Jornada com apoio (nutricionista, amigas, comunidade)', tom: 'bom', itens: [['Suporte nos dias difíceis', 'tem para onde recorrer'], ['Troca de experiências', 'enriquece o processo']] },
     ],
-    dica: 'Você não precisa fazer isso sozinha. Use o WhatsApp de suporte sempre que precisar de orientação — está aqui para isso.',
+    dica: 'Programas de mudança de comportamento com algum tipo de suporte social tendem a apresentar melhor adesão a longo prazo do que jornadas feitas isoladamente. Você não precisa fazer isso sozinha. Use o WhatsApp de suporte sempre que precisar de orientação — está aqui para isso.',
     cta: null,
   },
   {
@@ -1098,7 +1100,7 @@ export const INFORMATIVOS = [
       { nome: 'Cozinhar a cada refeição, com fome', tom: 'ruim', itens: [['Tempo gasto', 'diário e sob pressão'], ['Tendência a improviso', 'alta']] },
       { nome: 'Preparar parte das refeições da semana de uma vez', tom: 'bom', itens: [['Tempo gasto', 'concentrado, sem pressa'], ['Tendência a improviso', 'baixa']] },
     ],
-    dica: 'Separar 1-2 horas no fim de semana para adiantar bases (arroz, proteína, legumes) elimina a decisão sob fome nos dias corridos.',
+    dica: 'Separar 1-2 horas no fim de semana para adiantar bases — arroz, proteína, legumes — elimina a decisão sob fome nos dias corridos, o momento em que a fadiga de decisão é maior e a escolha por impulso fica mais provável.',
     cta: null,
   },
   {
@@ -1109,7 +1111,7 @@ export const INFORMATIVOS = [
       { nome: 'Sem registro nenhum', tom: 'ruim', itens: [['Consciência do que come', 'baseada em memória'], ['Ajustes possíveis', 'difíceis de identificar']] },
       { nome: 'Registrando no app MWA', tom: 'bom', itens: [['Consciência do que come', 'baseada em dado real'], ['Ajustes possíveis', 'claros e visíveis']] },
     ],
-    dica: 'O simples ato de registrar já muda o comportamento alimentar. Continue usando o app — é a ferramenta que sustenta tudo o que você aprendeu.',
+    dica: 'O ato de registrar ativa um fenômeno bem documentado em pesquisas de mudança de comportamento chamado "reatividade da automonitorização": o simples fato de anotar já muda o comportamento alimentar, antes mesmo de qualquer ajuste consciente. Continue usando o app — é a ferramenta que sustenta tudo o que você aprendeu.',
     cta: null,
   },
   {
@@ -1120,7 +1122,7 @@ export const INFORMATIVOS = [
       { nome: 'Só valorizar o resultado final', tom: 'ruim', itens: [['Reconhecimento do progresso', 'raro'], ['Motivação no percurso', 'oscila']] },
       { nome: 'Celebrar cada pequena vitória no caminho', tom: 'bom', itens: [['Reconhecimento do progresso', 'frequente'], ['Motivação no percurso', 'mais estável']] },
     ],
-    dica: 'Roupa que folgou, energia maior, uma semana de água na meta — tudo isso merece ser celebrado. O resultado final é feito dessas vitórias.',
+    dica: 'Reconhecer vitórias pequenas ativa o circuito de recompensa do cérebro com mais frequência do que esperar por um único marco distante. Roupa que folgou, energia maior, uma semana de água na meta — tudo isso merece ser celebrado. O resultado final é feito dessas vitórias somadas.',
     cta: null,
   },
   {
@@ -1131,7 +1133,7 @@ export const INFORMATIVOS = [
       { nome: 'Só olhar a balança', tom: 'neutro', itens: [['O que mede', 'só o peso'], ['O que ignora', 'energia, sono, roupas, humor']] },
       { nome: 'Olhar o conjunto (fotos, medidas, energia, sono)', tom: 'bom', itens: [['O que mede', 'a transformação real'], ['O que ignora', 'nada relevante']] },
     ],
-    dica: 'A balança é só um dos números. Compare as fotos e observe como está sua energia e seu sono — a transformação é maior do que um número.',
+    dica: 'A balança mede apenas um número entre vários que compõem a transformação real — ela não capta massa muscular ganha, retenção hídrica pontual ou a qualidade da sua energia. Compare as fotos e observe como está seu sono — a transformação é maior do que um único número.',
     cta: null,
   },
   {
@@ -1142,7 +1144,7 @@ export const INFORMATIVOS = [
       { nome: 'Testar receita nova toda refeição', tom: 'neutro', itens: [['Esforço mental', 'alto, toda vez'], ['Previsibilidade', 'baixa']] },
       { nome: 'Ter 5-6 pratos-pilares que você domina e gosta', tom: 'bom', itens: [['Esforço mental', 'baixo — já sabe fazer'], ['Previsibilidade', 'alta, com variações']] },
     ],
-    dica: 'Você não precisa reinventar a roda a cada refeição. Tenha um repertório de pratos equilibrados que você já sabe fazer de olhos fechados.',
+    dica: 'Ter um repertório fixo de pratos equilibrados reduz a fadiga de decisão associada a "inventar" uma refeição nova todos os dias. Você não precisa reinventar a roda a cada refeição — 5 ou 6 pratos-pilares que você domina de olhos fechados sustentam a semana toda com variações simples.',
     cta: null,
   },
   {
@@ -1153,7 +1155,7 @@ export const INFORMATIVOS = [
       { nome: 'Comer olhando tela (celular, TV)', tom: 'ruim', itens: [['Atenção ao alimento', 'dividida'], ['Percepção de saciedade', 'atrasada']] },
       { nome: 'Comer com atenção plena, sem tela', tom: 'bom', itens: [['Atenção ao alimento', 'total'], ['Percepção de saciedade', 'em tempo real']] },
     ],
-    dica: 'Comer distraída faz você comer mais sem perceber. Experimente uma refeição hoje sem tela nenhuma e note a diferença.',
+    dica: 'Comer distraída atrasa o registro cerebral dos sinais de saciedade, fazendo você comer mais sem perceber — a atenção dividida entre a tela e o prato reduz a consciência do que e de quanto está sendo consumido. Experimente uma refeição hoje sem tela nenhuma e note a diferença.',
     cta: null,
   },
   {
@@ -1164,7 +1166,7 @@ export const INFORMATIVOS = [
       { nome: 'Guiar-se só pelo espelho', tom: 'neutro', itens: [['O que mostra', 'só o visível'], ['O que não mostra', 'glicemia, colesterol, vitaminas']] },
       { nome: 'Acompanhar exames de rotina periodicamente', tom: 'bom', itens: [['O que mostra', 'a saúde por dentro'], ['O que não mostra', 'nada — é o retrato completo']] },
     ],
-    dica: 'Resultado visual é só parte da história. Exames de rotina confirmam que a transformação está acontecendo por dentro também.',
+    dica: 'O resultado visual é só parte da história — marcadores como glicemia, perfil lipídico e vitaminas revelam mudanças metabólicas que o espelho não mostra. Exames de rotina confirmam que a transformação está acontecendo por dentro também, não apenas na aparência.',
     cta: null,
   },
   {
@@ -1175,7 +1177,7 @@ export const INFORMATIVOS = [
       { nome: 'Parar tudo de forma abrupta', tom: 'ruim', itens: [['Risco', 'voltar aos hábitos antigos'], ['Plano', 'nenhum']] },
       { nome: 'Planejar a fase de manutenção com antecedência', tom: 'bom', itens: [['Risco', 'reduzido'], ['Plano', 'claro, com metas atualizadas']] },
     ],
-    dica: 'Faltam 20 dias. Comece já a pensar em como vai ser sua rotina depois — manutenção também é uma fase, e ela também merece planejamento.',
+    dica: 'Faltam 20 dias. Interromper todo o suporte estruturado de uma vez, sem plano de manutenção, é um dos fatores mais associados ao retorno de hábitos antigos na literatura de mudança de comportamento. Comece já a pensar em como vai ser sua rotina depois — manutenção também é uma fase, e ela merece planejamento.',
     cta: null,
   },
   {
@@ -1186,7 +1188,7 @@ export const INFORMATIVOS = [
       { nome: 'Hábito esporádico', tom: 'ruim', itens: [['Frequência', 'quando lembra'], ['Automatismo', 'baixo']] },
       { nome: 'Hábito repetido diariamente', tom: 'bom', itens: [['Frequência', 'todo dia, sem pensar muito'], ['Automatismo', 'alto']] },
     ],
-    dica: 'Liste os 5 hábitos que já viraram automáticos para você. Eles são a prova concreta de que a mudança já aconteceu.',
+    dica: 'Um hábito repetido diariamente já reduz o esforço consciente necessário para executá-lo — é o que a ciência do comportamento chama de automatização. Liste os 5 hábitos que já viraram automáticos para você. Eles são a prova concreta de que a mudança já aconteceu no seu cérebro, não só no papel.',
     cta: null,
   },
   {
@@ -1197,7 +1199,7 @@ export const INFORMATIVOS = [
       { nome: 'Copiar a dieta de outra pessoa', tom: 'ruim', itens: [['Ajuste ao seu corpo', 'nenhum'], ['Sustentabilidade para você', 'baixa']] },
       { nome: 'Observar o que funciona para o seu corpo', tom: 'bom', itens: [['Ajuste ao seu corpo', 'total'], ['Sustentabilidade para você', 'alta']] },
     ],
-    dica: 'Depois de 72 dias você já tem dados sobre você mesma: que horário sente mais fome, o que sacia mais. Use esse conhecimento — ele é só seu.',
+    dica: 'Depois de 72 dias registrando suas próprias refeições, você já tem dados reais sobre você mesma: que horário sente mais fome, o que sacia mais. Use esse conhecimento — ele é individual, e nenhuma dieta genérica substitui a precisão que sua própria observação já entregou.',
     cta: null,
   },
   {
@@ -1208,7 +1210,7 @@ export const INFORMATIVOS = [
       { nome: 'Achar que não vai conseguir manter', tom: 'ruim', itens: [['Base', 'medo do futuro'], ['Evidência considerada', 'nenhuma']] },
       { nome: 'Lembrar do que já venceu em 73 dias', tom: 'bom', itens: [['Base', 'sua própria história recente'], ['Evidência considerada', 'muita']] },
     ],
-    dica: 'Você já provou, dia após dia, que consegue sustentar uma rotina. Isso não desaparece — é uma habilidade que você já construiu.',
+    dica: 'O medo do futuro costuma ignorar a evidência mais concreta que existe: o que você já fez. Você já provou, dia após dia, durante 73 dias, que consegue sustentar uma rotina. Isso não desaparece — é uma habilidade que você já construiu e carrega com você.',
     cta: null,
   },
   {
@@ -1219,7 +1221,7 @@ export const INFORMATIVOS = [
       { nome: 'Evento social sem nenhum plano', tom: 'ruim', itens: [['Controle da situação', 'baixo'], ['Resultado comum', 'exagero sem perceber']] },
       { nome: 'Evento social com estratégia leve (comer antes, escolher com calma)', tom: 'bom', itens: [['Controle da situação', 'alto'], ['Resultado comum', 'aproveita sem culpa']] },
     ],
-    dica: 'Faltam 16 dias. Planejar como vai lidar com os próximos compromissos sociais evita que um imprevisto vire desânimo.',
+    dica: 'Faltam 16 dias. Planejar como vai lidar com os próximos compromissos sociais, ainda que de forma leve, reduz a chance de que um imprevisto isolado seja interpretado como um retrocesso e vire desânimo generalizado.',
     cta: null,
   },
   {
@@ -1230,7 +1232,7 @@ export const INFORMATIVOS = [
       { nome: 'Seu início (dia 1)', tom: 'neutro', itens: [['Peso', 'ponto de partida'], ['Hábitos', 'em construção']] },
       { nome: 'Você agora (dia 75)', tom: 'bom', itens: [['Peso', 'sua evolução até aqui'], ['Hábitos', 'consolidados']] },
     ],
-    dica: 'Faça sua pesagem e fotos de checkpoint. Faltam 15 dias — é hora de olhar para trás e ver o quanto você já percorreu.',
+    dica: 'Faça sua pesagem e fotos de checkpoint. Faltam 15 dias — é hora de olhar para trás, com dados reais, e ver com clareza o quanto você já percorreu desde o dia 1.',
     cta: { label: 'Ver Meu Progresso', tipo: 'progresso' },
   },
   {
@@ -1241,7 +1243,7 @@ export const INFORMATIVOS = [
       { nome: 'Sem visão do "depois"', tom: 'ruim', itens: [['Direção pós-programa', 'indefinida']] },
       { nome: 'Com plano de manutenção esboçado', tom: 'bom', itens: [['Direção pós-programa', 'clara']] },
     ],
-    dica: 'Comece a esboçar como será sua semana típica depois do dia 90 — quantas refeições planejadas, quantos treinos, qual sua meta de manutenção.',
+    dica: 'Comece a esboçar como será sua semana típica depois do dia 90 — quantas refeições planejadas, quantos treinos, qual sua meta de manutenção. Um plano esboçado com antecedência reduz a chance de a rotina se dissolver por falta de direção clara.',
     cta: null,
   },
   {
@@ -1252,7 +1254,7 @@ export const INFORMATIVOS = [
       { nome: 'Deixar a conquista passar em branco', tom: 'ruim', itens: [['Reconhecimento', 'nenhum']] },
       { nome: 'Planejar uma forma de celebrar o dia 90', tom: 'bom', itens: [['Reconhecimento', 'merecido e memorável']] },
     ],
-    dica: 'Pense em como vai marcar a conclusão dos seus 90 dias — não precisa ser grande, só precisa ser seu.',
+    dica: 'Marcar conquistas de forma consciente reforça, no cérebro, a associação entre esforço sustentado e recompensa reconhecida. Pense em como vai marcar a conclusão dos seus 90 dias — não precisa ser grande, só precisa ser seu.',
     cta: null,
   },
   {
@@ -1263,7 +1265,7 @@ export const INFORMATIVOS = [
       { nome: 'Fundamentos', tom: 'bom', itens: [['Macros', 'você sabe montar um prato equilibrado'], ['Hidratação', 'você sabe sua meta e a atinge']] },
       { nome: 'Comportamento', tom: 'bom', itens: [['Leitura de rótulo', 'você não é mais enganada por marketing'], ['Consciência alimentar', 'parte da sua rotina']] },
     ],
-    dica: 'Releia essa lista com orgulho: cada item já é seu, de verdade. Esse é o resultado que nenhuma dieta rápida entrega.',
+    dica: 'Releia essa lista com orgulho: cada item já é seu, de verdade, incorporado por repetição consistente ao longo de quase 3 meses. Esse é o resultado que nenhuma dieta rápida entrega, porque nenhuma dieta rápida ensina.',
     cta: null,
   },
   {
@@ -1274,7 +1276,7 @@ export const INFORMATIVOS = [
       { nome: 'Relaxar tudo por já estar perto do fim', tom: 'ruim', itens: [['Consistência na reta final', 'em risco']] },
       { nome: 'Manter o padrão até o último dia', tom: 'bom', itens: [['Consistência na reta final', 'garantida']] },
     ],
-    dica: 'A última semana também conta. Mantenha o mesmo cuidado dos primeiros dias — você está construindo a base da sua manutenção.',
+    dica: 'A última semana também conta — na verdade, é ela que sedimenta o padrão que você vai levar para a manutenção. Mantenha o mesmo cuidado dos primeiros dias.',
     cta: null,
   },
   {
@@ -1285,7 +1287,7 @@ export const INFORMATIVOS = [
       { nome: 'Antes do MWA', tom: 'neutro', itens: [['Relação com a comida', 'baseada em culpa e recomeços']] },
       { nome: 'Depois do MWA', tom: 'bom', itens: [['Relação com a comida', 'baseada em consciência e constância']] },
     ],
-    dica: 'A maior mudança não está só no corpo — está em como você pensa sobre alimentação hoje. Isso não se perde depois do programa.',
+    dica: 'A maior mudança não está só no corpo — está em como você pensa sobre alimentação hoje, na forma como decide em vez de reagir. Isso não se perde depois do programa, porque foi internalizado, não apenas seguido.',
     cta: null,
   },
   {
@@ -1296,7 +1298,7 @@ export const INFORMATIVOS = [
       { nome: 'Perder o foco na reta final', tom: 'ruim', itens: [['Constância', 'oscila']] },
       { nome: 'Manter o foco até o dia 90', tom: 'bom', itens: [['Constância', 'sustentada']] },
     ],
-    dica: 'Faltam 9 dias. Continue exatamente como tem feito — não é hora de mudar a fórmula que está funcionando.',
+    dica: 'Faltam 9 dias. Continue exatamente como tem feito — não é hora de mudar a fórmula que está funcionando, mesmo que a motivação inicial pareça diferente agora.',
     cta: null,
   },
   {
@@ -1307,7 +1309,7 @@ export const INFORMATIVOS = [
       { nome: 'Foto do dia 1', tom: 'neutro', itens: [['Referência', 'seu ponto de partida']] },
       { nome: 'Foto de hoje', tom: 'bom', itens: [['Referência', 'sua evolução real']] },
     ],
-    dica: 'Compare as fotos lado a lado. Às vezes a mudança é tão gradual que só fica visível quando você olha o início e o agora juntos.',
+    dica: 'Compare as fotos lado a lado. Mudanças graduais costumam ser mais difíceis de perceber no dia a dia do que quando você compara o início e o agora, lado a lado, de uma vez.',
     cta: null,
   },
   {
@@ -1318,7 +1320,7 @@ export const INFORMATIVOS = [
       { nome: 'Ansiedade pelo que vem depois', tom: 'ruim', itens: [['Sono', 'prejudicado']] },
       { nome: 'Gratidão pelo caminho percorrido', tom: 'bom', itens: [['Sono', 'mais tranquilo']] },
     ],
-    dica: 'Faltam poucos dias. Hoje é um bom dia para descansar bem e reconhecer o quanto você já conquistou até aqui.',
+    dica: 'Faltam poucos dias. Hoje é um bom dia para descansar bem e reconhecer, com gratidão genuína, o quanto você já conquistou até aqui.',
     cta: null,
   },
   {
@@ -1329,7 +1331,7 @@ export const INFORMATIVOS = [
       { nome: 'Ver o fim do programa como um "fim"', tom: 'ruim', itens: [['Perspectiva', 'de encerramento']] },
       { nome: 'Ver o fim do programa como transição', tom: 'bom', itens: [['Perspectiva', 'de continuidade']] },
     ],
-    dica: 'O dia 90 não é uma linha de chegada — é a confirmação de que uma nova forma de viver já é sua realidade.',
+    dica: 'O dia 90 não é uma linha de chegada — é a confirmação de que uma nova forma de viver já é sua realidade, consolidada por repetição, não dependente do programa para continuar existindo.',
     cta: null,
   },
   {
@@ -1340,7 +1342,7 @@ export const INFORMATIVOS = [
       { nome: 'Início do programa', tom: 'neutro', itens: [['Metas', 'recém-calculadas']] },
       { nome: 'Semana 13', tom: 'bom', itens: [['Metas', 'incorporadas à rotina']] },
     ],
-    dica: 'Faça sua penúltima pesagem e fotos de progresso. Você está prestes a fechar um ciclo importante.',
+    dica: 'Faça sua penúltima pesagem e fotos de progresso. Você está prestes a fechar um ciclo importante — vale registrar esse momento com atenção.',
     cta: { label: 'Ver Meu Progresso', tipo: 'progresso' },
   },
   {
@@ -1351,7 +1353,7 @@ export const INFORMATIVOS = [
       { nome: 'Focar só no que ainda falta', tom: 'ruim', itens: [['Reconhecimento do percurso', 'baixo']] },
       { nome: 'Reconhecer tudo o que já foi conquistado', tom: 'bom', itens: [['Reconhecimento do percurso', 'alto']] },
     ],
-    dica: 'Hoje, escreva 3 coisas pelas quais você é grata nessa jornada — não sobre o corpo, sobre o processo.',
+    dica: 'Hoje, escreva 3 coisas pelas quais você é grata nessa jornada — não sobre o corpo, sobre o processo: o que você aprendeu a fazer por si mesma nos últimos meses.',
     cta: null,
   },
   {
@@ -1362,7 +1364,7 @@ export const INFORMATIVOS = [
       { nome: 'Dúvida sobre manter depois', tom: 'ruim', itens: [['Confiança', 'baixa']] },
       { nome: 'Confiança baseada em 87 dias de prova', tom: 'bom', itens: [['Confiança', 'alta, com evidência real']] },
     ],
-    dica: 'Você não está mais começando — você já é alguém que sustenta uma rotina saudável há quase 3 meses. Confie nisso.',
+    dica: 'Você não está mais começando — você já é alguém que sustenta uma rotina saudável há quase 3 meses. Confie nisso: a evidência está nos seus próprios 87 dias, não em uma promessa incerta.',
     cta: null,
   },
   {
@@ -1373,7 +1375,7 @@ export const INFORMATIVOS = [
       { nome: 'Ansiedade pelo fim do programa', tom: 'ruim', itens: [['Foco', 'no futuro incerto']] },
       { nome: 'Presença no hoje, aproveitando o processo', tom: 'bom', itens: [['Foco', 'no que está sob seu controle agora']] },
     ],
-    dica: 'Faltam só 2 dias. Aproveite esse momento em vez de já pular mentalmente para o "depois" — o hoje também importa.',
+    dica: 'Faltam só 2 dias. Aproveite esse momento em vez de já pular mentalmente para o "depois" — o hoje também importa, e é o único momento onde você realmente decide algo.',
     cta: null,
   },
   {
@@ -1384,7 +1386,7 @@ export const INFORMATIVOS = [
       { nome: 'Última noite agitada, pensando em amanhã', tom: 'ruim', itens: [['Descanso', 'prejudicado']] },
       { nome: 'Última noite tranquila, com orgulho do percurso', tom: 'bom', itens: [['Descanso', 'reparador']] },
     ],
-    dica: 'Amanhã é o dia 90. Durma bem hoje — você quer chegar descansada para celebrar o que construiu.',
+    dica: 'Amanhã é o dia 90. Durma bem hoje — um sono reparador ajuda inclusive a chegar mais presente e disposta para celebrar o que você construiu.',
     cta: null,
   },
   {
@@ -1404,11 +1406,11 @@ export const INFORMATIVOS = [
         extras: ['Registre a pesagem final e compare as fotos do dia 1 com as de hoje.'],
       },
     ],
-    dica: 'Você concluiu os 90 dias. Mais importante do que chegar até aqui é perceber que a transformação não depende de perfeição — ela nasce da repetição e das escolhas que você decide continuar fazendo. Este pode ser apenas o começo. Se quiser dar o próximo passo com orientação individual, a Sessão Estratégica MWA está disponível para personalizar sua próxima fase. 💚',
+    dica: 'Você não apenas completou 90 dias — você construiu uma identidade. 90 repetições de contabilizar macros, respeitar seu déficit calórico, escolher densidade nutricional, honrar a fibra e se escutar se tornaram quem você é. A transformação que você vê no espelho é real, mas a mais importante é interna: você agora confia em si mesma. Sabe o que funciona. Sabe que merecia estar aqui. E essa verdade não vai embora. O próximo ciclo não é começar do zero — é elevar a excelência que você construiu. Porque excelência não é um destino. É uma repetição que você escolhe todos os dias. Hábitos mudam vidas. E você já provou que sua vida vale cada repetição. 💚',
     cta: { label: 'Agendar minha sessão estratégica', tipo: 'sessao' },
   },
 ]
 
 export function informativoDoDia(dia) {
-  return INFORMATIVOS.find((i) => i.dia === dia) ?? INFORMATIVOS[0]
+  return INFORMATIVOS.find((i) => i.dia === dia)
 }

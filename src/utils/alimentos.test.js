@@ -26,10 +26,10 @@ test('base não tem ids duplicados nem valores negativos', () => {
   assert.equal(ALIMENTOS.some((a) => [a.kcal, a.prot, a.carb, a.gord, a.fibra, a.porcao].some((v) => !Number.isFinite(v) || v < 0)), false)
 })
 
-test('encontra Herbalife por nomes brasileiros e siglas', () => {
-  assert.equal(buscarAlimentos(ALIMENTOS, 'formula 1')[0]?.id, 'hbl-shake')
-  assert.equal(buscarAlimentos(ALIMENTOS, 'PDM')[0]?.id, 'hbl-pdm')
-  assert.equal(buscarAlimentos(ALIMENTOS, 'cha herbalife').some((a) => a.id === 'hbl-cha'), true)
+test('encontra suplementos por termos genéricos', () => {
+  assert.equal(buscarAlimentos(ALIMENTOS, 'shake proteico')[0]?.id, 'hbl-shake')
+  assert.equal(buscarAlimentos(ALIMENTOS, 'bebida proteica em po')[0]?.id, 'hbl-pdm')
+  assert.equal(buscarAlimentos(ALIMENTOS, 'cha de ervas').some((a) => a.id === 'hbl-cha'), true)
 })
 
 test('encontra alimentos dos EUA em inglês e português', () => {

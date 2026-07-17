@@ -154,7 +154,7 @@ export default function ModalRefeicao() {
           <ul className="mt-2 max-h-56 overflow-y-auto rounded-lg border border-cinza bg-white">
             {resultados.map((a) => <li key={a.id} className={`flex items-center ${alimentoId === a.id ? 'bg-sage-claro' : ''}`}>
               <button type="button" onClick={() => escolherAlimento(a)} className="min-w-0 flex-1 px-3 py-2.5 text-left text-sm text-verde/80">
-                <span className="block truncate font-medium">{a.herbalife && '🌿 '}{a.nome}</span>
+                <span className="block truncate font-medium">{a.suplemento && '🌿 '}{a.nome}</span>
                 <span className="text-[10px] text-verde/45">{a.origem === 'Estados Unidos' && '🇺🇸 '}{a.categoria} · {a.kcal} kcal/100{a.unidadeBase}</span>
               </button>
               <button type="button" aria-label={`${favoritos.includes(a.id) ? (ingles ? 'Remove from' : 'Remover') : (ingles ? 'Add to' : 'Adicionar')} ${ingles ? 'favorites' : 'favorito'}`} onClick={() => alternarFavorito(a.id)} className="p-3 text-ouro"><Star size={16} fill={favoritos.includes(a.id) ? 'currentColor' : 'none'} /></button>

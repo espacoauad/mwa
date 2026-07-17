@@ -12,7 +12,7 @@ export const CATEGORIAS = [
   'Vegetais',
   'Laticínios',
   'Gorduras boas',
-  'Herbalife',
+  'Suplementos',
   'Refeições prontas',
   'Bebidas',
   'Doces e sobremesas',
@@ -74,14 +74,14 @@ const ALIMENTOS_BASE = [
   { id: 'castanha-caju', nome: 'Castanha de caju', categoria: 'Gorduras boas', kcal: 570, prot: 18.5, carb: 29.1, gord: 46.3, fibra: 3.7, porcao: 20 },
   { id: 'chia', nome: 'Semente de chia', categoria: 'Gorduras boas', kcal: 486, prot: 16.5, carb: 42.1, gord: 30.7, fibra: 34.4, porcao: 15 },
 
-  // Herbalife
-  { id: 'hbl-shake', nome: 'Fórmula 1 / Shake Herbalife (pó)', categoria: 'Herbalife', marca: 'Herbalife', aliases: ['formula 1', 'f1', 'shake herbalife'], kcal: 354, prot: 34.6, carb: 42.3, gord: 3.8, fibra: 11.5, porcao: 26, herbalife: true, estimado: true },
-  { id: 'hbl-pdm', nome: 'Protein Drink Mix / PDM', categoria: 'Herbalife', marca: 'Herbalife', aliases: ['pdm', 'bebida de proteina em po'], kcal: 393, prot: 53.6, carb: 46.4, gord: 3.6, fibra: 3.6, porcao: 28, herbalife: true, estimado: true },
-  { id: 'hbl-cha', nome: 'Chá Concentrado de Ervas Herbalife', categoria: 'Herbalife', marca: 'Herbalife', aliases: ['herbal tea concentrate', 'cha herbalife'], kcal: 294, prot: 0, carb: 58.8, gord: 0, fibra: 0, porcao: 1.7, herbalife: true, estimado: true },
-  { id: 'hbl-nrg', nome: 'N-R-G Chá com Guaraná', categoria: 'Herbalife', marca: 'Herbalife', aliases: ['nrg', 'cha nrg'], kcal: 300, prot: 0, carb: 60, gord: 0, fibra: 0, porcao: 2, herbalife: true, estimado: true },
-  { id: 'hbl-fiber', nome: 'Active Fiber Complex', categoria: 'Herbalife', marca: 'Herbalife', aliases: ['fibra herbalife', 'active fiber'], kcal: 220, prot: 0, carb: 73.5, gord: 0, fibra: 73.5, porcao: 6.8, herbalife: true, estimado: true },
-  { id: 'hbl-cr7', nome: 'Herbalife24 CR7 Drive', categoria: 'Herbalife', marca: 'Herbalife', aliases: ['cr7', 'cr7 drive'], kcal: 370, prot: 0, carb: 88.9, gord: 0, fibra: 0, porcao: 27, herbalife: true, estimado: true },
-  { id: 'hbl-barra', nome: 'Barra de Proteína Herbalife', categoria: 'Herbalife', marca: 'Herbalife', aliases: ['barra herbalife', 'protein bar'], kcal: 400, prot: 28.6, carb: 42.9, gord: 11.4, fibra: 2.9, porcao: 35, herbalife: true, estimado: true },
+  // Suplementos
+  { id: 'hbl-shake', nome: 'Shake proteico (pó)', categoria: 'Suplementos', aliases: ['shake proteico', 'shake'], kcal: 354, prot: 34.6, carb: 42.3, gord: 3.8, fibra: 11.5, porcao: 26, suplemento: true, estimado: true },
+  { id: 'hbl-pdm', nome: 'Bebida proteica em pó', categoria: 'Suplementos', aliases: ['bebida proteica em po', 'bebida de proteina em po'], kcal: 393, prot: 53.6, carb: 46.4, gord: 3.6, fibra: 3.6, porcao: 28, suplemento: true, estimado: true },
+  { id: 'hbl-cha', nome: 'Chá de ervas concentrado', categoria: 'Suplementos', aliases: ['cha de ervas', 'cha de ervas concentrado'], kcal: 294, prot: 0, carb: 58.8, gord: 0, fibra: 0, porcao: 1.7, suplemento: true, estimado: true },
+  { id: 'hbl-nrg', nome: 'Chá com guaraná', categoria: 'Suplementos', aliases: ['cha com guarana'], kcal: 300, prot: 0, carb: 60, gord: 0, fibra: 0, porcao: 2, suplemento: true, estimado: true },
+  { id: 'hbl-fiber', nome: 'Fibras solúveis (pó)', categoria: 'Suplementos', aliases: ['fibras', 'fibras soluveis'], kcal: 220, prot: 0, carb: 73.5, gord: 0, fibra: 73.5, porcao: 6.8, suplemento: true, estimado: true },
+  { id: 'hbl-cr7', nome: 'Bebida isotônica em pó', categoria: 'Suplementos', aliases: ['isotonico', 'bebida isotonica'], kcal: 370, prot: 0, carb: 88.9, gord: 0, fibra: 0, porcao: 27, suplemento: true, estimado: true },
+  { id: 'hbl-barra', nome: 'Barra de proteína', categoria: 'Suplementos', aliases: ['barra de proteina'], kcal: 400, prot: 28.6, carb: 42.9, gord: 11.4, fibra: 2.9, porcao: 35, suplemento: true, estimado: true },
 
   // Refeições prontas (estimativas por 100 g do prato)
   { id: 'pf-tradicional', nome: 'Prato feito (arroz, feijão, frango, salada)', categoria: 'Refeições prontas', kcal: 130, prot: 9, carb: 15, gord: 3.5, fibra: 2.5, porcao: 400 },
@@ -105,14 +105,14 @@ function prepararAlimento(alimento) {
   if (/feijão|lentilha|grão-de-bico|sopa|caldo/.test(nome)) medidasPadrao.push({ id: 'concha', nome: 'concha', plural: 'conchas', base: alimento.porcao })
   if (/iogurte/.test(nome)) medidasPadrao.push({ id: 'pote', nome: 'pote', plural: 'potes', base: alimento.porcao })
   if (/azeite|manteiga|margarina|maionese|molho|açúcar|mel|creme de leite/.test(nome)) medidasPadrao.push({ id: 'colher', nome: 'colher de sopa', plural: 'colheres de sopa', base: alimento.porcao })
-  if (alimento.herbalife) medidasPadrao.push({ id: 'dose', nome: 'dose', plural: 'doses', base: alimento.porcao })
+  if (alimento.suplemento) medidasPadrao.push({ id: 'dose', nome: 'dose', plural: 'doses', base: alimento.porcao })
   const medidas = alimento.medidas ?? medidasPadrao
   return {
     aliases: [],
-    fonte: alimento.herbalife ? 'Rótulo do produto — conferir versão brasileira vigente' : 'TACO/TBCA',
-    fonteUrl: alimento.herbalife ? 'https://www.herbalife.com/pt-br/products' : 'https://fcf.usp.br/tbca/',
-    ultimaConferencia: alimento.herbalife ? '2026-07-13' : null,
-    validacaoPendente: Boolean(alimento.herbalife),
+    fonte: alimento.suplemento ? 'Valores médios da categoria — conferir o rótulo do produto escolhido' : 'TACO/TBCA',
+    fonteUrl: alimento.suplemento ? null : 'https://fcf.usp.br/tbca/',
+    ultimaConferencia: alimento.suplemento ? '2026-07-13' : null,
+    validacaoPendente: Boolean(alimento.suplemento),
     estimado: false,
     ...alimento,
     unidadeBase,

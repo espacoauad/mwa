@@ -9,8 +9,8 @@ export const DICAS = [
     icone: '🌱',
     titulo: 'Bem-vindo(a) aos seus 21 dias!',
     conteudo:
-      'Hoje começa uma jornada de 21 dias — o tempo que a ciência sugere para começar a consolidar um novo hábito. Seu corpo gasta energia até em repouso: essa é a sua TMB (Taxa Metabólica Basal). Somando suas atividades diárias, chegamos ao seu TDEE, o total de calorias que você gasta por dia. Suas metas foram calculadas a partir desses números e do seu objetivo. Não busque perfeição: busque constância. Registrar o que você come já muda o seu comportamento alimentar — estudos mostram que quem anota, emagrece mais.',
-    dicaPratica: 'Registre TODAS as refeições de hoje, mesmo as que "não contam". Consciência vem antes da mudança.',
+      'Hoje começa uma jornada de 21 dias — o tempo que a ciência sugere para começar a consolidar um novo hábito. Seu corpo gasta energia até em repouso: essa é a sua TMB (Taxa Metabólica Basal). Somando suas atividades diárias, chegamos ao seu TDEE, o total de calorias que você gasta por dia. Suas metas foram calculadas a partir desses números e do seu objetivo: para emagrecer com saúde, é preciso consumir um pouco menos calorias do que você gasta — isso se chama déficit calórico, e é o único mecanismo real por trás de qualquer emagrecimento, não importa o nome da dieta da vez. Não busque perfeição: busque constância. Registrar o que você come já muda o seu comportamento alimentar — estudos mostram que quem anota, emagrece mais.',
+    dicaPratica: 'Registre TODAS as refeições de hoje, mesmo as que "não contam" — consciência vem antes da mudança. E o foco dos seus próximos 21 dias será entender e aplicar, na prática, quatro conceitos que sustentam todo o método: análise de macros (como proteína, carboidrato e gordura se distribuem no seu prato), controle de calorias (quanto você realmente consome), déficit calórico (a base fisiológica de todo emagrecimento) e densidade nutricional (escolher alimentos que entregam mais nutriente por caloria). Se quiser revisitar cada um desses conceitos a qualquer momento, encontre o guia completo em Ferramentas → Reforçando Conceitos.',
     produto: null,
   },
   {
@@ -29,7 +29,7 @@ export const DICAS = [
     icone: '🌱',
     titulo: 'Planejar é cuidar do seu "eu" do futuro',
     conteudo:
-      'Olá! Aqui é a Wanessa. Você já começou a sentir a diferença de ter uma estratégia clara. Mas a verdade é que hábitos profundos levam tempo para se tornarem automáticos. Eu mantenho minha transformação há 14 anos porque entendi que o segredo não é a intensidade de uma semana, mas a consistência de meses. O Programa de 90 Dias foi desenhado para que essa nova forma de viver deixe de ser um desafio e se torne sua natureza. Por ser aluna da Jornada de 21 dias, preparei uma condição especial para você não interromper sua evolução. Continuidade é tudo.',
+      'Olá! Aqui é a Wanessa. Você já começou a sentir a diferença de ter uma estratégia clara. Mas a verdade é que hábitos profundos levam tempo para se tornarem automáticos. Eu mantenho minha transformação há 14 anos porque entendi que o segredo não é a intensidade de uma semana, mas a consistência de meses. Foque em viver bem estes primeiros dias, um de cada vez — a constância que você está construindo agora é o que sustenta qualquer resultado no futuro. Continuidade é tudo.',
     dicaPratica: 'Reserve 5 minutos hoje para escrever onde você quer estar daqui a 3 meses. Visualize sua energia, suas roupas e sua saúde.',
     produto: null,
   },
@@ -47,10 +47,10 @@ export const DICAS = [
     dia: 5,
     tema: 'Hidratação',
     icone: '🥤',
-    titulo: 'Sede ou fome? Aprenda a diferenciar',
+    titulo: 'Sede, fome e as calorias dos sucos',
     conteudo:
-      'O hipotálamo, região do cérebro que controla a fome, também controla a sede — e os sinais se confundem. Resultado: muita gente come quando na verdade precisa beber. Antes de um lanche fora de hora, beba um copo de água e espere 10 minutos. Se a "fome" passar, era sede. Beber 500 ml de água antes das refeições principais também reduz naturalmente a quantidade que você come, além de dar um pequeno impulso temporário no metabolismo.',
-    dicaPratica: 'Hoje, beba 1 copo de água 15 minutos antes do almoço e do jantar. Observe a diferença na saciedade.',
+      'O hipotálamo participa do controle da fome e da sede, e os sinais podem se confundir. Antes de um lanche fora de hora, beba água e observe. Atenção também aos sucos: mesmo natural e sem açúcar, o suco concentra várias frutas, tem menos fibra e é consumido rapidamente. Um copo pode somar as calorias de 3 ou 4 frutas sem oferecer a mesma saciedade de mastigá-las. Para hidratar, prefira água; quando quiser fruta, priorize a fruta inteira. Suco pode fazer parte, mas em porção planejada.',
+    dicaPratica: 'Hoje, troque um copo de suco pela fruta inteira + água e compare a saciedade.',
     produto: null,
   },
   {
@@ -79,7 +79,7 @@ export const DICAS = [
     icone: '🥩',
     titulo: 'Proteína: o macro que muda o jogo',
     conteudo:
-      'Semana da proteína! Ela é o macro mais importante em um processo de emagrecimento por três motivos: (1) preserva massa muscular enquanto você perde gordura; (2) é o macro que mais sacia — você sente menos fome; (3) tem o maior efeito térmico: o corpo gasta 20–30% das calorias da proteína só para digeri-la. Sua meta diária está no painel. A maioria das pessoas come proteína de menos no café da manhã e de mais no jantar — equilibrar isso melhora os resultados.',
+      'Semana da proteína! Ela é o macro mais importante em um processo de emagrecimento por três motivos: (1) preserva massa muscular enquanto você perde gordura; (2) é o macro que mais sacia — você sente menos fome; (3) tem o maior efeito térmico: o corpo gasta 20–30% das calorias da proteína só para digeri-la. É por isso que ela tem a maior densidade nutricional entre os três macros: entrega mais benefício — saciedade, preservação muscular, funções no corpo — por caloria consumida. Sua meta diária está no painel, e mantê-la em dia é o ajuste mais importante no seu controle de macros. A maioria das pessoas come proteína de menos no café da manhã e de mais no jantar — equilibrar isso melhora os resultados.',
     dicaPratica: 'Inclua uma fonte de proteína no café da manhã de hoje: ovos, iogurte ou um shake.',
     produto: null,
   },
@@ -91,17 +91,17 @@ export const DICAS = [
     conteudo:
       'Fontes magras entregam mais proteína por caloria: peito de frango (31 g/100 g), atum (26 g), tilápia (20 g), ovos (6 g por unidade), iogurte grego (10 g/100 g) e cortes magros de carne vermelha. Fontes vegetais como feijão, lentilha e grão-de-bico também contribuem, junto com fibras. Na correria, um shake proteico bem formulado resolve: rápido, prático e com dose certa. Use a calculadora de macros na aba FERRAMENTAS para conferir qualquer alimento.',
     dicaPratica: 'Confira na calculadora quanto de proteína tem o seu almoço típico. Está perto de 30 g?',
-    produto: { nome: 'Shake Herbalife', descricao: 'Cerca de 18 g de proteína por dose preparada com leite desnatado — café da manhã ou lanche prático.' },
+    produto: { nome: 'Shake proteico', descricao: 'Cerca de 18 g de proteína por dose preparada com leite desnatado — café da manhã ou lanche prático.' },
   },
   {
     dia: 10,
     tema: 'Proteínas',
     icone: '⏰',
-    titulo: 'Distribua a proteína ao longo do dia',
+    titulo: 'O lanche muda quando entra proteína',
     conteudo:
-      'O corpo aproveita melhor a proteína quando ela chega em doses regulares: procure 20–30 g por refeição, a cada 3–4 horas, em vez de concentrar tudo no jantar. Essa distribuição mantém a síntese muscular ativa o dia inteiro e controla a fome entre as refeições — a maior causa de beliscos. Se seu jantar costuma ser "pesado" e o café da manhã "leve", experimente inverter um pouco esse equilíbrio e observe a energia ao longo do dia.',
-    dicaPratica: 'Planeje as refeições de hoje garantindo pelo menos 20 g de proteína em três delas.',
-    produto: { nome: 'Protein Drink Mix', descricao: '15 g de proteína por dose — reforço para lanches ou para enriquecer o shake.' },
+      'Compare dois lanches: uma fruta sozinha é nutritiva, mas pode deixar a fome voltar mais cedo; fruta + iogurte natural, queijo ou ovos acrescenta proteína e costuma prolongar a saciedade. O mesmo vale para pão ou tapioca: quando entram ovos, frango, atum ou queijo, a refeição fica mais completa. A proteína ajuda a preservar músculos, exige mais digestão e reduz os beliscos. Distribua-a ao longo do dia, em vez de concentrar tudo no jantar.',
+    dicaPratica: 'Monte hoje um lanche com fruta ou pão + uma fonte de proteína e compare quanto tempo a fome demora a voltar.',
+    produto: { nome: 'Bebida proteica em pó', descricao: '15 g de proteína por dose — reforço para lanches ou para enriquecer o shake.' },
   },
   {
     dia: 11,
@@ -109,7 +109,7 @@ export const DICAS = [
     icone: '🌾',
     titulo: 'Fibras: saciedade de longa duração',
     conteudo:
-      'Semana das fibras! Elas retardam o esvaziamento do estômago, estabilizam a glicose no sangue e mantêm você satisfeito(a) por horas — tudo isso praticamente sem calorias absorvíveis. Sua meta está no painel (cerca de 14 g a cada 1000 kcal). A maioria dos brasileiros consome metade do recomendado. Boas fontes: feijão (8,5 g/100 g), aveia, chia, frutas com casca, brócolis e folhas. Aumente gradualmente e beba bastante água junto — fibra sem água pode causar desconforto.',
+      'Semana das fibras! Elas retardam o esvaziamento do estômago, estabilizam a glicose no sangue e mantêm você satisfeito(a) por horas — tudo isso praticamente sem calorias absorvíveis. É um dos exemplos mais claros de densidade nutricional: altíssimo benefício fisiológico por quase nenhuma caloria. Sua meta está no painel (cerca de 14 g a cada 1000 kcal). A maioria dos brasileiros consome metade do recomendado. Boas fontes: feijão (8,5 g/100 g), aveia, chia, frutas com casca, brócolis e folhas. Aumente gradualmente e beba bastante água junto — fibra sem água pode causar desconforto.',
     dicaPratica: 'Adicione 1 colher de chia ou aveia em alguma refeição de hoje. São +5 g de fibra fáceis.',
     produto: null,
   },
@@ -121,26 +121,26 @@ export const DICAS = [
     conteudo:
       'Suas fibras alimentam trilhões de bactérias benéficas no intestino — a microbiota. Ela influencia digestão, imunidade, inflamação e até o humor e o apetite. Fibras solúveis (aveia, maçã, feijão) viram um gel que alimenta essas bactérias; insolúveis (folhas, farelos) aceleram o trânsito intestinal. Intestino regular também significa menos inchaço abdominal — aquele efeito "desinchou" das primeiras semanas vem muito daí. Variedade de vegetais = microbiota diversa = metabolismo melhor.',
     dicaPratica: 'Coma pelo menos 3 vegetais de cores diferentes hoje. Cada cor alimenta bactérias diferentes.',
-    produto: { nome: 'Active Fiber Complex', descricao: '5 g de fibras solúveis e insolúveis por dose, sabor neutro — misture em água ou no shake.' },
+    produto: { nome: 'Fibras solúveis', descricao: '5 g de fibras solúveis e insolúveis por dose, sabor neutro — misture em água ou no shake.' },
   },
   {
     dia: 13,
     tema: 'Fibras',
     icone: '🍎',
-    titulo: 'Fibra é a "vacina" contra a fome',
+    titulo: 'Fruta é saudável — e quantidade também conta',
     conteudo:
-      'Compare: 100 kcal de biscoito somem em 2 mordidas e não saciam nada; 100 kcal de maçã com casca (2 unidades pequenas) enchem o estômago, demoram a digerir e seguram a fome por horas. Essa é a mágica da densidade nutricional: alimentos ricos em fibra e água entregam mais volume e nutrição por caloria. No supermercado, a regra prática é simples: quanto menos ingredientes no rótulo e mais perto da forma natural, mais fibra e saciedade o alimento entrega.',
-    dicaPratica: 'Quando bater vontade de doce hoje, coma primeiro uma fruta. Se a vontade continuar, tudo bem — mas geralmente ela passa.',
+      'Frutas oferecem vitaminas, água e fibras, mas também fornecem calorias e carboidratos. Uma unidade média costuma ter aproximadamente 60–120 kcal, variando muito conforme o tipo e o tamanho; porções de uva, manga, banana, açaí e frutas secas podem somar rapidamente. Comer muitas frutas ao longo do dia, além da sua necessidade, pode dificultar o déficit calórico. Isso não torna a fruta vilã: a estratégia é variar, respeitar porções e, para maior saciedade, combinar com proteína.',
+    dicaPratica: 'Observe hoje quantas porções de fruta você come e experimente uma delas com iogurte natural ou queijo.',
     produto: null,
   },
   {
     dia: 14,
     tema: 'Carboidratos',
     icone: '🍠',
-    titulo: 'Dia de pesagem + a verdade sobre carboidratos',
+    titulo: 'Massas: menos quantidade, mais saciedade',
     conteudo:
-      'Duas semanas — faça hoje sua pesagem e fotos na aba PROGRESSO! E vamos falar do macro mais injustiçado: o carboidrato. Ele NÃO é vilão — é a fonte de energia preferida do cérebro e dos músculos. O problema é a qualidade e a quantidade. Carboidratos integrais e naturais (batata-doce, arroz integral, frutas, mandioca) vêm com fibras e nutrientes; os ultraprocessados (biscoitos, refrigerantes, salgadinhos) são "calorias vazias": muita energia, zero saciedade, zero nutrição.',
-    dicaPratica: 'Pese-se, tire as fotos e compare com a semana 1. Depois, confira: seus carboidratos de hoje são "de verdade" ou de pacote?',
+      'Duas semanas — faça hoje sua pesagem e fotos na aba PROGRESSO! Massa não precisa ser excluída. O ajuste está na composição do prato — no controle de macros, não na exclusão: reduza a porção de macarrão e complete o prato com proteína — frango, carne magra, atum, ovos, queijo ou uma opção vegetal — e vegetais. A mesma refeição fica mais equilibrada e tende a sustentar por mais tempo do que um prato grande de massa com pouco acompanhamento. Carboidrato dá energia; proteína e fibras prolongam a saciedade.',
+    dicaPratica: 'Na próxima massa, use cerca de 1/4 do prato de massa, 1/4 de proteína e metade de vegetais.',
     produto: null,
   },
   {
@@ -157,10 +157,10 @@ export const DICAS = [
     dia: 16,
     tema: 'Carboidratos',
     icone: '🔍',
-    titulo: 'Açúcar escondido: onde ele se disfarça',
+    titulo: 'Granola, balas, doces e quitandas: o detalhe é a porção',
     conteudo:
-      'O açúcar se esconde sob mais de 50 nomes nos rótulos: xarope de milho, maltodextrina, dextrose, néctar, suco concentrado... Molho pronto, pão de forma, iogurte "de frutas", granola e barrinhas podem carregar açúcar equivalente a uma sobremesa. Um iogurte adoçado pode ter 20 g de açúcar — 4 colheres de chá! A defesa: leia a lista de ingredientes (se açúcar está entre os 3 primeiros, cuidado) e prefira versões naturais que você mesmo adoça com fruta.',
-    dicaPratica: 'Pegue 3 produtos da sua despensa e procure o açúcar na lista de ingredientes. Vai se surpreender.',
+      'Granola pode parecer leve, mas muitas versões juntam açúcar, mel, óleo e frutas secas: 3–4 colheres podem acrescentar cerca de 150–250 kcal. Balas parecem pequenas, porém várias ao longo do dia viram calorias pouco percebidas e quase nenhuma saciedade. Doces e quitandas — pão de queijo, biscoitos, bolos, broas e salgados assados — também concentram farinha e gordura. Nada disso é proibido: escolha uma porção, coma com atenção e evite o "beliscar sem contar".',
+    dicaPratica: 'Meça a granola com colher e coloque doces ou quitandas em um prato; não coma direto do pacote ou da travessa.',
     produto: null,
   },
   {
@@ -169,8 +169,8 @@ export const DICAS = [
     icone: '🥑',
     titulo: 'Gordura não engorda — excesso de calorias engorda',
     conteudo:
-      'Semana das gorduras! Elas são essenciais: formam hormônios (inclusive os que regulam o apetite), constroem membranas celulares e transportam as vitaminas A, D, E e K. Cortar gordura demais desregula o corpo. A questão é escolher bem: priorize as insaturadas — azeite, abacate, castanhas, peixes — e modere as saturadas. O único cuidado real é a densidade calórica: com 9 kcal/g, porções pequenas somam rápido. Uma colher de azeite tem ~90 kcal; meça, não despeje.',
-    dicaPratica: 'Troque a margarina ou manteiga de hoje por meio abacate amassado ou pasta de amendoim no pão.',
+      'Semana das gorduras! Elas são essenciais: formam hormônios, constroem membranas celulares e transportam as vitaminas A, D, E e K. A questão é escolher bem e dosar. O azeite é uma boa fonte de gordura, mas continua calórico: 1 colher de sopa tem aproximadamente 90–120 kcal, conforme a medida. Regar salada, cozinhar e finalizar o prato sem medir pode somar várias colheres. Use colher ou dosador; saudável não significa "à vontade".',
+    dicaPratica: 'Meça sempre o azeite em uma colher antes de usar, em vez de despejar direto no prato. Assim você sabe exatamente quanto consumiu e consegue registrar aqui no app a gordura e as calorias certas.',
     produto: null,
   },
   {
@@ -179,9 +179,9 @@ export const DICAS = [
     icone: '🐟',
     titulo: 'Ômega-3: a gordura anti-inflamatória',
     conteudo:
-      'O ômega-3 (EPA e DHA) é uma gordura que o corpo não produz — precisa vir da alimentação. Ele reduz inflamação, protege o coração, apoia o cérebro e pode até melhorar a recuperação muscular. As melhores fontes são peixes gordos de água fria: salmão, sardinha, atum. A recomendação é consumi-los 2x por semana. Chia e linhaça trazem a versão vegetal (ALA), que o corpo converte em pequena quantidade. Se peixe não faz parte da sua rotina, a suplementação é uma alternativa prática.',
+      'O ômega-3 (EPA e DHA) é uma gordura que o corpo não produz — precisa vir da alimentação. Ele reduz inflamação, protege o coração, apoia o cérebro e pode até melhorar a recuperação muscular: poucos gramas entregam um benefício funcional desproporcional ao tamanho da porção, o que faz dele um dos nutrientes de maior densidade nutricional que existem. As melhores fontes são peixes gordos de água fria: salmão, sardinha, atum. A recomendação é consumi-los 2x por semana. Chia e linhaça trazem a versão vegetal (ALA), que o corpo converte em pequena quantidade. Se peixe não faz parte da sua rotina, a suplementação é uma alternativa prática.',
     dicaPratica: 'Inclua sardinha, salmão ou atum em uma refeição hoje — ou 1 colher de chia no iogurte.',
-    produto: { nome: 'Herbalifeline', descricao: 'Cápsulas de óleo de peixe ricas em EPA e DHA, com óleos essenciais de hortelã e tomilho.' },
+    produto: { nome: 'Ômega 3 (óleo de peixe)', descricao: 'Cápsulas de óleo de peixe ricas em EPA e DHA, com óleos essenciais de hortelã e tomilho.' },
   },
   {
     dia: 19,
@@ -189,8 +189,8 @@ export const DICAS = [
     icone: '🥜',
     titulo: 'Oleaginosas: o lanche perfeito (na dose certa)',
     conteudo:
-      'Castanhas, nozes e amêndoas reúnem gordura boa, proteína, fibra e minerais como selênio e magnésio. Estudos associam o consumo regular a menor risco cardíaco e melhor controle de peso — apesar de calóricas, sua mastigação lenta e alta saciedade compensam. A dose ideal é "1 punhado fechado" (~30 g, 170–200 kcal). O erro é comer direto do pacote no sofá: aí um punhado vira três. Porcione antes e guarde o resto.',
-    dicaPratica: 'Separe porções de 30 g de castanhas em potinhos para os lanches da semana.',
+      'Amendoim, castanhas, nozes e amêndoas oferecem gorduras boas, proteína, fibras e minerais. Mas são alimentos muito concentrados: cerca de 30 g — um punhado pequeno — costuma fornecer 170–200 kcal. Pasta de amendoim também exige atenção: uma colher generosa pode virar duas sem perceber. Elas podem ajudar na saciedade quando porcionadas, mas comer direto do pacote pode acrescentar centenas de calorias e atrapalhar o déficit calórico.',
+    dicaPratica: 'Separe porções de 20–30 g de amendoim ou castanhas em potinhos e guarde o pacote antes de comer.',
     produto: null,
   },
   {
@@ -199,7 +199,7 @@ export const DICAS = [
     icone: '🧭',
     titulo: 'Depois dos 21 dias: o plano de manutenção',
     conteudo:
-      'Reta final! O maior erro pós-programa é "voltar ao normal" — porque foi o "normal" que trouxe você até aqui. A manutenção usa tudo o que você praticou: proteína em todas as refeições, metade do prato de vegetais, água na meta, carboidratos de verdade e gordura boa na dose certa. A regra 80/20 é sua aliada: 80% de escolhas alinhadas, 20% de flexibilidade para pizza com amigos e bolo de aniversário. Rigidez extrema quebra; consistência flexível dura para sempre.',
+      'Reta final! O maior erro pós-programa é "voltar ao normal" — porque foi o "normal" que trouxe você até aqui. A manutenção usa tudo o que você praticou: proteína em todas as refeições, alimentos de alta densidade nutricional ocupando a maior parte do prato, água na meta e um controle de macros que já virou instinto, não esforço. A diferença é que agora as calorias que você consome se equilibram com as que gasta — não é mais o déficit calórico que te trouxe até aqui, é o equilíbrio calórico que sustenta o resultado. A regra 80/20 é sua aliada: 80% de escolhas alinhadas, 20% de flexibilidade para pizza com amigos e bolo de aniversário. Rigidez extrema quebra; consistência flexível dura para sempre.',
     dicaPratica: 'Escreva 3 hábitos deste programa que você vai manter. Fixe na geladeira.',
     produto: null,
   },
@@ -207,14 +207,14 @@ export const DICAS = [
     dia: 21,
     tema: 'Manutenção',
     icone: '🏆',
-    titulo: 'Você conseguiu! E agora?',
+    titulo: 'Você conseguiu! Agora vem a repetição.',
     conteudo:
-      'Dia 21! Faça hoje sua pesagem final e as fotos de comparação — e celebre CADA progresso: peso, medidas, disposição, sono, roupas mais folgadas. Você provou que consegue manter constância por 3 semanas; essa é exatamente a habilidade que mantém resultados para a vida. Próximos passos possíveis: renovar por mais 21 dias com metas atualizadas (seu peso mudou, suas metas também), ou migrar para o modo manutenção. Converse com sua nutricionista pelo botão do WhatsApp para planejar a próxima fase. Orgulho de você! 💚',
-    dicaPratica: 'Compare as fotos do dia 1 com as de hoje. Mande para a nutricionista com sua maior vitória do programa.',
+      'Dia 21! Faça sua pesagem final e as fotos de comparação — e celebre cada detalhe: peso, medidas, disposição, como suas roupas caem, como você se vê. Mas aqui está a verdade que a ciência confirma: 21 dias construíram o gatilho. 90 dias construirão a identidade. Você provou que consegue ser constante por 21 repetições; essa habilidade é exatamente o que sustenta resultados para a vida toda. Os próximos 69 dias não vão repetir o que você aprendeu aqui — vão aprofundá-lo até que seja impossível voltar atrás. Macros, déficit calórico, densidade nutricional, fibra: tudo isso se tornará tão automático quanto respirar. A excelência está na repetição. E você já iniciou a dela. 💚',
+    dicaPratica: 'Compare as fotos do dia 1 com as de hoje. Essa transformação que você vê é apenas o começo. Reserve 15 minutos para decidir: continua comigo nos próximos 90 dias?',
     produto: null,
   },
 ]
 
 export function dicaDoDia(dia) {
-  return DICAS.find((d) => d.dia === dia) ?? DICAS[0]
+  return DICAS.find((d) => d.dia === dia)
 }
