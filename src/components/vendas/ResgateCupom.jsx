@@ -210,7 +210,7 @@ export default function ResgateCupom() {
               Sua conta foi criada com sucesso. Você será redirecionado em instantes...
             </p>
             <p className="text-xs text-verde/60">
-              Você tem <strong>21 dias</strong> de acesso completo ao app MWA.
+              Você tem <strong>30 dias</strong> de acesso completo ao app MWA.
             </p>
           </div>
         )}
