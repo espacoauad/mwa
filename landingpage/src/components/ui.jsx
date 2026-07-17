@@ -27,10 +27,22 @@ export function CtaButton({ children, variant = 'primary', href = CHECKOUT_URL, 
   )
 }
 
-/* ---------- Seção com respiro padrão ---------- */
-export function Section({ children, className = '', id, wide = false }) {
+/* ---------- Seção com respiro padrão ----------
+ * `lazy` + `intrinsicHeight`: aplica content-visibility: auto para que o
+ * navegador pule style/layout/paint de seções fora da viewport (custo
+ * principal do Lighthouse mobile é Style & Layout). O contain-intrinsic-size
+ * usa "auto <altura>" — a altura estimada só serve de placeholder até a
+ * seção ser medida de verdade (fica "lembrada" depois), então evita salto
+ * visível desde que a estimativa seja próxima da altura mobile real.
+ * Não usar em seções com âncora (#app, #oferta) nem acima da dobra.
+ */
+export function Section({ children, className = '', id, wide = false, lazy = false, intrinsicHeight }) {
   return (
-    <section id={id} className={`px-6 py-20 md:py-28 ${className}`}>
+    <section
+      id={id}
+      className={`px-6 py-20 md:py-28 ${className}`}
+      style={lazy ? { contentVisibility: 'auto', containIntrinsicSize: `auto ${intrinsicHeight}px` } : undefined}
+    >
       <div className={`mx-auto ${wide ? 'max-w-6xl' : 'max-w-5xl'}`}>{children}</div>
     </section>
   )

@@ -27,7 +27,7 @@ const pillars = [
 
 export default function Method() {
   return (
-    <Section className="bg-cream" wide>
+    <Section className="bg-cream" wide lazy intrinsicHeight={1250}>
       <div className="text-center">
         <Reveal>
           <Eyebrow>O método</Eyebrow>

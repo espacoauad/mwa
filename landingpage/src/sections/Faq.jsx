@@ -14,7 +14,7 @@ const faqs = [
 
 export default function Faq() {
   return (
-    <Section className="bg-cream">
+    <Section className="bg-cream" lazy intrinsicHeight={670}>
       <div className="mx-auto max-w-2xl">
         <Reveal className="text-center">
           <Eyebrow>Dúvidas frequentes</Eyebrow>

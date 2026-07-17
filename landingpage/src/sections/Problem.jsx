@@ -3,7 +3,7 @@ import Reveal from '../components/Reveal.jsx'
 
 export default function Problem() {
   return (
-    <Section className="bg-offwhite">
+    <Section className="bg-offwhite" lazy intrinsicHeight={530}>
       <div className="mx-auto max-w-2xl text-center">
         <Reveal>
           <Eyebrow>O problema</Eyebrow>

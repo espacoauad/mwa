@@ -3,7 +3,7 @@ import Reveal from '../components/Reveal.jsx'
 
 export default function FinalCta() {
   return (
-    <Section className="bg-forest-deep">
+    <Section className="bg-forest-deep" lazy intrinsicHeight={490}>
       <Reveal className="mx-auto max-w-2xl text-center">
         <Title light>
           Daqui a 30 dias, você estará 30 dias mais velha.

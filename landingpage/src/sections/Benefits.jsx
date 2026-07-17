@@ -15,7 +15,7 @@ const chips = ['Mais leveza', 'Menos culpa', 'Mais clareza', 'Mais consistência
 
 export default function Benefits() {
   return (
-    <Section className="bg-offwhite">
+    <Section className="bg-offwhite" lazy intrinsicHeight={970}>
       <div className="mx-auto max-w-2xl">
         <Reveal className="text-center">
           <Eyebrow>A transformação</Eyebrow>

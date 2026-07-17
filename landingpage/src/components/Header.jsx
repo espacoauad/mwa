@@ -17,7 +17,7 @@ export default function Header() {
       aria-label="Principal"
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'border-b border-forest/10 bg-offwhite/85 shadow-sm backdrop-blur-md'
+          ? 'border-b border-forest/10 bg-offwhite/85 shadow-sm backdrop-blur-sm'
           : 'bg-transparent'
       }`}
     >

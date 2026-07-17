@@ -13,7 +13,7 @@ const stats = [
 
 export default function Story() {
   return (
-    <Section className="bg-forest-deep" wide>
+    <Section className="bg-forest-deep" wide lazy intrinsicHeight={870}>
       <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
         <Reveal className="order-2 md:order-1">
           <div className="overflow-hidden rounded-3xl border border-gold/25 shadow-2xl shadow-black/30">

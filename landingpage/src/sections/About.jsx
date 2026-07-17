@@ -17,7 +17,7 @@ const learnings = [
 
 export default function About() {
   return (
-    <Section className="bg-cream" wide>
+    <Section className="bg-cream" wide lazy intrinsicHeight={640}>
       <div className="grid items-center gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
         <Reveal className="mx-auto w-full max-w-sm">
           <div className="overflow-hidden rounded-3xl border border-gold/30 shadow-xl shadow-forest/10">

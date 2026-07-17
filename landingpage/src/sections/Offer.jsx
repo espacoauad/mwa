@@ -16,7 +16,7 @@ const included = [
 
 export default function Offer() {
   return (
-    <Section id="oferta" className="bg-offwhite">
+    <Section id="oferta" className="bg-offwhite" lazy intrinsicHeight={1330}>
       <Reveal className="mx-auto mb-10 max-w-2xl space-y-2 text-center">
         <p className="font-display text-xl italic text-forest md:text-2xl">
           Quanto vale parar de recomeçar toda segunda-feira?

@@ -46,7 +46,7 @@ export default function Hero() {
           <img
             src={logoMWA}
             alt="MWA — My Wellness Approach"
-            className="w-64 max-w-full drop-shadow-[0_18px_28px_rgba(42,59,31,0.12)] sm:w-72 md:w-full md:max-w-[26rem]"
+            className="w-64 max-w-full drop-shadow-[0_10px_16px_rgba(42,59,31,0.12)] sm:w-72 md:w-full md:max-w-[26rem]"
           />
         </div>
       </div>

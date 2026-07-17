@@ -45,7 +45,7 @@ export default function AppShowcase() {
   }
 
   return (
-    <Section id="app" className="bg-forest-deep" wide>
+    <Section id="app" className="bg-forest-deep" wide lazy intrinsicHeight={1130}>
       <div className="text-center">
         <Reveal>
           <Eyebrow light>O aplicativo</Eyebrow>
