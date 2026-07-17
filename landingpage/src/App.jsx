@@ -1,17 +1,19 @@
+import { lazy, Suspense } from 'react'
 import Header from './components/Header.jsx'
 import Hero from './sections/Hero.jsx'
 import TrustBar from './sections/TrustBar.jsx'
 import Problem from './sections/Problem.jsx'
 import Quiz from './sections/Quiz.jsx'
-import Story from './sections/Story.jsx'
-import Method from './sections/Method.jsx'
-import AppShowcase from './sections/AppShowcase.jsx'
-import Benefits from './sections/Benefits.jsx'
-import About from './sections/About.jsx'
-import Offer from './sections/Offer.jsx'
-import FinalCta from './sections/FinalCta.jsx'
-import Faq from './sections/Faq.jsx'
 import Footer from './sections/Footer.jsx'
+
+const Story = lazy(() => import('./sections/Story.jsx'))
+const Method = lazy(() => import('./sections/Method.jsx'))
+const AppShowcase = lazy(() => import('./sections/AppShowcase.jsx'))
+const Benefits = lazy(() => import('./sections/Benefits.jsx'))
+const About = lazy(() => import('./sections/About.jsx'))
+const Offer = lazy(() => import('./sections/Offer.jsx'))
+const FinalCta = lazy(() => import('./sections/FinalCta.jsx'))
+const Faq = lazy(() => import('./sections/Faq.jsx'))
 
 export default function App() {
   return (
@@ -21,14 +23,16 @@ export default function App() {
       <TrustBar />
       <Problem />
       <Quiz />
-      <Story />
-      <Method />
-      <AppShowcase />
-      <Benefits />
-      <About />
-      <Offer />
-      <FinalCta />
-      <Faq />
+      <Suspense fallback={<div style={{ minHeight: '40rem' }} aria-hidden="true" />}>
+        <Story />
+        <Method />
+        <AppShowcase />
+        <Benefits />
+        <About />
+        <Offer />
+        <FinalCta />
+        <Faq />
+      </Suspense>
       <Footer />
     </main>
   )
