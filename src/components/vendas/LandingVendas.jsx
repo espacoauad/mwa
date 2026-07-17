@@ -19,8 +19,8 @@ function BotaoCTA({ children = 'Começar meus 30 dias', className = '' }) {
 export default function LandingVendas() {
   // Gatilhos de confiança logo abaixo do título
   const gatilhos = [
-    { icon: Award, texto: 'Nutricionista · CRN-1/27939 · 20+ anos de experiência' },
-    { icon: ShieldCheck, texto: 'Conteúdo com orientação nutricional profissional' },
+    { icon: Award, texto: '20+ anos de experiência em emagrecimento' },
+    { icon: ShieldCheck, texto: 'Nutricionista · CRN-1/27939' },
     { icon: Smartphone, texto: 'Monitoramento real do seu dia — simples e prático' },
     { icon: HeartHandshake, texto: 'Garantia incondicional de 7 dias — risco zero' },
     { icon: Zap, texto: 'Acesso imediato após a compra' },
@@ -92,7 +92,7 @@ export default function LandingVendas() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
           <div className="flex items-center gap-2">
             <LogoMWA variante="simbolo" className="h-9 w-9" />
-            <h1 className="font-serif text-xl font-bold italic text-verde">MWA Wellness App</h1>
+            <h1 className="font-serif text-xl font-bold italic text-verde">MWA · My Wellness App</h1>
           </div>
           <button
             onClick={irParaPreco}
@@ -107,7 +107,7 @@ export default function LandingVendas() {
       <section className="mx-auto max-w-4xl px-4 py-16 text-center md:py-20">
         <div className="mb-6">
           <span className="inline-block rounded-full bg-sage-claro px-4 py-2 text-xs font-bold uppercase text-verde">
-            MWA · Wellness App
+            MWA · My Wellness App
           </span>
         </div>
 
@@ -140,7 +140,7 @@ export default function LandingVendas() {
 
         <BotaoCTA />
         <p className="mx-auto mt-6 max-w-xl text-xs leading-relaxed text-verde/60">
-          Desenvolvido por Wanessa Auad — Nutricionista · CRN-1/27939 · 20+ anos de experiência
+          Desenvolvido por Wanessa Auad — Nutricionista · CRN-1/27939
         </p>
       </section>
 
@@ -585,7 +585,7 @@ export default function LandingVendas() {
       <section className="py-16">
         <div className="mx-auto max-w-3xl px-4">
           <h3 className="mb-6 text-center font-serif text-3xl font-bold italic text-verde">
-            Por que o MWA Wellness App funciona?
+            Por que o My Wellness App funciona?
           </h3>
           <p className="mb-2 text-center text-base leading-relaxed text-verde/80">
             Porque ele transforma informação em prática diária e mostra sua evolução de forma clara.
@@ -619,7 +619,7 @@ export default function LandingVendas() {
             </div>
             <p className="font-serif text-2xl font-bold italic text-verde">Wanessa Auad</p>
             <p className="text-sm font-semibold text-verde/70">Nutricionista · CRN-1/27939</p>
-            <p className="mb-6 mt-1 text-sm font-semibold text-ouro">Criadora e mentora do MWA Wellness App</p>
+            <p className="mb-6 mt-1 text-sm font-semibold text-ouro">Criadora e mentora do My Wellness App</p>
             <p className="mb-4 text-sm leading-relaxed text-verde/80">
               Há mais de 20 anos, ajudo pessoas a conquistarem saúde, autoestima e
               qualidade de vida através da educação alimentar.
@@ -806,11 +806,11 @@ export default function LandingVendas() {
       {/* Footer */}
       <footer className="border-t border-cinza bg-white py-10 text-center text-sm text-verde/60">
         <LogoMWA variante="simbolo" className="mx-auto mb-2 h-10 w-10" />
-        <p className="font-serif text-lg font-bold italic text-verde">MWA Wellness App</p>
+        <p className="font-serif text-lg font-bold italic text-verde">MWA · My Wellness App</p>
         <p className="mt-1 text-xs uppercase tracking-[0.2em] text-verde/40">My Wellness Approach</p>
         <p className="mx-auto mt-3 max-w-xs text-sm text-verde/70">Seu ecossistema para criar hábitos de bem-estar.</p>
         <p className="mt-6 text-xs">Wanessa Auad — Nutricionista — CRN-1/27939</p>
-        <p className="mt-4 text-xs">© 2026 MWA Wellness App</p>
+        <p className="mt-4 text-xs">© 2026 MWA · My Wellness App</p>
         <p className="mt-1 text-xs">metodomwa.com.br</p>
       </footer>
     </div>
