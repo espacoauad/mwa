@@ -36,7 +36,7 @@ export default function About() {
             <Eyebrow>Quem guia você</Eyebrow>
             <Title>Criado por Wanessa Auad</Title>
             <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-gold">
-              Nutricionista · CRN-1/27939 · 20+ anos de experiência
+              + de 20 anos de experiência
             </p>
           </Reveal>
           <Reveal delay={120} className="mt-6 space-y-4 text-base leading-relaxed text-ink/80">

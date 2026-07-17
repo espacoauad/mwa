@@ -8,7 +8,7 @@ import fotoStory1200 from '../assets/foto-wanessa-story-final-1200.webp'
 const stats = [
   { value: 26, suffix: ' kg', label: 'eliminados após a gestação' },
   { value: 14, suffix: ' anos', label: 'mantendo a transformação' },
-  { value: 20, suffix: '+', label: 'anos como nutricionista' },
+  { value: 20, suffix: '+', label: 'anos de experiência em emagrecimento' },
 ]
 
 export default function Story() {

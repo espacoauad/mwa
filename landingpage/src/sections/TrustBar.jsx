@@ -2,9 +2,9 @@ import { Award, BadgeCheck, ShieldCheck, CreditCard } from 'lucide-react'
 import Reveal from '../components/Reveal.jsx'
 
 const items = [
-  { icon: Award, label: '20+ anos de experiência' },
   { icon: BadgeCheck, label: 'Nutricionista · CRN-1/27939' },
   { icon: ShieldCheck, label: 'Garantia incondicional de 7 dias' },
+  { icon: Award, label: '20+ anos de experiência em emagrecimento' },
   { icon: CreditCard, label: 'Pagamento único, sem mensalidade' },
 ]
 

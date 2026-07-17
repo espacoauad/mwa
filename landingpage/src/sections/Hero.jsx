@@ -37,7 +37,7 @@ export default function Hero() {
           <div className="hero-enter hero-enter-delay-4 mt-10">
             <CtaButton>Quero começar meus 30 dias</CtaButton>
             <p className="mt-6 text-xs leading-relaxed text-mist md:text-sm">
-              Desenvolvido por Wanessa Auad — Nutricionista · CRN-1/27939 · 20+ anos de experiência
+              Desenvolvido por Wanessa Auad — Nutricionista · CRN-1/27939
             </p>
           </div>
         </div>
