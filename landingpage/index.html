@@ -30,6 +30,19 @@
   </head>
   <body>
     <div id="root"></div>
+    <!--
+      Form estático oculto para o Netlify detectar o formulário do quiz
+      no build (data-netlify="true"). O envio real acontece via fetch()
+      em Quiz.jsx; este form nunca é renderizado nem submetido pelo usuário.
+    -->
+    <form name="quiz-mwa" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="nome" />
+      <input type="email" name="email" />
+      <input type="text" name="perfil" />
+      <input type="text" name="respostas" />
+      <input type="text" name="consentimento" />
+      <input type="text" name="bot-field" />
+    </form>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

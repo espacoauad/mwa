@@ -2,6 +2,7 @@ import Header from './components/Header.jsx'
 import Hero from './sections/Hero.jsx'
 import TrustBar from './sections/TrustBar.jsx'
 import Problem from './sections/Problem.jsx'
+import Quiz from './sections/Quiz.jsx'
 import Story from './sections/Story.jsx'
 import Method from './sections/Method.jsx'
 import AppShowcase from './sections/AppShowcase.jsx'
@@ -19,6 +20,7 @@ export default function App() {
       <Hero />
       <TrustBar />
       <Problem />
+      <Quiz />
       <Story />
       <Method />
       <AppShowcase />
