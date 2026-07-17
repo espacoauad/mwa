@@ -1,7 +1,9 @@
 import { X } from 'lucide-react'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Visualizador em tela cheia para Política de Privacidade e Termos de Uso
 export default function DocumentoLegal({ documento, onFechar }) {
+  const { ingles } = useIdioma()
   return (
     <div className="fixed inset-0 z-50 flex justify-center bg-verde/40 backdrop-blur-sm">
       <div className="flex h-full w-full max-w-md flex-col bg-creme">
@@ -13,7 +15,7 @@ export default function DocumentoLegal({ documento, onFechar }) {
           <button
             type="button"
             onClick={onFechar}
-            aria-label="Fechar"
+            aria-label={ingles ? 'Close' : 'Fechar'}
             className="rounded-full bg-sage-claro p-2 text-verde transition-colors hover:bg-sage/30"
           >
             <X size={18} />
@@ -32,7 +34,7 @@ export default function DocumentoLegal({ documento, onFechar }) {
             onClick={onFechar}
             className="mb-4 w-full rounded-lg bg-verde py-3.5 text-sm font-semibold text-white transition-colors hover:bg-verde-escuro"
           >
-            Entendi
+            {ingles ? 'I understand' : 'Entendi'}
           </button>
         </div>
       </div>

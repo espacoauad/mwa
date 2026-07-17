@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { X, Play, RotateCcw, Star } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import Avatar from './Avatar.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Restaurante Saudável — a pessoa é a chef e monta pratos para os clientes,
 // escolhendo opções saudáveis em cada etapa. 300+ pontos = +10 🌱 (1x por dia)
@@ -106,6 +107,7 @@ function estrelasDoPrato(acertos) {
 }
 
 export default function JogoRestaurante({ onFechar }) {
+  const { ingles } = useIdioma()
   const { game, registrarJogoRestaurante } = useApp()
   const [fase, setFase] = useState('inicio') // inicio | montando | reacao | fim
   const [clientes, setClientes] = useState([])
@@ -174,7 +176,7 @@ export default function JogoRestaurante({ onFechar }) {
         {/* Cabeçalho */}
         <div className="mb-3 flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-xl font-semibold italic text-verde">Restaurante Saudável 🍽️</h2>
+            <h2 className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Healthy Restaurant' : 'Restaurante Saudável'} 🍽️</h2>
             <p className="text-xs text-verde/60">
               Monte pratos saudáveis para os clientes. {META_PONTOS}+ pontos = +10 🌱
             </p>
@@ -291,7 +293,7 @@ export default function JogoRestaurante({ onFechar }) {
                 onClick={proximoCliente}
                 className="mt-4 rounded-full bg-white px-6 py-2.5 font-bold text-verde"
               >
-                {clienteIdx + 1 >= TOTAL_CLIENTES ? 'Ver resultado' : 'Próximo cliente →'}
+                {clienteIdx + 1 >= TOTAL_CLIENTES ? (ingles ? 'View result' : 'Ver resultado') : (ingles ? 'Next customer →' : 'Próximo cliente →')}
               </button>
             </div>
           )}
@@ -301,10 +303,10 @@ export default function JogoRestaurante({ onFechar }) {
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-verde/85 text-center text-white backdrop-blur-sm">
               <p className="text-4xl">{pontos >= META_PONTOS ? '🏆' : '👩‍🍳'}</p>
               <p className="mt-2 font-serif text-xl font-semibold italic">
-                {pontos >= META_PONTOS ? 'Restaurante 5 estrelas!' : 'O cardápio pode melhorar!'}
+                {pontos >= META_PONTOS ? (ingles ? 'Five-star restaurant!' : 'Restaurante 5 estrelas!') : (ingles ? 'The menu can improve!' : 'O cardápio pode melhorar!')}
               </p>
               <p className="mt-1 text-sm text-white/80">{pontos} pontos</p>
-              {premioDado && <p className="mt-2 font-bold text-ouro">+10 🌱 ganhas!</p>}
+              {premioDado && <p className="mt-2 font-bold text-ouro">+10 🌱 {ingles ? 'earned!' : 'ganhas!'}</p>}
               <button
                 type="button"
                 onClick={comecar}

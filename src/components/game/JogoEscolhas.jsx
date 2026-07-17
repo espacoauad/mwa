@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { X, Heart, Play, RotateCcw } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import Avatar from './Avatar.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Jogo das Escolhas — o avatar da pessoa apanha comida saudável e desvia das besteiras.
 // 300+ pontos = +10 🌱 (1x por dia)
@@ -15,6 +16,7 @@ const TICK_MS = 50
 let proximoId = 1
 
 export default function JogoEscolhas({ onFechar }) {
+  const { ingles } = useIdioma()
   const { game, registrarJogoAvatar } = useApp()
   const [fase, setFase] = useState('inicio') // inicio | jogando | fim
   const [itens, setItens] = useState([])
@@ -118,7 +120,7 @@ export default function JogoEscolhas({ onFechar }) {
         {/* Cabeçalho */}
         <div className="mb-3 flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-xl font-semibold italic text-verde">Jogo das Escolhas 🥗</h2>
+            <h2 className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Choices Game' : 'Jogo das Escolhas'} 🥗</h2>
             <p className="text-xs text-verde/60">
               Apanhe o saudável, desvie da besteira. {META_PONTOS}+ pontos = +10 🌱
             </p>
@@ -194,10 +196,10 @@ export default function JogoEscolhas({ onFechar }) {
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-verde/85 text-center text-white backdrop-blur-sm">
               <p className="text-4xl">{pontos >= META_PONTOS ? '🏆' : '💪'}</p>
               <p className="mt-2 font-serif text-xl font-semibold italic">
-                {pontos >= META_PONTOS ? 'Escolhas perfeitas!' : 'Quase lá!'}
+                {pontos >= META_PONTOS ? (ingles ? 'Perfect choices!' : 'Escolhas perfeitas!') : (ingles ? 'Almost there!' : 'Quase lá!')}
               </p>
               <p className="mt-1 text-sm text-white/80">{pontos} pontos</p>
-              {premioDado && <p className="mt-2 font-bold text-ouro">+10 🌱 ganhas!</p>}
+              {premioDado && <p className="mt-2 font-bold text-ouro">+10 🌱 {ingles ? 'earned!' : 'ganhas!'}</p>}
               <button
                 type="button"
                 onClick={comecar}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AppProvider, useApp } from './context/AppContext.jsx'
+import { IdiomaProvider, useIdioma } from './context/IdiomaContext.jsx'
 import TelaAuth from './components/auth/TelaAuth.jsx'
 import OnboardingFlow from './components/onboarding/OnboardingFlow.jsx'
 import TabBar from './components/layout/TabBar.jsx'
@@ -11,9 +12,15 @@ import Dicas from './components/dicas/Dicas.jsx'
 import Ferramentas from './components/ferramentas/Ferramentas.jsx'
 import Perfil from './components/perfil/Perfil.jsx'
 import ModalRefeicao from './components/alimentacao/ModalRefeicao.jsx'
+import LembretePesagem from './components/progresso/LembretePesagem.jsx'
+import AcessoBloqueado from './components/layout/AcessoBloqueado.jsx'
 import AdminApp from './components/admin/AdminApp.jsx'
 import LandingVendas from './components/vendas/LandingVendas.jsx'
 import ResgateCupom from './components/vendas/ResgateCupom.jsx'
+import PreviewLanches from './components/dicas/PreviewLanches.jsx'
+import ModoDeRevisao from './components/admin/MododeRevisao.jsx'
+import { ehDiaPesagem } from './utils/pesagensReminder.js'
+import { configurarNotificacoesPesagem } from './utils/notificacoesReminder.js'
 
 const AVISOS_PAGAMENTO = {
   sucesso: { texto: '✅ Pagamento aprovado! Seu acesso será liberado em instantes.', estilo: 'border-sage bg-sage-claro text-verde' },
@@ -22,9 +29,15 @@ const AVISOS_PAGAMENTO = {
 }
 
 function AppInner() {
-  const { sessao, carregando, usuario, modalRefeicao, ganhoSementes } = useApp()
+  const { sessao, carregando, usuario, modalRefeicao, ganhoSementes, diaAtual, totalDias, programa90Ativo } = useApp()
+  const { ingles } = useIdioma()
   const [aba, setAba] = useState('hoje')
   const [avisoPagamento, setAvisoPagamento] = useState(null)
+  const [mostrarLembretePesagem, setMostrarLembretePesagem] = useState(false)
+  const [jaMostrarLembrete, setJaMostrarLembrete] = useState(false)
+
+  // Verifica se acesso deve ser bloqueado (dia 90 sem programa 90d ativo)
+  const acessoBloqueado = usuario && diaAtual === 90 && !programa90Ativo
 
   // Ao voltar do checkout, o Mercado Pago adiciona ?pagamento= na URL
   useEffect(() => {
@@ -34,6 +47,24 @@ function AppInner() {
       setAvisoPagamento(AVISOS_PAGAMENTO[status] ?? null)
     }
   }, [])
+
+  // Verifica se é dia de pesagem e mostra lembrete
+  useEffect(() => {
+    if (usuario && diaAtual && !jaMostrarLembrete && totalDias) {
+      if (ehDiaPesagem(diaAtual, totalDias)) {
+        setMostrarLembretePesagem(true)
+        setJaMostrarLembrete(true)
+      }
+    }
+  }, [usuario, diaAtual, totalDias, jaMostrarLembrete])
+
+  // Configura notificações push 24h antes da pesagem
+  useEffect(() => {
+    const userId = sessao?.user?.id
+    if (usuario && diaAtual && totalDias && userId) {
+      configurarNotificacoesPesagem(diaAtual, totalDias, userId)
+    }
+  }, [sessao, usuario, diaAtual, totalDias])
 
   if (carregando) {
     return (
@@ -55,6 +86,11 @@ function AppInner() {
     return <AdminApp />
   }
 
+  // Bloqueia acesso se chegou ao dia 90 sem programa 90d ativo
+  if (acessoBloqueado) {
+    return <AcessoBloqueado usuario={usuario} />
+  }
+
   const telas = {
     hoje: <Hoje irParaDicas={() => setAba('dicas')} />,
     alimentacao: <Alimentacao />,
@@ -73,13 +109,20 @@ function AppInner() {
           className={`mx-5 mt-4 block w-[calc(100%-2.5rem)] rounded-lg border-2 p-3.5 text-left text-sm font-semibold ${avisoPagamento.estilo}`}
         >
           {avisoPagamento.texto}
-          <span className="block text-xs font-normal opacity-60">toque para fechar</span>
+          <span className="block text-xs font-normal opacity-60">{ingles ? 'tap to close' : 'toque para fechar'}</span>
         </button>
       )}
       <div className="pb-28">{telas[aba]}</div>
       <BotaoWhatsApp />
       <TabBar aba={aba} onMudar={setAba} />
+      <ModoDeRevisao />
       {modalRefeicao.aberto && <ModalRefeicao />}
+      {mostrarLembretePesagem && (
+        <LembretePesagem
+          onFechar={() => setMostrarLembretePesagem(false)}
+          onIrPara={setAba}
+        />
+      )}
       {/* Aviso de sementes ganhas (gamificação) */}
       {ganhoSementes && (
         <div className="fixed left-1/2 top-6 z-50 -translate-x-1/2 animate-bounce rounded-full bg-verde px-5 py-2.5 font-bold text-ouro shadow-lg">
@@ -95,10 +138,13 @@ export default function App() {
   const rota = window.location.pathname
   if (rota === '/vendas') return <LandingVendas />
   if (rota === '/resgate') return <ResgateCupom />
+  if (rota === '/preview-lanches') return <IdiomaProvider><PreviewLanches /></IdiomaProvider>
 
   return (
-    <AppProvider>
-      <AppInner />
-    </AppProvider>
+    <IdiomaProvider>
+      <AppProvider>
+        <AppInner />
+      </AppProvider>
+    </IdiomaProvider>
   )
 }

@@ -19,3 +19,41 @@ body {
   background-color: var(--color-creme);
   color: var(--color-verde);
 }
+
+/* Tela de encerramento do programa (dia 90): chuva de estrelas + foguetes */
+@keyframes mwa-twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes mwa-shooting-star {
+  0% {
+    transform: translate(0, 0) rotate(35deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-320px, 320px) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+.mwa-estrela {
+  animation: mwa-twinkle 2.4s ease-in-out infinite;
+}
+
+.mwa-estrela-cadente {
+  animation: mwa-shooting-star 3.2s linear infinite;
+}

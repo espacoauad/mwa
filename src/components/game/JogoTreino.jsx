@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { X, Play, RotateCcw, Timer } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Jogo do Treino — toque no exercício que "acende" antes que o tempo passe.
 // 300+ pontos = +10 🌱 (1x por dia)
 
-const EXERCICIOS = ['🏃', '💪', '🤸', '🧘', '🚴', '🏋️', '⛹️', '🤾', '🏊']
+const EXERCICIOS = ['🏃', '💪', '🤸', '🥊', '🚴', '🏋️', '⛹️', '🤾', '🏊']
 const TAMANHO_GRADE = 9
 const DURACAO_JOGO = 40 // segundos
 const CICLO_MS = 850
@@ -13,6 +14,7 @@ const META_PONTOS = 300
 const PONTOS_POR_ACERTO = 15
 
 export default function JogoTreino({ onFechar }) {
+  const { ingles } = useIdioma()
   const { registrarJogoTreino } = useApp()
   const [fase, setFase] = useState('inicio') // inicio | jogando | fim
   const [ativa, setAtiva] = useState(null)
@@ -79,7 +81,7 @@ export default function JogoTreino({ onFechar }) {
         {/* Cabeçalho */}
         <div className="mb-3 flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-xl font-semibold italic text-verde">Jogo do Treino 💪</h2>
+            <h2 className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Workout Game' : 'Jogo do Treino'} 💪</h2>
             <p className="text-xs text-verde/60">Toque no exercício que acender. {META_PONTOS}+ pontos = +10 🌱</p>
           </div>
           <button type="button" onClick={onFechar} className="rounded-full bg-verde/10 p-2 text-verde hover:bg-verde/20">
@@ -135,10 +137,10 @@ export default function JogoTreino({ onFechar }) {
             <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-verde/85 text-center text-white backdrop-blur-sm">
               <p className="text-4xl">{pontos >= META_PONTOS ? '🏆' : '💪'}</p>
               <p className="mt-2 font-serif text-xl font-semibold italic">
-                {pontos >= META_PONTOS ? 'Treino completo!' : 'Bom treino!'}
+                {pontos >= META_PONTOS ? (ingles ? 'Workout complete!' : 'Treino completo!') : (ingles ? 'Good workout!' : 'Bom treino!')}
               </p>
               <p className="mt-1 text-sm text-white/80">{pontos} pontos</p>
-              {premioDado && <p className="mt-2 font-bold text-ouro">+10 🌱 ganhas!</p>}
+              {premioDado && <p className="mt-2 font-bold text-ouro">+10 🌱 {ingles ? 'earned!' : 'ganhas!'}</p>}
               <button
                 type="button"
                 onClick={comecar}

@@ -16,6 +16,7 @@ export const RECOMPENSAS = {
   jogo_treino: { sementes: 10, label: 'Jogo do Treino: 300+ pontos' },
   jogo_mente: { sementes: 15, label: 'Jardim de Afirmações completo' },
   jogo_restaurante: { sementes: 10, label: 'Restaurante Saudável: 300+ pontos' },
+  jogo_poda: { sementes: 10, label: 'Jogo da Poda: 300+ pontos' },
 }
 
 export const PERSONAGENS = [

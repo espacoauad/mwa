@@ -83,12 +83,42 @@ export function horarioAgora() {
   return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`
 }
 
-// Dia do programa (1–21) a partir da data de início
-export function diaDoPrograma(dataInicio) {
-  const inicio = new Date(dataInicio)
+function diasDesde(dataISO) {
+  const inicio = new Date(dataISO)
   inicio.setHours(0, 0, 0, 0)
   const hoje = new Date()
   hoje.setHours(0, 0, 0, 0)
-  const diff = Math.floor((hoje - inicio) / 86400000)
-  return Math.min(21, Math.max(1, diff + 1))
+  return Math.floor((hoje - inicio) / 86400000) + 1
+}
+
+// O 90d ativo é a fonte de verdade: enquanto existir, mostramos essa linha.
+// `programas` é a lista já mapeada para camelCase (ver programaDoBanco em AppContext).
+export function programa90Ativo(programas) {
+  return (programas ?? []).find((p) => p.tipo === '90d' && p.status === 'ativo') ?? null
+}
+
+// Dia do programa (1–90) a partir dos registros de mwa_programas da cliente.
+// Sem 90d ativo: dia 1–21, contado a partir do início do programa 21d (ou do
+// perfil, para contas antigas sem registro em mwa_programas).
+// Com 90d ativo: dia 22–90, contado a partir do início do programa 90d —
+// a continuidade do dia 21 para o dia 22 é automática, sem gap.
+export function diaDoPrograma(programas, dataInicioFallback) {
+  // Modo de revisão: permite visualizar qualquer dia sem restrições
+  const modoRevisao = typeof sessionStorage !== 'undefined' ? JSON.parse(sessionStorage.getItem('mwaModorevisao') || 'null') : null
+  if (modoRevisao?.ativo && modoRevisao?.diaVisualizacao) {
+    return modoRevisao.diaVisualizacao
+  }
+
+  const p90 = programa90Ativo(programas)
+  if (p90) {
+    return Math.min(90, Math.max(22, 21 + diasDesde(p90.dataInicio)))
+  }
+  const p21 = (programas ?? []).find((p) => p.tipo === '21d')
+  const inicio = p21?.dataInicio ?? dataInicioFallback
+  return Math.min(21, Math.max(1, diasDesde(inicio)))
+}
+
+// Total de dias do programa da cliente, para exibição de progresso (barra, "Dia X de Y").
+export function totalDiasPrograma(programas) {
+  return programa90Ativo(programas) ? 90 : 21
 }

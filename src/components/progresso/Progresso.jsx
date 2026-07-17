@@ -4,14 +4,16 @@ import { useApp } from '../../context/AppContext.jsx'
 import GraficoPeso from './GraficoPeso.jsx'
 import ModalPesagem from './ModalPesagem.jsx'
 import Botao from '../ui/Botao.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 export default function Progresso() {
+  const { ingles, locale } = useIdioma()
   const { usuario, pesagens, diaAtual } = useApp()
   const [modalAberto, setModalAberto] = useState(false)
 
   const pontos = [
-    { rotulo: 'Início', peso: usuario.peso },
-    ...pesagens.map((p) => ({ rotulo: `Sem ${p.semana}`, peso: p.peso })),
+    { rotulo: ingles ? 'Start' : 'Início', peso: usuario.peso },
+    ...pesagens.map((p) => ({ rotulo: `${ingles ? 'Wk' : 'Sem'} ${p.semana}`, peso: p.peso })),
   ]
 
   const pesoAtual = pontos[pontos.length - 1].peso
@@ -24,17 +26,17 @@ export default function Progresso() {
 
   return (
     <div className="px-5 pt-10">
-      <h1 className="font-serif text-2xl font-semibold italic text-verde">Seu progresso</h1>
-      <p className="mt-1 text-sm text-verde/60">Pesagem e fotos a cada 7 dias — compare o comparável.</p>
+      <h1 className="font-serif text-2xl font-semibold italic text-verde">{ingles ? 'Your progress' : 'Seu progresso'}</h1>
+      <p className="mt-1 text-sm text-verde/60">{ingles ? 'Weigh-ins and photos every 7 days — compare like with like.' : 'Pesagem e fotos a cada 7 dias — compare o comparável.'}</p>
 
       {/* Resumo do peso */}
       <div className="mt-4 grid grid-cols-3 gap-3">
         {[
-          { label: 'Peso inicial', valor: `${usuario.peso.toLocaleString('pt-BR')} kg` },
-          { label: 'Peso atual', valor: `${pesoAtual.toLocaleString('pt-BR')} kg` },
+          { label: ingles ? 'Starting weight' : 'Peso inicial', valor: `${usuario.peso.toLocaleString(locale)} kg` },
+          { label: ingles ? 'Current weight' : 'Peso atual', valor: `${pesoAtual.toLocaleString(locale)} kg` },
           {
-            label: 'Variação',
-            valor: `${variacao > 0 ? '+' : ''}${variacao.toLocaleString('pt-BR')} kg`,
+            label: ingles ? 'Change' : 'Variação',
+            valor: `${variacao > 0 ? '+' : ''}${variacao.toLocaleString(locale)} kg`,
             icone: true,
           },
         ].map((c) => (
@@ -50,7 +52,7 @@ export default function Progresso() {
 
       {/* Gráfico */}
       <div className="mt-4 rounded-2xl bg-white p-5 shadow-sm shadow-verde/5">
-        <h2 className="mb-2 text-sm font-semibold text-verde/60">Evolução do peso (kg)</h2>
+        <h2 className="mb-2 text-sm font-semibold text-verde/60">{ingles ? 'Weight trend (kg)' : 'Evolução do peso (kg)'}</h2>
         <GraficoPeso pontos={pontos} />
       </div>
 
@@ -59,16 +61,16 @@ export default function Progresso() {
         <div className={`mt-4 rounded-2xl p-5 ${diaPesagem ? 'bg-ouro-claro' : 'bg-white shadow-sm shadow-verde/5'}`}>
           <h2 className="flex items-center gap-2 font-semibold text-verde">
             <Scale size={18} className="text-sage" />
-            {diaPesagem ? `Semana ${proximaSemana}: dia de pesagem! 📸` : `Próxima pesagem: dia ${proximaSemana * 7}`}
+            {diaPesagem ? (ingles ? `Week ${proximaSemana}: weigh-in day! 📸` : `Semana ${proximaSemana}: dia de pesagem! 📸`) : (ingles ? `Next weigh-in: day ${proximaSemana * 7}` : `Próxima pesagem: dia ${proximaSemana * 7}`)}
           </h2>
           <p className="mt-1 text-sm text-verde/70">
             {diaPesagem
-              ? 'Pese-se em jejum e tire as 4 fotos (frente, costas e laterais).'
-              : 'Você pode registrar antes se preferir — o importante é manter as mesmas condições.'}
+              ? (ingles ? 'Weigh yourself before eating and take 4 photos: front, back, and both sides.' : 'Pese-se em jejum e tire as 4 fotos (frente, costas e laterais).')
+              : (ingles ? 'You may log it earlier if you prefer — the key is to keep the same conditions.' : 'Você pode registrar antes se preferir — o importante é manter as mesmas condições.')}
           </p>
           <div className="mt-3">
             <Botao variante={diaPesagem ? 'ouro' : 'secundario'} onClick={() => setModalAberto(true)}>
-              Registrar pesagem da semana {proximaSemana}
+              {ingles ? `Log week ${proximaSemana} weigh-in` : `Registrar pesagem da semana ${proximaSemana}`}
             </Botao>
           </div>
         </div>
@@ -77,7 +79,7 @@ export default function Progresso() {
       {/* Histórico */}
       {pesagens.length > 0 && (
         <div className="mt-4 flex flex-col gap-3 pb-4">
-          <h2 className="text-sm font-semibold text-verde/60">Histórico</h2>
+          <h2 className="text-sm font-semibold text-verde/60">{ingles ? 'History' : 'Histórico'}</h2>
           {pesagens.map((p, i) => {
             const pesoAnterior = i === 0 ? usuario.peso : pesagens[i - 1].peso
             const delta = Math.round((p.peso - pesoAnterior) * 10) / 10
@@ -85,24 +87,24 @@ export default function Progresso() {
             return (
               <div key={p.id} className="rounded-2xl bg-white p-4 shadow-sm shadow-verde/5">
                 <div className="flex items-center justify-between">
-                  <p className="font-semibold text-verde">Semana {p.semana}</p>
+                  <p className="font-semibold text-verde">{ingles ? 'Week' : 'Semana'} {p.semana}</p>
                   <p className="text-sm text-verde/60">
-                    <strong className="text-verde">{p.peso.toLocaleString('pt-BR')} kg</strong>{' '}
+                    <strong className="text-verde">{p.peso.toLocaleString(locale)} kg</strong>{' '}
                     <span className={delta <= 0 ? 'text-sage' : 'text-ouro'}>
                       ({delta > 0 ? '+' : ''}
-                      {delta.toLocaleString('pt-BR')})
+                      {delta.toLocaleString(locale)})
                     </span>
                   </p>
                 </div>
                 {fotos.length > 0 ? (
                   <div className="mt-3 grid grid-cols-4 gap-2">
                     {fotos.map((f, j) => (
-                      <img key={j} src={f} alt={`Foto ${j + 1} da semana ${p.semana}`} className="aspect-[3/4] w-full rounded-lg object-cover" />
+                      <img key={j} src={f} alt={ingles ? `Photo ${j + 1} from week ${p.semana}` : `Foto ${j + 1} da semana ${p.semana}`} className="aspect-[3/4] w-full rounded-lg object-cover" />
                     ))}
                   </div>
                 ) : (
                   <p className="mt-2 flex items-center gap-1 text-xs text-verde/40">
-                    <Camera size={12} /> Sem fotos nesta semana
+                    <Camera size={12} /> {ingles ? 'No photos this week' : 'Sem fotos nesta semana'}
                   </p>
                 )}
               </div>
@@ -114,9 +116,9 @@ export default function Progresso() {
       {programaCompleto && (
         <div className="mt-4 rounded-2xl bg-verde p-5 text-center text-white">
           <p className="text-2xl">🏆</p>
-          <p className="mt-1 font-serif text-lg font-semibold italic">Programa completo!</p>
+          <p className="mt-1 font-serif text-lg font-semibold italic">{ingles ? 'Program completed!' : 'Programa completo!'}</p>
           <p className="mt-1 text-sm text-white/70">
-            Fale com a nutricionista para planejar sua próxima fase.
+            {ingles ? 'Talk to your nutritionist to plan your next phase.' : 'Fale com a nutricionista para planejar sua próxima fase.'}
           </p>
         </div>
       )}

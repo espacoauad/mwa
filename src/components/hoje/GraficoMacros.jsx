@@ -1,7 +1,10 @@
+import { useIdioma } from '../../context/IdiomaContext.jsx'
+
 // Gráfico de macronutrientes em anéis concêntricos
 // Design premium MWA: minimalismo + hierarquia visual + respiro
 
 export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, metaProteina = 100, metaCarbos = 100, metaGordura = 40, calorias = 0, metaCalorias = 1800 }) {
+  const { ingles } = useIdioma()
   const centro = 100 // Centro do SVG (viewBox = 200x200)
   const espessuraAnel = 9
 
@@ -85,7 +88,7 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
       <div className="grid grid-cols-3 gap-6 text-center">
         {/* Proteína */}
         <div>
-          <p className="text-xs font-semibold text-verde/70">Proteína</p>
+          <p className="text-xs font-semibold text-verde/70">{ingles ? 'Protein' : 'Proteína'}</p>
           <p className="mt-1 font-serif text-xl font-bold text-verde">
             {Math.round(proteina)}<span className="text-xs font-normal text-verde/60">g</span>
           </p>
@@ -103,7 +106,7 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
 
         {/* Gordura */}
         <div>
-          <p className="text-xs font-semibold text-verde/70">Gordura</p>
+          <p className="text-xs font-semibold text-verde/70">{ingles ? 'Fat' : 'Gordura'}</p>
           <p className="mt-1 font-serif text-xl font-bold text-ouro">
             {Math.round(gordura)}<span className="text-xs font-normal text-verde/60">g</span>
           </p>

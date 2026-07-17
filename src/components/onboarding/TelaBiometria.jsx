@@ -1,8 +1,20 @@
 import Botao from '../ui/Botao.jsx'
 import CampoNumero from '../ui/CampoNumero.jsx'
 import { NIVEIS_ATIVIDADE, OBJETIVOS } from '../../utils/calculos.js'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
+
+const ATIVIDADE_EN = {
+  sedentario: ['Sedentary', 'Little or no exercise'],
+  leve: ['Lightly active', 'Light exercise 1–3 times a week'],
+  moderado: ['Moderately active', 'Moderate exercise 3–5 times a week'],
+  intenso: ['Very active', 'Intense exercise 6–7 times a week'],
+  atleta: ['Extremely active', 'Daily intense training or physical work'],
+}
+
+const OBJETIVO_EN = { emagrecer: 'Lose weight', manter: 'Maintain', ganhar: 'Build muscle' }
 
 export default function TelaBiometria({ dados, atualizar, avancar, voltar }) {
+  const { ingles } = useIdioma()
   const idade = Number(dados.idade)
   const peso = Number(dados.peso)
   const altura = Number(dados.altura)
@@ -15,23 +27,23 @@ export default function TelaBiometria({ dados, atualizar, avancar, voltar }) {
   return (
     <>
       <div className="mb-6">
-        <h1 className="font-serif text-3xl font-semibold italic leading-tight text-verde">Seus dados biométricos</h1>
-        <p className="mt-3 text-verde/70">Com eles calculamos sua TMB, TDEE e todas as suas metas.</p>
+        <h1 className="font-serif text-3xl font-semibold italic leading-tight text-verde">{ingles ? 'Your biometric information' : 'Seus dados biométricos'}</h1>
+        <p className="mt-3 text-verde/70">{ingles ? 'We use it to calculate your BMR, TDEE, and daily targets.' : 'Com eles calculamos sua TMB, TDEE e todas as suas metas.'}</p>
       </div>
 
       <div className="flex flex-col gap-5">
         <div className="grid grid-cols-3 gap-3">
-          <CampoNumero label="Peso" sufixo="kg" value={dados.peso} onChange={(v) => atualizar('peso', v)} placeholder="72" step="0.1" />
-          <CampoNumero label="Altura" sufixo="cm" value={dados.altura} onChange={(v) => atualizar('altura', v)} placeholder="168" />
-          <CampoNumero label="Idade" sufixo="anos" value={dados.idade} onChange={(v) => atualizar('idade', v)} placeholder="35" />
+          <CampoNumero label={ingles ? 'Weight' : 'Peso'} sufixo="kg" value={dados.peso} onChange={(v) => atualizar('peso', v)} placeholder="72" step="0.1" />
+          <CampoNumero label={ingles ? 'Height' : 'Altura'} sufixo="cm" value={dados.altura} onChange={(v) => atualizar('altura', v)} placeholder="168" />
+          <CampoNumero label={ingles ? 'Age' : 'Idade'} sufixo={ingles ? 'years' : 'anos'} value={dados.idade} onChange={(v) => atualizar('idade', v)} placeholder="35" />
         </div>
 
         <div>
-          <span className="mb-2 block text-sm font-semibold text-verde">Sexo biológico</span>
+          <span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Biological sex' : 'Sexo biológico'}</span>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { id: 'feminino', label: 'Feminino ♀' },
-              { id: 'masculino', label: 'Masculino ♂' },
+              { id: 'feminino', label: ingles ? 'Female ♀' : 'Feminino ♀' },
+              { id: 'masculino', label: ingles ? 'Male ♂' : 'Masculino ♂' },
             ].map((op) => (
               <button
                 key={op.id}
@@ -50,7 +62,7 @@ export default function TelaBiometria({ dados, atualizar, avancar, voltar }) {
         </div>
 
         <div>
-          <span className="mb-2 block text-sm font-semibold text-verde">Nível de atividade física</span>
+          <span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Physical activity level' : 'Nível de atividade física'}</span>
           <div className="flex flex-col gap-2">
             {NIVEIS_ATIVIDADE.map((nivel) => (
               <button
@@ -63,15 +75,15 @@ export default function TelaBiometria({ dados, atualizar, avancar, voltar }) {
                     : 'border-sage/25 bg-white hover:border-sage/50'
                 }`}
               >
-                <span className="block text-sm font-semibold text-verde">{nivel.label}</span>
-                <span className="block text-xs text-verde/60">{nivel.descricao}</span>
+                <span className="block text-sm font-semibold text-verde">{ingles ? ATIVIDADE_EN[nivel.id][0] : nivel.label}</span>
+                <span className="block text-xs text-verde/60">{ingles ? ATIVIDADE_EN[nivel.id][1] : nivel.descricao}</span>
               </button>
             ))}
           </div>
         </div>
 
         <div>
-          <span className="mb-2 block text-sm font-semibold text-verde">Objetivo</span>
+          <span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Goal' : 'Objetivo'}</span>
           <div className="grid grid-cols-3 gap-2">
             {OBJETIVOS.map((obj) => (
               <button
@@ -85,7 +97,7 @@ export default function TelaBiometria({ dados, atualizar, avancar, voltar }) {
                 }`}
               >
                 <span className="block text-xl">{obj.emoji}</span>
-                <span className="block text-xs font-semibold text-verde">{obj.label}</span>
+                <span className="block text-xs font-semibold text-verde">{ingles ? OBJETIVO_EN[obj.id] : obj.label}</span>
               </button>
             ))}
           </div>
@@ -94,10 +106,10 @@ export default function TelaBiometria({ dados, atualizar, avancar, voltar }) {
 
       <div className="mt-auto flex flex-col gap-3 pt-8">
         <Botao onClick={avancar} disabled={!valido}>
-          Continuar
+          {ingles ? 'Continue' : 'Continuar'}
         </Botao>
         <Botao variante="secundario" onClick={voltar}>
-          Voltar
+          {ingles ? 'Back' : 'Voltar'}
         </Botao>
       </div>
     </>

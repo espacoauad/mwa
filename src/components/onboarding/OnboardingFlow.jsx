@@ -5,11 +5,13 @@ import TelaContato from './TelaContato.jsx'
 import TelaBiometria from './TelaBiometria.jsx'
 import TelaCorporais from './TelaCorporais.jsx'
 import TelaMetas from './TelaMetas.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 const TOTAL_TELAS = 5
 
 export default function OnboardingFlow() {
   const { sessao, concluirOnboarding } = useApp()
+  const { ingles } = useIdioma()
   const [tela, setTela] = useState(0)
   const [salvando, setSalvando] = useState(false)
   const [erro, setErro] = useState(null)
@@ -50,7 +52,9 @@ export default function OnboardingFlow() {
         altura: Number(dados.altura),
       })
     } catch {
-      setErro('Não foi possível salvar seu cadastro. Verifique sua conexão e tente novamente.')
+      setErro(ingles
+        ? 'We could not save your profile. Check your connection and try again.'
+        : 'Não foi possível salvar seu cadastro. Verifique sua conexão e tente novamente.')
       setSalvando(false)
     }
   }
@@ -77,7 +81,9 @@ export default function OnboardingFlow() {
         <p className="mb-4 rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700">{erro}</p>
       )}
       {salvando && (
-        <p className="mb-4 rounded-lg bg-sage-claro p-3 text-sm font-medium text-verde">Salvando seu cadastro…</p>
+        <p className="mb-4 rounded-lg bg-sage-claro p-3 text-sm font-medium text-verde">
+          {ingles ? 'Saving your profile…' : 'Salvando seu cadastro…'}
+        </p>
       )}
       <div className="flex flex-1 flex-col">{telas[tela]}</div>
     </div>

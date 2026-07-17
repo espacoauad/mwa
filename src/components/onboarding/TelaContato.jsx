@@ -1,7 +1,9 @@
 import Botao from '../ui/Botao.jsx'
 import LogoMWA from '../ui/LogoMWA.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 export default function TelaContato({ dados, atualizar, avancar }) {
+  const { ingles } = useIdioma()
   const emailValido = /\S+@\S+\.\S+/.test(dados.email)
   const valido = dados.nome.trim().length >= 2 && emailValido && dados.whatsapp.trim().length >= 10
 
@@ -13,21 +15,21 @@ export default function TelaContato({ dados, atualizar, avancar }) {
       <div className="mb-8">
         <LogoMWA variante="simbolo" className="mb-4 h-12 w-12" />
         <h1 className="font-serif text-3xl font-semibold italic leading-tight text-verde">
-          Mais do que um método, um estilo de vida que transforma!
+          {ingles ? 'More than a method, a lifestyle that transforms!' : 'Mais do que um método, um estilo de vida que transforma!'}
         </h1>
         <p className="mt-3 text-verde/70">
-          Primeiro, seus dados de contato para o acompanhamento.
+          {ingles ? 'First, your contact details for follow-up.' : 'Primeiro, seus dados de contato para o acompanhamento.'}
         </p>
       </div>
 
       <div className="flex flex-col gap-5">
         <label className="block">
-          <span className="mb-2 block text-sm font-semibold text-verde">Nome completo</span>
+          <span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Full name' : 'Nome completo'}</span>
           <input
             type="text"
             value={dados.nome}
             onChange={(e) => atualizar('nome', e.target.value)}
-            placeholder="Seu nome"
+            placeholder={ingles ? 'Your name' : 'Seu nome'}
             className={campo}
           />
         </label>
@@ -58,7 +60,7 @@ export default function TelaContato({ dados, atualizar, avancar }) {
 
       <div className="mt-auto pt-8">
         <Botao onClick={avancar} disabled={!valido}>
-          Continuar
+          {ingles ? 'Continue' : 'Continuar'}
         </Botao>
       </div>
     </>

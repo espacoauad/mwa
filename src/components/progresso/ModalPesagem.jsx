@@ -1,24 +1,28 @@
 import { useState } from 'react'
 import { X, Camera } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
+import { useConfeti } from '../../hooks/useConfeti.js'
 import Botao from '../ui/Botao.jsx'
 import CampoNumero from '../ui/CampoNumero.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 const FOTOS = [
-  { id: 'frente', label: 'Frente' },
-  { id: 'costas', label: 'Costas' },
-  { id: 'latEsq', label: 'Lateral esq.' },
-  { id: 'latDir', label: 'Lateral dir.' },
+  { id: 'frente', pt: 'Frente', en: 'Front' },
+  { id: 'costas', pt: 'Costas', en: 'Back' },
+  { id: 'latEsq', pt: 'Lateral esq.', en: 'Left side' },
+  { id: 'latDir', pt: 'Lateral dir.', en: 'Right side' },
 ]
 
 const MEDIDAS = [
-  { id: 'cintura', label: 'Cintura' },
-  { id: 'quadril', label: 'Quadril' },
-  { id: 'peito', label: 'Peito' },
+  { id: 'cintura', pt: 'Cintura', en: 'Waist' },
+  { id: 'quadril', pt: 'Quadril', en: 'Hips' },
+  { id: 'peito', pt: 'Peito', en: 'Chest' },
 ]
 
 export default function ModalPesagem({ semana, onFechar }) {
+  const { ingles } = useIdioma()
   const { adicionarPesagem } = useApp()
+  const { celebrarGrande } = useConfeti()
   const [peso, setPeso] = useState('')
   const [fotos, setFotos] = useState({})
   const [medidas, setMedidas] = useState({ cintura: '', quadril: '', peito: '' })
@@ -41,7 +45,10 @@ export default function ModalPesagem({ semana, onFechar }) {
         peito: Number(medidas.peito) || null,
       },
     })
-    onFechar()
+    // 🎉 Dispara confete de celebração
+    celebrarGrande()
+    // Fecha o modal após a animação
+    setTimeout(() => onFechar(), 600)
   }
 
   return (
@@ -51,27 +58,27 @@ export default function ModalPesagem({ semana, onFechar }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="font-serif text-xl font-semibold italic text-verde">Pesagem — semana {semana}</h2>
-          <button type="button" aria-label="Fechar" onClick={onFechar} className="rounded-full bg-white p-2 text-verde/60">
+          <h2 className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Weigh-in — week' : 'Pesagem — semana'} {semana}</h2>
+          <button type="button" aria-label={ingles ? 'Close' : 'Fechar'} onClick={onFechar} className="rounded-full bg-white p-2 text-verde/60">
             <X size={18} />
           </button>
         </div>
 
-        <CampoNumero label="Peso de hoje" sufixo="kg" value={peso} onChange={setPeso} placeholder="Ex.: 71.2" step="0.1" />
+        <CampoNumero label={ingles ? 'Today’s weight' : 'Peso de hoje'} sufixo="kg" value={peso} onChange={setPeso} placeholder={ingles ? 'Example: 71.2' : 'Ex.: 71.2'} step="0.1" />
 
         <div className="mt-4">
-          <span className="mb-2 block text-sm font-semibold text-verde">Fotos de progresso</span>
+          <span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Progress photos' : 'Fotos de progresso'}</span>
           <div className="grid grid-cols-4 gap-2">
             {FOTOS.map((f) => (
               <label key={f.id} className="cursor-pointer text-center">
                 {fotos[f.id] ? (
-                  <img src={fotos[f.id]} alt={f.label} className="aspect-[3/4] w-full rounded-lg object-cover" />
+                  <img src={fotos[f.id]} alt={ingles ? f.en : f.pt} className="aspect-[3/4] w-full rounded-lg object-cover" />
                 ) : (
                   <span className="flex aspect-[3/4] w-full items-center justify-center rounded-lg border-2 border-dashed border-sage/40 bg-white text-sage">
                     <Camera size={18} />
                   </span>
                 )}
-                <span className="mt-1 block text-[10px] font-medium text-verde/60">{f.label}</span>
+                <span className="mt-1 block text-[10px] font-medium text-verde/60">{ingles ? f.en : f.pt}</span>
                 <input type="file" accept="image/*" capture="environment" onChange={(e) => escolherFoto(f.id, e)} className="hidden" />
               </label>
             ))}
@@ -79,12 +86,12 @@ export default function ModalPesagem({ semana, onFechar }) {
         </div>
 
         <div className="mt-4">
-          <span className="mb-2 block text-sm font-semibold text-verde">Medidas (opcional)</span>
+          <span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Measurements (optional)' : 'Medidas (opcional)'}</span>
           <div className="grid grid-cols-3 gap-2">
             {MEDIDAS.map((m) => (
               <CampoNumero
                 key={m.id}
-                label={m.label}
+                label={ingles ? m.en : m.pt}
                 sufixo="cm"
                 value={medidas[m.id]}
                 onChange={(v) => setMedidas((x) => ({ ...x, [m.id]: v }))}
@@ -97,7 +104,7 @@ export default function ModalPesagem({ semana, onFechar }) {
 
         <div className="mt-5">
           <Botao onClick={salvar} disabled={!valido}>
-            Salvar pesagem
+            {ingles ? 'Save weigh-in' : 'Salvar pesagem'}
           </Botao>
         </div>
       </div>

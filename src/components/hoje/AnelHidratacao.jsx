@@ -1,3 +1,5 @@
+import { useIdioma } from '../../context/IdiomaContext.jsx'
+
 /**
  * AnelHidratacao — Indicador premium de hidratação diária
  * Componente minimalista que reforça a mentalidade MWA através do design
@@ -8,19 +10,20 @@
  *   onClickAdicionar: function — callback para adicionar água
  */
 export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }) {
+  const { ingles } = useIdioma()
   const raio = 50
   const circ = 2 * Math.PI * raio
   const pct = Math.min(Math.round((consumidoMl / metaMl) * 100), 100)
   const preenchido = (Math.min(pct, 100) / 100) * circ
 
   // Estado visual e micro-copy educativa
-  let estado = { frase: 'Comece com calma. Pequenos goles também constroem cuidado.', tipo: 'inicio', cor: '#C9963B' }
+  let estado = { frase: ingles ? 'Start gently. Small sips are also an act of care.' : 'Comece com calma. Pequenos goles também constroem cuidado.', tipo: 'inicio', cor: '#C9963B' }
   if (pct >= 40 && pct < 80) {
-    estado = { frase: 'Seu corpo responde melhor quando a rotina apoia.', tipo: 'progresso', cor: '#879B55' }
+    estado = { frase: ingles ? 'Your body responds better when your routine supports it.' : 'Seu corpo responde melhor quando a rotina apoia.', tipo: 'progresso', cor: '#879B55' }
   } else if (pct >= 80 && pct < 100) {
-    estado = { frase: 'Você está perto da meta. Consistência também se bebe.', tipo: 'proximidade', cor: '#879B55' }
+    estado = { frase: ingles ? 'You are close to your target. Consistency comes one sip at a time.' : 'Você está perto da meta. Consistência também se bebe.', tipo: 'proximidade', cor: '#879B55' }
   } else if (pct >= 100) {
-    estado = { frase: 'Meta concluída. Mais um cuidado silencioso por você.', tipo: 'conquista', cor: '#344528' }
+    estado = { frase: ingles ? 'Target reached. Another quiet act of care for yourself.' : 'Meta concluída. Mais um cuidado silencioso por você.', tipo: 'conquista', cor: '#344528' }
   }
 
   const corTexto = pct >= 100 ? 'text-ouro' : 'text-verde/70'
@@ -65,7 +68,7 @@ export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }
             {(consumidoMl / 1000).toFixed(1).replace('.', ',')}
           </span>
           <span className="text-sm font-medium text-verde/60">L</span>
-          <span className="text-verde/40"> de </span>
+          <span className="text-verde/40"> {ingles ? 'of' : 'de'} </span>
           <span className="text-lg font-medium text-verde/70">
             {(metaMl / 1000).toFixed(1).replace('.', ',')} L
           </span>

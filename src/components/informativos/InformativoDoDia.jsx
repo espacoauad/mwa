@@ -1,5 +1,6 @@
 import { Sparkles } from 'lucide-react'
-import { linkCompraUpgrade, linkSessao } from '../../utils/ofertas.js'
+import { linkCompraUpgrade, linkSessao, linkWhatsApp } from '../../utils/ofertas.js'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 const TONS = {
   bom: { borda: 'border-sage', badge: 'bg-sage text-white' },
@@ -11,14 +12,14 @@ function CaixaComparacao({ opcao }) {
   const tom = TONS[opcao.tom] ?? TONS.neutro
   return (
     <div className={`rounded-xl border-2 bg-white p-4 ${tom.borda}`}>
-      <span className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-bold ${tom.badge}`}>
+      <span className={`inline-block rounded-lg px-2.5 py-1 text-[11px] font-bold leading-snug ${tom.badge}`}>
         {opcao.nome}
       </span>
-      <ul className="mt-3 flex flex-col gap-1.5">
+      <ul className="mt-3 flex flex-col gap-2">
         {opcao.itens.map(([rotulo, valor], i) => (
-          <li key={i} className="flex items-baseline justify-between gap-2 text-xs">
+          <li key={i} className="flex flex-col gap-0.5 text-xs">
             <span className="text-verde/60">{rotulo}</span>
-            <span className="text-right font-semibold text-verde">{valor}</span>
+            <span className="font-semibold leading-snug text-verde">{valor}</span>
           </li>
         ))}
       </ul>
@@ -36,11 +37,13 @@ function CaixaComparacao({ opcao }) {
 
 // Card do informativo diário: comparação visual A vs B (+ C) com dica e CTA
 export default function InformativoDoDia({ informativo, dia, irPara }) {
+  const { ingles } = useIdioma()
   const duasColunas = informativo.opcoes.length === 2
 
   function acaoCta() {
     if (informativo.cta.tipo === 'progresso') irPara?.('progresso')
     else if (informativo.cta.tipo === 'sessao') window.open(linkSessao(dia), '_blank', 'noopener')
+    else if (informativo.cta.tipo === 'whatsapp') window.open(linkWhatsApp(informativo.cta.mensagem ?? 'Olá! Quero saber mais sobre o MWA.'), '_blank', 'noopener')
     else window.open(linkCompraUpgrade(dia), '_blank', 'noopener')
   }
 
@@ -48,7 +51,7 @@ export default function InformativoDoDia({ informativo, dia, irPara }) {
     <article className="overflow-hidden rounded-2xl bg-verde shadow-sm shadow-verde/10">
       <div className="p-5 text-center">
         <p className="text-xs font-semibold uppercase tracking-widest text-white/50">
-          Informativo · Dia {informativo.dia} de {informativo.dia > 21 ? 90 : 21}
+          {ingles ? 'Guide · Day' : 'Informativo · Dia'} {informativo.dia} {ingles ? 'of' : 'de'} {informativo.dia > 21 ? 90 : 21}
         </p>
         <p className="mt-2 text-4xl">{informativo.emoji}</p>
         <h2 className="mt-2 font-serif text-xl font-semibold italic leading-snug text-ouro">
@@ -65,7 +68,7 @@ export default function InformativoDoDia({ informativo, dia, irPara }) {
 
         <div className="mt-3 rounded-xl bg-ouro p-4">
           <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-verde-escuro/70">
-            <Sparkles size={13} /> Dica do dia
+            <Sparkles size={13} /> {ingles ? 'Tip of the day' : 'Dica do dia'}
           </p>
           <p className="mt-1 text-sm font-semibold leading-relaxed text-verde-escuro">{informativo.dica}</p>
         </div>

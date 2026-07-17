@@ -1,6 +1,9 @@
+import { useIdioma } from '../../context/IdiomaContext.jsx'
+
 // Gráfico de peso — série única: linha 2px verde-escuro, rótulos diretos nos
 // pontos (sem legenda), grade discreta. Pontos ≥ 8px com anel branco.
 export default function GraficoPeso({ pontos }) {
+  const { ingles, locale } = useIdioma()
   // pontos: [{ rotulo, peso }]
   const W = 340
   const H = 170
@@ -19,7 +22,7 @@ export default function GraficoPeso({ pontos }) {
   const caminho = pontos.map((p, i) => `${i === 0 ? 'M' : 'L'}${escalaX(i)},${escalaY(p.peso)}`).join(' ')
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label="Evolução do peso ao longo do programa">
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={ingles ? 'Weight trend throughout the program' : 'Evolução do peso ao longo do programa'}>
       {/* Grade discreta */}
       {linhas.map((v) => (
         <g key={v}>
@@ -37,7 +40,7 @@ export default function GraficoPeso({ pontos }) {
       {pontos.map((p, i) => (
         <g key={i}>
           <circle cx={escalaX(i)} cy={escalaY(p.peso)} r="5" fill="#344528" stroke="#FFFFFF" strokeWidth="2">
-            <title>{`${p.rotulo}: ${p.peso.toLocaleString('pt-BR')} kg`}</title>
+            <title>{`${p.rotulo}: ${p.peso.toLocaleString(locale)} kg`}</title>
           </circle>
           <text
             x={escalaX(i)}
@@ -47,7 +50,7 @@ export default function GraficoPeso({ pontos }) {
             fontWeight="600"
             fill="#344528"
           >
-            {p.peso.toLocaleString('pt-BR')}
+            {p.peso.toLocaleString(locale)}
           </text>
           <text x={escalaX(i)} y={H - 8} textAnchor="middle" fontSize="9" fill="#34452880">
             {p.rotulo}

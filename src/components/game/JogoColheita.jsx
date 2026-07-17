@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { X, RotateCcw } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Jogo da Colheita — combine 3 ou mais frutas iguais (estilo match-3)
 // 300+ pontos ao fim das jogadas = +10 🌱 (1x por dia)
@@ -68,6 +69,7 @@ function aplicarGravidade(b) {
 const pausa = (ms) => new Promise((r) => setTimeout(r, ms))
 
 export default function JogoColheita({ onFechar }) {
+  const { ingles } = useIdioma()
   const { registrarJoguinho } = useApp()
   const [tabuleiro, setTabuleiro] = useState(gerarTabuleiro)
   const [selecionada, setSelecionada] = useState(null)
@@ -163,7 +165,7 @@ export default function JogoColheita({ onFechar }) {
         {/* Cabeçalho */}
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-xl font-semibold italic text-verde">Jogo da Colheita 🍓</h2>
+            <h2 className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Harvest Game' : 'Jogo da Colheita'} 🍓</h2>
             <p className="text-xs text-verde/60">Combine 3 frutas iguais. {META_PONTOS}+ pontos = +10 🌱</p>
           </div>
           <button type="button" onClick={onFechar} className="rounded-full bg-verde/10 p-2 text-verde hover:bg-verde/20">
@@ -174,11 +176,11 @@ export default function JogoColheita({ onFechar }) {
         {/* Placar */}
         <div className="mb-4 grid grid-cols-2 gap-3">
           <div className="rounded-xl bg-white p-3 text-center">
-            <p className="text-[10px] font-bold uppercase tracking-wide text-verde/50">Pontos</p>
+            <p className="text-[10px] font-bold uppercase tracking-wide text-verde/50">{ingles ? 'Points' : 'Pontos'}</p>
             <p className={`text-2xl font-bold ${pontos >= META_PONTOS ? 'text-sage' : 'text-verde'}`}>{pontos}</p>
           </div>
           <div className="rounded-xl bg-white p-3 text-center">
-            <p className="text-[10px] font-bold uppercase tracking-wide text-verde/50">Jogadas</p>
+            <p className="text-[10px] font-bold uppercase tracking-wide text-verde/50">{ingles ? 'Moves' : 'Jogadas'}</p>
             <p className={`text-2xl font-bold ${jogadas <= 5 ? 'text-red-500' : 'text-verde'}`}>{jogadas}</p>
           </div>
         </div>
@@ -210,12 +212,12 @@ export default function JogoColheita({ onFechar }) {
               <div className="p-6 text-center text-white">
                 <p className="text-4xl">{pontos >= META_PONTOS ? '🏆' : '🌱'}</p>
                 <p className="mt-2 font-serif text-xl font-semibold italic">
-                  {pontos >= META_PONTOS ? 'Colheita incrível!' : 'Boa tentativa!'}
+                  {pontos >= META_PONTOS ? (ingles ? 'Amazing harvest!' : 'Colheita incrível!') : (ingles ? 'Good try!' : 'Boa tentativa!')}
                 </p>
                 <p className="mt-1 text-sm text-white/80">{pontos} pontos</p>
-                {premioDado && <p className="mt-2 font-bold text-ouro">+10 🌱 ganhas!</p>}
+                {premioDado && <p className="mt-2 font-bold text-ouro">+10 🌱 {ingles ? 'earned!' : 'ganhas!'}</p>}
                 {!premioDado && pontos >= META_PONTOS && (
-                  <p className="mt-2 text-xs text-white/60">(sementes do joguinho já resgatadas hoje)</p>
+                  <p className="mt-2 text-xs text-white/60">{ingles ? '(game seeds already claimed today)' : '(sementes do joguinho já resgatadas hoje)'}</p>
                 )}
                 <button
                   type="button"
