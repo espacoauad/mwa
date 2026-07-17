@@ -5,7 +5,7 @@ function irParaPreco() {
   document.querySelector('#preco')?.scrollIntoView({ behavior: 'smooth' })
 }
 
-function BotaoCTA({ children = 'Começar meus 21 dias', className = '' }) {
+function BotaoCTA({ children = 'Começar meus 30 dias', className = '' }) {
   return (
     <button
       onClick={irParaPreco}
@@ -19,9 +19,9 @@ function BotaoCTA({ children = 'Começar meus 21 dias', className = '' }) {
 export default function LandingVendas() {
   // Gatilhos de confiança logo abaixo do título
   const gatilhos = [
-    { icon: Award, texto: '20+ anos de experiência em transformação de hábitos' },
-    { icon: ShieldCheck, texto: 'Método criado por nutricionista especialista' },
-    { icon: Smartphone, texto: 'Acompanhamento diário no app — interativo e prático' },
+    { icon: Award, texto: 'Nutricionista · CRN-1/27939 · 20+ anos de experiência' },
+    { icon: ShieldCheck, texto: 'Conteúdo com orientação nutricional profissional' },
+    { icon: Smartphone, texto: 'Monitoramento real do seu dia — simples e prático' },
     { icon: HeartHandshake, texto: 'Garantia incondicional de 7 dias — risco zero' },
     { icon: Zap, texto: 'Acesso imediato após a compra' },
     { icon: CreditCard, texto: 'Pagamento único · nenhuma cobrança automática' },
@@ -32,12 +32,12 @@ export default function LandingVendas() {
     {
       pergunta: '"Será que eu vou conseguir seguir?"',
       resposta:
-        'O método foi desenhado para ser simples: metas calculadas automaticamente, refeições registradas em segundos e uma dica nova a cada dia — sem depender de força de vontade sozinha. Você é guiada, não abandonada.',
+        'O app foi desenhado para ser simples: metas calculadas automaticamente, refeições registradas em segundos e uma orientação nova a cada dia — sem depender apenas da força de vontade. Você entende o próximo passo e acompanha sua evolução.',
     },
     {
       pergunta: '"Será que isso é só mais uma dieta?"',
       resposta:
-        'Não é uma dieta restritiva com prazo de validade. É um método que te ensina o porquê de cada escolha — para que, depois dos 21 dias, você continue emagrecendo por conta própria, sem efeito sanfona.',
+        'Não é uma dieta restritiva com prazo de validade. É educação para você entender o que comer, quanto comer e como se comportar diante das escolhas do dia a dia — criando autonomia para cuidar de si.',
     },
   ]
 
@@ -51,7 +51,7 @@ export default function LandingVendas() {
     'Sentir a segurança de ter aprendido algo que vai durar para a vida toda.',
   ]
 
-  const pilares = ['Organização', 'Motivação', 'Conhecimento', 'Acompanhamento']
+  const pilares = ['Monitoramento', 'Educação', 'Motivação', 'Diversão']
 
   const recursos = [
     { emoji: '🍽', texto: 'Alimentação' },
@@ -76,7 +76,7 @@ export default function LandingVendas() {
   ]
 
   const inclusos = [
-    'App completo com acompanhamento diário por 21 dias',
+    'App completo com acompanhamento diário por 30 dias',
     'Cálculo personalizado de calorias e macronutrientes',
     'Banco de alimentos e calculadora de macros',
     'Registro de exercícios com contagem de calorias gastas',
@@ -92,7 +92,7 @@ export default function LandingVendas() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
           <div className="flex items-center gap-2">
             <LogoMWA variante="simbolo" className="h-9 w-9" />
-            <h1 className="font-serif text-xl font-bold italic text-verde">MWA</h1>
+            <h1 className="font-serif text-xl font-bold italic text-verde">MWA Wellness App</h1>
           </div>
           <button
             onClick={irParaPreco}
@@ -107,22 +107,22 @@ export default function LandingVendas() {
       <section className="mx-auto max-w-4xl px-4 py-16 text-center md:py-20">
         <div className="mb-6">
           <span className="inline-block rounded-full bg-sage-claro px-4 py-2 text-xs font-bold uppercase text-verde">
-            MWA · My Wellness Approach
+            MWA · Wellness App
           </span>
         </div>
 
         <h2 className="mb-6 font-serif text-3xl font-bold uppercase leading-tight text-verde md:text-5xl">
-          Transforme seus hábitos em apenas 21 dias.
+          Não é uma dieta. É uma nova forma de viver.
         </h2>
 
         <p className="mx-auto mb-4 max-w-2xl text-lg font-semibold leading-relaxed text-verde md:text-xl">
-          Em 21 dias, aprenda a transformar seus hábitos com estratégia nutricional e consciência
-          que perduram para a vida toda.
+          Em 30 dias, você aprende a metodologia MWA e aplica no seu dia a dia: alimentação
+          organizada, hidratação, movimento e evolução acompanhados diariamente pelo aplicativo.
         </p>
 
         <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-verde/70">
-          Método criado por <strong>Wanessa Auad</strong>, nutricionista especialista
-          em transformação de hábitos há mais de 20 anos.
+          Criado a partir da abordagem que permitiu a Wanessa Auad eliminar 26 kg e manter sua
+          transformação por 14 anos — agora no seu bolso.
         </p>
 
         {/* Gatilhos de autoridade */}
@@ -139,28 +139,75 @@ export default function LandingVendas() {
         </div>
 
         <BotaoCTA />
+        <p className="mx-auto mt-6 max-w-xl text-xs leading-relaxed text-verde/60">
+          Desenvolvido por Wanessa Auad — Nutricionista · CRN-1/27939 · 20+ anos de experiência
+        </p>
       </section>
 
-      {/* O problema e a promessa */}
+      {/* O problema */}
       <section className="bg-white py-16">
         <div className="mx-auto max-w-3xl px-4 text-center">
-          <p className="mb-6 text-xl font-semibold leading-relaxed text-verde">
-            <strong>Não é uma dieta.</strong> É uma nova forma de viver.
+          <p className="mb-2 text-xs font-bold uppercase tracking-widest text-ouro">O problema</p>
+          <p className="mb-6 font-serif text-2xl font-bold text-verde md:text-3xl">
+            Pare de recomeçar toda segunda-feira.
           </p>
           <p className="mb-6 text-base leading-relaxed text-verde/80">
-            O <strong>MWA — Método Wanessa Auad</strong> foi criado para ensinar você a entender seu
-            corpo, organizar sua nutrição com autonomia e conquistar resultados de forma prática,
-            saudável e que duram.
+            Você não precisa contar calorias sem entender o que está fazendo. Não precisa de
+            restrições impossíveis. E não precisa carregar culpa por não sustentar uma rotina que
+            nunca foi pensada para a sua vida real.
           </p>
-          <p className="mb-6 text-base leading-relaxed text-verde/80">
-            Tudo isso através de um aplicativo completo que estará com você todos os dias.
+          <p className="mb-6 font-serif text-xl italic text-verde">
+            O problema não é a sua força de vontade. É tentar mudar sem método.
           </p>
-          <p className="mb-8 font-serif text-2xl font-bold italic text-ouro">
-            Sua transformação começa agora.
+          <p className="mb-8 text-base leading-relaxed text-verde/80">
+            O MWA existe para ensinar você a entender seu corpo, organizar sua alimentação e
+            construir hábitos que continuam — muito depois do programa.
           </p>
           <BotaoCTA className="!bg-transparent !text-verde !shadow-none border-2 border-verde hover:!bg-verde hover:!text-white">
             Quero começar agora
           </BotaoCTA>
+        </div>
+      </section>
+
+      {/* História — Wanessa */}
+      <section className="bg-verde py-16">
+        <div className="mx-auto max-w-3xl px-4 text-center">
+          <p className="mb-2 text-xs font-bold uppercase tracking-widest text-ouro-claro">A história</p>
+          <h3 className="mb-8 font-serif text-2xl font-bold italic text-white md:text-3xl">
+            Antes de ser um método, foi uma vida transformada.
+          </h3>
+          <div className="mx-auto max-w-2xl space-y-5 text-left text-base leading-relaxed text-white/85">
+            <p>
+              Após a gestação do meu filho, eliminei 26 kg. Mas o maior desafio não era emagrecer —
+              era nunca mais precisar recomeçar.
+            </p>
+            <p>
+              Foi nesse processo que entendi: dietas até geram resultados rápidos, mas são os
+              hábitos que os mantêm ao longo dos anos. Há 14 anos vivo essa transformação, com
+              alimentação inteligente, mentalidade e escolhas consistentes.
+            </p>
+            <p>
+              Como nutricionista, transformei essa vivência em método — o mesmo que agora acompanha
+              você todos os dias pelo aplicativo.
+            </p>
+          </div>
+          <p className="mx-auto mt-8 max-w-2xl border-l-2 border-ouro pl-5 text-left font-serif text-xl italic leading-snug text-ouro-claro md:text-2xl">
+            "O maior resultado não foi perder 26 kg. Foi aprender a permanecer."
+          </p>
+          <div className="mx-auto mt-10 grid max-w-md grid-cols-3 gap-4 text-center">
+            <div>
+              <p className="font-serif text-3xl font-bold text-ouro-claro md:text-4xl">26 kg</p>
+              <p className="mt-1 text-xs leading-snug text-white/60">eliminados após a gestação</p>
+            </div>
+            <div>
+              <p className="font-serif text-3xl font-bold text-ouro-claro md:text-4xl">14 anos</p>
+              <p className="mt-1 text-xs leading-snug text-white/60">mantendo a transformação</p>
+            </div>
+            <div>
+              <p className="font-serif text-3xl font-bold text-ouro-claro md:text-4xl">20+</p>
+              <p className="mt-1 text-xs leading-snug text-white/60">anos como nutricionista</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -184,11 +231,11 @@ export default function LandingVendas() {
         </div>
       </section>
 
-      {/* Imagine daqui a 21 dias */}
+      {/* Imagine daqui a 30 dias */}
       <section className="bg-white py-16">
         <div className="mx-auto max-w-3xl px-4">
           <h3 className="mb-10 text-center font-serif text-3xl font-bold italic text-verde">
-            Imagine como será daqui a 21 dias...
+            Imagine como será daqui a 30 dias.
           </h3>
           <div className="space-y-4">
             {imagine.map((item, i) => (
@@ -224,15 +271,15 @@ export default function LandingVendas() {
       <section className="py-16">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <h3 className="mb-3 font-serif text-3xl font-bold italic text-verde">
-            Mais do que um aplicativo.
+            Seu ecossistema de bem-estar.
           </h3>
           <p className="mb-10 text-xl font-semibold text-verde/80">
-            Um método que acompanha você diariamente.
+            Tudo se conecta para ajudar você a criar hábitos que permanecem.
           </p>
 
           <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-verde/80">
-            Durante 21 dias você terá acesso a um sistema desenvolvido para fazer
-            exatamente o que normalmente falta em qualquer dieta:
+            Ao longo do dia, você registra o que comeu e o app soma calorias e nutrientes em tempo real.
+            Assim, você vê quanto já consumiu, o que ainda precisa e como ajustar a próxima refeição.
           </p>
 
           <div className="mb-10 grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -244,10 +291,10 @@ export default function LandingVendas() {
           </div>
 
           <p className="mb-2 text-base text-verde/80">
-            Porque informação sem prática não gera resultado.
+            Educação mostra o porquê. O monitoramento mostra onde você está. A motivação ajuda a continuar.
           </p>
           <p className="mb-10 text-xl font-bold text-verde">
-            Você terá literalmente uma nutricionista no seu bolso. 👝
+            E os jogos trazem diversão, tornando o processo simples, mágico e leve. ✨
           </p>
 
           <p className="mb-6 font-semibold text-verde">Todos os dias você poderá acompanhar:</p>
@@ -272,7 +319,7 @@ export default function LandingVendas() {
             Conheça o app por dentro
           </h3>
           <p className="mb-12 text-center text-sm text-white/70">
-            Tudo o que você precisa para os seus 21 dias, na palma da mão.
+            Tudo o que você precisa para os seus 30 dias, na palma da mão.
           </p>
 
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
@@ -280,7 +327,7 @@ export default function LandingVendas() {
             <div className="text-center">
               <div className="mx-auto w-56 rounded-[2rem] border-4 border-white/20 bg-creme p-4 shadow-2xl">
                 <p className="mb-1 text-left font-serif text-sm font-bold italic text-verde">Olá, Maria 🌿</p>
-                <p className="mb-3 text-left text-[10px] text-verde/60">Dia 7 de 21 — você está indo bem!</p>
+                <p className="mb-3 text-left text-[10px] text-verde/60">Dia 7 de 30 — você está indo bem!</p>
                 <div className="relative mx-auto mb-3 flex h-28 w-28 items-center justify-center rounded-full" style={{ background: 'conic-gradient(#879B55 0% 68%, #E8E4DC 68% 100%)' }}>
                   <div className="flex flex-col items-center justify-center rounded-full bg-creme" style={{ width: '5.5rem', height: '5.5rem' }}>
                     <p className="text-lg font-bold text-verde">1.240</p>
@@ -398,7 +445,7 @@ export default function LandingVendas() {
             <div className="text-center">
               <div className="mx-auto w-56 rounded-[2rem] border-4 border-white/20 bg-creme p-4 shadow-2xl">
                 <p className="mb-1 text-left font-serif text-sm font-bold italic text-verde">Dica do dia</p>
-                <p className="mb-3 text-left text-[10px] text-verde/60">Dia 4 de 21 · Hidratação</p>
+                <p className="mb-3 text-left text-[10px] text-verde/60">Dia 4 de 30 · Hidratação</p>
                 <div className="rounded-lg bg-white p-3 text-left">
                   <p className="text-2xl">💧</p>
                   <p className="mt-1 text-[11px] font-bold leading-snug text-verde">
@@ -417,12 +464,12 @@ export default function LandingVendas() {
                 </div>
                 <div className="mt-2 rounded-lg bg-white p-2 text-left">
                   <p className="text-[9px] font-bold text-verde">🔒 Conteúdo exclusivo para alunas</p>
-                  <p className="mt-0.5 text-[9px] text-verde/60">Por Wanessa Auad · Nutricionista</p>
+                  <p className="mt-0.5 text-[9px] text-verde/60">Educação para escolhas mais conscientes</p>
                 </div>
               </div>
               <h4 className="mt-5 font-bold text-white">Aprenda todos os dias</h4>
               <p className="mx-auto mt-1 max-w-xs text-xs text-white/70">
-                Durante os 21 dias, você recebe diariamente o conhecimento da nutricionista:
+                Durante os 30 dias, você recebe diariamente o conhecimento da nutricionista:
                 uma dica exclusiva por dia para transformar seus hábitos.
               </p>
             </div>
@@ -523,7 +570,7 @@ export default function LandingVendas() {
               </div>
               <h4 className="mt-5 font-bold text-white">Jogos que motivam</h4>
               <p className="mx-auto mt-1 max-w-xs text-xs text-white/70">
-                Cumpra tarefas, jogue e personalize seu avatar. Gamificação para tornar os 21 dias mais leves.
+                Cumpra tarefas, jogue e personalize seu avatar. Gamificação para tornar os 30 dias mais leves.
               </p>
             </div>
           </div>
@@ -538,13 +585,13 @@ export default function LandingVendas() {
       <section className="py-16">
         <div className="mx-auto max-w-3xl px-4">
           <h3 className="mb-6 text-center font-serif text-3xl font-bold italic text-verde">
-            Por que esse método funciona?
+            Por que o MWA Wellness App funciona?
           </h3>
           <p className="mb-2 text-center text-base leading-relaxed text-verde/80">
-            Porque ele não foi criado para fazer você emagrecer apenas durante 21 dias.
+            Porque ele transforma informação em prática diária e mostra sua evolução de forma clara.
           </p>
           <p className="mb-10 text-center text-lg font-bold text-verde">
-            Foi criado para ensinar você a continuar emagrecendo mesmo depois do programa.
+            Você aprende, coloca em prática, acompanha e se diverte enquanto cria novos hábitos.
           </p>
 
           <p className="mb-6 text-center font-semibold text-verde">Você aprenderá:</p>
@@ -563,7 +610,7 @@ export default function LandingVendas() {
       <section className="bg-white py-16">
         <div className="mx-auto max-w-3xl px-4 text-center">
           <h3 className="mb-10 font-serif text-2xl font-bold italic text-verde md:text-3xl">
-            O método criado por quem vive isso há mais de duas décadas.
+            Criado com experiência. Guiado com propósito.
           </h3>
 
           <div className="mx-auto max-w-lg rounded-2xl border-2 border-sage-claro bg-creme/50 p-8">
@@ -571,7 +618,8 @@ export default function LandingVendas() {
               🌿
             </div>
             <p className="font-serif text-2xl font-bold italic text-verde">Wanessa Auad</p>
-            <p className="mb-6 text-sm font-semibold text-ouro">Nutricionista</p>
+            <p className="text-sm font-semibold text-verde/70">Nutricionista · CRN-1/27939</p>
+            <p className="mb-6 mt-1 text-sm font-semibold text-ouro">Criadora e mentora do MWA Wellness App</p>
             <p className="mb-4 text-sm leading-relaxed text-verde/80">
               Há mais de 20 anos, ajudo pessoas a conquistarem saúde, autoestima e
               qualidade de vida através da educação alimentar.
@@ -625,17 +673,17 @@ export default function LandingVendas() {
           </div>
 
           <div className="rounded-2xl border-2 border-ouro bg-gradient-to-br from-ouro-claro/30 to-sage-claro/30 p-10 text-center md:p-12">
-            <p className="mb-2 text-sm font-bold uppercase text-ouro">MWA | Jornada de 21 Dias</p>
+            <p className="mb-2 text-sm font-bold uppercase text-ouro">MWA | Jornada de 30 Dias</p>
             <div className="mb-6">
-              <span className="font-serif text-7xl font-bold text-verde">R$ 127</span>
-              <p className="mt-2 text-verde/70">Acesso completo durante 21 dias · pagamento único</p>
+              <span className="font-serif text-7xl font-bold text-verde">R$ 97</span>
+              <p className="mt-2 text-verde/70">Acesso completo durante 30 dias · pagamento único</p>
             </div>
 
             <button
               disabled
               className="mb-4 inline-flex items-center gap-2 rounded-xl bg-verde px-10 py-5 text-lg font-bold text-white disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Começar meus 21 dias
+              Começar meus 30 dias
             </button>
             <p className="mb-6 text-xs text-verde/50">(botão será ativado no lançamento)</p>
 
@@ -650,9 +698,9 @@ export default function LandingVendas() {
             <div className="mx-auto flex max-w-md items-center gap-3 rounded-lg bg-white/70 p-4 text-left">
               <span className="text-2xl">🎁</span>
               <p className="text-xs leading-relaxed text-verde">
-                <strong>Bônus:</strong> ao concluir o programa de 21 dias, você poderá continuar
-                sua evolução com o <strong>Programa de 90 Dias</strong> em uma condição
-                exclusiva para alunas.
+                <strong>Sua evolução pode continuar:</strong> no checkout, você pode adicionar o{' '}
+                <strong>MWA | Programa de 90 Dias</strong> em condição especial para alunas — e a
+                continuidade também fica disponível dentro do aplicativo.
               </p>
             </div>
           </div>
@@ -666,7 +714,7 @@ export default function LandingVendas() {
             Sua decisão começa agora.
           </h3>
           <p className="mb-10 text-base text-white/80">
-            Daqui a 21 dias você estará exatamente 21 dias mais velha.
+            Daqui a 30 dias você estará exatamente 30 dias mais velha.
             <br />
             A única diferença será escolher entre:
           </p>
@@ -707,13 +755,37 @@ export default function LandingVendas() {
           <details className="rounded-lg border border-cinza bg-white p-4 cursor-pointer">
             <summary className="font-semibold text-verde">Como acesso o app?</summary>
             <p className="mt-2 text-sm text-verde/70">
-              Você recebe um email com seu código de acesso. Resgate no nosso site e crie sua conta. O app funciona no navegador do celular e pode ser "instalado" na tela inicial.
+              Após a compra, você recebe por email as instruções e seu código de acesso. É só resgatar e criar sua conta.
             </p>
           </details>
           <details className="rounded-lg border border-cinza bg-white p-4 cursor-pointer">
-            <summary className="font-semibold text-verde">Preciso baixar da loja de aplicativos?</summary>
+            <summary className="font-semibold text-verde">Preciso baixar na loja de aplicativos?</summary>
             <p className="mt-2 text-sm text-verde/70">
-              Não. O app funciona direto no navegador e pode ser adicionado à tela inicial do celular em um toque — sem ocupar espaço na memória.
+              Não. O app funciona direto no navegador do celular e pode ser adicionado à tela inicial em um toque, sem ocupar memória.
+            </p>
+          </details>
+          <details className="rounded-lg border border-cinza bg-white p-4 cursor-pointer">
+            <summary className="font-semibold text-verde">É um PDF ou e-book?</summary>
+            <p className="mt-2 text-sm text-verde/70">
+              Não. O MWA é uma experiência guiada pelo aplicativo, com registros, conteúdos, metas e acompanhamento diário.
+            </p>
+          </details>
+          <details className="rounded-lg border border-cinza bg-white p-4 cursor-pointer">
+            <summary className="font-semibold text-verde">Por quanto tempo terei acesso?</summary>
+            <p className="mt-2 text-sm text-verde/70">
+              O acesso da Jornada é de 30 dias, começando quando você criar sua conta.
+            </p>
+          </details>
+          <details className="rounded-lg border border-cinza bg-white p-4 cursor-pointer">
+            <summary className="font-semibold text-verde">Posso continuar depois dos 30 dias?</summary>
+            <p className="mt-2 text-sm text-verde/70">
+              Sim. Você pode adicionar o MWA | Programa de 90 Dias já no checkout, em condição especial para alunas, ou contratar a continuidade dentro do aplicativo.
+            </p>
+          </details>
+          <details className="rounded-lg border border-cinza bg-white p-4 cursor-pointer">
+            <summary className="font-semibold text-verde">Existe mensalidade?</summary>
+            <p className="mt-2 text-sm text-verde/70">
+              Não. A Jornada de 30 Dias é pagamento único de R$ 97.
             </p>
           </details>
           <details className="rounded-lg border border-cinza bg-white p-4 cursor-pointer">
@@ -723,9 +795,9 @@ export default function LandingVendas() {
             </p>
           </details>
           <details className="rounded-lg border border-cinza bg-white p-4 cursor-pointer">
-            <summary className="font-semibold text-verde">Posso compartilhar com amigos?</summary>
+            <summary className="font-semibold text-verde">Posso compartilhar meu acesso?</summary>
             <p className="mt-2 text-sm text-verde/70">
-              Não. Cada acesso é individual e monitorado.
+              Não. O acesso é individual e pessoal.
             </p>
           </details>
         </div>
@@ -734,10 +806,11 @@ export default function LandingVendas() {
       {/* Footer */}
       <footer className="border-t border-cinza bg-white py-10 text-center text-sm text-verde/60">
         <LogoMWA variante="simbolo" className="mx-auto mb-2 h-10 w-10" />
-        <p className="font-serif text-lg font-bold italic text-verde">MWA — Método Wanessa Auad</p>
+        <p className="font-serif text-lg font-bold italic text-verde">MWA Wellness App</p>
         <p className="mt-1 text-xs uppercase tracking-[0.2em] text-verde/40">My Wellness Approach</p>
-        <p className="mx-auto mt-3 max-w-xs text-sm text-verde/70">Mais do que um método, um estilo de vida que transforma!</p>
-        <p className="mt-4 text-xs">© 2026 MWA · Wanessa Auad — Nutricionista</p>
+        <p className="mx-auto mt-3 max-w-xs text-sm text-verde/70">Seu ecossistema para criar hábitos de bem-estar.</p>
+        <p className="mt-6 text-xs">Wanessa Auad — Nutricionista — CRN-1/27939</p>
+        <p className="mt-4 text-xs">© 2026 MWA Wellness App</p>
         <p className="mt-1 text-xs">metodomwa.com.br</p>
       </footer>
     </div>
