@@ -16,17 +16,19 @@ export default function Hero() {
           </p>
 
           <h1 className="hero-enter hero-enter-delay-1 mt-6 font-display text-4xl leading-[1.15] text-forest-deep md:text-6xl">
-            Não é uma dieta.
+            Transforme hábitos.
             <br />
-            <em className="italic text-forest">É uma nova forma de viver.</em>
+            Conquiste resultados.
+            <br />
+            <em className="italic text-forest">Mude sua vida.</em>
           </h1>
 
           <GoldRule className="hero-enter hero-enter-delay-2 mx-auto my-8 md:mx-0" />
 
           <p className="hero-enter hero-enter-delay-2 mx-auto max-w-xl text-base leading-relaxed text-ink/80 md:mx-0 md:text-lg">
-            Em <strong className="font-semibold text-forest">30 dias</strong>, você aprende a
-            metodologia MWA e aplica no seu dia a dia: alimentação organizada, hidratação,
-            movimento e evolução acompanhados diariamente pelo aplicativo.
+            Não é uma dieta. Em <strong className="font-semibold text-forest">30 dias</strong>,
+            um passo por dia, o MWA guia você pelo aplicativo para mudar sua relação com a
+            comida e construir hábitos que permanecem — sem restrição, sem culpa.
           </p>
 
           <p className="hero-enter hero-enter-delay-3 mx-auto mt-4 max-w-xl text-sm leading-relaxed text-mist md:mx-0">

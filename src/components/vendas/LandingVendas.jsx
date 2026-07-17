@@ -112,12 +112,12 @@ export default function LandingVendas() {
         </div>
 
         <h2 className="mb-6 font-serif text-3xl font-bold uppercase leading-tight text-verde md:text-5xl">
-          Não é uma dieta. É uma nova forma de viver.
+          Transforme hábitos. Conquiste resultados. Mude sua vida.
         </h2>
 
         <p className="mx-auto mb-4 max-w-2xl text-lg font-semibold leading-relaxed text-verde md:text-xl">
-          Em 30 dias, você aprende a metodologia MWA e aplica no seu dia a dia: alimentação
-          organizada, hidratação, movimento e evolução acompanhados diariamente pelo aplicativo.
+          Não é uma dieta. Em 30 dias, um passo por dia, o MWA guia você pelo aplicativo para
+          mudar sua relação com a comida e construir hábitos que permanecem — sem restrição, sem culpa.
         </p>
 
         <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-verde/70">
