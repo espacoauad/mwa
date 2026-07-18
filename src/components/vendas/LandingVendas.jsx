@@ -453,7 +453,7 @@ export default function LandingVendas() {
                   </p>
                   <p className="mt-1.5 select-none text-[9px] leading-relaxed text-verde/70 blur-[3px]">
                     Seu corpo confunde sede com fome. Beber água ao longo do dia reduz beliscos,
-                    melhora a digestão e potencializa a queima de gordura durante o programa.
+                    melhora a digestão e apoia os seus resultados durante o programa.
                   </p>
                 </div>
                 <div className="mt-2 rounded-lg bg-sage-claro/60 p-2.5 text-left">
@@ -809,6 +809,23 @@ export default function LandingVendas() {
         <p className="font-serif text-lg font-bold italic text-verde">MWA · My Wellness App</p>
         <p className="mt-1 text-xs uppercase tracking-[0.2em] text-verde/40">My Wellness Approach</p>
         <p className="mx-auto mt-3 max-w-xs text-sm text-verde/70">Seu ecossistema para criar hábitos de bem-estar.</p>
+        <div className="mx-auto mt-6 max-w-2xl space-y-2 border-t border-cinza px-4 pt-5 text-left">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-verde/60">Avisos importantes</p>
+          <p className="text-[11px] leading-relaxed text-verde/60">
+            O MWA | Jornada de 30 Dias é um programa <strong>educacional</strong> de organização de
+            hábitos e rotina alimentar. Ele não realiza diagnóstico, tratamento, cura ou prevenção
+            de qualquer doença e <strong>não substitui consulta com nutricionista, médico ou outro
+            profissional de saúde</strong>. O conteúdo do aplicativo tem caráter geral e informativo
+            e não constitui atendimento nutricional individualizado nem prescrição dietética.
+          </p>
+          <p className="text-[11px] leading-relaxed text-verde/60">
+            Resultados variam de pessoa para pessoa e dependem de fatores individuais e da aplicação
+            das orientações — nenhum resultado específico é prometido ou garantido. A história de
+            Wanessa Auad é um relato pessoal real e não representa promessa de resultado. Em caso de
+            condição de saúde, uso de medicamentos, gestação, amamentação ou histórico de transtorno
+            alimentar, procure orientação profissional individualizada antes de mudar sua alimentação.
+          </p>
+        </div>
         <p className="mt-6 text-xs">Wanessa Auad — Nutricionista — CRN-1/27939</p>
         <p className="mt-4 text-xs">© 2026 MWA · My Wellness App</p>
         <p className="mt-1 text-xs">metodomwa.com.br</p>

@@ -146,10 +146,13 @@ export default function Quiz() {
     <Section id="quiz" className="bg-cream">
       <div className="mx-auto max-w-2xl text-center">
         <Reveal>
-          <Eyebrow>Mini-diagnóstico</Eyebrow>
+          <Eyebrow>Mini-avaliação</Eyebrow>
           <Title>Qual hábito está sabotando você?</Title>
           <p className="mt-4 text-base leading-relaxed text-ink/75 md:text-lg">
             5 perguntas, 1 minuto — descubra por onde a sua mudança começa.
+          </p>
+          <p className="mt-2 text-xs text-mist">
+            Avaliação educativa de hábitos — não é diagnóstico clínico.
           </p>
         </Reveal>
       </div>

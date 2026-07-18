@@ -66,6 +66,12 @@ export default function Story() {
               </div>
             ))}
           </Reveal>
+
+          <Reveal delay={300}>
+            <p className="mt-5 text-[11px] italic text-cream/45">
+              Relato pessoal — resultados individuais variam.
+            </p>
+          </Reveal>
         </div>
       </div>
     </Section>

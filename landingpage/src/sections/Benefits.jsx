@@ -41,6 +41,9 @@ export default function Benefits() {
             Essa transformação começa com pequenas decisões feitas todos os dias.
           </p>
           <p className="mt-1 font-display text-lg italic text-forest">E você não estará sozinha.</p>
+          <p className="mt-4 text-[11px] italic text-mist">
+            Resultados variam de pessoa para pessoa e dependem da aplicação das orientações.
+          </p>
         </Reveal>
       </div>
     </Section>

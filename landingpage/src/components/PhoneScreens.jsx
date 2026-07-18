@@ -123,7 +123,7 @@ export function ScreenDica() {
         </p>
         <p className="mt-1.5 text-[9px] leading-relaxed text-forest/70">
           Seu corpo confunde sede com fome. Beber água ao longo do dia reduz beliscos,
-          melhora a digestão e potencializa a queima de gordura durante o programa.
+          melhora a digestão e apoia os seus resultados durante o programa.
         </p>
       </div>
       <div className="mt-2 rounded-lg bg-sage/15 p-2.5 text-left">
