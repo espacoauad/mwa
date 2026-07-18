@@ -14,14 +14,12 @@ const faqs = [
     'Como falo com vocês se tiver problema?',
     (
       <>
-        Suporte direto pelo WhatsApp — respondemos em horário comercial.{' '}
+        Suporte por e-mail — respondemos em horário comercial:{' '}
         <a
-          href={`https://wa.me/5562994246775?text=${encodeURIComponent('Olá! Estou na página do MWA | Jornada de 30 Dias e tenho uma dúvida.')}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="mailto:atendimento@metodomwa.com.br"
           className="font-semibold text-forest hover:text-forest-deep"
         >
-          Clique aqui para conversar
+          atendimento@metodomwa.com.br
         </a>
         .
       </>
