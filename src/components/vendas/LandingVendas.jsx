@@ -714,7 +714,7 @@ export default function LandingVendas() {
             Sua decisão começa agora.
           </h3>
           <p className="mb-10 text-base text-white/80">
-            Daqui a 30 dias você estará exatamente 30 dias mais velha.
+            Os próximos 30 dias vão passar de qualquer forma.
             <br />
             A única diferença será escolher entre:
           </p>

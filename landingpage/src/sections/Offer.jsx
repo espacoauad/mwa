@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Check, ShieldCheck, Sparkles, MessageCircle } from 'lucide-react'
+import { Check, ShieldCheck, Sparkles } from 'lucide-react'
 import { Section, Eyebrow, CtaButton } from '../components/ui.jsx'
 import Reveal from '../components/Reveal.jsx'
 import { BRAND } from '../config.js'
@@ -82,20 +82,6 @@ export default function Offer() {
             </p>
           </div>
 
-          <div className="mt-3 flex items-center gap-2 text-left">
-            <MessageCircle size={16} aria-hidden="true" className="shrink-0 text-forest" />
-            <p className="text-xs text-ink/75 md:text-sm">
-              Dúvidas antes de começar?{' '}
-              <a
-                href={`https://wa.me/5562994246775?text=${encodeURIComponent('Olá! Estou na página do MWA | Jornada de 30 Dias e tenho uma dúvida.')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-forest hover:text-forest-deep"
-              >
-                Fale com a gente no WhatsApp
-              </a>
-            </p>
-          </div>
         </div>
       </Reveal>
       </div>
