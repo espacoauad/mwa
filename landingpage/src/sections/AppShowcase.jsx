@@ -3,7 +3,7 @@ import { Section, Eyebrow, Title, CtaButton } from '../components/ui.jsx'
 import Reveal from '../components/Reveal.jsx'
 import {
   ScreenHoje, ScreenRefeicoes, ScreenProgresso, ScreenDica,
-  ScreenMacros, ScreenExercicio, ScreenJogos,
+  ScreenMacros, ScreenExercicio, ScreenJogos, ScreenReflexao,
 } from '../components/PhoneScreens.jsx'
 
 const features = [
@@ -14,6 +14,7 @@ const features = [
   { id: 'macros', label: 'Calculadora de macros', desc: 'Consulte qualquer alimento em segundos, sem decorar tabela nutricional.', Screen: ScreenMacros },
   { id: 'exercicio', label: 'Atividade física', desc: 'Registre treinos e veja as calorias gastas somadas às metas do dia.', Screen: ScreenExercicio },
   { id: 'jogos', label: 'Jogos que motivam', desc: 'Cumpra metas, jogue e personalize seu avatar. Leveza para sustentar o processo.', Screen: ScreenJogos },
+  { id: 'reflexao', label: 'Reflexões que edificam', desc: 'A cada dia, uma mensagem que cuida da mente e do coração — porque transformação também nasce por dentro.', Screen: ScreenReflexao },
 ]
 
 const AUTO_MS = 5000
@@ -51,7 +52,7 @@ export default function AppShowcase() {
           <Eyebrow light>O aplicativo</Eyebrow>
           <Title light>Mais do que um app. Um método que acompanha você todos os dias.</Title>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-cream/70 md:text-base">
-            Uma nutricionista no seu bolso: registre, aprenda e veja sua evolução em tempo real.
+            O método de uma nutricionista no seu bolso: registre, aprenda e veja sua evolução em tempo real.
           </p>
         </Reveal>
       </div>

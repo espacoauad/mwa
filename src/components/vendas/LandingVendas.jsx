@@ -573,6 +573,36 @@ export default function LandingVendas() {
                 Cumpra tarefas, jogue e personalize seu avatar. Gamificação para tornar os 30 dias mais leves.
               </p>
             </div>
+
+            {/* Tela 8: Reflexões que edificam */}
+            <div className="text-center">
+              <div className="mx-auto w-56 rounded-[2rem] border-4 border-white/20 bg-creme p-4 shadow-2xl">
+                <p className="mb-3 flex items-center gap-1.5 text-left font-serif text-sm font-bold italic text-verde">
+                  <span className="text-sm">✨</span> Reflexão do dia
+                </p>
+                <div
+                  className="relative overflow-hidden rounded-2xl border border-ouro/30 p-4 text-center"
+                  style={{ background: 'linear-gradient(160deg, #344528 0%, #4A5F3A 55%, #879B55 100%)' }}
+                >
+                  <p className="text-[8px] font-bold uppercase tracking-wider text-ouro-claro">Respeito ao corpo</p>
+                  <p className="mt-2 font-serif text-[11px] italic leading-snug text-white">
+                    "Ou não sabem que o corpo de vocês é templo do Espírito Santo que habita em vocês?"
+                  </p>
+                  <p className="mt-2 text-[9px] font-bold text-ouro-claro">— 1 Coríntios 6:19</p>
+                  <div className="mx-auto my-3 h-px w-2/3 bg-ouro/30" />
+                  <div className="rounded-xl border border-white/15 bg-black/15 p-2.5 text-left">
+                    <p className="text-[8px] font-bold uppercase tracking-wider text-ouro-claro">💭 Reflexão</p>
+                    <p className="mt-1 text-[9px] leading-relaxed text-white/95">
+                      Seu corpo é sagrado. Cada escolha alimentar é um ato de cuidado com você mesma.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <h4 className="mt-5 font-bold text-white">Reflexões que edificam</h4>
+              <p className="mx-auto mt-1 max-w-xs text-xs text-white/70">
+                A cada dia, uma mensagem que cuida da mente e do coração — porque transformação também nasce por dentro.
+              </p>
+            </div>
           </div>
 
           <div className="mt-14 text-center">

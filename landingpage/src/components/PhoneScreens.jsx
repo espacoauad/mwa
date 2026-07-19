@@ -1,4 +1,4 @@
-import { Calculator, Flame, Gamepad2 } from 'lucide-react'
+import { Calculator, Flame, Gamepad2, Sparkles } from 'lucide-react'
 
 /* Telas do app desenhadas em código — conteúdo interno do telefone do showcase. */
 
@@ -225,6 +225,33 @@ export function ScreenJogos() {
         <div className="rounded-lg bg-white p-2 text-center">
           <p className="text-lg">🥗</p>
           <p className="text-[9px] font-bold text-forest">Escolhas</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export function ScreenReflexao() {
+  return (
+    <div className="p-4">
+      <p className="mb-3 flex items-center gap-1.5 text-left font-display text-sm font-bold italic text-forest">
+        <Sparkles size={14} className="not-italic text-gold" /> Reflexão do dia
+      </p>
+      <div
+        className="relative overflow-hidden rounded-2xl border border-gold/30 p-4 text-center"
+        style={{ background: 'linear-gradient(160deg, #2A3B1F 0%, #4A5F3A 55%, #879B55 100%)' }}
+      >
+        <p className="text-[8px] font-bold uppercase tracking-wider text-gold-soft">Respeito ao corpo</p>
+        <p className="mt-2 font-display text-[11px] italic leading-snug text-white">
+          "Ou não sabem que o corpo de vocês é templo do Espírito Santo que habita em vocês?"
+        </p>
+        <p className="mt-2 text-[9px] font-bold text-gold-soft">— 1 Coríntios 6:19</p>
+        <div className="mx-auto my-3 h-px w-2/3 bg-gold/30" />
+        <div className="rounded-xl border border-white/15 bg-black/15 p-2.5 text-left">
+          <p className="text-[8px] font-bold uppercase tracking-wider text-gold-soft">💭 Reflexão</p>
+          <p className="mt-1 text-[9px] leading-relaxed text-white/95">
+            Seu corpo é sagrado. Cada escolha alimentar é um ato de cuidado com você mesma.
+          </p>
         </div>
       </div>
     </div>
