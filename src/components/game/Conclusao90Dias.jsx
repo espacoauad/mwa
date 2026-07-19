@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
-import { X, Repeat, TrendingDown, Sparkles, Flame, Lock } from 'lucide-react'
+import { X, Repeat, TrendingDown, Sparkles, Flame, Lock, Award } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { supabase } from '../../lib/supabase.js'
 import { abrirCheckout } from '../../lib/hotmart.js'
 import { useConfeti } from '../../hooks/useConfeti.js'
 import LogoMWA from '../ui/LogoMWA.jsx'
+import CertificadoConclusao from './CertificadoConclusao.jsx'
 
 /**
  * Tela de encerramento do programa de 90 dias — a linha de chegada.
@@ -19,6 +20,7 @@ export default function Conclusao90Dias() {
   const [caloriasEconomizadas, setCaloriasEconomizadas] = useState(null)
   const [diasRegistrados, setDiasRegistrados] = useState(0)
   const [reveladas, setReveladas] = useState(() => new Set())
+  const [certificadoAberto, setCertificadoAberto] = useState(false)
 
   useEffect(() => {
     const userId = sessao?.user?.id
@@ -210,6 +212,17 @@ export default function Conclusao90Dias() {
           </div>
         </div>
 
+        {/* Certificado — destaque comemorativo */}
+        <button
+          type="button"
+          onClick={() => setCertificadoAberto(true)}
+          className="flex w-full max-w-sm items-center justify-center gap-2.5 rounded-2xl border-2 border-ouro bg-gradient-to-r from-ouro/30 via-ouro/15 to-ouro/30 px-6 py-4 font-bold text-white shadow-lg shadow-ouro/25 transition-all active:scale-[0.98] hover:shadow-xl hover:shadow-ouro/40"
+        >
+          <Award size={22} className="text-ouro" />
+          <span className="uppercase tracking-wide">Ver meu certificado</span>
+          <span className="text-lg">🏅</span>
+        </button>
+
         {/* Conquistas interativas */}
         <div className="w-full max-w-sm">
           <p className="mb-3 text-center text-xs font-bold uppercase tracking-widest text-white/60">
@@ -297,6 +310,10 @@ export default function Conclusao90Dias() {
           <p className="text-[11px] font-serif italic">Com admiração, Wanessa ❤️</p>
         </div>
       </div>
+
+      {certificadoAberto && (
+        <CertificadoConclusao dias={90} onFechar={() => setCertificadoAberto(false)} />
+      )}
     </div>
   )
 }

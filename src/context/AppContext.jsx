@@ -125,8 +125,8 @@ export function AppProvider({ children }) {
   const [tarefasHoje, setTarefasHoje] = useState({ refeicao: false, agua: false, dica: false, exercicio: false, sementesHoje: 0 })
   // Tela de "dia concluído" (compartilhável)
   const [conclusaoDiaAberta, setConclusaoDiaAberta] = useState(false)
-  // Tela de encerramento dos 21 dias — celebração com aprendizados e CTA para upgrade
-  const [conclusao21Aberta, setConclusao21Aberta] = useState(false)
+  // Tela de encerramento da Jornada de 30 dias — celebração com aprendizados e CTA para upgrade
+  const [conclusao30Aberta, setConclusao30Aberta] = useState(false)
   // Tela de encerramento do programa (dia 90) — celebração final com conquistas e déficit total
   const [conclusao90Aberta, setConclusao90Aberta] = useState(false)
 
@@ -254,14 +254,14 @@ export function AppProvider({ children }) {
     setConclusaoDiaAberta(true)
   }, [diaCompleto, userId, hoje])
 
-  // Ao chegar no dia 21 sem programa 90d ativo, abre a tela de encerramento dos
-  // 21 dias com aprendizados e CTA para upgrade — só 1x.
+  // Ao chegar no dia 30 sem programa 90d ativo, abre a tela de encerramento da
+  // Jornada de 30 Dias com aprendizados, certificado e CTA para upgrade — só 1x.
   useEffect(() => {
-    if (diaAtual !== 21 || programa90Ativo || !userId) return
-    const chave = `mwa_21_concluido_${userId}`
+    if (diaAtual !== 30 || programa90Ativo || !userId) return
+    const chave = `mwa_30_concluido_${userId}`
     if (localStorage.getItem(chave)) return
     localStorage.setItem(chave, '1')
-    setConclusao21Aberta(true)
+    setConclusao30Aberta(true)
   }, [diaAtual, programa90Ativo, userId])
 
   // Ao chegar no dia 90 (fim do programa de 90 dias pago), abre a tela de
@@ -328,8 +328,8 @@ export function AppProvider({ children }) {
     setConclusaoDiaAberta(true)
   }
 
-  function fecharConclusao21() {
-    setConclusao21Aberta(false)
+  function fecharConclusao30() {
+    setConclusao30Aberta(false)
   }
 
   function fecharConclusao90() {
@@ -666,8 +666,8 @@ export function AppProvider({ children }) {
     conclusaoDiaAberta,
     abrirConclusaoDia,
     fecharConclusaoDia,
-    conclusao21Aberta,
-    fecharConclusao21,
+    conclusao30Aberta,
+    fecharConclusao30,
     conclusao90Aberta,
     fecharConclusao90,
     marcarDicaLida,

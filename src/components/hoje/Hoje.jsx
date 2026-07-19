@@ -13,7 +13,7 @@ import CardUpgrade from '../upgrade/CardUpgrade.jsx'
 import Avatar from '../game/Avatar.jsx'
 import LojaAvatar from '../game/LojaAvatar.jsx'
 import ConclusaoDia from '../game/ConclusaoDia.jsx'
-import Conclusao21Dias from '../game/Conclusao21Dias.jsx'
+import Conclusao30Dias from '../game/Conclusao30Dias.jsx'
 import Conclusao90Dias from '../game/Conclusao90Dias.jsx'
 import LogoMWA from '../ui/LogoMWA.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
@@ -37,8 +37,8 @@ export default function Hoje({ irParaDicas }) {
     diaCompleto,
     conclusaoDiaAberta,
     abrirConclusaoDia,
-    conclusao21Aberta,
-    fecharConclusao21,
+    conclusao30Aberta,
+    fecharConclusao30,
     conclusao90Aberta,
     atualizarFotoPerfil,
   } = useApp()
@@ -313,8 +313,8 @@ export default function Hoje({ irParaDicas }) {
       {/* Tela de conclusão do dia (compartilhável) */}
       {conclusaoDiaAberta && <ConclusaoDia />}
 
-      {/* Tela de encerramento dos 21 dias */}
-      {conclusao21Aberta && <Conclusao21Dias />}
+      {/* Tela de encerramento da Jornada de 30 Dias */}
+      {conclusao30Aberta && <Conclusao30Dias />}
 
       {/* Tela de encerramento do programa (dia 90) */}
       {conclusao90Aberta && <Conclusao90Dias />}

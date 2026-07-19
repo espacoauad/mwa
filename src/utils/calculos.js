@@ -98,10 +98,11 @@ export function programa90Ativo(programas) {
 }
 
 // Dia do programa (1–90) a partir dos registros de mwa_programas da cliente.
-// Sem 90d ativo: dia 1–21, contado a partir do início do programa 21d (ou do
-// perfil, para contas antigas sem registro em mwa_programas).
-// Com 90d ativo: dia 22–90, contado a partir do início do programa 90d —
-// a continuidade do dia 21 para o dia 22 é automática, sem gap.
+// Sem 90d ativo: dia 1–30 (Jornada de entrada), contado a partir do início do
+// programa de entrada (tipo '21d' no banco — identificador histórico) ou do
+// perfil, para contas antigas sem registro em mwa_programas.
+// Com 90d ativo: dia 31–90, contado a partir do início do programa 90d —
+// a continuidade do dia 30 para o dia 31 é automática, sem gap.
 export function diaDoPrograma(programas, dataInicioFallback) {
   // Modo de revisão: permite visualizar qualquer dia sem restrições
   const modoRevisao = typeof sessionStorage !== 'undefined' ? JSON.parse(sessionStorage.getItem('mwaModorevisao') || 'null') : null
@@ -111,14 +112,14 @@ export function diaDoPrograma(programas, dataInicioFallback) {
 
   const p90 = programa90Ativo(programas)
   if (p90) {
-    return Math.min(90, Math.max(22, 21 + diasDesde(p90.dataInicio)))
+    return Math.min(90, Math.max(31, 30 + diasDesde(p90.dataInicio)))
   }
   const p21 = (programas ?? []).find((p) => p.tipo === '21d')
   const inicio = p21?.dataInicio ?? dataInicioFallback
-  return Math.min(21, Math.max(1, diasDesde(inicio)))
+  return Math.min(30, Math.max(1, diasDesde(inicio)))
 }
 
 // Total de dias do programa da cliente, para exibição de progresso (barra, "Dia X de Y").
 export function totalDiasPrograma(programas) {
-  return programa90Ativo(programas) ? 90 : 21
+  return programa90Ativo(programas) ? 90 : 30
 }
