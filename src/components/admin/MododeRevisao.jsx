@@ -24,14 +24,13 @@ export default function ModoDeRevisao() {
         return Math.floor((hoje - inicio) / 86400000) + 1
       }
 
-      const p90 = programas.find((p) => p.tipo === '90d' && p.status === 'ativo')
-      if (p90) {
-        setDiaAtual(Math.min(90, Math.max(31, 30 + diasDesde(p90.dataInicio))))
-      } else {
-        const p21 = programas.find((p) => p.tipo === '21d')
-        if (p21) {
-          setDiaAtual(Math.min(30, Math.max(1, diasDesde(p21.dataInicio))))
-        }
+      // Ancorado sempre na data de início da jornada de 30 dias (não na data
+      // de compra do 90d) — ver mesma decisão em src/utils/calculos.js.
+      const p21 = programas.find((p) => p.tipo === '21d')
+      if (p21) {
+        const diaCorrido = diasDesde(p21.dataInicio)
+        const p90 = programas.find((p) => p.tipo === '90d' && p.status === 'ativo')
+        setDiaAtual(p90 ? Math.min(90, Math.max(1, diaCorrido)) : Math.min(30, Math.max(1, diaCorrido)))
       }
     }
   }, [programas])

@@ -1,30 +1,14 @@
 /**
- * Calcula os dias de pesagem do programa MWA
- * Jornada de 30 dias: dias 7, 14, 21, 28, 30 (fechamento)
- * Programa de 90 dias: dias 35, 42, 49, 56, 63, 70, 77, 84, 90
+ * Calcula os dias de pesagem do programa MWA.
+ * Cadência fixa a cada 15 dias, em todo o ciclo de 90 dias: meio e fim de
+ * cada bloco de 30 — dias 15 e 30 (Jornada de 30 Dias), 45 e 60 (Programa de
+ * 90 Dias, bloco 1), 75 e 90 (Programa de 90 Dias, bloco 2).
  */
 
+const DIAS_PESAGEM_CICLO = [15, 30, 45, 60, 75, 90]
+
 export function getDiasPesagem(totalDiasPrograma) {
-  const dias = []
-
-  if (totalDiasPrograma >= 21) {
-    // Dias de pesagem da Jornada de 30 Dias
-    dias.push(7, 14, 21)
-  }
-
-  if (totalDiasPrograma > 21) {
-    // Dias de pesagem do programa de 90 dias (a cada 7 dias depois do dia 21)
-    for (let dia = 28; dia <= totalDiasPrograma; dia += 7) {
-      dias.push(dia)
-    }
-    // A grade de 7 em 7 a partir do dia 28 nunca cai exatamente no último dia (ex: 84 → 91).
-    // Garante o último dia como checkpoint de fechamento do ciclo, igual ao dia 21 no programa inicial.
-    if (!dias.includes(totalDiasPrograma)) {
-      dias.push(totalDiasPrograma)
-    }
-  }
-
-  return dias.sort((a, b) => a - b)
+  return DIAS_PESAGEM_CICLO.filter((dia) => dia <= totalDiasPrograma)
 }
 
 /**

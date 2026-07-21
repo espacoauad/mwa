@@ -97,12 +97,16 @@ export function programa90Ativo(programas) {
   return (programas ?? []).find((p) => p.tipo === '90d' && p.status === 'ativo') ?? null
 }
 
-// Dia do programa (1–90) a partir dos registros de mwa_programas da cliente.
-// Sem 90d ativo: dia 1–30 (Jornada de entrada), contado a partir do início do
-// programa de entrada (tipo '21d' no banco — identificador histórico) ou do
-// perfil, para contas antigas sem registro em mwa_programas.
-// Com 90d ativo: dia 31–90, contado a partir do início do programa 90d —
-// a continuidade do dia 30 para o dia 31 é automática, sem gap.
+// Dia do programa (1–90), contado sempre a partir de UMA única data-âncora: o
+// início real da Jornada de 30 Dias (tipo '21d' no banco — identificador
+// histórico — ou o perfil, para contas antigas sem registro em mwa_programas).
+// Sem 90d ativo: contador trava em 30 (fim da jornada de entrada).
+// Com 90d ativo: o cap de 30 é removido e o contador segue até 90 — usando a
+// MESMA data-âncora, não a data de compra do 90d. Isso é proposital: se a
+// aluna comprar a continuidade de uma vez (bundle no checkout) ou no meio dos
+// 30 dias, ela continua vendo os dias 1–30 normalmente, dia a dia, e só
+// avança para o conteúdo do dia 31+ quando o calendário real chegar lá — sem
+// pular para o dia 31 no instante da compra (bug corrigido em 2026-07-21).
 export function diaDoPrograma(programas, dataInicioFallback) {
   // Modo de revisão: permite visualizar qualquer dia sem restrições
   const modoRevisao = typeof sessionStorage !== 'undefined' ? JSON.parse(sessionStorage.getItem('mwaModorevisao') || 'null') : null
@@ -110,13 +114,15 @@ export function diaDoPrograma(programas, dataInicioFallback) {
     return modoRevisao.diaVisualizacao
   }
 
-  const p90 = programa90Ativo(programas)
-  if (p90) {
-    return Math.min(90, Math.max(31, 30 + diasDesde(p90.dataInicio)))
-  }
   const p21 = (programas ?? []).find((p) => p.tipo === '21d')
   const inicio = p21?.dataInicio ?? dataInicioFallback
-  return Math.min(30, Math.max(1, diasDesde(inicio)))
+  const diaCorrido = diasDesde(inicio)
+
+  const p90 = programa90Ativo(programas)
+  if (p90) {
+    return Math.min(90, Math.max(1, diaCorrido))
+  }
+  return Math.min(30, Math.max(1, diaCorrido))
 }
 
 // Total de dias do programa da cliente, para exibição de progresso (barra, "Dia X de Y").
