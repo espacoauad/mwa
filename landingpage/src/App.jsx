@@ -17,23 +17,31 @@ const Faq = lazy(() => import('./sections/Faq.jsx'))
 
 export default function App() {
   return (
-    <main>
+    <>
+      <a
+        href="#conteudo"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-forest focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-cream"
+      >
+        Pular para o conteúdo
+      </a>
       <Header />
-      <Hero />
-      <TrustBar />
-      <Problem />
-      <Quiz />
-      <Suspense fallback={<div style={{ minHeight: '40rem' }} aria-hidden="true" />}>
-        <Story />
-        <Method />
-        <AppShowcase />
-        <Benefits />
-        <About />
-        <Offer />
-        <FinalCta />
-        <Faq />
-      </Suspense>
+      <main id="conteudo" style={{ scrollMarginTop: '5rem' }}>
+        <Hero />
+        <TrustBar />
+        <Problem />
+        <Quiz />
+        <Suspense fallback={<div style={{ minHeight: '40rem' }} aria-hidden="true" />}>
+          <Story />
+          <Method />
+          <AppShowcase />
+          <Benefits />
+          <About />
+          <Offer />
+          <FinalCta />
+          <Faq />
+        </Suspense>
+      </main>
       <Footer />
-    </main>
+    </>
   )
 }

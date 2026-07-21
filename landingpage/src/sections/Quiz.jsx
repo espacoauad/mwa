@@ -35,7 +35,7 @@ const perguntas = [
   },
   {
     id: 'p4',
-    texto: 'Quando "sai da linha", o que acontece?',
+    texto: 'Quando “sai da linha”, o que acontece?',
     opcoes: [
       { letra: 'A', texto: 'Sigo normal na próxima refeição' },
       { letra: 'B', texto: 'Culpa — e compenso restringindo' },
@@ -175,7 +175,7 @@ export default function Quiz() {
           </div>
 
           {fase === 'quiz' && (
-            <fieldset className="mt-8 border-0 p-0">
+            <fieldset key={passo} className="screen-in mt-8 border-0 p-0" aria-live="polite">
               <legend className="font-display text-xl text-forest-deep md:text-2xl">
                 {perguntaAtual.texto}
               </legend>
@@ -223,7 +223,7 @@ export default function Quiz() {
           )}
 
           {fase === 'captura' && (
-            <form onSubmit={handleCaptureSubmit} className="mt-8 space-y-5">
+            <form onSubmit={handleCaptureSubmit} className="screen-in mt-8 space-y-5">
               <p className="text-sm leading-relaxed text-ink/75">
                 Quase lá. Deixe seus dados para ver o seu resultado.
               </p>
@@ -234,12 +234,13 @@ export default function Quiz() {
                 </label>
                 <input
                   id="quiz-nome"
+                  name="nome"
                   type="text"
                   autoComplete="name"
                   required
                   value={nome}
                   onChange={(event) => setNome(event.target.value)}
-                  placeholder="Seu nome"
+                  placeholder="Ex.: Maria Silva"
                   className="w-full rounded-xl border border-forest/15 bg-offwhite px-4 py-3 text-sm text-ink outline-none transition-colors duration-300 focus:border-sage focus-visible:ring-2 focus-visible:ring-gold"
                 />
               </div>
@@ -250,7 +251,10 @@ export default function Quiz() {
                 </label>
                 <input
                   id="quiz-email"
+                  name="email"
                   type="email"
+                  inputMode="email"
+                  spellCheck={false}
                   autoComplete="email"
                   required
                   value={email}
@@ -263,6 +267,7 @@ export default function Quiz() {
               <label htmlFor="quiz-consentimento" className="flex items-start gap-3 text-left text-xs leading-relaxed text-ink/75 md:text-sm">
                 <input
                   id="quiz-consentimento"
+                  name="consentimento"
                   type="checkbox"
                   required
                   checked={aceitou}
@@ -285,15 +290,15 @@ export default function Quiz() {
               <button
                 type="submit"
                 disabled={enviando}
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-forest px-9 py-4 text-sm font-semibold tracking-wide text-cream transition-all duration-300 hover:bg-forest-deep hover:shadow-xl hover:shadow-forest/25 disabled:cursor-not-allowed disabled:opacity-60 md:text-base"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-forest px-9 py-4 text-sm font-semibold tracking-wide text-cream transition-[background-color,box-shadow] duration-300 hover:bg-forest-deep hover:shadow-xl hover:shadow-forest/25 disabled:cursor-not-allowed disabled:opacity-60 md:text-base"
               >
-                Ver meu resultado
+                {enviando ? 'Enviando…' : 'Ver meu resultado'}
               </button>
             </form>
           )}
 
           {fase === 'resultado' && perfilResultado && (
-            <div className="mt-8 text-center">
+            <div className="screen-in mt-8 text-center">
               <Eyebrow>Seu resultado</Eyebrow>
               <h3 className="font-display text-2xl text-forest-deep md:text-3xl">
                 {perfis[perfilResultado].titulo}

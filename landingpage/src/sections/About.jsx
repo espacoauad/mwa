@@ -26,6 +26,8 @@ export default function About() {
               srcSet={`${fotoWanessa480} 480w, ${fotoWanessa800} 800w, ${fotoWanessa1200} 1200w`}
               sizes="(min-width: 768px) 35vw, 90vw"
               alt="Wanessa Auad"
+              width={800}
+              height={800}
               loading="lazy"
               className="h-auto w-full"
             />

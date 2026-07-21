@@ -192,7 +192,7 @@ export default function LandingVendas() {
             </p>
           </div>
           <p className="mx-auto mt-8 max-w-2xl border-l-2 border-ouro pl-5 text-left font-serif text-xl italic leading-snug text-ouro-claro md:text-2xl">
-            "O maior resultado não foi perder 26 kg. Foi aprender a permanecer."
+            “O maior resultado não foi perder 26 kg. Foi aprender a permanecer.”
           </p>
           <div className="mx-auto mt-10 grid max-w-md grid-cols-3 gap-4 text-center">
             <div>

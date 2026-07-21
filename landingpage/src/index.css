@@ -80,8 +80,20 @@ body {
   animation: screen-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ---------- Acessibilidade: reduced motion ---------- */
+/* ---------- Acessibilidade: reduced motion ----------
+ * Reset universal: zera qualquer animação/transição do site (inclusive as
+ * utilitárias do Tailwind — hover-lift do CTA, blur do header, rotação do
+ * ícone do FAQ, tabs do showcase etc.), não só as classes nomeadas abaixo.
+ */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
   html {
     scroll-behavior: auto;
   }

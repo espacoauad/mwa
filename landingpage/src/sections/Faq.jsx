@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Section, Eyebrow, Title } from '../components/ui.jsx'
 import Reveal from '../components/Reveal.jsx'
 
@@ -27,7 +28,41 @@ const faqs = [
   ],
 ]
 
+/* Item de FAQ controlado (em vez de <details> nativo) para permitir a
+ * transição animada de abertura/fechamento via CSS grid-template-rows
+ * (0fr → 1fr) — a técnica padrão para animar algo equivalente a height:auto. */
+function ItemFaq({ pergunta, resposta, aberto, onToggle, id }) {
+  return (
+    <div className="rounded-2xl border border-forest/10 bg-offwhite px-6 py-4 transition-colors open:border-gold/40">
+      <button
+        type="button"
+        id={`faq-pergunta-${id}`}
+        aria-expanded={aberto}
+        aria-controls={`faq-resposta-${id}`}
+        onClick={onToggle}
+        className="flex w-full cursor-pointer list-none items-center justify-between gap-4 text-left text-sm font-semibold text-forest md:text-base"
+      >
+        {pergunta}
+        <span aria-hidden="true" className={`shrink-0 text-gold transition-transform duration-300 ${aberto ? 'rotate-45' : ''}`}>+</span>
+      </button>
+      <div
+        id={`faq-resposta-${id}`}
+        role="region"
+        aria-labelledby={`faq-pergunta-${id}`}
+        className="grid transition-[grid-template-rows] duration-300 ease-out"
+        style={{ gridTemplateRows: aberto ? '1fr' : '0fr' }}
+      >
+        <div className="overflow-hidden">
+          <p className="mt-3 text-sm leading-relaxed text-ink/75">{resposta}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Faq() {
+  const [abertoIndex, setAbertoIndex] = useState(null)
+
   return (
     <Section className="bg-cream" lazy intrinsicHeight={670}>
       <div className="mx-auto max-w-2xl">
@@ -38,13 +73,13 @@ export default function Faq() {
         <div className="mt-10 space-y-3">
           {faqs.map(([q, a], i) => (
             <Reveal key={q} delay={i * 50}>
-              <details className="group rounded-2xl border border-forest/10 bg-offwhite px-6 py-4 transition-colors open:border-gold/40">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-forest md:text-base">
-                  {q}
-                  <span aria-hidden="true" className="text-gold transition-transform duration-300 group-open:rotate-45">+</span>
-                </summary>
-                <div className="mt-3 text-sm leading-relaxed text-ink/75">{a}</div>
-              </details>
+              <ItemFaq
+                id={i}
+                pergunta={q}
+                resposta={a}
+                aberto={abertoIndex === i}
+                onToggle={() => setAbertoIndex((atual) => (atual === i ? null : i))}
+              />
             </Reveal>
           ))}
         </div>

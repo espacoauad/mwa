@@ -22,6 +22,8 @@ export default function Story() {
               srcSet={`${fotoStory480} 480w, ${fotoStory800} 800w, ${fotoStory1200} 1200w`}
               sizes="(min-width: 768px) 45vw, 90vw"
               alt="Wanessa Auad, nutricionista e criadora do MWA"
+              width={800}
+              height={800}
               loading="lazy"
               className="h-auto w-full"
             />
@@ -52,7 +54,7 @@ export default function Story() {
 
           <Reveal delay={200}>
             <p className="mt-8 border-l-2 border-gold pl-5 font-display text-xl italic leading-snug text-gold-soft md:text-2xl">
-              "O maior resultado não foi perder 26 kg. Foi aprender a permanecer."
+              “O maior resultado não foi perder 26 kg. Foi aprender a permanecer.”
             </p>
           </Reveal>
 

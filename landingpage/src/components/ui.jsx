@@ -5,7 +5,7 @@ import { track } from '../lib/analytics.js'
 /* ---------- Botão CTA (link para checkout Hotmart) ---------- */
 export function CtaButton({ children, variant = 'primary', href = CHECKOUT_URL, className = '' }) {
   const base =
-    'group inline-flex items-center justify-center gap-2 rounded-full px-9 py-4 text-sm md:text-base font-semibold tracking-wide transition-all duration-300'
+    'group inline-flex items-center justify-center gap-2 rounded-full px-9 py-4 text-sm md:text-base font-semibold tracking-wide transition-[background-color,box-shadow,transform] duration-300'
   const variants = {
     primary:
       'bg-forest text-cream hover:bg-forest-deep hover:shadow-xl hover:shadow-forest/25 hover:-translate-y-0.5',
@@ -72,7 +72,7 @@ export function Eyebrow({ children, light = false }) {
 export function Title({ children, light = false, className = '' }) {
   return (
     <h2
-      className={`font-display text-3xl leading-snug md:text-[2.6rem] md:leading-tight ${
+      className={`text-balance font-display text-3xl leading-snug md:text-[2.6rem] md:leading-tight ${
         light ? 'text-cream' : 'text-forest-deep'
       } ${className}`}
     >

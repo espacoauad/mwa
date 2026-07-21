@@ -67,9 +67,9 @@ export function ScreenRefeicoes() {
           <p className="mt-0.5 text-[9px] text-forest/70">Iogurte com fibras</p>
           <p className="text-[9px] font-semibold text-sage">180 kcal · 12g prot</p>
         </div>
-        <button className="w-full rounded-lg bg-forest py-2 text-[10px] font-bold text-white">
+        <div className="w-full rounded-lg bg-forest py-2 text-center text-[10px] font-bold text-white">
           + Adicionar refeição
-        </button>
+        </div>
       </div>
     </div>
   )
@@ -170,9 +170,9 @@ export function ScreenMacros() {
           </div>
         </div>
       </div>
-      <button className="mt-2 w-full rounded-lg bg-sage py-2 text-[10px] font-bold text-white">
+      <div className="mt-2 w-full rounded-lg bg-sage py-2 text-center text-[10px] font-bold text-white">
         + Adicionar à refeição
-      </button>
+      </div>
     </div>
   )
 }
@@ -243,7 +243,7 @@ export function ScreenReflexao() {
       >
         <p className="text-[8px] font-bold uppercase tracking-wider text-gold-soft">Respeito ao corpo</p>
         <p className="mt-2 font-display text-[11px] italic leading-snug text-white">
-          "Ou não sabem que o corpo de vocês é templo do Espírito Santo que habita em vocês?"
+          “Ou não sabem que o corpo de vocês é templo do Espírito Santo que habita em vocês?”
         </p>
         <p className="mt-2 text-[9px] font-bold text-gold-soft">— 1 Coríntios 6:19</p>
         <div className="mx-auto my-3 h-px w-2/3 bg-gold/30" />

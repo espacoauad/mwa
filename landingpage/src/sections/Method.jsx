@@ -39,7 +39,7 @@ export default function Method() {
           <Reveal
             key={title}
             delay={i * 100}
-            className="group rounded-3xl border border-forest/10 bg-offwhite p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-xl hover:shadow-forest/10"
+            className="group rounded-3xl border border-forest/10 bg-offwhite p-7 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-xl hover:shadow-forest/10"
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sage/15 text-forest transition-colors duration-300 group-hover:bg-gold/20">
               <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
