@@ -26,18 +26,18 @@ export default function ModoDeRevisao() {
 
       const p90 = programas.find((p) => p.tipo === '90d' && p.status === 'ativo')
       if (p90) {
-        setDiaAtual(Math.min(90, Math.max(22, 21 + diasDesde(p90.dataInicio))))
+        setDiaAtual(Math.min(90, Math.max(31, 30 + diasDesde(p90.dataInicio))))
       } else {
         const p21 = programas.find((p) => p.tipo === '21d')
         if (p21) {
-          setDiaAtual(Math.min(21, Math.max(1, diasDesde(p21.dataInicio))))
+          setDiaAtual(Math.min(30, Math.max(1, diasDesde(p21.dataInicio))))
         }
       }
     }
   }, [programas])
 
-  // Modo de revisão sempre permite ver até 89 dias (todos os lanches)
-  const totalDias = 89
+  // Modo de revisão sempre permite ver até 90 dias (todo o programa)
+  const totalDias = 90
 
   // Armazenar em sessionStorage para passar pro resto da app
   useEffect(() => {
