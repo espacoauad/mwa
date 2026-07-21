@@ -6,7 +6,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
     return (
       <section className="mt-4 rounded-2xl bg-white p-8 shadow-lg shadow-verde/10">
         <h2 className="mb-1 text-sm font-semibold text-verde/60">Seu progresso</h2>
-        <p className="mb-6 text-xs text-verde/40">
+        <p className="mb-6 text-xs text-verde/80">
           Registre sua primeira pesagem para acompanhar o progresso — peso, medidas e fotos.
         </p>
         <div className="rounded-lg bg-sage-claro p-4 text-center">
@@ -77,7 +77,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
     <section className="mt-4 rounded-2xl bg-white p-8 shadow-lg shadow-verde/10">
       {/* Header */}
       <h2 className="mb-1 text-sm font-semibold text-verde/60">Seu progresso</h2>
-      <p className="mb-6 text-xs text-verde/40">
+      <p className="mb-6 text-xs text-verde/80">
         O corpo responde quando a mente entende o caminho percorrido. Seus resultados como consequência de uma nova forma de viver.
       </p>
 
@@ -95,7 +95,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
               {variacao > 0 ? '+' : ''}{variacao.toLocaleString('pt-BR')} kg
             </span>
           </div>
-          <p className="mt-1 text-[10px] text-verde/50">desde o início</p>
+          <p className="mt-1 text-[10px] text-verde/80">desde o início</p>
         </div>
 
         {/* Card 2: Top Medidas */}
@@ -112,7 +112,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
                 </div>
               ))
             ) : (
-              <p className="text-[10px] text-verde/50">Nenhuma medida registrada ainda</p>
+              <p className="text-[10px] text-verde/80">Nenhuma medida registrada ainda</p>
             )}
           </div>
         </div>
@@ -131,7 +131,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
                 </div>
               ))
             ) : (
-              <p className="text-verde/50">Registre sua pesagem</p>
+              <p className="text-verde/80">Registre sua pesagem</p>
             )}
           </div>
         </div>

@@ -69,7 +69,7 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
       {/* Calorias em cima */}
       <div className="text-center">
         <p className="font-serif text-3xl font-bold text-verde">{caloriasInteiro}</p>
-        <p className="mt-0.5 text-xs text-verde/50 tracking-wide">de {metaCaloriasInteiro} kcal</p>
+        <p className="mt-0.5 text-xs text-verde/80 tracking-wide">de {metaCaloriasInteiro} kcal</p>
       </div>
 
       {/* SVG do gráfico */}
@@ -92,16 +92,16 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
           <p className="mt-1 font-serif text-xl font-bold text-verde">
             {Math.round(proteina)}<span className="text-xs font-normal text-verde/60">g</span>
           </p>
-          <p className="mt-0.5 text-[10px] text-verde/40">de {Math.round(metaProteina)}g</p>
+          <p className="mt-0.5 text-[10px] text-verde/80">de {Math.round(metaProteina)}g</p>
         </div>
 
         {/* Carboidratos */}
         <div>
-          <p className="text-xs font-semibold text-verde/70">Carbs</p>
+          <p className="text-xs font-semibold text-verde/70">{ingles ? 'Carbs' : 'Carboidratos'}</p>
           <p className="mt-1 font-serif text-xl font-bold text-sage">
             {Math.round(carbos)}<span className="text-xs font-normal text-verde/60">g</span>
           </p>
-          <p className="mt-0.5 text-[10px] text-verde/40">de {Math.round(metaCarbos)}g</p>
+          <p className="mt-0.5 text-[10px] text-verde/80">de {Math.round(metaCarbos)}g</p>
         </div>
 
         {/* Gordura */}
@@ -110,7 +110,7 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
           <p className="mt-1 font-serif text-xl font-bold text-ouro">
             {Math.round(gordura)}<span className="text-xs font-normal text-verde/60">g</span>
           </p>
-          <p className="mt-0.5 text-[10px] text-verde/40">de {Math.round(metaGordura)}g</p>
+          <p className="mt-0.5 text-[10px] text-verde/80">de {Math.round(metaGordura)}g</p>
         </div>
       </div>
     </div>

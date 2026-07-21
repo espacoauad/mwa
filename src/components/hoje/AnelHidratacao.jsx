@@ -47,7 +47,7 @@ export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }
               strokeWidth="8"
               strokeLinecap="round"
               strokeDasharray={`${preenchido} ${circ}`}
-              className="transition-all duration-700 ease-out"
+              className="transition-all duration-700 ease-out motion-reduce:transition-none"
             />
           </svg>
 
@@ -56,7 +56,7 @@ export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }
             <span className="text-3xl font-bold" style={{ color: estado.cor }}>
               {pct}
             </span>
-            <span className="text-xs font-semibold text-verde/40">%</span>
+            <span className="text-xs font-semibold text-verde/80">%</span>
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@ export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }
             {(consumidoMl / 1000).toFixed(1).replace('.', ',')}
           </span>
           <span className="text-sm font-medium text-verde/60">L</span>
-          <span className="text-verde/40"> {ingles ? 'of' : 'de'} </span>
+          <span className="text-verde/80"> {ingles ? 'of' : 'de'} </span>
           <span className="text-lg font-medium text-verde/70">
             {(metaMl / 1000).toFixed(1).replace('.', ',')} L
           </span>
@@ -76,7 +76,7 @@ export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }
       </div>
 
       {/* Micro-copy educativa */}
-      <p className={`text-center text-sm font-medium transition-colors duration-500 ${corTexto}`}>
+      <p className={`text-center text-sm font-medium transition-colors duration-500 motion-reduce:transition-none ${corTexto}`}>
         {estado.frase}
       </p>
 
@@ -85,16 +85,16 @@ export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }
         <button
           type="button"
           onClick={() => onClickAdicionar && onClickAdicionar(-250)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-sage/30 font-bold text-verde/60 transition-colors hover:border-sage/60 active:scale-95"
-          aria-label="Remover 250 ml de água"
+          className="flex h-11 w-11 items-center justify-center rounded-lg border-2 border-sage/30 font-bold text-verde/60 transition-colors hover:border-sage/60 active:scale-95"
+          aria-label={ingles ? 'Remove 250 ml of water' : 'Remover 250 ml de água'}
         >
           −
         </button>
         <button
           type="button"
           onClick={() => onClickAdicionar && onClickAdicionar(250)}
-          className="rounded-lg bg-sage px-4 py-2.5 text-sm font-semibold text-white transition-transform active:scale-95 hover:bg-sage/90"
-          aria-label="Adicionar 250 ml de água"
+          className="min-h-11 rounded-lg bg-sage px-4 py-2.5 text-sm font-semibold text-white transition-transform active:scale-95 hover:bg-sage/90"
+          aria-label={ingles ? 'Add 250 ml of water' : 'Adicionar 250 ml de água'}
         >
           +250 ml
         </button>
@@ -102,7 +102,9 @@ export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }
 
       {/* Label acessível */}
       <div className="sr-only" role="status" aria-live="polite">
-        Hidratação: {consumidoMl} ml de {metaMl} ml, {pct}% da meta. {estado.frase}
+        {ingles
+          ? `Hydration: ${consumidoMl} ml of ${metaMl} ml, ${pct}% of the target. ${estado.frase}`
+          : `Hidratação: ${consumidoMl} ml de ${metaMl} ml, ${pct}% da meta. ${estado.frase}`}
       </div>
     </div>
   )

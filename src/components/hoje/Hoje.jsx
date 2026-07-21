@@ -122,7 +122,14 @@ export default function Hoje({ irParaDicas }) {
               <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-ouro text-verde-escuro">
                 <Camera size={10} />
               </span>
-              <input type="file" accept="image/*" className="hidden" onChange={escolherFoto} disabled={enviandoFoto} />
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={escolherFoto}
+                disabled={enviandoFoto}
+                aria-label={ingles ? 'Change profile photo' : 'Trocar foto de perfil'}
+              />
             </label>
 
             {game && (
@@ -130,6 +137,7 @@ export default function Hoje({ irParaDicas }) {
                 type="button"
                 onClick={() => setLojaAberta(true)}
                 className="flex flex-col items-center gap-1"
+                aria-label={ingles ? 'Open avatar shop' : 'Abrir loja do avatar'}
               >
                 <Avatar avatar={game.avatar} tamanho="sm" />
                 <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-bold text-ouro">
@@ -151,8 +159,18 @@ export default function Hoje({ irParaDicas }) {
             </p>
             <p className="text-sm text-white/70">{progresso}% {ingles ? 'of the program' : 'do programa'}</p>
           </div>
-          <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-white/20">
-            <div className="h-full rounded-full bg-ouro transition-all" style={{ width: `${progresso}%` }} />
+          <div
+            className="mt-3 h-2.5 overflow-hidden rounded-full bg-white/20"
+            role="progressbar"
+            aria-valuenow={progresso}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label={ingles ? 'Program progress' : 'Progresso do programa'}
+          >
+            <div
+              className="h-full rounded-full bg-ouro transition-[width] duration-500 ease-out motion-reduce:transition-none"
+              style={{ width: `${progresso}%` }}
+            />
           </div>
         </div>
       </header>
@@ -177,7 +195,7 @@ export default function Hoje({ irParaDicas }) {
         {/* Painel Premium: Macronutrientes em Anéis Concêntricos */}
         <section className="rounded-2xl bg-white p-6 shadow-lg shadow-verde/10">
           <h2 className="mb-1 text-sm font-semibold text-verde/60">{ingles ? 'Your intake today' : 'Seu consumo de hoje'}</h2>
-          <p className="mb-6 text-xs text-verde/40">{ingles ? 'Macronutrients at a glance — protein is the focus' : 'Macronutrientes em destaque — proteína é o foco'}</p>
+          <p className="mb-6 text-xs text-verde/80">{ingles ? 'Macronutrients at a glance — protein is the focus' : 'Macronutrientes em destaque — proteína é o foco'}</p>
           <GraficoMacros
             proteina={totaisHoje.proteina}
             carbos={totaisHoje.carbos}
@@ -225,7 +243,7 @@ export default function Hoje({ irParaDicas }) {
             <GlassWater size={18} className="text-sage" />
             <h2 className="text-sm font-semibold text-verde/60">{ingles ? 'Hydration strategy' : 'Estratégia de Hidratação'}</h2>
           </div>
-          <p className="mb-6 text-xs text-verde/40">
+          <p className="mb-6 text-xs text-verde/80">
             {ingles ? 'Strategic hydration helps your body perform at its full capacity' : 'A hidratação estratégica sinaliza ao seu corpo que ele pode funcionar em plena capacidade'}
           </p>
           <AnelHidratacao consumidoMl={aguaMl} metaMl={metas.aguaMl} onClickAdicionar={adicionarAgua} />

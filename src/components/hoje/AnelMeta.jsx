@@ -22,7 +22,7 @@ export default function AnelMeta({ label, consumido, meta, unidade }) {
             strokeWidth="6"
             strokeLinecap="round"
             strokeDasharray={`${preenchido} ${circ}`}
-            className="transition-all duration-500"
+            className="transition-all duration-500 motion-reduce:transition-none"
           />
         </svg>
         <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-verde">
@@ -30,7 +30,7 @@ export default function AnelMeta({ label, consumido, meta, unidade }) {
         </span>
       </div>
       <p className="text-xs font-semibold text-verde/70">{label}</p>
-      <p className="-mt-1 text-[10px] text-verde/50">
+      <p className="-mt-1 text-[10px] text-verde/80">
         {consumido.toLocaleString('pt-BR')}/{meta.toLocaleString('pt-BR')} {unidade}
       </p>
     </div>
