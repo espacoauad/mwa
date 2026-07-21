@@ -66,12 +66,12 @@ export default function CardUpgrade({ dia }) {
     )
   }
 
-  // fase final — dia 21+: nova oportunidade pelo valor cheio fixo
+  // fase final — dia 30+: nova oportunidade pelo valor cheio fixo
   return (
     <section className="mt-4 overflow-hidden rounded-2xl bg-verde p-5 text-white shadow-lg shadow-verde/20">
       <p className="text-3xl">🏆</p>
       <h2 className="mt-1 font-serif text-xl font-semibold italic text-ouro">
-        {ingles ? 'You completed your 21-Day Journey!' : 'Você completou sua Jornada de 21 Dias!'}
+        {ingles ? 'You completed your 30-Day Journey!' : 'Você completou sua Jornada de 30 Dias!'}
       </h2>
       <p className="mt-1 text-sm text-white/70">
         {ingles ? 'Your habits have changed. Now choose how you want to go deeper:' : 'Seus hábitos estão transformados. Agora, escolha como quer aprofundar:'}
@@ -81,7 +81,7 @@ export default function CardUpgrade({ dia }) {
         <div>
           <BotaoPagamento
             tipo="upgrade_vip"
-            fallbackWhatsApp={linkWhatsApp(`Olá! Completei o MWA | Jornada de 21 Dias e quero o MWA | Programa de 90 Dias (${formatarPreco(PRODUTOS.upgrade.precoCheio)})!`)}
+            fallbackWhatsApp={linkWhatsApp(`Olá! Completei o MWA | Jornada de 30 Dias e quero o MWA | Programa de 90 Dias (${formatarPreco(PRODUTOS.upgrade.precoCheio)})!`)}
             className="block w-full rounded-lg bg-ouro p-4 text-left text-verde-escuro transition-all hover:brightness-95 active:scale-[0.99] disabled:opacity-60"
           >
             <span className="flex items-center gap-1.5 text-xs font-bold uppercase">

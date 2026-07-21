@@ -162,25 +162,25 @@ export const INFORMATIVOS = [
   {
     dia: 6,
     emoji: '🌱',
-    titulo: 'Sua jornada além dos 21 dias',
+    titulo: 'Sua jornada além dos 30 dias',
     opcoes: [
       {
-        nome: 'Fase Inicial (Dias 1–21)',
+        nome: 'Fase Inicial (Dias 1–30)',
         tom: 'neutro',
         itens: [
           ['Objetivo', 'Aprender o método'],
           ['Foco', 'Construir consciência'],
-          ['Duração', '21 dias'],
+          ['Duração', '30 dias'],
           ['Resultado', 'Despertar (novo hábito)'],
         ],
       },
       {
-        nome: 'Consolidação (Dias 22–90)',
+        nome: 'Consolidação (Dias 31–90)',
         tom: 'bom',
         itens: [
           ['Objetivo', 'Transformar em estilo de vida'],
           ['Foco', 'Automatizar o método'],
-          ['Duração', '69 dias adicionais'],
+          ['Duração', '60 dias adicionais'],
           ['Resultado', 'Permanência (nova forma de viver)'],
         ],
       },
@@ -205,7 +205,7 @@ export const INFORMATIVOS = [
         extras: ['Você já venceu a etapa mais difícil: começar.'],
       },
     ],
-    dica: 'Uma semana completa é muito mais do que parece, querida. Nesses 7 dias, seu corpo reduziu a retenção de líquidos (por isso a barriga menos inchada), começou a se adaptar ao maior consumo de proteína e já registra os primeiros sinais de flexibilidade metabólica — sua energia mais estável ao longo do dia é prova disso. Registre sua pesagem e suas fotos hoje: elas contam uma história que o espelho sozinho não mostra. E se você já sente que quer ir além dos 21 dias, saiba que a condição especial do MWA | Programa de 90 Dias por R$ 97 está ativa até o dia 10 — quero que você tenha essa oportunidade enquanto ainda está disponível. Siga firme, você está exatamente onde precisa estar. 💪💚',
+    dica: 'Uma semana completa é muito mais do que parece, querida. Nesses 7 dias, seu corpo reduziu a retenção de líquidos (por isso a barriga menos inchada), começou a se adaptar ao maior consumo de proteína e já registra os primeiros sinais de flexibilidade metabólica — sua energia mais estável ao longo do dia é prova disso. Registre sua pesagem e suas fotos hoje: elas contam uma história que o espelho sozinho não mostra. E se você já sente que quer ir além dos 30 dias, saiba que a condição especial do MWA | Programa de 90 Dias por R$ 97 está ativa até o dia 10 — quero que você tenha essa oportunidade enquanto ainda está disponível. Siga firme, você está exatamente onde precisa estar. 💪💚',
     cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
   },
   {
@@ -269,7 +269,7 @@ export const INFORMATIVOS = [
         extras: ['Preço: R$ 25–30', 'Saúde: 4/10'],
       },
     ],
-    dica: 'O problema da tigela de açaí não é o açaí em si — é o que colocamos ao redor dele. A polpa pura tem gordura boa e antioxidantes valiosos, mas quando some granola açucarada, mel e leite condensado, o prato triplica de calorias e ainda assim sacia menos, porque o açúcar simples não sustenta a glicemia. A banana com aveia funciona ao contrário: a fibra da aveia forma um gel no estômago que retarda o esvaziamento gástrico e estabiliza a glicose por horas. Açaí pode entrar na sua rotina, sim — mas como sobremesa ocasional, com moderação nos acompanhamentos, não como lanche do dia a dia.\n\n"Ah, Wanessa, mas hoje eu quero muito um açaí!" Ótimo, eu te entendo — e lembre que você está em um desafio de 21 dias, priorizando algumas escolhas, não se privando para sempre. Mas, quando for comer açaí, escolha a polpa sem adição de açúcares, prefira toppings de frutas frescas em vez de doces, e tenha cuidado especial com a granola: ela é bem calórica e, na maioria das vezes, vem com açúcar adicionado, mesmo parecendo uma opção "saudável". Se for comer açaí, preste atenção se ele tem açúcar na polpa e muito cuidado com os toppings — é ali que a conta realmente explode. 🍌',
+    dica: 'O problema da tigela de açaí não é o açaí em si — é o que colocamos ao redor dele. A polpa pura tem gordura boa e antioxidantes valiosos, mas quando some granola açucarada, mel e leite condensado, o prato triplica de calorias e ainda assim sacia menos, porque o açúcar simples não sustenta a glicemia. A banana com aveia funciona ao contrário: a fibra da aveia forma um gel no estômago que retarda o esvaziamento gástrico e estabiliza a glicose por horas. Açaí pode entrar na sua rotina, sim — mas como sobremesa ocasional, com moderação nos acompanhamentos, não como lanche do dia a dia.\n\n"Ah, Wanessa, mas hoje eu quero muito um açaí!" Ótimo, eu te entendo — e lembre que você está em uma jornada de 30 dias, priorizando algumas escolhas, não se privando para sempre. Mas, quando for comer açaí, escolha a polpa sem adição de açúcares, prefira toppings de frutas frescas em vez de doces, e tenha cuidado especial com a granola: ela é bem calórica e, na maioria das vezes, vem com açúcar adicionado, mesmo parecendo uma opção "saudável". Se for comer açaí, preste atenção se ele tem açúcar na polpa e muito cuidado com os toppings — é ali que a conta realmente explode. 🍌',
     cta: null,
   },
   {
@@ -385,7 +385,7 @@ export const INFORMATIVOS = [
         ],
       },
     ],
-    dica: 'Os molhos industrializados usam açúcar e sódio como "atalhos de sabor" — eles disfarçam a acidez do tomate e prolongam a validade do produto, mas em excesso, o sódio favorece a retenção de líquidos (aquela sensação de inchaço no dia seguinte) e o açúcar extra soma calorias que não aparecem no seu radar. O molho caseiro, com tomate, alho e azeite, entrega o mesmo prazer sensorial com metade das calorias e zero aditivos — e o melhor: leva de 10 a 15 minutos para ficar pronto. Pequenos hábitos como esse, repetidos ao longo dos 21 dias, é o que constrói controle real sobre o seu prato, sem depender de força de vontade a cada refeição. 🍅',
+    dica: 'Os molhos industrializados usam açúcar e sódio como "atalhos de sabor" — eles disfarçam a acidez do tomate e prolongam a validade do produto, mas em excesso, o sódio favorece a retenção de líquidos (aquela sensação de inchaço no dia seguinte) e o açúcar extra soma calorias que não aparecem no seu radar. O molho caseiro, com tomate, alho e azeite, entrega o mesmo prazer sensorial com metade das calorias e zero aditivos — e o melhor: leva de 10 a 15 minutos para ficar pronto. Pequenos hábitos como esse, repetidos ao longo dos 30 dias, é o que constrói controle real sobre o seu prato, sem depender de força de vontade a cada refeição. 🍅',
     cta: null,
   },
   {
@@ -620,23 +620,14 @@ export const INFORMATIVOS = [
   },
   {
     dia: 21,
-    emoji: '🏆',
-    titulo: 'Você completou sua Jornada de 21 Dias!',
+    emoji: '🛒',
+    titulo: 'Supermercado: Navegando Com Intenção',
     opcoes: [
-      {
-        nome: 'Seu resultado em 21 dias',
-        tom: 'bom',
-        itens: [
-          ['Como contar calorias', '✅'],
-          ['Proteína é a chave', '✅'],
-          ['Pequenas mudanças = resultado', '✅'],
-          ['Uma nova forma de viver', '✅'],
-        ],
-        extras: ['Registre a pesagem final e compare as fotos do dia 1 com as de hoje.'],
-      },
+      { nome: 'Corredores centrais', tom: 'ruim', itens: [['Tipo de alimento', 'ultraprocessados'], ['Prateleira', 'produtos de longa validade'], ['Decisão', 'guiada pela embalagem']] },
+      { nome: 'Perímetro do mercado (hortifruti, açougue, laticínios)', tom: 'bom', itens: [['Tipo de alimento', 'in natura e frescos'], ['Prateleira', 'produtos perecíveis'], ['Decisão', 'guiada pelo alimento em si']] },
     ],
-    dica: 'Em 21 dias, você não seguiu uma dieta — você começou a reconstruir. Cada vez que contabilizou macros, respeitou seu déficit calórico, escolheu densidade nutricional, honrou a fibra, e pausou antes de comer, você fortaleceu circuitos neurais. E 21 repetições transformam-se em automação. Mas aqui está a verdade que a ciência do comportamento comprova: 21 dias criam o gatilho, e 90 dias consolidam a identidade. Você já quebrou a inércia. Você já provou que consegue. Os próximos 69 dias não vão repetir o que você aprendeu aqui — vão aprofundá-lo até que ele se torne tão parte de você que recuar fique impossível. Hábitos mudam vidas. Repetição constrói excelência. E excelência é escolher continuar, não porque você tem que ser perfeita, mas porque agora você sabe que merecia isso desde o início. 💚',
-    cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
+    dica: 'A maioria dos alimentos de verdade — frutas, verduras, carnes, laticínios frescos — fica nas bordas do supermercado, porque são produtos perecíveis. O corredor central concentra o que dura na prateleira, que costuma ser também o mais processado. Comece sua compra pelas bordas.',
+    cta: { label: 'Ver Meu Progresso', tipo: 'progresso' },
   },
 
   // ---- Continuação: MWA | Programa de 90 Dias (dias 22–90) ----
@@ -730,14 +721,23 @@ export const INFORMATIVOS = [
   },
   {
     dia: 30,
-    emoji: '🛒',
-    titulo: 'Supermercado: Navegando Com Intenção',
+    emoji: '🏆',
+    titulo: 'Você completou sua Jornada de 30 Dias!',
     opcoes: [
-      { nome: 'Corredores centrais', tom: 'ruim', itens: [['Tipo de alimento', 'ultraprocessados'], ['Prateleira', 'produtos de longa validade'], ['Decisão', 'guiada pela embalagem']] },
-      { nome: 'Perímetro do mercado (hortifruti, açougue, laticínios)', tom: 'bom', itens: [['Tipo de alimento', 'in natura e frescos'], ['Prateleira', 'produtos perecíveis'], ['Decisão', 'guiada pelo alimento em si']] },
+      {
+        nome: 'Seu resultado em 30 dias',
+        tom: 'bom',
+        itens: [
+          ['Como contar calorias', '✅'],
+          ['Proteína é a chave', '✅'],
+          ['Pequenas mudanças = resultado', '✅'],
+          ['Uma nova forma de viver', '✅'],
+        ],
+        extras: ['Registre a pesagem final e compare as fotos do dia 1 com as de hoje.'],
+      },
     ],
-    dica: 'Um mês de jornada! A maioria dos alimentos de verdade — frutas, verduras, carnes, laticínios frescos — fica nas bordas do supermercado, porque são produtos perecíveis. O corredor central concentra o que dura na prateleira, que costuma ser também o mais processado. Comece sua compra pelas bordas.',
-    cta: { label: 'Ver Meu Progresso', tipo: 'progresso' },
+    dica: 'Em 30 dias, você não seguiu uma dieta — você começou a reconstruir. Cada vez que contabilizou macros, respeitou seu déficit calórico, escolheu densidade nutricional, honrou a fibra, e pausou antes de comer, você fortaleceu circuitos neurais. E 30 repetições transformam-se em automação. Mas aqui está a verdade que a ciência do comportamento comprova: 30 dias criam o gatilho, e 90 dias consolidam a identidade. Você já quebrou a inércia. Você já provou que consegue. Os próximos 60 dias não vão repetir o que você aprendeu aqui — vão aprofundá-lo até que ele se torne tão parte de você que recuar fique impossível. Hábitos mudam vidas. Repetição constrói excelência. E excelência é escolher continuar, não porque você tem que ser perfeita, mas porque agora você sabe que merecia isso desde o início. 💚',
+    cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
   },
   {
     dia: 31,

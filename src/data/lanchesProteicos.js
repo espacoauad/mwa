@@ -1,4 +1,4 @@
-// Lanches proteicos dos 21 dias — simples, práticos e rápidos.
+// Lanches proteicos dos 30 dias — simples, práticos e rápidos.
 // Curadoria nutricional: cada dia traz um lanche com boa dose de proteína para
 // sustentar a saciedade entre as refeições, preservar massa magra e evitar beliscos.
 //
@@ -234,7 +234,7 @@ export const LANCHES_PROTEICOS = [
     titulo: 'Prato-celebração proteico',
     proteina: '~28g',
     descricao:
-      'Você chegou ao dia 21! Monte uma tábua colorida com suas melhores fontes de proteína — a prova de que comer bem é simples e gostoso.',
+      'Hoje é dia de celebrar o quanto você já evoluiu! Monte uma tábua colorida com suas melhores fontes de proteína — a prova de que comer bem é simples e gostoso.',
     ingredientes: ['Ovos de codorna ou fatias de ovo', 'Cubos de queijo', 'Peito de peru ou frango', 'Castanhas e tomatinhos'],
     preparo: 'Disponha tudo numa tábua ou prato bonito. Celebre o novo hábito que agora é seu.',
     produto: null,

@@ -3,7 +3,7 @@ import { X, ChevronDown, BookOpen } from 'lucide-react'
 import { CONCEITOS_NUTRICIONAIS } from '../../data/conceitosNutricionais.js'
 
 // Apêndice de conceitos nutricionais: glossário com o que é e por que o MWA
-// trabalha cada tema, para reforçar o conhecimento aplicado ao longo dos 21 dias.
+// trabalha cada tema, para reforçar o conhecimento aplicado ao longo dos 30 dias.
 export default function ReforcandoConceitos({ onFechar }) {
   const [abertoId, setAbertoId] = useState(CONCEITOS_NUTRICIONAIS[0].id)
 

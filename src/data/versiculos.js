@@ -149,10 +149,10 @@ export const versiculos = [
   },
   {
     dia: 21,
-    texto: "Ao final dos 21 dias, você não é mais quem era. Você é forte, consciente e capaz.",
-    referencia: "Romanos 12:2",
-    tema: "Renovação",
-    reflexao: "Parabéns pelos 21 dias! Você provou para si mesma que consegue. Agora, mantenha essa força viva."
+    texto: "Porque o Senhor vê o seu coração e recompensa quem busca com sinceridade.",
+    referencia: "1 Samuel 16:7",
+    tema: "Recompensa interna",
+    reflexao: "Ninguém precisa ver seu esforço. O que importa é que você sabe a verdade sobre seu comprometimento."
   },
 
   // DIAS 22-42: CONSISTÊNCIA - Permanecer, disciplina, hábito
@@ -214,10 +214,10 @@ export const versiculos = [
   },
   {
     dia: 30,
-    texto: "Porque o Senhor vê o seu coração e recompensa quem busca com sinceridade.",
-    referencia: "1 Samuel 16:7",
-    tema: "Recompensa interna",
-    reflexao: "Ninguém precisa ver seu esforço. O que importa é que você sabe a verdade sobre seu comprometimento."
+    texto: "Ao final destes 30 dias, você não é mais quem era. Você é forte, consciente e capaz.",
+    referencia: "Romanos 12:2",
+    tema: "Renovação",
+    reflexao: "Parabéns pelos seus 30 dias! Você provou para si mesma que consegue. Agora, mantenha essa força viva."
   },
   {
     dia: 31,

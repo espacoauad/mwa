@@ -65,7 +65,7 @@ export default function TelaMetas({ dados, finalizar, voltar }) {
 
       <div className="mt-auto flex flex-col gap-3 pt-8">
         <Botao variante="ouro" onClick={finalizar}>
-          {ingles ? 'Start my 21 days ✨' : 'Começar meus 21 dias ✨'}
+          {ingles ? 'Start my 30 days ✨' : 'Começar meus 30 dias ✨'}
         </Botao>
         <Botao variante="secundario" onClick={voltar}>
           {ingles ? 'Back' : 'Voltar'}

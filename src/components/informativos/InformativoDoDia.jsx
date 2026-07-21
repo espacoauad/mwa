@@ -51,7 +51,7 @@ export default function InformativoDoDia({ informativo, dia, irPara }) {
     <article className="overflow-hidden rounded-2xl bg-verde shadow-sm shadow-verde/10">
       <div className="p-5 text-center">
         <p className="text-xs font-semibold uppercase tracking-widest text-white/50">
-          {ingles ? 'Guide · Day' : 'Informativo · Dia'} {informativo.dia} {ingles ? 'of' : 'de'} {informativo.dia > 21 ? 90 : 21}
+          {ingles ? 'Guide · Day' : 'Informativo · Dia'} {informativo.dia} {ingles ? 'of' : 'de'} {informativo.dia > 30 ? 90 : 30}
         </p>
         <p className="mt-2 text-4xl">{informativo.emoji}</p>
         <h2 className="mt-2 font-serif text-xl font-semibold italic leading-snug text-ouro">

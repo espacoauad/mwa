@@ -1,6 +1,6 @@
 // Glossário de conceitos nutricionais do MWA — apêndice de apoio em Ferramentas.
 // Cada conceito explica o que é e por que o programa trabalha esse tema,
-// com a mesma base científica usada nos informativos e dicas dos 21 dias.
+// com a mesma base científica usada nos informativos e dicas dos 30 dias.
 
 export const CONCEITOS_NUTRICIONAIS = [
   {

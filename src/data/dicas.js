@@ -1,16 +1,16 @@
-// Dicas diárias do programa de 21 dias
+// Dicas diárias da Jornada de 30 Dias
 // Temas: 1–3 introdução, 4–7 hidratação, 8–10 proteínas, 11–13 fibras,
-// 14–16 carboidratos, 17–19 gorduras, 20–21 manutenção
+// 14–16 carboidratos, 17–19 gorduras, 20–21 consistência e autocompaixão
 
 export const DICAS = [
   {
     dia: 1,
     tema: 'Introdução',
     icone: '🌱',
-    titulo: 'Bem-vindo(a) aos seus 21 dias!',
+    titulo: 'Bem-vinda aos seus 30 dias!',
     conteudo:
-      'Hoje começa uma jornada de 21 dias — o tempo que a ciência sugere para começar a consolidar um novo hábito. Seu corpo gasta energia até em repouso: essa é a sua TMB (Taxa Metabólica Basal). Somando suas atividades diárias, chegamos ao seu TDEE, o total de calorias que você gasta por dia. Suas metas foram calculadas a partir desses números e do seu objetivo: para emagrecer com saúde, é preciso consumir um pouco menos calorias do que você gasta — isso se chama déficit calórico, e é o único mecanismo real por trás de qualquer emagrecimento, não importa o nome da dieta da vez. Não busque perfeição: busque constância. Registrar o que você come já muda o seu comportamento alimentar — estudos mostram que quem anota, emagrece mais.',
-    dicaPratica: 'Registre TODAS as refeições de hoje, mesmo as que "não contam" — consciência vem antes da mudança. E o foco dos seus próximos 21 dias será entender e aplicar, na prática, quatro conceitos que sustentam todo o método: análise de macros (como proteína, carboidrato e gordura se distribuem no seu prato), controle de calorias (quanto você realmente consome), déficit calórico (a base fisiológica de todo emagrecimento) e densidade nutricional (escolher alimentos que entregam mais nutriente por caloria). Se quiser revisitar cada um desses conceitos a qualquer momento, encontre o guia completo em Ferramentas → Reforçando Conceitos.',
+      'Hoje começa a sua Jornada de 30 Dias. Ela não promete instalar um hábito para sempre em um mês — nenhum programa sério promete isso. Ela constrói a fundação e prova, na prática, que é possível. Por isso existe a continuidade de 90 dias: é nela que o hábito se consolida de verdade. Seu corpo gasta energia até em repouso: essa é a sua TMB (Taxa Metabólica Basal). Somando suas atividades diárias, chegamos ao seu TDEE, o total de calorias que você gasta por dia. Suas metas foram calculadas a partir desses números e do seu objetivo: para emagrecer com saúde, é preciso consumir um pouco menos calorias do que você gasta — isso se chama déficit calórico, e é o único mecanismo real por trás de qualquer emagrecimento, não importa o nome da dieta da vez. Não busque perfeição: busque constância. Registrar o que você come já muda o seu comportamento alimentar — estudos mostram que quem anota, emagrece mais.',
+    dicaPratica: 'Registre TODAS as refeições de hoje, mesmo as que "não contam" — consciência vem antes da mudança. E o foco dos seus próximos 30 dias será entender e aplicar, na prática, quatro conceitos que sustentam todo o método: análise de macros (como proteína, carboidrato e gordura se distribuem no seu prato), controle de calorias (quanto você realmente consome), déficit calórico (a base fisiológica de todo emagrecimento) e densidade nutricional (escolher alimentos que entregam mais nutriente por caloria). Se quiser revisitar cada um desses conceitos a qualquer momento, encontre o guia completo em Ferramentas → Reforçando Conceitos.',
     produto: null,
   },
   {
@@ -195,22 +195,22 @@ export const DICAS = [
   },
   {
     dia: 20,
-    tema: 'Manutenção',
+    tema: 'Consistência',
     icone: '🧭',
-    titulo: 'Depois dos 21 dias: o plano de manutenção',
+    titulo: 'Consistência é o Novo Talento',
     conteudo:
-      'Reta final! O maior erro pós-programa é "voltar ao normal" — porque foi o "normal" que trouxe você até aqui. A manutenção usa tudo o que você praticou: proteína em todas as refeições, alimentos de alta densidade nutricional ocupando a maior parte do prato, água na meta e um controle de macros que já virou instinto, não esforço. A diferença é que agora as calorias que você consome se equilibram com as que gasta — não é mais o déficit calórico que te trouxe até aqui, é o equilíbrio calórico que sustenta o resultado. A regra 80/20 é sua aliada: 80% de escolhas alinhadas, 20% de flexibilidade para pizza com amigos e bolo de aniversário. Rigidez extrema quebra; consistência flexível dura para sempre.',
-    dicaPratica: 'Escreva 3 hábitos deste programa que você vai manter. Fixe na geladeira.',
+      'Você já passou dos primeiros dias mais difíceis — aqueles em que tudo era novidade e exigia atenção redobrada. Agora, algo interessante começa a acontecer: proteína em todas as refeições, alimentos de alta densidade nutricional ocupando a maior parte do prato e um controle de macros que já é quase automático. Isso não é sorte. É repetição virando habilidade.\n\nA partir daqui, o segredo não é reforçar a disciplina — é confiar no que já virou seu. A regra 80/20 é sua aliada: 80% de escolhas alinhadas, 20% de flexibilidade para o que a vida real pede — pizza com amigas, bolo de aniversário, uma sobremesa sem culpa. Rigidez extrema quebra; consistência flexível dura para sempre.',
+    dicaPratica: 'Escreva 3 hábitos que você já sente que "são seus" — que não exigem mais esforço consciente. Perceba o quanto você já mudou.',
     produto: null,
   },
   {
     dia: 21,
-    tema: 'Manutenção',
-    icone: '🏆',
-    titulo: 'Você conseguiu! Agora vem a repetição.',
+    tema: 'Autocompaixão',
+    icone: '💚',
+    titulo: 'Gentileza Consigo Mesma Funciona Melhor Que Culpa',
     conteudo:
-      'Dia 21! Faça sua pesagem final e as fotos de comparação — e celebre cada detalhe: peso, medidas, disposição, como suas roupas caem, como você se vê. Mas aqui está a verdade que a ciência confirma: 21 dias construíram o gatilho. 90 dias construirão a identidade. Você provou que consegue ser constante por 21 repetições; essa habilidade é exatamente o que sustenta resultados para a vida toda. Os próximos 69 dias não vão repetir o que você aprendeu aqui — vão aprofundá-lo até que seja impossível voltar atrás. Macros, déficit calórico, densidade nutricional, fibra: tudo isso se tornará tão automático quanto respirar. A excelência está na repetição. E você já iniciou a dela. 💚',
-    dicaPratica: 'Compare as fotos do dia 1 com as de hoje. Essa transformação que você vê é apenas o começo. Reserve 15 minutos para decidir: continua comigo nos próximos 90 dias?',
+      'Isso vai parecer contraintuitivo, mas a ciência é clara: pessoas que são mais gentis consigo mesmas APÓS um deslize alimentar retomam o padrão saudável mais rápido do que pessoas que se julgam duramente.\n\nPor quê? Porque autocrítica forte ativa uma resposta de estresse no seu corpo. E estresse? Aumenta apetite por alimentos calóricos. É fisiologia pura.\n\nO famoso "já que estraguei tudo agora, vale tudo" não é falta de disciplina ou fraqueza. É seu corpo respondendo à química do estresse causada pelo próprio julgamento.\n\nUma refeição grande é só uma refeição. Dois churros são dois churros. A diferença entre um deslize pequeno que você retoma e um deslize que vira semana inteira comendo errado é: como você fala consigo mesma depois.\n\nO pensamento tudo-ou-nada ("já era, desisti") é o que transforma um episódio pequeno em uma trajetória inteira perdida. E gentileza desativa esse ciclo.\n\nEssa é a verdade firme: ser gentil consigo mesma não é fraqueza. É estratégia inteligente.',
+    dicaPratica: 'Se hoje uma escolha não sair como planejado, simplesmente retome na próxima refeição. Sem culpa, sem esperar amanhã ou segunda-feira. Como um dia normal.',
     produto: null,
   },
 ]

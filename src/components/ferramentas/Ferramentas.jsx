@@ -251,7 +251,7 @@ const JOGOS = [
     id: 'plantio',
     emoji: '🌱',
     titulo: 'Jogo do Plantio',
-    desc: 'Cultive seus hábitos respondendo desafios sobre os 21 dias. 16 acertos = +10 🌱 por dia',
+    desc: 'Cultive seus hábitos respondendo desafios sobre os 30 dias. 16 acertos = +10 🌱 por dia',
   },
   {
     id: 'restaurante',

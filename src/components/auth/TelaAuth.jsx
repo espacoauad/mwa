@@ -8,7 +8,7 @@ import { useIdioma } from '../../context/IdiomaContext.jsx'
 const TEXTOS = {
   'pt-BR': {
     tituloEntrar: 'Que bom te ver de novo', tituloCadastrar: 'Crie seu acesso',
-    descricaoEntrar: 'Entre para continuar sua transformação de 21 dias.',
+    descricaoEntrar: 'Entre para continuar sua Jornada de 30 Dias.',
     descricaoCadastrar: 'Seu acesso pessoal ao programa. Use o mesmo e-mail da compra.',
     idioma: 'Idioma', portugues: 'Português', ingles: 'Inglês', email: 'E-mail', senha: 'Senha',
     senhaPlaceholder: 'Mínimo 6 caracteres', aguarde: 'Aguarde…', entrar: 'Entrar', criarConta: 'Criar conta',
@@ -22,7 +22,7 @@ const TEXTOS = {
   },
   'en-US': {
     tituloEntrar: 'It’s great to see you again', tituloCadastrar: 'Create your account',
-    descricaoEntrar: 'Sign in to continue your 21-day transformation.',
+    descricaoEntrar: 'Sign in to continue your 30-day journey.',
     descricaoCadastrar: 'Your personal access to the program. Use the same email as your purchase.',
     idioma: 'Language', portugues: 'Portuguese', ingles: 'English', email: 'Email', senha: 'Password',
     senhaPlaceholder: 'At least 6 characters', aguarde: 'Please wait…', entrar: 'Sign in', criarConta: 'Create account',

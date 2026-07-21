@@ -21,7 +21,7 @@ export default function PreviewLanches() {
     <div className="mx-auto min-h-screen max-w-md bg-creme px-5 pb-16 pt-10">
       <div className="text-center">
         <p className="text-xs font-bold uppercase tracking-widest text-sage">Preview interno</p>
-        <h1 className="mt-1 font-serif text-2xl font-semibold italic text-verde">Conteúdo do programa — 21 dias</h1>
+        <h1 className="mt-1 font-serif text-2xl font-semibold italic text-verde">Conteúdo do programa — 30 dias</h1>
         <p className="mt-1 text-sm text-verde/60">Escolha o dia e alterne entre informativo, dica e lanche.</p>
       </div>
 

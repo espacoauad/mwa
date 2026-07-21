@@ -30,7 +30,7 @@ export const POLITICA_PRIVACIDADE = {
   secoes: [
     {
       titulo: '1. Quem somos',
-      texto: `O MWA — Método Wanessa Auad 21 Dias é um programa de acompanhamento nutricional conduzido pela Nutricionista ${NUTRICIONISTA.nome} (${NUTRICIONISTA.crn}). Contato: ${CONTATO.email} · ${CONTATO.instagram} · ${CONTATO.site}.`,
+      texto: `O MWA — Método Wanessa Auad, Jornada de 30 Dias, é um programa de acompanhamento nutricional conduzido pela Nutricionista ${NUTRICIONISTA.nome} (${NUTRICIONISTA.crn}). Contato: ${CONTATO.email} · ${CONTATO.instagram} · ${CONTATO.site}.`,
     },
     {
       titulo: '2. Dados que coletamos',
@@ -65,11 +65,11 @@ export const TERMOS_USO = {
   secoes: [
     {
       titulo: '1. Aceitação',
-      texto: 'Ao usar o app MWA — Método Wanessa Auad 21 Dias, você concorda com estes Termos de Uso e com a Política de Privacidade. Se não concordar, não utilize o serviço.',
+      texto: 'Ao usar o app MWA — Método Wanessa Auad, Jornada de 30 Dias, você concorda com estes Termos de Uso e com a Política de Privacidade. Se não concordar, não utilize o serviço.',
     },
     {
       titulo: '2. Descrição do serviço',
-      texto: 'O MWA é um programa educacional de acompanhamento nutricional com duração de 21 dias (extensível a 90 dias), que inclui cálculo de metas, registro de refeições, acompanhamento de progresso e conteúdos educativos diários.',
+      texto: 'O MWA é um programa educacional de acompanhamento nutricional com duração de 30 dias (extensível a 90 dias), que inclui cálculo de metas, registro de refeições, acompanhamento de progresso e conteúdos educativos diários.',
     },
     {
       titulo: '3. Natureza educacional — não é atendimento médico',

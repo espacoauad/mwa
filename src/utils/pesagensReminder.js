@@ -1,14 +1,14 @@
 /**
  * Calcula os dias de pesagem do programa MWA
- * Programa de 21 dias: dias 7, 14, 21
- * Programa de 90 dias: dias 28, 35, 42, 49, 56, 63, 70, 77, 84, 90
+ * Jornada de 30 dias: dias 7, 14, 21, 28, 30 (fechamento)
+ * Programa de 90 dias: dias 35, 42, 49, 56, 63, 70, 77, 84, 90
  */
 
 export function getDiasPesagem(totalDiasPrograma) {
   const dias = []
 
   if (totalDiasPrograma >= 21) {
-    // Dias de pesagem do programa de 21 dias
+    // Dias de pesagem da Jornada de 30 Dias
     dias.push(7, 14, 21)
   }
 

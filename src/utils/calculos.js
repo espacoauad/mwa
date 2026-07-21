@@ -1,4 +1,4 @@
-// Cálculos nutricionais do programa de 21 dias
+// Cálculos nutricionais da Jornada de 30 Dias
 
 export const NIVEIS_ATIVIDADE = [
   { id: 'sedentario', label: 'Sedentário', descricao: 'Pouco ou nenhum exercício', fator: 1.2 },

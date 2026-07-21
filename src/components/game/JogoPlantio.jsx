@@ -3,7 +3,7 @@ import { X, Play, RotateCcw, Zap, Award } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
-// Jogo do Plantio — cultive seus hábitos dos 21 dias respondendo desafios sobre cada pilar
+// Jogo do Plantio — cultive seus hábitos dos 30 dias respondendo desafios sobre cada pilar
 // Cada acerto faz a planta crescer (semente → broto → planta)
 // 8 pilares diferentes, 2 desafios por pilar = 16 desafios total
 // Ganhe 🌱 ao acertar todos os 16 desafios
@@ -350,8 +350,8 @@ export default function JogoPlantio({ onFechar }) {
             <p className="text-5xl mb-4">🌱 → 🌿 → 🌳</p>
             <p className="mb-4 text-sm max-w-sm mx-auto">
               {ingles
-                ? 'You have 8 seeds to grow. Each seed represents a pillar of your 21-day transformation. Answer 2 questions per pillar. Every correct answer makes your plant grow. '
-                : 'Você tem 8 sementes para cultivar. Cada uma representa um pilar dos seus 21 dias. Responda 2 perguntas por pilar. Cada acerto faz a planta crescer.'}
+                ? 'You have 8 seeds to grow. Each seed represents a pillar of your 30-day journey. Answer 2 questions per pillar. Every correct answer makes your plant grow. '
+                : 'Você tem 8 sementes para cultivar. Cada uma representa um pilar dos seus 30 dias. Responda 2 perguntas por pilar. Cada acerto faz a planta crescer.'}
             </p>
             <div className="mt-6 grid grid-cols-2 gap-2 text-xs max-w-xs mx-auto mb-6">
               {PILARES.map((p) => (

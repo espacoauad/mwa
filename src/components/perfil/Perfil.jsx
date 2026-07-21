@@ -56,8 +56,8 @@ export default function Perfil() {
 
   async function indicarAmiga() {
     const texto = ingles
-      ? `Hi! I’m doing MWA — Método Wanessa Auad, a 21-day program with an app, daily nutrition tips, and complete follow-up. I thought you might like it! 🌿\n\nTake a look: https://${CONTATO.site}`
-      : `Oi! Estou fazendo o MWA — Método Wanessa Auad, um programa de 21 dias com app, dicas diárias da nutricionista e acompanhamento completo. Achei que você ia gostar! 🌿\n\nDá uma olhada: https://${CONTATO.site}`
+      ? `Hi! I’m doing MWA — Método Wanessa Auad, a 30-day program with an app, daily nutrition tips, and complete follow-up. I thought you might like it! 🌿\n\nTake a look: https://${CONTATO.site}`
+      : `Oi! Estou fazendo o MWA — Método Wanessa Auad, um programa de 30 dias com app, dicas diárias da nutricionista e acompanhamento completo. Achei que você ia gostar! 🌿\n\nDá uma olhada: https://${CONTATO.site}`
     window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank', 'noopener')
     const ganho = await registrarIndicacao()
     setAvisoIndicacao(
@@ -128,7 +128,7 @@ export default function Perfil() {
         </p>
       </div>
 
-      {/* Hall da Fama — acumula em qualquer número de ciclos de 90 dias, não só nos 21 dias iniciais */}
+      {/* Hall da Fama — acumula em qualquer número de ciclos de 90 dias, não só nos 30 dias iniciais */}
       <div className="mt-4 rounded-2xl bg-white p-5 shadow-sm shadow-verde/5">
         <div className="flex items-center justify-between">
           <h2 className="flex items-center gap-1.5 text-sm font-semibold text-verde/60">
