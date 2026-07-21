@@ -3,119 +3,12 @@
 // Não é dieta. É uma nova forma de viver.
 // Voz: Wanessa como acompanhamento pessoal, acolhedor e educativo
 
-// Dias 1–21: ver src/data/dicas.js (conteúdo canônico da Jornada de 21 Dias).
+// Dias 1–30: ver src/data/dicas.js (conteúdo canônico da Jornada de 30 Dias).
 // Este arquivo cobre exclusivamente a continuidade do MWA | Programa de 90 Dias
-// (dias 22–90, liberado para quem tem programa90Ativo).
+// (dias 31–90, os 60 dias do upsell — bundle no checkout ou compra dentro do
+// app —, liberados apenas quando programa90Ativo).
 export const DICAS_90 = [
-  // FASE 1 — Dias 22-36: A Transição para a Rotina Sustentável (Mês 1: Aprofundamento)
-  {
-    dia: 22,
-    tema: 'Continuidade',
-    pilar: 'Comportamento',
-    icone: '🌱',
-    titulo: 'O Que a Ciência Diz Sobre Repetição',
-    conteudo: 'Chegamos ao dia 22, e eu quero que você entenda uma coisa com toda a clareza, de mulher para mulher: você não está recomeçando. Está exatamente no meio do caminho — e isso é ótimo. Os primeiros dias tiveram um objetivo bem específico — tirar você da inércia, quebrar padrões que eram automáticos, mostrar que é possível comer bem sem sofrimento, sem contar cada grama, sem abrir mão de prazer. Aquilo funcionou.\n\nAgora entra a parte firme da história: consolidar. Você já quebrou a inércia. Agora a gente trabalha o que chamamos em psicologia comportamental de "automatização do hábito" — e para isso, sim, você precisa de 66 a 90 dias de repetição. Por quê? Porque seu cérebro é um órgão preguiçoso e inteligente ao mesmo tempo. Ele detecta o que é relevante (você repetiu por vários dias, então provavelmente é importante) mas não o absorve como automático até que o padrão apareça muitas vezes — é como aprender a andar de bicicleta, sabe? Você não pensa mais em cada movimento depois que o corpo entende a dinâmica.\n\nOs próximos dias são sobre fazer o que já sabe caber na sua vida real — a vida que tem semanas corridas, imprevistos, terças-feiras quando você acorda cansada. Não é sobre aprender mais regras. É sobre tornar automático o que você já conquistou. Emagrecer foi o convite. Viver bem de verdade, sem contar cada dia, é o compromisso que continua agora.',
-    dicaPratica: 'Olhe para trás nesses dias. Qual foi o hábito que mais mudou sua rotina? Qual ainda exige esforço? Observe sem criticar. Você só quer saber em que ponto está.',
-    fraseMotivacional: 'Eu não preciso recomeçar. Eu preciso continuar. Assim, com calma.',
-    objetivoComportamental: 'Estabelecer a mentalidade de continuidade, automação e compaixão ao aprofundar a jornada',
-    produto: null,
-  },
-  {
-    dia: 23,
-    tema: 'Planejamento',
-    pilar: 'Planejamento',
-    icone: '📋',
-    titulo: 'Planejar Sem Que Isso Vire Fardo',
-    conteudo: 'Sabe aquele momento à noite quando você chega cansada e não sabe o que comer, e aí acaba pedindo algo fácil porque não tem energia para pensar? Tem um nome para isso: fadiga de decisão. Seu cérebro gasta energia real — usamos glicose, oxigênio — para tomar decisões. Quanto mais decisões você toma ao longo do dia, mais esgotada fica sua capacidade de decidir bem nas próximas. E adivinhe qual é a última decisão importante do dia? A sobre comida.\n\nÉ por isso que decidir sozinha o que comer, sem planejamento, quando você já está cansada, geralmente a leva para o caminho de menor esforço — não para o mais nutritivo, mas para o mais fácil de resolver. Planejar, portanto, não é sobre ser rígida ou controladora. É sobre ser inteligente: você tira essa decisão do momento em que sua energia está no piso e a coloca num momento em que você consegue pensar com clareza.\n\nReserve 20 minutos no seu domingo ou em um dia tranquilo. Olhe para a semana que vem: quais são seus dias mais corridos? Quando você costuma chegar mais cansada? Prepare exatamente para esses momentos. Você não está prevendo cada garfada. Está literalmente economizando energia mental para as coisas que realmente importam.',
-    dicaPratica: 'Faça uma lista de compras olhando para a sua semana real. Separe: "isso resolve os dias corridos" e "isso dá para eu caprichar nos dias que tenho mais tempo e energia".',
-    fraseMotivacional: 'Planejar não é ser rigída. É cuidado comigo mesma, bem pensado.',
-    objetivoComportamental: 'Estabelecer planejamento leve de refeições sem culpa ou exesso de controle',
-    produto: null,
-  },
-  {
-    dia: 24,
-    tema: 'Preparo Inteligente',
-    pilar: 'Planejamento',
-    icone: '🍱',
-    titulo: 'Preparo Inteligente: Menos Esforço, Melhor Resultado',
-    conteudo: 'Aqui vem uma verdade que muda o jogo: você não precisa cozinhar todos os dias para comer bem todos os dias. Essa distinção é enorme.\n\nO que faz uma alimentação equilibrada durar 90 dias, 1 ano, uma vida inteira, não é força de vontade diária — isso é infinito e cansa. É estrutura. É você ter, de antemão, 2 ou 3 opções boas já prontas para os dias (e você vai ter muitos) em que faltar tempo, energia ou paciência para cozinhar do zero.\n\nHá um conceito na nutrição comportamental chamado "reduzir barreiras de acesso". Basicamente: quanto menor o esforço entre a fome e a escolha nutritiva, maior a chance de você escolher bem, mesmo quando está cansada, com pressa, irritada. É ciência pura. Seu cérebro cansado vai sempre tomar o caminho de menor resistência — então sua missão é fazer o caminho certo ser o de menor resistência.\n\nReserve um momento — sábado ou domingo funcionam bem — para deixar 2 refeições semiprontas: uma proteína já cozida (frango, ovo, carne moída), seus vegetais favoritos já lavados e cortados, um carboidrato de base pronto (arroz, batata doce, macarrão integral). Isso não é "dieta regrada". É engenharia: você está desenhando seu ambiente a seu favor.',
-    dicaPratica: 'Escolha um dia: deixe 2 refeições semiprontas no domingo ou seu dia mais tranquilo. Proteína, vegetais, carboidrato. Pronto.',
-    fraseMotivacional: 'Estrutura não é prisão. É liberdade para escolher bem quando não tenho energia para pensar.',
-    objetivoComportamental: 'Criar sistema de preparo antecipado que torne fácil comer bem',
-    produto: null,
-  },
-  {
-    dia: 25,
-    tema: 'Estrutura',
-    pilar: 'Planejamento',
-    icone: '🧊',
-    titulo: 'O Congelador é Seu Aliado (Não é Loucura)',
-    conteudo: 'Muita gente acha que congelar comida é "exagero" ou "ansiedade". Não é. É tática.\n\nPrimeiro, a ciência: congelar não destrói os nutrientes de uma refeição bem preparada. O processo caseiro preserva a maioria das proteínas, vitaminas e minerais — especialmente se você congela tudo rapidinho, logo após o preparo. A qualidade nutricional se mantém intacta.\n\nSegundo, o que realmente muda é sua relação com o tempo. Você tendo porções individuais congeladas é tipo ter uma rede de segurança. Porque quando você chega em casa depois de um dia violento, o trabalho foi pesado, a última coisa que quer é pensar "o que vou comer?". A resposta já está lá no freezer, esperando por você, sem exigir energia mental, sem exigir criatividade, sem exigir que você se arraste até o mercado. Está pronto.\n\nIsso tira a decisão de impulso e cansaço. Tira o "já que não tenho tempo para cozinhar, vou pedir algo calórico". Tira o sentimento de culpa depois. Não é sobre estocar comida por medo ou ansiedade. É construir uma rede de segurança gentil para os dias em que sua energia simplesmente não alcança o fogão.',
-    dicaPratica: 'Congele 2-3 porções de uma refeição que você faz essa semana. Pronto. Rede de segurança instalada.',
-    fraseMotivacional: 'Ter uma opção pronta não é preguiça. É ser gentil comigo mesma no dia difícil.',
-    objetivoComportamental: 'Criar reserva de refeições congeladas como rede de segurança para dias difíceis',
-    produto: null,
-  },
-  {
-    dia: 26,
-    tema: 'Cansaço e Escolhas',
-    pilar: 'Comportamento',
-    icone: '😮‍💨',
-    titulo: 'O Cansaço Muda Sua Química (E Isso Não é Fraqueza)',
-    conteudo: 'Quando você chega cansada e acaba comendo besteira, não é falta de disciplina. É neurologia. Literalmente.\n\nO cansaço físico e mental altera a química do seu apetite. Quando seus níveis de energia estão baixos, seu corpo procura combustível fácil — e por isso o desejo por coisas calóricas, açucaradas, de recompensa rápida aumenta. Seu corpo não está sendo fraco. Está sendo lógico: "preciso de energia agora, quero a opção mais fácil".\n\nAlem disso, cansaço reduz a capacidade de resistência cognitiva — seu cérebro simplesmente tem menos poder de processamento para pensar em alternativas, em valores nutricionais, em consequências. Você quer o caminho mais curto entre fome e comida.\n\nEntão aqui vai a verdade firme: reconhecer isso já resolve metade do problema. Porque tira a culpa completamente da equação e coloca a ciência no lugar. A outra metade é estratégia pura: ter, de antemão, uma opção BOA que exija o mínimo de esforço possível exatamente no horário em que seu cansaço costuma bater mais forte. Se você chega cansada às 18h, não deixe essa hora sem defesa.',
-    dicaPratica: 'Qual horário é seu pico de cansaço? Identifique. Agora prepare exatamente para esse momento uma opção que está 80% pronta. Você só aquece.',
-    fraseMotivacional: 'Cansaço não é fraqueza. É sinal de que eu preciso de uma estrutura melhor.',
-    objetivoComportamental: 'Reconhecer cansaço como gatilho fisiológico e se defender antecipadamente',
-    produto: null,
-  },
-  {
-    dia: 27,
-    tema: 'Lente da Consciência',
-    pilar: 'Comportamento',
-    icone: '🔍',
-    titulo: 'Expandir a Consciência Para Além do Prato',
-    conteudo: 'Você já começou a praticar uma pausa antes de comer — respira, observa, depois come. Isso já é alimentação consciente, que tem nome de verdade em ciência: é chamada mindful eating, e estudos mostram que reduz compulsão e melhora a percepção de saciedade.\n\nAgora vem a parte que expande isso: levar a mesma pausa para outros momentos. Não só quando está sentado com comida na frente. Mas quando bate a vontade automática de pular uma refeição porque "não tenho tempo". Ou de comer rápido demais enquanto trabalha. Ou de decidir por cansaço em vez de por fome real.\n\nVocê sabe qual é a diferença? Uma é fome real (seu corpo precisa combustível). Outra é escape (você está irritada, entediada, cansada, e sua boca procura sensação). Seu cérebro foi programado para confundir essas duas. A pausa reconstrói essa habilidade perdida: você aprende a escutar seus sinais internos em vez de responder só ao relógio, ao prato dos outros, ao cheiro que passou na cozinha.\n\nCada pequena pausa é um treino. Seu cérebro melhora nisso com a repetição.',
-    dicaPratica: 'Hoje, antes de cada refeição e antes de qualquer "lancinho automático", respire fundo 3 vezes. Pergunta: tenho fome de verdade ou estou procurando algo?',
-    fraseMotivacional: 'Consciência não é controle rígido. É se conhecer mais profundamente.',
-    objetivoComportamental: 'Treinar o reconhecimento entre fome real e escape emocional',
-    produto: null,
-  },
-  {
-    dia: 28,
-    tema: 'Identidade',
-    pilar: 'Comportamento',
-    icone: '🪞',
-    titulo: 'Quem Você Está se Tornando (Não é Vanidade)',
-    conteudo: 'Existem dois caminhos totalmente diferentes para mudança duradoura. Um é focado em resultado ("quero perder X quilos"). O outro é focado em identidade ("eu sou alguém que cuida de si").\n\nAdivinha qual sustenta a mudança no longo prazo?\n\nQual é? Quando você só foca em número, sua motivação sobe e desce com a balança. Subiu meio quilo sem motivo? Pronto, você entra em parafuso, se sente fracassada, abandona tudo. Mas quando o foco é "quem eu estou me tornando", cada escolha pequena — mesmo que ninguém veja — vira uma evidência. Evidência que reforça sua identidade. Você escolhe o salada em vez de pizza? Não é só uma refeição. É você sendo coerente com quem você quer ser. É você se provando isso.\n\nNos primeiros dias você aprendeu o QUÊ fazer. Agora a pergunta muda de "o que eu devo fazer?" para "quem eu estou sendo enquanto faço isso, repetidas vezes?".\n\nIsso é poderoso porque te desconecta do resultado externo e te conecta na sua própria narrativa interna. E narrativas internas são muito mais poderosas para sustentar comportamentos ao longo do tempo.',
-    dicaPratica: 'Complete a frase 3 vezes hoje: "Eu sou alguém que..." seguida de uma escolha real que você fez nessa última semana. Não é soberba. É reconhecer verdades sobre você.',
-    fraseMotivacional: 'Eu não estou seguindo um plano de emagrecer. Estou me tornando a pessoa que eu quero ser.',
-    objetivoComportamental: 'Conectar hábitos repetidos à identidade pessoal renovada',
-    produto: null,
-  },
-  {
-    dia: 29,
-    tema: 'Imprevistos',
-    pilar: 'Comportamento',
-    icone: '🌦️',
-    titulo: 'Imprevistos Não Apagam Progresso (Retomada Sim)',
-    conteudo: 'Ninguém tem uma semana perfeita. Ninguém. Alguém sempre vai te chamar para jantar fora, você vai acordar com pressa, vai ter um dia que o trabalho esgotou e você comeu chocolate em quantidade. Isso é garantido que vai acontecer.\n\nA pergunta que importa não é "como evito imprevistos?" (impossível). A pergunta é "como retomo rápido?". E tem até nome em psicologia comportamental: "efeito de violação da abstinência".\n\nBasicamente: um deslize pequeno só vira uma recaída grande quando você interpreta como "ah, estraguei tudo, já que comecei do errado, deixa eu desistir".\n\nMas quando você entende que deslizes são PARTE esperada do processo — não uma exceção vergonhosa a ele — tudo muda. Uma semana fora do previsto não apaga 28 dias de trabalho consistente. Ela só testa se você já internalizou uma verdade: retomar é parte do método.\n\nDesde sempre você sobe em bicicleta, cai, levanta, tenta de novo. Por que com comida seria diferente?',
-    dicaPratica: 'Pense num imprevisto recente (uma refeição grande, um dia de besteira). Agora: e se você tivesse retomado na refeição seguinte, sem culpa? Escreva como seria.',
-    fraseMotivacional: 'Um imprevisto muda o dia. Retomar rápido muda a trajetória.',
-    objetivoComportamental: 'Normalizar imprevistos e desenvolver capacidade rápida de retomada',
-    produto: null,
-  },
-  {
-    dia: 30,
-    tema: 'Conquista',
-    pilar: 'Comportamento',
-    icone: '🏆',
-    titulo: 'Você Conseguiu! Agora Vem a Repetição.',
-    conteudo: 'Dia 30! Faça sua pesagem final e as fotos de comparação — e celebre cada detalhe: peso, medidas, disposição, como suas roupas caem, como você se vê. Mas aqui está a verdade que a ciência confirma: 30 dias construíram o gatilho. 90 dias construirão a identidade. Você provou que consegue ser constante por 30 repetições; essa habilidade é exatamente o que sustenta resultados para a vida toda. Os próximos 60 dias não vão repetir o que você aprendeu aqui — vão aprofundá-lo até que seja impossível voltar atrás. Macros, déficit calórico, densidade nutricional, fibra: tudo isso se tornará tão automático quanto respirar. A excelência está na repetição. E você já iniciou a dela. 💚',
-    dicaPratica: 'Compare as fotos do dia 1 com as de hoje. Essa transformação que você vê é apenas o começo. Reserve 15 minutos para decidir: continua comigo nos próximos 90 dias?',
-    fraseMotivacional: 'Trinta repetições me trouxeram até aqui. A próxima fase me leva além.',
-    objetivoComportamental: 'Celebrar a conclusão da Jornada de 30 Dias e apresentar a continuidade',
-    produto: null,
-  },
+  // FASE 1 — Dias 31-36: retomada logo após a Jornada de 30 Dias
   {
     dia: 31,
     tema: 'Celebração De Pequenas Vitórias',
@@ -261,7 +154,7 @@ export const DICAS_90 = [
     produto: null,
   },
 
-  // SEMANA 7-9: Consolidação e Saúde (Dias 43-63)
+  // FASE 2 (continuação) — Dias 43-51: rótulos, porções e armadilhas ocultas
   {
     dia: 43,
     tema: 'Barrinhas e Cereais',
@@ -515,7 +408,7 @@ export const DICAS_90 = [
     produto: null,
   },
 
-  // SEMANA 10-13: Reta Final e Manutenção (Dias 64-90)
+  // FASE 3 (continuação) — Dias 64-66: fechamento da densidade calórica aplicada
   {
     dia: 64,
     tema: 'Alto Volume',
@@ -710,7 +603,7 @@ export const DICAS_90 = [
   },
   {
     dia: 80,
-    tema: 'Revisão Mês 3',
+    tema: 'Revisão da Fase 4',
     pilar: 'Reflexão',
     icone: '📊',
     titulo: 'Revisão: O Que Você Fez Na Vida Real',
@@ -726,7 +619,7 @@ export const DICAS_90 = [
     pilar: 'Reflexão',
     icone: '🎊',
     titulo: 'Você Provou Que Funciona Fora De Casa',
-    conteudo: 'Você encerra o Mês 2 (dias 64-81) tendo feito o teste REAL.\n\nNão em casa. Fora de casa.\n\nBuffet. Rodízio. Festa. Viagem. Restaurante. Festa. Fim de semana.\n\nE você testou o método NESSE contexto. E funcionou.\n\nUm método que funciona só em casa é experimento de laboratório, não é vida real.\n\nMas um método que funciona FORA é o que realmente muda vidas, porque lá é onde a vida DE VERDADE acontece.\n\nVocê já provou isso. Agora o próximo ciclo não é começar do zero — é elevar a excelência que você já demonstrou.',
+    conteudo: 'Você encerra a Fase 4 (dias 67-81) tendo feito o teste REAL.\n\nNão em casa. Fora de casa.\n\nBuffet. Rodízio. Festa. Viagem. Restaurante. Festa. Fim de semana.\n\nE você testou o método NESSE contexto. E funcionou.\n\nUm método que funciona só em casa é experimento de laboratório, não é vida real.\n\nMas um método que funciona FORA é o que realmente muda vidas, porque lá é onde a vida DE VERDADE acontece.\n\nVocê já provou isso. Agora o próximo ciclo não é começar do zero — é elevar a excelência que você já demonstrou.',
     dicaPratica: 'Observe simbolicamente no app a colheita dessa fase. E cante a vitória de você mesma.',
     fraseMotivacional: 'Maior vitória: não emagrecer comendo em casa. Emagrecer comendo em FESTA.',
     objetivoComportamental: 'Consolidar vitória de aplicar método na vida real',

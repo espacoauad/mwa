@@ -26,7 +26,7 @@ export default function Dicas({ irPara }) {
   }, [diaAberto, diaAtual])
 
   const diasDoPrograma = Array.from({ length: totalDias }, (_, i) => i + 1)
-  const dica = diaAberto <= 21 ? dicaDoDia(diaAberto) : dicaDoDia90(diaAberto)
+  const dica = diaAberto <= 30 ? dicaDoDia(diaAberto) : dicaDoDia90(diaAberto)
   const informativo = informativoDoDia(diaAberto)
   const lanche = diaAberto <= 21 ? lancheDoDia(diaAberto) : diaAberto >= 22 && diaAberto <= 37 ? lancheDoDia22a37(diaAberto) : diaAberto >= 38 && diaAberto <= 89 ? lancheDoDia38a89(diaAberto) : null
 

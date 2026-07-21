@@ -80,7 +80,7 @@ export default function Hoje({ irParaDicas }) {
 
   const primeiroNome = usuario.nome.trim().split(' ')[0]
   const progresso = Math.round((diaAtual / totalDias) * 100)
-  const dica = diaAtual <= 21 ? dicaDoDia(diaAtual) : dicaDoDia90(diaAtual)
+  const dica = diaAtual <= 30 ? dicaDoDia(diaAtual) : dicaDoDia90(diaAtual)
   const informativo = informativoDoDia(diaAtual)
   const dataFormatada = new Date().toLocaleDateString(locale, {
     weekday: 'long',

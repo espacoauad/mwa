@@ -1,4 +1,4 @@
-// Informativos diários MWA — comparações nutricionais visuais (dias 1–21)
+// Informativos diários MWA — comparações nutricionais visuais (dias 1–90)
 // tom: 'bom' (verde), 'ruim' (terracota), 'neutro' (ouro)
 
 export const INFORMATIVOS = [
