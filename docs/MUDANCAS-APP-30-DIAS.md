@@ -4,6 +4,21 @@ Documento de mapeamento (não é implementação). Investigado em 2026-07-16, br
 `security/correcoes-criticas`, via `grep -rn "21" src/ --include="*.jsx" --include="*.js"` e
 inspeção manual de cada arquivo relevante.
 
+> **Atualização 2026-07-21 — migração concluída.** Tudo mapeado abaixo foi implementado:
+> `calculos.js`/`AppContext.jsx`/`Hoje.jsx` migrados para o corte em 30/31/90, tela de
+> encerramento (`Conclusao30Dias.jsx`) + certificado compartilhável criados, `ofertas.js` e
+> `InformativoDoDia.jsx` corrigidos, conteúdo dos dias 20-22/28/30 (em `dicas.js`/`dicas90.js`/
+> `versiculos.js`/`informativos.js`) reescrito para não soar como encerramento fora do dia 30.
+> O texto histórico abaixo permanece como registro de como o bug foi encontrado.
+>
+> **Pendência nova, descoberta durante a correção:** a estrutura interna de "Mês 1 / Mês 2 /
+> Mês 3" dentro do conteúdo do Programa de 90 Dias (`src/data/dicas90.js`) foi escrita
+> assumindo que a continuidade paga começava no dia 22 (ex.: "Mês 2 = dias 64–81", dia 184 do
+> arquivo). Agora que a continuidade paga começa no dia 31, essa rotulação interna dos meses
+> ficou desalinhada por 9 dias em relação ao dia real da aluna. Corrigir isso exige renumerar
+> ~60 entradas de conteúdo (dias 31–90) — está fora do escopo desta sessão; precisa de uma
+> rodada de conteúdo dedicada.
+
 ## Contexto e achado central
 
 O produto de entrada mudou de "Jornada de 21 Dias" (R$ 97) para "MWA | Jornada de 30 Dias"
