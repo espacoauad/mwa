@@ -1,5 +1,5 @@
-// Lanches proteicos dos dias 38–89 do programa de 90 dias
-// Continuação após os 37 primeiros dias. Máxima variedade com:
+// Lanches proteicos dos dias 38–89, continuidade de 90 dias em andamento.
+// Máxima variedade com:
 // • Verduras + Proteínas
 // • Frutas + Proteínas
 // • Castanhas e oleaginosas

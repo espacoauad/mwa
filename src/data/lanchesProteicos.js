@@ -1,4 +1,5 @@
-// Lanches proteicos dos 30 dias — simples, práticos e rápidos.
+// Lanches proteicos dos dias 1-21 — simples, práticos e rápidos.
+// Dias 22-30 (fim da Jornada de 30 Dias): ver lanches22a37.js.
 // Curadoria nutricional: cada dia traz um lanche com boa dose de proteína para
 // sustentar a saciedade entre as refeições, preservar massa magra e evitar beliscos.
 //

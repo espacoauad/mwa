@@ -1,5 +1,5 @@
-// Lanches proteicos dos dias 22–37 do programa de 90 dias
-// Continuação após os 21 primeiros dias. Mantém foco em:
+// Lanches proteicos dos dias 22–37 (22-30 fim da Jornada de 30 Dias, 31-37
+// início da continuidade de 90 dias). Mantém foco em:
 // • Alta proteína (sustentação de massa magra)
 // • Praticidade (rotina acelerada)
 // • Variedade (evita monotonia)
