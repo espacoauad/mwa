@@ -124,10 +124,16 @@ export default function ModalRefeicao() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-verde-escuro/50" onClick={fecharModalRefeicao}>
-      <div className="max-h-[94vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-6" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="max-h-[94vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-6"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-refeicao-titulo"
+      >
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="font-serif text-xl font-semibold italic text-verde">{editando ? (ingles ? 'Edit meal' : 'Editar refeição') : (ingles ? 'Add meal' : 'Adicionar refeição')}</h2>
-          <button type="button" aria-label={ingles ? 'Close' : 'Fechar'} onClick={fecharModalRefeicao} className="rounded-full bg-white p-2 text-verde/60"><X size={18} /></button>
+          <h2 id="modal-refeicao-titulo" className="font-serif text-xl font-semibold italic text-verde">{editando ? (ingles ? 'Edit meal' : 'Editar refeição') : (ingles ? 'Add meal' : 'Adicionar refeição')}</h2>
+          <button type="button" aria-label={ingles ? 'Close' : 'Fechar'} onClick={fecharModalRefeicao} className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white text-verde/60"><X size={18} /></button>
         </div>
         <div className="grid grid-cols-2 gap-3">
           <label className="block"><span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Meal' : 'Refeição'}</span>
@@ -141,7 +147,7 @@ export default function ModalRefeicao() {
         </div>
         <div className="mt-4 grid grid-cols-2 gap-1 rounded-lg bg-cinza p-1">
           {[['banco', ingles ? 'Search foods' : 'Buscar alimento'], ['manual', ingles ? 'Enter manually' : 'Inserir manualmente']].map(([id, label]) => (
-            <button key={id} type="button" onClick={() => setModo(id)} className={`rounded-md py-2 text-sm font-semibold ${modo === id ? 'bg-white text-verde shadow-sm' : 'text-verde/50'}`}>{label}</button>
+            <button key={id} type="button" onClick={() => setModo(id)} aria-pressed={modo === id} className={`rounded-md py-2 text-sm font-semibold ${modo === id ? 'bg-white text-verde shadow-sm' : 'text-verde/80'}`}>{label}</button>
           ))}
         </div>
         {modo === 'banco' ? <div className="mt-4">
@@ -149,24 +155,24 @@ export default function ModalRefeicao() {
             <input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder={ingles ? 'Search food, brand, or alternative name…' : 'Buscar alimento, marca ou apelido...'} className="w-full py-3 font-medium text-verde outline-none" />
           </div>
           <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
-            {['Todos', 'Recentes', 'Favoritos', 'Estados Unidos', ...CATEGORIAS, 'Meus alimentos'].map((cat) => <button key={cat} type="button" onClick={() => setFiltro(cat)} className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold ${filtro === cat ? 'bg-verde text-white' : 'bg-white text-verde/60'}`}>{cat === 'Estados Unidos' ? `🇺🇸 ${ingles ? 'United States' : 'Estados Unidos'}` : (ingles ? FILTROS_EN[cat] ?? cat : cat)}</button>)}
+            {['Todos', 'Recentes', 'Favoritos', 'Estados Unidos', ...CATEGORIAS, 'Meus alimentos'].map((cat) => <button key={cat} type="button" onClick={() => setFiltro(cat)} className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold ${filtro === cat ? 'bg-verde text-white' : 'bg-white text-verde/80'}`}>{cat === 'Estados Unidos' ? `🇺🇸 ${ingles ? 'United States' : 'Estados Unidos'}` : (ingles ? FILTROS_EN[cat] ?? cat : cat)}</button>)}
           </div>
           <ul className="mt-2 max-h-56 overflow-y-auto rounded-lg border border-cinza bg-white">
             {resultados.map((a) => <li key={a.id} className={`flex items-center ${alimentoId === a.id ? 'bg-sage-claro' : ''}`}>
               <button type="button" onClick={() => escolherAlimento(a)} className="min-w-0 flex-1 px-3 py-2.5 text-left text-sm text-verde/80">
                 <span className="block truncate font-medium">{a.suplemento && '🌿 '}{a.nome}</span>
-                <span className="text-[10px] text-verde/45">{a.origem === 'Estados Unidos' && '🇺🇸 '}{a.categoria} · {a.kcal} kcal/100{a.unidadeBase}</span>
+                <span className="text-[10px] text-verde/80">{a.origem === 'Estados Unidos' && '🇺🇸 '}{a.categoria} · {a.kcal} kcal/100{a.unidadeBase}</span>
               </button>
-              <button type="button" aria-label={`${favoritos.includes(a.id) ? (ingles ? 'Remove from' : 'Remover') : (ingles ? 'Add to' : 'Adicionar')} ${ingles ? 'favorites' : 'favorito'}`} onClick={() => alternarFavorito(a.id)} className="p-3 text-ouro"><Star size={16} fill={favoritos.includes(a.id) ? 'currentColor' : 'none'} /></button>
+              <button type="button" aria-label={`${favoritos.includes(a.id) ? (ingles ? 'Remove from' : 'Remover') : (ingles ? 'Add to' : 'Adicionar')} ${ingles ? 'favorites' : 'favorito'}`} onClick={() => alternarFavorito(a.id)} className="flex min-h-11 min-w-11 shrink-0 items-center justify-center text-ouro"><Star size={16} fill={favoritos.includes(a.id) ? 'currentColor' : 'none'} /></button>
             </li>)}
-            {!resultados.length && <li className="px-3 py-4 text-sm text-verde/50">{ingles ? 'Nothing found. Try another name or enter it manually.' : 'Nada encontrado. Tente um sinônimo ou cadastre manualmente.'}</li>}
+            {!resultados.length && <li className="px-3 py-4 text-sm text-verde/80">{ingles ? 'Nothing found. Try another name or enter it manually.' : 'Nada encontrado. Tente um sinônimo ou cadastre manualmente.'}</li>}
           </ul>
           {alimento && <div className="mt-3 grid grid-cols-2 gap-3">
             <CampoNumero label={ingles ? 'Quantity' : 'Quantidade'} value={quantidade} onChange={setQuantidade} min="0" step="any" placeholder="1" />
             <label><span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Serving unit' : 'Medida'}</span><select value={medidaId} onChange={(e) => setMedidaId(e.target.value)} className="w-full rounded-lg border-2 border-sage/30 bg-white px-3 py-3.5 font-medium text-verde outline-none">{alimento.medidas.map((m) => <option key={m.id} value={m.id}>{m.nome}</option>)}</select></label>
           </div>}
           {macros && <div className="mt-3 grid grid-cols-5 gap-1 rounded-lg bg-verde p-3 text-center text-white">{[['kcal', macros.calorias], ['prot', `${macros.proteina}g`], ['carb', `${macros.carbos}g`], ['gord', `${macros.gordura}g`], ['fibra', `${macros.fibras}g`]].map(([l, v]) => <div key={l}><p className="text-sm font-bold text-ouro">{v}</p><p className="text-[10px] text-white/60">{l}</p></div>)}</div>}
-          {alimento?.estimado && <p className="mt-2 flex items-start gap-1 text-[11px] text-verde/55"><AlertCircle size={13} className="mt-0.5 shrink-0" />{ingles ? 'Reference value: preparation, recipe, or brand may change the macros.' : 'Valor de referência: preparação, receita ou marca pode alterar os macros.'}</p>}
+          {alimento?.estimado && <p className="mt-2 flex items-start gap-1 text-[11px] text-verde/80"><AlertCircle size={13} className="mt-0.5 shrink-0" />{ingles ? 'Reference value: preparation, recipe, or brand may change the macros.' : 'Valor de referência: preparação, receita ou marca pode alterar os macros.'}</p>}
         </div> : <div className="mt-4 flex flex-col gap-3">
           <label><span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Food or meal name' : 'Nome do alimento/refeição'}</span><input value={manual.nome} onChange={(e) => setManual((m) => ({ ...m, nome: e.target.value }))} placeholder={ingles ? 'Example: Homemade casserole' : 'Ex.: Strogonoff da vovó'} className="w-full rounded-lg border-2 border-sage/30 bg-white px-4 py-3.5 font-medium text-verde outline-none" /></label>
           <label><span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Brand (optional)' : 'Marca (opcional)'}</span><input value={manual.marca} onChange={(e) => setManual((m) => ({ ...m, marca: e.target.value }))} className="w-full rounded-lg border-2 border-sage/30 bg-white px-4 py-3.5 font-medium text-verde outline-none" /></label>
@@ -175,7 +181,7 @@ export default function ModalRefeicao() {
           <CampoNumero label="Fibras" sufixo="g" value={manual.fibras} onChange={(v) => setManual((m) => ({ ...m, fibras: v }))} min="0" />
           {!editando && <label className="flex items-center gap-2 text-sm font-medium text-verde/70"><input type="checkbox" checked={salvarPersonalizado} onChange={(e) => setSalvarPersonalizado(e.target.checked)} /> {ingles ? 'Save for reuse in “My foods”' : 'Salvar para reutilizar em “Meus alimentos”'}</label>}
         </div>}
-        <label className="mt-4 flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed border-sage/40 bg-white p-4">{fotoUrl ? <img src={fotoUrl} alt={ingles ? 'Meal' : 'Foto da refeição'} className="h-14 w-14 rounded-lg object-cover" /> : <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-sage-claro text-sage"><Camera size={22} /></span>}<span className="text-sm font-medium text-verde/70">{fotoUrl ? (ingles ? 'Change meal photo' : 'Trocar foto da refeição') : (ingles ? 'Add meal photo 📸' : 'Adicionar foto da refeição 📸')}</span><input type="file" accept="image/*" capture="environment" onChange={escolherFoto} className="hidden" /></label>
+        <label className="mt-4 flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed border-sage/40 bg-white p-4 focus-within:border-sage focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2">{fotoUrl ? <img src={fotoUrl} alt={ingles ? 'Meal' : 'Foto da refeição'} className="h-14 w-14 rounded-lg object-cover" /> : <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-sage-claro text-sage"><Camera size={22} /></span>}<span className="text-sm font-medium text-verde/70">{fotoUrl ? (ingles ? 'Change meal photo' : 'Trocar foto da refeição') : (ingles ? 'Add meal photo 📸' : 'Adicionar foto da refeição 📸')}</span><input type="file" accept="image/*" capture="environment" onChange={escolherFoto} className="sr-only" /></label>
         <div className="mt-5"><Botao onClick={salvar} disabled={!valido}>{editando ? (ingles ? 'Save changes' : 'Salvar alterações') : (ingles ? 'Add to today' : 'Adicionar ao dia')}</Botao></div>
       </div>
     </div>

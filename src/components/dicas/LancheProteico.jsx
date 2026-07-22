@@ -1,19 +1,24 @@
 import { useState } from 'react'
 import { Sparkles, Check } from 'lucide-react'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Card do lanche proteico do dia: nome, descrição, ingredientes, preparo e,
 // quando houver, a foto do suplemento/alimento usado na receita.
+// Observação: o conteúdo (título, descrição, ingredientes, preparo) vem dos
+// arquivos data/lanches*.js, que só têm texto em PT-BR — só os rótulos fixos
+// deste componente respeitam o alternador de idioma.
 export default function LancheProteico({ lanche }) {
+  const { ingles } = useIdioma()
   const [imagemOk, setImagemOk] = useState(true)
 
   return (
     <article className="rounded-2xl bg-white p-6 shadow-sm shadow-verde/5">
       <div className="flex items-center justify-between">
         <span className="inline-block rounded-full bg-sage-claro px-3 py-1 text-xs font-semibold text-verde">
-          Dia {lanche.dia} · Lanche proteico
+          {ingles ? 'Day' : 'Dia'} {lanche.dia} · {ingles ? 'Protein snack' : 'Lanche proteico'}
         </span>
         <span className="rounded-full bg-verde px-3 py-1 text-xs font-bold text-ouro">
-          {lanche.proteina} proteína
+          {lanche.proteina} {ingles ? 'protein' : 'proteína'}
         </span>
       </div>
 
@@ -37,7 +42,7 @@ export default function LancheProteico({ lanche }) {
 
       {/* Ingredientes */}
       <div className="mt-4 rounded-lg bg-sage-claro/40 p-4">
-        <p className="text-xs font-bold uppercase tracking-wide text-verde/60">🧺 Ingredientes</p>
+        <p className="text-xs font-bold uppercase tracking-wide text-verde/60">🧺 {ingles ? 'Ingredients' : 'Ingredientes'}</p>
         <ul className="mt-2 flex flex-col gap-1.5">
           {lanche.ingredientes.map((item, i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-verde/80">
@@ -51,7 +56,7 @@ export default function LancheProteico({ lanche }) {
       {/* Modo de preparo */}
       <div className="mt-3 rounded-lg bg-ouro-claro p-4">
         <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-verde/60">
-          <Sparkles size={13} /> Como fazer
+          <Sparkles size={13} /> {ingles ? 'How to make it' : 'Como fazer'}
         </p>
         <p className="mt-1 text-sm font-medium leading-relaxed text-verde">{lanche.preparo}</p>
       </div>

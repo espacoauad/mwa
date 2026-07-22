@@ -25,7 +25,7 @@ export default function Alimentacao() {
         ].map((x) => (
           <div key={x.label}>
             <p className="text-lg font-bold text-verde">{x.v.toLocaleString(locale)}</p>
-            <p className="text-[10px] font-medium text-verde/50">
+            <p className="text-[10px] font-medium text-verde/80">
               {x.label} / {x.m.toLocaleString(locale)}
             </p>
           </div>
@@ -37,7 +37,7 @@ export default function Alimentacao() {
         <div className="mt-10 flex flex-col items-center gap-3 text-center">
           <span className="text-4xl">🍽️</span>
           <p className="font-medium text-verde/60">{ingles ? 'No meals logged today.' : 'Nenhuma refeição registrada hoje.'}</p>
-          <p className="text-sm text-verde/40">{ingles ? 'Tap the button below to add your first one!' : 'Toque no botão abaixo para adicionar a primeira!'}</p>
+          <p className="text-sm text-verde/80">{ingles ? 'Tap the button below to add your first one!' : 'Toque no botão abaixo para adicionar a primeira!'}</p>
         </div>
       ) : (
         <ul className="mt-5 flex flex-col gap-3">
@@ -56,7 +56,7 @@ export default function Alimentacao() {
                 </p>
                 <p className="truncate font-semibold text-verde">{r.nome}</p>
                 {r.quantidade && (
-                  <p className="text-[11px] text-verde/45">
+                  <p className="text-[11px] text-verde/80">
                     {r.quantidade} {r.medidaNome ?? r.unidadeBase ?? 'g'}
                   </p>
                 )}
@@ -69,15 +69,22 @@ export default function Alimentacao() {
                   type="button"
                   aria-label={`${ingles ? 'Edit' : 'Editar'} ${r.nome}`}
                   onClick={() => abrirModalRefeicao(r)}
-                  className="rounded-md p-1.5 text-verde/40 transition-colors hover:bg-sage-claro hover:text-verde"
+                  className="flex min-h-11 min-w-11 items-center justify-center rounded-md text-verde/60 transition-colors hover:bg-sage-claro hover:text-verde"
                 >
                   <Pencil size={16} />
                 </button>
                 <button
                   type="button"
                   aria-label={`${ingles ? 'Delete' : 'Excluir'} ${r.nome}`}
-                  onClick={() => removerRefeicao(r.id)}
-                  className="rounded-md p-1.5 text-verde/40 transition-colors hover:bg-red-50 hover:text-red-700"
+                  onClick={() => {
+                    const confirmado = window.confirm(
+                      ingles
+                        ? `Delete "${r.nome}" from today's log?`
+                        : `Excluir "${r.nome}" do registro de hoje?`
+                    )
+                    if (confirmado) removerRefeicao(r.id)
+                  }}
+                  className="flex min-h-11 min-w-11 items-center justify-center rounded-md text-verde/60 transition-colors hover:bg-red-50 hover:text-red-700"
                 >
                   <Trash2 size={16} />
                 </button>

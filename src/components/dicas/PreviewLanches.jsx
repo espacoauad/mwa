@@ -34,6 +34,7 @@ export default function PreviewLanches() {
               key={l.dia}
               type="button"
               onClick={() => setDia(l.dia)}
+              aria-current={ativo ? 'true' : undefined}
               className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 text-sm font-bold transition-all ${
                 ativo ? 'border-verde bg-verde text-white' : 'border-sage/40 bg-white text-verde hover:border-sage'
               }`}
@@ -55,8 +56,9 @@ export default function PreviewLanches() {
             key={op.id}
             type="button"
             onClick={() => setSecao(op.id)}
+            aria-pressed={secao === op.id}
             className={`rounded-md py-2 text-sm font-semibold transition-colors ${
-              secao === op.id ? 'bg-white text-verde shadow-sm' : 'text-verde/50'
+              secao === op.id ? 'bg-white text-verde shadow-sm' : 'text-verde/80'
             }`}
           >
             {op.label}
