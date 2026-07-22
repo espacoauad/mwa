@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { Plus, GlassWater, Flame, Lightbulb, ChevronRight, Newspaper, Share2, PartyPopper, Camera } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { dicaDoDia } from '../../data/dicas.js'
@@ -11,12 +11,16 @@ import GraficoMacros from './GraficoMacros.jsx'
 import SeuProgresso from './SeuProgresso.jsx'
 import CardUpgrade from '../upgrade/CardUpgrade.jsx'
 import Avatar from '../game/Avatar.jsx'
-import LojaAvatar from '../game/LojaAvatar.jsx'
-import ConclusaoDia from '../game/ConclusaoDia.jsx'
-import Conclusao30Dias from '../game/Conclusao30Dias.jsx'
-import Conclusao90Dias from '../game/Conclusao90Dias.jsx'
+import CarregandoFallback from '../ui/CarregandoFallback.jsx'
 import LogoMWA from '../ui/LogoMWA.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
+
+// Telas de gamificação (loja/conclusões) só abrem sob interação — carregadas
+// sob demanda para reduzir o bundle principal.
+const LojaAvatar = lazy(() => import('../game/LojaAvatar.jsx'))
+const ConclusaoDia = lazy(() => import('../game/ConclusaoDia.jsx'))
+const Conclusao30Dias = lazy(() => import('../game/Conclusao30Dias.jsx'))
+const Conclusao90Dias = lazy(() => import('../game/Conclusao90Dias.jsx'))
 
 export default function Hoje({ irParaDicas }) {
   const { ingles, locale } = useIdioma()
@@ -328,16 +332,32 @@ export default function Hoje({ irParaDicas }) {
       </button>
 
       {/* Loja de skins do avatar */}
-      {lojaAberta && <LojaAvatar onFechar={() => setLojaAberta(false)} />}
+      {lojaAberta && (
+        <Suspense fallback={<CarregandoFallback />}>
+          <LojaAvatar onFechar={() => setLojaAberta(false)} />
+        </Suspense>
+      )}
 
       {/* Tela de conclusão do dia (compartilhável) */}
-      {conclusaoDiaAberta && <ConclusaoDia />}
+      {conclusaoDiaAberta && (
+        <Suspense fallback={<CarregandoFallback />}>
+          <ConclusaoDia />
+        </Suspense>
+      )}
 
       {/* Tela de encerramento da Jornada de 30 Dias */}
-      {conclusao30Aberta && <Conclusao30Dias />}
+      {conclusao30Aberta && (
+        <Suspense fallback={<CarregandoFallback />}>
+          <Conclusao30Dias />
+        </Suspense>
+      )}
 
       {/* Tela de encerramento do programa (dia 90) */}
-      {conclusao90Aberta && <Conclusao90Dias />}
+      {conclusao90Aberta && (
+        <Suspense fallback={<CarregandoFallback />}>
+          <Conclusao90Dias />
+        </Suspense>
+      )}
     </div>
   )
 }

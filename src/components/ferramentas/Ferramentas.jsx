@@ -1,22 +1,26 @@
-import { useMemo, useState } from 'react'
+import { lazy, Suspense, useMemo, useState } from 'react'
 import { Calculator, Flame, Trash2, Search, BookOpen } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { ALIMENTOS, macrosDoAlimento } from '../../data/alimentos.js'
 import { TIPOS_EXERCICIO, INTENSIDADES, calcularGastoCalorico } from '../../data/exercicios.js'
 import Botao from '../ui/Botao.jsx'
 import CampoNumero from '../ui/CampoNumero.jsx'
-import JogoColheita from '../game/JogoColheita.jsx'
-import JogoEscolhas from '../game/JogoEscolhas.jsx'
-import JogoTreino from '../game/JogoTreino.jsx'
-import JogoMente from '../game/JogoMente.jsx'
-import JogoRestaurante from '../game/JogoRestaurante.jsx'
+import CarregandoFallback from '../ui/CarregandoFallback.jsx'
 import LenteConsciencia from './LenteConsciencia.jsx'
-import JogoPoda from '../game/JogoPoda.jsx'
-import JogoPlantio from '../game/JogoPlantio.jsx'
 import VersiculoDoDiaModal from './VersiculoDoDiaModal.jsx'
 import ReforcandoConceitos from './ReforcandoConceitos.jsx'
 import { diaLiberacaoJogo, jogoLiberado } from '../../utils/jogosLiberacao.js'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
+
+// Jogos de gamificação só abrem sob interação — carregados sob demanda para
+// reduzir o bundle principal (cada um é um mini-jogo com bastante lógica própria).
+const JogoColheita = lazy(() => import('../game/JogoColheita.jsx'))
+const JogoEscolhas = lazy(() => import('../game/JogoEscolhas.jsx'))
+const JogoTreino = lazy(() => import('../game/JogoTreino.jsx'))
+const JogoMente = lazy(() => import('../game/JogoMente.jsx'))
+const JogoRestaurante = lazy(() => import('../game/JogoRestaurante.jsx'))
+const JogoPoda = lazy(() => import('../game/JogoPoda.jsx'))
+const JogoPlantio = lazy(() => import('../game/JogoPlantio.jsx'))
 
 function CalculadoraMacros() {
   const { ingles } = useIdioma()
@@ -394,13 +398,15 @@ export default function Ferramentas() {
       </section>
 
       {/* Modais dos Jogos */}
-      {jogoAberto && <JogoColheita onFechar={() => setJogoAberto(false)} />}
-      {restauranteAberto && <JogoRestaurante onFechar={() => setRestauranteAberto(false)} />}
-      {escolhasAberto && <JogoEscolhas onFechar={() => setEscolhasAberto(false)} />}
-      {treinoAberto && <JogoTreino onFechar={() => setTreinoAberto(false)} />}
-      {podaAberto && <JogoPoda onFechar={() => setPodaAberto(false)} />}
-      {plantioAberto && <JogoPlantio onFechar={() => setPlantioAberto(false)} />}
-      {menteAberto && <JogoMente onFechar={() => setMenteAberto(false)} />}
+      <Suspense fallback={<CarregandoFallback />}>
+        {jogoAberto && <JogoColheita onFechar={() => setJogoAberto(false)} />}
+        {restauranteAberto && <JogoRestaurante onFechar={() => setRestauranteAberto(false)} />}
+        {escolhasAberto && <JogoEscolhas onFechar={() => setEscolhasAberto(false)} />}
+        {treinoAberto && <JogoTreino onFechar={() => setTreinoAberto(false)} />}
+        {podaAberto && <JogoPoda onFechar={() => setPodaAberto(false)} />}
+        {plantioAberto && <JogoPlantio onFechar={() => setPlantioAberto(false)} />}
+        {menteAberto && <JogoMente onFechar={() => setMenteAberto(false)} />}
+      </Suspense>
       {lenteAberta && <LenteConsciencia onFechar={() => setLenteAberta(false)} />}
       {versiculoAberto && <VersiculoDoDiaModal onFechar={() => setVersiculoAberto(false)} />}
       {conceitosAberto && <ReforcandoConceitos onFechar={() => setConceitosAberto(false)} />}

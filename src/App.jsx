@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { AppProvider, useApp } from './context/AppContext.jsx'
 import { IdiomaProvider, useIdioma } from './context/IdiomaContext.jsx'
 import TelaAuth from './components/auth/TelaAuth.jsx'
-import OnboardingFlow from './components/onboarding/OnboardingFlow.jsx'
+import CarregandoFallback from './components/ui/CarregandoFallback.jsx'
 import TabBar from './components/layout/TabBar.jsx'
 import BotaoWhatsApp from './components/layout/BotaoWhatsApp.jsx'
 import Hoje from './components/hoje/Hoje.jsx'
@@ -21,6 +21,10 @@ import PreviewLanches from './components/dicas/PreviewLanches.jsx'
 import ModoDeRevisao from './components/admin/MododeRevisao.jsx'
 import { ehDiaPesagem } from './utils/pesagensReminder.js'
 import { configurarNotificacoesPesagem } from './utils/notificacoesReminder.js'
+
+// Fluxo de cadastro (onboarding) é pesado e só é usado uma vez por pessoa —
+// carregado sob demanda para reduzir o bundle principal.
+const OnboardingFlow = lazy(() => import('./components/onboarding/OnboardingFlow.jsx'))
 
 const AVISOS_PAGAMENTO = {
   sucesso: { texto: '✅ Pagamento aprovado! Seu acesso será liberado em instantes.', estilo: 'border-sage bg-sage-claro text-verde' },
@@ -79,7 +83,11 @@ function AppInner() {
   }
 
   if (!usuario) {
-    return <OnboardingFlow />
+    return (
+      <Suspense fallback={<CarregandoFallback />}>
+        <OnboardingFlow />
+      </Suspense>
+    )
   }
 
   if (usuario?.role === 'admin') {
