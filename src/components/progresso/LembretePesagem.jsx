@@ -6,14 +6,19 @@ export default function LembretePesagem({ onFechar, onIrPara }) {
   const { ingles } = useIdioma()
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="w-full max-w-sm rounded-3xl bg-creme p-6 shadow-2xl">
+      <div
+        className="w-full max-w-sm rounded-3xl bg-creme p-6 shadow-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="lembrete-pesagem-titulo"
+      >
         {/* Cabeçalho */}
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Weigh-in Day!' : 'Dia de Pesagem!'} 🎯</h2>
+          <h2 id="lembrete-pesagem-titulo" className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Weigh-in Day!' : 'Dia de Pesagem!'} 🎯</h2>
           <button
             type="button"
             onClick={onFechar}
-            className="rounded-full p-1 hover:bg-verde/10"
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-full hover:bg-verde/10"
             aria-label={ingles ? 'Close' : 'Fechar'}
           >
             <X size={20} className="text-verde/60" />
@@ -38,7 +43,7 @@ export default function LembretePesagem({ onFechar, onIrPara }) {
           <button
             type="button"
             onClick={onFechar}
-            className="flex-1 rounded-xl border-2 border-verde/20 px-4 py-2.5 text-sm font-semibold text-verde hover:bg-verde/5"
+            className="min-h-11 flex-1 rounded-xl border-2 border-verde/20 px-4 py-2.5 text-sm font-semibold text-verde hover:bg-verde/5"
           >
             {ingles ? 'Later' : 'Depois'}
           </button>
@@ -48,9 +53,9 @@ export default function LembretePesagem({ onFechar, onIrPara }) {
               onIrPara('progresso')
               onFechar()
             }}
-            className="flex-1 rounded-xl bg-sage px-4 py-2.5 text-sm font-semibold text-white hover:bg-sage/90"
+            className="min-h-11 flex-1 rounded-xl bg-sage px-4 py-2.5 text-sm font-semibold text-white hover:bg-sage/90"
           >
-            {ingles ? 'Go to weigh-in' : 'Ir para Pesagem'}
+            {ingles ? 'Go to Progress' : 'Ir para Progresso'}
           </button>
         </div>
       </div>

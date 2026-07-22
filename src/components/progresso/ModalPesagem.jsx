@@ -45,10 +45,16 @@ export default function ModalPesagem({ semana, onFechar }) {
         peito: Number(medidas.peito) || null,
       },
     })
-    // 🎉 Dispara confete de celebração
-    celebrarGrande()
-    // Fecha o modal após a animação
-    setTimeout(() => onFechar(), 600)
+    const prefereMenosMovimento = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    if (prefereMenosMovimento) {
+      // Sem confete: fecha o modal logo em seguida, sem esperar a animação
+      onFechar()
+    } else {
+      // 🎉 Dispara confete de celebração
+      celebrarGrande()
+      // Fecha o modal após a animação
+      setTimeout(() => onFechar(), 600)
+    }
   }
 
   return (
@@ -56,10 +62,18 @@ export default function ModalPesagem({ semana, onFechar }) {
       <div
         className="max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-6"
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-pesagem-titulo"
       >
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Weigh-in — week' : 'Pesagem — semana'} {semana}</h2>
-          <button type="button" aria-label={ingles ? 'Close' : 'Fechar'} onClick={onFechar} className="rounded-full bg-white p-2 text-verde/60">
+          <h2 id="modal-pesagem-titulo" className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Weigh-in — week' : 'Pesagem — semana'} {semana}</h2>
+          <button
+            type="button"
+            aria-label={ingles ? 'Close' : 'Fechar'}
+            onClick={onFechar}
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white text-verde/60"
+          >
             <X size={18} />
           </button>
         </div>
@@ -70,7 +84,7 @@ export default function ModalPesagem({ semana, onFechar }) {
           <span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Progress photos' : 'Fotos de progresso'}</span>
           <div className="grid grid-cols-4 gap-2">
             {FOTOS.map((f) => (
-              <label key={f.id} className="cursor-pointer text-center">
+              <label key={f.id} className="cursor-pointer rounded-lg text-center focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2">
                 {fotos[f.id] ? (
                   <img src={fotos[f.id]} alt={ingles ? f.en : f.pt} className="aspect-[3/4] w-full rounded-lg object-cover" />
                 ) : (
@@ -79,7 +93,13 @@ export default function ModalPesagem({ semana, onFechar }) {
                   </span>
                 )}
                 <span className="mt-1 block text-[10px] font-medium text-verde/60">{ingles ? f.en : f.pt}</span>
-                <input type="file" accept="image/*" capture="environment" onChange={(e) => escolherFoto(f.id, e)} className="hidden" />
+                <input
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  onChange={(e) => escolherFoto(f.id, e)}
+                  className="sr-only"
+                />
               </label>
             ))}
           </div>

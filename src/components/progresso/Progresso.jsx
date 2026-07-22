@@ -45,7 +45,7 @@ export default function Progresso() {
               {c.icone && <IconeVariacao size={16} className={variacao < 0 ? 'text-sage' : 'text-ouro'} />}
               {c.valor}
             </p>
-            <p className="text-[10px] font-medium text-verde/50">{c.label}</p>
+            <p className="text-[10px] font-medium text-verde/80">{c.label}</p>
           </div>
         ))}
       </div>
@@ -103,7 +103,7 @@ export default function Progresso() {
                     ))}
                   </div>
                 ) : (
-                  <p className="mt-2 flex items-center gap-1 text-xs text-verde/40">
+                  <p className="mt-2 flex items-center gap-1 text-xs text-verde/80">
                     <Camera size={12} /> {ingles ? 'No photos this week' : 'Sem fotos nesta semana'}
                   </p>
                 )}

@@ -27,7 +27,7 @@ export default function GraficoPeso({ pontos }) {
       {linhas.map((v) => (
         <g key={v}>
           <line x1={M.left} x2={W - M.right} y1={escalaY(v)} y2={escalaY(v)} stroke="#E8E4DC" strokeWidth="1" />
-          <text x={M.left - 6} y={escalaY(v) + 3} textAnchor="end" fontSize="9" fill="#34452880">
+          <text x={M.left - 6} y={escalaY(v) + 3} textAnchor="end" fontSize="9" fill="#344528CC">
             {v}
           </text>
         </g>
@@ -52,7 +52,7 @@ export default function GraficoPeso({ pontos }) {
           >
             {p.peso.toLocaleString(locale)}
           </text>
-          <text x={escalaX(i)} y={H - 8} textAnchor="middle" fontSize="9" fill="#34452880">
+          <text x={escalaX(i)} y={H - 8} textAnchor="middle" fontSize="9" fill="#344528CC">
             {p.rotulo}
           </text>
         </g>
