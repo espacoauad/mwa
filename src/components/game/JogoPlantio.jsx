@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, Play, RotateCcw, Zap, Award } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
@@ -252,6 +252,21 @@ export default function JogoPlantio({ onFechar }) {
   const [progressoPlanta, setProgressoPlanta] = useState({}) // {pilarId: estagio}
   const [premioDado, setPremioDado] = useState(false)
   const [feedback, setFeedback] = useState(null)
+  const dialogRef = useRef(null)
+
+  // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
+  useEffect(() => {
+    if (!onFechar) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') onFechar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [onFechar])
+
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   // Inicializar progresso das plantas
   useEffect(() => {
@@ -323,12 +338,17 @@ export default function JogoPlantio({ onFechar }) {
   }, [fase])
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-sage/70 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-creme p-6">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-sage/70 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="jogo-plantio-titulo"
+    >
+      <div ref={dialogRef} tabIndex={-1} className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-creme p-6 outline-none">
         {/* Cabeçalho */}
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-2xl font-semibold italic text-sage">
+            <h2 id="jogo-plantio-titulo" className="font-serif text-2xl font-semibold italic text-sage">
               {ingles ? 'Planting Game' : 'Jogo do Plantio'} 🌱
             </h2>
             <p className="text-xs text-sage/60">
@@ -338,7 +358,8 @@ export default function JogoPlantio({ onFechar }) {
           <button
             type="button"
             onClick={onFechar}
-            className="rounded-full bg-sage/10 p-2 text-sage hover:bg-sage/20"
+            aria-label={ingles ? 'Close' : 'Fechar'}
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-sage/10 text-sage hover:bg-sage/20"
           >
             <X size={18} />
           </button>
@@ -380,9 +401,16 @@ export default function JogoPlantio({ onFechar }) {
                 <span className="font-bold text-sage">{desafiocurrentIndex + 1}/16 desafios</span>
                 <span className="text-sage/60">{acertos} acertos</span>
               </div>
-              <div className="w-full h-2 bg-sage/20 rounded-full overflow-hidden">
+              <div
+                className="w-full h-2 bg-sage/20 rounded-full overflow-hidden"
+                role="progressbar"
+                aria-valuenow={desafiocurrentIndex + 1}
+                aria-valuemin={1}
+                aria-valuemax={16}
+                aria-label={ingles ? 'Challenge progress' : 'Progresso dos desafios'}
+              >
                 <div
-                  className="h-full bg-sage transition-all duration-500"
+                  className="h-full bg-sage transition-all duration-500 motion-reduce:transition-none"
                   style={{ width: `${((desafiocurrentIndex + 1) / 16) * 100}%` }}
                 />
               </div>
@@ -419,6 +447,8 @@ export default function JogoPlantio({ onFechar }) {
               {/* Feedback */}
               {feedback && (
                 <div
+                  role="status"
+                  aria-live="polite"
                   className={`mt-4 rounded-lg p-3 text-center text-sm font-bold ${
                     feedback.bom ? 'bg-sage/10 text-sage' : 'bg-red-100 text-red-600'
                   }`}
@@ -442,7 +472,7 @@ export default function JogoPlantio({ onFechar }) {
 
         {/* Tela final */}
         {fase === 'fim' && (
-          <div className="rounded-2xl bg-sage/85 p-8 text-center text-white">
+          <div className="rounded-2xl bg-sage/85 p-8 text-center text-white" role="status" aria-live="polite">
             <p className="text-5xl mb-4">{acertos === 16 ? '🏆' : '🌱'}</p>
             <p className="font-serif text-2xl font-semibold italic mb-2">
               {acertos === 16

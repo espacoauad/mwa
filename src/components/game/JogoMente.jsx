@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, Sparkles, RotateCcw } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
@@ -23,6 +23,21 @@ export default function JogoMente({ onFechar }) {
   const [reveladas, setReveladas] = useState([])
   const [premioDado, setPremioDado] = useState(false)
   const [processando, setProcessando] = useState(false)
+  const dialogRef = useRef(null)
+
+  // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
+  useEffect(() => {
+    if (!onFechar) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') onFechar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [onFechar])
+
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   const completo = reveladas.length === AFIRMACOES.length
 
@@ -45,15 +60,25 @@ export default function JogoMente({ onFechar }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-sm rounded-3xl bg-creme p-5">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="jogo-mente-titulo"
+    >
+      <div ref={dialogRef} tabIndex={-1} className="w-full max-w-sm rounded-3xl bg-creme p-5 outline-none">
         {/* Cabeçalho */}
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Affirmation Garden' : 'Jardim de Afirmações'} 🌷</h2>
+            <h2 id="jogo-mente-titulo" className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Affirmation Garden' : 'Jardim de Afirmações'} 🌷</h2>
             <p className="text-xs text-verde/60">{ingles ? 'Tap each seed and harvest a message for yourself.' : 'Toque em cada semente e colha uma mensagem para você.'}</p>
           </div>
-          <button type="button" onClick={onFechar} className="rounded-full bg-verde/10 p-2 text-verde hover:bg-verde/20">
+          <button
+            type="button"
+            onClick={onFechar}
+            aria-label={ingles ? 'Close' : 'Fechar'}
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-verde/10 text-verde hover:bg-verde/20"
+          >
             <X size={18} />
           </button>
         </div>
@@ -99,7 +124,11 @@ export default function JogoMente({ onFechar }) {
 
         {/* Conclusão */}
         {completo && (
-          <div className="mt-4 rounded-2xl bg-gradient-to-r from-sage-claro to-ouro-claro p-4 text-center">
+          <div
+            className="mt-4 rounded-2xl bg-gradient-to-r from-sage-claro to-ouro-claro p-4 text-center"
+            role="status"
+            aria-live="polite"
+          >
             <Sparkles size={22} className="mx-auto text-verde" />
             <p className="mt-1 font-serif text-lg font-semibold italic text-verde">{ingles ? 'Garden completed!' : 'Jardim completo!'} 🌸</p>
             {premioDado && <p className="mt-1 text-sm font-bold text-verde">+15 🌱 {ingles ? 'earned!' : 'ganhas!'}</p>}

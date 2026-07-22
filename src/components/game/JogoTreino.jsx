@@ -22,6 +22,21 @@ export default function JogoTreino({ onFechar }) {
   const [tempoRestante, setTempoRestante] = useState(DURACAO_JOGO)
   const [premioDado, setPremioDado] = useState(false)
   const ativaRef = useRef(null)
+  const dialogRef = useRef(null)
+
+  // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
+  useEffect(() => {
+    if (!onFechar) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') onFechar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [onFechar])
+
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   function comecar() {
     setPontos(0)
@@ -76,15 +91,25 @@ export default function JogoTreino({ onFechar }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-sm rounded-3xl bg-creme p-5">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="jogo-treino-titulo"
+    >
+      <div ref={dialogRef} tabIndex={-1} className="w-full max-w-sm rounded-3xl bg-creme p-5 outline-none">
         {/* Cabeçalho */}
         <div className="mb-3 flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Workout Game' : 'Jogo do Treino'} 💪</h2>
+            <h2 id="jogo-treino-titulo" className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Workout Game' : 'Jogo do Treino'} 💪</h2>
             <p className="text-xs text-verde/60">Toque no exercício que acender. {META_PONTOS}+ pontos = +10 🌱</p>
           </div>
-          <button type="button" onClick={onFechar} className="rounded-full bg-verde/10 p-2 text-verde hover:bg-verde/20">
+          <button
+            type="button"
+            onClick={onFechar}
+            aria-label={ingles ? 'Close' : 'Fechar'}
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-verde/10 text-verde hover:bg-verde/20"
+          >
             <X size={18} />
           </button>
         </div>
@@ -134,7 +159,11 @@ export default function JogoTreino({ onFechar }) {
 
           {/* Fim de jogo */}
           {fase === 'fim' && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-verde/85 text-center text-white backdrop-blur-sm">
+            <div
+              className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-verde/85 text-center text-white backdrop-blur-sm"
+              role="status"
+              aria-live="polite"
+            >
               <p className="text-4xl">{pontos >= META_PONTOS ? '🏆' : '💪'}</p>
               <p className="mt-2 font-serif text-xl font-semibold italic">
                 {pontos >= META_PONTOS ? (ingles ? 'Workout complete!' : 'Treino completo!') : (ingles ? 'Good workout!' : 'Bom treino!')}
@@ -152,7 +181,7 @@ export default function JogoTreino({ onFechar }) {
           )}
         </div>
 
-        <p className="mt-3 text-center text-[11px] text-verde/50">
+        <p className="mt-3 text-center text-[11px] text-verde/70">
           Cada acerto vale {PONTOS_POR_ACERTO} pontos. Fique de olho nos 9 quadrados!
         </p>
       </div>

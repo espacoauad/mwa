@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { X, Repeat, TrendingDown, Sparkles, Flame, Lock, Award } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { supabase } from '../../lib/supabase.js'
@@ -21,6 +21,20 @@ export default function Conclusao90Dias() {
   const [diasRegistrados, setDiasRegistrados] = useState(0)
   const [reveladas, setReveladas] = useState(() => new Set())
   const [certificadoAberto, setCertificadoAberto] = useState(false)
+  const dialogRef = useRef(null)
+
+  // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
+  useEffect(() => {
+    function aoTeclar(e) {
+      if (e.key === 'Escape') fecharConclusao90()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [fecharConclusao90])
+
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   useEffect(() => {
     const userId = sessao?.user?.id
@@ -65,6 +79,9 @@ export default function Conclusao90Dias() {
   }, [sessao, metas?.tdee])
 
   useEffect(() => {
+    // a11y: respeita prefers-reduced-motion — sem chuva de confete para quem pediu menos movimento
+    const prefereMenosMovimento = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    if (prefereMenosMovimento) return
     setTimeout(() => celebrarVitoria(), 300)
     setTimeout(() => celebrarFogos(), 700)
   }, [celebrarVitoria, celebrarFogos])
@@ -137,7 +154,14 @@ export default function Conclusao90Dias() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-gradient-to-b from-[#12190c] via-verde-escuro to-verde">
+    <div
+      ref={dialogRef}
+      tabIndex={-1}
+      className="fixed inset-0 z-50 overflow-y-auto bg-gradient-to-b from-[#12190c] via-verde-escuro to-verde outline-none"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="conclusao90-titulo"
+    >
       {/* Céu estrelado */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         {estrelas.map((e, i) => (
@@ -159,7 +183,7 @@ export default function Conclusao90Dias() {
       <button
         type="button"
         onClick={fecharConclusao90}
-        className="fixed right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
+        className="fixed right-4 top-4 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
         aria-label="Fechar"
       >
         <X size={20} />
@@ -168,12 +192,12 @@ export default function Conclusao90Dias() {
       <div className="relative z-10 flex flex-col items-center gap-6 p-4 pb-10">
         <div className="w-full max-w-sm pt-10 text-center">
           <div className="mb-4 flex items-center justify-center gap-2">
-            <span className="text-3xl animate-bounce">👑</span>
+            <span className="text-3xl animate-bounce motion-reduce:animate-none">👑</span>
             <LogoMWA variante="simbolo" tema="claro" className="h-6 w-6" />
-            <span className="text-3xl animate-bounce" style={{ animationDelay: '0.2s' }}>👑</span>
+            <span className="text-3xl animate-bounce motion-reduce:animate-none" style={{ animationDelay: '0.2s' }}>👑</span>
           </div>
           <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.3em] text-ouro/70">My Wellness Approach</p>
-          <p className="font-serif text-6xl font-black italic text-ouro drop-shadow-lg">90 DIAS</p>
+          <p id="conclusao90-titulo" className="font-serif text-6xl font-black italic text-ouro drop-shadow-lg">90 DIAS</p>
           <p className="mt-3 text-5xl">🏆✨👑</p>
           <p className="mt-5 text-xl font-black text-white">
             {primeiroNome ? `${primeiroNome},` : 'Você'}

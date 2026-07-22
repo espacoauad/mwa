@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, Check, Lock } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { CATALOGO, RECOMPENSAS } from '../../data/skins.js'
@@ -16,6 +16,21 @@ export default function LojaAvatar({ onFechar }) {
   const { game, comprarSkin, equiparSkin } = useApp()
   const [categoria, setCategoria] = useState('personagem')
   const [aviso, setAviso] = useState(null)
+  const dialogRef = useRef(null)
+
+  // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
+  useEffect(() => {
+    if (!onFechar) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') onFechar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [onFechar])
+
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   if (!game) return null
 
@@ -40,13 +55,27 @@ export default function LojaAvatar({ onFechar }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-verde/60 backdrop-blur-sm sm:items-center">
-      <div className="flex max-h-[90vh] w-full max-w-md flex-col rounded-t-3xl bg-creme sm:rounded-3xl">
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center bg-verde/60 backdrop-blur-sm sm:items-center"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="loja-avatar-titulo"
+    >
+      <div
+        ref={dialogRef}
+        tabIndex={-1}
+        className="flex max-h-[90vh] w-full max-w-md flex-col rounded-t-3xl bg-creme outline-none sm:rounded-3xl"
+      >
         {/* Cabeçalho com avatar e saldo */}
         <div className="rounded-t-3xl bg-verde p-5 text-white sm:rounded-t-3xl">
           <div className="flex items-start justify-between">
-            <h2 className="font-serif text-xl font-semibold italic">{ingles ? 'Your avatar' : 'Seu avatar'}</h2>
-            <button type="button" onClick={onFechar} className="rounded-full bg-white/15 p-1.5 hover:bg-white/25">
+            <h2 id="loja-avatar-titulo" className="font-serif text-xl font-semibold italic">{ingles ? 'Your avatar' : 'Seu avatar'}</h2>
+            <button
+              type="button"
+              onClick={onFechar}
+              aria-label={ingles ? 'Close' : 'Fechar'}
+              className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/15 hover:bg-white/25"
+            >
               <X size={18} />
             </button>
           </div>
@@ -66,7 +95,7 @@ export default function LojaAvatar({ onFechar }) {
         </div>
 
         {aviso && (
-          <p className="bg-ouro-claro px-5 py-2.5 text-center text-sm font-semibold text-verde">{aviso}</p>
+          <p role="status" aria-live="polite" className="bg-ouro-claro px-5 py-2.5 text-center text-sm font-semibold text-verde">{aviso}</p>
         )}
 
         {/* Abas de categoria */}
@@ -77,7 +106,7 @@ export default function LojaAvatar({ onFechar }) {
               type="button"
               onClick={() => setCategoria(c.id)}
               className={`rounded-md py-2 text-sm font-semibold transition-colors ${
-                categoria === c.id ? 'bg-white text-verde shadow-sm' : 'text-verde/50'
+                categoria === c.id ? 'bg-white text-verde shadow-sm' : 'text-verde/80'
               }`}
             >
               {ingles ? c.en : c.pt}
@@ -132,7 +161,7 @@ export default function LojaAvatar({ onFechar }) {
                 ) : (
                   <span
                     className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                      podeComprar ? 'bg-ouro-claro text-verde' : 'bg-cinza text-verde/50'
+                      podeComprar ? 'bg-ouro-claro text-verde' : 'bg-cinza text-verde/80'
                     }`}
                   >
                     {!podeComprar && <Lock size={9} />}
@@ -146,7 +175,7 @@ export default function LojaAvatar({ onFechar }) {
 
         {/* Como ganhar sementes */}
         <div className="border-t border-cinza bg-white p-4">
-          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-verde/50">{ingles ? 'How to earn seeds' : 'Como ganhar sementes'}</p>
+          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-verde/80">{ingles ? 'How to earn seeds' : 'Como ganhar sementes'}</p>
           <div className="grid grid-cols-2 gap-x-3 gap-y-1">
             {Object.entries(RECOMPENSAS)
               .filter(([tipo]) => tipo !== 'boas_vindas')

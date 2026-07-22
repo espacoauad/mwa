@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, Share2, Download, Flame } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import Avatar from './Avatar.jsx'
@@ -26,6 +26,20 @@ export default function ConclusaoDia() {
   const [compartilhando, setCompartilhando] = useState(false)
   const [aviso, setAviso] = useState(null)
   const cardRef = useRef(null)
+  const dialogRef = useRef(null)
+
+  // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
+  useEffect(() => {
+    function aoTeclar(e) {
+      if (e.key === 'Escape') fecharConclusaoDia()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [fecharConclusaoDia])
+
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   const primeiroNome = usuario?.nome?.trim().split(' ')[0] ?? ''
   const mensagem = MENSAGENS[diaAtual % MENSAGENS.length]
@@ -79,19 +93,29 @@ export default function ConclusaoDia() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 overflow-y-auto bg-verde-escuro/80 p-4 backdrop-blur-sm">
+    <div
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 overflow-y-auto bg-verde-escuro/80 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="conclusao-dia-titulo"
+    >
       <button
         type="button"
         onClick={fecharConclusaoDia}
-        className="absolute right-4 top-4 rounded-full bg-white/15 p-2 text-white hover:bg-white/25"
+        aria-label="Fechar"
+        className="absolute right-4 top-4 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"
       >
         <X size={20} />
       </button>
 
       {/* Cartão compartilhável */}
       <div
-        ref={cardRef}
-        className="relative w-full max-w-sm shrink-0 overflow-hidden rounded-[2rem] px-8 pb-10 pt-8 text-center"
+        ref={(el) => {
+          cardRef.current = el
+          dialogRef.current = el
+        }}
+        tabIndex={-1}
+        className="relative w-full max-w-sm shrink-0 overflow-hidden rounded-[2rem] px-8 pb-10 pt-8 text-center outline-none"
         style={{ background: 'linear-gradient(160deg, #344528 0%, #4A5F3A 45%, #879B55 100%)' }}
       >
         {/* Decoração */}
@@ -103,7 +127,7 @@ export default function ConclusaoDia() {
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/50">My Wellness Approach</p>
         </div>
 
-        <p className="relative mt-4 font-serif text-2xl font-bold italic text-ouro">
+        <p id="conclusao-dia-titulo" className="relative mt-4 font-serif text-2xl font-bold italic text-ouro">
           Dia {diaAtual} concluído! 🎉
         </p>
 
@@ -133,7 +157,7 @@ export default function ConclusaoDia() {
         <p className="relative mx-auto mt-1 max-w-[240px] text-sm leading-relaxed text-white/80">{mensagem}</p>
 
         {/* Sementes ganhas hoje */}
-        <div className="relative mt-6 rounded-2xl bg-white/10 p-4">
+        <div className="relative mt-6 rounded-2xl bg-white/10 p-4" role="status" aria-live="polite">
           <p className="text-3xl font-bold text-ouro">+{tarefasHoje.sementesHoje} 🌱</p>
           <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-white/60">
             sementes conquistadas hoje
@@ -168,7 +192,7 @@ export default function ConclusaoDia() {
       {/* Ações (fora do cartão — não entram na imagem) */}
       <div className="flex w-full max-w-sm shrink-0 flex-col gap-2.5">
         {aviso && (
-          <p className="rounded-lg bg-white/90 p-3 text-center text-sm font-semibold text-verde">{aviso}</p>
+          <p role="status" aria-live="polite" className="rounded-lg bg-white/90 p-3 text-center text-sm font-semibold text-verde">{aviso}</p>
         )}
         <button
           type="button"

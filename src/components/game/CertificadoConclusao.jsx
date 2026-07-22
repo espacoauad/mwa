@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, Share2, Download } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import LogoMWA from '../ui/LogoMWA.jsx'
@@ -12,8 +12,23 @@ import LogoMWA from '../ui/LogoMWA.jsx'
 export default function CertificadoConclusao({ dias = 30, titulo, onFechar }) {
   const { usuario } = useApp()
   const cardRef = useRef(null)
+  const dialogRef = useRef(null)
   const [gerando, setGerando] = useState(false)
   const [aviso, setAviso] = useState(null)
+
+  // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
+  useEffect(() => {
+    if (!onFechar) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') onFechar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [onFechar])
+
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   const nome = usuario?.nome?.trim() || 'Aluna MWA'
   const tituloPrograma = titulo || (dias === 90 ? 'Programa de 90 Dias' : 'Jornada de 30 Dias')
@@ -66,11 +81,16 @@ export default function CertificadoConclusao({ dias = 30, titulo, onFechar }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-4 overflow-y-auto bg-verde-escuro/85 p-4 backdrop-blur-sm">
+    <div
+      className="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-4 overflow-y-auto bg-verde-escuro/85 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="certificado-titulo"
+    >
       <button
         type="button"
         onClick={onFechar}
-        className="fixed right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
+        className="fixed right-4 top-4 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
         aria-label="Fechar"
       >
         <X size={20} />
@@ -78,8 +98,12 @@ export default function CertificadoConclusao({ dias = 30, titulo, onFechar }) {
 
       {/* Cartão do certificado (capturado como imagem) */}
       <div
-        ref={cardRef}
-        className="relative w-full max-w-[20rem] overflow-hidden rounded-[1.75rem] px-6 py-8 text-center"
+        ref={(el) => {
+          cardRef.current = el
+          dialogRef.current = el
+        }}
+        tabIndex={-1}
+        className="relative w-full max-w-[20rem] overflow-hidden rounded-[1.75rem] px-6 py-8 text-center outline-none"
         style={{ background: 'linear-gradient(165deg, #f8f4ec 0%, #f5efe2 55%, #efe4d0 100%)' }}
       >
         {/* Moldura dourada ornamental */}
@@ -94,7 +118,7 @@ export default function CertificadoConclusao({ dias = 30, titulo, onFechar }) {
             My Wellness Approach
           </p>
 
-          <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.3em] text-ouro">
+          <p id="certificado-titulo" className="mt-4 text-[10px] font-bold uppercase tracking-[0.3em] text-ouro">
             Certificado de Conclusão
           </p>
 
@@ -163,7 +187,11 @@ export default function CertificadoConclusao({ dias = 30, titulo, onFechar }) {
           {navigator.canShare ? <Share2 size={18} /> : <Download size={18} />}
           {gerando ? 'Gerando...' : 'Compartilhar meu certificado'}
         </button>
-        {aviso && <p className="text-center text-xs text-white/90">{aviso}</p>}
+        {aviso && (
+          <p role="status" aria-live="polite" className="text-center text-xs text-white/90">
+            {aviso}
+          </p>
+        )}
         <p className="text-center text-[11px] text-white/60">Mostre sua conquista para o mundo ✨</p>
       </div>
     </div>

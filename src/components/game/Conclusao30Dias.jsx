@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { X, Repeat, TrendingDown, Sparkles, Lock, Flame, Award } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { supabase } from '../../lib/supabase.js'
@@ -19,6 +19,20 @@ export default function Conclusao30Dias() {
   const [totalRefeicoes, setTotalRefeicoes] = useState(0)
   const [reveladas, setReveladas] = useState(() => new Set())
   const [certificadoAberto, setCertificadoAberto] = useState(false)
+  const dialogRef = useRef(null)
+
+  // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
+  useEffect(() => {
+    function aoTeclar(e) {
+      if (e.key === 'Escape') fecharConclusao30()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [fecharConclusao30])
+
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   useEffect(() => {
     const userId = sessao?.user?.id
@@ -37,6 +51,9 @@ export default function Conclusao30Dias() {
   }, [sessao])
 
   useEffect(() => {
+    // a11y: respeita prefers-reduced-motion — sem chuva de confete para quem pediu menos movimento
+    const prefereMenosMovimento = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    if (prefereMenosMovimento) return
     setTimeout(() => celebrarVitoria(), 300)
     setTimeout(() => celebrarFogos(), 700)
   }, [celebrarVitoria, celebrarFogos])
@@ -127,7 +144,14 @@ export default function Conclusao30Dias() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-gradient-to-b from-[#faf6f0] via-[#f5ede0] to-[#f0e5d3]">
+    <div
+      ref={dialogRef}
+      tabIndex={-1}
+      className="fixed inset-0 z-50 overflow-y-auto bg-gradient-to-b from-[#faf6f0] via-[#f5ede0] to-[#f0e5d3] outline-none"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="conclusao30-titulo"
+    >
       {/* Céu estrelado */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         {estrelas.map((e, i) => (
@@ -149,7 +173,7 @@ export default function Conclusao30Dias() {
       <button
         type="button"
         onClick={fecharConclusao30}
-        className="fixed right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-verde-escuro hover:bg-white/20"
+        className="fixed right-4 top-4 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/10 text-verde-escuro hover:bg-white/20"
         aria-label="Fechar"
       >
         <X size={20} />
@@ -163,7 +187,7 @@ export default function Conclusao30Dias() {
             <span className="text-2xl">✨</span>
           </div>
           <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.3em] text-verde-escuro/70">My Wellness Approach</p>
-          <p className="font-serif text-6xl font-bold italic text-ouro drop-shadow-lg">30 DIAS</p>
+          <p id="conclusao30-titulo" className="font-serif text-6xl font-bold italic text-ouro drop-shadow-lg">30 DIAS</p>
           <p className="mt-2 text-4xl">🎉🎊✨</p>
           <p className="mt-4 text-lg font-bold text-verde-escuro">
             {primeiroNome ? `${primeiroNome},` : 'Você'}

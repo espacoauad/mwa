@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, RotateCcw } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
@@ -79,6 +79,21 @@ export default function JogoColheita({ onFechar }) {
   const [processando, setProcessando] = useState(false)
   const [fim, setFim] = useState(false)
   const [premioDado, setPremioDado] = useState(false)
+  const dialogRef = useRef(null)
+
+  // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
+  useEffect(() => {
+    if (!onFechar) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') onFechar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [onFechar])
+
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   const saoVizinhas = (a, b) => {
     const dr = Math.abs(Math.floor(a / N) - Math.floor(b / N))
@@ -160,15 +175,25 @@ export default function JogoColheita({ onFechar }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-sm rounded-3xl bg-creme p-5">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="jogo-colheita-titulo"
+    >
+      <div ref={dialogRef} tabIndex={-1} className="w-full max-w-sm rounded-3xl bg-creme p-5 outline-none">
         {/* Cabeçalho */}
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Harvest Game' : 'Jogo da Colheita'} 🍓</h2>
+            <h2 id="jogo-colheita-titulo" className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Harvest Game' : 'Jogo da Colheita'} 🍓</h2>
             <p className="text-xs text-verde/60">Combine 3 frutas iguais. {META_PONTOS}+ pontos = +10 🌱</p>
           </div>
-          <button type="button" onClick={onFechar} className="rounded-full bg-verde/10 p-2 text-verde hover:bg-verde/20">
+          <button
+            type="button"
+            onClick={onFechar}
+            aria-label={ingles ? 'Close' : 'Fechar'}
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-verde/10 text-verde hover:bg-verde/20"
+          >
             <X size={18} />
           </button>
         </div>
@@ -176,11 +201,11 @@ export default function JogoColheita({ onFechar }) {
         {/* Placar */}
         <div className="mb-4 grid grid-cols-2 gap-3">
           <div className="rounded-xl bg-white p-3 text-center">
-            <p className="text-[10px] font-bold uppercase tracking-wide text-verde/50">{ingles ? 'Points' : 'Pontos'}</p>
+            <p className="text-[10px] font-bold uppercase tracking-wide text-verde/80">{ingles ? 'Points' : 'Pontos'}</p>
             <p className={`text-2xl font-bold ${pontos >= META_PONTOS ? 'text-sage' : 'text-verde'}`}>{pontos}</p>
           </div>
           <div className="rounded-xl bg-white p-3 text-center">
-            <p className="text-[10px] font-bold uppercase tracking-wide text-verde/50">{ingles ? 'Moves' : 'Jogadas'}</p>
+            <p className="text-[10px] font-bold uppercase tracking-wide text-verde/80">{ingles ? 'Moves' : 'Jogadas'}</p>
             <p className={`text-2xl font-bold ${jogadas <= 5 ? 'text-red-500' : 'text-verde'}`}>{jogadas}</p>
           </div>
         </div>
@@ -193,7 +218,7 @@ export default function JogoColheita({ onFechar }) {
                 key={i}
                 type="button"
                 onClick={() => tocar(i)}
-                className={`flex aspect-square items-center justify-center rounded-lg text-2xl transition-all duration-200 ${
+                className={`flex aspect-square items-center justify-center rounded-lg text-2xl transition-all duration-200 motion-reduce:transition-none ${
                   selecionada === i
                     ? 'scale-110 bg-ouro-claro ring-2 ring-ouro'
                     : sumindo.has(i)
@@ -208,7 +233,11 @@ export default function JogoColheita({ onFechar }) {
 
           {/* Fim de jogo */}
           {fim && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-verde/85 backdrop-blur-sm">
+            <div
+              className="absolute inset-0 flex items-center justify-center rounded-2xl bg-verde/85 backdrop-blur-sm"
+              role="status"
+              aria-live="polite"
+            >
               <div className="p-6 text-center text-white">
                 <p className="text-4xl">{pontos >= META_PONTOS ? '🏆' : '🌱'}</p>
                 <p className="mt-2 font-serif text-xl font-semibold italic">
@@ -231,7 +260,7 @@ export default function JogoColheita({ onFechar }) {
           )}
         </div>
 
-        <p className="mt-3 text-center text-[11px] text-verde/50">
+        <p className="mt-3 text-center text-[11px] text-verde/70">
           Toque numa fruta e depois na vizinha para trocá-las de lugar.
         </p>
       </div>

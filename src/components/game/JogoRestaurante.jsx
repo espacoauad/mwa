@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, Play, RotateCcw, Star } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import Avatar from './Avatar.jsx'
@@ -117,6 +117,21 @@ export default function JogoRestaurante({ onFechar }) {
   const [prato, setPrato] = useState([])
   const [pontos, setPontos] = useState(0)
   const [premioDado, setPremioDado] = useState(false)
+  const dialogRef = useRef(null)
+
+  // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
+  useEffect(() => {
+    if (!onFechar) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') onFechar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [onFechar])
+
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   function comecar() {
     setClientes(sortearClientes())
@@ -171,17 +186,27 @@ export default function JogoRestaurante({ onFechar }) {
   const estrelas = estrelasDoPrato(acertos)
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-sm rounded-3xl bg-creme p-5">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="jogo-restaurante-titulo"
+    >
+      <div ref={dialogRef} tabIndex={-1} className="w-full max-w-sm rounded-3xl bg-creme p-5 outline-none">
         {/* Cabeçalho */}
         <div className="mb-3 flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Healthy Restaurant' : 'Restaurante Saudável'} 🍽️</h2>
+            <h2 id="jogo-restaurante-titulo" className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Healthy Restaurant' : 'Restaurante Saudável'} 🍽️</h2>
             <p className="text-xs text-verde/60">
               Monte pratos saudáveis para os clientes. {META_PONTOS}+ pontos = +10 🌱
             </p>
           </div>
-          <button type="button" onClick={onFechar} className="rounded-full bg-verde/10 p-2 text-verde hover:bg-verde/20">
+          <button
+            type="button"
+            onClick={onFechar}
+            aria-label={ingles ? 'Close' : 'Fechar'}
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-verde/10 text-verde hover:bg-verde/20"
+          >
             <X size={18} />
           </button>
         </div>
@@ -264,7 +289,11 @@ export default function JogoRestaurante({ onFechar }) {
 
           {/* Reação do cliente */}
           {fase === 'reacao' && cliente && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-verde/85 text-center text-white backdrop-blur-sm">
+            <div
+              className="absolute inset-0 flex flex-col items-center justify-center bg-verde/85 text-center text-white backdrop-blur-sm"
+              role="status"
+              aria-live="polite"
+            >
               <p className="text-4xl">{estrelas >= 2 ? '😋' : estrelas === 1 ? '🙂' : '😕'}</p>
               <p className="mt-2 font-serif text-lg font-semibold italic">
                 {estrelas === 3
@@ -300,7 +329,11 @@ export default function JogoRestaurante({ onFechar }) {
 
           {/* Fim de jogo */}
           {fase === 'fim' && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-verde/85 text-center text-white backdrop-blur-sm">
+            <div
+              className="absolute inset-0 flex flex-col items-center justify-center bg-verde/85 text-center text-white backdrop-blur-sm"
+              role="status"
+              aria-live="polite"
+            >
               <p className="text-4xl">{pontos >= META_PONTOS ? '🏆' : '👩‍🍳'}</p>
               <p className="mt-2 font-serif text-xl font-semibold italic">
                 {pontos >= META_PONTOS ? (ingles ? 'Five-star restaurant!' : 'Restaurante 5 estrelas!') : (ingles ? 'The menu can improve!' : 'O cardápio pode melhorar!')}
@@ -318,7 +351,7 @@ export default function JogoRestaurante({ onFechar }) {
           )}
         </div>
 
-        <p className="mt-3 text-center text-[11px] text-verde/50">
+        <p className="mt-3 text-center text-[11px] text-verde/70">
           Escolha saudável = +{PONTOS_ITEM} pontos · Prato perfeito = +{BONUS_PRATO_PERFEITO} de bônus ⭐
         </p>
       </div>

@@ -14,7 +14,7 @@ export default function Avatar({ avatar, tamanho = 'md' }) {
   }[tamanho]
 
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block" aria-hidden="true">
       <div
         className={`flex items-center justify-center rounded-full ${dims.caixa} ${moldura.classe}`}
         style={{ background: fundo.css }}
