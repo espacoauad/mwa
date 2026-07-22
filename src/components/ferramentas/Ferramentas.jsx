@@ -39,7 +39,7 @@ function CalculadoraMacros() {
       <h2 className="flex items-center gap-2 font-semibold text-verde">
         <Calculator size={18} className="text-sage" /> {ingles ? 'Macro calculator' : 'Calculadora de macros'}
       </h2>
-      <p className="mt-1 text-sm text-verde/60">{ingles ? 'Look up any food in the database in seconds.' : 'Consulte qualquer alimento do banco em segundos.'}</p>
+      <p className="mt-1 text-sm text-verde/80">{ingles ? 'Look up any food in the database in seconds.' : 'Consulte qualquer alimento do banco em segundos.'}</p>
 
       <div className="mt-3 flex items-center gap-2 rounded-lg border-2 border-sage/30 bg-white px-3 focus-within:border-sage">
         <Search size={16} className="text-verde/40" />
@@ -51,6 +51,7 @@ function CalculadoraMacros() {
             setAlimentoId(null)
           }}
           placeholder={ingles ? 'Example: sweet potato, shake, egg…' : 'Ex.: batata-doce, shake, ovo...'}
+          aria-label={ingles ? 'Search food' : 'Buscar alimento'}
           className="w-full py-3 font-medium text-verde outline-none"
         />
       </div>
@@ -134,7 +135,7 @@ function CalculadoraExercicio() {
       <h2 className="flex items-center gap-2 font-semibold text-verde">
         <Flame size={18} className="text-ouro" /> {ingles ? 'Physical activity' : 'Atividade física'}
       </h2>
-      <p className="mt-1 text-sm text-verde/60">
+      <p className="mt-1 text-sm text-verde/80">
         {ingles ? `Estimate calories burned using the MET method and your weight of ${usuario.peso} kg.` : `Calcule seu gasto calórico (método MET, com base no seu peso de ${usuario.peso} kg).`}
       </p>
 
@@ -163,7 +164,7 @@ function CalculadoraExercicio() {
               onClick={() => setIntensidade(i.id)}
               title={i.descricao}
               className={`rounded-lg border-2 py-2.5 text-sm font-semibold transition-all ${
-                intensidade === i.id ? 'border-sage bg-sage-claro text-verde' : 'border-sage/25 bg-white text-verde/60'
+                intensidade === i.id ? 'border-sage bg-sage-claro text-verde' : 'border-sage/25 bg-white text-verde/80'
               }`}
             >
               {i.label}
@@ -179,7 +180,7 @@ function CalculadoraExercicio() {
       {gasto > 0 && (
         <div className="mt-3 rounded-lg bg-ouro-claro p-4 text-center">
           <p className="text-2xl font-bold text-verde">≈ {gasto} kcal</p>
-          <p className="text-xs text-verde/60">
+          <p className="text-xs text-verde/80">
             {ingles ? `estimated for ${duracao} minutes of this activity` : `é o que você "libera" com ${duracao} min de ${tipo.nome.toLowerCase()}`} 🎉
           </p>
         </div>
@@ -193,7 +194,7 @@ function CalculadoraExercicio() {
 
       {exerciciosHoje.length > 0 && (
         <div className="mt-4 border-t border-cinza pt-3">
-          <p className="text-xs font-semibold text-verde/60">
+          <p className="text-xs font-semibold text-verde/80">
             {ingles ? 'Today' : 'Hoje'} · {ingles ? 'total' : 'total'} {gastoExercicios.toLocaleString(locale)} kcal
           </p>
           <ul className="mt-2 flex flex-col gap-2">
@@ -208,7 +209,7 @@ function CalculadoraExercicio() {
                     type="button"
                     aria-label={`${ingles ? 'Delete' : 'Excluir'} ${e.tipo}`}
                     onClick={() => removerExercicio(e.id)}
-                    className="text-verde/40 hover:text-red-700"
+                    className="flex min-h-11 min-w-11 items-center justify-center text-verde/40 hover:text-red-700"
                   >
                     <Trash2 size={14} />
                   </button>
@@ -304,7 +305,7 @@ export default function Ferramentas() {
   return (
     <div className="px-5 pt-10">
       <h1 className="font-serif text-2xl font-semibold italic text-verde">{ingles ? 'Tools' : 'Ferramentas'}</h1>
-      <p className="mb-4 mt-1 text-sm text-verde/60">{ingles ? 'Calculators and resources for your daily routine.' : 'Calculadoras para o seu dia a dia.'}</p>
+      <p className="mb-4 mt-1 text-sm text-verde/80">{ingles ? 'Calculators and resources for your daily routine.' : 'Calculadoras para o seu dia a dia.'}</p>
       <CalculadoraMacros />
       <CalculadoraExercicio />
 
@@ -321,7 +322,7 @@ export default function Ferramentas() {
           <span className="block font-serif text-lg font-semibold italic text-verde">
             {ingles ? 'Reinforcing Concepts' : 'Reforçando Conceitos'}
           </span>
-          <span className="text-sm text-verde/60">
+          <span className="text-sm text-verde/80">
             {ingles
               ? 'Nutritional density, caloric deficit, macros and more — the why behind the method.'
               : 'Densidade nutricional, déficit calórico, macros e mais — o porquê por trás do método.'}
@@ -347,7 +348,7 @@ export default function Ferramentas() {
             <span className="text-3xl">{liberado ? jogo.emoji : '🔒'}</span>
             <span className="flex-1">
               <span className="block font-serif text-lg font-semibold italic text-verde">{ingles ? JOGOS_EN[jogo.id][0] : jogo.titulo}</span>
-              <span className="text-sm text-verde/60">
+              <span className="text-sm text-verde/80">
                 {liberado ? (ingles ? JOGOS_EN[jogo.id][1] : jogo.desc) : (ingles ? `Unlocks on day ${diaLiberacaoJogo(jogo.id)} of your program` : `Libera no dia ${diaLiberacaoJogo(jogo.id)} do seu programa`)}
               </span>
             </span>
@@ -359,11 +360,11 @@ export default function Ferramentas() {
       <section className="mt-6 rounded-2xl border-2 border-verde/20 bg-gradient-to-br from-verde/5 to-sage-claro/30 p-6">
         <div className="mb-4">
           <h2 className="font-serif text-lg font-semibold italic text-verde">🔍 {ingles ? 'The Awareness Lens' : 'A Lente da Consciência'}</h2>
-          <p className="mt-1 text-sm text-verde/70">
+          <p className="mt-1 text-sm text-verde/80">
             {ingles ? 'A guided pause to step out of autopilot and choose with clarity.' : 'Uma ferramenta de pausa guiada para sair do automático e escolher com clareza.'}
           </p>
         </div>
-        <p className="mb-4 text-xs text-verde/60">
+        <p className="mb-4 text-xs text-verde/80">
           <span className="italic">{ingles ? '“Awareness is not rigid control. It is learning to listen to yourself before acting on autopilot.”' : '"Consciência não é controle rígido. É aprender a se escutar antes de agir no automático."'}</span>
         </p>
         <button
@@ -379,7 +380,7 @@ export default function Ferramentas() {
       <section className="mt-6 rounded-2xl border-2 border-ouro/20 bg-gradient-to-br from-ouro/5 to-sage-claro/30 p-6">
         <div className="mb-4">
           <h2 className="font-serif text-lg font-semibold italic text-verde">✨ {ingles ? 'Verse of the Day' : 'Versículo do Dia'}</h2>
-          <p className="mt-1 text-sm text-verde/70">
+          <p className="mt-1 text-sm text-verde/80">
             {ingles ? 'A reflection to inspire your journey.' : 'Uma reflexão para inspirar sua jornada.'}
           </p>
         </div>

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { X } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import versiculos from '../../data/versiculos.js'
@@ -8,16 +9,36 @@ export default function VersiculoDoDiaModal({ onFechar }) {
   const versiculoHoje = versiculos.find(v => v.dia === diaAtual) || versiculos[0]
   const progresso = totalDias ? Math.round((diaAtual / totalDias) * 100) : 0
 
+  useEffect(() => {
+    if (!onFechar) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') onFechar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [onFechar])
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-sm rounded-3xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm" onClick={onFechar}>
+      <div
+        className="w-full max-w-sm rounded-3xl overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="versiculo-titulo"
+      >
         {/* CABEÇALHO COM FECHAR */}
         <div className="bg-creme p-5 flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-xl font-semibold italic text-verde">✨ {diaAtual === 1 ? 'Versículo do Dia' : `Dia ${diaAtual}`}</h2>
-            <p className="text-xs text-verde/60">Dia {diaAtual} de {totalDias}</p>
+            <h2 id="versiculo-titulo" className="font-serif text-xl font-semibold italic text-verde">✨ {diaAtual === 1 ? 'Versículo do Dia' : `Dia ${diaAtual}`}</h2>
+            <p className="text-xs text-verde/80">Dia {diaAtual} de {totalDias}</p>
           </div>
-          <button type="button" onClick={onFechar} className="rounded-full bg-verde/10 p-2 text-verde hover:bg-verde/20">
+          <button
+            type="button"
+            aria-label="Fechar"
+            onClick={onFechar}
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-verde/10 text-verde hover:bg-verde/20"
+          >
             <X size={18} />
           </button>
         </div>
@@ -66,7 +87,14 @@ export default function VersiculoDoDiaModal({ onFechar }) {
                 <p className="text-xs font-semibold text-white/90">Sua jornada</p>
                 <p className="text-xs font-bold text-ouro">{progresso}%</p>
               </div>
-              <div className="w-full h-2 bg-black/20 rounded-full overflow-hidden border border-white/20">
+              <div
+                className="w-full h-2 bg-black/20 rounded-full overflow-hidden border border-white/20"
+                role="progressbar"
+                aria-valuenow={progresso}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="Sua jornada"
+              >
                 <div
                   className="h-full bg-gradient-to-r from-ouro to-sage transition-all duration-300"
                   style={{ width: `${progresso}%` }}

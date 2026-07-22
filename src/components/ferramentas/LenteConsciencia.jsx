@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ChevronRight, Eye, Heart, CheckCircle2, X } from 'lucide-react'
 
 const ETAPAS_CONFIG = {
@@ -56,6 +56,15 @@ export default function LenteConsciencia({ onFechar = null }) {
   const indiceEtapa = etapas.indexOf(etapaAtual)
   const progresso = ((indiceEtapa + 1) / etapas.length) * 100
 
+  useEffect(() => {
+    if (!onFechar) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') onFechar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [onFechar])
+
   function selecionarOpcao(opcaoId) {
     setSelecoes((prev) => ({
       ...prev,
@@ -100,13 +109,24 @@ export default function LenteConsciencia({ onFechar = null }) {
     const labelEscolher = ETAPAS_CONFIG.escolher.opcoes.find((o) => o.id === resultado.escolher)?.label
 
     return (
-      <div className="fixed inset-0 z-50 flex items-end justify-center bg-verde-escuro/50">
-        <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-8">
+      <div className="fixed inset-0 z-50 flex items-end justify-center bg-verde-escuro/50" onClick={onFechar}>
+        <div
+          className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-8"
+          onClick={(e) => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="lente-resultado-titulo"
+        >
           {/* Header */}
           <div className="mb-6 flex items-center justify-between">
-            <h2 className="font-serif text-2xl font-semibold italic text-verde">Sua Jornada</h2>
+            <h2 id="lente-resultado-titulo" className="font-serif text-2xl font-semibold italic text-verde">Sua Jornada</h2>
             {onFechar && (
-              <button type="button" onClick={onFechar} className="rounded-full bg-white p-2 text-verde/60">
+              <button
+                type="button"
+                aria-label="Fechar"
+                onClick={onFechar}
+                className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white text-verde/60"
+              >
                 <X size={18} />
               </button>
             )}
@@ -124,7 +144,7 @@ export default function LenteConsciencia({ onFechar = null }) {
             <p className="mb-4 font-serif text-xl font-semibold italic text-verde">
               Você pausou e se escutou.
             </p>
-            <p className="text-sm text-verde/70">
+            <p className="text-sm text-verde/80">
               Esta consciência que você acabou de demonstrar é o primeiro passo para decisões mais alinhadas com quem você é.
             </p>
           </div>
@@ -132,15 +152,15 @@ export default function LenteConsciencia({ onFechar = null }) {
           {/* Resumo da jornada */}
           <div className="mb-8 space-y-3 rounded-xl bg-white p-4">
             <div>
-              <p className="text-xs font-semibold text-verde/60">Você sentiu:</p>
+              <p className="text-xs font-semibold text-verde/80">Você sentiu:</p>
               <p className="text-sm font-medium text-verde">{labelPausar}</p>
             </div>
             <div className="border-t border-cinza pt-3">
-              <p className="text-xs font-semibold text-verde/60">Seu corpo/rotina pediu por:</p>
+              <p className="text-xs font-semibold text-verde/80">Seu corpo/rotina pediu por:</p>
               <p className="text-sm font-medium text-verde">{labelObservar}</p>
             </div>
             <div className="border-t border-cinza pt-3">
-              <p className="text-xs font-semibold text-verde/60">Sua escolha consciente foi:</p>
+              <p className="text-xs font-semibold text-verde/80">Sua escolha consciente foi:</p>
               <p className="text-sm font-medium text-verde">{labelEscolher}</p>
             </div>
           </div>
@@ -178,13 +198,24 @@ export default function LenteConsciencia({ onFechar = null }) {
 
   // Tela principal da ferramenta
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-verde-escuro/50">
-      <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-8">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-verde-escuro/50" onClick={onFechar}>
+      <div
+        className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-8"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="lente-titulo"
+      >
         {/* Header com fechar */}
         <div className="mb-6 flex items-center justify-between">
-          <h1 className="font-serif text-2xl font-semibold italic text-verde">A Lente da Consciência</h1>
+          <h1 id="lente-titulo" className="font-serif text-2xl font-semibold italic text-verde">A Lente da Consciência</h1>
           {onFechar && (
-            <button type="button" onClick={onFechar} className="rounded-full bg-white p-2 text-verde/60">
+            <button
+              type="button"
+              aria-label="Fechar"
+              onClick={onFechar}
+              className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white text-verde/60"
+            >
               <X size={18} />
             </button>
           )}
@@ -193,12 +224,19 @@ export default function LenteConsciencia({ onFechar = null }) {
         {/* Barra de progresso */}
         <div className="mb-6">
           <div className="mb-2 flex justify-between text-xs">
-            <span className="font-semibold text-verde/70">
+            <span className="font-semibold text-verde/80">
               {ETAPAS_CONFIG[etapaAtual].titulo}
             </span>
-            <span className="text-verde/50">{indiceEtapa + 1} de 3</span>
+            <span className="text-verde/80">{indiceEtapa + 1} de 3</span>
           </div>
-          <div className="h-2 overflow-hidden rounded-full bg-verde/10">
+          <div
+            className="h-2 overflow-hidden rounded-full bg-verde/10"
+            role="progressbar"
+            aria-valuenow={indiceEtapa + 1}
+            aria-valuemin={1}
+            aria-valuemax={etapas.length}
+            aria-label="Progresso da jornada"
+          >
             <div className="h-full rounded-full bg-sage transition-all duration-300" style={{ width: `${progresso}%` }} />
           </div>
         </div>
@@ -215,7 +253,7 @@ export default function LenteConsciencia({ onFechar = null }) {
         {/* Pergunta e descrição */}
         <div className="mb-8 text-center">
           <h2 className="mb-2 font-serif text-xl font-semibold italic text-verde">{config.pergunta}</h2>
-          <p className="text-sm text-verde/70">{config.descricao}</p>
+          <p className="text-sm text-verde/80">{config.descricao}</p>
         </div>
 
         {/* Opções */}
@@ -246,7 +284,7 @@ export default function LenteConsciencia({ onFechar = null }) {
 
         {/* Micro-copy motivadora */}
         <div className="mb-8 rounded-lg bg-verde/5 p-4 text-center">
-          <p className="text-xs text-verde/70">
+          <p className="text-xs text-verde/80">
             💭 <span className="font-semibold">Dica:</span> Não há resposta "correta". Há apenas a sua verdade neste momento.
           </p>
         </div>

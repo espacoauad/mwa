@@ -20,7 +20,7 @@ export default function VersiculoDoDia() {
       {/* CABEÇALHO — fora do cartão escuro, por isso em tom verde (legível no fundo claro da tela) */}
       <div className="text-center">
         <p className="text-xs font-bold uppercase tracking-widest text-verde mb-2">✨ Versículo do Dia</p>
-        <p className="text-xs text-verde/60">Dia {diaAtual} de {totalDias}</p>
+        <p className="text-xs text-verde/80">Dia {diaAtual} de {totalDias}</p>
       </div>
 
       {/* CARTÃO PRINCIPAL — fundo escuro sólido para garantir contraste com o texto claro */}
@@ -69,7 +69,14 @@ export default function VersiculoDoDia() {
               <p className="text-xs font-semibold text-white/90">Sua jornada</p>
               <p className="text-xs font-bold text-ouro">{progresso}%</p>
             </div>
-            <div className="w-full h-2 bg-black/20 rounded-full overflow-hidden border border-white/20">
+            <div
+              className="w-full h-2 bg-black/20 rounded-full overflow-hidden border border-white/20"
+              role="progressbar"
+              aria-valuenow={progresso}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label="Sua jornada"
+            >
               <div
                 className="h-full bg-gradient-to-r from-ouro to-sage transition-all duration-300"
                 style={{ width: `${progresso}%` }}
