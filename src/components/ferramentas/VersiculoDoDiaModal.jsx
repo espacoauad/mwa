@@ -1,10 +1,11 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { X } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import versiculos from '../../data/versiculos.js'
 
 export default function VersiculoDoDiaModal({ onFechar }) {
   const { diaAtual, totalDias } = useApp()
+  const dialogRef = useRef(null)
 
   const versiculoHoje = versiculos.find(v => v.dia === diaAtual) || versiculos[0]
   const progresso = totalDias ? Math.round((diaAtual / totalDias) * 100) : 0
@@ -18,10 +19,17 @@ export default function VersiculoDoDiaModal({ onFechar }) {
     return () => window.removeEventListener('keydown', aoTeclar)
   }, [onFechar])
 
+  // Move o foco para o diálogo assim que ele é aberto (a11y: modal focus management).
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm" onClick={onFechar}>
       <div
-        className="w-full max-w-sm rounded-3xl overflow-hidden"
+        ref={dialogRef}
+        tabIndex={-1}
+        className="w-full max-w-sm rounded-3xl overflow-hidden outline-none"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"

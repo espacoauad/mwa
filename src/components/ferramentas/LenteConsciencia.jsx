@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ChevronRight, Eye, Heart, CheckCircle2, X } from 'lucide-react'
 
 const ETAPAS_CONFIG = {
@@ -50,6 +50,7 @@ export default function LenteConsciencia({ onFechar = null }) {
     escolher: null,
   })
   const [resultado, setResultado] = useState(null)
+  const dialogRef = useRef(null)
 
   const config = ETAPAS_CONFIG[etapaAtual]
   const etapas = ['pausar', 'observar', 'escolher']
@@ -64,6 +65,12 @@ export default function LenteConsciencia({ onFechar = null }) {
     window.addEventListener('keydown', aoTeclar)
     return () => window.removeEventListener('keydown', aoTeclar)
   }, [onFechar])
+
+  // Move o foco para o diálogo assim que ele é aberto, e novamente quando o
+  // conteúdo troca entre a etapa atual e a tela de resultado (a11y: modal focus management).
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [Boolean(resultado)])
 
   function selecionarOpcao(opcaoId) {
     setSelecoes((prev) => ({
@@ -111,7 +118,9 @@ export default function LenteConsciencia({ onFechar = null }) {
     return (
       <div className="fixed inset-0 z-50 flex items-end justify-center bg-verde-escuro/50" onClick={onFechar}>
         <div
-          className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-8"
+          ref={dialogRef}
+          tabIndex={-1}
+          className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-8 outline-none"
           onClick={(e) => e.stopPropagation()}
           role="dialog"
           aria-modal="true"
@@ -200,7 +209,9 @@ export default function LenteConsciencia({ onFechar = null }) {
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-verde-escuro/50" onClick={onFechar}>
       <div
-        className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-8"
+        ref={dialogRef}
+        tabIndex={-1}
+        className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-8 outline-none"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"

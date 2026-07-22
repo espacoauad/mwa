@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, ChevronDown, BookOpen } from 'lucide-react'
 import { CONCEITOS_NUTRICIONAIS } from '../../data/conceitosNutricionais.js'
 
@@ -6,6 +6,7 @@ import { CONCEITOS_NUTRICIONAIS } from '../../data/conceitosNutricionais.js'
 // trabalha cada tema, para reforçar o conhecimento aplicado ao longo dos 30 dias.
 export default function ReforcandoConceitos({ onFechar }) {
   const [abertoId, setAbertoId] = useState(CONCEITOS_NUTRICIONAIS[0].id)
+  const dialogRef = useRef(null)
 
   function alternar(id) {
     setAbertoId((atual) => (atual === id ? null : id))
@@ -20,10 +21,17 @@ export default function ReforcandoConceitos({ onFechar }) {
     return () => window.removeEventListener('keydown', aoTeclar)
   }, [onFechar])
 
+  // Move o foco para o diálogo assim que ele é aberto (a11y: modal focus management).
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
+
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-verde-escuro/50" onClick={onFechar}>
       <div
-        className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-6"
+        ref={dialogRef}
+        tabIndex={-1}
+        className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-6 outline-none"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -79,20 +87,23 @@ export default function ReforcandoConceitos({ onFechar }) {
                   />
                 </button>
 
-                {aberto && (
-                  <div id={`conceito-painel-${c.id}`} className="space-y-3 border-t border-cinza px-4 pb-4 pt-3">
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-wide text-verde/80">O que é</p>
-                      <p className="mt-1 text-sm leading-relaxed text-verde/80">{c.oQueE}</p>
-                    </div>
-                    <div className="rounded-lg bg-sage-claro/40 p-3">
-                      <p className="text-xs font-bold uppercase tracking-wide text-sage">
-                        Por que tratamos disso no programa
-                      </p>
-                      <p className="mt-1 text-sm leading-relaxed text-verde/80">{c.porQue}</p>
-                    </div>
+                <div
+                  id={`conceito-painel-${c.id}`}
+                  hidden={!aberto}
+                  className="space-y-3 border-t border-cinza px-4 pb-4 pt-3"
+                >
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wide text-verde/80">O que é</p>
+                    <p className="mt-1 text-sm leading-relaxed text-verde/80">{c.oQueE}</p>
                   </div>
-                )}
+                  <div className="rounded-lg bg-sage-claro/40 p-3">
+                    <p className="text-xs font-bold uppercase tracking-wide text-sage">
+                      Por que tratamos disso no programa
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-verde/80">{c.porQue}</p>
+                  </div>
+                </div>
+
               </div>
             )
           })}
