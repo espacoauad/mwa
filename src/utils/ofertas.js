@@ -13,13 +13,12 @@ export const CONTATO = {
 
 export const PRODUTOS = {
   programa: { nome: 'MWA | Jornada de 30 Dias', preco: 97 },
-  // precoCheio: valor integral do Programa de 90 Dias — vale dos dias 8–29 e também
-  // a partir do Dia 30 (preço fixo, sem desconto adicional)
-  // precoOferta: valor especial de lançamento, ativo do Dia 3 ao Dia 7
+  // Não existe um produto "90 dias" à parte — é um upgrade/upsell que libera os
+  // dias 31–90 do mesmo programa. Preço único de R$ 97, sempre, em qualquer tela
+  // (checkout da landing page ou upgrade dentro do app).
   upgrade: {
-    nome: 'MWA | Programa de 90 Dias',
-    precoCheio: 147,
-    precoOferta: 97,
+    nome: 'MWA | Upgrade para 90 Dias',
+    preco: 97,
   },
   sessao: { nome: 'Sessão Estratégica MWA', preco: 297 },
 }
@@ -28,10 +27,9 @@ export function formatarPreco(valor) {
   return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
 
-// Cronograma oficial: a oferta especial do Programa de 90 Dias abre no Dia 6,
-// fica ativa por R$ 97 até o Dia 10 e então expira. A partir do Dia 11 (inclusive
-// depois de concluída a Jornada de 30 Dias), a continuidade fica disponível
-// pelo valor cheio fixo de R$ 147.
+// Cronograma oficial: o upgrade para 90 dias pode ser oferecido em qualquer momento
+// entre o Dia 6 e o Dia 30 (mesmo preço de R$ 97 em toda a janela), e volta a ser
+// oferecido como "nova oportunidade" a partir do Dia 30 (fim do ciclo de 30 dias).
 export function faseUpgrade(dia) {
   if (dia >= 6 && dia <= 10) {
     return { id: 'oferta', ultimoDia: dia === 10, diasRestantes: 10 - dia }
@@ -47,18 +45,13 @@ export function linkWhatsApp(mensagem) {
 
 export function linkCompraUpgrade(dia) {
   const fase = faseUpgrade(dia)
-  if (fase.id === 'oferta') {
-    return linkWhatsApp(
-      `Olá! Estou no Dia ${dia} do MWA | Jornada de 30 Dias e quero garantir o MWA | Programa de 90 Dias por ${formatarPreco(PRODUTOS.upgrade.precoOferta)}!`,
-    )
-  }
   if (fase.id === 'final') {
     return linkWhatsApp(
-      `Olá! Completei o MWA | Jornada de 30 Dias e quero aprofundar meu aprendizado com o MWA | Programa de 90 Dias (${formatarPreco(PRODUTOS.upgrade.precoCheio)})!`,
+      `Olá! Completei o MWA | Jornada de 30 Dias e quero o upgrade para 90 dias (${formatarPreco(PRODUTOS.upgrade.preco)})!`,
     )
   }
   return linkWhatsApp(
-    `Olá! Estou no Dia ${dia} do MWA | Jornada de 30 Dias e quero saber mais sobre o MWA | Programa de 90 Dias (${formatarPreco(PRODUTOS.upgrade.precoCheio)}).`,
+    `Olá! Estou no Dia ${dia} do MWA | Jornada de 30 Dias e quero garantir o upgrade para 90 dias por ${formatarPreco(PRODUTOS.upgrade.preco)}!`,
   )
 }
 

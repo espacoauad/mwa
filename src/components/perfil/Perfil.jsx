@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { RotateCcw, Mail, Phone, AtSign, Globe, Crown, FlaskConical, BadgeCheck, LogOut, Camera, Star, Share2 } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { NIVEIS_ATIVIDADE, OBJETIVOS } from '../../utils/calculos.js'
-import { PRODUTOS, CONTATO, formatarPreco, linkCompraUpgrade, linkSessao } from '../../utils/ofertas.js'
+import { PRODUTOS, CONTATO, formatarPreco, linkSessao } from '../../utils/ofertas.js'
+import { abrirCheckout } from '../../lib/hotmart.js'
 import { NUTRICIONISTA, AVISO_CRN } from '../../data/legal.js'
 import { calcularEstrelas } from '../../utils/hallDaFama.js'
 import { redimensionarImagem } from '../../lib/imagem.js'
@@ -252,10 +253,10 @@ export default function Perfil() {
           </div>
           {!programa90Ativo && (
             <div>
-              <BotaoPagamento
-                tipo="upgrade"
-                fallbackWhatsApp={linkCompraUpgrade(diaAtual)}
-                className="block w-full rounded-lg border-2 border-ouro/60 p-3.5 text-left transition-colors hover:bg-ouro-claro disabled:opacity-60"
+              <button
+                type="button"
+                onClick={() => abrirCheckout('programa90d')}
+                className="block w-full rounded-lg border-2 border-ouro/60 p-3.5 text-left transition-colors hover:bg-ouro-claro"
               >
                 <span className="flex items-center gap-1.5 text-xs font-bold uppercase text-ouro">
                   <Crown size={12} /> {ingles ? 'Continue your transformation' : 'Continue sua transformação'}
@@ -263,10 +264,10 @@ export default function Perfil() {
                 <span className="block font-semibold text-verde">{PRODUTOS.upgrade.nome}</span>
                 <span className="block text-xs text-verde/60">
                   {diaAtual >= 6 && diaAtual <= 10
-                    ? `${formatarPreco(PRODUTOS.upgrade.precoOferta)} (${ingles ? 'special offer valid through day 10' : 'condição especial válida até o dia 10'})`
-                    : `${formatarPreco(PRODUTOS.upgrade.precoCheio)}`}
+                    ? `${formatarPreco(PRODUTOS.upgrade.preco)} (${ingles ? 'special offer valid through day 10' : 'condição especial válida até o dia 10'})`
+                    : `${formatarPreco(PRODUTOS.upgrade.preco)}`}
                 </span>
-              </BotaoPagamento>
+              </button>
             </div>
           )}
           <div className="rounded-lg border-2 border-sage/25 bg-white p-3.5 text-left">
