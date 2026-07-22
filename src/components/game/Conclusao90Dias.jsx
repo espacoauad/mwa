@@ -26,11 +26,12 @@ export default function Conclusao90Dias() {
   // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
   useEffect(() => {
     function aoTeclar(e) {
-      if (e.key === 'Escape') fecharConclusao90()
+      // se o certificado estiver aberto por cima, deixa o Esc dele agir sozinho
+      if (e.key === 'Escape' && !certificadoAberto) fecharConclusao90()
     }
     window.addEventListener('keydown', aoTeclar)
     return () => window.removeEventListener('keydown', aoTeclar)
-  }, [fecharConclusao90])
+  }, [fecharConclusao90, certificadoAberto])
 
   useEffect(() => {
     dialogRef.current?.focus()
