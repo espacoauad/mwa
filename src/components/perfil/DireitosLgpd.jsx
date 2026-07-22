@@ -52,7 +52,7 @@ export default function DireitosLgpd() {
           <Download size={16} className="shrink-0 text-sage" />
           <span>
             {exportando ? (ingles ? 'Preparing your file…' : 'Preparando seu arquivo…') : (ingles ? 'Export my data' : 'Exportar meus dados')}
-            <span className="block text-xs font-normal text-verde/50">
+            <span className="block text-xs font-normal text-verde/80">
               {ingles ? 'Downloads a file containing everything recorded' : 'Baixa um arquivo com tudo que está registrado'}
             </span>
           </span>
@@ -67,7 +67,7 @@ export default function DireitosLgpd() {
           <Trash2 size={16} className="shrink-0" />
           <span>
             {ingles ? 'Delete my data' : 'Deletar meus dados'}
-            <span className="block text-xs font-normal text-red-700/60">
+            <span className="block text-xs font-normal text-red-700/80">
               {ingles ? 'Removes your profile and every app record' : 'Remove cadastro e todos os registros do app'}
             </span>
           </span>

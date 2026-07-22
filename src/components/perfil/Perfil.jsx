@@ -77,7 +77,7 @@ export default function Perfil() {
         <div className="mt-2 grid grid-cols-2 rounded-lg bg-cinza p-1">
           {[['pt-BR', 'Português'], ['en-US', 'English']].map(([valor, label]) => (
             <button key={valor} type="button" onClick={() => atualizarIdioma(valor)} aria-pressed={idioma === valor}
-              className={`rounded-md py-2.5 text-sm font-semibold ${idioma === valor ? 'bg-verde text-white shadow-sm' : 'text-verde/60'}`}>
+              className={`min-h-11 rounded-md py-2.5 text-sm font-semibold ${idioma === valor ? 'bg-verde text-white shadow-sm' : 'text-verde/60'}`}>
               {label}
             </button>
           ))}
@@ -87,7 +87,10 @@ export default function Perfil() {
       <div className="mt-4 rounded-2xl bg-verde p-5 text-white">
         <div className="flex items-center gap-4">
           {/* Foto real da pessoa (toque para trocar) */}
-          <label className="relative shrink-0 cursor-pointer">
+          <label
+            className="relative shrink-0 cursor-pointer"
+            aria-label={ingles ? 'Change profile photo' : 'Alterar foto de perfil'}
+          >
             <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border-2 border-ouro bg-white/10">
               {usuario.fotoUrl ? (
                 <img src={usuario.fotoUrl} alt={usuario.nome} className="h-full w-full object-cover" />
@@ -101,10 +104,10 @@ export default function Perfil() {
             <input type="file" accept="image/*" className="hidden" onChange={escolherFoto} disabled={enviandoFoto} />
           </label>
 
-          <div className="flex-1">
+          <div className="min-w-0 flex-1">
             <p className="font-serif text-xl font-semibold italic">{usuario.nome}</p>
-            <p className="mt-1 flex items-center gap-2 text-sm text-white/70">
-              <Mail size={14} /> {usuario.email}
+            <p className="mt-1 flex items-center gap-2 truncate text-sm text-white/70">
+              <Mail size={14} className="shrink-0" /> <span className="truncate">{usuario.email}</span>
             </p>
           </div>
         </div>
@@ -138,11 +141,11 @@ export default function Perfil() {
             <Star size={14} className="fill-ouro text-ouro" /> {estrelas.filter((e) => e.estrela).length}
           </p>
         </div>
-        <p className="mt-1 text-xs text-verde/50">
+        <p className="mt-1 text-xs text-verde/80">
           {ingles ? 'Earn a star for every weekly weigh-in with a positive result — through the end of your program.' : 'Ganhe uma estrela a cada pesagem semanal com resultado positivo — até o fim do seu programa.'}
         </p>
         {estrelas.length === 0 ? (
-          <p className="mt-3 rounded-xl bg-creme p-3 text-center text-xs text-verde/50">
+          <p className="mt-3 rounded-xl bg-creme p-3 text-center text-xs text-verde/80">
             {ingles ? 'Log your first weekly weigh-in to start earning stars.' : 'Registre sua primeira pesagem semanal para começar a conquistar estrelas.'}
           </p>
         ) : (
@@ -154,7 +157,7 @@ export default function Perfil() {
               >
                 <Star size={20} className={`mx-auto ${c.estrela ? 'fill-ouro text-ouro' : 'text-verde/20'}`} />
                 <p className="mt-1 text-[11px] font-bold text-verde">{c.dia ? `${ingles ? 'Day' : 'Dia'} ${c.dia}` : '—'}</p>
-                <p className="text-[9px] text-verde/50">{c.estrela ? (ingles ? 'Earned!' : 'Conquistada!') : (ingles ? 'No result' : 'Sem resultado')}</p>
+                <p className="text-[9px] text-verde/80">{c.estrela ? (ingles ? 'Earned!' : 'Conquistada!') : (ingles ? 'No result' : 'Sem resultado')}</p>
               </div>
             ))}
           </div>
@@ -177,7 +180,7 @@ export default function Perfil() {
           <Share2 size={16} /> {ingles ? 'Refer through WhatsApp' : 'Indicar pelo WhatsApp'}
         </button>
         {avisoIndicacao && (
-          <p className="mt-2 rounded-lg bg-white/70 p-2.5 text-center text-xs font-semibold text-verde">
+          <p className="mt-2 rounded-lg bg-white/70 p-2.5 text-center text-xs font-semibold text-verde" role="status" aria-live="polite">
             {avisoIndicacao}
           </p>
         )}
@@ -285,7 +288,7 @@ export default function Perfil() {
         <h2 className="flex items-center gap-1.5 text-sm font-semibold text-verde/60">
           <FlaskConical size={15} className="text-sage" /> {ingles ? 'Demo mode' : 'Modo demonstração'}
         </h2>
-        <p className="mt-1 text-xs text-verde/50">
+        <p className="mt-1 text-xs text-verde/80">
           {ingles ? 'Simulate any program day to preview guides, tips, and offers.' : 'Simule qualquer dia do programa para pré-visualizar informativos, dicas e ofertas.'}
         </p>
         <div className="mt-3 flex items-center gap-3">
@@ -305,7 +308,7 @@ export default function Perfil() {
             <button
               type="button"
               onClick={() => setSimuladorDia(null)}
-              className="rounded-lg bg-sage px-3 py-2.5 text-sm font-semibold text-white"
+              className="min-h-11 rounded-lg bg-sage px-3 py-2.5 text-sm font-semibold text-white"
             >
               {ingles ? 'Return to actual day' : 'Voltar ao real'}
             </button>
@@ -320,7 +323,7 @@ export default function Perfil() {
         </h2>
         <p className="mt-2 font-serif text-lg font-semibold italic text-verde">{NUTRICIONISTA.nome}</p>
         <p className="text-sm text-verde/70">{NUTRICIONISTA.titulo} · {NUTRICIONISTA.crn}</p>
-        <p className="text-xs text-verde/50">{NUTRICIONISTA.conselho}</p>
+        <p className="text-xs text-verde/80">{NUTRICIONISTA.conselho}</p>
         <p className="mt-3 rounded-lg bg-ouro-claro/60 p-3 text-xs leading-relaxed text-verde/70">
           ⚠️ {AVISO_CRN}
         </p>
@@ -330,7 +333,7 @@ export default function Perfil() {
 
       {/* Contato MWA */}
       <div className="mt-4 rounded-2xl bg-verde p-5 text-white">
-        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">My Wellness Approach</p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/70">My Wellness Approach</p>
         <p className="mt-1 font-serif text-base font-semibold italic text-ouro">{CONTATO.slogan}</p>
         <p className="mt-1 text-sm text-white/70">{CONTATO.tagline}</p>
         <ul className="mt-3 flex flex-col gap-1.5 text-sm text-white/80">
