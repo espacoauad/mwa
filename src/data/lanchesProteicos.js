@@ -224,13 +224,13 @@ export const LANCHES_PROTEICOS = [
     titulo: 'Salada de frutas com iogurte grego',
     proteina: '~15g',
     descricao:
-      'Reta final! Uma tigela colorida que une a fibra das frutas com a proteína do iogurte grego — saciante, refrescante e naturalmente doce, sem açúcar adicionado.',
+      'Uma tigela colorida que une a fibra das frutas com a proteína do iogurte grego — saciante, refrescante e naturalmente doce, sem açúcar adicionado.',
     ingredientes: ['1 pote de iogurte grego zero açúcar', 'Frutas picadas (morango, banana, mamão, maçã)', '1 colher de aveia ou granola sem açúcar (opcional)', 'Canela a gosto'],
     preparo: 'Pique as frutas numa tigela, cubra com o iogurte grego e finalize com canela. Se quiser crocância, salpique a aveia por cima.',
     produto: null,
   },
   {
-    dia: 21,
+    dia: 30,
     icone: '🎉',
     titulo: 'Prato-celebração proteico',
     proteina: '~28g',

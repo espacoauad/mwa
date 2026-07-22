@@ -10,7 +10,7 @@ import LancheProteico from './LancheProteico.jsx'
 // Rota pública de pré-visualização (/preview-lanches) — mostra o conteúdo completo
 // de cada dia (informativo + dica + lanche), SEM precisar de login. Uso interno/temporário.
 export default function PreviewLanches() {
-  const [dia, setDia] = useState(21) // abre no dia 21 (encerramento do ciclo)
+  const [dia, setDia] = useState(30) // abre no dia 30 (encerramento do ciclo de 30 dias)
   const [secao, setSecao] = useState('informativo')
 
   const informativo = informativoDoDia(dia)
@@ -25,7 +25,7 @@ export default function PreviewLanches() {
         <p className="mt-1 text-sm text-verde/60">Escolha o dia e alterne entre informativo, dica e lanche.</p>
       </div>
 
-      {/* Seletor de dias 1–21 */}
+      {/* Seletor de dias com conteúdo de lanche disponível (dias 22–29 ainda sem lanche cadastrado) */}
       <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
         {LANCHES_PROTEICOS.map((l) => {
           const ativo = l.dia === dia
