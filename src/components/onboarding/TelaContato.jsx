@@ -1,14 +1,27 @@
+import { useState } from 'react'
 import Botao from '../ui/Botao.jsx'
 import LogoMWA from '../ui/LogoMWA.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 export default function TelaContato({ dados, atualizar, avancar }) {
   const { ingles } = useIdioma()
+  const [tocado, setTocado] = useState({})
+  const nomeValido = dados.nome.trim().length >= 2
   const emailValido = /\S+@\S+\.\S+/.test(dados.email)
-  const valido = dados.nome.trim().length >= 2 && emailValido && dados.whatsapp.trim().length >= 10
+  const whatsappValido = dados.whatsapp.trim().length >= 10
+  const valido = nomeValido && emailValido && whatsappValido
+
+  function marcarTocado(campo) {
+    setTocado((t) => ({ ...t, [campo]: true }))
+  }
 
   const campo =
     'w-full rounded-lg border-2 border-sage/30 bg-white px-4 py-4 text-lg font-medium text-verde outline-none transition-colors focus:border-sage'
+  const campoInvalido = 'w-full rounded-lg border-2 border-red-300 bg-white px-4 py-4 text-lg font-medium text-verde outline-none transition-colors focus:border-red-400'
+
+  const erroNome = ingles ? 'Enter your full name.' : 'Informe seu nome completo.'
+  const erroEmail = ingles ? 'Enter a valid e-mail address.' : 'Informe um e-mail válido.'
+  const erroWhatsapp = ingles ? 'Enter a valid phone number with area code.' : 'Informe um número válido com DDD.'
 
   return (
     <>
@@ -27,33 +40,56 @@ export default function TelaContato({ dados, atualizar, avancar }) {
           <span className="mb-2 block text-sm font-semibold text-verde">{ingles ? 'Full name' : 'Nome completo'}</span>
           <input
             type="text"
+            autoComplete="name"
             value={dados.nome}
             onChange={(e) => atualizar('nome', e.target.value)}
+            onBlur={() => marcarTocado('nome')}
             placeholder={ingles ? 'Your name' : 'Seu nome'}
-            className={campo}
+            aria-invalid={tocado.nome && !nomeValido}
+            aria-describedby={tocado.nome && !nomeValido ? 'erro-nome' : undefined}
+            className={tocado.nome && !nomeValido ? campoInvalido : campo}
           />
+          {tocado.nome && !nomeValido && (
+            <p id="erro-nome" role="alert" className="mt-1.5 text-sm font-medium text-red-700">{erroNome}</p>
+          )}
         </label>
 
         <label className="block">
           <span className="mb-2 block text-sm font-semibold text-verde">E-mail</span>
           <input
             type="email"
+            autoComplete="email"
+            spellCheck={false}
             value={dados.email}
             onChange={(e) => atualizar('email', e.target.value)}
+            onBlur={() => marcarTocado('email')}
             placeholder="voce@email.com"
-            className={campo}
+            aria-invalid={tocado.email && !emailValido}
+            aria-describedby={tocado.email && !emailValido ? 'erro-email' : undefined}
+            className={tocado.email && !emailValido ? campoInvalido : campo}
           />
+          {tocado.email && !emailValido && (
+            <p id="erro-email" role="alert" className="mt-1.5 text-sm font-medium text-red-700">{erroEmail}</p>
+          )}
         </label>
 
         <label className="block">
           <span className="mb-2 block text-sm font-semibold text-verde">WhatsApp</span>
           <input
             type="tel"
+            autoComplete="tel"
+            inputMode="tel"
             value={dados.whatsapp}
             onChange={(e) => atualizar('whatsapp', e.target.value)}
+            onBlur={() => marcarTocado('whatsapp')}
             placeholder="(62) 99999-9999"
-            className={campo}
+            aria-invalid={tocado.whatsapp && !whatsappValido}
+            aria-describedby={tocado.whatsapp && !whatsappValido ? 'erro-whatsapp' : undefined}
+            className={tocado.whatsapp && !whatsappValido ? campoInvalido : campo}
           />
+          {tocado.whatsapp && !whatsappValido && (
+            <p id="erro-whatsapp" role="alert" className="mt-1.5 text-sm font-medium text-red-700">{erroWhatsapp}</p>
+          )}
         </label>
 
       </div>

@@ -69,19 +69,27 @@ export default function OnboardingFlow() {
 
   return (
     <div className="mx-auto flex min-h-screen max-w-md flex-col px-6 py-8">
-      <div className="mb-8 flex gap-2">
+      <div
+        className="mb-8 flex gap-2"
+        role="progressbar"
+        aria-valuenow={tela + 1}
+        aria-valuemin={1}
+        aria-valuemax={TOTAL_TELAS}
+        aria-label={ingles ? `Step ${tela + 1} of ${TOTAL_TELAS}` : `Passo ${tela + 1} de ${TOTAL_TELAS}`}
+      >
         {Array.from({ length: TOTAL_TELAS }).map((_, i) => (
           <div
             key={i}
+            aria-hidden="true"
             className={`h-1.5 flex-1 rounded-full transition-colors ${i <= tela ? 'bg-sage' : 'bg-sage/20'}`}
           />
         ))}
       </div>
       {erro && (
-        <p className="mb-4 rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700">{erro}</p>
+        <p role="alert" className="mb-4 rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700">{erro}</p>
       )}
       {salvando && (
-        <p className="mb-4 rounded-lg bg-sage-claro p-3 text-sm font-medium text-verde">
+        <p role="status" aria-live="polite" className="mb-4 rounded-lg bg-sage-claro p-3 text-sm font-medium text-verde">
           {ingles ? 'Saving your profile…' : 'Salvando seu cadastro…'}
         </p>
       )}

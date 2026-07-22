@@ -81,6 +81,7 @@ export default function TelaConsentimento({ dados, atualizar, avancar }) {
             type="checkbox"
             checked={dados.consentimentoLgpd}
             onChange={(e) => atualizar('consentimentoLgpd', e.target.checked)}
+            aria-required="true"
             className="mt-0.5 h-5 w-5 shrink-0 accent-sage"
           />
           <span className="text-sm text-verde/80">
@@ -115,6 +116,7 @@ export default function TelaConsentimento({ dados, atualizar, avancar }) {
             type="checkbox"
             checked={dados.cienteAvisoCrn}
             onChange={(e) => atualizar('cienteAvisoCrn', e.target.checked)}
+            aria-required="true"
             className="mt-0.5 h-5 w-5 shrink-0 accent-sage"
           />
           <span className="text-sm text-verde/80">

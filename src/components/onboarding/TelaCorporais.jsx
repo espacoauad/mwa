@@ -40,7 +40,7 @@ export default function TelaCorporais({ dados, atualizarMedida, avancar, voltar 
 
       <div className="mt-auto flex flex-col gap-3 pt-8">
         <Botao onClick={avancar}>{ingles ? 'Continue' : 'Continuar'}</Botao>
-        <button type="button" onClick={avancar} className="py-1 text-sm font-medium text-verde/50 underline">
+        <button type="button" onClick={avancar} className="flex min-h-11 items-center justify-center py-1 text-sm font-medium text-verde/70 underline">
           {ingles ? 'Skip this step' : 'Pular esta etapa'}
         </button>
         <Botao variante="secundario" onClick={voltar}>
