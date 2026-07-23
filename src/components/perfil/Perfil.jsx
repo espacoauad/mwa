@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { RotateCcw, Mail, Phone, AtSign, Globe, Crown, FlaskConical, BadgeCheck, LogOut, Camera, Star, Share2 } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { NIVEIS_ATIVIDADE, OBJETIVOS } from '../../utils/calculos.js'
@@ -11,6 +11,9 @@ import DireitosLgpd from './DireitosLgpd.jsx'
 import BotaoPagamento from '../upgrade/BotaoPagamento.jsx'
 import Avatar from '../game/Avatar.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
+import CarregandoFallback from '../ui/CarregandoFallback.jsx'
+
+const MinhaEvolucao = lazy(() => import('./MinhaEvolucao.jsx'))
 
 const ATIVIDADE_EN = { sedentario: 'Sedentary', leve: 'Lightly active', moderado: 'Moderately active', intenso: 'Very active', atleta: 'Extremely active' }
 const OBJETIVO_EN = { emagrecer: 'Lose weight', manter: 'Maintain weight', ganhar: 'Build muscle' }
@@ -40,6 +43,7 @@ export default function Perfil() {
   const medidas = Object.entries(usuario.medidas ?? {}).filter(([, v]) => v)
   const [enviandoFoto, setEnviandoFoto] = useState(false)
   const [avisoIndicacao, setAvisoIndicacao] = useState(null)
+  const [evolucaoAberta, setEvolucaoAberta] = useState(false)
 
   const estrelas = calcularEstrelas(usuario, pesagens)
 
@@ -163,6 +167,17 @@ export default function Perfil() {
             ))}
           </div>
         )}
+        <button
+          type="button"
+          onClick={() => setEvolucaoAberta(true)}
+          className="mt-4 flex w-full items-center justify-between rounded-2xl bg-white p-5 text-left shadow-sm shadow-verde/5"
+        >
+          <div>
+            <p className="font-semibold text-verde">Minha Evolução</p>
+            <p className="mt-0.5 text-xs text-verde/60">Peso, medidas e sua linha do tempo</p>
+          </div>
+          <span className="text-2xl">📈</span>
+        </button>
       </div>
 
       {/* Indicar uma amiga */}
@@ -331,6 +346,12 @@ export default function Perfil() {
       </div>
 
       <DireitosLgpd />
+
+      {evolucaoAberta && (
+        <Suspense fallback={<CarregandoFallback />}>
+          <MinhaEvolucao onFechar={() => setEvolucaoAberta(false)} />
+        </Suspense>
+      )}
 
       {/* Contato MWA */}
       <div className="mt-4 rounded-2xl bg-verde p-5 text-white">
