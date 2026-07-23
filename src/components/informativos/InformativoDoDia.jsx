@@ -1,6 +1,7 @@
 import { Sparkles } from 'lucide-react'
-import { linkCompraUpgrade, linkSessao, linkWhatsApp } from '../../utils/ofertas.js'
+import { linkSessao, linkWhatsApp } from '../../utils/ofertas.js'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
+import { abrirCheckout } from '../../lib/hotmart.js'
 
 const TONS = {
   bom: { borda: 'border-sage', badge: 'bg-sage text-white' },
@@ -44,7 +45,7 @@ export default function InformativoDoDia({ informativo, dia, irPara }) {
     if (informativo.cta.tipo === 'progresso') irPara?.('progresso')
     else if (informativo.cta.tipo === 'sessao') window.open(linkSessao(dia), '_blank', 'noopener')
     else if (informativo.cta.tipo === 'whatsapp') window.open(linkWhatsApp(informativo.cta.mensagem ?? 'Olá! Quero saber mais sobre o MWA.'), '_blank', 'noopener')
-    else window.open(linkCompraUpgrade(dia), '_blank', 'noopener')
+    else abrirCheckout('programa90d')
   }
 
   return (

@@ -89,7 +89,7 @@ export default function Perfil() {
         <div className="flex items-center gap-4">
           {/* Foto real da pessoa (toque para trocar) */}
           <label
-            className="relative shrink-0 cursor-pointer"
+            className="relative shrink-0 cursor-pointer rounded-full focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2"
             aria-label={ingles ? 'Change profile photo' : 'Alterar foto de perfil'}
           >
             <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border-2 border-ouro bg-white/10">
@@ -102,7 +102,7 @@ export default function Perfil() {
             <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-ouro text-verde-escuro">
               <Camera size={12} />
             </span>
-            <input type="file" accept="image/*" className="hidden" onChange={escolherFoto} disabled={enviandoFoto} />
+            <input type="file" accept="image/*" className="sr-only" onChange={escolherFoto} disabled={enviandoFoto} />
           </label>
 
           <div className="min-w-0 flex-1">

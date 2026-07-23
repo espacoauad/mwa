@@ -1,13 +1,33 @@
+import { useEffect, useRef } from 'react'
 import { X } from 'lucide-react'
 import Botao from '../ui/Botao.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 export default function LembretePesagem({ onFechar, onIrPara }) {
   const { ingles } = useIdioma()
+  const dialogRef = useRef(null)
+
+  useEffect(() => {
+    if (!onFechar) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') onFechar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [onFechar])
+
+  // Move o foco para o diálogo assim que ele é aberto (a11y: modal focus management).
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={onFechar}>
       <div
-        className="w-full max-w-sm rounded-3xl bg-creme p-6 shadow-2xl"
+        ref={dialogRef}
+        tabIndex={-1}
+        className="w-full max-w-sm rounded-3xl bg-creme p-6 shadow-2xl outline-none"
+        onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="lembrete-pesagem-titulo"

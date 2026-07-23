@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, Camera } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { useConfeti } from '../../hooks/useConfeti.js'
@@ -26,6 +26,21 @@ export default function ModalPesagem({ semana, onFechar }) {
   const [peso, setPeso] = useState('')
   const [fotos, setFotos] = useState({})
   const [medidas, setMedidas] = useState({ cintura: '', quadril: '', peito: '' })
+  const dialogRef = useRef(null)
+
+  useEffect(() => {
+    if (!onFechar) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') onFechar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [onFechar])
+
+  // Move o foco para o diálogo assim que ele é aberto (a11y: modal focus management).
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   function escolherFoto(id, e) {
     const arquivo = e.target.files?.[0]
@@ -60,7 +75,9 @@ export default function ModalPesagem({ semana, onFechar }) {
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-verde-escuro/50" onClick={onFechar}>
       <div
-        className="max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-6"
+        ref={dialogRef}
+        tabIndex={-1}
+        className="max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-6 outline-none"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"

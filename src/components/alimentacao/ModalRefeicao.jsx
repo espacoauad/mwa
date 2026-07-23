@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { X, Search, Camera, Star, AlertCircle } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { ALIMENTOS, CATEGORIAS, macrosDoAlimento } from '../../data/alimentos.js'
@@ -45,6 +45,21 @@ export default function ModalRefeicao() {
     carbos: editando?.manual ? editando.carbos : '', gordura: editando?.manual ? editando.gordura : '',
     fibras: editando?.manual ? editando.fibras : '',
   })
+  const dialogRef = useRef(null)
+
+  useEffect(() => {
+    if (!fecharModalRefeicao) return
+    function aoTeclar(e) {
+      if (e.key === 'Escape') fecharModalRefeicao()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [fecharModalRefeicao])
+
+  // Move o foco para o diálogo assim que ele é aberto (a11y: modal focus management).
+  useEffect(() => {
+    dialogRef.current?.focus()
+  }, [])
 
   const todosAlimentos = useMemo(() => [...personalizados, ...ALIMENTOS], [personalizados])
   const alimento = todosAlimentos.find((a) => a.id === alimentoId)
@@ -125,7 +140,9 @@ export default function ModalRefeicao() {
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-verde-escuro/50" onClick={fecharModalRefeicao}>
       <div
-        className="max-h-[94vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-6"
+        ref={dialogRef}
+        tabIndex={-1}
+        className="max-h-[94vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-creme p-6 outline-none"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"

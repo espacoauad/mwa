@@ -116,7 +116,7 @@ export default function Hoje({ irParaDicas }) {
           {/* Foto real (toque para trocar) + avatar gamificado logo abaixo (toque abre a loja) */}
           <div className="flex flex-col items-center gap-1.5">
             <label
-              className="relative cursor-pointer"
+              className="relative cursor-pointer rounded-full focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2"
               aria-label={ingles ? 'Change profile photo' : 'Trocar foto de perfil'}
             >
               <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-2 border-ouro bg-white/10">
@@ -132,7 +132,7 @@ export default function Hoje({ irParaDicas }) {
               <input
                 type="file"
                 accept="image/*"
-                className="hidden"
+                className="sr-only"
                 onChange={escolherFoto}
                 disabled={enviandoFoto}
               />
