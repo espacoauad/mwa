@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { pesagensComRotulo, proporcaoCinturaQuadril, estagioPostura, corConquista } from '../../utils/evolucao.js'
@@ -10,6 +10,7 @@ const FOTO_LABELS = { frente: 'Frente', costas: 'Costas', latEsq: 'Lateral esq.'
 export default function MinhaEvolucao({ onFechar }) {
   const { pesagens, usuario, totalDias } = useApp()
   const dialogRef = useRef(null)
+  const [fotosComErro, setFotosComErro] = useState(() => new Set())
 
   useEffect(() => {
     if (!onFechar) return
@@ -112,20 +113,29 @@ export default function MinhaEvolucao({ onFechar }) {
                       tamanho="sm"
                     />
                     <div className="grid grid-cols-2 gap-1">
-                      {Object.entries(FOTO_LABELS).map(([id, rotuloFoto]) =>
-                        pesagem.fotos?.[id] ? (
+                      {Object.entries(FOTO_LABELS).map(([id, rotuloFoto]) => {
+                        const chave = `${pesagem.id}:${id}`
+                        return pesagem.fotos?.[id] && !fotosComErro.has(chave) ? (
                           <img
                             key={id}
                             src={pesagem.fotos[id]}
                             alt={`${rotuloFoto} — ${rotulo}`}
                             className="aspect-[3/4] w-full rounded-lg object-cover"
+                            onError={() =>
+                              setFotosComErro((atual) => {
+                                if (atual.has(chave)) return atual
+                                const proximo = new Set(atual)
+                                proximo.add(chave)
+                                return proximo
+                              })
+                            }
                           />
                         ) : (
                           <span key={id} className="flex aspect-[3/4] w-full items-center justify-center rounded-lg bg-creme text-[10px] text-verde/40">
                             Sem foto
                           </span>
-                        ),
-                      )}
+                        )
+                      })}
                     </div>
                   </div>
                 ))}
