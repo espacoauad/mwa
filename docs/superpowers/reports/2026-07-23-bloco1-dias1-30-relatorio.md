@@ -26,10 +26,11 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 
 | Dia | Arquivo | Campo | Antes → Depois (resumo) | Categoria | Justificativa |
 |---|---|---|---|---|---|
-| — | conceitosNutricionais.js | `porQue` (id: gordura) | "...é o que garante todos os benefícios sem sabotar..." → "...é o que ajuda a aproveitar os benefícios sem sabotar..." | claim de saúde | "garante" é afirmação absoluta não defensável para CRN-1; suavizado para linguagem defensável |
-| — | conceitosNutricionais.js | `porQue` (id: micronutrientes) | "...densidade nutricional garante que, mesmo comendo menos calorias..." → "...densidade nutricional contribui para que, mesmo comendo menos calorias..." | claim de saúde | "garante" é afirmação absoluta não defensável para CRN-1; suavizado para "contribui para" |
+| — | conceitosNutricionais.js | `porQue` (id: gordura) | "...é o que garante todos os benefícios sem sabotar..." → "...é o que ajuda a aproveitar os benefícios sem sabotar..." | segurança | "garante" é afirmação absoluta não defensável para CRN-1; suavizado para linguagem defensável |
+| — | conceitosNutricionais.js | `porQue` (id: micronutrientes) | "...densidade nutricional garante que, mesmo comendo menos calorias..." → "...densidade nutricional contribui para que, mesmo comendo menos calorias..." | segurança | "garante" é afirmação absoluta não defensável para CRN-1; suavizado para "contribui para" |
 
 ## Itens Sinalizados (não editados — decisão da Wanessa)
 
 | Dia | Arquivo | O que é | Por que precisa de decisão |
 |---|---|---|---|
+| — | conceitosNutricionais.js | Nenhum dos 9 conceitos usa 1ª pessoa da Wanessa ("eu"/"comigo") — é um glossário de referência, não uma fala pessoal | Confirmar se isso é intencional (tom de apêndice/glossário) ou se deveria ganhar voz pessoal como o resto do conteúdo |
