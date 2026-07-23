@@ -85,8 +85,11 @@ Acessível a partir do Perfil (`src/components/perfil/`).
 
 - **Proporção cintura/quadril**: recalculada a cada marco a partir das
   medidas reais registradas naquela pesagem (`medidas.cintura`,
-  `medidas.quadril`). Sem medida registrada → usa o valor do marco anterior
-  disponível (não quebra o gráfico/avatar por dado faltante).
+  `medidas.quadril`). Sem medida registrada → o marco fica sem dado (gap no
+  gráfico, avatar cai no padrão neutro) em vez de repetir o valor do marco
+  anterior — decisão tomada na implementação (2026-07-23): mais honesto
+  mostrar a ausência do dado do que sugerir que a medida foi retirada de
+  novo quando não foi.
 - **Postura/energia**: pequena progressão visual (mais ereta, braços mais
   abertos) conforme os marcos avançam — reforço motivacional, não literal.
 - **Cor/acessório de conquista**: cada marco atingido desbloqueia uma
