@@ -5,6 +5,7 @@ import { useConfeti } from '../../hooks/useConfeti.js'
 import Botao from '../ui/Botao.jsx'
 import CampoNumero from '../ui/CampoNumero.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
+import { redimensionarImagemProporcional } from '../../lib/imagem.js'
 
 const FOTOS = [
   { id: 'frente', pt: 'Frente', en: 'Front' },
@@ -42,9 +43,11 @@ export default function ModalPesagem({ semana, onFechar }) {
     dialogRef.current?.focus()
   }, [])
 
-  function escolherFoto(id, e) {
+  async function escolherFoto(id, e) {
     const arquivo = e.target.files?.[0]
-    if (arquivo) setFotos((f) => ({ ...f, [id]: URL.createObjectURL(arquivo) }))
+    if (!arquivo) return
+    const dataUrl = await redimensionarImagemProporcional(arquivo)
+    setFotos((f) => ({ ...f, [id]: dataUrl }))
   }
 
   const valido = Number(peso) >= 30 && Number(peso) <= 300
