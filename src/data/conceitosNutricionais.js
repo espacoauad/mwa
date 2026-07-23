@@ -64,7 +64,7 @@ export const CONCEITOS_NUTRICIONAIS = [
     oQueE:
       'O macronutriente mais calórico (9 kcal por grama), essencial para produção hormonal, absorção das vitaminas A, D, E e K, e saúde das membranas celulares.',
     porQue:
-      'Gordura não engorda por si só — excesso de calorias engorda, e a gordura concentra mais calorias por grama que qualquer outro macro. Escolher bem (azeite, ômega-3) e medir a quantidade é o que garante todos os benefícios sem sabotar o seu déficit calórico.',
+      'Gordura não engorda por si só — excesso de calorias engorda, e a gordura concentra mais calorias por grama que qualquer outro macro. Escolher bem (azeite, ômega-3) e medir a quantidade é o que ajuda a aproveitar os benefícios sem sabotar o seu déficit calórico.',
   },
   {
     id: 'fibras',
@@ -82,6 +82,6 @@ export const CONCEITOS_NUTRICIONAIS = [
     oQueE:
       'Vitaminas e minerais que o corpo precisa em pequenas quantidades, mas que são essenciais para praticamente todas as funções metabólicas, imunológicas e hormonais.',
     porQue:
-      'Uma alimentação em déficit calórico, se mal planejada, pode ser pobre em micronutrientes — e isso compromete energia, imunidade e até os próprios resultados. Escolher alimentos de alta densidade nutricional garante que, mesmo comendo menos calorias, você continue bem nutrida.',
+      'Uma alimentação em déficit calórico, se mal planejada, pode ser pobre em micronutrientes — e isso compromete energia, imunidade e até os próprios resultados. Escolher alimentos de alta densidade nutricional contribui para que, mesmo comendo menos calorias, você continue bem nutrida.',
   },
 ]
