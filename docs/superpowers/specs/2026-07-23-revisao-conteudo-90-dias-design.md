@@ -31,6 +31,14 @@ com peso igual). Consistência interna é secundária, mas cuidada de passagem.
   (`docs/MWA-BrandBook-LandingPage-Copy.md`, atualmente modificado) diz "21 dias" e está
   **fora de sincronia** — será atualizado depois, na frente de estética/landing. **Não é
   escopo deste projeto.**
+  - **Histórico (esclarecido em 2026-07-23):** o modelo antigo era 21 dias base + 90 dias
+    de continuação nova = 111 dias total (ver docs obsoletos citados no Bloco 3). Após a
+    auditoria recomendar abandonar os 21 dias, os dias 22–30 — que antes eram o início do
+    conteúdo de continuação — foram remanejados para dentro da jornada base, que passou a
+    ter 30 dias. A continuação ("Programa de 90 Dias") não é mais um ciclo novo de 90 dias:
+    é a extensão que leva a aluna do dia 31 ao dia 90 (60 dias de conteúdo novo), sempre
+    contando a partir da mesma data de início da jornada. Total real: **90 dias corridos**,
+    nunca 111, nunca 120. `totalDiasPrograma` (`src/utils/calculos.js`) só retorna 30 ou 90.
 - **Nível de edição:** editar direto no código + entregar relatório do que mudou. A Wanessa
   reverte o que não gostar.
 - **Abordagem:** revisão em **blocos por fase da jornada** (1–30, 31–60, 61–90), com um
@@ -113,7 +121,16 @@ Um arquivo markdown em `docs/superpowers/reports/` por bloco, contendo:
 - `src/data/dicas90.js` (dias 61–90)
 - `src/data/informativos.js` (recorte 61–90)
 - `src/data/lanches38a89.js` (61–89)
-- `src/data/versiculos.js` (dias 61–90; versículos 91–111 são pós-programa — revisar voz)
+- `src/data/versiculos.js` (dias 61–90; voz da `reflexao` + conferência de referência)
+- **Limpeza de resíduo do modelo antigo (21+90=111 dias), confirmada com a Wanessa em
+  2026-07-23:** o app não passa do dia 90 (`totalDiasPrograma` só retorna 30 ou 90 —
+  ver `src/utils/calculos.js`). Isso deixou dois resíduos do modelo antigo para tratar
+  neste bloco:
+  - `src/data/versiculos.js` tem 21 versículos órfãos para os dias 91–111 ("PERMANÊNCIA
+    E CONTINUAÇÃO") que nunca são exibidos — sinalizar para remoção ou repropósito.
+  - `BLOQUEIO_ACESSO_DIA_111.md` e `CONCLUSAO_111_DIAS.md` (raiz do projeto) descrevem
+    a lógica de bloqueio no dia 111 do modelo antigo (21 dias base + 90 de continuação),
+    sem nenhuma correspondência no código atual — marcar como obsoletos/arquivar.
 
 ## 8. Critérios de sucesso
 
