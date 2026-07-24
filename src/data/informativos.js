@@ -858,7 +858,7 @@ export const INFORMATIVOS = [
       { nome: 'Refrigerante comum (lata)', tom: 'ruim', itens: [['Açúcar', '~35g (7 colheres de chá)'], ['Saciedade', 'zero'], ['Nutriente', 'zero']] },
       { nome: 'Água com gás e limão', tom: 'bom', itens: [['Açúcar', '0g'], ['Saciedade', 'ajuda a hidratar'], ['Nutriente', 'vitamina C do limão']] },
     ],
-    dica: 'Uma lata de refrigerante por dia soma quase 1kg de açúcar por mês, sem entregar nenhuma saciedade em troca — o açúcar líquido não ativa os mesmos sinais de saciedade que o açúcar de um alimento sólido. A troca por água com gás e limão é simples, e o impacto acumulado é grande.',
+    dica: 'Uma lata de refrigerante por dia soma mais de 1kg de açúcar por mês, sem entregar nenhuma saciedade em troca — o açúcar líquido não ativa os mesmos sinais de saciedade que o açúcar de um alimento sólido. A troca por água com gás e limão é simples, e o impacto acumulado é grande.',
     cta: null,
   },
   {
@@ -941,7 +941,7 @@ export const INFORMATIVOS = [
   {
     dia: 49,
     emoji: '🧩',
-    titulo: 'Balance Entre Alimentos: Fórmula Simples',
+    titulo: 'Balanço Entre Alimentos: Fórmula Simples',
     opcoes: [
       { nome: 'Focar só em restringir', tom: 'ruim', itens: [['Foco', 'no que tirar'], ['Sustentação', 'baixa']] },
       { nome: 'Focar em adicionar o que falta (proteína, fibra, água)', tom: 'bom', itens: [['Foco', 'no que somar'], ['Sustentação', 'alta']] },
@@ -985,12 +985,12 @@ export const INFORMATIVOS = [
   {
     dia: 53,
     emoji: '😤',
-    titulo: 'Stress: O Efeito Silencioso no Progresso',
+    titulo: 'Estresse: O Efeito Silencioso no Progresso',
     opcoes: [
-      { nome: 'Comer para aliviar o stress, no piloto automático', tom: 'ruim', itens: [['Consciência da escolha', 'baixa'], ['Cortisol elevado', 'favorece acúmulo abdominal']] },
+      { nome: 'Comer para aliviar o estresse, no piloto automático', tom: 'ruim', itens: [['Consciência da escolha', 'baixa'], ['Cortisol elevado', 'favorece acúmulo abdominal']] },
       { nome: 'Pausa de 2 minutos antes de decidir comer', tom: 'bom', itens: [['Consciência da escolha', 'alta'], ['Cortisol', 'tende a reduzir com a pausa']] },
     ],
-    dica: 'O cortisol elevado de forma crônica favorece o acúmulo de gordura na região abdominal e aumenta o apetite por alimentos calóricos — o stress afeta o corpo muito além da alimentação em si. Uma pausa consciente de 2 minutos antes de comer por impulso já muda o resultado do dia.',
+    dica: 'O cortisol elevado de forma crônica favorece o acúmulo de gordura na região abdominal e aumenta o apetite por alimentos calóricos — o estresse afeta o corpo muito além da alimentação em si. Uma pausa consciente de 2 minutos antes de comer por impulso já muda o resultado do dia.',
     cta: null,
   },
   {
