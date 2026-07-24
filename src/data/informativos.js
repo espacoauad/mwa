@@ -43,8 +43,8 @@ export const INFORMATIVOS = [
         nome: '3 ovos cozidos',
         tom: 'neutro',
         itens: [
-          ['Calorias', '155'],
-          ['Proteína', '13g ✅'],
+          ['Calorias', '210'],
+          ['Proteína', '18g ✅'],
           ['Tempo de preparo', '15 min'],
           ['Saciedade', '3h'],
         ],
@@ -405,7 +405,7 @@ export const INFORMATIVOS = [
         extras: ['Agora é reta final. Faltam só 7 dias!'],
       },
     ],
-    dica: 'Duas semanas de constância mudam a bioquímica do seu corpo, querida — não é força de vontade, é adaptação real. Sua sensibilidade à insulina melhora, seus níveis de inflamação tendem a cair e seu cérebro começa a associar as novas escolhas alimentares a menos esforço, porque elas viram rotina. É por isso que roupas folgam e o rosto afina antes mesmo de o número da balança mudar muito: seu corpo está redistribuindo líquido e gordura antes de "revelar" o resultado final. Registre a pesagem da semana 2 e compare com a semana 1 — olhe para a tendência, não para o número isolado de um único dia. Faltam 7 dias e você já provou que consegue sustentar isso. 💚',
+    dica: 'Duas semanas de constância mudam a bioquímica do seu corpo, querida — não é força de vontade, é adaptação real. Sua sensibilidade à insulina tende a melhorar, seus níveis de inflamação tendem a cair e seu cérebro começa a associar as novas escolhas alimentares a menos esforço, porque elas viram rotina. É por isso que roupas folgam e o rosto afina antes mesmo de o número da balança mudar muito: seu corpo está redistribuindo líquido e gordura antes de "revelar" o resultado final. Registre a pesagem da semana 2 e compare com a semana 1 — olhe para a tendência, não para o número isolado de um único dia. Faltam 7 dias e você já provou que consegue sustentar isso. 💚',
     cta: { label: 'Ver Meu Progresso', tipo: 'progresso' },
   },
   {
@@ -611,11 +611,11 @@ export const INFORMATIVOS = [
           ['Açúcar', '0'],
           ['Efeito', 'hidrata'],
           ['Saúde', '10/10'],
-          ['Emagrece?', 'ESSENCIAL'],
+          ['Emagrece?', 'SIM, apoia'],
         ],
       },
     ],
-    dica: 'Os 40g de açúcar de uma única lata de refrigerante equivalem a cerca de 8 colheres de chá — um volume que, sozinho, já ultrapassa o limite diário recomendado de açúcar adicionado. E o efeito não para na caloria: esse açúcar gera um pico de insulina seguido de uma queda brusca de glicose, que se manifesta como fome, irritabilidade e vontade de doce logo depois. O chá, além de zero caloria, tem compostos bioativos que apoiam o controle do apetite e ainda contam para sua meta de hidratação do dia. E a água continua sendo, sempre, a base inegociável: é o solvente de todas as reações metabólicas do seu corpo, inclusive da queima de gordura. Priorize sempre água, use o chá como aliado estratégico e reserve o refrigerante para exceções raras e conscientes. 💚',
+    dica: 'Os 40g de açúcar de uma única lata de refrigerante equivalem a cerca de 8 colheres de chá — um volume que, sozinho, já ultrapassa o limite diário recomendado de açúcar adicionado. E o efeito não para na caloria: esse açúcar gera um pico de insulina seguido de uma queda brusca de glicose, que se manifesta como fome, irritabilidade e vontade de doce logo depois. O chá, além de zero caloria, tem compostos bioativos que apoiam o controle do apetite e ainda contam para sua meta de hidratação do dia. E a água continua sendo, sempre, a base inegociável: é o solvente da grande maioria das reações metabólicas do seu corpo, incluindo os processos ligados à queima de gordura. Priorize sempre água, use o chá como aliado estratégico e reserve o refrigerante para exceções raras e conscientes. 💚',
     cta: null,
   },
   {
