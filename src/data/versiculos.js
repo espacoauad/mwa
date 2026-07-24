@@ -26,7 +26,7 @@ export const versiculos = [
     texto: "Portanto, se alguém está em Cristo, é nova criação. As coisas antigas já se foram; eis que surgiram coisas novas!",
     referencia: "2 Coríntios 5:17",
     tema: "Transformação",
-    reflexao: "Você não é mais quem era ontem. Cada dia é um novo começo. Deixe o passado para trás e abraçe essa nova versão de si mesma."
+    reflexao: "Você não é mais quem era ontem. Cada dia é um novo começo. Deixe o passado para trás e abrace essa nova versão de si mesma."
   },
   {
     dia: 4,
@@ -124,7 +124,7 @@ export const versiculos = [
     texto: "Abençoado é o homem que não anda conforme o conselho dos ímpios.",
     referencia: "Salmos 1:1",
     tema: "Boas escolhas",
-    reflexao: "Nem todos os conselhos que você recebe são para você. Filtro tudo através da sabedoria e do amor por si mesma."
+    reflexao: "Nem todos os conselhos que você recebe são para você. Filtre tudo através da sabedoria e do amor por si mesma."
   },
   {
     dia: 18,
