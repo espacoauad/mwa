@@ -181,7 +181,7 @@ export const DICAS = [
     icone: '🐟',
     titulo: 'Ômega-3: a gordura anti-inflamatória',
     conteudo:
-      'O ômega-3 (EPA e DHA) é uma gordura que o corpo não produz — precisa vir da alimentação. Ele reduz inflamação, protege o coração, apoia o cérebro e pode até melhorar a recuperação muscular: poucos gramas entregam um benefício funcional desproporcional ao tamanho da porção, o que faz dele um dos nutrientes de maior densidade nutricional que existem. As melhores fontes são peixes gordos de água fria: salmão, sardinha, atum. A recomendação é consumi-los 2x por semana. Chia e linhaça trazem a versão vegetal (ALA), que o corpo converte em pequena quantidade. Se peixe não faz parte da sua rotina, a suplementação é uma alternativa prática.',
+      'O ômega-3 (EPA e DHA) é uma gordura que o corpo não produz — precisa vir da alimentação. Ele ajuda a reduzir a inflamação, contribui para a saúde do coração, favorece o cérebro e pode até melhorar a recuperação muscular: poucos gramas entregam um benefício funcional desproporcional ao tamanho da porção, o que faz dele um dos nutrientes de maior densidade nutricional que existem. As melhores fontes são peixes gordos de água fria: salmão, sardinha, atum. A recomendação é consumi-los 2x por semana. Chia e linhaça trazem a versão vegetal (ALA), que o corpo converte em pequena quantidade. Se peixe não faz parte da sua rotina, a suplementação é uma alternativa prática.',
     dicaPratica: 'Inclua sardinha, salmão ou atum em uma refeição hoje — ou 1 colher de chia no iogurte.',
     produto: { nome: 'Ômega 3 (óleo de peixe)', descricao: 'Cápsulas de óleo de peixe ricas em EPA e DHA, com óleos essenciais de hortelã e tomilho.' },
   },
