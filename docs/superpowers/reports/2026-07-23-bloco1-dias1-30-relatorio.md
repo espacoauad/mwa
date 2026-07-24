@@ -10,7 +10,7 @@ Arquivos revisados — Bloco 2 (dias 31–60): dicas90.js (dias 31–60), inform
 
 ## Resumo Executivo
 
-- Total de mudanças: 36 (fato: 19, voz: 3, segurança: 11, consistência: 3)
+- Total de mudanças: 50 (fato: 22, voz: 14, segurança: 11, consistência: 3)
 - Total de itens sinalizados para decisão da Wanessa: 12
 - Arquivos sem nenhuma alteração necessária: nenhum (todos os 6 arquivos revisados receberam pelo menos uma edição)
 
@@ -115,12 +115,26 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | 19 | lanchesProteicos.js | `proteina` | "~23g" → "~35g" | fato | Composição real confirmada: 1 dose de whey 3W (~26g) + 3 colheres de aveia (~3.75g) + 150ml de leite (~5.25g) = ~35g |
 | 25 | lanches22a37.js | `proteina` | "~20g" → "~25g" | fato | Composição real confirmada: 2 colheres de shake (~18g) + 200ml de leite desnatado (~7g) + fibras solúveis (~0g) = ~25g |
 | 30 | lanches22a37.js | `proteina` | "~28g" → "~35g" | fato | Composição real confirmada: 1 dose de whey 3W (~26g) + ½ banana (~0.5g) + 1 colher de aveia (~1.25g) + 200ml de leite (~7g) = ~34.75g |
+| 31 | dicas90.js | `conteudo` | "o cérebro fica 60 dias sem reforço real" → "o cérebro fica seis meses sem reforço real" | consistência | A frase seguinte já dizia "Seis meses é muito tempo para o sistema nervoso central", então "60 dias" contradizia o próprio parágrafo |
 | 32 | dicas90.js | `conteudo` | "decide com criterio" → "decide com critério" | voz | Correção ortográfica (acentuação) |
 | 32 | dicas90.js | `conteudo` | "fome urgente desativa seu cérebro executivo... Ativa em vez disso circuitos primitivos..." / "...mantém a grelina sob controle e preserva sua capacidade de decidir bem" → "fome urgente compromete seu cérebro executivo... e dá mais espaço a circuitos primitivos..." / "...ajuda a manter a grelina sob controle e favorece sua capacidade de decidir bem" | segurança | "desativa"/"mantém"/"preserva" são verbos de causalidade absoluta sobre função cognitiva, não defensáveis para CRN-1 (mesmo padrão "garante"→"ajuda a"/"favorece" já corrigido no Bloco 1); suavizado para linguagem defensável |
 | 33 | dicas90.js | `conteudo` | "Isso explica um estudo clássico: antes de lanchar..." → "Um truque simples costuma ajudar: antes de lanchar..." | fato | Referência a "um estudo clássico" não identificado/não verificável (diferente do dia 35 do mesmo arquivo, que cita corretamente Spiegel et al., 2004); removida a alegação de estudo específico não verificável, mantendo a dica prática intacta |
+| 34 | dicas90.js | `titulo` | "Vida Vermelha" → "Vida Real" | voz | Correção de erro de digitação |
+| 37 | dicas90.js | `conteudo` | "pe com 2 colheres" → "põe 2 colheres" | voz | Correção de erro de digitação |
+| 38 | dicas90.js | `conteudo` | "Nutritivo, totalmente diferentes." → "Nutricionalmente, são totalmente diferentes." | voz | Correção gramatical |
+| 39 | dicas90.js | `dicaPratica` | "Memorizando." → "Memorize esse número." | voz | Correção gramatical/imperativo, consistente com o resto do arquivo |
+| 40 | dicas90.js | `conteudo` | "Amendomim" → "Amendoim" | voz | Correção de erro de digitação |
+| 41 | dicas90.js | `conteudo` / `dicaPratica` | "seu brain não registra" → "seu cérebro não registra"; "CHAGÁ" → "CHÁ" | voz | Anglicismo e erro de digitação |
+| 43 | dicas90.js | `conteudo` | "sem mastigação que significaria" → "sem mastigação de verdade" | voz | Correção gramatical |
 | 44 | dicas90.js | `conteudo` | "você não vê quantity da mesma forma..." → "você não vê a quantidade da mesma forma..." | voz | Correção de erro de digitação/idioma (palavra em inglês "quantity" em texto em português) |
 | 45 | dicas90.js | `conteudo` | "Se você costuma comer requeijão no pão no café, trocar por ricota economiza 80 kcal por dia..." → "Se você costuma comer manteiga no pão no café, trocar por ricota economiza 80 kcal por dia..." | consistência | Inconsistência matemática interna: o parágrafo já havia estabelecido manteiga = 100 kcal/colher e ricota = 20 kcal/colher (diferença de 80 kcal, batendo com o valor citado); requeijão tradicional = 45 kcal/colher, cuja troca por ricota economizaria apenas ~25 kcal, não 80 kcal. Corrigido o alimento de referência da frase para bater com a conta já apresentada |
-| 52 | dicas90.js | `conteudo` | "2000 kcal por dia... 1550 kcal por dia... Não 1000. Não 800. 1550." → "2.000 kcal por dia... 1.550 kcal por dia... Não 1.000. Não 800. 1.550." | consistência | Formatação de milhar (separador ".") usada de forma inconsistente dentro do mesmo parágrafo — "~3.150 kcal" já usava o separador, os demais números de 4 dígitos não; padronizado |
+| 46 | dicas90.js | `conteudo` | "eaten with presence" → "saboreada com presença" | voz | Anglicismo — frase em inglês dentro do texto em português |
+| 47 | dicas90.js | `conteudo` | "150-200 kcal" → "~90-100 kcal" (para 30g de queijo); "um lanche INTEIRO" → "quase um lanche inteiro"; "as 200 calorias" → "essas calorias" | fato | 150-200 kcal para 30g de queijo implicava ~500-670 kcal/100g, implausível; corrigido para valor plausível |
+| 49 | dicas90.js | `conteudo` | "iguais anyway" → "iguais de qualquer forma" | voz | Anglicismo (nota: dia 49 já tem item separado em `## Itens Sinalizados` sobre valor de kcal de biscoito questionável — edição diferente, não duplicada) |
+| 50 | dicas90.js | `conteudo` | "economizou 400 kcal" → "economizou quase 420 kcal" | fato | Soma correta dos números do parágrafo é 120+75+125+100=420, não 400 |
+| 51 | dicas90.js | `conteudo` | "encerraa" → "encerra" | voz | Correção de erro de digitação |
+| 51 | dicas90.js | `conteudo` | "Informação te deixa FREE" → "Informação te deixa LIVRE" | voz | Anglicismo (palavra em inglês maiúscula usada para ênfase, substituída por "LIVRE" que preserva a mesma ênfase) — mesmo padrão de anglicismo já corrigido nos dias 41, 46 e 49 do mesmo arquivo |
+| 52 | dicas90.js | `conteudo` | "2000 kcal por dia... 1550 kcal por dia... Não 1000. Não 800. 1550... Vira 3000 kcal por semana" → "2.000 kcal por dia... 1.550 kcal por dia... Não 1.000. Não 800. 1.550... Vira ~3.150 kcal por semana" | fato | Correção aritmética: 450 kcal/dia × 7 dias = 3.150 kcal/semana, não 3000 kcal como estava no texto original; além disso, formatação de milhar (separador ".") padronizada nos demais números de 4 dígitos do mesmo parágrafo |
 
 ## Itens Sinalizados (não editados — decisão da Wanessa)
 
