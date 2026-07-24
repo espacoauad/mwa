@@ -4,6 +4,17 @@ Data: 2026-07-23
 Arquivos revisados: conceitosNutricionais.js, dicas.js, informativos.js (dias 1–30),
 lanchesProteicos.js, lanches22a37.js (dias 22–30), versiculos.js (dias 1–30, campo reflexao)
 
+## Resumo Executivo
+
+- Total de mudanças: 21 (fato: 5, voz: 3, segurança: 11, consistência: 2)
+- Total de itens sinalizados para decisão da Wanessa: 23
+- Arquivos sem nenhuma alteração necessária: nenhum (todos os 6 arquivos revisados receberam pelo menos uma edição)
+- Achados estruturais fora do escopo de texto/fatos, sinalizados para decisão separada:
+  1. **`lanchesProteicos.js` tem uma entrada `dia: 30` órfã/duplicada** que diverge da entrada real do dia 30 em `lanches22a37.js` (a que o app de fato usa). Não afeta usuárias reais (o app roteia corretamente), mas afeta a rota de preview interna `/preview-lanches`. Decisão: remover a entrada órfã, ou mantê-la como está.
+  2. **`versiculos.js`, dia 30: o campo `texto` não é uma citação bíblica real** — parece copy do próprio programa ("Ao final destes 30 dias...") inserida no campo reservado para o versículo NVI, com uma referência ("Romanos 12:2") que não corresponde. Decisão: substituir por uma citação bíblica real, ou reformular o campo.
+  3. **5 outras referências bíblicas com `texto`/`referencia` divergentes** (dias 6, 8, 18, 22 de `versiculos.js`) — decisão: confirmar/corrigir cada uma.
+  4. **Ausência de 1ª pessoa da Wanessa** é um padrão recorrente em `conceitosNutricionais.js`, `lanchesProteicos.js`, `lanches22a37.js` e `versiculos.js` (reflexões) — não editado por ser uma mudança de tom em massa que merece confirmação antes de reescrever dezenas de textos.
+
 ## Tabela de Referência Nutricional
 
 Valores padrão usados para conferência de plausibilidade (fonte: TACO/USDA, arredondado).
