@@ -44,8 +44,8 @@ export const versiculos = [
   },
   {
     dia: 6,
-    texto: "Você é digno de cuidado, de amor e de atenção. Honre o corpo que você habita.",
-    referencia: "1 Pedro 2:25",
+    texto: "Você é precioso e honrado à minha vista, e eu o amo.",
+    referencia: "Isaías 43:4",
     tema: "Autorrespeito",
     reflexao: "Não espere que outros a cuidem. Seja sua própria prioridade. O cuidado que você dedica a si é um reflexo do que você merece."
   },
@@ -58,8 +58,8 @@ export const versiculos = [
   },
   {
     dia: 8,
-    texto: "Como é alegre a vida de quem está em paz com tudo! Como é bem-aventurado!",
-    referencia: "Provérbios 17:1",
+    texto: "E a paz de Deus, que excede todo o entendimento, guardará os seus corações e as suas mentes em Cristo Jesus.",
+    referencia: "Filipenses 4:7",
     tema: "Paz interior",
     reflexao: "A alegria não vem da perfeição. Vem da paz com quem você é agora. Busque essa paz hoje."
   },
@@ -128,8 +128,8 @@ export const versiculos = [
   },
   {
     dia: 18,
-    texto: "Uma vida calma e tranquila é melhor que a riqueza e a fama.",
-    referencia: "1 Timóteo 6:6",
+    texto: "Melhor é ter um punhado com tranquilidade do que dois punhados à custa de muito trabalho; é correr atrás do vento.",
+    referencia: "Eclesiastes 4:6",
     tema: "Simplicidade",
     reflexao: "A vida saudável não precisa ser complicada. Simplicidade, consistência e paz valem mais que qualquer fórmula mágica."
   },
@@ -158,8 +158,8 @@ export const versiculos = [
   // DIAS 22-42: CONSISTÊNCIA - Permanecer, disciplina, hábito
   {
     dia: 22,
-    texto: "Semeia um pensamento e você colhe uma ação; semeia uma ação e você colhe um hábito.",
-    referencia: "Provérbios 23:7",
+    texto: "Não nos cansemos de fazer o bem, pois no tempo próprio colheremos se não desistirmos.",
+    referencia: "Gálatas 6:9",
     tema: "Construção de hábitos",
     reflexao: "Cada pequena escolha hoje planta uma semente para amanhã. Os hábitos são construídos repetição após repetição."
   },
@@ -214,10 +214,10 @@ export const versiculos = [
   },
   {
     dia: 30,
-    texto: "Ao final destes 30 dias, você não é mais quem era. Você é forte, consciente e capaz.",
-    referencia: "Romanos 12:2",
-    tema: "Renovação",
-    reflexao: "Parabéns pelos seus 30 dias! Você provou para si mesma que consegue. Agora, mantenha essa força viva."
+    texto: "Não fui eu que ordenei a você? Seja forte e corajoso! Não se apavore nem desanime, pois o Senhor, o seu Deus, estará com você por onde você andar.",
+    referencia: "Josué 1:9",
+    tema: "Coragem",
+    reflexao: "Você chegou até aqui. Seja forte e corajosa para o que vem a seguir — você não caminha sozinha."
   },
   {
     dia: 31,

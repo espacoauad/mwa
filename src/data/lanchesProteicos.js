@@ -229,17 +229,6 @@ export const LANCHES_PROTEICOS = [
     preparo: 'Pique as frutas numa tigela, cubra com o iogurte grego e finalize com canela. Se quiser crocância, salpique a aveia por cima.',
     produto: null,
   },
-  {
-    dia: 30,
-    icone: '🎉',
-    titulo: 'Prato-celebração proteico',
-    proteina: '~28g',
-    descricao:
-      'Hoje é dia de celebrar o quanto você já evoluiu! Monte uma tábua colorida com suas melhores fontes de proteína — a prova de que comer bem é simples e gostoso.',
-    ingredientes: ['Ovos de codorna ou fatias de ovo', 'Cubos de queijo', 'Peito de peru ou frango', 'Castanhas e tomatinhos'],
-    preparo: 'Disponha tudo numa tábua ou prato bonito. Celebre o novo hábito que agora é seu.',
-    produto: null,
-  },
 ]
 
 // Retorna o lanche do dia informado (com fallback para o dia 1).

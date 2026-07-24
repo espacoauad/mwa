@@ -249,11 +249,11 @@ export const INFORMATIVOS = [
         nome: 'Banana + aveia + mel',
         tom: 'bom',
         itens: [
-          ['Banana', '105 cal · 1g prot'],
+          ['Banana', '90 cal · 1g prot'],
           ['Aveia', '80 cal · 3g prot'],
           ['Mel', '65 cal'],
         ],
-        total: '250 cal · 4g proteína',
+        total: '235 cal · 4g proteína',
         extras: ['Preço: R$ 2–3', 'Saúde: 9/10'],
       },
       {
@@ -322,14 +322,14 @@ export const INFORMATIVOS = [
         tom: 'bom',
         itens: [
           ['Café preto', '5 cal'],
-          ['Leite desnatado 200ml', '80 cal'],
+          ['Leite desnatado 200ml', '70 cal'],
           ['Adoçante', '0 cal'],
         ],
-        total: '85 cal · 8g PROTEÍNA ✅',
-        extras: ['Economia: 80 calorias', 'Saúde: 8/10'],
+        total: '75 cal · 8g PROTEÍNA ✅',
+        extras: ['Economia: 90 calorias', 'Saúde: 8/10'],
       },
     ],
-    dica: 'A gordura do leite integral não é vilã — mas em quem busca déficit calórico, ela pesa mais do que parece. Como a gordura tem 9 kcal por grama (mais que o dobro da proteína e do carboidrato, que têm 4), pequenas trocas na gordura do dia a dia geram grande economia calórica sem cortar volume nem sacrifício. Aqui, são 80 calorias por xícara — multiplicadas por um cafezinho ao dia, viram quase 560 calorias por semana, o equivalente a uma refeição inteira que você "devolve" ao seu corpo sem perceber. É esse tipo de ajuste fino, discreto e sustentável, que separa quem emagrece com consistência de quem vive de dietas radicais. ☕',
+    dica: 'A gordura do leite integral não é vilã — mas em quem busca déficit calórico, ela pesa mais do que parece. Como a gordura tem 9 kcal por grama (mais que o dobro da proteína e do carboidrato, que têm 4), pequenas trocas na gordura do dia a dia geram grande economia calórica sem cortar volume nem sacrifício. Aqui, são 90 calorias por xícara — multiplicadas por um cafezinho ao dia, viram quase 630 calorias por semana, o equivalente a uma refeição inteira que você "devolve" ao seu corpo sem perceber. É esse tipo de ajuste fino, discreto e sustentável, que separa quem emagrece com consistência de quem vive de dietas radicais. ☕',
     cta: null,
   },
   {
