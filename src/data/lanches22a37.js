@@ -168,7 +168,7 @@ export const LANCHES_22_37 = [
     titulo: 'Milho cozido com gengibre',
     proteina: '~4g',
     descricao:
-      'Lanche leve e diferente. Milho cozido é satisfatório, gengibre traz digestão + anti-inflamação.',
+      'Lanche leve e diferente. Milho cozido é satisfatório, e o gengibre ajuda na digestão e favorece processos anti-inflamatórios.',
     ingredientes: ['1 espiga pequena de milho cozido (ou 200g de grãos)', 'Gengibre fresco ralado (uma colher de chá)', 'Sal e pimenta', 'Limão a gosto'],
     preparo: 'Cozinhe o milho (ou compre já cozido), tempere com gengibre ralado, sal, pimenta e suco de limão. Coma morno.',
     produto: null,
@@ -177,9 +177,9 @@ export const LANCHES_22_37 = [
     dia: 37,
     icone: '🎉',
     titulo: 'Batida turbo de proteína + berries',
-    proteina: '~32g',
+    proteina: '~43g',
     descricao:
-      'Entrando na reta final da semana 5-6! Vitamina TURBO com dupla de proteína: Whey + Shake. Máxima saciação.',
+      'Entrando na reta final da semana 5-6! Vitamina TURBO com dupla de proteína: Whey + Shake. Favorece a saciação por mais tempo.',
     ingredientes: ['1 dose de whey protein', '1 colher de shake proteico', '½ xícara de berries variados', '200ml de leite', 'Gelo'],
     preparo: 'Bata tudo no liquidificador até virar uma vitamina cremosa. Gelada é ainda melhor.',
     produto: { nome: 'Whey protein + shake proteico', imagem: '/produtos/whey-generico.jpg' },
