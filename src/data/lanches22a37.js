@@ -45,7 +45,7 @@ export const LANCHES_22_37 = [
     dia: 25,
     icone: '🥤',
     titulo: 'Shake clássico + fibra',
-    proteina: '~20g',
+    proteina: '~25g',
     descricao:
       'Volta do shake proteico com turbina de fibra. Proteína + fibra = máxima saciedade. A fibra ainda regula intestino.',
     ingredientes: ['2 colheres de shake proteico', '1 dose de fibras solúveis', '200ml de leite desnatado', 'Canela e gelo'],
@@ -100,7 +100,7 @@ export const LANCHES_22_37 = [
     dia: 30,
     icone: '💪',
     titulo: 'Whey com banana e aveia',
-    proteina: '~28g',
+    proteina: '~35g',
     descricao:
       'Whey protein + carboidrato lento (banana + aveia) = lanche pós-treino ideal. Ajuda a favorecer a recuperação muscular.',
     ingredientes: ['1 dose de whey protein', '½ banana', '1 colher de aveia em flocos', '200ml de leite', 'Gelo'],

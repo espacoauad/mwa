@@ -12,7 +12,7 @@ export const LANCHES_PROTEICOS = [
     dia: 1,
     icone: '🥤',
     titulo: 'Shake clássico',
-    proteina: '~19g',
+    proteina: '~26g',
     descricao:
       'Uma forma rápida, prática e inteligente de garantir proteína e nutrientes logo nas primeiras horas do dia — pensada para caber na sua rotina sem exigir tempo que você não tem.',
     ingredientes: ['2 colheres de shake', '200 ml de leite desnatado (ou bebida vegetal)', '½ banana', 'Gelo a gosto'],
@@ -70,7 +70,7 @@ export const LANCHES_PROTEICOS = [
     titulo: 'Whey protein batido',
     proteina: '~24g',
     descricao:
-      'O whey protein é uma proteína de absorção rápida — por isso é tão usado depois do treino, para ajudar na recuperação muscular. Com fruta congelada, vira um smoothie cremoso e refrescante.',
+      'O Whey 3W combina três formas de proteína (isolada, concentrada e hidrolisada), o que favorece uma liberação mais gradual de aminoácidos — por isso é tão usado depois do treino, para ajudar na recuperação muscular. Com fruta congelada, vira um smoothie cremoso e refrescante.',
     ingredientes: ['1 dose de whey protein', '250 ml de água gelada ou leite', '½ banana congelada ou 4–5 morangos congelados', 'Gelo'],
     preparo: 'Bata tudo no liquidificador por 20 segundos até ficar cremoso. A fruta congelada dá textura de milk-shake. Beba de preferência até 1h depois do treino.',
     produto: { nome: 'Whey protein', imagem: '/produtos/whey-generico.jpg' },
@@ -90,7 +90,7 @@ export const LANCHES_PROTEICOS = [
     dia: 8,
     icone: '🥤',
     titulo: 'Shake proteico reforçado',
-    proteina: '~30g',
+    proteina: '~50g',
     descricao:
       'Entramos na semana das proteínas! Some shake + whey para um lanche que substitui bem uma refeição leve nos dias mais corridos.',
     ingredientes: ['2 colheres de shake proteico', '1 dose de whey protein', '200 ml de leite', 'Canela e gelo'],
@@ -156,7 +156,7 @@ export const LANCHES_PROTEICOS = [
     dia: 14,
     icone: '🥤',
     titulo: 'Shake com aveia',
-    proteina: '~19g',
+    proteina: '~27g',
     descricao:
       'Fim da semana 2! A aveia deixa o shake mais encorpado e libera energia devagar — ótimo para os dias de maior atividade.',
     ingredientes: ['2 colheres de shake proteico', '1 colher de aveia em flocos', '200 ml de leite', 'Gelo'],
@@ -211,7 +211,7 @@ export const LANCHES_PROTEICOS = [
     dia: 19,
     icone: '🥣',
     titulo: 'Overnight oats proteico',
-    proteina: '~23g',
+    proteina: '~35g',
     descricao:
       'Prepare à noite, acorde com o lanche pronto. Aveia + whey descansando na geladeira viram um creme proteico delicioso.',
     ingredientes: ['3 colheres de aveia', '1 dose de whey protein', '150 ml de leite', 'Frutas para cobrir'],
