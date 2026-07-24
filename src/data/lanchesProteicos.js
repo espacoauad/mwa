@@ -70,7 +70,7 @@ export const LANCHES_PROTEICOS = [
     titulo: 'Whey protein batido',
     proteina: '~24g',
     descricao:
-      'O whey protein tem três tipos de proteína (rápida, média e lenta), ideal depois do treino para recuperar o músculo. Com fruta congelada, vira um smoothie cremoso e refrescante.',
+      'O whey protein é uma proteína de absorção rápida — por isso é tão usado depois do treino, para ajudar na recuperação muscular. Com fruta congelada, vira um smoothie cremoso e refrescante.',
     ingredientes: ['1 dose de whey protein', '250 ml de água gelada ou leite', '½ banana congelada ou 4–5 morangos congelados', 'Gelo'],
     preparo: 'Bata tudo no liquidificador por 20 segundos até ficar cremoso. A fruta congelada dá textura de milk-shake. Beba de preferência até 1h depois do treino.',
     produto: { nome: 'Whey protein', imagem: '/produtos/whey-generico.jpg' },
