@@ -10,8 +10,8 @@ Arquivos revisados — Bloco 2 (dias 31–60): dicas90.js (dias 31–60), inform
 
 ## Resumo Executivo
 
-- Total de mudanças: 57 (fato: 23, voz: 17, segurança: 12, consistência: 5)
-- Total de itens sinalizados para decisão da Wanessa: 15
+- Total de mudanças: 70 (fato: 29, voz: 21, segurança: 15, consistência: 5)
+- Total de itens sinalizados para decisão da Wanessa: 21
 - Arquivos sem nenhuma alteração necessária: nenhum (todos os 6 arquivos revisados receberam pelo menos uma edição)
 
 ## Decisões da Wanessa (Checkpoint Bloco 1, 2026-07-24)
@@ -76,6 +76,28 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | Rabanete cru (100g) | 100g | ~16 kcal | ~0.7g |
 | Sementes de chia (2 colheres de sopa, ~24g) | 24g | ~115-120 kcal | ~4g |
 | Milho cozido (100g) | 100g | ~96 kcal | ~3-3.5g |
+| Frango desfiado/cozido (100g) — mesma base do peito de frango grelhado | 100g | ~165 kcal | ~31g |
+| Peito de peru fatiado/defumado (100g) | 100g | ~100-110 kcal | ~17-19g |
+| Cream cheese light (100g) | 100g | ~150-170 kcal | ~7-8g |
+| Wrap integral (1 unidade, ~50g) | 1 un | ~130-150 kcal | ~3-4g |
+| Salmão defumado (100g) | 100g | ~115-120 kcal | ~18g |
+| Pepino (100g) | 100g | ~10-15 kcal | ~0.6-1g |
+| Amêndoas (100g) | 100g | ~580 kcal | ~21g |
+| Abacaxi (100g) | 100g | ~50 kcal | ~0.9g |
+| Uva vermelha (100g) | 100g | ~55-70 kcal | ~0.6-0.7g |
+| Castanha do pará (100g) | 100g | ~650-660 kcal | ~14g |
+| Presunto Parma / cru curado (100g) | 100g | ~200-270 kcal | ~25-27g |
+| Rúcula (100g) | 100g | ~25 kcal | ~2.6g |
+| Queijo de cabra, tipo macio/chèvre (100g) | 100g | ~290-320 kcal | ~18-19g |
+| Tangerina (100g) | 100g | ~40-45 kcal | ~0.8-0.9g |
+| Goiaba (100g) | 100g | ~50-55 kcal | ~1.1g |
+| Amora (100g) | 100g | ~40-45 kcal | ~1.4g |
+| Melancia (100g) | 100g | ~30 kcal | ~0.6g |
+| Melão (100g) | 100g | ~29 kcal | ~0.7g |
+| Mamão (100g) | 100g | ~40 kcal | ~0.5-0.8g |
+| Pera (1 unidade média, ~180g) | 1 un | ~100 kcal | ~0.5-1g |
+| Linhaça (100g) | 100g | ~495 kcal | ~18g |
+| Pasta/manteiga de castanha-do-pará (100g, estimativa) | 100g | ~600 kcal | ~14-20g |
 
 ## Mudanças
 
@@ -144,6 +166,19 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | 36 | lanches22a37.js | `descricao` | "gengibre traz digestão + anti-inflamação" → "o gengibre ajuda na digestão e favorece processos anti-inflamatórios" | segurança | "traz...anti-inflamação" é afirmação causal absoluta não defensável para CRN-1 (mesmo padrão "garante"/"reduz"→"ajuda a"/"favorece" já corrigido no Bloco 1); suavizado, e corrigida a construção gramatical estranha ("traz digestão") |
 | 37 | lanches22a37.js | `proteina` | "~32g" → "~43g" | fato | Composição real confirmada: 1 dose de whey 3W (~26g) + 1 colher de shake proteico (metade de 2 colheres = ~9g) + 200ml de leite (~7g) + ½ xícara de berries (~0.5-0.75g) = ~42.5-43g |
 | 37 | lanches22a37.js | `descricao` | "Vitamina TURBO com dupla de proteína: Whey + Shake. Máxima saciação." → "...Favorece a saciação por mais tempo." | segurança | "Máxima saciação" é afirmação absoluta não defensável para CRN-1 (mesmo padrão "máxima absorção"→"ajuda no processo de recuperação" já corrigido no dia 30 deste arquivo, Bloco 1); suavizado para linguagem defensável |
+| 38 | lanches38a89.js | `proteina` | "~20g" → "~26g" | fato | Soma dos ingredientes (150g cenoura ~1.5g + 80g frango desfiado, mesma base do peito grelhado ~24.8g) resulta em ~26.3g, ~6.3g acima do declarado (fora da margem ±3g); corrigido |
+| 39 | lanches38a89.js | `descricao` | "Manjericão traz aroma e digestão." → "Manjericão traz aroma e favorece a digestão." | segurança | "traz...digestão" é afirmação causal direta não defensável para CRN-1, mesmo padrão já corrigido no dia 36 de `lanches22a37.js` ("traz digestão"→"ajuda na digestão"); suavizado |
+| 41 | lanches38a89.js | `preparo` | "aquece no forno" → "aqueça no forno" | voz | Correção gramatical — verbo precisa estar no imperativo, consistente com os demais verbos da mesma frase ("Cozinhe", "espalhe") |
+| 44 | lanches38a89.js | `proteina` | "~22g" → "~28g" | fato | Soma dos ingredientes (100g alface ~1.4g + 80g frango desfiado ~24.8g + cenoura ralada ~0.5g + gergelim ~1.6g) resulta em ~28.3g, ~6.3g acima do declarado (fora da margem ±3g); corrigido |
+| 46 | lanches38a89.js | `proteina` | "~18g" → "~15g" | fato | Soma dos ingredientes (150g pepino ~1g + 40g cream cheese light ~2.8g + 60g salmão defumado ~11g) resulta em ~14.8g, ~3.2g abaixo do declarado (na borda/fora da margem ±3g); corrigido |
+| 47 | lanches38a89.js | `proteina` | "~13g" → "~17g" | fato | Soma dos ingredientes (100g rúcula ~2.6g + 60g queijo de cabra ~11.4g + 15g nozes ~2.5g) resulta em ~16.5g, ~3.5g acima do declarado (fora da margem ±3g); corrigido |
+| 47 | lanches38a89.js | `preparo` | "desmiúe queijo de cabra" → "esfarele o queijo de cabra" | voz | "Desmiúe" não é verbo em português (erro de digitação/palavra inexistente); corrigido para "esfarele", verbo correto para desmanchar queijo macio |
+| 49 | lanches38a89.js | `descricao` | "Ótimo para digestão." → "Favorece a digestão." | segurança | "Ótimo para" é afirmação de benefício superlativa não defensável para CRN-1, mesmo padrão "traz digestão"→"favorece a digestão" já corrigido no dia 39 deste arquivo; suavizado |
+| 50 | lanches38a89.js | `descricao` | "Eleganciado + saciante." → "Elegante + saciante." | voz | "Eleganciado" não é palavra em português (erro de digitação); corrigido para "Elegante" |
+| 54 | lanches38a89.js | `proteina` | "~14g" → "~18g" | fato | Soma dos ingredientes (300g melão ~2.1g + 60g presunto parma ~15.6g) resulta em ~17.7g, ~3.7g acima do declarado (fora da margem ±3g); corrigido |
+| 55 | lanches38a89.js | `descricao` | "Energia slow-release + magnésio." → "Energia de liberação lenta + magnésio." | voz | Anglicismo — expressão em inglês dentro de texto em português, mesmo padrão de anglicismo já corrigido em `dicas90.js` (dias 41, 46, 49, 51) e `informativos.js` (dias 49, 53) |
+| 59 | lanches38a89.js | `proteina` | "~9g" → "~6g" | fato | Soma dos ingredientes (150g amora congelada ~2.1g + 50g cream cheese light ~3.5g) resulta em ~5.6g, ~3.4g abaixo do declarado (fora da margem ±3g); corrigido |
+| 59 | lanches38a89.js | `descricao` | "Antioxidantes máximos." → "Rica em antioxidantes." | segurança | "máximos" é afirmação absoluta não defensável para CRN-1, mesmo padrão "Máxima saciação"→"Favorece a saciação" já corrigido no dia 37 de `lanches22a37.js`; suavizado |
 
 ## Itens Sinalizados (não editados — decisão da Wanessa)
 
@@ -165,3 +200,9 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | 37 | dicas90.js | `conteudo` — "2 colheres de granola (100 kcal)" no exemplo de calorias invisíveis | Pela Tabela de Referência Nutricional (granola 20g ~80-90kcal) e pela proporção usada nos dias 38/42/50 do mesmo arquivo (4 colheres ~60g = 250kcal → 2 colheres ~125kcal), o valor de 100kcal para 2 colheres parece ~20% abaixo do esperado. Não editado porque corrigir exigiria também ajustar a soma "300 kcal" citada na sequência (50+150+100=300) e a frase que a referencia depois ("300 kcal é praticamente um terço do déficit"), criando uma cascata de números sem uma fonte clara de qual valor está certo — sinalizado em vez de corrigido no chute |
 | 49 | dicas90.js | `conteudo` — "biscoito tradicional (100g) = 130 kcal" / "biscoito 'zero açúcar' (100g) = 130 kcal" | Biscoitos (cookies/bolachas) tipicamente ficam na faixa de ~400-500 kcal/100g; 130 kcal/100g parece baixo demais para a categoria (mais próximo de pão do que de biscoito), mas o tipo exato de biscoito não é especificado no texto e corrigir sem saber a referência exata seria um chute. Sinalizado para a Wanessa confirmar ou ajustar o valor |
 | 33 | lanches22a37.js | `ingredientes` (atum) / `proteina` | "1 lata de atum em água (escorrido)" — o tamanho da lata não é especificado e varia muito no mercado brasileiro (sachê ~80g total/~56-60g drenado até lata padrão ~170g total/~120g drenado). Usando a Tabela de Referência (atum drenado ~26g/100g), só o atum já pode variar de ~15g a ~31g de proteína — somado a abacate (~1g) e torradas integrais (~2g), o total do lanche fica entre ~18g e ~34g, uma faixa larga demais para confirmar ou corrigir o declarado ~20g sem saber o tamanho exato da lata assumido. Não editado — sinalizado para a Wanessa, mesmo padrão de incerteza já registrado no item do dia 3 de `informativos.js` (peixe) |
+| 39 | lanches38a89.js | `ingredientes` (queijo branco) / `proteina` | "100g queijo branco" — "queijo branco" é um termo genérico que pode significar produtos com proteína bem diferente (de uma ricota-like ~11g/100g até um minas frescal-like ~17g/100g). Com 8 tomates cherry (~1g), o total varia entre ~12g (ricota) e ~18g (minas), contra o declarado ~14g — dentro da margem num extremo, acima dela no outro. Não editado por depender do tipo exato de queijo — sinalizado para a Wanessa |
+| 41 | lanches38a89.js | `ingredientes` (queijo ralado) / `proteina` | "30g queijo ralado" — "queijo ralado" pode ser tanto um queijo tipo parmesão (proteína mais concentrada, ~35g/100g) quanto um queijo tipo mussarela ralado para gratinar (~22g/100g). Com 200g brócolis cozido (~6g), o total varia entre ~12,6g (mussarela) e ~16,5g (parmesão), contra o declarado ~12g — dentro da margem num extremo, acima dela no outro. Não editado por depender do tipo exato de queijo — sinalizado para a Wanessa |
+| 43 | lanches38a89.js | `ingredientes` (atum, cream cheese) / `proteina` | "1 lata atum" sem tamanho especificado (mesmo problema já sinalizado no dia 33 de `lanches22a37.js`) e "Cream cheese light" listado sem quantidade. As duas lacunas juntas tornam impossível calcular uma soma confiável para conferir o declarado ~14g. Não editado — sinalizado para a Wanessa |
+| 53 | lanches38a89.js | `ingredientes` (queijo fresco) / `proteina` | "100g queijo fresco" — termo genérico; dependendo do tipo (de uma ricota-like ~11g/100g até um minas frescal-like ~17g/100g), o total do lanche (com 300g melancia ~1,8g) varia entre ~12,8g e ~18,8g, contra o declarado ~12g. Como a porção é grande (100g), a diferença entre interpretações é grande — dentro da margem num extremo, bem acima dela no outro. Não editado — sinalizado para a Wanessa |
+| 56 | lanches38a89.js | `ingredientes` (whey em pó) / `proteina` / `produto` | "1 colher whey protein em pó" usa "colher" em vez de "dose/scoop" (a unidade da Tabela de Referência, ~34g = ~26g proteína). Se "colher" for ~1 colher de sopa rasa (~10g), a proteína dessa porção fica em ~7,6g, batendo com o declarado ~8g somado ao morango; se for interpretada como meia dose (~15-17g), o total sobe bem acima do declarado. Além disso, o campo `produto` deste dia usa "Whey protein" genérico (imagem `whey-generico.jpg`), diferente da referência Whey 3W Herbalife confirmada usada nos demais dias — não alterado por ser campo protegido pelo guardrail (produto/marca), mas sinalizado para a Wanessa confirmar se é intencional |
+| 58 | lanches38a89.js | `ingredientes` (iogurte) / `proteina` | "150g iogurte" sem especificar tipo. Se for iogurte grego (Tabela: ~10g/100g), o total do lanche (com mamão ~1,3g e linhaça ~1,8g) fica em ~18,1g, bem acima do declarado ~12g; se for iogurte natural integral comum (Tabela: ~3,5-4g/100g), o total fica em ~8,7g, abaixo do declarado. A ambiguidade de tipo inverte a direção do erro (para mais ou para menos) — mesmo padrão já sinalizado no dia 11 de `lanchesProteicos.js` (Bloco 1). Não editado — sinalizado para a Wanessa |
