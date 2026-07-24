@@ -12,7 +12,7 @@ export const LANCHES_22_37 = [
     dia: 22,
     icone: '🥜',
     titulo: 'Amendoim torrado com maçã',
-    proteina: '~10g',
+    proteina: '~7g',
     descricao:
       'Voltando ao começo com tudo novo! Amendoim é proteína + gordura boa, e a maçã traz fibra e saciação. Dupla que nunca falha.',
     ingredientes: ['1 punhado pequeno de amendoim torrado (25g)', '1 maçã pequena picada', 'Sal a gosto'],
@@ -56,7 +56,7 @@ export const LANCHES_22_37 = [
     dia: 26,
     icone: '🍗',
     titulo: 'Frango desfiado com macarrão integral',
-    proteina: '~25g',
+    proteina: '~29g',
     descricao:
       'Refeição light que parece lanche. Frango + macarrão integral (baixo IG) = carboidrato lento + proteína = energia controlada.',
     ingredientes: ['80g de peito de frango cozido e desfiado', '80g de macarrão integral cozido', 'Molho light (ou azeite + tomate)', 'Alho, sal, orégano'],
@@ -102,7 +102,7 @@ export const LANCHES_22_37 = [
     titulo: 'Whey com banana e aveia',
     proteina: '~28g',
     descricao:
-      'Whey protein + carboidrato lento (banana + aveia) = lanche pós-treino ideal. Recuperação muscular garantida.',
+      'Whey protein + carboidrato lento (banana + aveia) = lanche pós-treino ideal. Ajuda a favorecer a recuperação muscular.',
     ingredientes: ['1 dose de whey protein', '½ banana', '1 colher de aveia em flocos', '200ml de leite', 'Gelo'],
     preparo: 'Bata tudo no liquidificador até cremoso. Consumir até 1h após treino para máxima absorção.',
     produto: { nome: 'Whey protein', imagem: '/produtos/whey-generico.jpg' },
