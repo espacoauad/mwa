@@ -1,8 +1,12 @@
-# Bloco 1 (Dias 1–30) — Relatório de Revisão de Conteúdo
+# Blocos 1–2 (Dias 1–60) — Relatório de Revisão de Conteúdo
 
-Data: 2026-07-23
-Arquivos revisados: conceitosNutricionais.js, dicas.js, informativos.js (dias 1–30),
-lanchesProteicos.js, lanches22a37.js (dias 22–30), versiculos.js (dias 1–30, campo reflexao)
+Data: 2026-07-23 (Bloco 1) / 2026-07-24 (Bloco 2 em diante)
+Arquivos revisados — Bloco 1 (dias 1–30): conceitosNutricionais.js, dicas.js,
+informativos.js (dias 1–30), lanchesProteicos.js, lanches22a37.js (dias 22–30),
+versiculos.js (dias 1–30, campo reflexao)
+Arquivos revisados — Bloco 2 (dias 31–60): dicas90.js (dias 31–60), informativos.js
+(dias 31–60), lanches22a37.js (dias 31–37), lanches38a89.js (dias 38–60), versiculos.js
+(dias 31–60, campo reflexao)
 
 ## Resumo Executivo
 
