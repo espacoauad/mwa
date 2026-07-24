@@ -104,7 +104,7 @@ export const LANCHES_22_37 = [
     descricao:
       'Whey protein + carboidrato lento (banana + aveia) = lanche pós-treino ideal. Ajuda a favorecer a recuperação muscular.',
     ingredientes: ['1 dose de whey protein', '½ banana', '1 colher de aveia em flocos', '200ml de leite', 'Gelo'],
-    preparo: 'Bata tudo no liquidificador até cremoso. Consumir até 1h após treino para máxima absorção.',
+    preparo: 'Bata tudo no liquidificador até cremoso. Consumir após o treino ajuda no processo de recuperação.',
     produto: { nome: 'Whey protein', imagem: '/produtos/whey-generico.jpg' },
   },
   {
