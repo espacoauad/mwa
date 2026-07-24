@@ -10,8 +10,8 @@ Arquivos revisados — Bloco 2 (dias 31–60): dicas90.js (dias 31–60), inform
 
 ## Resumo Executivo
 
-- Total de mudanças: 50 (fato: 22, voz: 14, segurança: 11, consistência: 3)
-- Total de itens sinalizados para decisão da Wanessa: 12
+- Total de mudanças: 57 (fato: 23, voz: 17, segurança: 12, consistência: 5)
+- Total de itens sinalizados para decisão da Wanessa: 15
 - Arquivos sem nenhuma alteração necessária: nenhum (todos os 6 arquivos revisados receberam pelo menos uma edição)
 
 ## Decisões da Wanessa (Checkpoint Bloco 1, 2026-07-24)
@@ -135,6 +135,7 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | 51 | dicas90.js | `conteudo` | "encerraa" → "encerra" | voz | Correção de erro de digitação |
 | 51 | dicas90.js | `conteudo` | "Informação te deixa FREE" → "Informação te deixa LIVRE" | voz | Anglicismo (palavra em inglês maiúscula usada para ênfase, substituída por "LIVRE" que preserva a mesma ênfase) — mesmo padrão de anglicismo já corrigido nos dias 41, 46 e 49 do mesmo arquivo |
 | 52 | dicas90.js | `conteudo` | "2000 kcal por dia... 1550 kcal por dia... Não 1000. Não 800. 1550... Vira 3000 kcal por semana" → "2.000 kcal por dia... 1.550 kcal por dia... Não 1.000. Não 800. 1.550... Vira ~3.150 kcal por semana" | fato | Correção aritmética: 450 kcal/dia × 7 dias = 3.150 kcal/semana, não 3000 kcal como estava no texto original; além disso, formatação de milhar (separador ".") padronizada nos demais números de 4 dígitos do mesmo parágrafo |
+| 54 | dicas90.js | `conteudo` | "custoumais DUAS VEZES mais caloria" → "custou duas vezes mais caloria" | voz | Correção de erro de digitação (palavras grudadas) e remoção de maiúsculas soltas sem função de ênfase clara no restante do parágrafo |
 
 ## Itens Sinalizados (não editados — decisão da Wanessa)
 
