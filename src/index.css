@@ -13,11 +13,25 @@
 
   --font-sans: "Poppins", system-ui, -apple-system, sans-serif;
   --font-serif: "Lora", Georgia, serif;
+  --color-ouro-glow: rgba(212, 175, 122, 0.35);
 }
 
 body {
   background-color: var(--color-creme);
   color: var(--color-verde);
+}
+
+/* Sombra em duas camadas: difusa + próxima, para dar profundidade real aos
+   cards de destaque (visual "Boutique Elevado") */
+.mwa-sombra-premium {
+  box-shadow:
+    0 2px 6px rgba(52, 69, 40, 0.08),
+    0 20px 40px -12px rgba(52, 69, 40, 0.16);
+}
+
+/* Halo dourado sutil atrás de ícones/emojis em destaque */
+.mwa-halo-ouro {
+  background: radial-gradient(circle, var(--color-ouro-glow) 0%, transparent 70%);
 }
 
 /* Tela de encerramento do programa (dia 90): chuva de estrelas + foguetes */
