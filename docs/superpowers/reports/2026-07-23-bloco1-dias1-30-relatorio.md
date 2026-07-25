@@ -12,7 +12,7 @@ Arquivos revisados — Bloco 3 (dias 61–90): dicas90.js (dias 61–90), inform
 
 ## Resumo Executivo
 
-- Total de mudanças: 149 (fato: 56, voz: 52, segurança: 28, consistência: 13)
+- Total de mudanças: 150 (fato: 56, voz: 52, segurança: 28, consistência: 14)
 - Total de itens sinalizados para decisão da Wanessa: 18
 - Arquivos sem nenhuma alteração necessária: nenhum (todos os 6 arquivos revisados receberam pelo menos uma edição)
 
@@ -284,6 +284,7 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | 86 | lanches38a89.js | `proteina` | "~10g" → "~5g" | fato | Pão de queijo (2 unidades) tem densidade proteica bem menor do que o declarado sugeria — usando referência real (~2-2,5g/unidade média, adicionada à Tabela de Referência), o total fica em ~4-5g, bem abaixo dos ~10g declarados; corrigido |
 | 87 | lanches38a89.js | `proteina` + `ingredientes` + `preparo` | "~14g" / "30g queijo" / "queijo rallado" → "~21g" / "30g queijo ralado tipo parmesão" / "queijo ralado" | fato | "Queijo" padronizado para ralado tipo parmesão (convenção já estabelecida); soma (40g carne seca ~10g, nova entrada na Tabela de Referência, + 30g queijo ralado parmesão ~10,5g) resulta em ~20,5g, ~6,5g acima do declarado; corrigido. Também corrigido de passagem o erro de digitação "rallado"→"ralado" (dobro de L incorreto) |
 | 69 | versiculos.js | `reflexao` | "Agradeça sincerely." → "Agradeça sinceramente." | voz | Anglicismo — palavra em inglês dentro de texto em português, mesmo padrão já corrigido em outros arquivos |
+| 91-111 | versiculos.js | array completo | Remoção de 21 versículos órfãos (dias 91-111) + comentário de cabeçalho "111 Versículos" → "90 Versículos" | consistência | Resíduo do modelo antigo (21+90=111 dias), inacessível a qualquer usuário real (`diaDoPrograma()`/`totalDiasPrograma()` em `src/utils/calculos.js` limitam o programa a 90 dias); `BLOQUEIO_ACESSO_DIA_111.md` e `CONCLUSAO_111_DIAS.md` marcados como obsoletos com nota de aviso |
 
 ## Itens Sinalizados (não editados — decisão da Wanessa)
 
