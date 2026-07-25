@@ -54,7 +54,7 @@ export const LANCHES_38_89 = [
     icone: '🌯',
     titulo: 'Wrap com Ovo e Cream Cheese Light',
     proteina: '~16g',
-    descricao: 'Proteína dupla + portátil. Satisfaz completamente.',
+    descricao: 'Proteína dupla + portátil. Satisfaz por mais tempo.',
     ingredientes: ['1 wrap integral', '2 ovos cozidos picados', '30g cream cheese light', 'Tomate', 'Sal/pimenta'],
     preparo: 'Pique ovos, misture com cream cheese, coloque no wrap junto com tomate.',
     produto: null,

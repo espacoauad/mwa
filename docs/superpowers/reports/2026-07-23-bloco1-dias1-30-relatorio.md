@@ -179,6 +179,7 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | 55 | lanches38a89.js | `descricao` | "Energia slow-release + magnésio." → "Energia de liberação lenta + magnésio." | voz | Anglicismo — expressão em inglês dentro de texto em português, mesmo padrão de anglicismo já corrigido em `dicas90.js` (dias 41, 46, 49, 51) e `informativos.js` (dias 49, 53) |
 | 59 | lanches38a89.js | `proteina` | "~9g" → "~6g" | fato | Soma dos ingredientes (150g amora congelada ~2.1g + 50g cream cheese light ~3.5g) resulta em ~5.6g, ~3.4g abaixo do declarado (fora da margem ±3g); corrigido |
 | 59 | lanches38a89.js | `descricao` | "Antioxidantes máximos." → "Rica em antioxidantes." | segurança | "máximos" é afirmação absoluta não defensável para CRN-1, mesmo padrão "Máxima saciação"→"Favorece a saciação" já corrigido no dia 37 de `lanches22a37.js`; suavizado |
+| 42 | lanches38a89.js | `descricao` | "Satisfaz completamente." → "Satisfaz por mais tempo." | segurança | "Completamente" é afirmação absoluta de saciedade não defensável para CRN-1, mesmo padrão já corrigido no dia 59 deste arquivo e no dia 37 de `lanches22a37.js`; suavizado (achado pelo revisor da Task 5, corrigido pelo controller) |
 
 ## Itens Sinalizados (não editados — decisão da Wanessa)
 
