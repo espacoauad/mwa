@@ -83,7 +83,7 @@ const DESAFIOS = {
       perguntaEN: 'What is the best recipe for a healthy protein shake?',
       opcoes: [
         { texto: 'Apenas pó proteico com água', respostaEN: 'Only protein powder with water', correto: false },
-        { texto: 'Leite + fruta inteira + pó proteico', respostaEN: 'Milk + whole fruit + protein powder', correto: true },
+        { texto: 'Leite (ou substituto de leite) + fruta inteira + pó proteico', respostaEN: 'Milk (or milk substitute) + whole fruit + protein powder', correto: true },
         { texto: 'Leite condensado + açúcar + pó proteico', respostaEN: 'Condensed milk + sugar + protein powder', correto: false },
       ],
     },
@@ -91,7 +91,7 @@ const DESAFIOS = {
       pergunta: 'Como garantir consistência nas refeições?',
       perguntaEN: 'How to ensure meal consistency?',
       opcoes: [
-        { texto: 'Fazer as mesmas refeições', respostaEN: 'Same meals', correto: true },
+        { texto: 'Planejar as refeições com antecedência', respostaEN: 'Plan your meals in advance', correto: true },
         { texto: 'Comer conforme sinta vontade', respostaEN: 'Eat as you want', correto: false },
         { texto: 'Pular refeições para acelerar', respostaEN: 'Skip meals', correto: false },
       ],
