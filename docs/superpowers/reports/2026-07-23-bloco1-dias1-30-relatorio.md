@@ -10,8 +10,8 @@ Arquivos revisados — Bloco 2 (dias 31–60): dicas90.js (dias 31–60), inform
 
 ## Resumo Executivo
 
-- Total de mudanças: 100 (fato: 46, voz: 27, segurança: 18, consistência: 9)
-- Total de itens sinalizados para decisão da Wanessa: 7
+- Total de mudanças: 105 (fato: 46, voz: 27, segurança: 23, consistência: 9)
+- Total de itens sinalizados para decisão da Wanessa: 4
 - Arquivos sem nenhuma alteração necessária: nenhum (todos os 6 arquivos revisados receberam pelo menos uma edição)
 
 ## Decisões da Wanessa (Checkpoint Bloco 1, 2026-07-24)
@@ -43,9 +43,8 @@ A Wanessa pediu para resolver os itens sinalizados pendentes dos Blocos 1-2 e de
 2. **Claims científicos populares mas contestados** (fadiga de decisão por "glicose" no dia 23 de
    `dicas.js`, sede/fome confundidas por proximidade hipotalâmica no dia 33 de `dicas90.js`, e
    "densidade nutricional" aplicada a um nutriente isolado nos dias 8/11/18 de `dicas.js`) —
-   Wanessa aprovou suavizar a linguagem, mas pediu para ver o texto exato antes de aplicar.
-   ⏳ Pendente — proposta de texto apresentada no checkpoint, aguardando confirmação final antes
-   da edição.
+   Wanessa revisou o texto exato proposto e aprovou. ✅ Feito — ver linhas correspondentes em
+   `## Mudanças`.
 3. **2 itens de número em cascata** (granola no dia 37 e biscoito no dia 49, ambos de
    `dicas90.js`) — corrigidos recalculando toda a cascata de números do parágrafo. ✅ Feito — ver
    linhas correspondentes em `## Mudanças`.
@@ -232,6 +231,11 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | 37 | dicas90.js | `conteudo` | "2 colheres de granola (100 kcal)... Somados, foram 300 kcal... 300 kcal é praticamente um terço do déficit" → "2 colheres de granola (125 kcal)... Somados, foram 325 kcal... 325 kcal é mais de um terço do déficit" | fato | Valor de granola corrigido para bater com a proporção usada em outros dias do mesmo arquivo (dias 38/42/50: 4 colheres ~60g=250kcal → 2 colheres ~125kcal); soma e frase seguinte recalculadas em cascata, por decisão da Wanessa |
 | 49 | dicas90.js | `conteudo` | "biscoito tradicional (100g) = 130 kcal" / "biscoito 'zero açúcar' (100g) = 130 kcal" → "~450 kcal" nas duas ocorrências | fato | 130 kcal/100g era implausível para a categoria (biscoitos tipicamente ~400-500 kcal/100g); corrigido para um valor plausível, mantendo os dois valores iguais (que é o ponto do argumento: mesma caloria, açúcar trocado por gordura), por decisão da Wanessa |
 | 30 | lanches22a37.js | `titulo` + `descricao` | "Whey com banana e aveia" / "Whey protein + carboidrato lento (banana + aveia) = lanche pós-treino ideal. Ajuda a favorecer a recuperação muscular." → "Whey com Banana e Aveia — Marco dos 30 Dias" / "Você chegou ao dia 30. Esse shake é o mesmo de sempre — whey + carboidrato lento (banana + aveia) para ajudar na recuperação — mas hoje ele também celebra 30 dias de escolhas consistentes." | voz | Este é o dia 30 canônico e real do app (lanche de fim da jornada de 30 dias); texto reescrito para reconhecer o marco, mantendo claims moderados, por decisão explícita da Wanessa |
+| 8 | dicas.js | `conteudo` | "ela tem a maior densidade nutricional entre os três macros: entrega mais benefício..." → "caloria por caloria, ela entrega mais benefício que os outros dois macros..." | segurança | "Densidade nutricional" é definida em `conceitosNutricionais.js` como propriedade de um alimento (nutrientes por caloria), não de um macro comparado a si mesmo; termo trocado por linguagem equivalente sem o uso técnico incorreto, por decisão explícita da Wanessa (texto revisado e aprovado antes de aplicar) |
+| 11 | dicas.js | `conteudo` | "É um dos exemplos mais claros de densidade nutricional: altíssimo benefício fisiológico por quase nenhuma caloria." → "É um dos nutrientes com melhor custo-benefício calórico que existe: altíssimo benefício fisiológico por quase nenhuma caloria." | segurança | Mesmo ajuste do dia 8 (uso técnico incorreto de "densidade nutricional" para um nutriente isolado), por decisão explícita da Wanessa (texto revisado e aprovado antes de aplicar) |
+| 18 | dicas.js | `conteudo` | "...o que faz dele um dos nutrientes de maior densidade nutricional que existem." → "...o que faz dele um dos nutrientes com melhor custo-benefício calórico que existem." | segurança | Mesmo ajuste dos dias 8 e 11, por decisão explícita da Wanessa (texto revisado e aprovado antes de aplicar) |
+| 23 | dicas.js | `conteudo` | "Seu cérebro gasta energia real — usamos glicose, oxigênio — para tomar decisões. Quanto mais decisões você toma ao longo do dia, mais esgotada fica sua capacidade de decidir bem nas próximas." → "Seu cérebro se cansa de tomar decisões — é o que chamamos de fadiga de decisão. Quanto mais decisões você toma ao longo do dia, mais difícil fica decidir bem nas próximas." | segurança | Removido o mecanismo específico de "glicose/oxigênio como recurso finito" (modelo de "esgotamento do ego", cientificamente contestado), mantendo o conceito geral de fadiga de decisão (com apoio mais amplo), por decisão explícita da Wanessa (texto revisado e aprovado antes de aplicar) |
+| 33 | dicas90.js | `conteudo` | "Porque os centros do hipotálamo que regulam sede e apetite são vizinhos. Literalmente. E quando você está levemente desidratada, eles ativam juntos. Seu corpo pede água, seu cérebro traduz como 'preciso comer algo'." → "Um dos motivos apontados é que os sinais de sede e fome passam por circuitos parecidos no cérebro — e quando você está levemente desidratada, é comum confundir um pelo outro. Seu corpo pede água, seu cérebro às vezes traduz como 'preciso comer algo'." | segurança | Suavizada a afirmação categórica de mecanismo cerebral específico (popular mas contestada) para uma formulação hedged, por decisão explícita da Wanessa (texto revisado e aprovado antes de aplicar) |
 
 ## Itens Sinalizados (não editados — decisão da Wanessa)
 
@@ -241,9 +245,6 @@ tabela — não são mais pendências, ver `## Decisões da Wanessa`.
 
 | Dia | Arquivo | O que é | Por que precisa de decisão |
 |---|---|---|---|
-| 8, 11, 18 | dicas.js | `conteudo` usa "densidade nutricional" aplicado a um macronutriente/nutriente isolado (proteína no dia 8, fibra no dia 11, ômega-3 no dia 18) | Wanessa aprovou suavizar a linguagem, pendente de confirmação do texto exato proposto (ver mensagem do checkpoint) |
-| 23 | dicas.js | `conteudo` explica fadiga de decisão com o modelo de "esgotamento do ego"/glicose | Wanessa aprovou suavizar a linguagem, pendente de confirmação do texto exato proposto (ver mensagem do checkpoint) |
-| 33 | dicas90.js | `conteudo` — claim de que sede e fome são confundidas por proximidade de núcleos hipotalâmicos | Wanessa aprovou suavizar a linguagem, pendente de confirmação do texto exato proposto (ver mensagem do checkpoint) |
 | 3 | informativos.js | `opcoes` — "150g salmão grelhado" (280 cal · 25g prot) e "200g peixe branco/tilápia" (200 cal · 30g prot) | Conferindo contra dados padrão de peixe cozido (salmão ~200-230 kcal/~20-25g proteína por 100g; tilápia crua ~95 kcal/~20g proteína por 100g na Tabela de Referência), a proteína de ambas as opções parece um pouco subestimada para o peso declarado. A variação depende muito de peso cru vs. cozido e do corte/espécie do peixe, então não há como corrigir com segurança sem essa informação — sinalizado em vez de editado no chute |
 | 15 | informativos.js | `opcoes[0].itens` (Método Sozinho) — "Informação: Completa (21 dicas + app)" | Resíduo da estrutura antiga de 21 dias (o programa de 30 dias tem 30 dicas). Não é literalmente "21 dias" (o texto protegido pelo guardrail). Wanessa não selecionou correção imediata — mantido para a limpeza de resíduos já agendada no Bloco 3 |
 | 6, 17, 23 | lanchesProteicos.js / lanches22a37.js | `ingredientes` — receitas de whey com "água OU leite" (escolha do leitor) | Composição do Whey 3W confirmada (26g proteína/dose). Usando água, a proteína bate com o declarado; com leite, sobe ~7-8g além — não é um erro do texto, é variação real da escolha da leitora. Não editado — mencionado apenas para registro |
