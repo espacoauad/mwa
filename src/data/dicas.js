@@ -151,7 +151,7 @@ export const DICAS = [
     icone: '🎯',
     titulo: 'Onde a teoria encontra a sua vida real',
     conteudo:
-      'Olá! Ao longo de 20 anos como nutricionista, percebi que o método é a bússola, mas a estratégia individual é o que faz a diferença para você não parar no meio do caminho. No MWA, acreditamos que "o corpo responde quando a mente entende". Na Sessão Estratégica, eu e você olharemos para os seus desafios específicos — seja o sono, a rotina de trabalho ou a organização das refeições — para desenhar o seu mapa personalizado de sucesso. É a oportunidade de ter a minha experiência de 14 anos de manutenção aplicada diretamente à sua realidade. Você está no ponto crítico onde o "entusiasmo inicial" começa a ser testado pela rotina. Oferecer suporte individual agora previne a desistência.',
+      'Olá! Ao longo de 20 anos trabalhando com emagrecimento, percebi que o método é a bússola, mas a estratégia individual é o que faz a diferença para você não parar no meio do caminho. No MWA, acreditamos que "o corpo responde quando a mente entende". Na Sessão Estratégica, eu e você olharemos para os seus desafios específicos — seja o sono, a rotina de trabalho ou a organização das refeições — para desenhar o seu mapa personalizado de sucesso. É a oportunidade de ter a minha experiência de 14 anos de manutenção aplicada diretamente à sua realidade. Você está no ponto crítico onde o "entusiasmo inicial" começa a ser testado pela rotina. Oferecer suporte individual agora previne a desistência.',
     dicaPratica: 'Liste os dois pontos da sua rotina que você ainda sente dificuldade em ajustar. Esse será o ponto de partida da nossa conversa individual.',
     produto: null,
   },

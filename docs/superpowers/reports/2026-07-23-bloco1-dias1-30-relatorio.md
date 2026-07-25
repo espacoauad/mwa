@@ -12,7 +12,7 @@ Arquivos revisados — Bloco 3 (dias 61–90): dicas90.js (dias 61–90), inform
 
 ## Resumo Executivo
 
-- Total de mudanças: 107 (fato: 46, voz: 27, segurança: 24, consistência: 10)
+- Total de mudanças: 139 (fato: 48, voz: 50, segurança: 28, consistência: 13)
 - Total de itens sinalizados para decisão da Wanessa: 4
 - Arquivos sem nenhuma alteração necessária: nenhum (todos os 6 arquivos revisados receberam pelo menos uma edição)
 
@@ -271,6 +271,7 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | 63 | informativos.js | `titulo` | "Meal Prep: Futuro Já Preparado" → "Preparo de Refeições: Futuro Já Preparado" | voz | Anglicismo não corrigido direto na Task 3 (achado pelo revisor) — a regra do projeto é corrigir anglicismos direto, sem propor; corrigido pelo controller |
 | 71 | informativos.js | `titulo` | "Checklist de Hábitos: Solidificando" → "Lista de Hábitos: Solidificando" | voz | Anglicismo não pego na Task 3 (achado pelo revisor); corrigido pelo controller |
 | 75 | informativos.js | `titulo` + `dica` | "Checkpoint: Você Está Perto" / "fotos de checkpoint" → "Ponto de Checagem: Você Está Perto" / "fotos de checagem" | voz | Anglicismo não pego na Task 3 (achado pelo revisor); corrigido pelo controller |
+| 15 | dicas.js | `conteudo` | "Ao longo de 20 anos como nutricionista, percebi..." → "Ao longo de 20 anos trabalhando com emagrecimento, percebi..." | segurança | Correção urgente pedida pela Wanessa: o texto afirmava incorretamente 20 anos de atuação como nutricionista registrada — na realidade, ela trabalha com emagrecimento há 20 anos, mas não é nutricionista há esse tempo todo. Achado pela Wanessa em produção (screenshot do app), corrigido imediatamente e varrido em todo o projeto (ver nota abaixo) |
 
 ## Itens Sinalizados (não editados — decisão da Wanessa)
 

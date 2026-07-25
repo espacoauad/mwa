@@ -24,7 +24,7 @@ MWA não é apenas um programa de emagrecimento.
 
 MWA é uma abordagem de bem-estar criada a partir da experiência real de Wanessa Auad: uma mulher que eliminou 26 kg após a gestação e, mais importante do que isso, aprendeu a manter sua transformação por 14 anos.
 
-Essa vivência pessoal, somada a mais de 20 anos de experiência profissional como nutricionista, deu origem a uma metodologia que une ciência, estratégia nutricional, mentalidade, rotina e hábitos sustentáveis.
+Essa vivência pessoal, somada a mais de 20 anos de experiência profissional com emagrecimento, deu origem a uma metodologia que une ciência, estratégia nutricional, mentalidade, rotina e hábitos sustentáveis.
 
 ### Posicionamento
 
@@ -92,7 +92,7 @@ Após a gestação, Wanessa Auad eliminou 26 kg. Mas o maior resultado não foi 
 
 Há 14 anos, ela mantém essa transformação através de uma rotina construída com estratégia, consciência e hábitos sustentáveis.
 
-Depois, como nutricionista, transformou essa experiência em método. Ao longo de mais de 20 anos, ajudou pessoas a entenderem seus corpos, organizarem sua alimentação e construírem resultados que não dependem de sofrimento.
+Depois, como nutricionista, transformou essa experiência em método. Ao longo de mais de 20 anos trabalhando com emagrecimento, ajudou pessoas a entenderem seus corpos, organizarem sua alimentação e construírem resultados que não dependem de sofrimento.
 
 MWA significa Método Wanessa Auad.
 
@@ -122,7 +122,7 @@ Isso fortalece a marca principal e deixa o programa como o primeiro passo dentro
 
 ### Preço de entrada
 
-**R$ 127**
+**R$ 97**
 
 Pagamento único.
 
@@ -136,14 +136,13 @@ Após entrar no aplicativo, a aluna poderá contratar a continuação:
 
 Preço:
 
-**R$ 127**
+**R$ 97**
 
 ### Regra da oferta dos 90 dias
 
 - A oferta aparece no aplicativo no Dia 3.
-- Fica ativa até o Dia 7 pelo valor especial de R$ 127.
-- Após esse período, a aluna ainda poderá contratar, mas com desconto menor.
-- Quando o programa de 21 dias terminar, a continuação poderá ser oferecida com 20% de desconto sobre o valor cheio definido pela marca.
+- Fica ativa até o Dia 7 pelo valor especial de R$ 97.
+- Após esse período (Dia 8 em diante, inclusive depois de concluída a Jornada de 21 Dias), a aluna poderá contratar pelo valor cheio fixo de R$ 147.
 
 ### Oferta premium dentro do app
 
@@ -526,7 +525,7 @@ Agora, reuni essa experiência em um programa acessível, prático e guiado pelo
 
 #### Preço
 
-**R$ 127**
+**R$ 97**
 
 Pagamento único.
 
@@ -593,11 +592,11 @@ Essa oferta será apresentada no Dia 3 da sua jornada e ficará disponível até
 
 Valor especial para alunas:
 
-**R$ 127**
+**R$ 97**
 
 #### Texto de apoio
 
-Depois do período especial, a continuidade continuará disponível com uma condição diferente. Ao final dos 21 dias, a aluna poderá receber uma nova oportunidade com 20% de desconto.
+Depois do período especial, a continuidade continua disponível pelo valor cheio fixo de R$ 147 — inclusive ao final dos 21 dias, quando a aluna recebe uma nova oportunidade de contratar por esse valor.
 
 #### Observação para o desenvolvedor
 
@@ -685,7 +684,7 @@ Sim. Dentro do aplicativo, você poderá receber a oferta para continuar no Prog
 
 #### Quanto custa o programa inicial?
 
-O investimento para a Jornada de 21 Dias é de R$ 127, em pagamento único.
+O investimento para a Jornada de 21 Dias é de R$ 97, em pagamento único.
 
 #### Existe mensalidade?
 
@@ -735,7 +734,7 @@ Aprenda em 21 dias uma nova forma de emagrecer, organizar sua alimentação e co
 
 ### Descrição curta
 
-O MWA é uma jornada de 21 dias criada por Wanessa Auad, nutricionista com mais de 20 anos de experiência, para ajudar você a transformar sua alimentação, sua rotina e seus hábitos de forma prática e sustentável.
+O MWA é uma jornada de 21 dias criada por Wanessa Auad, nutricionista com mais de 20 anos trabalhando com emagrecimento, para ajudar você a transformar sua alimentação, sua rotina e seus hábitos de forma prática e sustentável.
 
 ### Descrição completa
 
@@ -762,7 +761,7 @@ O método nasceu da experiência pessoal de Wanessa, que eliminou 26 kg após a 
 
 ### Preço
 
-R$ 127
+R$ 97
 
 ### CTA
 
@@ -802,7 +801,7 @@ Continue comigo por mais 90 dias e aprofunde sua transformação com mais acompa
 
 Valor especial até o Dia 7:
 
-**R$ 127**
+**R$ 97**
 
 Botão:
 
@@ -810,7 +809,7 @@ Botão:
 
 ### Dia 7 — Último dia da oferta especial
 
-Hoje é o último dia para garantir sua continuidade no MWA por R$ 127.
+Hoje é o último dia para garantir sua continuidade no MWA por R$ 97.
 
 Você já deu os primeiros passos.
 
@@ -943,7 +942,7 @@ Direção obrigatória:
 - A Jornada de 21 Dias é a porta de entrada do ecossistema MWA.
 - O texto deve preservar a história de Wanessa: 26 kg eliminados após a gestação e manutenção do resultado por 14 anos.
 - A autoridade profissional deve aparecer com elegância: mais de 20 anos de experiência e CRN-1/27939.
-- O valor do programa inicial é R$ 127.
+- O valor do programa inicial é R$ 97.
 - A venda principal será pela Hotmart.
 - A continuidade de 90 dias será ofertada no app.
 - A Sessão Estratégica MWA de R$ 297 será ofertada dentro do app.
