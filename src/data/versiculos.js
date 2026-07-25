@@ -494,7 +494,7 @@ export const versiculos = [
     texto: "Porque toda boa dádiva vem de cima. Agradeça seu corpo e sua mente.",
     referencia: "Tiago 1:17",
     tema: "Gratidão",
-    reflexao: "Seu corpo funciona para você enquanto dorme, enquanto trabalha. É uma dádiva. Agradeça sincerely."
+    reflexao: "Seu corpo funciona para você enquanto dorme, enquanto trabalha. É uma dádiva. Agradeça sinceramente."
   },
   {
     dia: 70,
