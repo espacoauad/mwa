@@ -12,8 +12,8 @@ Arquivos revisados — Bloco 3 (dias 61–90): dicas90.js (dias 61–90), inform
 
 ## Resumo Executivo
 
-- Total de mudanças: 139 (fato: 48, voz: 50, segurança: 28, consistência: 13)
-- Total de itens sinalizados para decisão da Wanessa: 4
+- Total de mudanças: 148 (fato: 56, voz: 51, segurança: 28, consistência: 13)
+- Total de itens sinalizados para decisão da Wanessa: 5
 - Arquivos sem nenhuma alteração necessária: nenhum (todos os 6 arquivos revisados receberam pelo menos uma edição)
 
 ## Decisões da Wanessa (Checkpoint Bloco 1, 2026-07-24)
@@ -128,6 +128,8 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | Pera (1 unidade média, ~180g) | 1 un | ~100 kcal | ~0.5-1g |
 | Linhaça (100g) | 100g | ~495 kcal | ~18g |
 | Pasta/manteiga de castanha-do-pará (100g, estimativa) | 100g | ~600 kcal | ~14-20g |
+| Pão de queijo (1 unidade média, ~30g) | 1 un | ~90-100 kcal | ~2-2.5g |
+| Carne seca/charque (100g) | 100g | ~200-230 kcal | ~25g |
 
 ## Mudanças
 
@@ -272,6 +274,15 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | 71 | informativos.js | `titulo` | "Checklist de Hábitos: Solidificando" → "Lista de Hábitos: Solidificando" | voz | Anglicismo não pego na Task 3 (achado pelo revisor); corrigido pelo controller |
 | 75 | informativos.js | `titulo` + `dica` | "Checkpoint: Você Está Perto" / "fotos de checkpoint" → "Ponto de Checagem: Você Está Perto" / "fotos de checagem" | voz | Anglicismo não pego na Task 3 (achado pelo revisor); corrigido pelo controller |
 | 15 | dicas.js | `conteudo` | "Ao longo de 20 anos como nutricionista, percebi..." → "Ao longo de 20 anos trabalhando com emagrecimento, percebi..." | segurança | Correção urgente pedida pela Wanessa: o texto afirmava incorretamente 20 anos de atuação como nutricionista registrada — na realidade, ela trabalha com emagrecimento há 20 anos, mas não é nutricionista há esse tempo todo. Achado pela Wanessa em produção (screenshot do app), corrigido imediatamente e varrido em todo o projeto (ver nota abaixo) |
+| 67 | lanches38a89.js | `descricao` | "Eleganciado. Satisfaz doçura." → "Elegante. Satisfaz doçura." | voz | "Eleganciado" não é uma palavra real em português (erro de digitação/formação); corrigido para "Elegante" |
+| 74 | lanches38a89.js | `proteina` | "~20g" → "~26g" | fato | Soma dos ingredientes (80g frango cozido/desfiado ~24,8g, mesma base do peito de frango grelhado da Tabela de Referência, + ½ abacate ~1,5g) resulta em ~26,3g, ~6,3g acima do declarado (fora da margem ±3g); corrigido |
+| 77 | lanches38a89.js | `proteina` | "~18g" → "~23g" | fato | Soma dos ingredientes (2 colheres de shake proteico ~18g + 100g morango ~0,85g + 100ml leite ~3,5g + toppings granola pequena porção ~0,5g) resulta em ~22,85g, ~4,85g acima do declarado; corrigido |
+| 81 | lanches38a89.js | `proteina` + `ingredientes` | "~12g" / "150g iogurte" → "~17g" / "150g iogurte grego" | fato | "Iogurte" padronizado para grego (convenção já estabelecida no projeto); soma (150g iogurte grego ~15g + 1 colher chia ~2g, Tabela de Referência) resulta em ~17g, ~5g acima do declarado; corrigido |
+| 82 | lanches38a89.js | `proteina` | "~20g" → "~28g" | fato | Soma dos ingredientes (2 colheres de shake proteico ~18g + 200ml leite ~7g + 15g nozes ~2,5g) resulta em ~27,5g, ~7,5g acima do declarado; corrigido |
+| 84 | lanches38a89.js | `proteina` | "~22g" → "~32g" | fato | Soma dos ingredientes (2 fatias pão integral ~6g + 80g frango ~24,8g + ½ abacate ~1,5g) resulta em ~32,3g, ~10,3g acima do declarado; corrigido |
+| 85 | lanches38a89.js | `proteina` | "~15g" → "~20g" | fato | Soma dos ingredientes (1 wrap integral ~3,5g + 60g atum ~15,6g + rúcula porção pequena ~0,7g) resulta em ~19,8g, ~4,8g acima do declarado; corrigido |
+| 86 | lanches38a89.js | `proteina` | "~10g" → "~5g" | fato | Pão de queijo (2 unidades) tem densidade proteica bem menor do que o declarado sugeria — usando referência real (~2-2,5g/unidade média, adicionada à Tabela de Referência), o total fica em ~4-5g, bem abaixo dos ~10g declarados; corrigido |
+| 87 | lanches38a89.js | `proteina` + `ingredientes` + `preparo` | "~14g" / "30g queijo" / "queijo rallado" → "~21g" / "30g queijo ralado tipo parmesão" / "queijo ralado" | fato | "Queijo" padronizado para ralado tipo parmesão (convenção já estabelecida); soma (40g carne seca ~10g, nova entrada na Tabela de Referência, + 30g queijo ralado parmesão ~10,5g) resulta em ~20,5g, ~6,5g acima do declarado; corrigido. Também corrigido de passagem o erro de digitação "rallado"→"ralado" (dobro de L incorreto) |
 
 ## Itens Sinalizados (não editados — decisão da Wanessa)
 
@@ -285,3 +296,5 @@ tabela — não são mais pendências, ver `## Decisões da Wanessa`.
 | 6, 17, 23 | lanchesProteicos.js / lanches22a37.js | `ingredientes` — receitas de whey com "água OU leite" (escolha do leitor) | Composição do Whey 3W confirmada (26g proteína/dose). Usando água, a proteína bate com o declarado; com leite, sobe ~7-8g além — não é um erro do texto, é variação real da escolha da leitora. Não editado — mencionado apenas para registro |
 | 56 | lanches38a89.js | `produto` | O campo `produto` deste dia usa "Whey protein" genérico (imagem `whey-generico.jpg`), diferente da referência Whey 3W Herbalife confirmada usada nos demais dias com whey — não alterado por ser campo protegido pelo guardrail (produto/marca) | Confirmar se é intencional ou se deveria ser padronizado para a referência Whey 3W como os demais dias |
 | 90 | dicas90.js | `conteudo` — "A ciência do comportamento é clara: após 90 dias de repetição, o hábito deixa de ser uma ação que você força e vira uma identidade que você encarna." | Este é o mesmo padrão do mito popular "21 dias para criar um hábito" (mal atribuído a Maxwell Maltz), só que reciclado como "90 dias". A pesquisa mais citada sobre o tema (Lally et al., 2010, European Journal of Social Psychology) encontrou uma média de ~66 dias para automatizar um hábito, mas com variação enorme (18 a 254 dias) — não há um número fixo "cientificamente claro". Como é uma afirmação de mecanismo comportamental popular mas contestada (mesma categoria de "esgotamento do ego" e "hipotálamo vizinho" já suavizados nos Blocos 1-2), não editei direto — proponho para aprovação da Wanessa: **Antes:** "A ciência do comportamento é clara: após 90 dias de repetição, o hábito deixa de ser uma ação que você força e vira uma identidade que você encarna." **Depois (proposto):** "A ciência do comportamento aponta algo real: repetição consistente, sustentada ao longo de semanas e meses, transforma uma ação forçada em identidade — e 90 dias de prática é tempo mais que suficiente para essa mudança se consolidar." O restante do texto do dia 90 (tom de encerramento, reconhecimento da jornada completa de 90 dias) já está bem calibrado e coerente com o encerramento do dia 30 — nenhuma outra mudança de tom proposta |
+| 88 | lanches38a89.js | `ingredientes` (pó proteico) / `proteina` | "30g pó proteico" no Bolo Proteico de Cenoura e Chocolate — declarado ~14g. Se "pó proteico" for o Shake Fórmula 1 ou Whey 3W (produtos de referência confirmados, ~69-76g proteína/100g), 30g contribuiriam sozinhos ~21-23g de proteína, e a soma total (+ovo +leite +cenoura) passaria de ~29g, quase o dobro do declarado. Mas se for um "pó proteico" genérico/diferente (menos concentrado, comum em receitas caseiras), o valor declarado de ~14g é plausível | Confirmar se este "pó proteico" é o mesmo Whey 3W/Shake Fórmula 1 usado nos outros dias (e então corrigir a proteína para cima) ou se é um produto diferente/menos concentrado (e então manter ~14g) |
+
