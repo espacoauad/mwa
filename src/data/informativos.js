@@ -73,8 +73,8 @@ export const INFORMATIVOS = [
         nome: '150g salmão grelhado',
         tom: 'neutro',
         itens: [
-          ['Calorias', '280'],
-          ['Proteína', '25g ✅'],
+          ['Calorias', '320'],
+          ['Proteína', '34g ✅'],
           ['Ômega 3', 'ALTO'],
           ['Saciedade', '5h'],
           ['Custo', 'R$ 45–50/prato'],
@@ -85,8 +85,8 @@ export const INFORMATIVOS = [
         nome: '200g peixe branco (tilápia)',
         tom: 'bom',
         itens: [
-          ['Calorias', '200'],
-          ['Proteína', '30g ✅✅'],
+          ['Calorias', '190'],
+          ['Proteína', '40g ✅✅'],
           ['Ômega 3', 'baixo'],
           ['Saciedade', '5h'],
           ['Custo', 'R$ 15–20/prato'],

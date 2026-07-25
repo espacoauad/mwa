@@ -433,8 +433,8 @@ export const versiculos = [
   },
   {
     dia: 61,
-    texto: "Que a sua mente seja como um rio; sempre fluindo, sempre se renovando.",
-    referencia: "Isaías 26:3",
+    texto: "Não se amoldem ao padrão deste mundo, mas transformem-se pela renovação da sua mente, para que sejam capazes de experimentar e comprovar a boa, agradável e perfeita vontade de Deus.",
+    referencia: "Romanos 12:2",
     tema: "Fluxo mental",
     reflexao: "Não fique presa em um pensamento. Deixe sua mente fluir como um rio — sempre em movimento, sempre renovada."
   },
@@ -447,8 +447,8 @@ export const versiculos = [
   },
   {
     dia: 63,
-    texto: "Você está na metade da jornada de 90 dias. Seu espírito está mais forte.",
-    referencia: "2 Coríntios 9:8",
+    texto: "Mas os que esperam no Senhor renovam as suas forças. Voam alto como águias; correm e não ficam exaustos, andam e não se cansam.",
+    referencia: "Isaías 40:31",
     tema: "Força espiritual",
     reflexao: "Você não é mais a mesma. Seu espírito cresceu. Cada dia você está mais sábia, mais forte, mais inteira."
   },
@@ -470,8 +470,8 @@ export const versiculos = [
   },
   {
     dia: 66,
-    texto: "Se você quer contribuir para o mundo, comece cuidando bem de si mesmo.",
-    referencia: "Provérbios 22:3",
+    texto: "Amado, desejo que te vá bem em todas as coisas, e que tenhas saúde, assim como bem vai à tua alma.",
+    referencia: "3 João 1:2",
     tema: "Autocuidado como missão",
     reflexao: "Sua transformação é sua contribuição. Quando você brilha, outros têm permissão para brilhar também."
   },
@@ -484,7 +484,7 @@ export const versiculos = [
   },
   {
     dia: 68,
-    texto: "A comida que você escolhe é um ato de amor próprio. Escolha bem.",
+    texto: "Acaso não sabem que o corpo de vocês é santuário do Espírito Santo que habita em vocês, que lhes foi dado por Deus, e que vocês não são de si mesmos? Vocês foram comprados por alto preço. Portanto, glorifiquem a Deus com o seu próprio corpo.",
     referencia: "1 Coríntios 6:19-20",
     tema: "Alimentação consciente",
     reflexao: "Cada refeição é uma oportunidade de dizer 'eu me amo'. Escolha como se estivesse honrando sua vida."
@@ -505,8 +505,8 @@ export const versiculos = [
   },
   {
     dia: 71,
-    texto: "Porque quando você cuida de si, você tem energia para cuidar dos outros.",
-    referencia: "Efésios 5:33",
+    texto: "Cada um exerça o dom que recebeu para servir aos outros, administrando fielmente a graça de Deus nas suas múltiplas formas.",
+    referencia: "1 Pedro 4:10",
     tema: "Energia para servir",
     reflexao: "Cuidar de si não é egoísmo — é preparação. Você precisa estar bem para levar bem aos outros."
   },
@@ -526,10 +526,10 @@ export const versiculos = [
   },
   {
     dia: 74,
-    texto: "Abençoado é aquele que cuida dos necessitados. Comece por si mesmo.",
+    texto: "Fale em favor daqueles que não podem se defender; garanta justiça para os que estão aflitos.",
     referencia: "Provérbios 31:8",
     tema: "Cuidado amplo",
-    reflexao: "Você também é necessitada de cuidado. Seja sua própria primeira beneficiária."
+    reflexao: "Sua jornada te dá forças para também ser voz por quem ainda não encontrou a própria. Cuidar de si é o primeiro passo para cuidar de quem precisa."
   },
   {
     dia: 75,
@@ -547,15 +547,15 @@ export const versiculos = [
   },
   {
     dia: 77,
-    texto: "Porque você importa. Seu corpo importa. Sua mente importa.",
-    referencia: "1 Pedro 1:18-19",
+    texto: "Tu o fizeste um pouco menor do que os anjos e o coroaste com glória e com honra.",
+    referencia: "Salmos 8:5",
     tema: "Valor integral",
     reflexao: "Você não é um número na balança. Você é um ser completo que importa profundamente."
   },
   {
     dia: 78,
-    texto: "Não roubem seu próprio futuro. Cuide bem do que é seu hoje.",
-    referencia: "Provérbios 6:11",
+    texto: "Vá à formiga, ó preguiçoso! Observe os caminhos dela e seja sábio!",
+    referencia: "Provérbios 6:6",
     tema: "Responsabilidade futura",
     reflexao: "Cada escolha hoje é um investimento no seu futuro. Você está construindo a pessoa que será amanhã."
   },
@@ -575,15 +575,15 @@ export const versiculos = [
   },
   {
     dia: 81,
-    texto: "Porque quando você está bem, todos ao seu redor também estão melhor.",
-    referencia: "Efésios 5:2",
+    texto: "Se um membro sofre, todos os outros sofrem com ele; se um membro é honrado, todos os outros se alegram com ele.",
+    referencia: "1 Coríntios 12:26",
     tema: "Impacto em rede",
     reflexao: "Sua transformação afeta todos ao seu redor. Você não está apenas se salvando — está salvando sua família."
   },
   {
     dia: 82,
-    texto: "O cuidado é uma forma de oração. Ore com cada decisão.",
-    referencia: "Filipenses 4:6",
+    texto: "Portanto, irmãos, peço, pelas misericórdias de Deus, que ofereçam o corpo de vocês como sacrifício vivo, santo e agradável a Deus: este é o culto racional de vocês.",
+    referencia: "Romanos 12:1",
     tema: "Cuidado como oração",
     reflexao: "Cada comida que você escolhe bem é uma oração. Cada movimento é adoração. Ore com sua vida."
   },
@@ -596,8 +596,8 @@ export const versiculos = [
   },
   {
     dia: 84,
-    texto: "A verdadeira riqueza é saúde e paz. Invista nelas.",
-    referencia: "Provérbios 22:1",
+    texto: "Melhor é um pedaço seco de pão, com tranquilidade, do que uma casa cheia de banquetes, com desavenças.",
+    referencia: "Provérbios 17:1",
     tema: "Riqueza verdadeira",
     reflexao: "Dinheiro não traz saúde, mas saúde traz felicidade. Você está investindo no melhor que existe."
   },
@@ -631,15 +631,15 @@ export const versiculos = [
   },
   {
     dia: 89,
-    texto: "Porque a jornada é tanto sobre o caminho quanto sobre o destino.",
-    referencia: "Provérbios 14:12",
+    texto: "Meus irmãos, considerem motivo de grande alegria o fato de passarem por diversas provações; assim, vocês saberão que a prova da sua fé produz perseverança. No entanto, a perseverança deve ter ação completa, a fim de que vocês sejam perfeitos e íntegros, sem que lhes falte coisa alguma.",
+    referencia: "Tiago 1:2-4",
     tema: "Significado do percurso",
     reflexao: "O aprendizado que você ganhou é tão valioso quanto o peso que perdeu. Aprecie ambos."
   },
   {
     dia: 90,
-    texto: "Você completou 90 dias. Seu espírito é forte, seu corpo é sábio, seu coração é puro.",
-    referencia: "1 Tessalonicenses 5:23",
+    texto: "Combati o bom combate, terminei a corrida, guardei a fé.",
+    referencia: "2 Timóteo 4:7",
     tema: "Conclusão 90 dias",
     reflexao: "Você fez! 90 dias de fé, disciplina e amor. Agora a verdadeira vida saudável começa."
   }
