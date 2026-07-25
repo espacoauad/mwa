@@ -387,7 +387,7 @@ export const versiculos = [
     texto: "Porque a morte e a vida estão no poder da língua; quem a usar bem colherá seus frutos.",
     referencia: "Provérbios 18:21",
     tema: "Poder das palavras",
-    reflexao: "As palavras que você diz sobre si mesma são poderosas. Use sua língua para criar vida, não morte."
+    reflexao: "As palavras que você diz sobre si mesma moldam como você se enxerga. Escolha usá-las para construir, não destruir."
   },
   {
     dia: 55,
