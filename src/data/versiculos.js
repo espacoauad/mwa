@@ -287,7 +287,7 @@ export const versiculos = [
     texto: "A vitória não vai aos fortes, mas aos que nunca deixam de lutar.",
     referencia: "Provérbios 24:16",
     tema: "Vitória pela persistência",
-    reflexao: "Você não precisa ser perfeita. Apenas não desista. A vitória pertence àquem tenta de novo."
+    reflexao: "Você não precisa ser perfeita. Apenas não desista. A vitória pertence a quem tenta de novo."
   },
   {
     dia: 41,
@@ -310,7 +310,7 @@ export const versiculos = [
     texto: "Renovo da mente é renovo da vida. Controle seus pensamentos.",
     referencia: "Romanos 12:2",
     tema: "Transformação mental",
-    reflexao: "Seus pensamentos criam sua realidade. Comece a pensar como alguém que merece saúde."
+    reflexao: "Seus pensamentos moldam como você enxerga sua realidade. Comece a pensar como alguém que merece saúde."
   },
   {
     dia: 44,
@@ -324,14 +324,14 @@ export const versiculos = [
     texto: "Como um homem pensa em seu coração, assim ele é.",
     referencia: "Provérbios 23:7",
     tema: "Poder do pensamento",
-    reflexao: "Você pensa que consegue? Então consegue. Comece hoje a pensar como alguém transformada."
+    reflexao: "A forma como você fala consigo mesma importa. Comece hoje a pensar como alguém que já está se transformando."
   },
   {
     dia: 46,
     texto: "Abra mão do ódio para com você mesmo. Você é digno de amor.",
     referencia: "Mateus 22:39",
     tema: "Auto-compaixão",
-    reflexao: "Se você não se ama, ninguém mais poderá te convencer. Comece agora: seja gentil consigo mesma."
+    reflexao: "Se você não se ama, ninguém mais vai conseguir convencer você do contrário. Comece agora: seja gentil consigo mesma."
   },
   {
     dia: 47,
