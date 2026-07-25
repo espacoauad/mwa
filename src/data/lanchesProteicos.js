@@ -126,7 +126,7 @@ export const LANCHES_PROTEICOS = [
     proteina: '~12g',
     descricao:
       'Proteína + fibra é a combinação que mais sacia e ainda cuida do intestino. As fibras solúveis turbinam o iogurte sem alterar o sabor.',
-    ingredientes: ['1 iogurte natural', '1 dose de fibras solúveis', '1 colher de aveia'],
+    ingredientes: ['1 iogurte grego natural (pote de 100g)', '1 dose de fibras solúveis', '1 colher de aveia'],
     preparo: 'Misture as fibras e a aveia no iogurte, espere 1 minuto para engrossar e aproveite.',
     produto: { nome: 'Fibras solúveis', imagem: '/produtos/fibras-soluveis.jpg' },
   },

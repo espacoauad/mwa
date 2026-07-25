@@ -34,10 +34,10 @@ export const LANCHES_22_37 = [
     dia: 24,
     icone: '🧀',
     titulo: 'Requeijão com cenoura e rabanete',
-    proteina: '~12g',
+    proteina: '~7g',
     descricao:
       'Requeijão light é proteína concentrada. Com cenoura e rabanete crus, vira um lanche crocante que sacia por horas.',
-    ingredientes: ['4 colheres de requeijão light', 'Cenoura em palitos (1 cenoura média)', 'Rabanete em fatias finas (4–5)', 'Sal e pimenta a gosto'],
+    ingredientes: ['4 colheres de sopa de requeijão light', 'Cenoura em palitos (1 cenoura média)', 'Rabanete em fatias finas (4–5)', 'Sal e pimenta a gosto'],
     preparo: 'Coloque o requeijão num potinho e use cenoura e rabanete como "colher". Crocante e satisfatório.',
     produto: null,
   },
@@ -99,10 +99,10 @@ export const LANCHES_22_37 = [
   {
     dia: 30,
     icone: '💪',
-    titulo: 'Whey com banana e aveia',
+    titulo: 'Whey com Banana e Aveia — Marco dos 30 Dias',
     proteina: '~35g',
     descricao:
-      'Whey protein + carboidrato lento (banana + aveia) = lanche pós-treino ideal. Ajuda a favorecer a recuperação muscular.',
+      'Você chegou ao dia 30. Esse shake é o mesmo de sempre — whey + carboidrato lento (banana + aveia) para ajudar na recuperação — mas hoje ele também celebra 30 dias de escolhas consistentes.',
     ingredientes: ['1 dose de whey protein', '½ banana', '1 colher de aveia em flocos', '200ml de leite', 'Gelo'],
     preparo: 'Bata tudo no liquidificador até cremoso. Consumir após o treino ajuda no processo de recuperação.',
     produto: { nome: 'Whey protein', imagem: '/produtos/whey-generico.jpg' },
@@ -133,10 +133,10 @@ export const LANCHES_22_37 = [
     dia: 33,
     icone: '🐠',
     titulo: 'Atum com abacate em torrada',
-    proteina: '~20g',
+    proteina: '~34g',
     descricao:
       'Atum (ômega-3 + proteína) + abacate (gordura boa) + torrada integral (fibra) = lanche perfeito.',
-    ingredientes: ['1 lata de atum em água (escorrido)', '¼ abacate maduro', '2 torradas integrais', 'Limão e sal'],
+    ingredientes: ['1 lata padrão de atum em água (~120g escorrido)', '¼ abacate maduro', '2 torradas integrais', 'Limão e sal'],
     preparo: 'Esprema atum com garfo, misture com abacate amassado, tempere com limão e sal. Espalhe na torrada.',
     produto: null,
   },
