@@ -1095,7 +1095,7 @@ export const INFORMATIVOS = [
   {
     dia: 63,
     emoji: '🍱',
-    titulo: 'Meal Prep: Futuro Já Preparado',
+    titulo: 'Preparo de Refeições: Futuro Já Preparado',
     opcoes: [
       { nome: 'Cozinhar a cada refeição, com fome', tom: 'ruim', itens: [['Tempo gasto', 'diário e sob pressão'], ['Tendência a improviso', 'alta']] },
       { nome: 'Preparar parte das refeições da semana de uma vez', tom: 'bom', itens: [['Tempo gasto', 'concentrado, sem pressa'], ['Tendência a improviso', 'baixa']] },
@@ -1183,7 +1183,7 @@ export const INFORMATIVOS = [
   {
     dia: 71,
     emoji: '✅',
-    titulo: 'Checklist de Hábitos: Solidificando',
+    titulo: 'Lista de Hábitos: Solidificando',
     opcoes: [
       { nome: 'Hábito esporádico', tom: 'ruim', itens: [['Frequência', 'quando lembra'], ['Automatismo', 'baixo']] },
       { nome: 'Hábito repetido diariamente', tom: 'bom', itens: [['Frequência', 'todo dia, sem pensar muito'], ['Automatismo', 'alto']] },
@@ -1227,12 +1227,12 @@ export const INFORMATIVOS = [
   {
     dia: 75,
     emoji: '📈',
-    titulo: 'Checkpoint: Você Está Perto',
+    titulo: 'Ponto de Checagem: Você Está Perto',
     opcoes: [
       { nome: 'Seu início (dia 1)', tom: 'neutro', itens: [['Peso', 'ponto de partida'], ['Hábitos', 'em construção']] },
       { nome: 'Você agora (dia 75)', tom: 'bom', itens: [['Peso', 'sua evolução até aqui'], ['Hábitos', 'consolidados']] },
     ],
-    dica: 'Faça sua pesagem e fotos de checkpoint. Faltam 15 dias — é hora de olhar para trás, com dados reais, e ver com clareza o quanto você já percorreu desde o dia 1.',
+    dica: 'Faça sua pesagem e fotos de checagem. Faltam 15 dias — é hora de olhar para trás, com dados reais, e ver com clareza o quanto você já percorreu desde o dia 1.',
     cta: { label: 'Ver Meu Progresso', tipo: 'progresso' },
   },
   {
