@@ -235,8 +235,8 @@ export const versiculos = [
   },
   {
     dia: 33,
-    texto: "Vocês começaram bem. Terminem bem. Não desistam agora.",
-    referencia: "Gálatas 3:3",
+    texto: "Vocês corriam bem. Quem os impediu de continuar obedecendo à verdade?",
+    referencia: "Gálatas 5:7",
     tema: "Continuidade",
     reflexao: "Você já provou que consegue. Agora prove que consegue continuar. O melhor prêmio é a consistência."
   },
@@ -256,8 +256,8 @@ export const versiculos = [
   },
   {
     dia: 36,
-    texto: "Tudo posso fazer, menos abandonar o caminho que comecei.",
-    referencia: "2 Timóteo 4:7",
+    texto: "Ninguém que põe a mão no arado e olha para trás é apto para o reino de Deus.",
+    referencia: "Lucas 9:62",
     tema: "Determinação",
     reflexao: "Você fez um compromisso com você mesma. Honre esse compromisso a cada decisão que toma."
   },
@@ -270,8 +270,8 @@ export const versiculos = [
   },
   {
     dia: 38,
-    texto: "O homem firme será recompensado; o inconstante nunca conhecerá a paz.",
-    referencia: "Tiago 1:7-8",
+    texto: "É como árvore plantada à beira de águas correntes: dá fruto no tempo certo e suas folhas não murcham. Tudo o que ele faz prospera!",
+    referencia: "Salmos 1:3",
     tema: "Estabilidade",
     reflexao: "A paz vem da estabilidade. Não basta querer — é preciso ser firme, como uma rocha que não se move."
   },
@@ -321,8 +321,8 @@ export const versiculos = [
   },
   {
     dia: 45,
-    texto: "Como um homem pensa em seu coração, assim ele é.",
-    referencia: "Provérbios 23:7",
+    texto: "Levamos cativo todo pensamento, para torná-lo obediente a Cristo.",
+    referencia: "2 Coríntios 10:5",
     tema: "Poder do pensamento",
     reflexao: "A forma como você fala consigo mesma importa. Comece hoje a pensar como alguém que já está se transformando."
   },
@@ -349,8 +349,8 @@ export const versiculos = [
   },
   {
     dia: 49,
-    texto: "A sabedoria começa com o temor do Senhor; o conhecimento segue a humildade.",
-    referencia: "Provérbios 15:33",
+    texto: "O temor do Senhor é o princípio da sabedoria, e o conhecimento do Santo é entendimento.",
+    referencia: "Provérbios 9:10",
     tema: "Sabedoria",
     reflexao: "Seja humilde com seu corpo. Ouça o que ele te diz. Há sabedoria em cada fome, em cada fadiga."
   },
@@ -419,8 +419,8 @@ export const versiculos = [
   },
   {
     dia: 59,
-    texto: "Confiei no Senhor e Ele me sustentou. Você também pode confiar.",
-    referencia: "Salmos 27:10",
+    texto: "Entregue o seu caminho ao Senhor; confie nele, e ele agirá.",
+    referencia: "Salmos 37:5",
     tema: "Confiança",
     reflexao: "Quando você confia, você relaxa. E é no relaxamento que a transformação verdadeira acontece."
   },
