@@ -417,7 +417,7 @@ export const INFORMATIVOS = [
         nome: 'Método Sozinho',
         tom: 'neutro',
         itens: [
-          ['Informação', 'Completa (21 dicas + app)'],
+          ['Informação', 'Completa (30 dicas + app)'],
           ['Apoio', 'Estrutura do método'],
           ['Desafios', 'Você resolve com autonomia'],
           ['Progresso', 'Tendência geral'],
@@ -1274,7 +1274,7 @@ export const INFORMATIVOS = [
     titulo: 'Última Semana: Semana 13 Começou',
     opcoes: [
       { nome: 'Relaxar tudo por já estar perto do fim', tom: 'ruim', itens: [['Consistência na reta final', 'em risco']] },
-      { nome: 'Manter o padrão até o último dia', tom: 'bom', itens: [['Consistência na reta final', 'garantida']] },
+      { nome: 'Manter o padrão até o último dia', tom: 'bom', itens: [['Consistência na reta final', 'sustentada']] },
     ],
     dica: 'A última semana também conta — na verdade, é ela que sedimenta o padrão que você vai levar para a manutenção. Mantenha o mesmo cuidado dos primeiros dias.',
     cta: null,
