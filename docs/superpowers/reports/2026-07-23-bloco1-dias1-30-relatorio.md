@@ -264,6 +264,8 @@ Atualizar esta tabela sempre que um novo alimento for conferido.
 | 86 | dicas90.js | `objetivoComportamental` | "Usar respiração como ferramentat antes de comer emocionalmente" → "Usar respiração como ferramenta antes de comer emocionalmente" | voz | Correção ortográfica (erro de digitação) |
 | 88 | dicas90.js | `conteudo` | "cafeína dura TE 8-10 horas" → "cafeína dura até 8-10 horas" | voz | Correção de erro de digitação (fragmento de palavra truncado) |
 | 89 | dicas90.js | `tema` | "Biologia do Stress" → "Biologia do Estresse" | consistência | Anglicismo — o `titulo` do mesmo dia já usa corretamente "Estresse Crônico", mas o `tema` ficou em inglês; mesmo padrão de anglicismo já corrigido em outros dias do arquivo (63, 79) |
+| 70 | dicas90.js | `conteudo` | "Rodízio é tricky:" → "Rodízio é traiçoeiro:" | voz | Anglicismo não corrigido na Task 2 (achado pelo revisor) — mesmo padrão de anglicismo já corrigido no mesmo dia ("psicologicamente") e em outros dias do arquivo |
+| 72 | dicas90.js | `conteudo` | "Álcool é tricky porque..." → "Álcool é traiçoeiro porque..." | voz | Mesmo anglicismo do dia 70, não corrigido na Task 2 (achado pelo revisor) |
 
 ## Itens Sinalizados (não editados — decisão da Wanessa)
 
