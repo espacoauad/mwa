@@ -1,10 +1,18 @@
+import { useReducedMotion } from 'framer-motion'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
+import { useContagem } from '../../hooks/useContagem.js'
 
 // Gráfico de macronutrientes em anéis concêntricos
 // Design premium MWA: minimalismo + hierarquia visual + respiro
 
 export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, metaProteina = 100, metaCarbos = 100, metaGordura = 40, calorias = 0, metaCalorias = 1800 }) {
   const { ingles } = useIdioma()
+  const reduzido = useReducedMotion()
+  const ativo = !reduzido
+  const proteinaAnimada = useContagem(proteina, { ativo })
+  const carbosAnimados = useContagem(carbos, { ativo })
+  const gorduraAnimada = useContagem(gordura, { ativo })
+  const caloriasAnimadas = useContagem(calorias, { ativo })
   const centro = 100 // Centro do SVG (viewBox = 200x200)
   const espessuraAnel = 9
 
@@ -60,8 +68,8 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
   const opacidadeCarbos = carbos > metaCarbos ? 0.7 : 1
   const opacidadeGordura = gordura > metaGordura ? 0.7 : 1
 
-  // Calorie display
-  const caloriasInteiro = Math.round(calorias)
+  // Calorie display (usa o valor já animado)
+  const caloriasInteiro = Math.round(caloriasAnimadas)
   const metaCaloriasInteiro = Math.round(metaCalorias)
 
   return (
@@ -72,16 +80,18 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
         <p className="mt-0.5 text-xs text-verde/80 tracking-wide">de {metaCaloriasInteiro} kcal</p>
       </div>
 
+      <div className="h-px w-16 bg-ouro/30" />
+
       {/* SVG do gráfico */}
       <svg viewBox="0 0 200 200" className="h-48 w-48 md:h-56 md:w-56">
         {/* Anel de Proteína (externo, Verde Profundo) */}
-        {desenharAnel(raios.proteina, proteina, metaProteina, '#344528', opacidadeProteina)}
+        {desenharAnel(raios.proteina, proteinaAnimada, metaProteina, '#344528', opacidadeProteina)}
 
         {/* Anel de Carboidratos (meio, Sage) */}
-        {desenharAnel(raios.carbos, carbos, metaCarbos, '#879B55', opacidadeCarbos)}
+        {desenharAnel(raios.carbos, carbosAnimados, metaCarbos, '#879B55', opacidadeCarbos)}
 
         {/* Anel de Gordura (interno, Dourado) */}
-        {desenharAnel(raios.gordura, gordura, metaGordura, '#D4AF7A', opacidadeGordura)}
+        {desenharAnel(raios.gordura, gorduraAnimada, metaGordura, '#D4AF7A', opacidadeGordura)}
       </svg>
 
       {/* Rótulos dos macros */}
@@ -90,7 +100,7 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
         <div>
           <p className="text-xs font-semibold text-verde/70">{ingles ? 'Protein' : 'Proteína'}</p>
           <p className="mt-1 font-serif text-xl font-bold text-verde">
-            {Math.round(proteina)}<span className="text-xs font-normal text-verde/60">g</span>
+            {Math.round(proteinaAnimada)}<span className="text-xs font-normal text-verde/60">g</span>
           </p>
           <p className="mt-0.5 text-[10px] text-verde/80">de {Math.round(metaProteina)}g</p>
         </div>
@@ -99,7 +109,7 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
         <div>
           <p className="text-xs font-semibold text-verde/70">{ingles ? 'Carbs' : 'Carboidratos'}</p>
           <p className="mt-1 font-serif text-xl font-bold text-sage">
-            {Math.round(carbos)}<span className="text-xs font-normal text-verde/60">g</span>
+            {Math.round(carbosAnimados)}<span className="text-xs font-normal text-verde/60">g</span>
           </p>
           <p className="mt-0.5 text-[10px] text-verde/80">de {Math.round(metaCarbos)}g</p>
         </div>
@@ -108,7 +118,7 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
         <div>
           <p className="text-xs font-semibold text-verde/70">{ingles ? 'Fat' : 'Gordura'}</p>
           <p className="mt-1 font-serif text-xl font-bold text-ouro">
-            {Math.round(gordura)}<span className="text-xs font-normal text-verde/60">g</span>
+            {Math.round(gorduraAnimada)}<span className="text-xs font-normal text-verde/60">g</span>
           </p>
           <p className="mt-0.5 text-[10px] text-verde/80">de {Math.round(metaGordura)}g</p>
         </div>
