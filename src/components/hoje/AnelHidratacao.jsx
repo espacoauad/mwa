@@ -1,4 +1,6 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
+import { useContagem } from '../../hooks/useContagem.js'
 
 /**
  * AnelHidratacao — Indicador premium de hidratação diária
@@ -11,10 +13,14 @@ import { useIdioma } from '../../context/IdiomaContext.jsx'
  */
 export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }) {
   const { ingles } = useIdioma()
+  const reduzido = useReducedMotion()
+  const ativo = !reduzido
   const raio = 50
   const circ = 2 * Math.PI * raio
   const pct = Math.min(Math.round((consumidoMl / metaMl) * 100), 100)
-  const preenchido = (Math.min(pct, 100) / 100) * circ
+  const pctAnimado = useContagem(pct, { ativo, duracaoMs: 700 })
+  const consumidoAnimado = useContagem(consumidoMl, { ativo, duracaoMs: 700 })
+  const preenchido = (Math.min(pctAnimado, 100) / 100) * circ
 
   // Estado visual e micro-copy educativa
   let estado = { frase: ingles ? 'Start gently. Small sips are also an act of care.' : 'Comece com calma. Pequenos goles também constroem cuidado.', tipo: 'inicio', cor: '#C9963B' }
@@ -47,14 +53,13 @@ export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }
               strokeWidth="8"
               strokeLinecap="round"
               strokeDasharray={`${preenchido} ${circ}`}
-              className="transition-all duration-700 ease-out motion-reduce:transition-none"
             />
           </svg>
 
           {/* Núcleo: percentual */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className="text-3xl font-bold" style={{ color: estado.cor }}>
-              {pct}
+              {Math.round(pctAnimado)}
             </span>
             <span className="text-xs font-semibold text-verde/80">%</span>
           </div>
@@ -65,7 +70,7 @@ export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }
       <div className="text-center">
         <div className="flex items-baseline justify-center gap-2">
           <span className="text-2xl font-semibold text-verde">
-            {(consumidoMl / 1000).toFixed(1).replace('.', ',')}
+            {(consumidoAnimado / 1000).toFixed(1).replace('.', ',')}
           </span>
           <span className="text-sm font-medium text-verde/60">L</span>
           <span className="text-verde/80"> {ingles ? 'of' : 'de'} </span>
@@ -82,22 +87,26 @@ export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }
 
       {/* Botões de ação */}
       <div className="flex gap-3">
-        <button
+        <motion.button
           type="button"
+          whileTap={{ scale: 0.94 }}
+          transition={{ duration: 0.15, ease: 'easeOut' }}
           onClick={() => onClickAdicionar && onClickAdicionar(-250)}
-          className="flex h-11 w-11 items-center justify-center rounded-lg border-2 border-sage/30 font-bold text-verde/60 transition-colors hover:border-sage/60 active:scale-95"
+          className="flex h-11 w-11 items-center justify-center rounded-lg border-2 border-sage/30 font-bold text-verde/60 transition-colors hover:border-sage/60"
           aria-label={ingles ? 'Remove 250 ml of water' : 'Remover 250 ml de água'}
         >
           −
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           type="button"
+          whileTap={{ scale: 0.94 }}
+          transition={{ duration: 0.15, ease: 'easeOut' }}
           onClick={() => onClickAdicionar && onClickAdicionar(250)}
-          className="min-h-11 rounded-lg bg-sage px-4 py-2.5 text-sm font-semibold text-white transition-transform active:scale-95 hover:bg-sage/90"
+          className="min-h-11 rounded-lg bg-sage px-4 py-2.5 text-sm font-semibold text-white hover:bg-sage/90"
           aria-label={ingles ? 'Add 250 ml of water' : 'Adicionar 250 ml de água'}
         >
           +250 ml
-        </button>
+        </motion.button>
       </div>
 
       {/* Label acessível */}
