@@ -4,7 +4,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
   // Se não há pesagens, mostrar placeholder
   if (!pesagens || pesagens.length === 0) {
     return (
-      <section className="mt-4 rounded-2xl bg-white p-8 shadow-lg shadow-verde/10">
+      <section className="mwa-sombra-premium mt-4 rounded-2xl bg-white p-8">
         <h2 className="mb-1 text-sm font-semibold text-verde/60">Seu progresso</h2>
         <p className="mb-6 text-xs text-verde/80">
           Registre sua primeira pesagem para acompanhar o progresso — peso, medidas e fotos.
@@ -74,7 +74,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
   })
 
   return (
-    <section className="mt-4 rounded-2xl bg-white p-8 shadow-lg shadow-verde/10">
+    <section className="mwa-sombra-premium mt-4 rounded-2xl bg-white p-8">
       {/* Header */}
       <h2 className="mb-1 text-sm font-semibold text-verde/60">Seu progresso</h2>
       <p className="mb-6 text-xs text-verde/80">
@@ -139,7 +139,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
 
       {/* Mini tabela de histórico (opcional, se 2+ pesagens) */}
       {pesagens.length >= 2 && (
-        <div className="mt-6 border-t border-cinza pt-4">
+        <div className="mt-6 border-t border-ouro/20 pt-4">
           <h3 className="mb-3 text-xs font-semibold text-verde/70">Histórico resumido</h3>
           <div className="space-y-2 text-xs">
             {historicoSemanal.map((s) => (
