@@ -20,3 +20,12 @@ export function diaLiberacaoPilar(pilarId) {
 export function pilarLiberado(pilarId, diaAtual) {
   return diaAtual >= diaLiberacaoPilar(pilarId)
 }
+
+const DIAS_POR_ESTAGIO = 20
+const ESTAGIO_MAXIMO = 3 // 0=semente, 1=broto, 2=floração, 3=plena
+
+export function estagioDoPilar(pilarId, diaAtual) {
+  const diaLiberacao = diaLiberacaoPilar(pilarId)
+  if (diaAtual < diaLiberacao) return -1
+  return Math.min(ESTAGIO_MAXIMO, Math.floor((diaAtual - diaLiberacao) / DIAS_POR_ESTAGIO))
+}
