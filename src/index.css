@@ -120,12 +120,46 @@ body {
   animation: mwa-brilho 2.8s ease-in-out 0.6s infinite;
 }
 
+/* MWA FARM: balanço leve de plantas e bob de bichinhos (idle, contínuo) */
+@keyframes mwa-farm-balanco {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes mwa-farm-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.mwa-farm-balanco {
+  display: inline-block;
+  transform-origin: bottom center;
+  animation: mwa-farm-balanco 3.6s ease-in-out infinite;
+}
+
+.mwa-farm-bob {
+  display: inline-block;
+  animation: mwa-farm-bob 2.2s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mwa-estrela,
   .mwa-estrela-cadente,
   .mwa-medalha,
   .mwa-medalha-raios,
-  .mwa-brilho {
+  .mwa-brilho,
+  .mwa-farm-balanco,
+  .mwa-farm-bob {
     animation: none !important;
   }
 }
