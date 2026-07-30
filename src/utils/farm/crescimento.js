@@ -3,6 +3,7 @@
 // estado próprio.
 
 import { PILARES } from '../../data/farm/pilares.js'
+import { DECORACOES } from '../../data/farm/decoracoes.js'
 
 const INTERVALO_LIBERACAO_DIAS = 4
 
@@ -28,4 +29,23 @@ export function estagioDoPilar(pilarId, diaAtual) {
   const diaLiberacao = diaLiberacaoPilar(pilarId)
   if (diaAtual < diaLiberacao) return -1
   return Math.min(ESTAGIO_MAXIMO, Math.floor((diaAtual - diaLiberacao) / DIAS_POR_ESTAGIO))
+}
+
+export function decoracoesLiberadas(diaAtual) {
+  return DECORACOES.filter((d) => diaAtual >= d.dia)
+}
+
+// Único ponto de entrada que a tela (MwaFarm.jsx) precisa chamar.
+// diaAtual ausente/indefinido assume o dia 1, para nunca quebrar a tela.
+export function resumoFazenda(diaAtual) {
+  const dia = diaAtual ?? 1
+  return {
+    pilares: PILARES.map((pilar) => ({
+      ...pilar,
+      liberado: pilarLiberado(pilar.id, dia),
+      estagio: estagioDoPilar(pilar.id, dia),
+      diaLiberacao: diaLiberacaoPilar(pilar.id),
+    })),
+    decoracoes: decoracoesLiberadas(dia),
+  }
 }
