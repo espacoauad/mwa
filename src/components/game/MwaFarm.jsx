@@ -177,8 +177,8 @@ export default function MwaFarm({ onFechar }) {
 
         <p className="px-5 pb-5 pt-2 text-center text-[11px] text-verde/50">
           {ingles
-            ? 'Your farm grows on its own as your journey unfolds — nothing to do here.'
-            : 'Sua fazenda cresce sozinha conforme sua jornada avança — nada para fazer aqui.'}
+            ? 'Your farm grows on its own as your journey unfolds.'
+            : 'Sua fazenda cresce sozinha conforme sua jornada avança.'}
         </p>
       </div>
     </div>
