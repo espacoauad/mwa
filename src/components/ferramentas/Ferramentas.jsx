@@ -14,13 +14,13 @@ import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Jogos de gamificação só abrem sob interação — carregados sob demanda para
 // reduzir o bundle principal (cada um é um mini-jogo com bastante lógica própria).
+const MonteSeuPrato = lazy(() => import('../game/MonteSeuPrato.jsx'))
+const JogoVerdadeiroFalso = lazy(() => import('../game/JogoVerdadeiroFalso.jsx'))
+const JogoTrocaInteligente = lazy(() => import('../game/JogoTrocaInteligente.jsx'))
+const JogoBatalhaSaciedade = lazy(() => import('../game/JogoBatalhaSaciedade.jsx'))
+const JogoDetetiveRotulos = lazy(() => import('../game/JogoDetetiveRotulos.jsx'))
 const JogoColheita = lazy(() => import('../game/JogoColheita.jsx'))
-const JogoEscolhas = lazy(() => import('../game/JogoEscolhas.jsx'))
-const JogoTreino = lazy(() => import('../game/JogoTreino.jsx'))
-const JogoMente = lazy(() => import('../game/JogoMente.jsx'))
-const JogoRestaurante = lazy(() => import('../game/JogoRestaurante.jsx'))
-const JogoPoda = lazy(() => import('../game/JogoPoda.jsx'))
-const JogoPlantio = lazy(() => import('../game/JogoPlantio.jsx'))
+const MwaFarm = lazy(() => import('../game/MwaFarm.jsx'))
 
 function CalculadoraMacros() {
   const { ingles } = useIdioma()
@@ -227,84 +227,99 @@ function CalculadoraExercicio() {
   )
 }
 
-const JOGOS = [
+// Prateleira A — jogos que ensinam nutrição de verdade (progressão e missões)
+const JOGOS_NUTRICAO = [
+  {
+    id: 'prato',
+    emoji: '🍽️',
+    titulo: 'Monte Seu Prato',
+    desc: 'Cumpra missões montando pratos de verdade e aprenda com cada escolha. Missão concluída = +10 🌱 por dia',
+  },
+  {
+    id: 'vf',
+    emoji: '🤔',
+    titulo: 'Verdadeiro, Falso ou Depende',
+    desc: 'Nem tudo em nutrição é sim ou não. Cada resposta vem com a explicação. Rodada concluída = +10 🌱 por dia',
+  },
+  {
+    id: 'troca',
+    emoji: '🔄',
+    titulo: 'Troca Inteligente',
+    desc: 'Melhore uma refeição sem abrir mão dela e veja o impacto de cada troca. Rodada concluída = +10 🌱 por dia',
+  },
+  {
+    id: 'saciedade',
+    emoji: '⚖️',
+    titulo: 'Batalha da Saciedade',
+    desc: 'Mesmas calorias, fomes diferentes: descubra o que faz uma refeição sustentar mais. Rodada = +10 🌱 por dia',
+  },
+  {
+    id: 'rotulos',
+    emoji: '🔍',
+    titulo: 'Detetive dos Rótulos',
+    desc: 'Aprenda a ler a tabela nutricional e a diferença entre porção e embalagem. Rodada = +10 🌱 por dia',
+  },
+]
+
+// Prateleira B — pausa leve, sem promessa educativa
+const JOGOS_PAUSA = [
   {
     id: 'colheita',
     emoji: '🍓',
     titulo: 'Jogo da Colheita',
-    desc: 'Combine 3 frutas e relaxe. 300+ pontos = +10 🌱 por dia',
-  },
-  {
-    id: 'escolhas',
-    emoji: '🥗',
-    titulo: 'Jogo das Escolhas',
-    desc: 'Seu avatar apanha o saudável e desvia da besteira. 300+ pontos = +10 🌱 por dia',
-  },
-  {
-    id: 'treino',
-    emoji: '💪',
-    titulo: 'Jogo do Treino',
-    desc: 'Toque nos exercícios que acenderem. 300+ pontos = +10 🌱 por dia',
-  },
-  {
-    id: 'poda',
-    emoji: '✂️',
-    titulo: 'Jogo da Poda',
-    desc: 'Toque só nos hábitos que precisam ser podados. 300+ pontos = +10 🌱 por dia',
-  },
-  {
-    id: 'plantio',
-    emoji: '🌱',
-    titulo: 'Jogo do Plantio',
-    desc: 'Cultive seus hábitos respondendo desafios sobre os 30 dias. 16 acertos = +10 🌱 por dia',
-  },
-  {
-    id: 'restaurante',
-    emoji: '🍽️',
-    titulo: 'Restaurante Saudável',
-    desc: 'Seja a chef e monte pratos saudáveis para os clientes. 300+ pontos = +10 🌱 por dia',
-  },
-  {
-    id: 'mente',
-    emoji: '🌷',
-    titulo: 'Jardim de Afirmações',
-    desc: 'Colha mensagens positivas para sua mente. Complete = +15 🌱 por dia',
+    desc: 'Um respiro para a mente: combine 3 frutas e relaxe. 300+ pontos = +10 🌱 por dia',
   },
 ]
 
 const JOGOS_EN = {
-  colheita: ['Harvest Game', 'Match 3 fruits and relax. 300+ points = +10 🌱 per day'],
-  escolhas: ['Choices Game', 'Catch healthy foods and avoid junk food. 300+ points = +10 🌱 per day'],
-  treino: ['Workout Game', 'Tap the exercises as they light up. 300+ points = +10 🌱 per day'],
-  poda: ['Pruning Game', 'Tap only the habits that need pruning. 300+ points = +10 🌱 per day'],
-  plantio: ['Planting Game', 'Grow your habits over 21 days by answering challenges. 16 correct = +10 🌱 per day'],
-  restaurante: ['Healthy Restaurant', 'Be the chef and prepare healthy plates. 300+ points = +10 🌱 per day'],
-  mente: ['Affirmation Garden', 'Harvest positive messages for your mind. Complete it = +15 🌱 per day'],
+  prato: ['Build Your Plate', 'Complete missions by building real plates and learn from every choice. Mission done = +10 🌱 per day'],
+  vf: ['True, False or It Depends', 'Not everything in nutrition is yes or no. Every answer comes with an explanation. Round done = +10 🌱 per day'],
+  troca: ['Smart Swap', 'Improve a meal without giving it up and see the impact of each swap. Round done = +10 🌱 per day'],
+  saciedade: ['Satiety Battle', 'Same calories, different hunger: find out what makes a meal last longer. Round = +10 🌱 per day'],
+  rotulos: ['Label Detective', 'Learn to read the nutrition table and the difference between serving and package. Round = +10 🌱 per day'],
+  colheita: ['Harvest Game', 'A breather for your mind: match 3 fruits and relax. 300+ points = +10 🌱 per day'],
+}
+
+function CardJogo({ jogo, diaAtual, ingles, onAbrir }) {
+  const liberado = jogoLiberado(jogo.id, diaAtual)
+  return (
+    <button
+      type="button"
+      onClick={liberado ? () => onAbrir(jogo.id) : undefined}
+      disabled={!liberado}
+      className={`mt-3 flex w-full items-center gap-4 rounded-2xl p-5 text-left transition-transform ${
+        liberado
+          ? 'bg-gradient-to-r from-sage-claro to-ouro-claro active:scale-[0.99]'
+          : 'cursor-not-allowed bg-cinza/50 opacity-70'
+      }`}
+    >
+      <span className="text-3xl">{liberado ? jogo.emoji : '🔒'}</span>
+      <span className="flex-1">
+        <span className="block font-serif text-lg font-semibold italic text-verde">
+          {ingles ? JOGOS_EN[jogo.id][0] : jogo.titulo}
+        </span>
+        <span className="text-sm text-verde/80">
+          {liberado
+            ? ingles ? JOGOS_EN[jogo.id][1] : jogo.desc
+            : ingles
+              ? `Unlocks on day ${diaLiberacaoJogo(jogo.id)} of your program`
+              : `Libera no dia ${diaLiberacaoJogo(jogo.id)} do seu programa`}
+        </span>
+      </span>
+    </button>
+  )
 }
 
 export default function Ferramentas() {
   const { ingles } = useIdioma()
   const { diaAtual } = useApp()
-  const [jogoAberto, setJogoAberto] = useState(false)
-  const [escolhasAberto, setEscolhasAberto] = useState(false)
-  const [treinoAberto, setTreinoAberto] = useState(false)
-  const [podaAberto, setPodaAberto] = useState(false)
-  const [plantioAberto, setPlantioAberto] = useState(false)
-  const [menteAberto, setMenteAberto] = useState(false)
-  const [restauranteAberto, setRestauranteAberto] = useState(false)
+  // Um único estado guarda qual jogo está aberto (null = nenhum)
+  const [jogoAtivo, setJogoAtivo] = useState(null)
   const [lenteAberta, setLenteAberta] = useState(false)
   const [versiculoAberto, setVersiculoAberto] = useState(false)
   const [conceitosAberto, setConceitosAberto] = useState(false)
 
-  const abrirJogo = {
-    colheita: () => setJogoAberto(true),
-    escolhas: () => setEscolhasAberto(true),
-    treino: () => setTreinoAberto(true),
-    poda: () => setPodaAberto(true),
-    plantio: () => setPlantioAberto(true),
-    restaurante: () => setRestauranteAberto(true),
-    mente: () => setMenteAberto(true),
-  }
+  const fecharJogo = () => setJogoAtivo(null)
 
   return (
     <div className="px-5 pt-10">
@@ -334,31 +349,46 @@ export default function Ferramentas() {
         </span>
       </button>
 
-      {/* Jogos: liberados aos poucos, 1 novo a cada 3 dias */}
-      {JOGOS.map((jogo) => {
-        const liberado = jogoLiberado(jogo.id, diaAtual)
-        return (
-          <button
-            key={jogo.id}
-            type="button"
-            onClick={liberado ? abrirJogo[jogo.id] : undefined}
-            disabled={!liberado}
-            className={`mt-3 flex w-full items-center gap-4 rounded-2xl p-5 text-left transition-transform first:mt-4 ${
-              liberado
-                ? 'bg-gradient-to-r from-sage-claro to-ouro-claro active:scale-[0.99]'
-                : 'cursor-not-allowed bg-cinza/50 opacity-70'
-            }`}
-          >
-            <span className="text-3xl">{liberado ? jogo.emoji : '🔒'}</span>
-            <span className="flex-1">
-              <span className="block font-serif text-lg font-semibold italic text-verde">{ingles ? JOGOS_EN[jogo.id][0] : jogo.titulo}</span>
-              <span className="text-sm text-verde/80">
-                {liberado ? (ingles ? JOGOS_EN[jogo.id][1] : jogo.desc) : (ingles ? `Unlocks on day ${diaLiberacaoJogo(jogo.id)} of your program` : `Libera no dia ${diaLiberacaoJogo(jogo.id)} do seu programa`)}
-              </span>
-            </span>
-          </button>
-        )
-      })}
+      {/* MWA FARM: fazenda animada que cresce sozinha ao longo da jornada */}
+      <button
+        type="button"
+        onClick={() => setJogoAtivo('fazenda')}
+        className="mt-4 flex w-full items-center gap-4 rounded-2xl bg-gradient-to-r from-sky-100 to-sage-claro p-5 text-left transition-transform active:scale-[0.99]"
+      >
+        <span className="text-3xl">🌻</span>
+        <span className="flex-1">
+          <span className="block font-serif text-lg font-semibold italic text-verde">MWA FARM</span>
+          <span className="text-sm text-verde/80">
+            {ingles
+              ? 'Watch your farm grow on its own, day by day, as your journey unfolds.'
+              : 'Veja sua fazenda crescer sozinha, dia a dia, conforme sua jornada avança.'}
+          </span>
+        </span>
+      </button>
+
+      {/* Prateleira A — jogos de nutrição, liberados aos poucos */}
+      <h2 className="mt-8 font-serif text-lg font-semibold italic text-verde">
+        {ingles ? 'Nutrition games' : 'Jogos de Nutrição'}
+      </h2>
+      <p className="mb-1 mt-0.5 text-sm text-verde/70">
+        {ingles
+          ? 'Learn by playing what you use at every meal.'
+          : 'Aprenda brincando o que você usa em cada refeição.'}
+      </p>
+      {JOGOS_NUTRICAO.map((jogo) => (
+        <CardJogo key={jogo.id} jogo={jogo} diaAtual={diaAtual} ingles={ingles} onAbrir={setJogoAtivo} />
+      ))}
+
+      {/* Prateleira B — pausa leve */}
+      <h2 className="mt-8 font-serif text-lg font-semibold italic text-verde">
+        {ingles ? 'Pause and care' : 'Pausa e Cuidado'}
+      </h2>
+      <p className="mb-1 mt-0.5 text-sm text-verde/70">
+        {ingles ? 'A light break, with no lesson attached.' : 'Um respiro leve, sem lição para aprender.'}
+      </p>
+      {JOGOS_PAUSA.map((jogo) => (
+        <CardJogo key={jogo.id} jogo={jogo} diaAtual={diaAtual} ingles={ingles} onAbrir={setJogoAtivo} />
+      ))}
 
       {/* A Lente da Consciência: ferramenta de pausa guiada */}
       <section className="mt-6 rounded-2xl border-2 border-verde/20 bg-gradient-to-br from-verde/5 to-sage-claro/30 p-6">
@@ -399,13 +429,13 @@ export default function Ferramentas() {
 
       {/* Modais dos Jogos */}
       <Suspense fallback={<CarregandoFallback />}>
-        {jogoAberto && <JogoColheita onFechar={() => setJogoAberto(false)} />}
-        {restauranteAberto && <JogoRestaurante onFechar={() => setRestauranteAberto(false)} />}
-        {escolhasAberto && <JogoEscolhas onFechar={() => setEscolhasAberto(false)} />}
-        {treinoAberto && <JogoTreino onFechar={() => setTreinoAberto(false)} />}
-        {podaAberto && <JogoPoda onFechar={() => setPodaAberto(false)} />}
-        {plantioAberto && <JogoPlantio onFechar={() => setPlantioAberto(false)} />}
-        {menteAberto && <JogoMente onFechar={() => setMenteAberto(false)} />}
+        {jogoAtivo === 'prato' && <MonteSeuPrato onFechar={fecharJogo} />}
+        {jogoAtivo === 'vf' && <JogoVerdadeiroFalso onFechar={fecharJogo} />}
+        {jogoAtivo === 'troca' && <JogoTrocaInteligente onFechar={fecharJogo} />}
+        {jogoAtivo === 'saciedade' && <JogoBatalhaSaciedade onFechar={fecharJogo} />}
+        {jogoAtivo === 'rotulos' && <JogoDetetiveRotulos onFechar={fecharJogo} />}
+        {jogoAtivo === 'colheita' && <JogoColheita onFechar={fecharJogo} />}
+        {jogoAtivo === 'fazenda' && <MwaFarm onFechar={fecharJogo} />}
       </Suspense>
       {lenteAberta && <LenteConsciencia onFechar={() => setLenteAberta(false)} />}
       {versiculoAberto && <VersiculoDoDiaModal onFechar={() => setVersiculoAberto(false)} />}
