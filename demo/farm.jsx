@@ -11,6 +11,8 @@ const DIAS_DE_EXEMPLO = [1, 11, 15, 30, 60, 89]
 
 function Demo() {
   const [dia, setDia] = useState(1)
+  const [aberto, setAberto] = useState(false)
+
   return (
     <div className="mx-auto max-w-md space-y-3 p-5">
       <p className="text-sm font-semibold text-verde">Escolha o dia da jornada:</p>
@@ -28,9 +30,18 @@ function Demo() {
           </button>
         ))}
       </div>
-      <DemoFarmProvider diaAtual={dia}>
-        <MwaFarm onFechar={() => {}} />
-      </DemoFarmProvider>
+      <button
+        type="button"
+        onClick={() => setAberto(true)}
+        className="w-full rounded-2xl bg-verde px-4 py-3 font-semibold text-creme"
+      >
+        Ver Fazenda do Dia {dia}
+      </button>
+      {aberto && (
+        <DemoFarmProvider diaAtual={dia}>
+          <MwaFarm onFechar={() => setAberto(false)} />
+        </DemoFarmProvider>
+      )}
     </div>
   )
 }
