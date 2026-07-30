@@ -1,5 +1,8 @@
 import { ALIMENTOS_EXTRAS } from './alimentosExtras.js'
 import { ALIMENTOS_EUA } from './alimentosEua.js'
+import { ALIMENTOS_MARCAS } from './alimentosMarcas.js'
+import { ALIMENTOS_HERBALIFE } from './alimentosHerbalife.js'
+import { ALIMENTOS_INDUSTRIALIZADOS } from './alimentosIndustrializados.js'
 import { quantidadeNaBase } from '../utils/alimentos.js'
 
 // Banco de alimentos — valores por 100 g/ml (base TACO/TBCA/rótulos)
@@ -120,7 +123,7 @@ function prepararAlimento(alimento) {
   }
 }
 
-export const ALIMENTOS = [...ALIMENTOS_BASE, ...ALIMENTOS_EXTRAS, ...ALIMENTOS_EUA].map(prepararAlimento)
+export const ALIMENTOS = [...ALIMENTOS_BASE, ...ALIMENTOS_EXTRAS, ...ALIMENTOS_EUA, ...ALIMENTOS_MARCAS, ...ALIMENTOS_HERBALIFE, ...ALIMENTOS_INDUSTRIALIZADOS].map(prepararAlimento)
 
 // Macros de um alimento para uma quantidade em gramas
 export function macrosDoAlimento(alimento, quantidade, medidaId = alimento.unidadeBase ?? 'g') {
