@@ -67,6 +67,41 @@ test('chocomel appears in search', () => {
   )
 })
 
+test('cheetos appears in search', () => {
+  assert.equal(
+    buscarAlimentos(ALIMENTOS, 'cheetos').some((a) => a.id === 'mondelez-cheetos-original'),
+    true
+  )
+})
+
+test('doritos appears in search', () => {
+  assert.equal(
+    buscarAlimentos(ALIMENTOS, 'doritos').some((a) => a.id === 'mondelez-doritos-nacho-cheese'),
+    true
+  )
+})
+
+test('elma chips appears in search', () => {
+  assert.equal(
+    buscarAlimentos(ALIMENTOS, 'elma chips').some((a) => a.id === 'elma-chips-batata-frita'),
+    true
+  )
+})
+
+test('amendoim yoki appears in search', () => {
+  assert.equal(
+    buscarAlimentos(ALIMENTOS, 'amendoim yoki').some((a) => a.id === 'yoki-amendoim-salgado'),
+    true
+  )
+})
+
+test('amendoim de horta appears in search', () => {
+  assert.equal(
+    buscarAlimentos(ALIMENTOS, 'amendoim de horta').some((a) => a.id === 'de-horta-amendoim-salgado'),
+    true
+  )
+})
+
 test('todos industrializados tem marca, porcao, medida, fonte e situacao validado', () => {
   for (const item of ALIMENTOS_INDUSTRIALIZADOS) {
     assert.ok(item.marca, `${item.id} sem marca`)
