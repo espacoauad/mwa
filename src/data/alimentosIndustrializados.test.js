@@ -39,6 +39,34 @@ test('adria integral appears in search', () => {
   )
 })
 
+test('nescau appears in search', () => {
+  assert.equal(
+    buscarAlimentos(ALIMENTOS, 'nescau').some((a) => a.id === 'nestle-nescau'),
+    true
+  )
+})
+
+test('toddy appears in search', () => {
+  assert.equal(
+    buscarAlimentos(ALIMENTOS, 'toddy').some((a) => a.id === 'pepsico-toddy-original'),
+    true
+  )
+})
+
+test('achocolatado integral appears in search', () => {
+  assert.equal(
+    buscarAlimentos(ALIMENTOS, 'achocolatado integral').some((a) => a.id === 'itambe-achocolatado-integral'),
+    true
+  )
+})
+
+test('chocomel appears in search', () => {
+  assert.equal(
+    buscarAlimentos(ALIMENTOS, 'chocomel').some((a) => a.id === 'nestle-chocomel-250ml'),
+    true
+  )
+})
+
 test('todos industrializados tem marca, porcao, medida, fonte e situacao validado', () => {
   for (const item of ALIMENTOS_INDUSTRIALIZADOS) {
     assert.ok(item.marca, `${item.id} sem marca`)
