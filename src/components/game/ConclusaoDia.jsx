@@ -183,14 +183,14 @@ export default function ConclusaoDia() {
             {TAREFAS.map((t) => (
               <div
                 key={t.chave}
-                className={`rounded-xl p-4 transition-all text-center ${
+                className={`rounded-xl p-4 transition-all text-center border ${
                   tarefasHoje[t.chave]
-                    ? 'bg-white/20 border border-white/40'
-                    : 'bg-white/8 border border-white/15 opacity-45'
+                    ? 'bg-white/20 border-white/40'
+                    : 'bg-white/10 border-white/20 opacity-50'
                 }`}
               >
-                <p className="text-2xl mb-1">{t.emoji}</p>
-                <p className="text-[9px] font-bold leading-tight text-white">{t.label}</p>
+                <p className={`text-2xl mb-1 ${!tarefasHoje[t.chave] ? 'opacity-60' : ''}`}>{t.emoji}</p>
+                <p className={`text-[9px] font-bold leading-tight text-white ${!tarefasHoje[t.chave] ? 'opacity-70' : ''}`}>{t.label}</p>
               </div>
             ))}
           </div>
@@ -199,17 +199,15 @@ export default function ConclusaoDia() {
         {/* Estrelas da Semana - BRANDO */}
         {semanaEstrelas && semanaEstrelas.length > 0 && (
           <div className="relative mt-5 rounded-xl bg-white/10 px-4 py-3 backdrop-blur-sm border border-white/20">
-            <p className="text-xs font-bold uppercase tracking-wide text-white/70 mb-2.5 text-center">Estrelas da Semana</p>
-            <div className="flex items-center justify-center gap-2.5">
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-xs font-bold uppercase tracking-wide text-white/70">Estrelas</p>
+              <p className="text-[9px] text-white/60">{totalEstrelasSemanais} de {semanaEstrelas.length}</p>
+            </div>
+            <div className="flex items-center justify-center gap-1.5 mt-2">
               {semanaEstrelas.map((dia, idx) => (
-                <div key={idx} className="flex items-center justify-center w-7 h-7">
-                  <p className={`text-xl ${dia.acesa ? 'text-ouro' : 'text-white/25'}`}>⭐</p>
-                </div>
+                <p key={idx} className={`text-lg ${dia.acesa ? 'text-white' : 'text-white/25'}`}>⭐</p>
               ))}
             </div>
-            {totalEstrelasSemanais > 0 && (
-              <p className="mt-2 text-center text-[10px] text-white/70">{totalEstrelasSemanais} de {semanaEstrelas.length} estrelas</p>
-            )}
           </div>
         )}
 
@@ -255,13 +253,13 @@ export default function ConclusaoDia() {
         </div>
 
         {/* Sementes - PEQUENO, EMBAIXO */}
-        <div className="relative mt-4 rounded-lg bg-white/15 px-4 py-2 border border-white/25 text-center" role="status" aria-live="polite">
-          <p className="text-2xl font-bold text-ouro">+{tarefasHoje.sementesHoje}</p>
-          <p className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/80">🌱 Sementes</p>
+        <div className="relative mt-4 rounded-lg bg-white/12 px-3 py-2 border border-white/20 text-center" role="status" aria-live="polite">
+          <p className="text-2xl font-bold text-ouro leading-none">+{tarefasHoje.sementesHoje}</p>
+          <p className="text-[9px] font-bold uppercase tracking-wide text-white/75 mt-0.5">🌱 Sementes</p>
         </div>
 
         {/* Footer motivacional */}
-        <p className="relative mx-auto mt-5 max-w-xs font-serif text-xs italic leading-relaxed text-white/70">
+        <p className="relative mx-auto mt-4 max-w-xs font-serif text-[11px] italic leading-relaxed text-white/60">
           Transforme hábitos, cultive resultados! ✨
         </p>
       </div>
