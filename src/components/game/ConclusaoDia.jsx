@@ -15,7 +15,7 @@ const MENSAGENS = [
 ]
 
 const TAREFAS = [
-  { chave: 'refeicao', emoji: '🍽️', label: 'Refeição' },
+  { chave: 'refeicao', emoji: '🥗', label: 'Refeição' },
   { chave: 'agua', emoji: '💧', label: 'Água' },
   { chave: 'dica', emoji: '💡', label: 'Dica do dia' },
   { chave: 'exercicio', emoji: '💪', label: 'Exercício' },
@@ -186,7 +186,7 @@ export default function ConclusaoDia() {
                 className="rounded-xl p-4 transition-all text-center border bg-white/20 border-white/40"
               >
                 <p className="text-2xl mb-1">{t.emoji}</p>
-                <p className="text-[9px] font-normal leading-tight text-white">{t.label}</p>
+                <p className="text-[11px] font-normal leading-tight text-white">{t.label}</p>
               </div>
             ))}
           </div>
