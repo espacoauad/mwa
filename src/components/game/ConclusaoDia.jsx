@@ -119,98 +119,129 @@ export default function ConclusaoDia() {
         <X size={20} />
       </button>
 
-      {/* Cartão compartilhável */}
+      {/* Cartão compartilhável - REDESIGN */}
       <div
         ref={(el) => {
           cardRef.current = el
           dialogRef.current = el
         }}
         tabIndex={-1}
-        className="relative w-full max-w-sm shrink-0 overflow-hidden rounded-[2rem] px-8 pb-10 pt-8 text-center outline-none"
-        style={{ background: 'linear-gradient(160deg, #344528 0%, #4A5F3A 45%, #879B55 100%)' }}
+        className="relative w-full max-w-sm shrink-0 overflow-hidden rounded-[2.5rem] px-6 pb-8 pt-6 text-center outline-none"
+        style={{ background: 'linear-gradient(135deg, #5a8a50 0%, #6d9a5f 40%, #7db567 100%)' }}
       >
-        {/* Decoração */}
-        <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-        <div className="pointer-events-none absolute -bottom-14 -right-10 h-48 w-48 rounded-full bg-ouro/20 blur-2xl" />
+        {/* Decoração premium */}
+        <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-white/8 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-20 -right-12 h-60 w-60 rounded-full bg-ouro/15 blur-3xl" />
 
-        <div className="relative flex items-center justify-center gap-1.5">
-          <LogoMWA variante="simbolo" tema="claro" className="h-4 w-4" />
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/50">My Wellness Approach</p>
+        {/* Header com logo */}
+        <div className="relative flex items-center justify-center gap-2">
+          <LogoMWA variante="simbolo" tema="claro" className="h-5 w-5" />
+          <p className="text-[9px] font-bold uppercase tracking-widest text-white/60">Método Wanessa Auad</p>
         </div>
 
-        <p id="conclusao-dia-titulo" className="relative mt-4 font-serif text-2xl font-bold italic text-ouro">
-          Dia {diaAtual} concluído! 🎉
+        {/* Dia concluído - destaque grande */}
+        <p id="conclusao-dia-titulo" className="relative mt-3 font-serif text-3xl font-bold italic text-white">
+          Dia {diaAtual}
         </p>
+        <p className="relative text-sm text-ouro font-semibold">Concluído com sucesso! 🎉</p>
 
+        {/* Foto do usuário - GRANDE E DESTACADA */}
         {game && (
-          <div className="relative mt-5 flex justify-center">
+          <div className="relative mt-6 flex justify-center">
             {usuario?.fotoUrl ? (
               <div className="relative">
-                <div className="h-24 w-24 overflow-hidden rounded-full ring-4 ring-ouro/60">
+                <div className="h-32 w-32 overflow-hidden rounded-full ring-4 ring-ouro/80 shadow-lg">
                   <img src={usuario.fotoUrl} alt={usuario.nome} className="h-full w-full object-cover" />
                 </div>
-                {/* Avatar do jogo como selo, sobre a foto real */}
-                <div className="absolute -bottom-1 -right-1 rounded-full bg-verde-escuro p-0.5 ring-2 ring-white/30">
-                  <Avatar avatar={game.avatar} tamanho="sm" />
+                {/* Avatar do jogo como selo */}
+                <div className="absolute -bottom-2 -right-2 rounded-full bg-ouro p-1 ring-3 ring-white/30 shadow-md">
+                  <Avatar avatar={game.avatar} tamanho="md" />
                 </div>
               </div>
             ) : (
-              <div className="rounded-full bg-white/10 p-1.5 ring-4 ring-ouro/40">
+              <div className="rounded-full bg-white/15 p-2 ring-4 ring-ouro/60 shadow-lg">
                 <Avatar avatar={game.avatar} tamanho="lg" />
               </div>
             )}
           </div>
         )}
 
-        <p className="relative mt-4 text-lg font-semibold text-white">
+        {/* Mensagem personalizada */}
+        <p className="relative mt-5 text-base font-semibold text-white">
           {primeiroNome ? `Parabéns, ${primeiroNome}!` : 'Parabéns!'}
         </p>
-        <p className="relative mx-auto mt-1 max-w-[240px] text-sm leading-relaxed text-white/80">{mensagem}</p>
+        <p className="relative mx-auto mt-2 max-w-xs text-xs leading-relaxed text-white/85">{mensagem}</p>
 
-        {/* Sementes ganhas hoje */}
-        <div className="relative mt-6 rounded-2xl bg-white/10 p-4" role="status" aria-live="polite">
-          <p className="text-3xl font-bold text-ouro">+{tarefasHoje.sementesHoje} 🌱</p>
-          <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-white/60">
-            sementes conquistadas hoje
-          </p>
+        {/* Sementes - MELHOR POSICIONADO */}
+        <div className="relative mt-5 rounded-2xl bg-gradient-to-r from-green-600/30 to-ouro/20 px-5 py-4 border border-ouro/40" role="status" aria-live="polite">
+          <p className="text-4xl font-bold text-ouro">+{tarefasHoje.sementesHoje}</p>
+          <p className="mt-0.5 text-xs font-bold uppercase tracking-wide text-white">🌱 Sementes</p>
         </div>
 
-        {/* Sequência */}
+        {/* Sequência com destaque */}
         {sequencia > 1 && (
-          <div className="relative mt-3 inline-flex items-center gap-1.5 rounded-full bg-ouro px-4 py-1.5 text-sm font-bold text-verde-escuro">
-            <Flame size={15} /> {sequencia} dias seguidos
+          <div className="relative mt-3 inline-flex items-center gap-2 rounded-full bg-ouro px-5 py-2 text-sm font-bold text-verde shadow-md">
+            <Flame size={16} /> {sequencia} dias seguidos
           </div>
         )}
 
-        {/* Resumo de Macros */}
-        <div className="relative mt-6 rounded-2xl bg-white/10 p-4">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-white/60">Resumo Nutricional</p>
+        {/* Macros - REDESIGN COM LABELS */}
+        <div className="relative mt-6 space-y-2">
+          <p className="text-xs font-bold uppercase tracking-widest text-white/70">Nutrição do Dia</p>
+          <div className="grid grid-cols-2 gap-3">
+            {/* Calorias - destaque maior */}
+            <div className="rounded-xl bg-gradient-to-br from-orange-500/30 to-orange-600/20 px-4 py-3 border border-orange-400/40">
+              <p className="text-2xl">🔥</p>
+              <p className="mt-1 text-sm font-bold text-white">{totaisHoje.calorias}</p>
+              <p className="text-[10px] text-white/80">Calorias</p>
+            </div>
+
+            {/* Proteína */}
+            <div className="rounded-xl bg-gradient-to-br from-amber-500/30 to-amber-600/20 px-4 py-3 border border-amber-400/40">
+              <p className="text-2xl">🥚</p>
+              <p className="mt-1 text-sm font-bold text-white">{totaisHoje.proteina}</p>
+              <p className="text-[10px] text-white/80">Proteína (g)</p>
+            </div>
+
+            {/* Carboidrato */}
+            <div className="rounded-xl bg-gradient-to-br from-yellow-500/30 to-yellow-600/20 px-4 py-3 border border-yellow-400/40">
+              <p className="text-2xl">🌾</p>
+              <p className="mt-1 text-sm font-bold text-white">{totaisHoje.carbos}</p>
+              <p className="text-[10px] text-white/80">Carboidrato (g)</p>
+            </div>
+
+            {/* Gordura */}
+            <div className="rounded-xl bg-gradient-to-br from-lime-500/30 to-lime-600/20 px-4 py-3 border border-lime-400/40">
+              <p className="text-2xl">🥑</p>
+              <p className="mt-1 text-sm font-bold text-white">{totaisHoje.gordura}</p>
+              <p className="text-[10px] text-white/80">Gordura (g)</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Checklist do dia - MELHOR DESTAQUE */}
+        <div className="relative mt-5 space-y-2">
+          <p className="text-xs font-bold uppercase tracking-widest text-white/70">Tarefas Completadas</p>
           <div className="grid grid-cols-4 gap-2">
-            {MACROS_LABELS.map((m) => (
-              <div key={m.chave} className="rounded-lg bg-white/5 p-2.5 text-center">
-                <p className="text-sm">{m.emoji}</p>
-                <p className="mt-1 text-xs font-bold text-white">{totaisHoje[m.chave]}</p>
-                <p className="text-[9px] text-white/60">{m.unidade}</p>
+            {TAREFAS.map((t) => (
+              <div
+                key={t.chave}
+                className={`rounded-lg p-3 transition-all ${
+                  tarefasHoje[t.chave]
+                    ? 'bg-gradient-to-br from-white/20 to-white/10 ring-1 ring-white/40'
+                    : 'bg-white/5 opacity-40'
+                }`}
+              >
+                <p className="text-xl">{t.emoji}</p>
+                <p className="mt-1 text-[8px] font-bold leading-tight text-white">{t.label}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Checklist do dia */}
-        <div className="relative mt-5 grid grid-cols-4 gap-2">
-          {TAREFAS.map((t) => (
-            <div
-              key={t.chave}
-              className={`rounded-xl p-2.5 ${tarefasHoje[t.chave] ? 'bg-white/20' : 'bg-white/5 opacity-40'}`}
-            >
-              <p className="text-lg">{t.emoji}</p>
-              <p className="mt-0.5 text-[9px] font-semibold leading-tight text-white">{t.label}</p>
-            </div>
-          ))}
-        </div>
-
-        <p className="relative mx-auto mt-6 max-w-[220px] font-serif text-sm italic leading-snug text-white/60">
-          Mais do que um método, um estilo de vida que transforma.
+        {/* Footer motivacional */}
+        <p className="relative mx-auto mt-5 max-w-xs font-serif text-xs italic leading-relaxed text-white/70">
+          Transforme hábitos, cultive resultados! ✨
         </p>
       </div>
 
