@@ -1,44 +1,79 @@
-import { Section, Eyebrow, Title, GoldRule } from '../components/ui.jsx'
-import fotoWanessa from '../assets/foto-wanessa-story.png'
+import { Section, Eyebrow, Title } from '../components/ui.jsx'
+import Reveal from '../components/Reveal.jsx'
+import CountUp from '../components/CountUp.jsx'
+import fotoStory480 from '../assets/foto-wanessa-story-final-480.webp'
+import fotoStory800 from '../assets/foto-wanessa-story-final-800.webp'
+import fotoStory1200 from '../assets/foto-wanessa-story-final-1200.webp'
+
+const stats = [
+  { value: 26, suffix: ' kg', label: 'eliminados após a gestação' },
+  { value: 14, suffix: ' anos', label: 'mantendo a transformação' },
+  { value: 20, suffix: '+', label: 'anos de experiência em emagrecimento' },
+]
 
 export default function Story() {
   return (
-    <Section className="bg-forest-deep">
-      <div className="grid items-center gap-12 md:grid-cols-2">
-        {/* Espaço reservado para foto elegante de Wanessa */}
-        <div className="order-2 md:order-1">
-          <div className="flex aspect-[4/5] items-end justify-center overflow-hidden rounded-3xl border border-gold/25 bg-gradient-to-b from-forest/40 to-forest/70">
-            <img src={fotoWanessa} alt="Wanessa Auad" className="max-h-full w-auto object-contain drop-shadow-2xl" />
+    <Section className="bg-forest-deep" wide lazy intrinsicHeight={870}>
+      <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
+        <Reveal className="order-2 md:order-1">
+          <div className="overflow-hidden rounded-3xl border border-gold/25 shadow-2xl shadow-black/30">
+            <img
+              src={fotoStory800}
+              srcSet={`${fotoStory480} 480w, ${fotoStory800} 800w, ${fotoStory1200} 1200w`}
+              sizes="(min-width: 768px) 45vw, 90vw"
+              alt="Wanessa Auad, nutricionista e criadora do MWA"
+              width={800}
+              height={800}
+              loading="lazy"
+              className="h-auto w-full"
+            />
           </div>
-        </div>
+        </Reveal>
 
         <div className="order-1 md:order-2">
-          <Eyebrow light>Uma história real</Eyebrow>
-          <Title light>A história por trás do MWA</Title>
-          <GoldRule className="my-8" />
-          <div className="space-y-4 text-sm leading-relaxed text-cream/80 md:text-base">
-            <p>O MWA não nasceu apenas em um consultório. Nasceu também da minha própria transformação.</p>
+          <Reveal>
+            <Eyebrow light>A história</Eyebrow>
+            <Title light>Antes de ser um método, foi uma vida transformada.</Title>
+          </Reveal>
+
+          <Reveal delay={120} className="mt-8 space-y-5 text-base leading-relaxed text-cream/85">
             <p>
-              Após a gestação do meu filho, eliminei 26 kg. Mas o maior desafio não era emagrecer.
-              Era nunca mais precisar recomeçar.
+              Após a gestação do meu filho, eliminei 26 kg. Mas o maior desafio não era emagrecer —
+              era nunca mais precisar recomeçar.
             </p>
             <p>
-              Foi nesse processo que entendi algo que mudou minha vida: dietas podem até gerar
-              resultados rápidos, mas são os hábitos que mantêm esses resultados ao longo dos anos.
+              Foi nesse processo que entendi: dietas até geram resultados rápidos, mas são os
+              hábitos que os mantêm ao longo dos anos. Há 14 anos vivo essa transformação, com
+              alimentação inteligente, mentalidade e escolhas consistentes.
             </p>
             <p>
-              Há 14 anos, mantenho minha transformação através de uma rotina baseada em alimentação
-              inteligente, mudança de mentalidade e escolhas consistentes.
+              Como nutricionista, transformei essa vivência em método — o mesmo que agora acompanha
+              você todos os dias pelo aplicativo.
             </p>
-            <p>
-              Assim nasceu o MWA — Método Wanessa Auad | My Wellness Approach: experiência pessoal,
-              ciência nutricional e mais de 20 anos de prática profissional em uma forma mais leve,
-              estratégica e sustentável de viver saudável.
+          </Reveal>
+
+          <Reveal delay={200}>
+            <p className="mt-8 border-l-2 border-gold pl-5 font-display text-xl italic leading-snug text-gold-soft md:text-2xl">
+              “O maior resultado não foi perder 26 kg. Foi aprender a permanecer.”
             </p>
-          </div>
-          <p className="mt-8 border-l-2 border-gold pl-5 font-display text-xl italic leading-relaxed text-gold-soft md:text-2xl">
-            O maior resultado não foi perder 26 kg. Foi aprender a permanecer.
-          </p>
+          </Reveal>
+
+          <Reveal delay={260} className="mt-10 grid grid-cols-3 gap-4">
+            {stats.map(({ value, suffix, label }) => (
+              <div key={label}>
+                <p className="font-display text-3xl text-gold md:text-4xl">
+                  <CountUp value={value} suffix={suffix} />
+                </p>
+                <p className="mt-1 text-xs leading-snug text-cream/60">{label}</p>
+              </div>
+            ))}
+          </Reveal>
+
+          <Reveal delay={300}>
+            <p className="mt-5 text-[11px] italic text-cream/45">
+              Relato pessoal — resultados individuais variam.
+            </p>
+          </Reveal>
         </div>
       </div>
     </Section>

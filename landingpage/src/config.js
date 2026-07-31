@@ -6,9 +6,13 @@ export const CHECKOUT_URL = 'https://pay.hotmart.com/SEU_CODIGO_AQUI'
 
 export const BRAND = {
   name: 'MWA',
-  method: 'Método Wanessa Auad',
+  method: 'My Wellness App',
   concept: 'My Wellness Approach',
   tagline: 'Não é uma dieta. É uma nova forma de viver.',
-  price: 'R$ 127',
+  product: 'MWA | Jornada de 30 Dias',
+  days: 30,
+  price: 'R$ 97',
+  crn: 'CRN-1/27939',
+  author: 'Wanessa Auad',
   year: new Date().getFullYear(),
 }

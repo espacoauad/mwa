@@ -4,9 +4,9 @@ export default function SeuProgresso({ usuario, pesagens }) {
   // Se não há pesagens, mostrar placeholder
   if (!pesagens || pesagens.length === 0) {
     return (
-      <section className="mt-4 rounded-2xl bg-white p-8 shadow-lg shadow-verde/10">
+      <section className="mwa-sombra-premium mt-4 rounded-2xl bg-white p-8">
         <h2 className="mb-1 text-sm font-semibold text-verde/60">Seu progresso</h2>
-        <p className="mb-6 text-xs text-verde/40">
+        <p className="mb-6 text-xs text-verde/80">
           Registre sua primeira pesagem para acompanhar o progresso — peso, medidas e fotos.
         </p>
         <div className="rounded-lg bg-sage-claro p-4 text-center">
@@ -74,10 +74,10 @@ export default function SeuProgresso({ usuario, pesagens }) {
   })
 
   return (
-    <section className="mt-4 rounded-2xl bg-white p-8 shadow-lg shadow-verde/10">
+    <section className="mwa-sombra-premium mt-4 rounded-2xl bg-white p-8">
       {/* Header */}
       <h2 className="mb-1 text-sm font-semibold text-verde/60">Seu progresso</h2>
-      <p className="mb-6 text-xs text-verde/40">
+      <p className="mb-6 text-xs text-verde/80">
         O corpo responde quando a mente entende o caminho percorrido. Seus resultados como consequência de uma nova forma de viver.
       </p>
 
@@ -95,7 +95,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
               {variacao > 0 ? '+' : ''}{variacao.toLocaleString('pt-BR')} kg
             </span>
           </div>
-          <p className="mt-1 text-[10px] text-verde/50">desde o início</p>
+          <p className="mt-1 text-[10px] text-verde/80">desde o início</p>
         </div>
 
         {/* Card 2: Top Medidas */}
@@ -112,7 +112,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
                 </div>
               ))
             ) : (
-              <p className="text-[10px] text-verde/50">Nenhuma medida registrada ainda</p>
+              <p className="text-[10px] text-verde/80">Nenhuma medida registrada ainda</p>
             )}
           </div>
         </div>
@@ -131,7 +131,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
                 </div>
               ))
             ) : (
-              <p className="text-verde/50">Registre sua pesagem</p>
+              <p className="text-verde/80">Registre sua pesagem</p>
             )}
           </div>
         </div>
@@ -139,7 +139,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
 
       {/* Mini tabela de histórico (opcional, se 2+ pesagens) */}
       {pesagens.length >= 2 && (
-        <div className="mt-6 border-t border-cinza pt-4">
+        <div className="mt-6 border-t border-ouro/20 pt-4">
           <h3 className="mb-3 text-xs font-semibold text-verde/70">Histórico resumido</h3>
           <div className="space-y-2 text-xs">
             {historicoSemanal.map((s) => (
@@ -158,6 +158,112 @@ export default function SeuProgresso({ usuario, pesagens }) {
           </div>
         </div>
       )}
+
+      {/* Bioimpedancia Evolution Section */}
+      {(() => {
+        const metricas = {
+          percentualGordura: [],
+          percentualMusculo: [],
+          gorduraVisceral: [],
+          idadeMetabolica: [],
+          toraxCm: [],
+          circAbdominalCm: [],
+        }
+
+        pesagens.forEach((p) => {
+          if (!p.bioimpedancia) return
+          Object.entries(p.bioimpedancia).forEach(([key, val]) => {
+            if (val !== null && val !== undefined) {
+              metricas[key].push({
+                semana: p.semana,
+                valor: val,
+              })
+            }
+          })
+        })
+
+        const metricsComDados = Object.entries(metricas)
+          .filter(([_, values]) => values.length > 0)
+          .map(([key, values]) => ({ key, values }))
+
+        if (metricsComDados.length === 0) return null
+
+        const labels = {
+          percentualGordura: '% Gordura Corporal',
+          percentualMusculo: '% Músculo',
+          gorduraVisceral: 'Gordura Visceral',
+          idadeMetabolica: 'Idade Metabólica',
+          toraxCm: 'Tórax',
+          circAbdominalCm: 'Circ. Abdominal',
+        }
+
+        const units = {
+          percentualGordura: '%',
+          percentualMusculo: '%',
+          gorduraVisceral: '',
+          idadeMetabolica: ' anos',
+          toraxCm: ' cm',
+          circAbdominalCm: ' cm',
+        }
+
+        const melhorEhMenor = {
+          percentualGordura: true,
+          percentualMusculo: false,
+          gorduraVisceral: true,
+          idadeMetabolica: true,
+          toraxCm: false,
+          circAbdominalCm: true,
+        }
+
+        return (
+          <div className="mt-6 border-t border-ouro/20 pt-4">
+            <h3 className="mb-4 text-sm font-semibold text-verde/70">📊 Bioimpedância</h3>
+            <div className="space-y-4">
+              {metricsComDados.map(({ key, values }) => (
+                <div
+                  key={key}
+                  className="rounded-lg border border-verde/10 bg-gradient-to-br from-verde/5 to-sage-claro p-4"
+                >
+                  <p className="mb-2 text-xs font-semibold text-verde">{labels[key]}</p>
+                  <div className="space-y-1.5">
+                    {values.map((entry, idx) => {
+                      const valorAnterior = idx > 0 ? values[idx - 1].valor : null
+                      const variacao = valorAnterior ? entry.valor - valorAnterior : null
+
+                      let corVariacao = 'text-verde/60'
+                      if (variacao !== null) {
+                        const isMelhoraMenor = melhorEhMenor[key]
+                        const isMelhora = isMelhoraMenor ? variacao < 0 : variacao > 0
+                        const isPiora = isMelhoraMenor ? variacao > 0 : variacao < 0
+
+                        corVariacao = isMelhora ? 'text-sage' : isPiora ? 'text-ouro' : 'text-verde/60'
+                      }
+
+                      return (
+                        <div key={idx} className="flex items-center justify-between text-[11px]">
+                          <span className="text-verde/70">Semana {entry.semana}:</span>
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-verde">
+                              {entry.valor.toLocaleString('pt-BR', { maximumFractionDigits: 1 })}
+                              {units[key]}
+                            </span>
+                            {variacao !== null && (
+                              <span className={`font-medium ${corVariacao}`}>
+                                {variacao > 0 ? '+' : ''}
+                                {variacao.toLocaleString('pt-BR', { maximumFractionDigits: 1 })}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      })()}
     </section>
   )
 }

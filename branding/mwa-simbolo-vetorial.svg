@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 600 600" role="img" aria-label="Símbolo MWA">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#E0C28F"/><stop offset=".52" stop-color="#C49B62"/><stop offset="1" stop-color="#A9793E"/></linearGradient></defs>
+  <circle cx="300" cy="300" r="236" fill="none" stroke="#344528" stroke-width="11" stroke-linecap="round" stroke-dasharray="1280 204" transform="rotate(114 300 300)"/>
+  <circle cx="300" cy="300" r="209" fill="none" stroke="#879B55" stroke-width="2.5" opacity=".5" stroke-dasharray="1095 218" transform="rotate(122 300 300)"/>
+  <path d="M298 458c-34-72-89-118-132-206 71 19 126 67 144 133 8 29 4 54-12 73Z" fill="#344528"/>
+  <path d="M305 458c35-73 90-119 133-206-71 18-126 66-144 132-8 29-4 55 11 74Z" fill="url(#g)"/>
+  <path d="M292 458c-10-73-44-139-102-190 75 29 119 82 120 156 0 15-6 26-18 34Z" fill="#263219" opacity=".82"/>
+  <path d="M312 458c10-73 44-139 102-190-75 29-119 82-120 156 0 15 6 26 18 34Z" fill="#D4AF7A" opacity=".9"/>
+  <circle cx="301" cy="213" r="29" fill="#F5F1E8" stroke="#344528" stroke-width="9"/><circle cx="301" cy="213" r="9" fill="#C49B62"/>
+  <path d="M300 459c13-65 51-128 112-178" fill="none" stroke="#F5F1E8" stroke-width="6" stroke-linecap="round" opacity=".82"/>
+  <path d="M298 459c-12-64-50-127-111-177" fill="none" stroke="#879B55" stroke-width="5" stroke-linecap="round" opacity=".76"/>
+  <circle cx="467" cy="112" r="9" fill="#C49B62"/>
+</svg>

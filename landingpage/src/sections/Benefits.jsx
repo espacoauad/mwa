@@ -1,79 +1,51 @@
 import { Check } from 'lucide-react'
-import { Section, Eyebrow, Title, GoldRule } from '../components/ui.jsx'
+import { Section, Eyebrow, Title } from '../components/ui.jsx'
+import Reveal from '../components/Reveal.jsx'
 
-const emotional = [
-  'Acordar se sentindo mais leve.',
+const imagine = [
+  'Acordar se sentindo mais leve e com mais energia.',
   'Vestir aquela roupa que hoje está apertada.',
-  'Saber exatamente o que comer sem depender de dietas malucas.',
-  'Olhar para a balança e perceber que finalmente está no caminho certo.',
-  'Sentir orgulho de ter mantido uma rotina saudável.',
-  'Entender que você não precisa recomeçar do zero mais uma vez.',
+  'Saber exatamente o que comer e por quê — sem depender de modismos.',
+  'Olhar para a balança e perceber que finalmente está no caminho.',
+  'Sentir orgulho de ter sustentado uma rotina saudável por 30 dias.',
+  'Entender que você não precisa recomeçar do zero nunca mais.',
 ]
 
-const learnings = [
-  'Como montar refeições equilibradas.',
-  'Como controlar calorias sem sofrimento.',
-  'Como consumir proteínas corretamente.',
-  'Como manter o metabolismo ativo.',
-  'Como lidar com a fome.',
-  'Como evitar o efeito sanfona.',
-  'Como criar hábitos que realmente permanecem.',
-]
+const chips = ['Mais leveza', 'Menos culpa', 'Mais clareza', 'Mais consistência']
 
 export default function Benefits() {
   return (
-    <>
-      {/* Benefícios emocionais */}
-      <Section className="bg-cream">
-        <div className="mx-auto max-w-3xl text-center">
-          <Eyebrow>Sua nova rotina</Eyebrow>
-          <Title>Imagine como será daqui a 21 dias.</Title>
-          <GoldRule className="mx-auto my-8" />
-        </div>
-        <ul className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
-          {emotional.map((item) => (
-            <li key={item} className="flex items-start gap-3 rounded-2xl bg-white p-5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={2} />
-              <p className="text-sm leading-relaxed text-ink/80">{item}</p>
-            </li>
+    <Section className="bg-offwhite" lazy intrinsicHeight={970}>
+      <div className="mx-auto max-w-2xl">
+        <Reveal className="text-center">
+          <Eyebrow>A transformação</Eyebrow>
+          <Title>Imagine como será daqui a 30 dias.</Title>
+        </Reveal>
+        <div className="mt-10 space-y-3">
+          {imagine.map((item, i) => (
+            <Reveal key={item} delay={i * 70} className="flex items-start gap-3 rounded-2xl border border-forest/10 bg-cream/60 p-5">
+              <Check size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-sage" strokeWidth={2.2} />
+              <p className="text-sm leading-relaxed text-ink/85 md:text-base">{item}</p>
+            </Reveal>
           ))}
-        </ul>
-        <p className="mx-auto mt-10 max-w-2xl text-center font-display text-lg italic text-forest">
-          Essa transformação começa com pequenas decisões feitas todos os dias. E você não estará
-          sozinha.
-        </p>
-      </Section>
-
-      {/* Por que funciona */}
-      <Section className="bg-forest text-cream">
-        <div className="grid items-start gap-12 md:grid-cols-2">
-          <div>
-            <Eyebrow light>O diferencial</Eyebrow>
-            <Title light>Por que esse método funciona?</Title>
-            <GoldRule className="my-8" />
-            <p className="text-base leading-relaxed text-cream/85">
-              Porque ele não foi criado para fazer você emagrecer apenas durante 21 dias. Ele foi
-              criado para ensinar você a continuar evoluindo depois do programa.
-            </p>
-            <p className="mt-8 font-display text-2xl italic leading-snug text-gold-soft">
-              O MWA não entrega apenas informação. Ele organiza a prática.
-            </p>
-          </div>
-          <div>
-            <p className="mb-5 text-sm uppercase tracking-[0.2em] text-cream/60">
-              Durante a jornada, você aprenderá
-            </p>
-            <ul className="space-y-3">
-              {learnings.map((item) => (
-                <li key={item} className="flex items-start gap-3 border-b border-cream/10 pb-3">
-                  <Check className="mt-1 h-4 w-4 shrink-0 text-gold" strokeWidth={2} />
-                  <p className="text-sm leading-relaxed text-cream/85">{item}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
-      </Section>
-    </>
+        <Reveal delay={200} className="mt-8 flex flex-wrap justify-center gap-2.5">
+          {chips.map((c) => (
+            <span key={c} className="rounded-full border border-sage/40 bg-sage/10 px-4 py-2 text-xs font-semibold text-forest md:text-sm">
+              {c}
+            </span>
+          ))}
+        </Reveal>
+        <Reveal delay={260} className="mt-10 text-center">
+          <p className="text-base leading-relaxed text-ink/75">
+            Essa transformação começa com pequenas decisões feitas todos os dias.
+          </p>
+          <p className="mt-1 font-display text-lg italic text-forest">E você não estará sozinha.</p>
+          <p className="mt-4 text-[11px] italic text-mist">
+            Resultados variam de pessoa para pessoa e dependem da aplicação das orientações.
+          </p>
+        </Reveal>
+      </div>
+    </Section>
   )
 }

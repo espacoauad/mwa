@@ -3,9 +3,10 @@ node_modules/
 /.pnp
 .pnp.js
 
-# Build
+# Build (gerados — não versionar)
 /dist
 /build
+/landingpage/dist
 
 # Environment
 .env
@@ -29,8 +30,15 @@ yarn-error.log*
 Thumbs.db
 .DS_Store
 
-# Photos (local assets)
-*.png
-*.jpg
-*.jpeg
-*.pdf
+# Imagens e PDFs soltos na raiz não são versionados por padrão…
+/*.png
+/*.jpg
+/*.jpeg
+/*.pdf
+
+# …mas os assets usados pelo app, pela landing e a marca DEVEM ser versionados
+!public/**
+!src/assets/**
+!landingpage/src/assets/**
+!branding/**
+.superpowers/

@@ -5,11 +5,13 @@ import TelaContato from './TelaContato.jsx'
 import TelaBiometria from './TelaBiometria.jsx'
 import TelaCorporais from './TelaCorporais.jsx'
 import TelaMetas from './TelaMetas.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 const TOTAL_TELAS = 5
 
 export default function OnboardingFlow() {
   const { sessao, concluirOnboarding } = useApp()
+  const { ingles } = useIdioma()
   const [tela, setTela] = useState(0)
   const [salvando, setSalvando] = useState(false)
   const [erro, setErro] = useState(null)
@@ -50,7 +52,9 @@ export default function OnboardingFlow() {
         altura: Number(dados.altura),
       })
     } catch {
-      setErro('Não foi possível salvar seu cadastro. Verifique sua conexão e tente novamente.')
+      setErro(ingles
+        ? 'We could not save your profile. Check your connection and try again.'
+        : 'Não foi possível salvar seu cadastro. Verifique sua conexão e tente novamente.')
       setSalvando(false)
     }
   }
@@ -65,19 +69,29 @@ export default function OnboardingFlow() {
 
   return (
     <div className="mx-auto flex min-h-screen max-w-md flex-col px-6 py-8">
-      <div className="mb-8 flex gap-2">
+      <div
+        className="mb-8 flex gap-2"
+        role="progressbar"
+        aria-valuenow={tela + 1}
+        aria-valuemin={1}
+        aria-valuemax={TOTAL_TELAS}
+        aria-label={ingles ? `Step ${tela + 1} of ${TOTAL_TELAS}` : `Passo ${tela + 1} de ${TOTAL_TELAS}`}
+      >
         {Array.from({ length: TOTAL_TELAS }).map((_, i) => (
           <div
             key={i}
+            aria-hidden="true"
             className={`h-1.5 flex-1 rounded-full transition-colors ${i <= tela ? 'bg-sage' : 'bg-sage/20'}`}
           />
         ))}
       </div>
       {erro && (
-        <p className="mb-4 rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700">{erro}</p>
+        <p role="alert" className="mb-4 rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700">{erro}</p>
       )}
       {salvando && (
-        <p className="mb-4 rounded-lg bg-sage-claro p-3 text-sm font-medium text-verde">Salvando seu cadastro…</p>
+        <p role="status" aria-live="polite" className="mb-4 rounded-lg bg-sage-claro p-3 text-sm font-medium text-verde">
+          {ingles ? 'Saving your profile…' : 'Salvando seu cadastro…'}
+        </p>
       )}
       <div className="flex flex-1 flex-col">{telas[tela]}</div>
     </div>

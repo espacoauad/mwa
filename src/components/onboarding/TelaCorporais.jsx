@@ -1,24 +1,26 @@
 import Botao from '../ui/Botao.jsx'
 import CampoNumero from '../ui/CampoNumero.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 const MEDIDAS = [
-  { id: 'cintura', label: 'Cintura' },
-  { id: 'quadril', label: 'Quadril' },
-  { id: 'peito', label: 'Peito' },
-  { id: 'braco', label: 'Braço' },
-  { id: 'coxa', label: 'Coxa' },
+  { id: 'cintura', pt: 'Cintura', en: 'Waist' },
+  { id: 'quadril', pt: 'Quadril', en: 'Hips' },
+  { id: 'peito', pt: 'Peito', en: 'Chest' },
+  { id: 'braco', pt: 'Braço', en: 'Arm' },
+  { id: 'coxa', pt: 'Coxa', en: 'Thigh' },
 ]
 
 export default function TelaCorporais({ dados, atualizarMedida, avancar, voltar }) {
+  const { ingles } = useIdioma()
   return (
     <>
       <div className="mb-6">
         <span className="mb-3 inline-block rounded-full bg-sage-claro px-3 py-1 text-xs font-semibold text-verde">
-          Opcional, mas recomendado
+          {ingles ? 'Optional, but recommended' : 'Opcional, mas recomendado'}
         </span>
-        <h1 className="font-serif text-3xl font-semibold italic leading-tight text-verde">Medidas corporais</h1>
+        <h1 className="font-serif text-3xl font-semibold italic leading-tight text-verde">{ingles ? 'Body measurements' : 'Medidas corporais'}</h1>
         <p className="mt-3 text-verde/70">
-          A fita métrica mostra progresso que a balança esconde. Meça sem apertar, sobre a pele.
+          {ingles ? 'A measuring tape reveals progress the scale can hide. Measure directly on the skin without tightening.' : 'A fita métrica mostra progresso que a balança esconde. Meça sem apertar, sobre a pele.'}
         </p>
       </div>
 
@@ -26,7 +28,7 @@ export default function TelaCorporais({ dados, atualizarMedida, avancar, voltar 
         {MEDIDAS.map((m) => (
           <CampoNumero
             key={m.id}
-            label={m.label}
+            label={ingles ? m.en : m.pt}
             sufixo="cm"
             value={dados.medidas[m.id]}
             onChange={(v) => atualizarMedida(m.id, v)}
@@ -37,12 +39,12 @@ export default function TelaCorporais({ dados, atualizarMedida, avancar, voltar 
       </div>
 
       <div className="mt-auto flex flex-col gap-3 pt-8">
-        <Botao onClick={avancar}>Continuar</Botao>
-        <button type="button" onClick={avancar} className="py-1 text-sm font-medium text-verde/50 underline">
-          Pular esta etapa
+        <Botao onClick={avancar}>{ingles ? 'Continue' : 'Continuar'}</Botao>
+        <button type="button" onClick={avancar} className="flex min-h-11 items-center justify-center py-1 text-sm font-medium text-verde/70 underline">
+          {ingles ? 'Skip this step' : 'Pular esta etapa'}
         </button>
         <Botao variante="secundario" onClick={voltar}>
-          Voltar
+          {ingles ? 'Back' : 'Voltar'}
         </Botao>
       </div>
     </>

@@ -1,4 +1,4 @@
-// Cálculos nutricionais do programa de 21 dias
+// Cálculos nutricionais da Jornada de 30 Dias
 
 export const NIVEIS_ATIVIDADE = [
   { id: 'sedentario', label: 'Sedentário', descricao: 'Pouco ou nenhum exercício', fator: 1.2 },
@@ -83,12 +83,49 @@ export function horarioAgora() {
   return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`
 }
 
-// Dia do programa (1–21) a partir da data de início
-export function diaDoPrograma(dataInicio) {
-  const inicio = new Date(dataInicio)
+function diasDesde(dataISO) {
+  const inicio = new Date(dataISO)
   inicio.setHours(0, 0, 0, 0)
   const hoje = new Date()
   hoje.setHours(0, 0, 0, 0)
-  const diff = Math.floor((hoje - inicio) / 86400000)
-  return Math.min(21, Math.max(1, diff + 1))
+  return Math.floor((hoje - inicio) / 86400000) + 1
+}
+
+// O 90d ativo é a fonte de verdade: enquanto existir, mostramos essa linha.
+// `programas` é a lista já mapeada para camelCase (ver programaDoBanco em AppContext).
+export function programa90Ativo(programas) {
+  return (programas ?? []).find((p) => p.tipo === '90d' && p.status === 'ativo') ?? null
+}
+
+// Dia do programa (1–90), contado sempre a partir de UMA única data-âncora: o
+// início real da Jornada de 30 Dias (tipo '21d' no banco — identificador
+// histórico — ou o perfil, para contas antigas sem registro em mwa_programas).
+// Sem 90d ativo: contador trava em 30 (fim da jornada de entrada).
+// Com 90d ativo: o cap de 30 é removido e o contador segue até 90 — usando a
+// MESMA data-âncora, não a data de compra do 90d. Isso é proposital: se a
+// aluna comprar a continuidade de uma vez (bundle no checkout) ou no meio dos
+// 30 dias, ela continua vendo os dias 1–30 normalmente, dia a dia, e só
+// avança para o conteúdo do dia 31+ quando o calendário real chegar lá — sem
+// pular para o dia 31 no instante da compra (bug corrigido em 2026-07-21).
+export function diaDoPrograma(programas, dataInicioFallback) {
+  // Modo de revisão: permite visualizar qualquer dia sem restrições
+  const modoRevisao = typeof sessionStorage !== 'undefined' ? JSON.parse(sessionStorage.getItem('mwaModorevisao') || 'null') : null
+  if (modoRevisao?.ativo && modoRevisao?.diaVisualizacao) {
+    return modoRevisao.diaVisualizacao
+  }
+
+  const p21 = (programas ?? []).find((p) => p.tipo === '21d')
+  const inicio = p21?.dataInicio ?? dataInicioFallback
+  const diaCorrido = diasDesde(inicio)
+
+  const p90 = programa90Ativo(programas)
+  if (p90) {
+    return Math.min(90, Math.max(1, diaCorrido))
+  }
+  return Math.min(30, Math.max(1, diaCorrido))
+}
+
+// Total de dias do programa da cliente, para exibição de progresso (barra, "Dia X de Y").
+export function totalDiasPrograma(programas) {
+  return programa90Ativo(programas) ? 90 : 30
 }

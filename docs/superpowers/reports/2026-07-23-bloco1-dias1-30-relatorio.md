@@ -1,0 +1,336 @@
+# Blocos 1–3 (Dias 1–90) — Relatório de Revisão de Conteúdo COMPLETO
+
+Data: 2026-07-23 (Bloco 1) / 2026-07-24 (Bloco 2) / 2026-07-25 (Bloco 3 em diante)
+Arquivos revisados — Bloco 1 (dias 1–30): conceitosNutricionais.js, dicas.js,
+informativos.js (dias 1–30), lanchesProteicos.js, lanches22a37.js (dias 22–30),
+versiculos.js (dias 1–30, campo reflexao)
+Arquivos revisados — Bloco 2 (dias 31–60): dicas90.js (dias 31–60), informativos.js
+(dias 31–60), lanches22a37.js (dias 31–37), lanches38a89.js (dias 38–60), versiculos.js
+(dias 31–60, campo reflexao)
+Arquivos revisados — Bloco 3 (dias 61–90): dicas90.js (dias 61–90), informativos.js
+(dias 61–90), lanches38a89.js (dias 61–89), versiculos.js (dias 61–90, campo reflexao)
+
+## Resumo Executivo
+
+- Total de mudanças: 167 (fato: 71, voz: 53, segurança: 28, consistência: 15)
+- Total de itens sinalizados para decisão da Wanessa: 0 (todos resolvidos no checkpoint final do Bloco 3, 2026-07-25; resta apenas 1 nota de registro sem ação pendente)
+- Arquivos sem nenhuma alteração necessária: nenhum (todos os 6 arquivos revisados receberam pelo menos uma edição)
+
+## Decisões da Wanessa (Checkpoint Bloco 1, 2026-07-24)
+
+A Wanessa revisou os 5 achados apresentados no checkpoint do Bloco 1 e decidiu:
+
+1. **Versículo do dia 30 (`versiculos.js`)** — trocado por uma citação bíblica real: Josué 1:9 ("Não fui eu que ordenei a você? Seja forte e corajoso!..."), no lugar do texto que não era uma citação bíblica de fato. Tema atualizado para "Coragem" e reflexão ajustada ao novo versículo. ✅ Feito.
+2. **Referências bíblicas divergentes dos dias 6, 8, 18, 22 (`versiculos.js`)** — cada uma revisada e substituída por uma citação real e verificada (fonte: bibliaonline.com.br / bible.com, tradução NVI), mantendo o `tema` original de cada dia. ✅ Feito — ver linhas correspondentes em `## Mudanças`.
+3. **Entrada órfã do dia 30 em `lanchesProteicos.js`** — removida. O app já usava corretamente a entrada de `lanches22a37.js` para o dia 30; agora a rota de preview interna (`/preview-lanches`) também mostra o conteúdo correto. ✅ Feito.
+4. **Ausência de 1ª pessoa da Wanessa** (padrão recorrente em `conceitosNutricionais.js`, `lanchesProteicos.js`, `lanches22a37.js` e `versiculos.js`) — mantido como está, por decisão da Wanessa. Nenhuma reescrita de tom necessária; os itens sinalizados correspondentes permanecem na tabela abaixo como registro da decisão, não como pendência.
+5. **Pequenas divergências numéricas plausíveis** (banana no dia 9, leite desnatado no dia 11 de `informativos.js`) — padronizadas para bater com a Tabela de Referência Nutricional. ✅ Feito.
+6. **Ficha técnica dos produtos proprietários** — a Wanessa confirmou os produtos de referência: Whey 3W Herbalife, Barra de Proteína Herbalife Citrus Lemon, e Shake Fórmula 1 Herbalife baunilha (26g pó + 250ml leite semidesnatado). Com a composição real confirmada (fonte: fichas técnicas Herbalife, valores cruzados e verificados), os 7 dias que dependiam dessa informação foram recalculados — a maioria com correções significativas para cima (ex.: dia 8 de `lanchesProteicos.js`, que combina shake + whey, subiu de ~30g para ~50g de proteína declarada). ✅ Feito — ver linhas correspondentes em `## Mudanças`.
+
+## Decisões da Wanessa (Checkpoint Bloco 2, 2026-07-25)
+
+No checkpoint do Bloco 2, a Wanessa aprovou a aplicação das 6 propostas de versículo levantadas
+na Task 6 (dias 33, 36, 38, 45, 49, 59 de `versiculos.js`) — cada citação bíblica divergente foi
+substituída pela versão real e verificada (NVI), mantendo o `tema` original de cada dia. ✅ Feito
+— ver linhas correspondentes em `## Mudanças`.
+
+## Decisões da Wanessa (Limpeza dos Itens Sinalizados, 2026-07-25)
+
+A Wanessa pediu para resolver os itens sinalizados pendentes dos Blocos 1-2 e decidiu, por grupo:
+
+1. **9 itens de ingrediente genérico** (queijo branco/ralado/fresco sem tipo, iogurte sem tipo,
+   atum sem tamanho de lata, whey em "colher") — padronizados para o tipo/porção mais comum no
+   Brasil, com `proteina` recalculada em cada caso. ✅ Feito — ver linhas correspondentes em
+   `## Mudanças`.
+2. **Claims científicos populares mas contestados** (fadiga de decisão por "glicose" no dia 23 de
+   `dicas.js`, sede/fome confundidas por proximidade hipotalâmica no dia 33 de `dicas90.js`, e
+   "densidade nutricional" aplicada a um nutriente isolado nos dias 8/11/18 de `dicas.js`) —
+   Wanessa revisou o texto exato proposto e aprovou. ✅ Feito — ver linhas correspondentes em
+   `## Mudanças`.
+3. **2 itens de número em cascata** (granola no dia 37 e biscoito no dia 49, ambos de
+   `dicas90.js`) — corrigidos recalculando toda a cascata de números do parágrafo. ✅ Feito — ver
+   linhas correspondentes em `## Mudanças`.
+4. **Tom do dia 30** (`lanches22a37.js`, o lanche de celebração do fim da jornada de 30 dias) —
+   título e descrição reescritos reconhecendo o marco, mantendo claims moderados. ✅ Feito.
+5. **Resíduo "21 dicas"** (dia 15 de `informativos.js`) — mantido para o Bloco 3, conforme já
+   planejado.
+
+## Decisões da Wanessa (Checkpoint Final Bloco 3, 2026-07-25)
+
+A Wanessa revisou os 18 itens sinalizados do Bloco 3 e decidiu:
+
+1. **13 versículos com referência incorreta** (dias 61, 63, 66, 68, 71, 74, 77, 78, 81, 82, 84, 89,
+   90 de `versiculos.js`) — todos substituídos pelo texto real verificado (NVI), mantendo o `tema`
+   de cada dia sempre que possível. ✅ Feito — ver linhas correspondentes em `## Mudanças`.
+2. **Claim "ciência clara" sobre hábito em 90 dias** (dia 90 de `dicas90.js`) — suavizado, mesmo
+   tratamento dado a outros claims populares mas contestados nos Blocos 1-2. ✅ Feito.
+3. **"Pó proteico" no bolo do dia 88** (`lanches38a89.js`) — a Wanessa confirmou que deve
+   permanecer genérico ("whey ou pó proteico para shake proteico"), pois não pode indicar marca.
+   Ingrediente reescrito para deixar essa generalidade explícita; proteína mantida conservadora
+   (~14g), coerente com um produto não especificado. ✅ Feito.
+4. **"Whey protein" genérico no dia 56** (`lanches38a89.js`) — padronizado para dose completa
+   (mesmo padrão dos demais dias com whey), com proteína recalculada. ✅ Feito.
+5. **Proteína do peixe subestimada no dia 3** (`informativos.js`) — Wanessa pediu para corrigir os
+   valores para refletir o real potencial nutricional do peixe ("ficar incrível"). Recalculado com
+   base na Tabela de Referência Nutricional (salmão grelhado 100g ~200-230 kcal/~20-25g proteína;
+   tilápia crua 100g ~95 kcal/~20g proteína). ✅ Feito.
+
+## Tabela de Referência Nutricional
+
+Valores padrão usados para conferência de plausibilidade (fonte: TACO/USDA, arredondado).
+Atualizar esta tabela sempre que um novo alimento for conferido.
+
+| Alimento | Porção | Calorias | Proteína |
+|---|---|---|---|
+| Ovo cozido (1 unidade, ~50g) | 1 un | ~70 kcal | ~6g |
+| Iogurte grego natural (1 pote, 100g) | 100g | ~100 kcal | ~10g |
+| Pão francês (1 un, ~50g) | 1 un | ~150 kcal | ~4-6g |
+| Pão integral (1 fatia, ~25g) | 1 fatia | ~65-70 kcal | ~3g |
+| Banana (1 unidade média) | 1 un | ~90 kcal | ~1g |
+| Aveia em flocos (2 colheres de sopa, ~20g) | 20g | ~75 kcal | ~2.5g |
+| Castanhas/nozes (punhado, ~15g) | 15g | ~90-100 kcal | ~2-3g |
+| Azeite (1 colher de sopa, ~13g) | 1 colher | ~110-120 kcal | 0g |
+| Peito de frango grelhado (100g) | 100g | ~165 kcal | ~31g |
+| Leite desnatado (200ml) | 200ml | ~70 kcal | ~7g |
+| Atum enlatado em água, escorrido (100g) | 100g | ~115 kcal | ~26g |
+| Tilápia crua (100g) | 100g | ~95 kcal | ~20g |
+| Feijão cozido (100g) | 100g | ~130 kcal | ~8-9g (fibra ~8,5g) |
+| Azeite de oliva (1 colher de sopa, ~13-15g) | 1 colher | ~110-135 kcal | 0g |
+| Maçã (1 unidade média, ~130g) | 1 un | ~75-90 kcal | ~0-0,5g |
+| Granola (porção, ~20g) | 20g | ~80-90 kcal | ~2g |
+| Mel (1 colher de sopa, ~20g) | 1 colher | ~60-65 kcal | 0g |
+| Salmão grelhado (100g, cozido) | 100g | ~200-230 kcal | ~20-25g |
+| Cerveja (lata, 350ml, ~5% ABV) | 350ml | ~145-150 kcal | ~1g |
+| Vinho tinto (taça, 150ml) | 150ml | ~120-125 kcal | ~0g |
+| Batata frita (porção média, ~115g) | ~115g | ~360-365 kcal | ~4g |
+| Batata assada com casca (1 unidade média, ~170g) | 1 un | ~160 kcal | ~4g |
+| Queijo minas frescal (100g) | 100g | ~240-265 kcal | ~17g |
+| Queijo muçarela (100g) | 100g | ~280-330 kcal | ~22g |
+| Queijo cottage (100g) | 100g | ~90-100 kcal | ~11-13g |
+| Homus/hummus (100g) | 100g | ~165-170 kcal | ~7-8g |
+| Grão-de-bico cozido (100g) | 100g | ~160-165 kcal | ~8-9g |
+| Iogurte natural integral (não grego, 100g) | 100g | ~60-65 kcal | ~3.5-4g |
+| Whey Protein 3W Herbalife (1 dose/scoop, ~34g pó) — **confirmado pela Wanessa como produto de referência** | 1 dose | ~137 kcal | ~26g |
+| Barra de Proteína Herbalife Citrus Lemon (1 unidade, ~35g) — **confirmado pela Wanessa como produto de referência** | 1 un | ~140 kcal | ~10g |
+| Shake Fórmula 1 Herbalife baunilha, pó seco (2 colheres, ~26g) — **confirmado pela Wanessa como produto de referência** | 26g pó | ~221 kcal | ~18g |
+| Leite semidesnatado (250ml) | 250ml | ~120 kcal | ~8g |
+| Shake Fórmula 1 preparado (26g pó + 250ml leite semidesnatado — formulação de referência da Wanessa) | 1 porção | ~341 kcal | ~26g |
+| Fibras solúveis (1 dose) | 1 dose | baixo/desprezível | ~0g |
+| Amendoim torrado sem sal (100g) | 100g | ~570-590 kcal | ~24-26g |
+| Morango, fresco ou congelado (100g) | 100g | ~30-35 kcal | ~0.7-1g |
+| Macarrão integral cozido (100g) | 100g | ~124-130 kcal | ~5g |
+| Mirtilo fresco (100g) | 100g | ~55-60 kcal | ~0.7g |
+| Requeijão cremoso light (100g) — estimativa incerta, varia bastante por marca | 100g | ~140-180 kcal | ~8-13g (TACO só documenta a versão não-light, ~9-11g/100g; "light" pode variar para mais ou para menos por marca) |
+| Melado de cana (1 colher de chá, ~7g) | 1 colher chá | ~20 kcal | 0g |
+| Cenoura crua (100g) | 100g | ~40 kcal | ~1g |
+| Rabanete cru (100g) | 100g | ~16 kcal | ~0.7g |
+| Sementes de chia (2 colheres de sopa, ~24g) | 24g | ~115-120 kcal | ~4g |
+| Milho cozido (100g) | 100g | ~96 kcal | ~3-3.5g |
+| Frango desfiado/cozido (100g) — mesma base do peito de frango grelhado | 100g | ~165 kcal | ~31g |
+| Peito de peru fatiado/defumado (100g) | 100g | ~100-110 kcal | ~17-19g |
+| Cream cheese light (100g) | 100g | ~150-170 kcal | ~7-8g |
+| Wrap integral (1 unidade, ~50g) | 1 un | ~130-150 kcal | ~3-4g |
+| Salmão defumado (100g) | 100g | ~115-120 kcal | ~18g |
+| Pepino (100g) | 100g | ~10-15 kcal | ~0.6-1g |
+| Amêndoas (100g) | 100g | ~580 kcal | ~21g |
+| Abacaxi (100g) | 100g | ~50 kcal | ~0.9g |
+| Uva vermelha (100g) | 100g | ~55-70 kcal | ~0.6-0.7g |
+| Castanha do pará (100g) | 100g | ~650-660 kcal | ~14g |
+| Presunto Parma / cru curado (100g) | 100g | ~200-270 kcal | ~25-27g |
+| Rúcula (100g) | 100g | ~25 kcal | ~2.6g |
+| Queijo de cabra, tipo macio/chèvre (100g) | 100g | ~290-320 kcal | ~18-19g |
+| Tangerina (100g) | 100g | ~40-45 kcal | ~0.8-0.9g |
+| Goiaba (100g) | 100g | ~50-55 kcal | ~1.1g |
+| Amora (100g) | 100g | ~40-45 kcal | ~1.4g |
+| Melancia (100g) | 100g | ~30 kcal | ~0.6g |
+| Melão (100g) | 100g | ~29 kcal | ~0.7g |
+| Mamão (100g) | 100g | ~40 kcal | ~0.5-0.8g |
+| Pera (1 unidade média, ~180g) | 1 un | ~100 kcal | ~0.5-1g |
+| Linhaça (100g) | 100g | ~495 kcal | ~18g |
+| Pasta/manteiga de castanha-do-pará (100g, estimativa) | 100g | ~600 kcal | ~14-20g |
+| Pão de queijo (1 unidade média, ~30g) | 1 un | ~90-100 kcal | ~2-2.5g |
+| Carne seca/charque (100g) | 100g | ~200-230 kcal | ~25g |
+
+## Mudanças
+
+| Dia | Arquivo | Campo | Antes → Depois (resumo) | Categoria | Justificativa |
+|---|---|---|---|---|---|
+| — | conceitosNutricionais.js | `porQue` (id: gordura) | "...é o que garante todos os benefícios sem sabotar..." → "...é o que ajuda a aproveitar os benefícios sem sabotar..." | segurança | "garante" é afirmação absoluta não defensável para CRN-1; suavizado para linguagem defensável |
+| — | conceitosNutricionais.js | `porQue` (id: micronutrientes) | "...densidade nutricional garante que, mesmo comendo menos calorias..." → "...densidade nutricional contribui para que, mesmo comendo menos calorias..." | segurança | "garante" é afirmação absoluta não defensável para CRN-1; suavizado para "contribui para" |
+| 4 | dicas.js | `titulo` | "Água: seu acelerador de resultados" → "Água: sua aliada nos resultados" | segurança | "acelerador de resultados" sugere causalidade direta água→emagrecimento, análogo ao exemplo "acelera o metabolismo" citado nos guardrails; suavizado para linguagem defensável |
+| 4 | dicas.js | `conteudo` | "ela participa de TODAS as reações do metabolismo — inclusive a queima de gordura" → "ela participa da grande maioria das reações do metabolismo — inclusive dos processos ligados à queima de gordura" | segurança | "TODAS" é afirmação absoluta não defensável; suavizado, e "a queima de gordura" (causal direto) virou "processos ligados à queima de gordura" |
+| 15 | dicas.js | `conteudo` | "a estratégia individual é o que garante que você não pare no meio do caminho" → "a estratégia individual é o que faz a diferença para você não parar no meio do caminho" | segurança | "garante" é promessa absoluta sobre adesão/resultado, não defensável para CRN-1; suavizado |
+| 17 | dicas.js | `conteudo` | "1 colher de sopa tem aproximadamente 90–120 kcal" → "1 colher de sopa tem aproximadamente 110–120 kcal" | fato | Valor mínimo (90 kcal) divergia da Tabela de Referência Nutricional do relatório (~110-120 kcal para 1 colher de sopa de azeite); alinhado |
+| 18 | dicas.js | `conteudo` | "Ele reduz inflamação, protege o coração, apoia o cérebro..." → "Ele ajuda a reduzir a inflamação, contribui para a saúde do coração, favorece o cérebro..." | segurança | Afirmações absolutas de causalidade ("reduz", "protege", "apoia") não defensáveis para CRN-1 — RCTs de grande porte não confirmam redução significativa de eventos cardiovasculares maiores com suplementação de ômega-3 em população geral; suavizado para linguagem defensável |
+| 23 | dicas.js | `fraseMotivacional` | "Planejar não é ser rigída." → "Planejar não é ser rígida." | voz | Correção ortográfica (acentuação) |
+| 23 | dicas.js | `objetivoComportamental` | "sem culpa ou exesso de controle" → "sem culpa ou excesso de controle" | voz | Correção ortográfica (typo) |
+| 26 | dicas.js | `conteudo` | "Alem disso, cansaço reduz..." → "Além disso, cansaço reduz..." | voz | Correção ortográfica (acentuação) |
+| 2 | informativos.js | `opcoes[0].itens` (3 ovos cozidos) | "Calorias: 155 / Proteína: 13g" → "Calorias: 210 / Proteína: 18g" | fato | 3 ovos cozidos, pela Tabela de Referência (~70 kcal/~6g proteína cada), somam ~210 kcal/~18g proteína — o valor anterior correspondia a ~2 ovos, não 3; corrigido para bater com o número de ovos declarado no `nome` |
+| 14 | informativos.js | `dica` | "Sua sensibilidade à insulina melhora, seus níveis de inflamação tendem a cair..." → "Sua sensibilidade à insulina tende a melhorar, seus níveis de inflamação tendem a cair..." | segurança | Primeira cláusula afirmava melhora de sensibilidade à insulina em 2 semanas como fato certo (não hedged), inconsistente com a cláusula seguinte já hedged ("tendem a cair"); suavizado para linguagem defensável e consistente |
+| 20 | informativos.js | `dica` | "é o solvente de todas as reações metabólicas do seu corpo, inclusive da queima de gordura" → "é o solvente da grande maioria das reações metabólicas do seu corpo, incluindo os processos ligados à queima de gordura" | segurança | "TODAS" é afirmação absoluta não defensável (mesmo padrão já corrigido na Task 3 em dicas.js dia 4); suavizado para "grande maioria" e "processos ligados à" |
+| 20 | informativos.js | `opcoes[2].itens` (Água) | "Emagrece? ESSENCIAL" → "Emagrece? SIM, apoia" | segurança | "ESSENCIAL" para emagrecimento é uma causalidade direta água→resultado não defensável para CRN-1 (mesmo padrão do título "acelerador de resultados" já corrigido na Task 3); suavizado para linguagem defensável mantendo o formato binário usado nas outras opções do mesmo dia |
+| 6 | lanchesProteicos.js | `descricao` | "O whey protein tem três tipos de proteína (rápida, média e lenta), ideal depois do treino..." → "O whey protein é uma proteína de absorção rápida — por isso é tão usado depois do treino, para ajudar na recuperação muscular..." | fato | Whey protein (concentrado/isolado/hidrolisado) é uma proteína de absorção rápida a muito rápida — nenhuma das variantes de whey é considerada "lenta" (essa característica é da caseína, não do whey); a afirmação original descrevia uma composição tripla de velocidades de absorção que não é uma propriedade do whey protein em si, então foi corrigida para a afirmação nutricionalmente correta e defensável |
+| 22 | lanches22a37.js | `proteina` | "~10g" → "~7g" | fato | Soma dos ingredientes (amendoim torrado 25g ~6-6.5g proteína + maçã ~0.3g) resulta em ~6.5g, ~3.5g abaixo do declarado (fora da margem de ±3g); corrigido para ~7g |
+| 26 | lanches22a37.js | `proteina` | "~25g" → "~29g" | fato | Soma dos ingredientes (80g peito de frango cozido desfiado ~24.8g proteína, pela Tabela de Referência, + 80g macarrão integral cozido ~4g) resulta em ~28.8g, ~4g acima do declarado (fora da margem de ±3g); corrigido para ~29g |
+| 30 | lanches22a37.js | `descricao` | "...lanche pós-treino ideal. Recuperação muscular garantida." → "...lanche pós-treino ideal. Ajuda a favorecer a recuperação muscular." | segurança | "Recuperação muscular garantida" é afirmação absoluta de resultado fisiológico, não defensável para CRN-1 (mesmo padrão de "garante"→"ajuda a"/"contribui para" já corrigido em conceitosNutricionais.js e dicas.js dia 15); suavizado para linguagem defensável |
+| 30 | lanches22a37.js | `preparo` | "Consumir até 1h após treino para máxima absorção." → "Consumir após o treino ajuda no processo de recuperação." | segurança | "máxima absorção" atrelada a uma janela estrita de 1h é uma afirmação fisiológica absoluta não defensável para CRN-1 (janela anabólica como corte rígido de 1h é cientificamente contestada); suavizado seguindo o mesmo padrão de hedging já usado no arquivo ("ajuda a", "contribui para", "favorece") |
+| 3 | versiculos.js | `reflexao` | "...Deixe o passado para trás e abraçe essa nova versão de si mesma." → "...e abrace essa nova versão de si mesma." | consistência | Correção ortográfica (typo "abraçe"→"abrace", já identificado no brief da task) |
+| 17 | versiculos.js | `reflexao` | "Nem todos os conselhos que você recebe são para você. Filtro tudo através da sabedoria..." → "...Filtre tudo através da sabedoria..." | consistência | Correção gramatical: "Filtro" (substantivo/1ª pessoa) quebrava a frase, que precisa de um verbo no imperativo de 2ª pessoa ("filtre"), consistente com todos os outros comandos do arquivo ("Cuide", "Reconheça", "Busque" etc.) |
+| 9 | informativos.js | `opcoes[0].itens`/`total` (Banana) | "Banana: 105 cal · 1g prot" / total "250 cal" → "Banana: 90 cal · 1g prot" / total "235 cal" | fato | Padronizado para bater com a Tabela de Referência Nutricional (~90 kcal para banana média), por decisão da Wanessa no checkpoint do Bloco 1 |
+| 11 | informativos.js | `opcoes[1].itens`/`total`/`extras`/`dica` (Leite desnatado) | "80 cal" / total "85 cal" / "Economia: 80 calorias" / "80 calorias... quase 560 calorias por semana" → "70 cal" / total "75 cal" / "Economia: 90 calorias" / "90 calorias... quase 630 calorias por semana" | fato | Padronizado para bater com a Tabela de Referência Nutricional (~70 kcal/200ml), com toda a cascata (itens, total, extras, dica) recalculada para manter consistência interna, por decisão da Wanessa no checkpoint do Bloco 1 |
+| 30 | lanchesProteicos.js | Entrada `{ dia: 30, 'Prato-celebração proteico' }` | Entrada órfã removida por completo (linhas 232–242) | consistência | Entrada duplicada/morta que conflitava com a entrada real do dia 30 em `lanches22a37.js`; removida por decisão explícita da Wanessa no checkpoint do Bloco 1 |
+| 6 | versiculos.js | `texto`/`referencia` | "Você é digno de cuidado, de amor e de atenção. Honre o corpo que você habita." / "1 Pedro 2:25" → "Você é precioso e honrado à minha vista, e eu o amo." / "Isaías 43:4" | fato | Referência original não correspondia ao texto citado; substituído por citação real e verificada (NVI), mantendo o tema "Autorrespeito", por decisão da Wanessa |
+| 8 | versiculos.js | `texto`/`referencia` | "Como é alegre a vida de quem está em paz com tudo! Como é bem-aventurado!" / "Provérbios 17:1" → "E a paz de Deus, que excede todo o entendimento, guardará os seus corações e as suas mentes em Cristo Jesus." / "Filipenses 4:7" | fato | Referência original não correspondia ao texto citado; substituído por citação real e verificada (NVI), mantendo o tema "Paz interior", por decisão da Wanessa |
+| 18 | versiculos.js | `texto`/`referencia` | "Uma vida calma e tranquila é melhor que a riqueza e a fama." / "1 Timóteo 6:6" → "Melhor é ter um punhado com tranquilidade do que dois punhados à custa de muito trabalho; é correr atrás do vento." / "Eclesiastes 4:6" | fato | Referência original não correspondia ao texto citado; substituído por citação real e verificada (NVI), mantendo o tema "Simplicidade", por decisão da Wanessa |
+| 22 | versiculos.js | `texto`/`referencia` | "Semeia um pensamento e você colhe uma ação; semeia uma ação e você colhe um hábito." / "Provérbios 23:7" → "Não nos cansemos de fazer o bem, pois no tempo próprio colheremos se não desistirmos." / "Gálatas 6:9" | fato | Texto original era uma frase motivacional secular, não uma citação bíblica real; substituído por citação real e verificada (NVI) que preserva a metáfora de semear/colher, mantendo o tema "Construção de hábitos", por decisão da Wanessa |
+| 30 | versiculos.js | `texto`/`referencia`/`tema`/`reflexao` | "Ao final destes 30 dias..." / "Romanos 12:2" / tema "Renovação" → "Não fui eu que ordenei a você? Seja forte e corajoso!..." / "Josué 1:9" / tema "Coragem", reflexão ajustada | fato | Campo `texto` não era uma citação bíblica real; substituído pelo versículo pedido explicitamente pela Wanessa (Josué 1:9, verificado NVI), com tema e reflexão ajustados para manter coerência |
+| 1 | lanchesProteicos.js | `proteina` | "~19g" → "~26g" | fato | Composição real do Shake Fórmula 1 Herbalife confirmada pela Wanessa (26g pó = ~18g proteína). Soma: shake 18g + leite desnatado 200ml ~7g + ½ banana ~0.5g = ~25.5g |
+| 6 | lanchesProteicos.js | `descricao` | "O whey protein é uma proteína de absorção rápida..." → "O Whey 3W combina três formas de proteína (isolada, concentrada e hidrolisada), o que favorece uma liberação mais gradual de aminoácidos..." | fato | Correção da correção da Task 5: o produto real usado no programa é o Whey 3W da Herbalife, que a própria marca descreve como blend de 3 formas (isolada/concentrada/hidrolisada) para liberação gradual — a descrição original do arquivo estava mais próxima da realidade do produto do que a edição anterior presumia (que usou conhecimento genérico de whey, não do produto real) |
+| 8 | lanchesProteicos.js | `proteina` | "~30g" → "~50g" | fato | Composição real confirmada: 2 colheres de shake (~18g) + 1 dose de whey 3W (~26g) + 200ml de leite desnatado (~7g) = ~51g. Correção grande porque o valor antigo era uma estimativa sem dados reais dos 2 produtos combinados |
+| 14 | lanchesProteicos.js | `proteina` | "~19g" → "~27g" | fato | Composição real confirmada: 2 colheres de shake (~18g) + 1 colher de aveia (~1.5g) + 200ml de leite (~7g) = ~26.5g |
+| 19 | lanchesProteicos.js | `proteina` | "~23g" → "~35g" | fato | Composição real confirmada: 1 dose de whey 3W (~26g) + 3 colheres de aveia (~3.75g) + 150ml de leite (~5.25g) = ~35g |
+| 25 | lanches22a37.js | `proteina` | "~20g" → "~25g" | fato | Composição real confirmada: 2 colheres de shake (~18g) + 200ml de leite desnatado (~7g) + fibras solúveis (~0g) = ~25g |
+| 30 | lanches22a37.js | `proteina` | "~28g" → "~35g" | fato | Composição real confirmada: 1 dose de whey 3W (~26g) + ½ banana (~0.5g) + 1 colher de aveia (~1.25g) + 200ml de leite (~7g) = ~34.75g |
+| 31 | dicas90.js | `conteudo` | "o cérebro fica 60 dias sem reforço real" → "o cérebro fica seis meses sem reforço real" | consistência | A frase seguinte já dizia "Seis meses é muito tempo para o sistema nervoso central", então "60 dias" contradizia o próprio parágrafo |
+| 32 | dicas90.js | `conteudo` | "decide com criterio" → "decide com critério" | voz | Correção ortográfica (acentuação) |
+| 32 | dicas90.js | `conteudo` | "fome urgente desativa seu cérebro executivo... Ativa em vez disso circuitos primitivos..." / "...mantém a grelina sob controle e preserva sua capacidade de decidir bem" → "fome urgente compromete seu cérebro executivo... e dá mais espaço a circuitos primitivos..." / "...ajuda a manter a grelina sob controle e favorece sua capacidade de decidir bem" | segurança | "desativa"/"mantém"/"preserva" são verbos de causalidade absoluta sobre função cognitiva, não defensáveis para CRN-1 (mesmo padrão "garante"→"ajuda a"/"favorece" já corrigido no Bloco 1); suavizado para linguagem defensável |
+| 33 | dicas90.js | `conteudo` | "Isso explica um estudo clássico: antes de lanchar..." → "Um truque simples costuma ajudar: antes de lanchar..." | fato | Referência a "um estudo clássico" não identificado/não verificável (diferente do dia 35 do mesmo arquivo, que cita corretamente Spiegel et al., 2004); removida a alegação de estudo específico não verificável, mantendo a dica prática intacta |
+| 34 | dicas90.js | `titulo` | "Vida Vermelha" → "Vida Real" | voz | Correção de erro de digitação |
+| 37 | dicas90.js | `conteudo` | "pe com 2 colheres" → "põe 2 colheres" | voz | Correção de erro de digitação |
+| 38 | dicas90.js | `conteudo` | "Nutritivo, totalmente diferentes." → "Nutricionalmente, são totalmente diferentes." | voz | Correção gramatical |
+| 39 | dicas90.js | `dicaPratica` | "Memorizando." → "Memorize esse número." | voz | Correção gramatical/imperativo, consistente com o resto do arquivo |
+| 40 | dicas90.js | `conteudo` | "Amendomim" → "Amendoim" | voz | Correção de erro de digitação |
+| 41 | dicas90.js | `conteudo` / `dicaPratica` | "seu brain não registra" → "seu cérebro não registra"; "CHAGÁ" → "CHÁ" | voz | Anglicismo e erro de digitação |
+| 43 | dicas90.js | `conteudo` | "sem mastigação que significaria" → "sem mastigação de verdade" | voz | Correção gramatical |
+| 44 | dicas90.js | `conteudo` | "você não vê quantity da mesma forma..." → "você não vê a quantidade da mesma forma..." | voz | Correção de erro de digitação/idioma (palavra em inglês "quantity" em texto em português) |
+| 45 | dicas90.js | `conteudo` | "Se você costuma comer requeijão no pão no café, trocar por ricota economiza 80 kcal por dia..." → "Se você costuma comer manteiga no pão no café, trocar por ricota economiza 80 kcal por dia..." | consistência | Inconsistência matemática interna: o parágrafo já havia estabelecido manteiga = 100 kcal/colher e ricota = 20 kcal/colher (diferença de 80 kcal, batendo com o valor citado); requeijão tradicional = 45 kcal/colher, cuja troca por ricota economizaria apenas ~25 kcal, não 80 kcal. Corrigido o alimento de referência da frase para bater com a conta já apresentada |
+| 46 | dicas90.js | `conteudo` | "eaten with presence" → "saboreada com presença" | voz | Anglicismo — frase em inglês dentro do texto em português |
+| 47 | dicas90.js | `conteudo` | "150-200 kcal" → "~90-100 kcal" (para 30g de queijo); "um lanche INTEIRO" → "quase um lanche inteiro"; "as 200 calorias" → "essas calorias" | fato | 150-200 kcal para 30g de queijo implicava ~500-670 kcal/100g, implausível; corrigido para valor plausível |
+| 49 | dicas90.js | `conteudo` | "iguais anyway" → "iguais de qualquer forma" | voz | Anglicismo (nota: dia 49 já tem item separado em `## Itens Sinalizados` sobre valor de kcal de biscoito questionável — edição diferente, não duplicada) |
+| 50 | dicas90.js | `conteudo` | "economizou 400 kcal" → "economizou quase 420 kcal" | fato | Soma correta dos números do parágrafo é 120+75+125+100=420, não 400 |
+| 51 | dicas90.js | `conteudo` | "encerraa" → "encerra" | voz | Correção de erro de digitação |
+| 51 | dicas90.js | `conteudo` | "Informação te deixa FREE" → "Informação te deixa LIVRE" | voz | Anglicismo (palavra em inglês maiúscula usada para ênfase, substituída por "LIVRE" que preserva a mesma ênfase) — mesmo padrão de anglicismo já corrigido nos dias 41, 46 e 49 do mesmo arquivo |
+| 52 | dicas90.js | `conteudo` | "2000 kcal por dia... 1550 kcal por dia... Não 1000. Não 800. 1550... Vira 3000 kcal por semana" → "2.000 kcal por dia... 1.550 kcal por dia... Não 1.000. Não 800. 1.550... Vira ~3.150 kcal por semana" | fato | Correção aritmética: 450 kcal/dia × 7 dias = 3.150 kcal/semana, não 3000 kcal como estava no texto original; além disso, formatação de milhar (separador ".") padronizada nos demais números de 4 dígitos do mesmo parágrafo |
+| 54 | dicas90.js | `conteudo` | "custoumais DUAS VEZES mais caloria" → "custou duas vezes mais caloria" | voz | Correção de erro de digitação (palavras grudadas) e remoção de maiúsculas soltas sem função de ênfase clara no restante do parágrafo |
+| 41 | informativos.js | `dica` | "soma quase 1kg de açúcar por mês" → "soma mais de 1kg de açúcar por mês" | fato | Conta: 35g de açúcar/lata × 30 dias = 1.050g (~1,05kg) — esse valor já passou de 1kg, então "quase" (que sugere ainda não ter alcançado) estava impreciso; corrigido para "mais de 1kg" |
+| 49 | informativos.js | `titulo` | "Balance Entre Alimentos: Fórmula Simples" → "Balanço Entre Alimentos: Fórmula Simples" | voz | Anglicismo — "Balance" é palavra em inglês dentro de título em português; mesmo padrão de anglicismo já corrigido em dicas90.js (dias 41, 46, 49, 51) |
+| 53 | informativos.js | `titulo`/`opcoes[0].nome`/`dica` | "Stress: O Efeito Silencioso no Progresso" / "...aliviar o stress..." / "...o stress afeta o corpo..." → "Estresse: O Efeito Silencioso no Progresso" / "...aliviar o estresse..." / "...o estresse afeta o corpo..." | consistência | O resto do app usa consistentemente "estresse"/"estressada" em português (ex.: dicas90.js dias 32, 33, títulos e conteúdo); "Stress" em inglês era inconsistente com a terminologia usada em todo o restante do conteúdo, corrigido nas 3 ocorrências dentro do dia |
+| 36 | lanches22a37.js | `descricao` | "gengibre traz digestão + anti-inflamação" → "o gengibre ajuda na digestão e favorece processos anti-inflamatórios" | segurança | "traz...anti-inflamação" é afirmação causal absoluta não defensável para CRN-1 (mesmo padrão "garante"/"reduz"→"ajuda a"/"favorece" já corrigido no Bloco 1); suavizado, e corrigida a construção gramatical estranha ("traz digestão") |
+| 37 | lanches22a37.js | `proteina` | "~32g" → "~43g" | fato | Composição real confirmada: 1 dose de whey 3W (~26g) + 1 colher de shake proteico (metade de 2 colheres = ~9g) + 200ml de leite (~7g) + ½ xícara de berries (~0.5-0.75g) = ~42.5-43g |
+| 37 | lanches22a37.js | `descricao` | "Vitamina TURBO com dupla de proteína: Whey + Shake. Máxima saciação." → "...Favorece a saciação por mais tempo." | segurança | "Máxima saciação" é afirmação absoluta não defensável para CRN-1 (mesmo padrão "máxima absorção"→"ajuda no processo de recuperação" já corrigido no dia 30 deste arquivo, Bloco 1); suavizado para linguagem defensável |
+| 38 | lanches38a89.js | `proteina` | "~20g" → "~26g" | fato | Soma dos ingredientes (150g cenoura ~1.5g + 80g frango desfiado, mesma base do peito grelhado ~24.8g) resulta em ~26.3g, ~6.3g acima do declarado (fora da margem ±3g); corrigido |
+| 39 | lanches38a89.js | `descricao` | "Manjericão traz aroma e digestão." → "Manjericão traz aroma e favorece a digestão." | segurança | "traz...digestão" é afirmação causal direta não defensável para CRN-1, mesmo padrão já corrigido no dia 36 de `lanches22a37.js` ("traz digestão"→"ajuda na digestão"); suavizado |
+| 41 | lanches38a89.js | `preparo` | "aquece no forno" → "aqueça no forno" | voz | Correção gramatical — verbo precisa estar no imperativo, consistente com os demais verbos da mesma frase ("Cozinhe", "espalhe") |
+| 44 | lanches38a89.js | `proteina` | "~22g" → "~28g" | fato | Soma dos ingredientes (100g alface ~1.4g + 80g frango desfiado ~24.8g + cenoura ralada ~0.5g + gergelim ~1.6g) resulta em ~28.3g, ~6.3g acima do declarado (fora da margem ±3g); corrigido |
+| 46 | lanches38a89.js | `proteina` | "~18g" → "~15g" | fato | Soma dos ingredientes (150g pepino ~1g + 40g cream cheese light ~2.8g + 60g salmão defumado ~11g) resulta em ~14.8g, ~3.2g abaixo do declarado (na borda/fora da margem ±3g); corrigido |
+| 47 | lanches38a89.js | `proteina` | "~13g" → "~17g" | fato | Soma dos ingredientes (100g rúcula ~2.6g + 60g queijo de cabra ~11.4g + 15g nozes ~2.5g) resulta em ~16.5g, ~3.5g acima do declarado (fora da margem ±3g); corrigido |
+| 47 | lanches38a89.js | `preparo` | "desmiúe queijo de cabra" → "esfarele o queijo de cabra" | voz | "Desmiúe" não é verbo em português (erro de digitação/palavra inexistente); corrigido para "esfarele", verbo correto para desmanchar queijo macio |
+| 49 | lanches38a89.js | `descricao` | "Ótimo para digestão." → "Favorece a digestão." | segurança | "Ótimo para" é afirmação de benefício superlativa não defensável para CRN-1, mesmo padrão "traz digestão"→"favorece a digestão" já corrigido no dia 39 deste arquivo; suavizado |
+| 50 | lanches38a89.js | `descricao` | "Eleganciado + saciante." → "Elegante + saciante." | voz | "Eleganciado" não é palavra em português (erro de digitação); corrigido para "Elegante" |
+| 54 | lanches38a89.js | `proteina` | "~14g" → "~18g" | fato | Soma dos ingredientes (300g melão ~2.1g + 60g presunto parma ~15.6g) resulta em ~17.7g, ~3.7g acima do declarado (fora da margem ±3g); corrigido |
+| 55 | lanches38a89.js | `descricao` | "Energia slow-release + magnésio." → "Energia de liberação lenta + magnésio." | voz | Anglicismo — expressão em inglês dentro de texto em português, mesmo padrão de anglicismo já corrigido em `dicas90.js` (dias 41, 46, 49, 51) e `informativos.js` (dias 49, 53) |
+| 59 | lanches38a89.js | `proteina` | "~9g" → "~6g" | fato | Soma dos ingredientes (150g amora congelada ~2.1g + 50g cream cheese light ~3.5g) resulta em ~5.6g, ~3.4g abaixo do declarado (fora da margem ±3g); corrigido |
+| 59 | lanches38a89.js | `descricao` | "Antioxidantes máximos." → "Rica em antioxidantes." | segurança | "máximos" é afirmação absoluta não defensável para CRN-1, mesmo padrão "Máxima saciação"→"Favorece a saciação" já corrigido no dia 37 de `lanches22a37.js`; suavizado |
+| 42 | lanches38a89.js | `descricao` | "Satisfaz completamente." → "Satisfaz por mais tempo." | segurança | "Completamente" é afirmação absoluta de saciedade não defensável para CRN-1, mesmo padrão já corrigido no dia 59 deste arquivo e no dia 37 de `lanches22a37.js`; suavizado (achado pelo revisor da Task 5, corrigido pelo controller) |
+| 54 | versiculos.js | `reflexao` | "As palavras que você diz sobre si mesma são poderosas. Use sua língua para criar vida, não morte." → "As palavras que você diz sobre si mesma moldam como você se enxerga. Escolha usá-las para construir, não destruir." | voz | Mesmo padrão de overclaim metafísico já corrigido no dia 43 deste bloco ("pensamentos criam sua realidade"→"moldam como você enxerga"); "criar vida, não morte" é uma afirmação absoluta de poder literal, suavizada mantendo o espírito do versículo (Provérbios 18:21, sobre o poder das palavras) sem a promessa literal (achado pelo revisor da Task 6, corrigido pelo controller) |
+| 40 | versiculos.js | `reflexao` | "A vitória pertence àquem tenta de novo." → "A vitória pertence a quem tenta de novo." | consistência | Correção ortográfica/gramatical: "àquem" não existe (crase indevida antes de "quem", que não admite artigo craseado); corrigido para "a quem" |
+| 43 | versiculos.js | `reflexao` | "Seus pensamentos criam sua realidade." → "Seus pensamentos moldam como você enxerga sua realidade." | voz | "Pensamentos criam sua realidade" é uma afirmação absoluta de tipo metafísico/pensamento mágico, próxima do padrão de promessa não defensável já suavizado em outros arquivos do Bloco 1/2 ("garante"→"ajuda a"); reformulado para uma afirmação mais modesta e defensável sobre percepção, não criação literal da realidade |
+| 45 | versiculos.js | `reflexao` | "Você pensa que consegue? Então consegue. Comece hoje a pensar como alguém transformada." → "A forma como você fala consigo mesma importa. Comece hoje a pensar como alguém que já está se transformando." | voz | "Você pensa que consegue? Então consegue." é um clichê genérico de autoajuda/devocional, indo contra o guardrail de voz que veda clichê genérico; reformulado mantendo o tema "Poder do pensamento" com uma frase mais específica e menos formulaica |
+| 46 | versiculos.js | `reflexao` | "Se você não se ama, ninguém mais poderá te convencer. Comece agora: seja gentil consigo mesma." → "Se você não se ama, ninguém mais vai conseguir convencer você do contrário. Comece agora: seja gentil consigo mesma." | consistência | A frase original estava gramaticalmente incompleta ("ninguém mais poderá te convencer" — convencer de quê? — faltava o complemento da oração); corrigido para completar o sentido lógico da frase |
+| 33 | versiculos.js | `texto`/`referencia` | "Vocês começaram bem. Terminem bem. Não desistam agora." / "Gálatas 3:3" → "Vocês corriam bem. Quem os impediu de continuar obedecendo à verdade?" / "Gálatas 5:7" | fato | Referência original (Gálatas 3:3, sobre depender do Espírito vs. esforço próprio) não correspondia ao texto citado; substituído por citação real e verificada (NVI), mantendo o tema "Continuidade" — aplicado após aprovação explícita da Wanessa |
+| 36 | versiculos.js | `texto`/`referencia` | "Tudo posso fazer, menos abandonar o caminho que comecei." / "2 Timóteo 4:7" → "Ninguém que põe a mão no arado e olha para trás é apto para o reino de Deus." / "Lucas 9:62" | fato | Referência original (2 Timóteo 4:7, "combati o bom combate...") não continha a frase citada; substituído por citação real e verificada (NVI), mantendo o tema "Determinação" — aplicado após aprovação explícita da Wanessa |
+| 38 | versiculos.js | `texto`/`referencia` | "O homem firme será recompensado; o inconstante nunca conhecerá a paz." / "Tiago 1:7-8" → "É como árvore plantada à beira de águas correntes: dá fruto no tempo certo e suas folhas não murcham. Tudo o que ele faz prospera!" / "Salmos 1:3" | fato | Referência original (Tiago 1:7-8) tinha sentido oposto ao texto citado (quem duvida NÃO recebe nada, não uma promessa ao firme); substituído por citação real e verificada (NVI), mantendo o tema "Estabilidade" — aplicado após aprovação explícita da Wanessa |
+| 45 | versiculos.js | `texto`/`referencia` | "Como um homem pensa em seu coração, assim ele é." / "Provérbios 23:7" → "Levamos cativo todo pensamento, para torná-lo obediente a Cristo." / "2 Coríntios 10:5" | fato | Referência original (Provérbios 23:7 NVI é sobre um anfitrião mal-intencionado, não sobre "como o homem pensa, assim ele é" — redação de traduções tipo KJV, que diverge da NVI) não correspondia ao texto citado; substituído por citação real e verificada (NVI), mantendo o tema "Poder do pensamento" — aplicado após aprovação explícita da Wanessa |
+| 49 | versiculos.js | `texto`/`referencia` | "A sabedoria começa com o temor do Senhor; o conhecimento segue a humildade." / "Provérbios 15:33" → "O temor do Senhor é o princípio da sabedoria, e o conhecimento do Santo é entendimento." / "Provérbios 9:10" | fato | Referência original (Provérbios 15:33, sobre humildade/honra — já usado corretamente no dia 60) estava duplicada por engano; o texto citado corresponde na verdade a Provérbios 9:10, cuja redação exata (NVI) substituiu a paráfrase original; mantido o tema "Sabedoria" — aplicado após aprovação explícita da Wanessa |
+| 59 | versiculos.js | `texto`/`referencia` | "Confiei no Senhor e Ele me sustentou. Você também pode confiar." / "Salmos 27:10" → "Entregue o seu caminho ao Senhor; confie nele, e ele agirá." / "Salmos 37:5" | fato | Referência original (Salmos 27:10, sobre abandono dos pais) não correspondia ao texto citado; substituído por citação real e verificada (NVI), mantendo o tema "Confiança" — aplicado após aprovação explícita da Wanessa |
+| 11 | lanchesProteicos.js | `ingredientes` | "1 iogurte natural" → "1 iogurte grego natural (pote de 100g)" | consistência | Padronizado para o tipo mais comum no app (iogurte grego, já usado nos dias 3/16/20), por decisão da Wanessa; com pote de 100g, bate com o `proteina` já declarado (~12g), sem necessidade de alterar o número |
+| 24 | lanches22a37.js | `proteina` + `ingredientes` | "~12g" / "4 colheres de requeijão light" → "~7g" / "4 colheres de sopa de requeijão light" | fato | Padronizado colher de sopa ~17g e densidade TACO da versão cremosa tradicional (~10g/100g, "light" não documentado separadamente), por decisão da Wanessa: 4×17g×10% ≈ 7g |
+| 33 | lanches22a37.js | `proteina` + `ingredientes` | "~20g" / "1 lata de atum em água (escorrido)" → "~34g" / "1 lata padrão de atum em água (~120g escorrido)" | fato | Padronizado para lata comercial padrão brasileira (~170g total/~120g escorrido), por decisão da Wanessa: atum 120g×26g/100g=31,2g + abacate ~1g + torradas ~2g ≈ 34g |
+| 39 | lanches38a89.js | `proteina` + `ingredientes` | "~14g" / "100g queijo branco" → "~18g" / "100g queijo branco (tipo minas frescal)" | fato | "Queijo branco" padronizado para minas frescal (~17g/100g, tipo mais comum no Brasil), por decisão da Wanessa: 17g + tomate cherry ~1g ≈ 18g |
+| 41 | lanches38a89.js | `proteina` + `ingredientes` | "~12g" / "30g queijo ralado" → "~17g" / "30g queijo ralado tipo parmesão" | fato | "Queijo ralado" padronizado para parmesão (~35g/100g, produto mais comumente vendido com esse nome no Brasil), por decisão da Wanessa: 10,5g + brócolis ~6g ≈ 17g |
+| 43 | lanches38a89.js | `proteina` + `ingredientes` | "~14g" / "1 lata atum" + "Cream cheese light" (sem quantidade) → "~36g" / "1 lata padrão de atum (~120g escorrido)" + "30g cream cheese light" | fato | Padronizado lata de atum (mesma referência do dia 33 de `lanches22a37.js`) e quantidade de cream cheese (30g, consistente com o dia 42 do mesmo arquivo), por decisão da Wanessa: atum 31,2g + cream cheese ~2,25g + torradas ~3g ≈ 36g |
+| 53 | lanches38a89.js | `proteina` + `ingredientes` | "~12g" / "100g queijo fresco" → "~19g" / "100g queijo fresco (tipo minas frescal)" | fato | "Queijo fresco" padronizado para minas frescal (mesma convenção do dia 39), por decisão da Wanessa: 17g + melancia ~1,8g ≈ 19g |
+| 56 | lanches38a89.js | `ingredientes` | "1 colher whey protein em pó" → "1 colher de sopa (rasa) de whey protein em pó" | voz | Clarificado que "colher" se refere a colher de sopa rasa (não dose/scoop cheio), por decisão da Wanessa — esse cenário já batia com o `proteina` declarado (~8g), sem necessidade de alterar o número |
+| 58 | lanches38a89.js | `proteina` + `ingredientes` | "~12g" / "150g iogurte" → "~18g" / "150g iogurte grego" | fato | "Iogurte" padronizado para grego (consistente com a convenção geral do app em receitas proteicas), por decisão da Wanessa: 15g + mamão ~1,3g + linhaça ~1,8g ≈ 18g |
+| 37 | dicas90.js | `conteudo` | "2 colheres de granola (100 kcal)... Somados, foram 300 kcal... 300 kcal é praticamente um terço do déficit" → "2 colheres de granola (125 kcal)... Somados, foram 325 kcal... 325 kcal é mais de um terço do déficit" | fato | Valor de granola corrigido para bater com a proporção usada em outros dias do mesmo arquivo (dias 38/42/50: 4 colheres ~60g=250kcal → 2 colheres ~125kcal); soma e frase seguinte recalculadas em cascata, por decisão da Wanessa |
+| 49 | dicas90.js | `conteudo` | "biscoito tradicional (100g) = 130 kcal" / "biscoito 'zero açúcar' (100g) = 130 kcal" → "~450 kcal" nas duas ocorrências | fato | 130 kcal/100g era implausível para a categoria (biscoitos tipicamente ~400-500 kcal/100g); corrigido para um valor plausível, mantendo os dois valores iguais (que é o ponto do argumento: mesma caloria, açúcar trocado por gordura), por decisão da Wanessa |
+| 30 | lanches22a37.js | `titulo` + `descricao` | "Whey com banana e aveia" / "Whey protein + carboidrato lento (banana + aveia) = lanche pós-treino ideal. Ajuda a favorecer a recuperação muscular." → "Whey com Banana e Aveia — Marco dos 30 Dias" / "Você chegou ao dia 30. Esse shake é o mesmo de sempre — whey + carboidrato lento (banana + aveia) para ajudar na recuperação — mas hoje ele também celebra 30 dias de escolhas consistentes." | voz | Este é o dia 30 canônico e real do app (lanche de fim da jornada de 30 dias); texto reescrito para reconhecer o marco, mantendo claims moderados, por decisão explícita da Wanessa |
+| 8 | dicas.js | `conteudo` | "ela tem a maior densidade nutricional entre os três macros: entrega mais benefício..." → "caloria por caloria, ela entrega mais benefício que os outros dois macros..." | segurança | "Densidade nutricional" é definida em `conceitosNutricionais.js` como propriedade de um alimento (nutrientes por caloria), não de um macro comparado a si mesmo; termo trocado por linguagem equivalente sem o uso técnico incorreto, por decisão explícita da Wanessa (texto revisado e aprovado antes de aplicar) |
+| 11 | dicas.js | `conteudo` | "É um dos exemplos mais claros de densidade nutricional: altíssimo benefício fisiológico por quase nenhuma caloria." → "É um dos nutrientes com melhor custo-benefício calórico que existe: altíssimo benefício fisiológico por quase nenhuma caloria." | segurança | Mesmo ajuste do dia 8 (uso técnico incorreto de "densidade nutricional" para um nutriente isolado), por decisão explícita da Wanessa (texto revisado e aprovado antes de aplicar) |
+| 18 | dicas.js | `conteudo` | "...o que faz dele um dos nutrientes de maior densidade nutricional que existem." → "...o que faz dele um dos nutrientes com melhor custo-benefício calórico que existem." | segurança | Mesmo ajuste dos dias 8 e 11, por decisão explícita da Wanessa (texto revisado e aprovado antes de aplicar) |
+| 23 | dicas.js | `conteudo` | "Seu cérebro gasta energia real — usamos glicose, oxigênio — para tomar decisões. Quanto mais decisões você toma ao longo do dia, mais esgotada fica sua capacidade de decidir bem nas próximas." → "Seu cérebro se cansa de tomar decisões — é o que chamamos de fadiga de decisão. Quanto mais decisões você toma ao longo do dia, mais difícil fica decidir bem nas próximas." | segurança | Removido o mecanismo específico de "glicose/oxigênio como recurso finito" (modelo de "esgotamento do ego", cientificamente contestado), mantendo o conceito geral de fadiga de decisão (com apoio mais amplo), por decisão explícita da Wanessa (texto revisado e aprovado antes de aplicar) |
+| 33 | dicas90.js | `conteudo` | "Porque os centros do hipotálamo que regulam sede e apetite são vizinhos. Literalmente. E quando você está levemente desidratada, eles ativam juntos. Seu corpo pede água, seu cérebro traduz como 'preciso comer algo'." → "Um dos motivos apontados é que os sinais de sede e fome passam por circuitos parecidos no cérebro — e quando você está levemente desidratada, é comum confundir um pelo outro. Seu corpo pede água, seu cérebro às vezes traduz como 'preciso comer algo'." | segurança | Suavizada a afirmação categórica de mecanismo cerebral específico (popular mas contestada) para uma formulação hedged, por decisão explícita da Wanessa (texto revisado e aprovado antes de aplicar) |
+| 62 | dicas90.js | `conteudo` | "120g de macarrão + 100g de frango grelhado + legumes/salada = 320 kcal" → "100g de macarrão (metade) + 100g de frango grelhado + legumes/salada = 320 kcal" | consistência | O campo `dicaPratica` do mesmo dia instrui "metade do volume que você comeria de massa" (ou seja, metade de 200g = 100g), mas o `conteudo` usava 120g — inconsistência entre campos do mesmo dia. Corrigido para 100g, o que também resolve a soma: 100g macarrão (~150 kcal, mesma taxa implícita no "puro" do parágrafo) + 100g frango grelhado (~165 kcal, Tabela de Referência) + legumes ≈ bate com os 320 kcal já declarados (com 120g a soma parcial já ultrapassava 320 kcal antes mesmo de somar os legumes) |
+| 63 | dicas90.js | `titulo` | "A Fórmula Do Prato Que SEMPRE Funciona" → "A Fórmula Do Prato Que Funciona De Verdade" | segurança | "SEMPRE Funciona" é uma promessa absoluta de eficácia não defensável para CRN-1 (mesmo padrão "garante"→linguagem defensável já corrigido em vários dias dos Blocos 1-2); suavizado mantendo o tom confiante |
+| 63 | dicas90.js | `conteudo` | "Essa proporção você acha em toda literatura de nutrição." → "Essa proporção você acha em boa parte da literatura de nutrição." | segurança | "TODA" é afirmação absoluta não defensável, mesmo padrão de "TODAS as reações"→"grande maioria" já corrigido em dicas.js dia 4 e informativos.js dia 20; suavizado |
+| 63 | dicas90.js | `conteudo` | "nenhuma balança, nenhuma conta, nenhuma stress" → "nenhuma balança, nenhuma conta, nenhum estresse" | consistência | Anglicismo ("stress") com erro de concordância de gênero ("nenhuma stress"); corrigido para "estresse" (substantivo masculino em português) e concordância "nenhum", mesmo padrão de anglicismo "Stress"→"Estresse" já corrigido em informativos.js dia 53 |
+| 63 | dicas90.js | `fraseMotivacional` | "Fórmula simples, aplicação consistente, resultado garantido." → "Fórmula simples, aplicação consistente, resultado que se constrói." | segurança | "Resultado garantido" é promessa absoluta não defensável para CRN-1, mesmo padrão "garante"→linguagem defensável já corrigido em vários dias dos Blocos 1-2; suavizado |
+| 67 | dicas90.js | `conteudo` | "Was feito para você viver NORMAL." → "Foi feito para você viver NORMAL." | voz | Erro de digitação ("Was" em vez de "Foi") |
+| 67 | dicas90.js | `conteudo` | "buffet de peso fixo (densid calórica muda tudo)" → "buffet de peso fixo (densidade calórica muda tudo)" | voz | Correção de erro de digitação (palavra truncada) |
+| 68 | dicas90.js | `conteudo` | "É 200 kcal vs. 500 kcal." → "É 100 kcal vs. 500 kcal." | fato | Cascata matemática: o parágrafo estabelece que "dois pães de queijo pequenos (60g) = 200 kcal", ou seja, 1 unidade = ~100 kcal; a comparação final "escolhe 1... vs. beliscar 5" deveria usar 1×100=100 kcal (não 200 kcal) contra 5×100=500 kcal; corrigido para bater com a taxa já estabelecida no próprio parágrafo |
+| 69 | dicas90.js | `conteudo` | "MENOScalorias, mas com MUlargerOR volume no prato" → "MENOS calorias, mas com MAIOR volume no prato" | voz | Texto corrompido (palavra grudada + mistura de inglês "larger" dentro de "MAIOR"); corrigido |
+| 69 | dicas90.js | `conteudo` | "a densidade calórica do que você escolhe muda TUDO o resultado." → "a densidade calórica do que você escolhe muda TUDO no resultado." | voz | Correção gramatical (preposição faltando) |
+| 70 | dicas90.js | `conteudo` | "E psychologically é difícil recusar." → "E psicologicamente é difícil recusar." | voz | Anglicismo — palavra em inglês dentro de texto em português |
+| 70 | dicas90.js | `conteudo` | "as primeiras rodadas são HIGH proteína, LOWER gordura" / "carnesmagras" → "as primeiras rodadas são ALTA proteína, BAIXA gordura" / "carnes magras" | voz | Anglicismo (HIGH/LOWER em texto português) e erro de digitação (palavras grudadas) |
+| 73 | dicas90.js | `conteudo` | "MaiOR erro em viagem" / "Ancoras são aquelas" → "Maior erro em viagem" / "Âncoras são aquelas" | voz | Correção de erro de digitação (capitalização solta) e acentuação (falta do circunflexo em "Âncoras", inconsistente com o mesmo termo usado corretamente na frase anterior) |
+| 73 | dicas90.js | `conteudo` | "você levana mala não 'regras'" → "você leva na mala não 'regras'" | voz | Correção de erro de digitação (palavras grudadas) |
+| 75 | dicas90.js | `conteudo` | "Nossos dias assim, o objetivo MUDA." → "Nesses dias assim, o objetivo MUDA." | voz | Correção gramatical (palavra errada quebrava o sentido da frase) |
+| 75 | dicas90.js | `conteudo` | "vegetal congelado (já aque aquecido)" → "vegetal congelado (já aquecido)" | voz | Correção de erro de digitação (texto duplicado/truncado) |
+| 75 | dicas90.js | `conteudo` | "É modo\"sobrevivência\" — não é ideal" → "É modo \"sobrevivência\" — não é ideal" | voz | Correção de erro de digitação (espaço faltando antes da aspas) |
+| 76 | dicas90.js | `conteudo` | "450 kcal abaixo = 3000 na semana = meio quilo de perda." → "450 kcal abaixo = ~3.150 na semana = perto de meio quilo de perda." | fato | Erro aritmético: 450×7=3.150, não 3000 (mesmo padrão já corrigido no dia 52 deste arquivo no Bloco 2, que usa "~3.150 kcal por semana"); corrigido para bater com a mesma conta, com "perto de" adicionado para manter o hedge de aproximação |
+| 76 | dicas90.js | `dicaPratica` | "Mante no sábado e domingo também." → "Mantenha no sábado e domingo também." | voz | "Mante" não é conjugação válida em português; corrigido para "Mantenha" (imperativo), consistente com o restante do arquivo |
+| 77 | dicas90.js | `dicaPratica` | "3 âncoras leves de fim de semana (não rigorosa, só consciente)" → "(não rigorosas, só conscientes)" | voz | Correção de concordância de gênero/número (adjetivos precisam concordar com "âncoras", plural feminino) |
+| 77 | dicas90.js | `objetivoComportamental` | "em fin de semana" → "em fim de semana" | voz | Correção ortográfica (erro de digitação) |
+| 79 | dicas90.js | `conteudo` | "E isso gera STRESS real." → "E isso gera ESTRESSE real." | voz | Anglicismo — mesmo padrão "Stress"→"Estresse" já corrigido em informativos.js dia 53 e dicas90.js dia 63 |
+| 83 | dicas90.js | `conteudo` | "Tem DUA fomes completamente diferentes" → "Tem DUAS fomes completamente diferentes" | voz | Correção ortográfica (erro de digitação) |
+| 86 | dicas90.js | `objetivoComportamental` | "Usar respiração como ferramentat antes de comer emocionalmente" → "Usar respiração como ferramenta antes de comer emocionalmente" | voz | Correção ortográfica (erro de digitação) |
+| 88 | dicas90.js | `conteudo` | "cafeína dura TE 8-10 horas" → "cafeína dura até 8-10 horas" | voz | Correção de erro de digitação (fragmento de palavra truncado) |
+| 89 | dicas90.js | `tema` | "Biologia do Stress" → "Biologia do Estresse" | consistência | Anglicismo — o `titulo` do mesmo dia já usa corretamente "Estresse Crônico", mas o `tema` ficou em inglês; mesmo padrão de anglicismo já corrigido em outros dias do arquivo (63, 79) |
+| 70 | dicas90.js | `conteudo` | "Rodízio é tricky:" → "Rodízio é traiçoeiro:" | voz | Anglicismo não corrigido na Task 2 (achado pelo revisor) — mesmo padrão de anglicismo já corrigido no mesmo dia ("psicologicamente") e em outros dias do arquivo |
+| 72 | dicas90.js | `conteudo` | "Álcool é tricky porque..." → "Álcool é traiçoeiro porque..." | voz | Mesmo anglicismo do dia 70, não corrigido na Task 2 (achado pelo revisor) |
+| 15 | informativos.js | `opcoes[0].itens` (Método Sozinho) | "Informação: Completa (21 dicas + app)" → "Informação: Completa (30 dicas + app)" | consistência | Resíduo da estrutura antiga de 21 dias; o programa real de 30 dias tem 30 dicas diárias (`dicas.js`, dias 1-30). Já sinalizado e aprovado para correção na limpeza de resíduos do Bloco 3 |
+| 79 | informativos.js | `opcoes[1].itens` | "Consistência na reta final: garantida" → "Consistência na reta final: sustentada" | segurança | "Garantida" é afirmação absoluta de resultado comportamental, não defensável para CRN-1 (mesmo padrão "garante"→linguagem defensável já corrigido em vários dias dos Blocos 1-2); trocado por "sustentada", mesmo termo já usado para o mesmo conceito no dia 81 deste arquivo (consistência interna) |
+| 63 | informativos.js | `titulo` | "Meal Prep: Futuro Já Preparado" → "Preparo de Refeições: Futuro Já Preparado" | voz | Anglicismo não corrigido direto na Task 3 (achado pelo revisor) — a regra do projeto é corrigir anglicismos direto, sem propor; corrigido pelo controller |
+| 71 | informativos.js | `titulo` | "Checklist de Hábitos: Solidificando" → "Lista de Hábitos: Solidificando" | voz | Anglicismo não pego na Task 3 (achado pelo revisor); corrigido pelo controller |
+| 75 | informativos.js | `titulo` + `dica` | "Checkpoint: Você Está Perto" / "fotos de checkpoint" → "Ponto de Checagem: Você Está Perto" / "fotos de checagem" | voz | Anglicismo não pego na Task 3 (achado pelo revisor); corrigido pelo controller |
+| 15 | dicas.js | `conteudo` | "Ao longo de 20 anos como nutricionista, percebi..." → "Ao longo de 20 anos trabalhando com emagrecimento, percebi..." | segurança | Correção urgente pedida pela Wanessa: o texto afirmava incorretamente 20 anos de atuação como nutricionista registrada — na realidade, ela trabalha com emagrecimento há 20 anos, mas não é nutricionista há esse tempo todo. Achado pela Wanessa em produção (screenshot do app), corrigido imediatamente e varrido em todo o projeto (ver nota abaixo) |
+| 67 | lanches38a89.js | `descricao` | "Eleganciado. Satisfaz doçura." → "Elegante. Satisfaz doçura." | voz | "Eleganciado" não é uma palavra real em português (erro de digitação/formação); corrigido para "Elegante" |
+| 74 | lanches38a89.js | `proteina` | "~20g" → "~26g" | fato | Soma dos ingredientes (80g frango cozido/desfiado ~24,8g, mesma base do peito de frango grelhado da Tabela de Referência, + ½ abacate ~1,5g) resulta em ~26,3g, ~6,3g acima do declarado (fora da margem ±3g); corrigido |
+| 77 | lanches38a89.js | `proteina` | "~18g" → "~23g" | fato | Soma dos ingredientes (2 colheres de shake proteico ~18g + 100g morango ~0,85g + 100ml leite ~3,5g + toppings granola pequena porção ~0,5g) resulta em ~22,85g, ~4,85g acima do declarado; corrigido |
+| 81 | lanches38a89.js | `proteina` + `ingredientes` | "~12g" / "150g iogurte" → "~17g" / "150g iogurte grego" | fato | "Iogurte" padronizado para grego (convenção já estabelecida no projeto); soma (150g iogurte grego ~15g + 1 colher chia ~2g, Tabela de Referência) resulta em ~17g, ~5g acima do declarado; corrigido |
+| 82 | lanches38a89.js | `proteina` | "~20g" → "~28g" | fato | Soma dos ingredientes (2 colheres de shake proteico ~18g + 200ml leite ~7g + 15g nozes ~2,5g) resulta em ~27,5g, ~7,5g acima do declarado; corrigido |
+| 84 | lanches38a89.js | `proteina` | "~22g" → "~32g" | fato | Soma dos ingredientes (2 fatias pão integral ~6g + 80g frango ~24,8g + ½ abacate ~1,5g) resulta em ~32,3g, ~10,3g acima do declarado; corrigido |
+| 85 | lanches38a89.js | `proteina` | "~15g" → "~20g" | fato | Soma dos ingredientes (1 wrap integral ~3,5g + 60g atum ~15,6g + rúcula porção pequena ~0,7g) resulta em ~19,8g, ~4,8g acima do declarado; corrigido |
+| 86 | lanches38a89.js | `proteina` | "~10g" → "~5g" | fato | Pão de queijo (2 unidades) tem densidade proteica bem menor do que o declarado sugeria — usando referência real (~2-2,5g/unidade média, adicionada à Tabela de Referência), o total fica em ~4-5g, bem abaixo dos ~10g declarados; corrigido |
+| 87 | lanches38a89.js | `proteina` + `ingredientes` + `preparo` | "~14g" / "30g queijo" / "queijo rallado" → "~21g" / "30g queijo ralado tipo parmesão" / "queijo ralado" | fato | "Queijo" padronizado para ralado tipo parmesão (convenção já estabelecida); soma (40g carne seca ~10g, nova entrada na Tabela de Referência, + 30g queijo ralado parmesão ~10,5g) resulta em ~20,5g, ~6,5g acima do declarado; corrigido. Também corrigido de passagem o erro de digitação "rallado"→"ralado" (dobro de L incorreto) |
+| 69 | versiculos.js | `reflexao` | "Agradeça sincerely." → "Agradeça sinceramente." | voz | Anglicismo — palavra em inglês dentro de texto em português, mesmo padrão já corrigido em outros arquivos |
+| 91-111 | versiculos.js | array completo | Remoção de 21 versículos órfãos (dias 91-111) + comentário de cabeçalho "111 Versículos" → "90 Versículos" | consistência | Resíduo do modelo antigo (21+90=111 dias), inacessível a qualquer usuário real (`diaDoPrograma()`/`totalDiasPrograma()` em `src/utils/calculos.js` limitam o programa a 90 dias); `BLOQUEIO_ACESSO_DIA_111.md` e `CONCLUSAO_111_DIAS.md` marcados como obsoletos com nota de aviso |
+| 61 | versiculos.js | `texto` + `referencia` | Isaías 26:3 (incorreta) → Romanos 12:2 (real, NVI) | fato | Aprovado pela Wanessa no checkpoint final do Bloco 3; tema "Fluxo mental" preservado |
+| 63 | versiculos.js | `texto` + `referencia` | 2 Coríntios 9:8 (incorreta) → Isaías 40:31 (real, NVI) | fato | Aprovado; também remove menção não-bíblica a "jornada de 90 dias" do campo `texto`, mesmo problema já corrigido no dia 30 do Bloco 1 |
+| 66 | versiculos.js | `texto` + `referencia` | Provérbios 22:3 (incorreta) → 3 João 1:2 (real, NVI) | fato | Aprovado; tema "Autocuidado como missão" preservado |
+| 68 | versiculos.js | `texto` | Paráfrase livre → texto real de 1 Coríntios 6:19-20 (NVI) | fato | Aprovado; referência já estava correta, só o texto era paráfrase demais |
+| 71 | versiculos.js | `texto` + `referencia` | Efésios 5:33 (incorreta) → 1 Pedro 4:10 (real, NVI) | fato | Aprovado; tema "Energia para servir" preservado |
+| 74 | versiculos.js | `texto` + `reflexao` | Paráfrase invertida → texto real de Provérbios 31:8 (NVI); reflexão reescrita para não contradizer o versículo | fato | Aprovado; referência já estava correta. Nova reflexão: "Sua jornada te dá forças para também ser voz por quem ainda não encontrou a própria. Cuidar de si é o primeiro passo para cuidar de quem precisa." |
+| 77 | versiculos.js | `texto` + `referencia` | 1 Pedro 1:18-19 (incorreta) → Salmos 8:5 (real, NVI) | fato | Aprovado; tema "Valor integral" preservado |
+| 78 | versiculos.js | `texto` + `referencia` | Provérbios 6:11 (incorreta) → Provérbios 6:6 (real, NVI, mesmo capítulo/contexto) | fato | Aprovado; tema "Responsabilidade futura" preservado |
+| 81 | versiculos.js | `texto` + `referencia` | Efésios 5:2 (incorreta) → 1 Coríntios 12:26 (real, NVI) | fato | Aprovado; tema "Impacto em rede" preservado |
+| 82 | versiculos.js | `texto` + `referencia` | Filipenses 4:6 (incorreta) → Romanos 12:1 (real, NVI) | fato | Aprovado; tema "Cuidado como oração" preservado |
+| 84 | versiculos.js | `texto` + `referencia` | Provérbios 22:1 (incorreta) → Provérbios 17:1 (real, NVI) | fato | Aprovado; tema "Riqueza verdadeira" preservado |
+| 89 | versiculos.js | `texto` + `referencia` | Provérbios 14:12 (sentido oposto) → Tiago 1:2-4 (real, NVI) | fato | Aprovado; tema "Significado do percurso" preservado |
+| 90 | versiculos.js | `texto` + `referencia` | 1 Tessalonicenses 5:23 (incorreta) → 2 Timóteo 4:7 (real, NVI) | fato | Aprovado; também remove menção não-bíblica a "completou 90 dias" do campo `texto`, mesmo tratamento dado ao dia 30 no checkpoint do Bloco 1 |
+| 90 | dicas90.js | `conteudo` | "A ciência do comportamento é clara: após 90 dias de repetição, o hábito deixa de ser uma ação que você força e vira uma identidade que você encarna." → "A ciência do comportamento aponta algo real: repetição consistente, sustentada ao longo de semanas e meses, transforma uma ação forçada em identidade — e 90 dias de prática é tempo mais que suficiente para essa mudança se consolidar." | voz | Suavização de claim popular mas contestado (mito "X dias para criar hábito"), aprovado pela Wanessa |
+| 88 | lanches38a89.js | `ingredientes` | "30g pó proteico" → "30g whey ou pó proteico para shake proteico" | consistência | Wanessa confirmou que deve permanecer genérico (sem indicar marca); proteína mantida em ~14g, valor conservador coerente com produto não especificado |
+| 56 | lanches38a89.js | `proteina` + `ingredientes` | "~8g" / "1 colher de sopa (rasa) de whey protein em pó" → "~27g" / "1 dose de whey protein em pó" | fato | Padronizado para dose completa (mesmo padrão dos demais dias com whey do arquivo); proteína recalculada (dose + morango) |
+| 3 | informativos.js | `itens` (Calorias/Proteína) | Salmão 150g: "280"/"25g" → "320"/"34g"; Peixe branco 200g (tilápia): "200"/"30g" → "190"/"40g" | fato | Valores anteriores subestimavam a proteína real do peixe; recalculado com base na Tabela de Referência Nutricional (salmão ~200-230 kcal/~20-25g por 100g; tilápia crua ~95 kcal/~20g por 100g), a pedido da Wanessa |
+
+## Itens Sinalizados (não editados — decisão da Wanessa)
+
+Nota: os itens sobre "ausência de 1ª pessoa" (recorrentes em vários arquivos) foram
+consolidados na decisão #4 do checkpoint do Bloco 1 (manter como está) e removidos desta
+tabela — não são mais pendências, ver `## Decisões da Wanessa`.
+
+| Dia | Arquivo | O que é | Por que precisa de decisão |
+|---|---|---|---|
+| 6, 17, 23 | lanchesProteicos.js / lanches22a37.js | `ingredientes` — receitas de whey com "água OU leite" (escolha do leitor) | Composição do Whey 3W confirmada (26g proteína/dose). Usando água, a proteína bate com o declarado; com leite, sobe ~7-8g além — não é um erro do texto, é variação real da escolha da leitora. Não editado — mencionado apenas para registro, confirmado pela Wanessa no checkpoint final do Bloco 3 |
+
+

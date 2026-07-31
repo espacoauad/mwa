@@ -1,28 +1,28 @@
-import { Section, Eyebrow, Title, GoldRule } from '../components/ui.jsx'
+import { Section, Eyebrow, Title } from '../components/ui.jsx'
+import Reveal from '../components/Reveal.jsx'
 
 export default function Problem() {
   return (
-    <Section className="bg-sand/50">
-      <div className="mx-auto max-w-3xl text-center">
-        <Eyebrow>O ciclo que precisa acabar</Eyebrow>
-        <Title>Pare de começar uma nova dieta toda segunda-feira.</Title>
-        <GoldRule className="mx-auto my-8" />
-        <div className="space-y-5 text-left text-base leading-relaxed text-ink/80 md:text-lg">
-          <p>Você não precisa viver contando calorias sem entender o que está fazendo.</p>
-          <p>Não precisa sofrer com restrições impossíveis.</p>
+    <Section className="bg-offwhite" lazy intrinsicHeight={530}>
+      <div className="mx-auto max-w-2xl text-center">
+        <Reveal>
+          <Eyebrow>O problema</Eyebrow>
+          <Title>Pare de recomeçar toda segunda-feira.</Title>
+        </Reveal>
+        <Reveal delay={120} className="mt-8 space-y-5 text-base leading-relaxed text-ink/80 md:text-lg">
           <p>
-            Não precisa se sentir culpada por não conseguir manter uma rotina que nunca foi pensada
-            para a sua vida real.
+            Você não precisa contar calorias sem entender o que está fazendo. Não precisa de
+            restrições impossíveis. E não precisa carregar culpa por não sustentar uma rotina que
+            nunca foi pensada para a sua vida real.
           </p>
           <p className="font-display text-xl italic text-forest md:text-2xl">
-            O problema não é falta de força de vontade. O problema é tentar mudar sem método, sem
-            acompanhamento e sem uma rotina possível de sustentar.
+            O problema não é a sua força de vontade. É tentar mudar sem método.
           </p>
           <p>
-            O MWA foi criado para ensinar você a entender seu corpo, organizar sua alimentação e
-            construir hábitos que podem acompanhar você depois dos 21 dias.
+            O MWA existe para ensinar você a entender seu corpo, organizar sua alimentação e
+            construir hábitos que continuam — muito depois do programa.
           </p>
-        </div>
+        </Reveal>
       </div>
     </Section>
   )

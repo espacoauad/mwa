@@ -13,9 +13,153 @@
 
   --font-sans: "Poppins", system-ui, -apple-system, sans-serif;
   --font-serif: "Lora", Georgia, serif;
+  --color-ouro-glow: rgba(212, 175, 122, 0.35);
 }
 
 body {
   background-color: var(--color-creme);
   color: var(--color-verde);
+}
+
+/* Sombra em duas camadas: difusa + próxima, para dar profundidade real aos
+   cards de destaque (visual "Boutique Elevado") */
+.mwa-sombra-premium {
+  box-shadow:
+    0 2px 6px rgba(52, 69, 40, 0.08),
+    0 20px 40px -12px rgba(52, 69, 40, 0.16);
+}
+
+/* Halo dourado sutil atrás de ícones/emojis em destaque */
+.mwa-halo-ouro {
+  background: radial-gradient(circle, var(--color-ouro-glow) 0%, transparent 70%);
+}
+
+/* Tela de encerramento do programa (dia 90): chuva de estrelas + foguetes */
+@keyframes mwa-twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes mwa-shooting-star {
+  0% {
+    transform: translate(0, 0) rotate(35deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-320px, 320px) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+.mwa-estrela {
+  animation: mwa-twinkle 2.4s ease-in-out infinite;
+}
+
+.mwa-estrela-cadente {
+  animation: mwa-shooting-star 3.2s linear infinite;
+}
+
+/* Certificado: entrada comemorativa da medalha + brilho girando */
+@keyframes mwa-medalha-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) rotate(-25deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.12) rotate(6deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes mwa-medalha-giro {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes mwa-brilho {
+  0% {
+    transform: translateX(-120%) rotate(20deg);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateX(220%) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+.mwa-medalha {
+  animation: mwa-medalha-pop 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mwa-medalha-raios {
+  animation: mwa-medalha-giro 18s linear infinite;
+}
+
+.mwa-brilho {
+  animation: mwa-brilho 2.8s ease-in-out 0.6s infinite;
+}
+
+/* MWA FARM: balanço leve de plantas e bob de bichinhos (idle, contínuo) */
+@keyframes mwa-farm-balanco {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes mwa-farm-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.mwa-farm-balanco {
+  display: inline-block;
+  transform-origin: bottom center;
+  animation: mwa-farm-balanco 3.6s ease-in-out infinite;
+}
+
+.mwa-farm-bob {
+  display: inline-block;
+  animation: mwa-farm-bob 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mwa-estrela,
+  .mwa-estrela-cadente,
+  .mwa-medalha,
+  .mwa-medalha-raios,
+  .mwa-brilho,
+  .mwa-farm-balanco,
+  .mwa-farm-bob {
+    animation: none !important;
+  }
 }

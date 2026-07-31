@@ -1,4 +1,11 @@
-// Banco de alimentos — valores por 100 g (base TACO/aproximações)
+import { ALIMENTOS_EXTRAS } from './alimentosExtras.js'
+import { ALIMENTOS_EUA } from './alimentosEua.js'
+import { ALIMENTOS_MARCAS } from './alimentosMarcas.js'
+import { ALIMENTOS_HERBALIFE } from './alimentosHerbalife.js'
+import { ALIMENTOS_INDUSTRIALIZADOS } from './alimentosIndustrializados.js'
+import { quantidadeNaBase } from '../utils/alimentos.js'
+
+// Banco de alimentos — valores por 100 g/ml (base TACO/TBCA/rótulos)
 // porcao = porção sugerida em gramas, usada para pré-preencher a quantidade
 
 export const CATEGORIAS = [
@@ -8,11 +15,14 @@ export const CATEGORIAS = [
   'Vegetais',
   'Laticínios',
   'Gorduras boas',
-  'Herbalife',
+  'Suplementos',
   'Refeições prontas',
+  'Bebidas',
+  'Doces e sobremesas',
+  'Molhos e complementos',
 ]
 
-export const ALIMENTOS = [
+const ALIMENTOS_BASE = [
   // Proteínas
   { id: 'frango-grelhado', nome: 'Frango grelhado (peito)', categoria: 'Proteínas', kcal: 165, prot: 31, carb: 0, gord: 3.6, fibra: 0, porcao: 120 },
   { id: 'patinho', nome: 'Carne bovina magra (patinho)', categoria: 'Proteínas', kcal: 190, prot: 32, carb: 0, gord: 6.5, fibra: 0, porcao: 100 },
@@ -67,14 +77,14 @@ export const ALIMENTOS = [
   { id: 'castanha-caju', nome: 'Castanha de caju', categoria: 'Gorduras boas', kcal: 570, prot: 18.5, carb: 29.1, gord: 46.3, fibra: 3.7, porcao: 20 },
   { id: 'chia', nome: 'Semente de chia', categoria: 'Gorduras boas', kcal: 486, prot: 16.5, carb: 42.1, gord: 30.7, fibra: 34.4, porcao: 15 },
 
-  // Herbalife
-  { id: 'hbl-shake', nome: 'Shake Herbalife (pó, 1 dose)', categoria: 'Herbalife', kcal: 354, prot: 34.6, carb: 42.3, gord: 3.8, fibra: 11.5, porcao: 26, herbalife: true },
-  { id: 'hbl-pdm', nome: 'Protein Drink Mix (1 dose)', categoria: 'Herbalife', kcal: 393, prot: 53.6, carb: 46.4, gord: 3.6, fibra: 3.6, porcao: 28, herbalife: true },
-  { id: 'hbl-cha', nome: 'Herbal Tea Concentrate', categoria: 'Herbalife', kcal: 294, prot: 0, carb: 58.8, gord: 0, fibra: 0, porcao: 1.7, herbalife: true },
-  { id: 'hbl-nrg', nome: 'NRG (chá com guaraná)', categoria: 'Herbalife', kcal: 300, prot: 0, carb: 60, gord: 0, fibra: 0, porcao: 2, herbalife: true },
-  { id: 'hbl-fiber', nome: 'Active Fiber Complex (1 dose)', categoria: 'Herbalife', kcal: 220, prot: 0, carb: 73.5, gord: 0, fibra: 73.5, porcao: 6.8, herbalife: true },
-  { id: 'hbl-cr7', nome: 'CR7 Drive (1 dose)', categoria: 'Herbalife', kcal: 370, prot: 0, carb: 88.9, gord: 0, fibra: 0, porcao: 27, herbalife: true },
-  { id: 'hbl-barra', nome: 'Barra de proteína Herbalife', categoria: 'Herbalife', kcal: 400, prot: 28.6, carb: 42.9, gord: 11.4, fibra: 2.9, porcao: 35, herbalife: true },
+  // Suplementos
+  { id: 'hbl-shake', nome: 'Shake proteico (pó)', categoria: 'Suplementos', aliases: ['shake proteico', 'shake'], kcal: 354, prot: 34.6, carb: 42.3, gord: 3.8, fibra: 11.5, porcao: 26, suplemento: true, estimado: true },
+  { id: 'hbl-pdm', nome: 'Bebida proteica em pó', categoria: 'Suplementos', aliases: ['bebida proteica em po', 'bebida de proteina em po'], kcal: 393, prot: 53.6, carb: 46.4, gord: 3.6, fibra: 3.6, porcao: 28, suplemento: true, estimado: true },
+  { id: 'hbl-cha', nome: 'Chá de ervas concentrado', categoria: 'Suplementos', aliases: ['cha de ervas', 'cha de ervas concentrado'], kcal: 294, prot: 0, carb: 58.8, gord: 0, fibra: 0, porcao: 1.7, suplemento: true, estimado: true },
+  { id: 'hbl-nrg', nome: 'Chá com guaraná', categoria: 'Suplementos', aliases: ['cha com guarana'], kcal: 300, prot: 0, carb: 60, gord: 0, fibra: 0, porcao: 2, suplemento: true, estimado: true },
+  { id: 'hbl-fiber', nome: 'Fibras solúveis (pó)', categoria: 'Suplementos', aliases: ['fibras', 'fibras soluveis'], kcal: 220, prot: 0, carb: 73.5, gord: 0, fibra: 73.5, porcao: 6.8, suplemento: true, estimado: true },
+  { id: 'hbl-cr7', nome: 'Bebida isotônica em pó', categoria: 'Suplementos', aliases: ['isotonico', 'bebida isotonica'], kcal: 370, prot: 0, carb: 88.9, gord: 0, fibra: 0, porcao: 27, suplemento: true, estimado: true },
+  { id: 'hbl-barra', nome: 'Barra de proteína', categoria: 'Suplementos', aliases: ['barra de proteina'], kcal: 400, prot: 28.6, carb: 42.9, gord: 11.4, fibra: 2.9, porcao: 35, suplemento: true, estimado: true },
 
   // Refeições prontas (estimativas por 100 g do prato)
   { id: 'pf-tradicional', nome: 'Prato feito (arroz, feijão, frango, salada)', categoria: 'Refeições prontas', kcal: 130, prot: 9, carb: 15, gord: 3.5, fibra: 2.5, porcao: 400 },
@@ -83,9 +93,41 @@ export const ALIMENTOS = [
   { id: 'omelete', nome: 'Omelete com legumes', categoria: 'Refeições prontas', kcal: 154, prot: 11, carb: 3, gord: 11, fibra: 1, porcao: 150 },
 ]
 
+function prepararAlimento(alimento) {
+  const unidadeBase = alimento.unidadeBase ?? 'g'
+  const medidasPadrao = [
+    { id: unidadeBase, nome: unidadeBase, plural: unidadeBase, base: 1 },
+    { id: 'porcao', nome: 'porção sugerida', plural: 'porções sugeridas', base: alimento.porcao },
+  ]
+  const nome = alimento.nome.toLowerCase()
+  if (unidadeBase === 'ml') medidasPadrao.push({ id: 'copo', nome: 'copo', plural: 'copos', base: 200 })
+  if (alimento.categoria === 'Frutas') medidasPadrao.push({ id: 'un', nome: 'unidade média', plural: 'unidades médias', base: alimento.porcao })
+  if (/queijo|pão|torrada/.test(nome)) medidasPadrao.push({ id: 'fatia', nome: 'fatia', plural: 'fatias', base: alimento.porcao })
+  if (/ovo/.test(nome)) medidasPadrao.push({ id: 'un', nome: 'unidade', plural: 'unidades', base: 50 })
+  if (/pizza/.test(nome)) medidasPadrao.push({ id: 'fatia', nome: 'fatia', plural: 'fatias', base: alimento.porcao })
+  if (/feijão|lentilha|grão-de-bico|sopa|caldo/.test(nome)) medidasPadrao.push({ id: 'concha', nome: 'concha', plural: 'conchas', base: alimento.porcao })
+  if (/iogurte/.test(nome)) medidasPadrao.push({ id: 'pote', nome: 'pote', plural: 'potes', base: alimento.porcao })
+  if (/azeite|manteiga|margarina|maionese|molho|açúcar|mel|creme de leite/.test(nome)) medidasPadrao.push({ id: 'colher', nome: 'colher de sopa', plural: 'colheres de sopa', base: alimento.porcao })
+  if (alimento.suplemento) medidasPadrao.push({ id: 'dose', nome: 'dose', plural: 'doses', base: alimento.porcao })
+  const medidas = alimento.medidas ?? medidasPadrao
+  return {
+    aliases: [],
+    fonte: alimento.suplemento ? 'Valores médios da categoria — conferir o rótulo do produto escolhido' : 'TACO/TBCA',
+    fonteUrl: alimento.suplemento ? null : 'https://fcf.usp.br/tbca/',
+    ultimaConferencia: alimento.suplemento ? '2026-07-13' : null,
+    validacaoPendente: Boolean(alimento.suplemento),
+    estimado: false,
+    ...alimento,
+    unidadeBase,
+    medidas,
+  }
+}
+
+export const ALIMENTOS = [...ALIMENTOS_BASE, ...ALIMENTOS_EXTRAS, ...ALIMENTOS_EUA, ...ALIMENTOS_MARCAS, ...ALIMENTOS_HERBALIFE, ...ALIMENTOS_INDUSTRIALIZADOS].map(prepararAlimento)
+
 // Macros de um alimento para uma quantidade em gramas
-export function macrosDoAlimento(alimento, gramas) {
-  const f = gramas / 100
+export function macrosDoAlimento(alimento, quantidade, medidaId = alimento.unidadeBase ?? 'g') {
+  const f = quantidadeNaBase(alimento, quantidade, medidaId) / 100
   return {
     calorias: Math.round(alimento.kcal * f),
     proteina: Math.round(alimento.prot * f * 10) / 10,

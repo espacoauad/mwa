@@ -1,54 +1,59 @@
 import { CtaButton, GoldRule } from '../components/ui.jsx'
 import logoMWA from '../assets/logo-mwa.png'
-import { BRAND } from '../config.js'
 
 export default function Hero() {
   return (
-    <header className="relative overflow-hidden bg-cream px-6 pb-24 pt-20 md:pb-32 md:pt-28">
-      {/* detalhe decorativo sutil */}
+    <header className="relative overflow-hidden bg-offwhite px-6 pb-16 pt-28 md:pb-24 md:pt-36">
+      {/* Órbitas decorativas */}
       <div className="pointer-events-none absolute -right-40 -top-40 h-96 w-96 rounded-full border border-gold/15" />
       <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full border border-gold/10" />
+      <div className="pointer-events-none absolute -bottom-52 -left-40 h-96 w-96 rounded-full bg-sage/5" />
 
-      <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
-        {/* Marca — logo oficial */}
-        <img src={logoMWA} alt="MWA — My Wellness Approach" className="w-52 md:w-64" />
-        <p className="mt-4 font-display text-lg italic text-forest md:text-xl">
-          {BRAND.method}
-        </p>
-
-        <GoldRule className="my-10" />
-
-        {/* Headline */}
-        <h2 className="max-w-3xl font-display text-3xl leading-snug text-forest-deep md:text-5xl md:leading-tight">
-          Não é uma dieta.
-          <br />
-          <span className="italic text-forest">É uma nova forma de viver.</span>
-        </h2>
-
-        <p className="mt-6 text-sm font-light uppercase tracking-[0.2em] text-mist md:text-base">
-          Transforme hábitos, conquiste resultados, mude sua vida.
-        </p>
-
-        {/* Texto de apoio */}
-        <div className="mt-10 max-w-2xl space-y-4 text-base leading-relaxed text-ink/80 md:text-lg">
-          <p>
-            Aprenda, em <strong className="font-semibold text-forest">21 dias</strong>, a organizar
-            sua alimentação, transformar seus hábitos e construir uma rotina mais saudável com o
-            acompanhamento diário de uma nutricionista no seu bolso.
+      <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[1.1fr_0.9fr] md:gap-16">
+        <div className="text-center md:text-left">
+          <p className="hero-enter text-xs font-semibold uppercase tracking-[0.3em] text-gold">
+            MWA · My Wellness App
           </p>
-          <p>
-            O MWA nasceu da abordagem que permitiu a Wanessa Auad eliminar 26 kg após a gestação e
-            manter sua transformação por 14 anos.
+
+          <h1 className="hero-enter hero-enter-delay-1 mt-6 font-display text-4xl leading-[1.15] text-forest-deep md:text-6xl">
+            Transforme hábitos.
+            <br />
+            Conquiste resultados.
+            <br />
+            <em className="italic text-forest">Mude sua vida.</em>
+          </h1>
+
+          <GoldRule className="hero-enter hero-enter-delay-2 mx-auto my-8 md:mx-0" />
+
+          <p className="hero-enter hero-enter-delay-2 mx-auto max-w-xl text-base leading-relaxed text-ink/80 md:mx-0 md:text-lg">
+            Não é uma dieta. Em <strong className="font-semibold text-forest">30 dias</strong>,
+            um passo por dia, o MWA guia você pelo aplicativo para mudar sua relação com a
+            comida e construir hábitos que permanecem — sem restrição, sem culpa.
           </p>
+
+          <p className="hero-enter hero-enter-delay-3 mx-auto mt-4 max-w-xl text-sm leading-relaxed text-mist md:mx-0">
+            Criado a partir da abordagem que permitiu a Wanessa Auad eliminar 26 kg e manter sua
+            transformação por 14 anos — agora no seu bolso.
+          </p>
+
+          <div className="hero-enter hero-enter-delay-4 mt-10">
+            <CtaButton>Quero começar meus 30 dias</CtaButton>
+            <p className="mt-6 text-xs leading-relaxed text-mist md:text-sm">
+              Desenvolvido por Wanessa Auad — Nutricionista · CRN-1/27939
+            </p>
+          </div>
         </div>
 
-        <CtaButton className="mt-12">Quero começar meus 21 dias</CtaButton>
-
-        {/* Selo de confiança */}
-        <p className="mt-8 max-w-md text-xs leading-relaxed text-mist">
-          Desenvolvido por Wanessa Auad — nutricionista, empreendedora e especialista em
-          emagrecimento há mais de 20 anos. CRN-1/27939.
-        </p>
+        <div className="hero-enter hero-enter-delay-3 flex justify-center md:justify-end">
+          <img
+            src={logoMWA}
+            alt="MWA — My Wellness Approach"
+            width={600}
+            height={708}
+            fetchPriority="high"
+            className="w-64 max-w-full drop-shadow-[0_10px_16px_rgba(42,59,31,0.12)] sm:w-72 md:w-full md:max-w-[26rem]"
+          />
+        </div>
       </div>
     </header>
   )

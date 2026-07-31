@@ -1,8 +1,9 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase.js'
-import { calcularMetas, dataHojeISO, diaDoPrograma } from '../utils/calculos.js'
+import { calcularMetas, dataHojeISO, diaDoPrograma, totalDiasPrograma, programa90Ativo as calcularPrograma90Ativo } from '../utils/calculos.js'
 import { registrarSessao } from '../lib/sessoes.js'
 import { calcularEstrelas } from '../utils/hallDaFama.js'
+import { useIdioma } from './IdiomaContext.jsx'
 import {
   carregarGame,
   concederSementes,
@@ -10,7 +11,16 @@ import {
   equiparSkinDb,
   registrarAcessoDiario,
   carregarTarefasHoje,
+  carregarEstrelas,
 } from '../lib/game.js'
+import {
+  diasDaSemana,
+  estrelasDaSemana,
+  constelacaoCompleta,
+  ganhouEstrelaHoje,
+  metasCumpridas,
+} from '../utils/jogos/estrelas.js'
+import { lembrarEstrelaDoDia } from '../utils/notificacaoEstrela.js'
 
 const AppContext = createContext(null)
 
@@ -34,6 +44,18 @@ function perfilParaUsuario(p) {
     dataInicio: p.data_inicio,
     role: p.role ?? 'user',
     fotoUrl: p.foto_url ?? null,
+    idioma: p.idioma ?? 'pt-BR',
+  }
+}
+
+function programaDoBanco(p) {
+  return {
+    id: p.id,
+    tipo: p.tipo,
+    dataInicio: p.data_inicio,
+    dataFim: p.data_fim,
+    status: p.status,
+    origem: p.origem,
   }
 }
 
@@ -88,13 +110,16 @@ function pesagemDoBanco(p) {
     peso: Number(p.peso),
     medidas: p.medidas ?? {},
     fotos: p.fotos ?? {},
+    bioimpedancia: p.bioimpedancia ?? null,
   }
 }
 
 export function AppProvider({ children }) {
+  const { idioma, ingles, alterarIdioma } = useIdioma()
   const [sessao, setSessao] = useState(null)
   const [carregando, setCarregando] = useState(true)
   const [usuario, setUsuario] = useState(null)
+  const [programas, setProgramas] = useState([])
   const [refeicoes, setRefeicoes] = useState([])
   const [exercicios, setExercicios] = useState([])
   const [pesagens, setPesagens] = useState([])
@@ -107,14 +132,53 @@ export function AppProvider({ children }) {
   // Aviso "+N 🌱" exibido brevemente quando uma tarefa é recompensada
   const [ganhoSementes, setGanhoSementes] = useState(null)
   // Tarefas centrais do dia (refeição, água, dica, exercício) e sementes ganhas hoje
-  const [tarefasHoje, setTarefasHoje] = useState({ refeicao: false, agua: false, dica: false, exercicio: false, sementesHoje: 0 })
+  const [tarefasHoje, setTarefasHoje] = useState({ refeicao: false, agua: false, dica: false, exercicio: false, jogo: false, sementesHoje: 0 })
+  // Estrelas do Dia: dias da semana em que a estrela foi conquistada
+  const [estrelasSemana, setEstrelasSemana] = useState([])
   // Tela de "dia concluído" (compartilhável)
   const [conclusaoDiaAberta, setConclusaoDiaAberta] = useState(false)
+  // Tela de encerramento da Jornada de 30 dias — celebração com aprendizados e CTA para upgrade
+  const [conclusao30Aberta, setConclusao30Aberta] = useState(false)
+  // Tela de encerramento do programa (dia 90) — celebração final com conquistas e déficit total
+  const [conclusao90Aberta, setConclusao90Aberta] = useState(false)
 
   const hoje = dataHojeISO()
   const userId = sessao?.user?.id ?? null
   const metas = useMemo(() => (usuario ? calcularMetas(usuario) : null), [usuario])
-  const diaAtual = usuario ? (simuladorDia ?? diaDoPrograma(usuario.dataInicio)) : 1
+  const diaAtual = usuario ? (simuladorDia ?? diaDoPrograma(programas, usuario.dataInicio)) : 1
+  const totalDias = totalDiasPrograma(programas)
+  const programa90Ativo = calcularPrograma90Ativo(programas) !== null
+
+  // Monitora Modo de Revisão no sessionStorage e sincroniza simuladorDia
+  useEffect(() => {
+    const monitorarModoRevisao = () => {
+      const modoRevisao = sessionStorage.getItem('mwaModorevisao')
+      if (modoRevisao) {
+        try {
+          const { ativo, diaVisualizacao } = JSON.parse(modoRevisao)
+          if (ativo && diaVisualizacao) {
+            setSimuladorDia(diaVisualizacao)
+          }
+        } catch (e) {
+          // Ignora erro de parsing
+        }
+      }
+    }
+
+    // Verifica imediatamente
+    monitorarModoRevisao()
+
+    // Monitora mudanças via storage event
+    window.addEventListener('storage', monitorarModoRevisao)
+
+    // Cria um intervalo para verificar periodicamente (fallback)
+    const intervalo = setInterval(monitorarModoRevisao, 100)
+
+    return () => {
+      window.removeEventListener('storage', monitorarModoRevisao)
+      clearInterval(intervalo)
+    }
+  }, [])
 
   // Sessão do Supabase Auth
   useEffect(() => {
@@ -135,6 +199,7 @@ export function AppProvider({ children }) {
       }
       if (!novaSessao) {
         setUsuario(null)
+        setProgramas([])
         setRefeicoes([])
         setExercicios([])
         setPesagens([])
@@ -152,8 +217,9 @@ export function AppProvider({ children }) {
 
     async function carregar() {
       setCarregando(true)
-      const [perfil, refs, exs, pesos, agua] = await Promise.all([
+      const [perfil, progs, refs, exs, pesos, agua] = await Promise.all([
         supabase.from('mwa_perfis').select('*').eq('id', userId).maybeSingle(),
+        supabase.from('mwa_programas').select('*').eq('user_id', userId),
         supabase.from('mwa_refeicoes').select('*').eq('user_id', userId).eq('data', hoje),
         supabase.from('mwa_exercicios').select('*').eq('user_id', userId).eq('data', hoje),
         supabase.from('mwa_pesagens').select('*').eq('user_id', userId).order('data'),
@@ -161,6 +227,7 @@ export function AppProvider({ children }) {
       ])
       if (cancelado) return
       setUsuario(perfil.data ? perfilParaUsuario(perfil.data) : null)
+      setProgramas((progs.data ?? []).map(programaDoBanco))
       setRefeicoes((refs.data ?? []).map(refeicaoDoBanco))
       setExercicios((exs.data ?? []).map(exercicioDoBanco))
       setPesagens((pesos.data ?? []).map(pesagemDoBanco))
@@ -179,6 +246,8 @@ export function AppProvider({ children }) {
         }
         const tarefas = await carregarTarefasHoje(userId, hoje)
         if (!cancelado) setTarefasHoje(tarefas)
+        const eventosEstrela = await carregarEstrelas(userId, diasDaSemana(hoje))
+        if (!cancelado) setEstrelasSemana(eventosEstrela)
       })
     }
 
@@ -187,6 +256,48 @@ export function AppProvider({ children }) {
       cancelado = true
     }
   }, [userId, hoje])
+
+  // ── Estrelas do Dia ──
+  const metasEstrela = useMemo(
+    () => metasCumpridas(tarefasHoje, { jogouHoje: tarefasHoje.jogo }),
+    [tarefasHoje],
+  )
+  const semanaEstrelas = useMemo(() => estrelasDaSemana(hoje, estrelasSemana), [hoje, estrelasSemana])
+  const estrelaHojeAcesa = semanaEstrelas.find((d) => d.hoje)?.acesa ?? false
+
+  // Acende a estrela assim que as 2 micro-metas são cumpridas (1x por dia, dedup no banco)
+  useEffect(() => {
+    if (!userId || estrelaHojeAcesa || !ganhouEstrelaHoje(metasEstrela)) return
+    let cancelado = false
+    async function acender() {
+      const ganho = await concederSementes(userId, 'estrela_dia', hoje)
+      if (cancelado || ganho === 0) return
+      setGame((g) => (g ? { ...g, sementes: g.sementes + ganho } : g))
+      setGanhoSementes({ qtd: ganho, tipo: 'estrela_dia' })
+      setTimeout(() => setGanhoSementes(null), 3000)
+      const atualizadas = [...estrelasSemana, { ref: hoje }]
+      setEstrelasSemana(atualizadas)
+      // Sétima estrela da semana: a constelação fecha e vale um bônus
+      if (constelacaoCompleta(estrelasDaSemana(hoje, atualizadas))) {
+        const bonus = await concederSementes(userId, 'constelacao', diasDaSemana(hoje)[0])
+        if (!cancelado && bonus > 0) {
+          setGame((g) => (g ? { ...g, sementes: g.sementes + bonus } : g))
+          setGanhoSementes({ qtd: bonus, tipo: 'constelacao' })
+          setTimeout(() => setGanhoSementes(null), 3000)
+        }
+      }
+    }
+    acender()
+    return () => {
+      cancelado = true
+    }
+  }, [userId, hoje, metasEstrela, estrelaHojeAcesa])
+
+  // Lembrete local da estrela (só se a pessoa já autorizou notificações)
+  useEffect(() => {
+    if (!userId || !semanaEstrelas.length) return
+    lembrarEstrelaDoDia({ userId, hoje, estrelaAcesa: estrelaHojeAcesa, metas: metasEstrela, ingles })
+  }, [userId, hoje, estrelaHojeAcesa, metasEstrela, semanaEstrelas.length, ingles])
 
   const diaCompleto = tarefasHoje.refeicao && tarefasHoje.agua && tarefasHoje.dica
 
@@ -198,6 +309,27 @@ export function AppProvider({ children }) {
     localStorage.setItem(chave, '1')
     setConclusaoDiaAberta(true)
   }, [diaCompleto, userId, hoje])
+
+  // Ao chegar no dia 30 sem programa 90d ativo, abre a tela de encerramento da
+  // Jornada de 30 Dias com aprendizados, certificado e CTA para upgrade — só 1x.
+  useEffect(() => {
+    if (diaAtual !== 30 || programa90Ativo || !userId) return
+    const chave = `mwa_30_concluido_${userId}`
+    if (localStorage.getItem(chave)) return
+    localStorage.setItem(chave, '1')
+    setConclusao30Aberta(true)
+  }, [diaAtual, programa90Ativo, userId])
+
+  // Ao chegar no dia 90 (fim do programa de 90 dias pago), abre a tela de
+  // encerramento com estrelas, conquistas interativas e o total economizado no
+  // déficit — só 1x.
+  useEffect(() => {
+    if (diaAtual !== 90 || !programa90Ativo || !userId) return
+    const chave = `mwa_90_concluido_${userId}`
+    if (localStorage.getItem(chave)) return
+    localStorage.setItem(chave, '1')
+    setConclusao90Aberta(true)
+  }, [diaAtual, programa90Ativo, userId])
 
   const refeicoesHoje = useMemo(
     () => refeicoes.filter((r) => r.data === hoje).sort((a, b) => (a.horario ?? '').localeCompare(b.horario ?? '')),
@@ -252,6 +384,14 @@ export function AppProvider({ children }) {
     setConclusaoDiaAberta(true)
   }
 
+  function fecharConclusao30() {
+    setConclusao30Aberta(false)
+  }
+
+  function fecharConclusao90() {
+    setConclusao90Aberta(false)
+  }
+
   function fecharConclusaoDia() {
     setConclusaoDiaAberta(false)
   }
@@ -270,24 +410,31 @@ export function AppProvider({ children }) {
     await premiar('joguinho', hoje)
   }
 
-  // +10 🌱 por fazer 300+ pontos no Jogo das Escolhas (1x por dia)
-  async function registrarJogoAvatar() {
-    await premiar('jogo_avatar', hoje)
+  // +10 🌱 por concluir uma missão do Monte Seu Prato com 1+ estrela (1x por dia)
+  async function registrarJogoPrato() {
+    await premiar('jogo_prato', hoje)
   }
 
-  // +10 🌱 por fazer 300+ pontos no Jogo do Treino (1x por dia)
-  async function registrarJogoTreino() {
-    await premiar('jogo_treino', hoje)
+  // +10 🌱 por rodada concluída em cada jogo educativo (1x por dia, por jogo)
+  async function registrarJogoVerdadeiroFalso() {
+    await premiar('jogo_vf', hoje)
   }
 
-  // +15 🌱 por revelar todas as cartas do Jardim de Afirmações (1x por dia)
-  async function registrarJogoMente() {
-    await premiar('jogo_mente', hoje)
+  async function registrarJogoTroca() {
+    await premiar('jogo_troca', hoje)
   }
 
-  // +10 🌱 por fazer 300+ pontos no Restaurante Saudável (1x por dia)
-  async function registrarJogoRestaurante() {
-    await premiar('jogo_restaurante', hoje)
+  async function registrarJogoSaciedade() {
+    await premiar('jogo_saciedade', hoje)
+  }
+
+  async function registrarJogoRotulos() {
+    await premiar('jogo_rotulos', hoje)
+  }
+
+  // +5 🌱 pelo Momento MWA do dia (1x por dia)
+  async function registrarMomentoMwa() {
+    await premiar('momento_mwa', hoje)
   }
 
   async function comprarSkin(categoria, skinId, preco) {
@@ -323,6 +470,7 @@ export function AppProvider({ children }) {
         ciente_aviso_crn: dados.cienteAvisoCrn,
         consentimento_registrado_em: agora,
         data_inicio: agora,
+        idioma,
       })
       .select()
       .single()
@@ -333,7 +481,14 @@ export function AppProvider({ children }) {
       tipo_acao: 'consentimento',
       detalhes: { consentimento_lgpd: true, ciente_aviso_crn: true },
     })
+    // Programa 21d — fonte de verdade do contador de dias (mwa_programas)
+    const { data: prog } = await supabase
+      .from('mwa_programas')
+      .insert({ user_id: userId, tipo: '21d', data_inicio: agora, origem: 'onboarding', status: 'ativo' })
+      .select()
+      .single()
     setUsuario(perfilParaUsuario(data))
+    if (prog) setProgramas((atual) => [...atual, programaDoBanco(prog)])
     // +50 🌱 de boas-vindas
     await premiar('boas_vindas', 'unico')
   }
@@ -398,6 +553,15 @@ export function AppProvider({ children }) {
     await supabase.from('mwa_perfis').update({ foto_url: dataUrl }).eq('id', userId)
   }
 
+  async function atualizarIdioma(novoIdioma) {
+    alterarIdioma(novoIdioma)
+    setUsuario((u) => (u ? { ...u, idioma: novoIdioma } : u))
+    await Promise.all([
+      supabase.from('mwa_perfis').update({ idioma: novoIdioma }).eq('id', userId),
+      supabase.auth.updateUser({ data: { ...sessao?.user?.user_metadata, idioma: novoIdioma } }),
+    ])
+  }
+
   async function adicionarRefeicao(refeicao) {
     const { data, error } = await supabase
       .from('mwa_refeicoes')
@@ -450,9 +614,6 @@ export function AppProvider({ children }) {
   }
 
   async function adicionarPesagem(pesagem) {
-    // Hall da Fama: compara com o checkpoint anterior ANTES de inserir a nova pesagem
-    const checkpointAnterior = calcularEstrelas(usuario, pesagens).find((c) => c.semana === pesagem.semana)
-
     const { data, error } = await supabase
       .from('mwa_pesagens')
       .insert({
@@ -462,22 +623,23 @@ export function AppProvider({ children }) {
         peso: pesagem.peso,
         medidas: pesagem.medidas ?? {},
         fotos: pesagem.fotos ?? {},
+        bioimpedancia: pesagem.bioimpedancia ?? null,
       })
       .select()
       .single()
     if (!error) {
-      const novasPesagens = [...pesagens, pesagemDoBanco(data)]
+      const novaPesagem = pesagemDoBanco(data)
+      const novasPesagens = [...pesagens, novaPesagem]
       setPesagens(novasPesagens)
       await registrarSessao(userId, 'atividade', { acao: 'pesagem_adicionada', peso: pesagem.peso })
-      // +30 🌱 por semana de pesagem
-      await premiar('pesagem', `semana-${pesagem.semana}`)
+      // +30 🌱 por pesagem registrada — ref = data (única por dia). Não usamos "semana-N" porque
+      // esse número se repete entre ciclos de 90 dias diferentes e bloquearia a recompensa do 2º ciclo.
+      await premiar('pesagem', hoje)
 
       // +25 🌱 e estrela no Hall da Fama se o resultado foi positivo (perdeu peso ou medida)
-      if (!checkpointAnterior?.feita) {
-        const checkpointNovo = calcularEstrelas(usuario, novasPesagens).find((c) => c.semana === pesagem.semana)
-        if (checkpointNovo?.estrela) {
-          await premiar('hall_fama', `semana-${pesagem.semana}`)
-        }
+      const resultado = calcularEstrelas(usuario, novasPesagens).find((r) => r.id === novaPesagem.id)
+      if (resultado?.estrela) {
+        await premiar('hall_fama', hoje)
       }
     }
   }
@@ -520,8 +682,11 @@ export function AppProvider({ children }) {
     sessao,
     carregando,
     usuario,
+    programas,
+    programa90Ativo,
     metas,
     diaAtual,
+    totalDias,
     hoje,
     refeicoesHoje,
     exerciciosHoje,
@@ -547,20 +712,31 @@ export function AppProvider({ children }) {
     abrirModalRefeicao,
     fecharModalRefeicao,
     atualizarFotoPerfil,
+    atualizarIdioma,
     game,
     ganhoSementes,
     tarefasHoje,
+    metasEstrela,
+    semanaEstrelas,
+    estrelaHojeAcesa,
     diaCompleto,
     conclusaoDiaAberta,
     abrirConclusaoDia,
     fecharConclusaoDia,
+    conclusao30Aberta,
+    fecharConclusao30,
+    conclusao90Aberta,
+    fecharConclusao90,
     marcarDicaLida,
     registrarCompartilhamento,
     registrarJoguinho,
-    registrarJogoAvatar,
-    registrarJogoTreino,
-    registrarJogoMente,
-    registrarJogoRestaurante,
+    registrarJogoPrato,
+    registrarJogoVerdadeiroFalso,
+    registrarJogoTroca,
+    registrarJogoSaciedade,
+    registrarJogoRotulos,
+    registrarMomentoMwa,
+    userId,
     registrarIndicacao,
     comprarSkin,
     equiparSkin,

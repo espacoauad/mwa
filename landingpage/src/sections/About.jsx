@@ -1,43 +1,62 @@
-import { Section, Eyebrow, Title, GoldRule } from '../components/ui.jsx'
-import { BRAND } from '../config.js'
-import fotoWanessa from '../assets/foto-wanessa.png'
+import { GraduationCap } from 'lucide-react'
+import { Section, Eyebrow, Title } from '../components/ui.jsx'
+import Reveal from '../components/Reveal.jsx'
+import fotoWanessa480 from '../assets/foto-wanessa-final-480.webp'
+import fotoWanessa800 from '../assets/foto-wanessa-final-800.webp'
+import fotoWanessa1200 from '../assets/foto-wanessa-final-1200.webp'
+
+const learnings = [
+  'Montar refeições equilibradas',
+  'Controlar calorias sem sofrimento',
+  'Consumir proteínas corretamente',
+  'Manter o metabolismo ativo',
+  'Lidar com a fome',
+  'Evitar o efeito sanfona',
+  'Criar hábitos que permanecem',
+]
 
 export default function About() {
   return (
-    <Section className="bg-white">
-      <div className="grid items-center gap-12 md:grid-cols-5">
-        <div className="md:col-span-2">
-          {/* Espaço reservado para foto profissional */}
-          <div className="relative aspect-square overflow-hidden rounded-full border border-gold/30 bg-sand/60">
-            <img src={fotoWanessa} alt="Wanessa Auad — nutricionista" className="absolute left-1/2 top-4 w-[92%] -translate-x-1/2 object-contain" />
+    <Section className="bg-cream" wide lazy intrinsicHeight={640}>
+      <div className="grid items-center gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
+        <Reveal className="mx-auto w-full max-w-sm">
+          <div className="overflow-hidden rounded-3xl border border-gold/30 shadow-xl shadow-forest/10">
+            <img
+              src={fotoWanessa800}
+              srcSet={`${fotoWanessa480} 480w, ${fotoWanessa800} 800w, ${fotoWanessa1200} 1200w`}
+              sizes="(min-width: 768px) 35vw, 90vw"
+              alt="Wanessa Auad"
+              width={800}
+              height={800}
+              loading="lazy"
+              className="h-auto w-full"
+            />
           </div>
-        </div>
-        <div className="md:col-span-3">
-          <Eyebrow>Quem criou o método</Eyebrow>
-          <Title>Criado por Wanessa Auad</Title>
-          <p className="mt-3 text-sm font-medium tracking-wide text-gold">
-            Nutricionista | CRN-1/27939 | Especialista em emagrecimento há mais de 20 anos
-          </p>
-          <GoldRule className="my-8" />
-          <div className="space-y-4 text-base leading-relaxed text-ink/80">
-            <p>
-              Há mais de 20 anos, ajudo pessoas a conquistarem saúde, autoestima e qualidade de vida
-              através da educação alimentar. Mas antes de transformar esse conhecimento em método,
-              vivi minha própria jornada.
+        </Reveal>
+        <div>
+          <Reveal>
+            <Eyebrow>Quem guia você</Eyebrow>
+            <Title>Criado por Wanessa Auad</Title>
+            <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-gold">
+              + de 20 anos de experiência
             </p>
+          </Reveal>
+          <Reveal delay={120} className="mt-6 space-y-4 text-base leading-relaxed text-ink/80">
             <p>
-              Depois da gestação, eliminei 26 kg e aprendi que o maior desafio não era perder peso,
-              mas manter uma vida saudável sem viver presa a dietas.
+              Há mais de 20 anos ajudo pessoas a conquistarem saúde, autoestima e qualidade de vida
+              através da educação alimentar. Antes de virar método, essa abordagem foi a minha
+              própria jornada.
             </p>
-            <p>
-              Há 14 anos, mantenho esse resultado com a mesma abordagem que hoje ensino no MWA:
-              mentalidade, nutrição inteligente, rotina e consistência.
-            </p>
-            <p>
-              Agora, reuni essa experiência em um programa acessível, prático e guiado pelo
-              aplicativo, para que você também possa começar sua transformação.
-            </p>
-          </div>
+            <p>Durante os 30 dias, você aprende comigo a:</p>
+          </Reveal>
+          <Reveal delay={180} className="mt-4 grid gap-2 sm:grid-cols-2">
+            {learnings.map((item) => (
+              <div key={item} className="flex items-center gap-2.5">
+                <GraduationCap size={16} aria-hidden="true" className="shrink-0 text-sage" />
+                <p className="text-sm text-ink/80">{item}</p>
+              </div>
+            ))}
+          </Reveal>
         </div>
       </div>
     </Section>

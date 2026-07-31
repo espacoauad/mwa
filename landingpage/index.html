@@ -3,20 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MWA — Método Wanessa Auad | Jornada de 21 Dias</title>
+    <title>MWA | My Wellness App — Jornada de 30 Dias</title>
     <meta
       name="description"
-      content="Não é uma dieta. É uma nova forma de viver. Aprenda em 21 dias a organizar sua alimentação e construir hábitos saudáveis com acompanhamento diário pelo aplicativo. Criado por Wanessa Auad, nutricionista com mais de 20 anos de experiência."
+      content="Não é uma dieta. É uma nova forma de viver. Em 30 dias, aprenda a metodologia MWA e aplique no dia a dia com acompanhamento diário pelo app — criado pela nutricionista Wanessa Auad (CRN-1/27939)."
     />
+    <meta property="og:title" content="MWA — My Wellness App | Jornada de 30 Dias" />
+    <meta property="og:description" content="Não é uma dieta. É uma nova forma de viver. 30 dias para aprender e aplicar uma nova forma de cuidar de você." />
+    <meta property="og:image" content="/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
   </head>
   <body>
     <div id="root"></div>
+    <!--
+      Form estático oculto para o Netlify detectar o formulário do quiz
+      no build (data-netlify="true"). O envio real acontece via fetch()
+      em Quiz.jsx; este form nunca é renderizado nem submetido pelo usuário.
+    -->
+    <form name="quiz-mwa" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="nome" />
+      <input type="email" name="email" />
+      <input type="text" name="perfil" />
+      <input type="text" name="respostas" />
+      <input type="text" name="consentimento" />
+      <input type="text" name="bot-field" />
+    </form>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "skills": {
+    "algorithmic-art": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/algorithmic-art/SKILL.md",
+      "computedHash": "987b24aa98171a0d3690420173b2cdb6eaafd57981ed716b5d50371affa82ea3"
+    },
+    "animate": {
+      "source": "delphi-ai/animate-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "6cad510ef13753d01be3a463870bfa040e2ee4ddd8f2c1606ce75112a524dfc7"
+    },
+    "canvas-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/canvas-design/SKILL.md",
+      "computedHash": "4e8bbc31d3b159efdd32d31a63ba8cd5a44d84911e924c1f2c709c50cbcdd0ec"
+    },
+    "chain-of-thought-design": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/prompt-architecture/chain-of-thought-design/SKILL.md",
+      "computedHash": "01c240b5b962e60f24234dacf9ca6f217d2bd91f084b8b2341573cb45e891226"
+    },
+    "constraint-specification": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/prompt-architecture/constraint-specification/SKILL.md",
+      "computedHash": "14b2de6452224efef05b40ed00228444382e794829018205450ed104e1fe448a"
+    },
+    "context-window-design": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/model-interaction-design/context-window-design/SKILL.md",
+      "computedHash": "5c729dca9d8da9d6d474000618988b727f921a4a99d46eb9c8681b7027f88f69"
+    },
+    "conversation-patterns": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/model-interaction-design/conversation-patterns/SKILL.md",
+      "computedHash": "89066077e8f8bd791713b990faa3fa290584fddac181094ad5ff1abfcc9d7be3"
+    },
+    "deploy-to-vercel": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/deploy-to-vercel/SKILL.md",
+      "computedHash": "03e0eaaa9bf13ba1e7ffa387f5893de6f324c0868c627001f179395a8feaa7c9"
+    },
+    "design-motion-principles": {
+      "source": "kylezantos/design-motion-principles",
+      "sourceType": "github",
+      "skillPath": "skills/design-motion-principles/SKILL.md",
+      "computedHash": "ca263e4515ddd34e412c841a2b35c2898a2a2122744836fdd003f0a2552192d6"
+    },
+    "design-taste-frontend": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/taste-skill/SKILL.md",
+      "computedHash": "899b84384f74f540ea5284d9b2e9234e050998b42eacc805410b518d4226c0b3"
+    },
+    "few-shot-patterns": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/prompt-architecture/few-shot-patterns/SKILL.md",
+      "computedHash": "4f7411f2a7fac24d876572a159c88ef461c66990c41c4a4eaa8f20bf13c0dfc1"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "93f53fd1c0352d3d7ec17b8f73d7351bf76f4821e55d123c9d2abc2c53ba48e4"
+    },
+    "generative-ui": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/model-interaction-design/generative-ui/SKILL.md",
+      "computedHash": "111348ac5aa08306b1b808869a4ef30b8e264c4940ef626952aedea549950d56"
+    },
+    "guardrail-design": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/ai-alignment-reasoning/guardrail-design/SKILL.md",
+      "computedHash": "41c3d9083bef259da0db0a55b9df4b2d97bbd640852b3492e95c3e07abede75d"
+    },
+    "persona-architecture": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/system-behavior-shaping/persona-architecture/SKILL.md",
+      "computedHash": "b5ae507d6dbf5571f4f15b34fd1ebbd78689dc8bb4c28503ac5e1386372beafe"
+    },
+    "progressive-disclosure": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/model-interaction-design/progressive-disclosure/SKILL.md",
+      "computedHash": "f4a5b0480ef151983922ea424a03955db0dbe5b0d7e7ca3a457c84e1d1465bbd"
+    },
+    "system-prompt-structure": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/prompt-architecture/system-prompt-structure/SKILL.md",
+      "computedHash": "41d39e6cff8925323098661c818bd52440e0529ac7b6d5848059054387e74fc1"
+    },
+    "template-design": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/prompt-architecture/template-design/SKILL.md",
+      "computedHash": "b59fa64cf3c139ddcfdea19f69ff3775fc9892dc1e863408a787603c77b80dcf"
+    },
+    "tone-calibration": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/system-behavior-shaping/tone-calibration/SKILL.md",
+      "computedHash": "d7820f9581138d67525d41e4fd4218e4f1a2c0e2a724542cf0323b6cc536acc6"
+    },
+    "transparency-patterns": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/ai-alignment-reasoning/transparency-patterns/SKILL.md",
+      "computedHash": "da974f876fa583a33be8f304d11e9c5081e32a43dca96d97a23e54d695763b64"
+    },
+    "trust-calibration": {
+      "source": "Owl-Listener/ai-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/ai-alignment-reasoning/trust-calibration/SKILL.md",
+      "computedHash": "9365054c5d42a6bc976378916ebd3e356d57b61aef46421580d4f9ab0d25ee93"
+    },
+    "vercel-cli-with-tokens": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/vercel-cli-with-tokens/SKILL.md",
+      "computedHash": "eb16b20dcbe6ce51e0372083d624e0847af1b09487ec99249227d5a8eddebfc0"
+    },
+    "vercel-composition-patterns": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/composition-patterns/SKILL.md",
+      "computedHash": "575757e3e25761c8c562d6e395d29f0b76c98b1273c0bd72d88e6ab1bc9c7d42"
+    },
+    "vercel-optimize": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/vercel-optimize/SKILL.md",
+      "computedHash": "ad0ef9c5c980f824e2ec19cba5c45426aba923a17e71fbaf6d1830574b62cc44"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "computedHash": "ca7b0c0c6e5f2750043f7f0cd72d16ac4e2abc48f9b5500d047a4b77a2506212"
+    },
+    "vercel-react-native-skills": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-native-skills/SKILL.md",
+      "computedHash": "41d24eafa7c3d82e270439808f7cfbc4d51aeb2d14f2809a2267c16275784d06"
+    },
+    "vercel-react-view-transitions": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-view-transitions/SKILL.md",
+      "computedHash": "c8952fc9127fa0564d0cb71dccb4215a5608ac933b5831104f09173a97a46f85"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+    },
+    "writing-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/writing-guidelines/SKILL.md",
+      "computedHash": "25aa3a33a97bddbcb1847ce4a6169106ec25e5b19b15b99c66e75ab383866ef2"
+    }
+  }
+}

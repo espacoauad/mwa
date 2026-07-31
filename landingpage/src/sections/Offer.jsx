@@ -1,66 +1,90 @@
-import { Check, ShieldCheck } from 'lucide-react'
-import { Section, Eyebrow, Title, CtaButton } from '../components/ui.jsx'
+import { useEffect, useRef } from 'react'
+import { Check, ShieldCheck, Sparkles } from 'lucide-react'
+import { Section, Eyebrow, CtaButton } from '../components/ui.jsx'
+import Reveal from '../components/Reveal.jsx'
 import { BRAND } from '../config.js'
+import { track } from '../lib/analytics.js'
 
 const included = [
-  'Acesso completo ao aplicativo durante 21 dias',
+  'Acesso completo ao aplicativo durante 30 dias',
   'Acompanhamento diário da alimentação',
   'Controle de água, peso, evolução e metas',
-  'Conteúdos e dicas exclusivas',
-  'Orientações para construção de hábitos',
-  'Registro de progresso',
+  'Cálculo personalizado de calorias e macronutrientes',
+  'Conteúdos, dicas e informativos liberados diariamente',
+  'Registro de exercícios com calorias gastas',
+  'Jogos, recompensas e personalização do avatar',
   'Acesso imediato após a compra',
-  'Garantia incondicional de 7 dias',
 ]
 
 export default function Offer() {
-  return (
-    <>
-      {/* Oferta principal */}
-      <Section id="oferta" className="bg-sand/50">
-        <div className="mx-auto max-w-lg">
-          <div className="rounded-[2rem] border border-gold/30 bg-white p-8 text-center shadow-xl shadow-forest/5 md:p-12">
-            <Eyebrow>Comece hoje sua Jornada de 21 Dias</Eyebrow>
-            <h3 className="font-display text-2xl text-forest-deep md:text-3xl">
-              MWA | Jornada de 21 Dias
-            </h3>
-            <div className="mt-8">
-              <p className="font-display text-6xl text-forest">{BRAND.price}</p>
-              <p className="mt-2 text-sm text-mist">Pagamento único. Sem mensalidade.</p>
-            </div>
-            <ul className="mt-10 space-y-3 text-left">
-              {included.map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={2} />
-                  <p className="text-sm leading-relaxed text-ink/80">{item}</p>
-                </li>
-              ))}
-            </ul>
-            <CtaButton className="mt-10 w-full">Quero começar meus 21 dias</CtaButton>
-            <p className="mt-4 text-xs text-mist">Compra segura pela Hotmart · Acesso imediato</p>
-          </div>
-        </div>
-      </Section>
+  const sectionRef = useRef(null)
 
-      {/* Garantia */}
-      <Section className="bg-white">
-        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-gold/40 bg-cream">
-            <ShieldCheck className="h-8 w-8 text-gold" strokeWidth={1.5} />
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          track('ViewContent')
+          io.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  return (
+    <Section id="oferta" className="bg-offwhite">
+      <div ref={sectionRef}>
+      <Reveal className="mx-auto mb-10 max-w-2xl space-y-2 text-center">
+        <p className="font-display text-xl italic text-forest md:text-2xl">
+          Quanto vale parar de recomeçar toda segunda-feira?
+        </p>
+        <p className="text-sm text-mist md:text-base">
+          Você pode investir centenas de reais em tentativas isoladas — ou começar hoje com um método completo.
+        </p>
+      </Reveal>
+
+      <Reveal delay={100} className="mx-auto max-w-lg">
+        <div className="rounded-[2rem] border border-gold/40 bg-white p-8 text-center shadow-2xl shadow-forest/10 md:p-12">
+          <Eyebrow>Comece hoje</Eyebrow>
+          <h3 className="font-display text-2xl text-forest-deep md:text-3xl">{BRAND.product}</h3>
+          <div className="mt-8">
+            <p className="font-display text-6xl text-forest md:text-7xl">{BRAND.price}</p>
+            <p className="mt-2 text-sm text-mist">Pagamento único. Sem mensalidade.</p>
           </div>
-          <Title className="mt-6">Risco zero para começar.</Title>
-          <div className="mt-6 max-w-xl space-y-3 text-base leading-relaxed text-ink/80">
-            <p>
-              Você terá <strong className="font-semibold text-forest">7 dias de garantia incondicional</strong>.
-              Se entrar no programa e sentir que ele não é para você, devolvemos 100% do valor.
-            </p>
-            <p>Sem burocracia. Sem perguntas.</p>
-            <p className="font-display text-lg italic text-forest">
-              O risco é continuar no mesmo lugar.
+          <ul className="mt-10 space-y-3 text-left">
+            {included.map((item) => (
+              <li key={item} className="flex items-start gap-3">
+                <Check size={16} aria-hidden="true" className="mt-0.5 shrink-0 text-gold" strokeWidth={2.2} />
+                <p className="text-sm leading-relaxed text-ink/80">{item}</p>
+              </li>
+            ))}
+          </ul>
+          <CtaButton className="mt-10 w-full">Quero começar meus 30 dias</CtaButton>
+
+          <div className="mt-8 flex items-start gap-3 rounded-2xl bg-sage/10 p-4 text-left">
+            <ShieldCheck size={24} aria-hidden="true" className="shrink-0 text-sage" />
+            <p className="text-xs leading-relaxed text-ink/80 md:text-sm">
+              <strong className="text-forest">Garantia incondicional de 7 dias.</strong> Se sentir
+              que não é para você, devolvemos 100% do valor. Sem burocracia, sem perguntas.
             </p>
           </div>
+
+          <div className="mt-3 flex items-start gap-3 rounded-2xl bg-gold/10 p-4 text-left">
+            <Sparkles size={24} aria-hidden="true" className="shrink-0 text-gold" />
+            <p className="text-xs leading-relaxed text-ink/80 md:text-sm">
+              <strong className="text-forest">Sua evolução pode continuar:</strong> no checkout,
+              você pode adicionar o <strong>MWA | Programa de 90 Dias</strong> em condição especial
+              para alunas — e a continuidade também fica disponível dentro do aplicativo.
+            </p>
+          </div>
+
         </div>
-      </Section>
-    </>
+      </Reveal>
+      </div>
+    </Section>
   )
 }

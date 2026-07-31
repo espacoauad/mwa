@@ -1,0 +1,19 @@
+Coloque aqui as fotos dos alimentos/suplementos usados nos lanches proteicos,
+com estes nomes exatos (sem marca, sem embalagem — só o alimento pronto):
+
+- shake-proteico.jpg          (shake proteico batido, em copo)
+- cha-ervas.jpg                (chá de ervas concentrado, servido)
+- whey-generico.jpg            (whey protein em pó ou batido, sem embalagem)
+- barra-proteina-generica.jpg  (barra de proteína fora da embalagem)
+- fibras-soluveis.jpg          (fibras solúveis em pó ou dissolvidas)
+
+Formatos aceitos: .jpg, .png ou .webp (mantenha o nome, troque só a extensão
+se precisar — e ajuste a extensão referenciada em src/data/lanchesProteicos.js,
+lanches22a37.js e lanches38a89.js caso troque).
+
+Diretriz: fotografe o alimento pronto (no prato, copo ou porção), nunca a
+embalagem ou o rótulo do produto — o app não deve associar o conteúdo a
+nenhuma marca comercial específica.
+
+A imagem aparece sozinha no card assim que o arquivo existir; enquanto não
+existir, o card do lanche simplesmente não mostra foto (sem erro visual).

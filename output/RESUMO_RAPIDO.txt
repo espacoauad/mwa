@@ -1,0 +1,65 @@
+═══════════════════════════════════════════════════════════════
+    COMANDA ESPAÇO AUAD — RESUMO RÁPIDO
+═══════════════════════════════════════════════════════════════
+
+📄 ARQUIVOS GERADOS:
+
+1. comanda-espaço-auad-2026.pdf
+   → PDF pronto para gráfica (15×20cm, P&B, 300 DPI)
+   → Abra em: C:\Users\wanes\OneDrive\Desktop\MWA\output\
+
+2. README.md
+   → Instruções completas de impressão
+   → Lista de alterações vs. comanda anterior
+   → Especificações técnicas para gráfica
+
+3. CANVA_GUIA.md
+   → Guia passo-a-passo para criar template editável
+   → Instruções de como editar preços/sabores futuramente
+   → Dicas & troubleshooting
+
+═══════════════════════════════════════════════════════════════
+
+✅ CHECKLIST DE CONFORMIDADE:
+
+✓ Tamanho: 15cm × 20cm
+✓ Impressão: Preto & Branco (1 cor)
+✓ Combos: 6 itens em caixa destacada
+✓ Adicionais de Bebidas: 7 itens (+ Hype Drinks)
+✓ Sabores: 11 (Capuccino novo, Coco mantém)
+✓ Adicionais de Shake: 18 itens (sem Castanha/Barra)
+✓ Opções Proteicas Salgadas: Preços corrigidos
+✓ Campo Observações: Incluído
+✓ Forma de Pagamento: Checkboxes (Pix/Cartão/Dinheiro)
+✓ Tipografia: Legível (8-9pt conteúdo)
+
+═══════════════════════════════════════════════════════════════
+
+🚀 PRÓXIMOS PASSOS:
+
+1. REVISAR PDF
+   → Abra: comanda-espaço-auad-2026.pdf
+   → Verifique layout, preços, conteúdo
+
+2. ENVIAR À GRÁFICA
+   → Envie o PDF + README.md
+   → Solicite prova impressa antes de rodar 50 blocos
+
+3. EDIÇÕES FUTURAS (preços/sabores)
+   → Use CANVA_GUIA.md para criar template
+   → Ou peça ajuda para atualizar via script
+
+═══════════════════════════════════════════════════════════════
+
+💡 DÚVIDAS?
+
+- Qualidade do PDF: Abra no navegador/Adobe Reader
+- Como editar depois: Veja CANVA_GUIA.md
+- Instruções de impressão: Veja README.md
+
+═══════════════════════════════════════════════════════════════
+
+Criado: 2026-07-16
+Status: ✅ Pronto para impressão
+
+═══════════════════════════════════════════════════════════════
