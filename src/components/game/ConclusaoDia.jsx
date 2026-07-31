@@ -140,7 +140,7 @@ export default function ConclusaoDia() {
         {/* Header com logo */}
         <div className="relative flex items-center justify-center gap-2">
           <LogoMWA variante="simbolo" tema="claro" className="h-5 w-5" />
-          <p className="text-[9px] font-bold uppercase tracking-widest text-white/60">Método Wanessa Auad</p>
+          <p className="text-[9px] font-bold uppercase tracking-widest text-white/60">MWA - My Wellness App</p>
         </div>
 
         {/* Dia concluído - destaque grande */}
