@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { X, Repeat, TrendingDown, Sparkles, Lock, Flame, Award } from 'lucide-react'
+import { X, TrendingDown, Sparkles, Lock, Flame, Award } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { supabase } from '../../lib/supabase.js'
-import { abrirCheckout } from '../../lib/hotmart.js'
 import { useConfeti } from '../../hooks/useConfeti.js'
 import LogoMWA from '../ui/LogoMWA.jsx'
 import CertificadoConclusao from './CertificadoConclusao.jsx'
@@ -11,7 +10,7 @@ import CertificadoConclusao from './CertificadoConclusao.jsx'
  * Tela de encerramento da Jornada de 30 Dias — a primeira linha de chegada.
  * Céu estrelado com chuva de estrelas e foguetes de confete ao abrir.
  * Cada conquista começa "trancada": ao tocar, revela o aprendizado.
- * Entrega o certificado compartilhável e o CTA de upgrade para 90 dias.
+ * Entrega o certificado compartilhável e celebra o primeiro marco da jornada.
  */
 export default function Conclusao30Dias() {
   const { usuario, sessao, game, pesagens, fecharConclusao30 } = useApp()
@@ -138,10 +137,6 @@ export default function Conclusao30Dias() {
       else novo.add(i)
       return novo
     })
-  }
-
-  function continuarPor90Dias() {
-    abrirCheckout('programa90d')
   }
 
   return (
@@ -271,7 +266,7 @@ export default function Conclusao30Dias() {
           </div>
         </div>
 
-        {/* Transição para 90 dias */}
+        {/* Celebração do primeiro marco da jornada */}
         <div className="w-full max-w-sm rounded-3xl border-2 border-ouro/50 bg-gradient-to-br from-ouro/25 via-white/15 to-ouro/10 p-7 text-center backdrop-blur-lg shadow-2xl shadow-ouro/20">
           <div className="mb-4 flex items-center justify-center gap-2">
             <span className="text-2xl">✨</span>
@@ -283,31 +278,14 @@ export default function Conclusao30Dias() {
           </p>
           <div className="h-1 w-16 bg-gradient-to-r from-transparent via-ouro to-transparent mx-auto mb-4"></div>
           <p className="text-sm leading-relaxed text-verde-escuro/90">
-            Você carrega um conhecimento que é só seu — o que a ensina a alimentar seu corpo com respeito, a escutar seus próprios sinais. Isso não vai embora. Os próximos 60 dias vão aprofundar quem você está se tornando.
+            Você carrega um conhecimento que é só seu — o que a ensina a alimentar seu corpo com respeito e a escutar seus próprios sinais. Isso não vai embora. Os próximos 60 dias vão aprofundar quem você está se tornando.
           </p>
           <p className="mt-3 text-sm font-semibold text-verde-escuro italic">
             Uma mulher que confia em si mesma.
           </p>
           <p className="mt-4 text-xs font-bold text-ouro uppercase tracking-[0.2em]">
-            ✦ Você merece essa continuidade ✦
+            ✦ Sua jornada continua ✦
           </p>
-        </div>
-
-        {/* CTA — Upgrade */}
-        <div className="w-full max-w-sm pb-4 space-y-3">
-          <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-ouro via-ouro to-ouro/80 rounded-3xl blur opacity-75 transition duration-300"></div>
-            <button
-              type="button"
-              onClick={continuarPor90Dias}
-              className="relative flex w-full items-center justify-center gap-3 rounded-3xl bg-gradient-to-r from-ouro via-ouro/95 to-ouro px-6 py-5 font-black text-verde-escuro transition-all active:scale-[0.97] hover:shadow-2xl hover:shadow-ouro/40 shadow-xl shadow-ouro/30"
-            >
-              <Repeat size={22} />
-              <span className="text-base uppercase tracking-wide">Continuar por 90 dias</span>
-              <span className="text-lg">👑</span>
-            </button>
-          </div>
-          <p className="text-xs text-verde-escuro/60 text-center">A excelência está na repetição</p>
         </div>
 
         <div className="flex items-center gap-1.5 text-verde-escuro/60">

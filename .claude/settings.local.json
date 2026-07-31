@@ -452,7 +452,25 @@
       "Bash(gh pr create --title 'Fase 4: Adicionar 24 produtos industrializados validados' --body ' *)",
       "Bash(pasta)",
       "Bash(correcoes\" -i)",
-      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\wanes\\\\OneDrive\\\\Desktop\\\\\" | Where-Object { $_.PSIsContainer } | Select-Object Name, LastWriteTime | Sort-Object LastWriteTime -Descending)"
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\wanes\\\\OneDrive\\\\Desktop\\\\\" | Where-Object { $_.PSIsContainer } | Select-Object Name, LastWriteTime | Sort-Object LastWriteTime -Descending)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\wanes\\\\OneDrive\\\\Desktop\" -Directory)",
+      "Bash(Select-Object Name)",
+      "Bash(cp -r /c/Users/wanes/OneDrive/Desktop/MWA/src/context /c/Users/wanes/OneDrive/Desktop/MWA-FINAL-AVATAR-EVOLUCAO-REALISTA-31-07-2026/MWA/src/)",
+      "Bash(cp -r /c/Users/wanes/OneDrive/Desktop/MWA/src/components /c/Users/wanes/OneDrive/Desktop/MWA-FINAL-AVATAR-EVOLUCAO-REALISTA-31-07-2026/MWA/src/)",
+      "Bash(cp -r /c/Users/wanes/OneDrive/Desktop/MWA/src/utils /c/Users/wanes/OneDrive/Desktop/MWA-FINAL-AVATAR-EVOLUCAO-REALISTA-31-07-2026/MWA/src/)",
+      "Bash(cp -r /c/Users/wanes/OneDrive/Desktop/MWA/src/lib /c/Users/wanes/OneDrive/Desktop/MWA-FINAL-AVATAR-EVOLUCAO-REALISTA-31-07-2026/MWA/src/)",
+      "Bash(node -c src/components/auth/TelaAuth.jsx)",
+      "Bash(pkill -f \"npm run dev\")",
+      "Bash(python3)",
+      "Bash(echo \"--- MWA-FINAL directory listing ---\" && ls -la \"/c/Users/wanes/OneDrive/Desktop/MWA-FINAL-AVATAR-EVOLUCAO-REALISTA-31-07-2026\" && echo \"--- search for any .git dirs under Desktop ---\" && find \"/c/Users/wanes/OneDrive/Desktop\" -maxdepth 3 -iname \".git\" -type d 2>/dev/null)",
+      "Bash(echo \"--- Desktop top-level listing ---\" && ls -la \"/c/Users/wanes/OneDrive/Desktop\" 2>&1)",
+      "Bash(SCRATCH=\"/c/Users/wanes/AppData/Local/Temp/claude/C--Users-wanes-OneDrive-Desktop-MWA/72cb10a9-8fbd-491d-aee4-65f0972bad0c/scratchpad/zip-check\" *)",
+      "Read(//c/Users/wanes/AppData/Local/Temp/claude/C--Users-wanes-OneDrive-Desktop-MWA/72cb10a9-8fbd-491d-aee4-65f0972bad0c/scratchpad/zip-check/full/MWA/src/components/perfil/**)",
+      "Bash(echo \"=== mtime MwaFarm.jsx e AvatarEvolucaoRealista.jsx na pasta pesquisa ===\")",
+      "Bash(stat '/c/Users/wanes/OneDrive/Desktop/pasta pesquisa/MWA - pesquisa/src/components/game/MwaFarm.jsx')",
+      "Bash(find /c/Users/wanes/OneDrive/Desktop/MWA/src/context -iname *Idioma*)",
+      "Bash(cp '/c/Users/wanes/OneDrive/Desktop/pasta pesquisa/MWA - pesquisa/src/assets/farm/*.png' /c/Users/wanes/OneDrive/Desktop/MWA/src/assets/farm/)",
+      "Bash(cp '/c/Users/wanes/OneDrive/Desktop/pasta pesquisa/MWA - pesquisa/src/assets/evolucao/*.png' /c/Users/wanes/OneDrive/Desktop/MWA/src/assets/evolucao/)"
     ]
   }
 }

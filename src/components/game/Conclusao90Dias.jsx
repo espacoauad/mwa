@@ -3,6 +3,7 @@ import { X, Repeat, TrendingDown, Sparkles, Flame, Lock, Award } from 'lucide-re
 import { useApp } from '../../context/AppContext.jsx'
 import { supabase } from '../../lib/supabase.js'
 import { abrirCheckout } from '../../lib/hotmart.js'
+import { PRODUTOS, formatarPreco } from '../../utils/ofertas.js'
 import { useConfeti } from '../../hooks/useConfeti.js'
 import LogoMWA from '../ui/LogoMWA.jsx'
 import CertificadoConclusao from './CertificadoConclusao.jsx'
@@ -13,7 +14,7 @@ import CertificadoConclusao from './CertificadoConclusao.jsx'
  * Cada conquista começa "trancada": ao tocar, revela o aprendizado por trás
  * dela — incluindo o total de calorias economizadas ao longo do déficit.
  */
-export default function Conclusao90Dias() {
+export default function Conclusao90Dias({ persistente = false }) {
   const { usuario, sessao, metas, game, pesagens, fecharConclusao90 } = useApp()
   const { celebrarVitoria, celebrarFogos } = useConfeti()
   const [totalRefeicoes, setTotalRefeicoes] = useState(0)
@@ -27,11 +28,11 @@ export default function Conclusao90Dias() {
   useEffect(() => {
     function aoTeclar(e) {
       // se o certificado estiver aberto por cima, deixa o Esc dele agir sozinho
-      if (e.key === 'Escape' && !certificadoAberto) fecharConclusao90()
+      if (e.key === 'Escape' && !certificadoAberto && !persistente) fecharConclusao90()
     }
     window.addEventListener('keydown', aoTeclar)
     return () => window.removeEventListener('keydown', aoTeclar)
-  }, [fecharConclusao90, certificadoAberto])
+  }, [fecharConclusao90, certificadoAberto, persistente])
 
   useEffect(() => {
     dialogRef.current?.focus()
@@ -151,7 +152,7 @@ export default function Conclusao90Dias() {
   }
 
   function refazer90Dias() {
-    abrirCheckout('programa90d')
+    abrirCheckout('renovacao90d')
   }
 
   return (
@@ -181,14 +182,16 @@ export default function Conclusao90Dias() {
         ))}
       </div>
 
-      <button
-        type="button"
-        onClick={fecharConclusao90}
-        className="fixed right-4 top-4 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
-        aria-label="Fechar"
-      >
-        <X size={20} />
-      </button>
+      {!persistente && (
+        <button
+          type="button"
+          onClick={fecharConclusao90}
+          className="fixed right-4 top-4 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
+          aria-label="Fechar"
+        >
+          <X size={20} />
+        </button>
+      )}
 
       <div className="relative z-10 flex flex-col items-center gap-6 p-4 pb-10">
         <div className="w-full max-w-sm pt-10 text-center">
@@ -306,8 +309,21 @@ export default function Conclusao90Dias() {
           </p>
         </div>
 
-        {/* CTA - GRANDE DESTAQUE */}
+        {/* Oferta exclusiva para um novo ciclo */}
         <div className="w-full max-w-sm space-y-3 pb-4">
+          <div className="rounded-2xl border border-ouro/40 bg-white/10 p-5 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-ouro">
+              Condição exclusiva para participantes
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-white/85">
+              Preserve todo o seu histórico e comece uma nova jornada de 90 dias com novas metas.
+            </p>
+            <div className="mt-3 flex items-end justify-center gap-2">
+              <span className="pb-1 text-sm text-white/55 line-through">{formatarPreco(PRODUTOS.programa.preco)}</span>
+              <span className="font-serif text-4xl font-black text-ouro">{formatarPreco(PRODUTOS.renovacao.preco)}</span>
+            </div>
+            <p className="mt-1 text-xs text-white/55">pagamento único · sem renovação automática</p>
+          </div>
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-ouro via-ouro to-ouro/80 rounded-3xl blur opacity-75"></div>
             <button
@@ -316,18 +332,20 @@ export default function Conclusao90Dias() {
               className="relative flex w-full items-center justify-center gap-3 rounded-3xl bg-gradient-to-r from-ouro via-ouro/95 to-ouro px-6 py-5 font-black text-verde-escuro transition-all active:scale-[0.97] hover:shadow-2xl hover:shadow-ouro/50 shadow-xl shadow-ouro/40"
             >
               <Repeat size={22} />
-              <span className="text-base uppercase tracking-wide">Próximo ciclo de 90 dias</span>
+              <span className="text-base uppercase tracking-wide">Começar um novo ciclo</span>
               <span className="text-lg">🚀</span>
             </button>
           </div>
-          <p className="text-xs text-white/60 text-center">A verdade já é sua. Agora é só repetir.</p>
-          <button
-            type="button"
-            onClick={fecharConclusao90}
-            className="w-full rounded-2xl px-6 py-3 text-sm font-semibold text-ouro/80 hover:text-ouro hover:bg-white/10 transition-all border border-white/20 hover:border-ouro/40"
-          >
-            Explorar outras seções
-          </button>
+          <p className="text-xs text-white/60 text-center">A verdade já é sua. Agora é só continuar evoluindo.</p>
+          {!persistente && (
+            <button
+              type="button"
+              onClick={fecharConclusao90}
+              className="w-full rounded-2xl px-6 py-3 text-sm font-semibold text-ouro/80 hover:text-ouro hover:bg-white/10 transition-all border border-white/20 hover:border-ouro/40"
+            >
+              Explorar outras seções
+            </button>
+          )}
         </div>
 
         <div className="flex items-center gap-1.5 text-white/40">

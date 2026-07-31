@@ -137,7 +137,7 @@ export function AppProvider({ children }) {
   const [estrelasSemana, setEstrelasSemana] = useState([])
   // Tela de "dia concluído" (compartilhável)
   const [conclusaoDiaAberta, setConclusaoDiaAberta] = useState(false)
-  // Tela de encerramento da Jornada de 30 dias — celebração com aprendizados e CTA para upgrade
+  // Tela comemorativa do primeiro marco da Jornada de 90 dias
   const [conclusao30Aberta, setConclusao30Aberta] = useState(false)
   // Tela de encerramento do programa (dia 90) — celebração final com conquistas e déficit total
   const [conclusao90Aberta, setConclusao90Aberta] = useState(false)
@@ -257,6 +257,31 @@ export function AppProvider({ children }) {
     }
   }, [userId, hoje])
 
+  // Ao voltar do checkout da Hotmart, atualiza o ciclo sem exigir que a cliente
+  // feche e abra o aplicativo. O webhook continua sendo a única fonte de
+  // liberação; o navegador apenas relê o estado já confirmado no servidor.
+  useEffect(() => {
+    if (!userId) return
+    let cancelado = false
+    async function atualizarProgramas() {
+      const { data } = await supabase
+        .from('mwa_programas')
+        .select('*')
+        .eq('user_id', userId)
+      if (!cancelado && data) setProgramas(data.map(programaDoBanco))
+    }
+    function aoRetomar() {
+      if (document.visibilityState === 'visible') atualizarProgramas()
+    }
+    window.addEventListener('focus', atualizarProgramas)
+    document.addEventListener('visibilitychange', aoRetomar)
+    return () => {
+      cancelado = true
+      window.removeEventListener('focus', atualizarProgramas)
+      document.removeEventListener('visibilitychange', aoRetomar)
+    }
+  }, [userId])
+
   // ── Estrelas do Dia ──
   const metasEstrela = useMemo(
     () => metasCumpridas(tarefasHoje, { jogouHoje: tarefasHoje.jogo }),
@@ -310,26 +335,27 @@ export function AppProvider({ children }) {
     setConclusaoDiaAberta(true)
   }, [diaCompleto, userId, hoje])
 
-  // Ao chegar no dia 30 sem programa 90d ativo, abre a tela de encerramento da
-  // Jornada de 30 Dias com aprendizados, certificado e CTA para upgrade — só 1x.
+  // Ao chegar no dia 30, celebra o primeiro marco da Jornada de 90 Dias.
   useEffect(() => {
-    if (diaAtual !== 30 || programa90Ativo || !userId) return
-    const chave = `mwa_30_concluido_${userId}`
+    if (diaAtual !== 30 || !userId) return
+    const cicloId = calcularPrograma90Ativo(programas)?.id ?? 'inicial'
+    const chave = `mwa_30_concluido_${userId}_${cicloId}`
     if (localStorage.getItem(chave)) return
     localStorage.setItem(chave, '1')
     setConclusao30Aberta(true)
-  }, [diaAtual, programa90Ativo, userId])
+  }, [diaAtual, programas, userId])
 
   // Ao chegar no dia 90 (fim do programa de 90 dias pago), abre a tela de
   // encerramento com estrelas, conquistas interativas e o total economizado no
   // déficit — só 1x.
   useEffect(() => {
     if (diaAtual !== 90 || !programa90Ativo || !userId) return
-    const chave = `mwa_90_concluido_${userId}`
+    const cicloId = calcularPrograma90Ativo(programas)?.id ?? 'inicial'
+    const chave = `mwa_90_concluido_${userId}_${cicloId}`
     if (localStorage.getItem(chave)) return
     localStorage.setItem(chave, '1')
     setConclusao90Aberta(true)
-  }, [diaAtual, programa90Ativo, userId])
+  }, [diaAtual, programa90Ativo, programas, userId])
 
   const refeicoesHoje = useMemo(
     () => refeicoes.filter((r) => r.data === hoje).sort((a, b) => (a.horario ?? '').localeCompare(b.horario ?? '')),
@@ -481,14 +507,17 @@ export function AppProvider({ children }) {
       tipo_acao: 'consentimento',
       detalhes: { consentimento_lgpd: true, ciente_aviso_crn: true },
     })
-    // Programa 21d — fonte de verdade do contador de dias (mwa_programas)
-    const { data: prog } = await supabase
+    // Vincula à conta a compra inicial de 90 dias aprovada pela Hotmart.
+    // O webhook já deixou a compra aguardando a criação da conta.
+    const { data: vinculo } = await supabase.functions.invoke('hotmart-vincular', {
+      body: { email_compra: dados.email },
+    })
+    const { data: progs } = await supabase
       .from('mwa_programas')
-      .insert({ user_id: userId, tipo: '21d', data_inicio: agora, origem: 'onboarding', status: 'ativo' })
-      .select()
-      .single()
+      .select('*')
+      .eq('user_id', userId)
     setUsuario(perfilParaUsuario(data))
-    if (prog) setProgramas((atual) => [...atual, programaDoBanco(prog)])
+    if (vinculo?.liberado && progs) setProgramas(progs.map(programaDoBanco))
     // +50 🌱 de boas-vindas
     await premiar('boas_vindas', 'unico')
   }
