@@ -68,12 +68,16 @@ export default function ConclusaoDia() {
         }
         const arquivo = new File([blob], `mwa-dia-${diaAtual}.png`, { type: 'image/png' })
 
+        // Mensagem com link de compra (compatível com WhatsApp, email, etc)
+        const linkCompra = 'https://metodomwa.com.br'
+        const textoCompartilhamento = `Estou no dia ${diaAtual} da minha transformação com o MWA — Método Wanessa Auad! 🌿\n\nMacros de hoje:\n🔥 ${totaisHoje.calorias} kcal | 🥚 ${totaisHoje.proteina}g proteína | 🌾 ${totaisHoje.carbos}g carbos\n\n✨ Sementes conquistadas: +${tarefasHoje.sementesHoje} 🌱\n\nVem comigo: ${linkCompra}`
+
         if (navigator.canShare?.({ files: [arquivo] })) {
           try {
             await navigator.share({
               files: [arquivo],
               title: 'MWA — Método Wanessa Auad',
-              text: `Concluí o dia ${diaAtual} do meu MWA! 🌿`,
+              text: textoCompartilhamento,
             })
             await registrarCompartilhamento()
           } catch {
