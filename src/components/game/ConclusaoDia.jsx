@@ -201,7 +201,7 @@ export default function ConclusaoDia() {
             </div>
             <div className="flex items-center justify-center gap-1.5 mt-2">
               {semanaEstrelas.map((dia, idx) => (
-                <p key={idx} className={`text-lg ${dia.acesa ? 'text-white' : 'text-white/25'}`}>⭐</p>
+                <p key={idx} className={`text-lg ${dia.acesa ? 'opacity-100' : 'opacity-20'}`} style={{ filter: 'brightness(2) saturate(0)' }}>⭐</p>
               ))}
             </div>
           </div>
