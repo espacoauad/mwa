@@ -206,36 +206,36 @@ export default function ConclusaoDia() {
           </div>
         )}
 
-        {/* Macros - REDESIGN COM LABELS */}
+        {/* Macros - CARDS CLAROS E LIMPOS */}
         <div className="relative mt-6 space-y-2">
           <p className="text-xs font-bold uppercase tracking-widest text-white/70">Nutrição do Dia</p>
           <div className="grid grid-cols-2 gap-3">
-            {/* Calorias - destaque maior */}
-            <div className="rounded-xl bg-gradient-to-br from-orange-500/30 to-orange-600/20 px-4 py-3 border border-orange-400/40">
-              <p className="text-2xl">🔥</p>
-              <p className="mt-1 text-sm font-bold text-white">{totaisHoje.calorias}</p>
-              <p className="text-[10px] text-white/80">Calorias</p>
+            {/* Calorias */}
+            <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
+              <p className="text-3xl text-center">🔥</p>
+              <p className="mt-2 text-center text-sm font-bold text-white">{totaisHoje.calorias}</p>
+              <p className="text-center text-[10px] text-white/80">Calorias</p>
             </div>
 
             {/* Proteína */}
-            <div className="rounded-xl bg-gradient-to-br from-amber-500/30 to-amber-600/20 px-4 py-3 border border-amber-400/40">
-              <p className="text-2xl">🥚</p>
-              <p className="mt-1 text-sm font-bold text-white">{totaisHoje.proteina}</p>
-              <p className="text-[10px] text-white/80">Proteína (g)</p>
+            <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
+              <p className="text-3xl text-center">🥚</p>
+              <p className="mt-2 text-center text-sm font-bold text-white">{totaisHoje.proteina}</p>
+              <p className="text-center text-[10px] text-white/80">Proteína (g)</p>
             </div>
 
             {/* Carboidrato */}
-            <div className="rounded-xl bg-gradient-to-br from-yellow-500/30 to-yellow-600/20 px-4 py-3 border border-yellow-400/40">
-              <p className="text-2xl">🌾</p>
-              <p className="mt-1 text-sm font-bold text-white">{totaisHoje.carbos}</p>
-              <p className="text-[10px] text-white/80">Carboidrato (g)</p>
+            <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
+              <p className="text-3xl text-center">🌾</p>
+              <p className="mt-2 text-center text-sm font-bold text-white">{totaisHoje.carbos}</p>
+              <p className="text-center text-[10px] text-white/80">Carboidrato (g)</p>
             </div>
 
             {/* Gordura */}
-            <div className="rounded-xl bg-gradient-to-br from-lime-500/30 to-lime-600/20 px-4 py-3 border border-lime-400/40">
-              <p className="text-2xl">🥑</p>
-              <p className="mt-1 text-sm font-bold text-white">{totaisHoje.gordura}</p>
-              <p className="text-[10px] text-white/80">Gordura (g)</p>
+            <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
+              <p className="text-3xl text-center">🥑</p>
+              <p className="mt-2 text-center text-sm font-bold text-white">{totaisHoje.gordura}</p>
+              <p className="text-center text-[10px] text-white/80">Gordura (g)</p>
             </div>
           </div>
         </div>
