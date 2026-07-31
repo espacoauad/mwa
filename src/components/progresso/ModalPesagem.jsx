@@ -6,6 +6,8 @@ import Botao from '../ui/Botao.jsx'
 import CampoNumero from '../ui/CampoNumero.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 import { redimensionarImagemProporcional } from '../../lib/imagem.js'
+import BioimpedanciaToggleSection from './BioimpedanciaToggleSection.jsx'
+import { validarBioimpedancia, filterBioimpedanciaData } from '../../utils/bioimpedancia.js'
 
 const FOTOS = [
   { id: 'frente', pt: 'Frente', en: 'Front' },
@@ -27,6 +29,23 @@ export default function ModalPesagem({ semana, onFechar }) {
   const [peso, setPeso] = useState('')
   const [fotos, setFotos] = useState({})
   const [medidas, setMedidas] = useState({ cintura: '', quadril: '', peito: '' })
+  const [bioimpedanciaToggles, setBioimpedanciaToggles] = useState({
+    percentualGordura: false,
+    percentualMusculo: false,
+    gorduraVisceral: false,
+    idadeMetabolica: false,
+    toraxCm: false,
+    circAbdominalCm: false,
+  })
+  const [bioimpedanciaValues, setBioimpedanciaValues] = useState({
+    percentualGordura: '',
+    percentualMusculo: '',
+    gorduraVisceral: '',
+    idadeMetabolica: '',
+    toraxCm: '',
+    circAbdominalCm: '',
+  })
+  const [bioimpedanciaErros, setBioimpedanciaErros] = useState({})
   const dialogRef = useRef(null)
 
   useEffect(() => {
@@ -50,9 +69,44 @@ export default function ModalPesagem({ semana, onFechar }) {
     setFotos((f) => ({ ...f, [id]: dataUrl }))
   }
 
+  function handleBioimpedanciaToggle(key, checked) {
+    setBioimpedanciaToggles({
+      ...bioimpedanciaToggles,
+      [key]: checked,
+    })
+
+    if (!checked) {
+      const novoErros = { ...bioimpedanciaErros }
+      delete novoErros[key]
+      setBioimpedanciaErros(novoErros)
+    }
+  }
+
+  function handleBioimpedanciaValueChange(key, value) {
+    setBioimpedanciaValues({
+      ...bioimpedanciaValues,
+      [key]: value,
+    })
+  }
+
   const valido = Number(peso) >= 30 && Number(peso) <= 300
 
   function salvar() {
+    const bioDataAtivos = Object.entries(bioimpedanciaValues)
+      .filter(([key]) => bioimpedanciaToggles[key])
+      .reduce((acc, [key, val]) => {
+        acc[key] = val
+        return acc
+      }, {})
+
+    const validacao = validarBioimpedancia(bioDataAtivos)
+    if (!validacao.valid) {
+      setBioimpedanciaErros(validacao.erros)
+      return
+    }
+
+    const bioimpedanciaFiltrada = filterBioimpedanciaData(bioDataAtivos)
+
     adicionarPesagem({
       semana,
       peso: Number(peso),
@@ -62,15 +116,13 @@ export default function ModalPesagem({ semana, onFechar }) {
         quadril: Number(medidas.quadril) || null,
         peito: Number(medidas.peito) || null,
       },
+      bioimpedancia: bioimpedanciaFiltrada,
     })
     const prefereMenosMovimento = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
     if (prefereMenosMovimento) {
-      // Sem confete: fecha o modal logo em seguida, sem esperar a animação
       onFechar()
     } else {
-      // 🎉 Dispara confete de celebração
       celebrarGrande()
-      // Fecha o modal após a animação
       setTimeout(() => onFechar(), 600)
     }
   }
@@ -141,6 +193,14 @@ export default function ModalPesagem({ semana, onFechar }) {
             ))}
           </div>
         </div>
+
+        <BioimpedanciaToggleSection
+          toggles={bioimpedanciaToggles}
+          values={bioimpedanciaValues}
+          onToggleChange={handleBioimpedanciaToggle}
+          onValueChange={handleBioimpedanciaValueChange}
+          validacoes={bioimpedanciaErros}
+        />
 
         <div className="mt-5">
           <Botao onClick={salvar} disabled={!valido}>
