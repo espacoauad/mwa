@@ -29,11 +29,15 @@ const MACROS_LABELS = [
 ]
 
 export default function ConclusaoDia() {
-  const { usuario, diaAtual, game, tarefasHoje, totaisHoje, fecharConclusaoDia, registrarCompartilhamento } = useApp()
+  const { usuario, diaAtual, game, tarefasHoje, totaisHoje, semanaEstrelas, fecharConclusaoDia, registrarCompartilhamento } = useApp()
   const [compartilhando, setCompartilhando] = useState(false)
   const [aviso, setAviso] = useState(null)
   const cardRef = useRef(null)
   const dialogRef = useRef(null)
+
+  // Contar estrelas acesas na semana
+  const estrelasDiaHoje = semanaEstrelas?.find((d) => d.hoje)?.acesa ? 1 : 0
+  const totalEstrelasSemanais = semanaEstrelas?.filter((d) => d.acesa)?.length ?? 0
 
   // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
   useEffect(() => {
@@ -177,6 +181,23 @@ export default function ConclusaoDia() {
           <p className="text-4xl font-bold text-ouro">+{tarefasHoje.sementesHoje}</p>
           <p className="mt-0.5 text-xs font-bold uppercase tracking-wide text-white">🌱 Sementes</p>
         </div>
+
+        {/* Estrelas da Semana - NOVO */}
+        {semanaEstrelas && semanaEstrelas.length > 0 && (
+          <div className="relative mt-4 rounded-2xl bg-gradient-to-r from-yellow-600/20 to-yellow-400/10 px-5 py-3 border border-yellow-400/30">
+            <p className="text-xs font-bold uppercase tracking-wide text-yellow-200 mb-2">Estrelas da Semana</p>
+            <div className="flex items-center justify-center gap-2">
+              {semanaEstrelas.map((dia, idx) => (
+                <div key={idx} className={`flex items-center justify-center rounded-full ${dia.acesa ? 'bg-yellow-400 text-yellow-900' : 'bg-white/10 text-white/40'} w-8 h-8 text-lg`}>
+                  ⭐
+                </div>
+              ))}
+            </div>
+            {totalEstrelasSemanais > 0 && (
+              <p className="mt-2 text-center text-xs text-white/80">{totalEstrelasSemanais} de {semanaEstrelas.length} estrelas conquistadas</p>
+            )}
+          </div>
+        )}
 
         {/* Sequência com destaque */}
         {sequencia > 1 && (
