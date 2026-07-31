@@ -165,15 +165,20 @@ export default function MwaFarm({ onFechar }) {
           </div>
         </div>
 
-        {/* Cartão de informação ao tocar */}
-        {selecionado && (
-          <div className="p-5" role="status" aria-live="polite">
-            <div className="rounded-2xl bg-white p-4">
-              <p className="font-serif text-base font-semibold italic text-verde">{selecionado.titulo}</p>
-              <p className="mt-1 text-xs leading-relaxed text-verde/80">{selecionado.texto}</p>
+        {/* Cartão de informação ao tocar — o wrapper com role="status" fica
+            sempre montado (mesmo vazio) para que leitores de tela percebam a
+            MUDANÇA de conteúdo e anunciem; um live region que só aparece já
+            preenchido costuma ser ignorado por assistive tech. */}
+        <div role="status" aria-live="polite">
+          {selecionado && (
+            <div className="p-5">
+              <div className="rounded-2xl bg-white p-4">
+                <p className="font-serif text-base font-semibold italic text-verde">{selecionado.titulo}</p>
+                <p className="mt-1 text-xs leading-relaxed text-verde/80">{selecionado.texto}</p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         <p className="px-5 pb-5 pt-2 text-center text-[11px] text-verde/50">
           {ingles

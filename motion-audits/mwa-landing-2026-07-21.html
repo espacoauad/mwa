@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mwa-landing motion audit — 2026-07-21</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        oklch(0.155 0.006 255);
+    --surface:    oklch(0.195 0.007 255);
+    --surface-2:  oklch(0.235 0.008 255);
+    --paper:      oklch(0.945 0.004 255);
+    --paper-dim:  oklch(0.800 0.006 255);
+    --muted:      oklch(0.680 0.008 255);
+    --faint:      oklch(0.505 0.008 255);
+    --line:       oklch(0.95 0.01 255 / 0.09);
+    --line-strong:oklch(0.95 0.01 255 / 0.16);
+
+    --crit:  oklch(0.655 0.185 25);
+    --imp:   oklch(0.805 0.125 78);
+    --opp:   oklch(0.745 0.135 152);
+
+    --t-good: oklch(0.745 0.135 152);
+    --t-mid:  oklch(0.805 0.125 78);
+    --t-slow: oklch(0.655 0.185 25);
+
+    --accent: var(--paper);
+    --accent-soft: var(--paper-dim);
+    --accent-tint: color-mix(in oklch, var(--paper) 10%, transparent);
+
+    --display: "Familjen Grotesk", "Hanken Grotesk", system-ui, sans-serif;
+    --sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  :root:has(#theme-light:checked) {
+    --ink:        oklch(0.985 0.003 255);
+    --surface:    oklch(0.965 0.004 255);
+    --surface-2:  oklch(0.940 0.005 255);
+    --paper:      oklch(0.180 0.006 255);
+    --paper-dim:  oklch(0.330 0.008 255);
+    --muted:      oklch(0.475 0.010 255);
+    --faint:      oklch(0.640 0.009 255);
+    --line:       oklch(0.180 0.010 255 / 0.12);
+    --line-strong:oklch(0.180 0.010 255 / 0.22);
+
+    --crit:  oklch(0.52 0.19 25);
+    --imp:   oklch(0.50 0.15 70);
+    --opp:   oklch(0.50 0.13 152);
+
+    --t-good: oklch(0.50 0.13 152);
+    --t-mid:  oklch(0.50 0.15 70);
+    --t-slow: oklch(0.52 0.19 25);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 40px 24px 80px; }
+  a { color: inherit; }
+  code { font-family: var(--mono); }
+  .vh { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .mono-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+
+  /* ───────────── Theme switch ───────────── */
+  .theme-switch { display: flex; justify-content: flex-end; margin-bottom: 24px; }
+  .theme-pill { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 100px; overflow: hidden; }
+  .theme-pill label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; cursor: pointer; user-select: none; transition: background 0.15s ease, color 0.15s ease; }
+  #theme-dark:checked ~ .wrap .theme-pill label[for="theme-dark"],
+  #theme-light:checked ~ .wrap .theme-pill label[for="theme-light"] {
+    background: color-mix(in oklch, var(--paper) 12%, transparent);
+    color: var(--paper);
+  }
+
+  /* ───────────── Header ───────────── */
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin: 0 0 14px; }
+  .title { font-family: var(--display); font-size: clamp(28px, 4vw, 42px); font-weight: 700; line-height: 1.15; margin: 0 0 16px; letter-spacing: -0.01em; }
+  .lede { font-size: 16px; color: var(--paper-dim); max-width: 66ch; margin: 0 0 20px; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px 18px; font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin-bottom: 28px; }
+  .meta-row span b { color: var(--paper-dim); font-weight: 500; }
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+  .stat { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--line-strong); border-radius: 10px; text-decoration: none; font-family: var(--mono); font-size: 12.5px; color: var(--paper); transition: border-color 0.2s ease; }
+  .stat:hover { border-color: var(--muted); }
+  .stat .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .stat.crit .dot { background: var(--crit); }
+  .stat.imp .dot { background: var(--imp); }
+  .stat.opp .dot { background: var(--opp); }
+
+  /* ───────────── Assessment ───────────── */
+  .assessment { margin: 36px 0 44px; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .assessment p { font-family: var(--display); font-size: 19px; line-height: 1.55; color: var(--paper); max-width: 74ch; margin: 12px 0 0; font-weight: 400; }
+
+  section.block { margin-bottom: 56px; }
+  h2.sec-title { font-family: var(--display); font-size: 22px; margin: 0 0 18px; display: flex; align-items: baseline; gap: 10px; }
+  h2.sec-title .num { font-family: var(--mono); font-size: 13px; color: var(--faint); }
+
+  /* ───────────── Lens summary table ───────────── */
+  table.lens-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.lens-table th { text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); font-weight: 500; padding: 0 14px 10px; border-bottom: 1px solid var(--line-strong); }
+  table.lens-table td { padding: 16px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.lens-table tr { transition: border-color 0.2s ease; }
+  .lens-name { font-weight: 600; }
+  .weight-chip { display: inline-block; margin-left: 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); border: 1px solid var(--line-strong); border-radius: 100px; padding: 2px 9px; }
+  .verdict { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+  .verdict .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .v-strong .dot { background: var(--t-good); }
+  .v-mixed .dot { background: var(--imp); }
+  .v-concern .dot { background: var(--imp); }
+  .v-problem .dot { background: var(--crit); }
+
+  /* ───────────── Timing diagram ───────────── */
+  .timing-grid { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+  @media (max-width: 860px) { .timing-grid { grid-template-columns: 1fr; } }
+  .timing-figure svg { width: 100%; height: auto; display: block; }
+  .zone-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; }
+  .dot-label { font-family: var(--mono); font-size: 9.5px; }
+  .timing-key { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+  .timing-key li { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .timing-key li:last-child { border-bottom: none; }
+  .timing-key .k-name { color: var(--paper-dim); }
+  .timing-key .k-name.gap { color: var(--crit); }
+  .timing-key .k-time { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .timing-note { margin-top: 18px; font-size: 13.5px; color: var(--paper-dim); background: var(--surface-2); border-radius: 10px; padding: 14px 16px; }
+
+  /* ───────────── Lens sections ───────────── */
+  .lens-sec__head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .lens-sec__head h3 { font-family: var(--display); font-size: 22px; margin: 0; }
+  .lens-sec__weight { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); border: 1px solid var(--line-strong); border-radius: 100px; padding: 3px 10px; }
+  .lens-sec__verdict { margin: 0 0 26px; font-size: 15px; color: var(--paper-dim); }
+  .lens-block { margin-bottom: 26px; }
+  .lens-block > .mono-label { display: block; margin-bottom: 12px; }
+  ul.lens-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  ul.lens-list li { font-size: 14px; color: var(--paper-dim); padding-left: 22px; position: relative; }
+  ul.lens-list.good li::before { content: "✓"; position: absolute; left: 0; color: var(--t-good); font-weight: 700; }
+  ul.lens-list.opp li::before { content: "💡"; position: absolute; left: 0; }
+  ul.lens-list code, .lens-empty code { color: var(--muted); }
+  .lens-empty { font-style: italic; color: var(--faint); font-size: 14px; margin: 0; }
+  .lens-take { margin-top: 6px; padding: 16px 18px; background: var(--surface-2); border-radius: 10px; font-size: 14.5px; color: var(--paper-dim); }
+  .lens-take b { color: var(--paper); }
+
+  /* ───────────── Finding rows ───────────── */
+  .finding-row { display: grid; grid-template-columns: 1fr 380px; gap: 28px; padding: 24px 0; border-bottom: 1px solid var(--line); transition: border-color 0.2s ease; }
+  .finding-row:last-child { border-bottom: none; }
+  @media (max-width: 860px) { .finding-row { grid-template-columns: 1fr; } }
+  .find-tags { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 100px; padding: 3px 10px; }
+  .tag.crit { background: color-mix(in oklch, var(--crit) 22%, transparent); color: var(--crit); }
+  .tag.imp { background: color-mix(in oklch, var(--imp) 22%, transparent); color: var(--imp); }
+  .tag.lens { border: 1px solid var(--line-strong); color: var(--faint); }
+  .find-title { font-family: var(--display); font-size: 18px; margin: 0 0 10px; }
+  .find-body p { margin: 0 0 10px; font-size: 14px; color: var(--paper-dim); }
+  .find-body .label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); display: block; margin-bottom: 3px; }
+  .find-body .fix { background: var(--surface-2); border-radius: 10px; padding: 12px 14px; margin: 10px 0; }
+  .find-loc { margin-top: 12px !important; }
+  .find-loc code { font-size: 12.5px; color: var(--muted); background: var(--surface-2); padding: 2px 8px; border-radius: 6px; }
+
+  /* ───────────── Demo card ───────────── */
+  .demo { position: relative; }
+  .demo__bar { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .demo__meta { min-width: 0; }
+  .demo__title { display: block; font-size: 13.5px; font-weight: 600; color: var(--paper); line-height: 1.3; }
+  .demo__timing { display: block; font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .demo__controls { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .demo__loop { font-family: var(--mono); font-size: 12px; color: var(--faint); }
+  .seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 100px; overflow: hidden; }
+  .seg label { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 4px 9px; cursor: pointer; user-select: none; transition: background 0.15s ease, color 0.15s ease; }
+  .demo input[id$="-a"]:checked ~ .demo__bar .seg label[for$="-a"],
+  .demo input[id$="-l"]:checked ~ .demo__bar .seg label[for$="-l"],
+  .demo input[id$="-d"]:checked ~ .demo__bar .seg label[for$="-d"] {
+    background: color-mix(in oklch, var(--paper) 12%, transparent);
+    color: var(--paper);
+  }
+  .demo__stage {
+    --st-bg: var(--surface-2); --st-fg: var(--paper); --st-line: var(--line-strong);
+    --st-dim: color-mix(in oklch, var(--paper) 55%, transparent);
+    background: var(--st-bg); color: var(--st-fg);
+    border: 1px solid var(--line); border-radius: 10px;
+    padding: 28px 22px; min-height: 168px;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .demo input[id$="-l"]:checked ~ .demo__stage {
+    --st-bg: oklch(0.985 0.003 255); --st-fg: oklch(0.180 0.006 255);
+    --st-line: oklch(0.180 0.010 255 / 0.18); --st-dim: oklch(0.180 0.010 255 / 0.45);
+  }
+  .demo input[id$="-d"]:checked ~ .demo__stage {
+    --st-bg: oklch(0.180 0.006 255); --st-fg: oklch(0.985 0.003 255);
+    --st-line: oklch(0.985 0.010 255 / 0.18); --st-dim: oklch(0.985 0.010 255 / 0.50);
+  }
+  .ui-btn { display: inline-flex; align-items: center; justify-content: center; padding: 9px 18px; border-radius: 8px; background: var(--st-fg); color: var(--st-bg); font-family: var(--sans); font-size: 13px; font-weight: 600; }
+  .ui-card { background: var(--st-bg); border: 1px solid var(--st-line); border-radius: 10px; padding: 14px 16px; min-width: 190px; box-shadow: 0 8px 24px oklch(0 0 0 / 0.12); }
+  .ui-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--st-fg); }
+  .ui-check { width: 22px; height: 22px; border-radius: 7px; background: var(--st-fg); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .ui-check svg { width: 13px; height: 13px; stroke: var(--st-bg); }
+  .ui-num { font-family: var(--display); font-size: 30px; font-weight: 700; color: var(--st-fg); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .ui-label { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--st-dim); }
+  .ui-dot { border-radius: 100px; background: var(--st-dim); height: 6px; }
+  .ui-pill { border-radius: 100px; padding: 8px 16px; font-size: 12px; font-weight: 600; background: color-mix(in oklch, var(--st-fg) 10%, transparent); color: var(--st-fg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .demo__loop { display: none; }
+    [class*="__mt"], [class*="__mt"] * { animation: none !important; transition: none !important; }
+  }
+
+  /* ───────────── Combined recommendations ───────────── */
+  .tier-label { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 4px; }
+  .tier-label .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .tier-label.crit .dot { background: var(--crit); } .tier-label.crit { color: var(--crit); }
+  .tier-label.imp .dot { background: var(--imp); } .tier-label.imp { color: var(--imp); }
+  .tier-label.opp .dot { background: var(--opp); } .tier-label.opp { color: var(--opp); }
+  .tier-rule { border: none; border-top: 1px solid var(--line-strong); margin: 6px 0 14px; }
+  table.rec { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-bottom: 40px; }
+  table.rec th { text-align: left; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); font-weight: 500; padding: 0 12px 10px; border-bottom: 1px solid var(--line-strong); }
+  table.rec td { padding: 12px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--paper-dim); }
+  table.rec td.issue { color: var(--paper); font-weight: 500; }
+  table.rec td code { font-size: 12px; color: var(--muted); }
+
+  /* ───────────── Ref summary + footer ───────────── */
+  .ref-summary { background: var(--surface-2); border-radius: 14px; padding: 26px 28px; }
+  .ref-summary p { font-size: 14.5px; color: var(--paper-dim); margin: 0 0 14px; }
+  .ref-lean { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 6px; }
+  @media (max-width: 600px) { .ref-lean { grid-template-columns: 1fr; } }
+  .ref-lean div { font-size: 13px; color: var(--muted); }
+  .ref-lean b { display: block; color: var(--paper-dim); font-size: 13px; margin-bottom: 4px; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 11.5px; color: var(--faint); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  /* ═══════════ Per-finding motion (1–7), no-preference guarded ═══════════ */
+  @media (prefers-reduced-motion: no-preference) {
+
+    /* 1 — AppShowcase width-animated dots → transform-only fix */
+    @keyframes m1 {
+      0%   { --fill: 0.32; }
+      60%  { --fill: 1; }
+      100% { --fill: 1; }
+    }
+    .demo-1__mt { display: flex; gap: 7px; align-items: center; }
+    .demo-1__mt .dot-pill { position: relative; width: 26px; height: 7px; border-radius: 100px; background: color-mix(in oklch, var(--st-fg) 20%, transparent); overflow: hidden; }
+    .demo-1__mt .dot-pill.static { width: 7px; }
+    .demo-1__mt .dot-pill span { position: absolute; inset: 0; background: var(--st-fg); border-radius: 100px; transform: scaleX(var(--fill, 1)); transform-origin: left; animation: m1 3s cubic-bezier(0.22,1,0.36,1) infinite; }
+
+    /* 2 — FAQ accordion: instant → grid-rows style reveal */
+    @keyframes m2 {
+      0%   { grid-template-rows: 0fr; opacity: 0.4; }
+      60%  { grid-template-rows: 1fr; opacity: 1; }
+      100% { grid-template-rows: 1fr; opacity: 1; }
+    }
+    @keyframes m2-icon {
+      0%   { transform: rotate(0deg); }
+      60%  { transform: rotate(45deg); }
+      100% { transform: rotate(45deg); }
+    }
+    .demo-2__mt { width: 100%; }
+    .demo-2__mt .acc { border: 1px solid var(--st-line); border-radius: 12px; padding: 12px 16px; background: var(--st-bg); }
+    .demo-2__mt .acc__head { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; color: var(--st-fg); }
+    .demo-2__mt .acc__icon { color: var(--st-dim); font-weight: 700; animation: m2-icon 3s cubic-bezier(0.22,1,0.36,1) infinite; display: inline-block; }
+    .demo-2__mt .acc__body { display: grid; animation: m2 3s cubic-bezier(0.22,1,0.36,1) infinite; }
+    .demo-2__mt .acc__body-inner { overflow: hidden; min-height: 0; }
+    .demo-2__mt .acc__body-inner p { margin: 10px 0 0; font-size: 12px; color: var(--st-dim); line-height: 1.5; }
+
+    /* 3 — global reduced-motion guard, illustrated via a nav-pill state change */
+    @keyframes m3 {
+      0%   { background: transparent; box-shadow: none; backdrop-filter: blur(0px); }
+      60%  { background: color-mix(in oklch, var(--st-fg) 8%, transparent); box-shadow: 0 1px 0 var(--st-line); backdrop-filter: blur(6px); }
+      100% { background: color-mix(in oklch, var(--st-fg) 8%, transparent); box-shadow: 0 1px 0 var(--st-line); backdrop-filter: blur(6px); }
+    }
+    .demo-3__mt { width: 100%; display: flex; justify-content: center; }
+    .demo-3__mt .navbar { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 240px; padding: 10px 16px; border-radius: 12px; animation: m3 3s ease infinite; }
+    .demo-3__mt .navbar .brand { font-family: var(--display); font-weight: 700; font-size: 13px; color: var(--st-fg); }
+    .demo-3__mt .navbar .cta { font-size: 10.5px; font-weight: 700; padding: 5px 12px; border-radius: 100px; background: var(--st-fg); color: var(--st-bg); }
+
+    /* 4 — Reveal-everywhere → tiered reveal (heading instant, card eases) */
+    @keyframes m4 {
+      0%   { opacity: 0; transform: translateY(14px); }
+      60%  { opacity: 1; transform: translateY(0); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .demo-4__mt { width: 100%; }
+    .demo-4__mt .tier-head { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--st-fg); margin-bottom: 10px; }
+    .demo-4__mt .tier-card { animation: m4 3s cubic-bezier(0.22,1,0.36,1) infinite; }
+
+    /* 5 — carousel autoplay without a pause control → visible pause affordance */
+    @keyframes m5-ring {
+      0%   { --p: 0.1; }
+      60%  { --p: 1; }
+      100% { --p: 1; }
+    }
+    @keyframes m5-pause {
+      0%, 50% { opacity: 0; transform: scale(0.85); }
+      65%, 100% { opacity: 1; transform: scale(1); }
+    }
+    .demo-5__mt { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .demo-5__mt .ring-wrap { position: relative; width: 54px; height: 54px; }
+    .demo-5__mt .ring { width: 54px; height: 54px; border-radius: 50%; animation: m5-ring 3s linear infinite;
+      background: conic-gradient(var(--st-fg) calc(var(--p, 1) * 360deg), color-mix(in oklch, var(--st-fg) 16%, transparent) 0); }
+    .demo-5__mt .ring::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: var(--st-bg); }
+    .demo-5__mt .pause-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--st-fg); animation: m5-pause 3s ease infinite; }
+
+    /* 6 — Quiz phase swap: instant → mount-triggered fade */
+    @keyframes m6a {
+      0%, 45% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+      60%     { opacity: 0; transform: translateY(-6px) scale(0.98); filter: blur(2px); }
+      100%    { opacity: 0; transform: translateY(-6px) scale(0.98); filter: blur(2px); }
+    }
+    @keyframes m6b {
+      0%, 45% { opacity: 0; transform: translateY(10px); filter: blur(3px); }
+      70%     { opacity: 1; transform: translateY(0); filter: blur(0); }
+      100%    { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    .demo-6__mt { position: relative; width: 100%; min-height: 108px; }
+    .demo-6__mt .phase { position: absolute; inset: 0; }
+    .demo-6__mt .phase--q { animation: m6a 3s cubic-bezier(0.22,1,0.36,1) infinite; }
+    .demo-6__mt .phase--form { animation: m6b 3s cubic-bezier(0.22,1,0.36,1) infinite; }
+
+    /* 7 — Quiz question-to-question swap: instant → quick keyed crossfade */
+    @keyframes m7a {
+      0%, 40% { opacity: 1; transform: translateX(0); }
+      55%     { opacity: 0; transform: translateX(-8px); }
+      100%    { opacity: 0; transform: translateX(-8px); }
+    }
+    @keyframes m7b {
+      0%, 40% { opacity: 0; transform: translateX(8px); }
+      65%     { opacity: 1; transform: translateX(0); }
+      100%    { opacity: 1; transform: translateX(0); }
+    }
+    .demo-7__mt { position: relative; width: 100%; min-height: 92px; }
+    .demo-7__mt .q { position: absolute; inset: 0; }
+    .demo-7__mt .q--a { animation: m7a 3s cubic-bezier(0.22,1,0.36,1) infinite; }
+    .demo-7__mt .q--b { animation: m7b 3s cubic-bezier(0.22,1,0.36,1) infinite; }
+  }
+</style>
+</head>
+<body>
+
+<input class="vh" type="radio" name="theme" id="theme-dark" checked>
+<input class="vh" type="radio" name="theme" id="theme-light">
+
+<div class="wrap">
+
+  <div class="theme-switch">
+    <div class="theme-pill">
+      <label for="theme-dark">Dark</label>
+      <label for="theme-light">Light</label>
+    </div>
+  </div>
+
+  <p class="eyebrow">MOTION AUDIT · DESIGN-MOTION-PRINCIPLES</p>
+  <h1 class="title">mwa-landing — polish is real but uneven, and the two moments users actually touch skip motion entirely</h1>
+  <p class="lede">Editorial marketing site for a 30-day nutrition/habit program (Fraunces + Inter, forest/gold/cream). One scroll-reveal primitive carries almost the entire page; the interactive quiz and FAQ — the only two places a visitor clicks something — currently snap.</p>
+  <div class="meta-row">
+    <span>What it is: <b>React 18 + Vite 6 marketing landing page</b></span>
+    <span>Stack: <b>Tailwind v4, vanilla CSS keyframes, no animation library</b></span>
+    <span>Weighting: <b>Jakub → Jhey → Emil (forms, nav)</b></span>
+  </div>
+  <div class="stats">
+    <a class="stat crit" href="#rec-crit"><span class="dot"></span>4 Critical</a>
+    <a class="stat imp" href="#rec-imp"><span class="dot"></span>3 Important</a>
+    <a class="stat opp" href="#rec-opp"><span class="dot"></span>6 Opportunities</a>
+  </div>
+
+  <section class="assessment">
+    <p class="mono-label">OVERALL</p>
+    <p>The hero's staggered entrance and the count-up stats show real motion literacy — someone here understands sequencing and reduced-motion. But that same care didn't reach the page's two interactive moments: the mini-quiz's phase changes (question → email capture → result) and the FAQ accordion both snap instantly, and a carousel dot indicator quietly animates <code>width</code> every 5 seconds. Meanwhile a single <code>Reveal</code> component does duty for headings, paragraphs, cards, and pull-quotes alike, which reads as templated rather than composed. Net: passes the accessibility bar in spirit but not in code coverage, and the moments that most need a considered feel are the ones currently getting none.</p>
+  </section>
+
+  <section class="block" id="lens-summary">
+    <h2 class="sec-title"><span class="num">01</span> Lens summary</h2>
+    <table class="lens-table">
+      <thead><tr><th>Lens</th><th>Verdict</th><th>One-line read</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="lens-name">Jakub Krehel</span><span class="weight-chip">Primary</span></td>
+          <td><span class="verdict v-mixed"><span class="dot"></span>Mixed</span></td>
+          <td>Real instincts in a few spots — hero, count-up, the transform-only progress bar — applied unevenly everywhere else.</td>
+        </tr>
+        <tr>
+          <td><span class="lens-name">Jhey Tompkins</span><span class="weight-chip">Secondary</span></td>
+          <td><span class="verdict v-concern"><span class="dot"></span>Concern</span></td>
+          <td>One deliberate playful beat (the phone crossfade); the 5s autoplay carousel never asks permission to keep going.</td>
+        </tr>
+        <tr>
+          <td><span class="lens-name">Emil Kowalski</span><span class="weight-chip">Selective · forms, nav</span></td>
+          <td><span class="verdict v-concern"><span class="dot"></span>Concern</span></td>
+          <td>Nav behaves; the quiz — the one form on the page — snaps through every state change it has.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block" id="timing">
+    <h2 class="sec-title"><span class="num">02</span> Where the timings land</h2>
+    <div class="timing-grid">
+      <div class="timing-figure">
+        <svg viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg">
+          <style>
+            .zone-instant { fill: color-mix(in oklch, var(--t-good) 16%, transparent); }
+            .zone-responsive { fill: color-mix(in oklch, var(--t-good) 9%, transparent); }
+            .zone-deliberate { fill: color-mix(in oklch, var(--t-mid) 14%, transparent); }
+            .zone-sluggish { fill: color-mix(in oklch, var(--t-slow) 12%, transparent); }
+            .axis-line { stroke: var(--line-strong); stroke-width: 1; }
+            .zt { fill: var(--faint); font-family: var(--mono); font-size: 10px; }
+            .dt { font-family: var(--mono); font-size: 9px; }
+            .dot-good { fill: var(--t-good); }
+            .dot-mid { fill: var(--t-mid); }
+            .dot-slow { fill: var(--t-slow); }
+            .dot-gap { fill: var(--ink); stroke: var(--crit); stroke-width: 1.6; stroke-dasharray: 2.5 2.5; }
+          </style>
+          <!-- zone bands -->
+          <rect x="40" y="40" width="64.4" height="190" class="zone-instant" />
+          <rect x="104.4" y="40" width="128.9" height="190" class="zone-responsive" />
+          <rect x="233.3" y="40" width="128.9" height="190" class="zone-deliberate" />
+          <rect x="362.2" y="40" width="257.8" height="190" class="zone-sluggish" />
+          <line x1="40" y1="230" x2="620" y2="230" class="axis-line" />
+          <text x="40" y="252" class="zt">0ms</text>
+          <text x="96" y="252" class="zt">100</text>
+          <text x="225" y="252" class="zt">300</text>
+          <text x="354" y="252" class="zt">500</text>
+          <text x="600" y="252" class="zt">800+</text>
+          <text x="46" y="270" class="zt">INSTANT/RESPONSIVE</text>
+          <text x="240" y="270" class="zt">DELIBERATE</text>
+          <text x="440" y="270" class="zt">SLUGGISH</text>
+
+          <!-- motion gaps: hollow dashed circles at x=40 (0ms) -->
+          <circle cx="40" cy="70" r="6" class="dot-gap" />
+          <circle cx="40" cy="94" r="6" class="dot-gap" />
+          <circle cx="40" cy="118" r="6" class="dot-gap" />
+
+          <!-- responsive zone dots -->
+          <circle cx="104.4" cy="70" r="6" class="dot-good" />
+          <circle cx="104.4" cy="94" r="6" class="dot-good" />
+          <circle cx="104.4" cy="118" r="6" class="dot-good" />
+          <circle cx="104.4" cy="142" r="6" class="dot-good" />
+          <circle cx="104.4" cy="166" r="6" class="dot-good" />
+          <circle cx="96.5" cy="190" r="6" class="dot-good" />
+
+          <!-- deliberate zone dots -->
+          <circle cx="272.9" cy="70" r="6" class="dot-mid" />
+          <circle cx="362.2" cy="94" r="6" class="dot-mid" />
+
+          <!-- sluggish zone dots -->
+          <circle cx="491.1" cy="70" r="6" class="dot-slow" />
+          <circle cx="555.6" cy="94" r="6" class="dot-slow" />
+        </svg>
+      </div>
+      <ul class="timing-key">
+        <li><span class="k-name gap">Quiz phase swap (quiz→captura→resultado)</span><span class="k-time">no transition</span></li>
+        <li><span class="k-name gap">FAQ accordion content reveal</span><span class="k-time">no transition</span></li>
+        <li><span class="k-name gap">Quiz question→question swap</span><span class="k-time">no transition</span></li>
+        <li><span class="k-name">Quiz answer→advance delay</span><span class="k-time">280ms</span></li>
+        <li><span class="k-name">Header scroll-state transition</span><span class="k-time">300ms</span></li>
+        <li><span class="k-name">CtaButton hover-lift</span><span class="k-time">300ms</span></li>
+        <li><span class="k-name">FAQ "+" icon rotate</span><span class="k-time">300ms</span></li>
+        <li><span class="k-name">Quiz option select colors</span><span class="k-time">300ms</span></li>
+        <li><span class="k-name">AppShowcase tabs/dots (incl. width)</span><span class="k-time">300ms</span></li>
+        <li><span class="k-name">Phone "screen-in" crossfade</span><span class="k-time">450ms</span></li>
+        <li><span class="k-name">Quiz progress bar (scaleX)</span><span class="k-time">500ms</span></li>
+        <li><span class="k-name">Reveal (scroll fade, used 28×)</span><span class="k-time">700ms</span></li>
+        <li><span class="k-name">Hero staggered entrance</span><span class="k-time">800ms</span></li>
+      </ul>
+    </div>
+    <p class="timing-note">What's off: three real interaction moments sit at <code>x=0</code> — no transition at all — while the page's most-repeated animation (<code>.reveal</code>, used 28 times) sits inside the "sluggish" band at 700ms for something as routine as a scroll-triggered paragraph. For a marketing page under Jakub/Jhey weighting, 700ms isn't wrong on its own — it's wrong applied identically to every element regardless of what that element is.</p>
+  </section>
+
+  <!-- ═══════════ 03 · Jakub — Production Polish (Primary) ═══════════ -->
+  <section class="block">
+    <div class="lens-sec__head">
+      <h3>Jakub Krehel — Production Polish</h3>
+      <span class="lens-sec__weight">Primary</span>
+    </div>
+    <p class="lens-sec__verdict"><span class="verdict v-mixed"><span class="dot"></span>Mixed</span> — the invisible-enhancement instinct shows up in three places and is absent everywhere else.</p>
+
+    <div class="lens-block">
+      <span class="mono-label">What's working well</span>
+      <ul class="lens-list good">
+        <li>The hero's staggered entrance (<code>hero-enter-delay-1..4</code>) sequences eyebrow → headline → rule → body → CTA with a single custom cubic-bezier — a considered first impression, not a generic fade. <code>src/sections/Hero.jsx:14-47</code>, <code>src/index.css:48-66</code></li>
+        <li><code>CountUp</code> checks <code>prefers-reduced-motion</code> in JS before ever starting its RAF loop, and eases with a manual cubic ease-out rather than a linear tick. <code>src/components/CountUp.jsx:3-36</code></li>
+        <li>The quiz progress bar is explicitly built transform-only (<code>scaleX</code>, with a code comment noting the choice) instead of animating <code>width</code> — the right call, and inconsistently applied elsewhere (see Critical #1). <code>src/sections/Quiz.jsx:163-174</code></li>
+        <li>The app showcase's auto-advance interval checks <code>prefers-reduced-motion</code> in JS before arming the timer, not just via CSS. <code>src/sections/AppShowcase.jsx:28-33</code></li>
+      </ul>
+    </div>
+
+    <div class="lens-block">
+      <span class="mono-label">Issues to address</span>
+
+      <div class="finding-row" data-sev="crit">
+        <div class="finding-row__prose">
+          <div class="find-tags"><span class="tag crit">Critical</span><span class="tag lens">Jakub</span></div>
+          <h4 class="find-title">Mobile carousel dots animate <code>width</code>, not a transform</h4>
+          <div class="find-body">
+            <p><span class="label">What</span>The mobile pagination dots use <code>transition-all duration-300</code> while toggling Tailwind's <code>w-1.5</code> / <code>w-5</code> — that's a layout-triggering <code>width</code> transition, repeating every 5 seconds for as long as the section is in view.</p>
+            <p><span class="label">Why it matters</span>Width/height animations force layout recalculation on every frame; unlike the progress bar three components away in the same codebase, this one will visibly jank on low-end phones, and it repeats indefinitely during autoplay rather than firing once.</p>
+            <div class="fix"><p><span class="label">Recommended motion</span>Keep the dot's box a fixed size and animate an inner pill with <code>transform: scaleX()</code> + <code>transform-origin: left</code>, exactly the technique already used for the quiz progress bar two files away.</p></div>
+            <p class="find-loc"><code>src/sections/AppShowcase.jsx:100</code></p>
+          </div>
+        </div>
+        <div class="demo">
+          <input class="vh" type="radio" name="st1" id="st1-a" checked>
+          <input class="vh" type="radio" name="st1" id="st1-l">
+          <input class="vh" type="radio" name="st1" id="st1-d">
+          <div class="demo__bar">
+            <div class="demo__meta"><span class="demo__title">Transform-only dot indicator</span><span class="demo__timing">300ms · cubic-bezier(.22,1,.36,1)</span></div>
+            <div class="demo__controls"><div class="seg"><label for="st1-a">Auto</label><label for="st1-l">Light</label><label for="st1-d">Dark</label></div><span class="demo__loop">↻</span></div>
+          </div>
+          <div class="demo__stage">
+            <div class="demo-1__mt">
+              <div class="dot-pill static"><span style="animation:none; transform:scaleX(1);"></span></div>
+              <div class="dot-pill"><span></span></div>
+              <div class="dot-pill static"><span style="animation:none; transform:scaleX(1);"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding-row" data-sev="crit">
+        <div class="finding-row__prose">
+          <div class="find-tags"><span class="tag crit">Critical</span><span class="tag lens">Jakub</span></div>
+          <h4 class="find-title">FAQ accordion opens and closes with zero transition</h4>
+          <div class="find-body">
+            <p><span class="label">What</span>Each FAQ item is a native <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code>. Only the "+" icon animates (<code>group-open:rotate-45</code>); the answer text itself snaps open and shut instantly — the browser default, un-overridden.</p>
+            <p><span class="label">Why it matters</span>This is the classic motion gap: a conditional reveal with no enter/exit treatment at all. Every other expandable moment in the checklist gets some care; this is the one place content visibly pops.</p>
+            <div class="fix"><p><span class="label">Recommended motion</span>Swap to a controlled wrapper using the <code>grid-template-rows: 0fr → 1fr</code> technique with a CSS transition (or a max-height fallback for older Safari), so the reveal eases instead of snapping — same easing family as the rest of the page.</p></div>
+            <p class="find-loc"><code>src/sections/Faq.jsx:41-47</code></p>
+          </div>
+        </div>
+        <div class="demo">
+          <input class="vh" type="radio" name="st2" id="st2-a" checked>
+          <input class="vh" type="radio" name="st2" id="st2-l">
+          <input class="vh" type="radio" name="st2" id="st2-d">
+          <div class="demo__bar">
+            <div class="demo__meta"><span class="demo__title">Grid-rows accordion reveal</span><span class="demo__timing">320ms · cubic-bezier(.22,1,.36,1)</span></div>
+            <div class="demo__controls"><div class="seg"><label for="st2-a">Auto</label><label for="st2-l">Light</label><label for="st2-d">Dark</label></div><span class="demo__loop">↻</span></div>
+          </div>
+          <div class="demo__stage">
+            <div class="demo-2__mt">
+              <div class="acc">
+                <div class="acc__head">Como acesso o app? <span class="acc__icon">+</span></div>
+                <div class="acc__body"><div class="acc__body-inner"><p>Após a compra, você recebe o acesso por email.</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding-row" data-sev="crit">
+        <div class="finding-row__prose">
+          <div class="find-tags"><span class="tag crit">Critical</span><span class="tag lens">Jakub</span></div>
+          <h4 class="find-title"><code>prefers-reduced-motion</code> guard covers 3 classes, not the page</h4>
+          <div class="find-body">
+            <p><span class="label">What</span>The only reduced-motion override in <code>index.css</code> targets <code>.reveal, .hero-enter, .screen-in</code> by name. Every Tailwind utility transition sitewide — header blur-in, CTA hover-lift, FAQ icon rotate, progress-bar scaleX, input focus colors, showcase tab/dot states — sits outside that list and keeps animating in full for users who've asked for less motion.</p>
+            <p><span class="label">Why it matters</span>This skill treats <code>prefers-reduced-motion</code> as mandatory, no exceptions. A hand-picked class list is a maintenance trap: every new transition anyone adds is unprotected by default instead of protected by default.</p>
+            <div class="fix"><p><span class="label">Recommended motion</span>Add a wildcard fallback guard (<code>*, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }</code>) alongside the existing named rules, matching the pattern this very report's shell CSS uses for its own demo cards.</p></div>
+            <p class="find-loc"><code>src/index.css:84-96</code></p>
+          </div>
+        </div>
+        <div class="demo">
+          <input class="vh" type="radio" name="st3" id="st3-a" checked>
+          <input class="vh" type="radio" name="st3" id="st3-l">
+          <input class="vh" type="radio" name="st3" id="st3-d">
+          <div class="demo__bar">
+            <div class="demo__meta"><span class="demo__title">Global reduced-motion guard (wildcard)</span><span class="demo__timing">300ms · ease</span></div>
+            <div class="demo__controls"><div class="seg"><label for="st3-a">Auto</label><label for="st3-l">Light</label><label for="st3-d">Dark</label></div><span class="demo__loop">↻</span></div>
+          </div>
+          <div class="demo__stage">
+            <div class="demo-3__mt">
+              <div class="navbar"><span class="brand">MWA</span><span class="cta">Começar</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding-row" data-sev="imp">
+        <div class="finding-row__prose">
+          <div class="find-tags"><span class="tag imp">Important</span><span class="tag lens">Jakub</span></div>
+          <h4 class="find-title">One <code>Reveal</code> treatment, used identically 28 times, on unrelated content</h4>
+          <div class="find-body">
+            <p><span class="label">What</span>The same <code>opacity 0→1 + translateY(20px)→0</code>, 700ms, single easing curve wraps headings, body paragraphs, list items, a pull-quote, stat numbers, and card grids across all 11 sections — with only the stagger delay varying.</p>
+            <p><span class="label">Why it matters</span>This is the anti-checklist's "uniform fade-in on every element" pattern by the book: applying the same polish treatment regardless of what the content actually is reads as templated, and text-only elements (the pull-quote in <code>Story.jsx</code>, FAQ headings) delay reading for motion that isn't earning its keep.</p>
+            <div class="fix"><p><span class="label">Recommended motion</span>Let headings/eyebrows appear instantly (no wrap), reserve the fuller enter recipe for one deliberate moment per section (the stat block, the pull-quote), and keep the lighter/faster version for routine list and card reveals.</p></div>
+            <p class="find-loc"><code>src/components/Reveal.jsx:27-35</code>, <code>src/index.css:37-46</code> (28 call sites across <code>src/sections/*</code>)</p>
+          </div>
+        </div>
+        <div class="demo">
+          <input class="vh" type="radio" name="st4" id="st4-a" checked>
+          <input class="vh" type="radio" name="st4" id="st4-l">
+          <input class="vh" type="radio" name="st4" id="st4-d">
+          <div class="demo__bar">
+            <div class="demo__meta"><span class="demo__title">Tiered reveal — heading instant, card eases</span><span class="demo__timing">220ms · cubic-bezier(.22,1,.36,1)</span></div>
+            <div class="demo__controls"><div class="seg"><label for="st4-a">Auto</label><label for="st4-l">Light</label><label for="st4-d">Dark</label></div><span class="demo__loop">↻</span></div>
+          </div>
+          <div class="demo__stage">
+            <div class="demo-4__mt">
+              <div class="tier-head">Os 4 pilares</div>
+              <div class="ui-card tier-card"><div class="ui-label" style="margin-bottom:6px;">Nutrição inteligente</div><div class="ui-row" style="font-size:12px;">Sem modismos, sem extremos.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lens-block">
+      <span class="mono-label">Opportunities</span>
+      <ul class="lens-list opp">
+        <li>Add a touch of blur to the hero's enter recipe (<code>filter: blur(4px) → 0</code>) — the "materializing" feel Jakub's enter recipe is built around is currently just opacity + translateY. <code>src/index.css:49-58</code></li>
+        <li>Header's scroll-state class uses <code>transition-all duration-300</code>; naming the specific properties (<code>background-color, border-color, box-shadow, backdrop-filter</code>) is cheaper and makes the intent explicit. <code>src/components/Header.jsx:19</code></li>
+      </ul>
+    </div>
+
+    <p class="lens-take">Through Jakub's lens: <b>the instincts are there — a real enter sequence, a transform-only progress bar, a JS-level reduced-motion check — but they're the exception, not the default.</b> The most repeated motion decision on the page (<code>Reveal</code>) is also its least differentiated, and the accessibility guard is scoped to yesterday's three classes instead of tomorrow's fortieth transition.</p>
+  </section>
+
+  <!-- ═══════════ 04 · Jhey — Experimentation & Delight (Secondary) ═══════════ -->
+  <section class="block">
+    <div class="lens-sec__head">
+      <h3>Jhey Tompkins — Experimentation &amp; Delight</h3>
+      <span class="lens-sec__weight">Secondary</span>
+    </div>
+    <p class="lens-sec__verdict"><span class="verdict v-concern"><span class="dot"></span>Concern</span> — one genuine playful beat, but the page's most "alive" element (the autoplay carousel) offers no way to stop it.</p>
+
+    <div class="lens-block">
+      <span class="mono-label">What's working well</span>
+      <ul class="lens-list good">
+        <li>The phone showcase's <code>screen-in</code> crossfade (opacity + 14px translateX, keyed by the active tab) gives the "flipping to a new screen" moment real character instead of a plain swap. <code>src/index.css:68-81</code>, <code>src/sections/AppShowcase.jsx:92-107</code></li>
+        <li>Touch swipe is wired up with a directional threshold (40px) on the phone mockup — a small, appropriate bit of playfulness for a showcase, not a utility control. <code>src/sections/AppShowcase.jsx:37-46</code></li>
+      </ul>
+    </div>
+
+    <div class="lens-block">
+      <span class="mono-label">Issues to address</span>
+      <div class="finding-row" data-sev="imp">
+        <div class="finding-row__prose">
+          <div class="find-tags"><span class="tag imp">Important</span><span class="tag lens">Jhey</span><span class="tag lens">Jakub</span></div>
+          <h4 class="find-title">Autoplay carousel has no visible pause control</h4>
+          <div class="find-body">
+            <p><span class="label">What</span>The feature showcase advances every 5 seconds. Pausing only happens via <code>onMouseEnter</code> (desktop hover) or an incidental swipe; there is no visible button or indicator that lets a touch/keyboard user stop the motion on purpose.</p>
+            <p><span class="label">Why it matters</span>Auto-updating content that a user can't stop is exactly what pause controls exist for (WCAG 2.2.2). It's also a delight tax: the playful crossfade becomes friction the moment someone wants to linger on one screen and can't make it stay.</p>
+            <div class="fix"><p><span class="label">Recommended motion</span>Add a small visible pause/play toggle with a depleting progress ring showing time-to-next-advance — gives the autoplay a legible "you're in control of this" affordance instead of a silent timer.</p></div>
+            <p class="find-loc"><code>src/sections/AppShowcase.jsx:20-33, 60-64</code></p>
+          </div>
+        </div>
+        <div class="demo">
+          <input class="vh" type="radio" name="st5" id="st5-a" checked>
+          <input class="vh" type="radio" name="st5" id="st5-l">
+          <input class="vh" type="radio" name="st5" id="st5-d">
+          <div class="demo__bar">
+            <div class="demo__meta"><span class="demo__title">Visible pause control on autoplay</span><span class="demo__timing">5000ms · linear (ring), tap to pause</span></div>
+            <div class="demo__controls"><div class="seg"><label for="st5-a">Auto</label><label for="st5-l">Light</label><label for="st5-d">Dark</label></div><span class="demo__loop">↻</span></div>
+          </div>
+          <div class="demo__stage">
+            <div class="demo-5__mt">
+              <div class="ring-wrap"><div class="ring"></div><span class="pause-icon">‖‖</span></div>
+              <span class="ui-label">Tap to pause</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lens-block">
+      <span class="mono-label">Opportunities</span>
+      <ul class="lens-list opp">
+        <li>Let the swipe gesture follow the finger in real time (direct manipulation) instead of only resolving on <code>touchend</code> — a small change that would make the phone mockup feel physically draggable. <code>src/sections/AppShowcase.jsx:37-46</code></li>
+        <li>The FAQ's "+" → "×" rotation is a natural spot for a touch of personality — a <code>linear()</code> curve with a hint of overshoot instead of the default ease, since it's a low-frequency, high-visibility moment. <code>src/sections/Faq.jsx:44</code></li>
+      </ul>
+    </div>
+
+    <p class="lens-take">Through Jhey's lens: <b>the phone crossfade is the one moment on the page that feels authored rather than assembled — everything else in the "delight" register is either absent or, in the carousel's case, running without the user's consent.</b> Give the autoplay a visible off-switch and the showcase becomes a feature people enjoy exploring instead of watching happen to them.</p>
+  </section>
+
+  <!-- ═══════════ 05 · Emil — Restraint & Speed (Selective: forms, nav) ═══════════ -->
+  <section class="block">
+    <div class="lens-sec__head">
+      <h3>Emil Kowalski — Restraint &amp; Speed</h3>
+      <span class="lens-sec__weight">Selective · forms, nav</span>
+    </div>
+    <p class="lens-sec__verdict"><span class="verdict v-concern"><span class="dot"></span>Concern</span> — nav is fine; the quiz, the one form on the page, is where restraint tips into no motion at all.</p>
+
+    <div class="lens-block">
+      <span class="mono-label">What's working well</span>
+      <ul class="lens-list good">
+        <li>Header only transitions on a single low-frequency event — crossing the 24px scroll threshold once — rather than tracking scroll position continuously; a sensible, restrained trigger. <code>src/components/Header.jsx:9-14</code></li>
+        <li>The quiz progress bar is built on <code>transform: scaleX</code>, not <code>width</code> — the correct performance call, explicitly noted in a code comment. <code>src/sections/Quiz.jsx:163-174</code></li>
+      </ul>
+    </div>
+
+    <div class="lens-block">
+      <span class="mono-label">Issues to address</span>
+
+      <div class="finding-row" data-sev="crit">
+        <div class="finding-row__prose">
+          <div class="find-tags"><span class="tag crit">Critical</span><span class="tag lens">Emil</span><span class="tag lens">Jakub</span></div>
+          <h4 class="find-title">Quiz → capture-form → result: three phases, zero transitions</h4>
+          <div class="find-body">
+            <p><span class="label">What</span>The quiz's three phases render via plain <code>{fase === 'quiz' && (…)} {fase === 'captura' && (…)} {fase === 'resultado' && (…)}</code> conditionals with no <code>AnimatePresence</code>-equivalent and no CSS transition — each phase pops in and the previous one disappears with no exit at all.</p>
+            <p><span class="label">Why it matters</span>This is the page's one actual form, and the highest-stakes moment in the whole funnel — the step where a visitor becomes a lead. Emil's forms/nav weighting exists precisely for moments like this: state changes here should feel considered, not instant.</p>
+            <div class="fix"><p><span class="label">Recommended motion</span>Use a CSS-transition state class (mount → toggle <code>.mounted</code>) per phase so the swap is interruptible if the user moves fast — a quick fade + 8-10px translate, exit subtler than enter.</p></div>
+            <p class="find-loc"><code>src/sections/Quiz.jsx:177-306</code></p>
+          </div>
+        </div>
+        <div class="demo">
+          <input class="vh" type="radio" name="st6" id="st6-a" checked>
+          <input class="vh" type="radio" name="st6" id="st6-l">
+          <input class="vh" type="radio" name="st6" id="st6-d">
+          <div class="demo__bar">
+            <div class="demo__meta"><span class="demo__title">Phase-swap fade (mount-triggered)</span><span class="demo__timing">260ms · cubic-bezier(.22,1,.36,1)</span></div>
+            <div class="demo__controls"><div class="seg"><label for="st6-a">Auto</label><label for="st6-l">Light</label><label for="st6-d">Dark</label></div><span class="demo__loop">↻</span></div>
+          </div>
+          <div class="demo__stage">
+            <div class="demo-6__mt">
+              <div class="phase phase--q"><div class="ui-card"><div class="ui-label" style="margin-bottom:6px;">Pergunta 3 de 5</div><div class="ui-row">Água ao longo do dia?</div></div></div>
+              <div class="phase phase--form"><div class="ui-card"><div class="ui-label" style="margin-bottom:6px;">Quase lá</div><div class="ui-row">Nome + e-mail →</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding-row" data-sev="imp">
+        <div class="finding-row__prose">
+          <div class="find-tags"><span class="tag imp">Important</span><span class="tag lens">Emil</span></div>
+          <h4 class="find-title">Question-to-question swap pops with no crossfade</h4>
+          <div class="find-body">
+            <p><span class="label">What</span><code>responder()</code> waits 280ms (so the selected answer's highlight is visible), then calls <code>setPasso(passo + 1)</code> — but the new question's <code>&lt;fieldset&gt;</code> content simply appears; there's no keyed transition on the text itself, unlike the phone showcase three files away which does key + animate its content swap.</p>
+            <p><span class="label">Why it matters</span>Users repeat this five times in one sitting — Emil's frequency rule says keep it fast, not that it should be absent. A same-page pattern (<code>screen-in</code>) already solves this exact problem elsewhere in the codebase.</p>
+            <div class="fix"><p><span class="label">Recommended motion</span>Key the fieldset by <code>passo</code> and apply a quick 180ms fade + 6-8px slide — fast enough not to slow down a five-question flow, present enough that the swap doesn't feel broken.</p></div>
+            <p class="find-loc"><code>src/sections/Quiz.jsx:100-112, 177-223</code></p>
+          </div>
+        </div>
+        <div class="demo">
+          <input class="vh" type="radio" name="st7" id="st7-a" checked>
+          <input class="vh" type="radio" name="st7" id="st7-l">
+          <input class="vh" type="radio" name="st7" id="st7-d">
+          <div class="demo__bar">
+            <div class="demo__meta"><span class="demo__title">Question crossfade (keyed by step)</span><span class="demo__timing">180ms · ease-out</span></div>
+            <div class="demo__controls"><div class="seg"><label for="st7-a">Auto</label><label for="st7-l">Light</label><label for="st7-d">Dark</label></div><span class="demo__loop">↻</span></div>
+          </div>
+          <div class="demo__stage">
+            <div class="demo-7__mt">
+              <div class="q q--a"><div class="ui-label" style="margin-bottom:6px;">Pergunta 2 de 5</div><div class="ui-row">E no fim da tarde?</div></div>
+              <div class="q q--b"><div class="ui-label" style="margin-bottom:6px;">Pergunta 3 de 5</div><div class="ui-row">Água ao longo do dia?</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lens-block">
+      <span class="mono-label">Opportunities</span>
+      <ul class="lens-list opp">
+        <li>Nothing on the page has <code>:active { transform: scale(0.97) }</code> — not the CTA buttons, not the quiz's option cards. Emil's tip #1 (tactile press feedback) is cheap to add and currently absent everywhere. <code>src/components/ui.jsx:6-35</code>, <code>src/sections/Quiz.jsx:191-219</code></li>
+        <li>The progress bar's <code>transition-transform duration-500 ease-out</code> uses the built-in easing keyword rather than a custom Bézier curve — a small swap for a slightly more considered feel. <code>src/sections/Quiz.jsx:172</code></li>
+      </ul>
+    </div>
+
+    <p class="lens-take">Through Emil's lens: <b>the nav proves the team can be appropriately restrained; the quiz proves restraint and absence aren't the same thing.</b> A five-question form that a lead fills out in one sitting deserves fast, purposeful transitions between its states — right now it has none at all.</p>
+  </section>
+
+  <section class="block" id="recs">
+    <h2 class="sec-title"><span class="num">06</span> Combined recommendations</h2>
+
+    <div class="tier-label crit" id="rec-crit"><span class="dot"></span>Critical · must fix</div>
+    <hr class="tier-rule">
+    <table class="rec">
+      <thead><tr><th>Issue</th><th>File</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td class="issue">Carousel dots animate <code>width</code></td><td><code>AppShowcase.jsx:100</code></td><td>Fixed-size dot, inner <code>scaleX</code> transform</td></tr>
+        <tr><td class="issue">FAQ accordion snaps open/closed</td><td><code>Faq.jsx:41-47</code></td><td>Grid-rows (0fr→1fr) transition, or max-height fallback</td></tr>
+        <tr><td class="issue">Reduced-motion guard covers 3 classes only</td><td><code>index.css:84-96</code></td><td>Add wildcard <code>*</code> fallback rule</td></tr>
+        <tr><td class="issue">Quiz phase swap has no transition</td><td><code>Quiz.jsx:177-306</code></td><td>Mount-triggered fade, subtler exit than enter</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tier-label imp" id="rec-imp"><span class="dot"></span>Important · should fix</div>
+    <hr class="tier-rule">
+    <table class="rec">
+      <thead><tr><th>Issue</th><th>File</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td class="issue">One Reveal treatment on 28 unrelated elements</td><td><code>Reveal.jsx</code>, <code>index.css:37-46</code></td><td>Tiered treatment: instant headings, eased cards</td></tr>
+        <tr><td class="issue">Autoplay carousel has no pause control</td><td><code>AppShowcase.jsx:20-33</code></td><td>Visible pause/play toggle + progress ring</td></tr>
+        <tr><td class="issue">Question swap pops with no crossfade</td><td><code>Quiz.jsx:100-112</code></td><td>Key by step, 180ms fade + slide</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tier-label opp" id="rec-opp"><span class="dot"></span>Opportunities · could enhance</div>
+    <hr class="tier-rule">
+    <table class="rec">
+      <thead><tr><th>Enhancement</th><th>Where</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td class="issue">Add blur to hero enter recipe</td><td><code>index.css:49-58</code></td><td>Stronger "materializing" first impression</td></tr>
+        <tr><td class="issue">Name Header's transitioned properties</td><td><code>Header.jsx:19</code></td><td>Clarity + marginal perf</td></tr>
+        <tr><td class="issue">Direct-manipulation swipe on phone mockup</td><td><code>AppShowcase.jsx:37-46</code></td><td>Feels physically draggable</td></tr>
+        <tr><td class="issue">Personality easing on FAQ icon rotate</td><td><code>Faq.jsx:44</code></td><td>One low-frequency delight beat</td></tr>
+        <tr><td class="issue">Add <code>:active</code> press feedback sitewide</td><td><code>ui.jsx:6-35</code>, <code>Quiz.jsx:191-219</code></td><td>Tactile confirmation on every tap</td></tr>
+        <tr><td class="issue">Custom easing on progress bar</td><td><code>Quiz.jsx:172</code></td><td>Marginal polish</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block" id="ref-summary-sec">
+    <h2 class="sec-title"><span class="num">07</span> Lens reference summary</h2>
+    <div class="ref-summary">
+      <p>Lens referenced most: <b>Jakub Krehel — Production Polish.</b> As the primary weighting for a marketing/editorial page, most of the audit's findings are framed through "does this feel subtle and considered" rather than "should this exist at all" or "what could this become" — appropriate given the brand's editorial, non-utility positioning.</p>
+      <div class="ref-lean">
+        <div><b>Lean more Emil</b>Tighten every transition under 300ms and remove the <code>Reveal</code> wrap from any text-only element (headings, single paragraphs).</div>
+        <div><b>Lean more Jakub</b>Differentiate the enter treatment per content type instead of one component for everything; add blur to the hero recipe.</div>
+        <div><b>Lean more Jhey</b>Give the phone showcase a signature interaction beyond the crossfade — a draggable swipe, a personality-driven easing on the FAQ icon.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>mwa-landing · motion audit</span>
+    <span>4 critical · 3 important · 6 opportunities</span>
+  </footer>
+
+</div>
+</body>
+</html>

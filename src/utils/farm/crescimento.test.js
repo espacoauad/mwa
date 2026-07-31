@@ -68,3 +68,10 @@ test('resumoFazenda com diaAtual ausente assume o dia 1', () => {
   assert.equal(resumo.pilares[0].estagio, 0) // primeiro pilar, dia 1, estágio semente
   assert.equal(resumo.pilares[1].liberado, false) // segundo pilar só libera no dia 5
 })
+
+test('as funções primitivas do motor também toleram diaAtual indefinido', () => {
+  const primeiroPilar = PILARES[0].id // libera no dia 1
+  assert.equal(estagioDoPilar(primeiroPilar, undefined), 0) // dia 1 assumido, próprio dia da liberação
+  assert.equal(pilarLiberado(primeiroPilar, undefined), true)
+  assert.equal(decoracoesLiberadas(undefined).length, decoracoesLiberadas(1).length)
+})

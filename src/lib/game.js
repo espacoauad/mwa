@@ -123,6 +123,23 @@ export async function carregarTarefasHoje(userId, hojeISO) {
     agua: tipos.has('agua'),
     dica: tipos.has('dica'),
     exercicio: tipos.has('exercicio'),
+    // Qualquer jogo educativo concluído hoje cumpre a micro-meta "desafio" da estrela
+    jogo: [...tipos].some((t) => t === 'joguinho' || t.startsWith('jogo_')),
     sementesHoje,
   }
+}
+
+// ── Estrelas do Dia ──
+// Uma estrela por dia (ref = data) e a constelação da semana. A trava de duplicidade
+// é a mesma dos outros eventos: a chave (tipo, ref) só entra uma vez.
+
+export async function carregarEstrelas(userId, datasISO) {
+  if (!userId || datasISO.length === 0) return []
+  const { data } = await supabase
+    .from('mwa_game_eventos')
+    .select('ref')
+    .eq('user_id', userId)
+    .eq('tipo', 'estrela_dia')
+    .in('ref', datasISO)
+  return data ?? []
 }

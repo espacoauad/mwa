@@ -1,6 +1,6 @@
 import { lazy, Suspense, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Plus, GlassWater, Flame, Lightbulb, ChevronRight, Newspaper, Share2, PartyPopper, Camera } from 'lucide-react'
+import { Plus, GlassWater, Flame, Lightbulb, ChevronRight, Newspaper, Share2, PartyPopper, Camera, Sparkles } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { containerEntrada, itemEntrada } from '../../lib/motion.js'
 import { dicaDoDia } from '../../data/dicas.js'
@@ -11,6 +11,9 @@ import AnelMeta from './AnelMeta.jsx'
 import AnelHidratacao from './AnelHidratacao.jsx'
 import GraficoMacros from './GraficoMacros.jsx'
 import SeuProgresso from './SeuProgresso.jsx'
+import EstrelasDoDia from './EstrelasDoDia.jsx'
+
+const MomentoMwa = lazy(() => import('./MomentoMwa.jsx'))
 import CardUpgrade from '../upgrade/CardUpgrade.jsx'
 import Avatar from '../game/Avatar.jsx'
 import CarregandoFallback from '../ui/CarregandoFallback.jsx'
@@ -49,6 +52,7 @@ export default function Hoje({ irParaDicas }) {
     atualizarFotoPerfil,
   } = useApp()
   const [lojaAberta, setLojaAberta] = useState(false)
+  const [momentoAberto, setMomentoAberto] = useState(false)
   const [avisoCompartilhar, setAvisoCompartilhar] = useState(null)
   const [enviandoFoto, setEnviandoFoto] = useState(false)
   const reduzido = useReducedMotion()
@@ -210,6 +214,35 @@ export default function Hoje({ irParaDicas }) {
           initial={reduzido ? false : 'oculto'}
           animate="visivel"
         >
+        {/* Estrelas do Dia: o convite para voltar todos os dias */}
+        <motion.div variants={itemEntrada} className="mb-4">
+          <EstrelasDoDia />
+        </motion.div>
+
+        {/* Momento MWA: cuidado diário de menos de um minuto */}
+        <motion.div variants={itemEntrada} className="mb-4">
+          <button
+            type="button"
+            onClick={() => setMomentoAberto(true)}
+            className="flex w-full items-center gap-3 rounded-2xl border-2 border-ouro/40 bg-white p-4 text-left transition-transform active:scale-[0.99]"
+          >
+            <span className="rounded-full bg-ouro-claro p-2.5">
+              <Sparkles size={20} className="text-ouro" strokeWidth={1.5} />
+            </span>
+            <span className="flex-1">
+              <span className="block font-serif text-base font-semibold italic text-verde">
+                {ingles ? 'MWA Moment' : 'Momento MWA'}
+              </span>
+              <span className="text-xs text-verde/70">
+                {ingles
+                  ? 'Affirmation, breathing and your intention — under a minute'
+                  : 'Afirmação, respiração e sua intenção — em menos de um minuto'}
+              </span>
+            </span>
+            <ChevronRight size={18} className="shrink-0 text-verde/40" />
+          </button>
+        </motion.div>
+
         {/* Painel Premium: Macronutrientes em Anéis Concêntricos */}
         <motion.section variants={itemEntrada} className="mwa-sombra-premium rounded-2xl bg-white p-7">
           <h2 className="mb-1 text-sm font-semibold text-verde/60">{ingles ? 'Your intake today' : 'Seu consumo de hoje'}</h2>
@@ -357,6 +390,13 @@ export default function Hoje({ irParaDicas }) {
       >
         <Plus size={20} strokeWidth={2.5} /> {ingles ? 'Add meal' : 'Adicionar refeição'}
       </motion.button>
+
+      {/* Momento MWA: afirmação, respiração e intenção do dia */}
+      {momentoAberto && (
+        <Suspense fallback={<CarregandoFallback />}>
+          <MomentoMwa onFechar={() => setMomentoAberto(false)} />
+        </Suspense>
+      )}
 
       {/* Loja de skins do avatar */}
       {lojaAberta && (

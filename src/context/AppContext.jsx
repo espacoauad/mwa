@@ -11,7 +11,16 @@ import {
   equiparSkinDb,
   registrarAcessoDiario,
   carregarTarefasHoje,
+  carregarEstrelas,
 } from '../lib/game.js'
+import {
+  diasDaSemana,
+  estrelasDaSemana,
+  constelacaoCompleta,
+  ganhouEstrelaHoje,
+  metasCumpridas,
+} from '../utils/jogos/estrelas.js'
+import { lembrarEstrelaDoDia } from '../utils/notificacaoEstrela.js'
 
 const AppContext = createContext(null)
 
@@ -105,7 +114,7 @@ function pesagemDoBanco(p) {
 }
 
 export function AppProvider({ children }) {
-  const { idioma, alterarIdioma } = useIdioma()
+  const { idioma, ingles, alterarIdioma } = useIdioma()
   const [sessao, setSessao] = useState(null)
   const [carregando, setCarregando] = useState(true)
   const [usuario, setUsuario] = useState(null)
@@ -122,7 +131,9 @@ export function AppProvider({ children }) {
   // Aviso "+N 🌱" exibido brevemente quando uma tarefa é recompensada
   const [ganhoSementes, setGanhoSementes] = useState(null)
   // Tarefas centrais do dia (refeição, água, dica, exercício) e sementes ganhas hoje
-  const [tarefasHoje, setTarefasHoje] = useState({ refeicao: false, agua: false, dica: false, exercicio: false, sementesHoje: 0 })
+  const [tarefasHoje, setTarefasHoje] = useState({ refeicao: false, agua: false, dica: false, exercicio: false, jogo: false, sementesHoje: 0 })
+  // Estrelas do Dia: dias da semana em que a estrela foi conquistada
+  const [estrelasSemana, setEstrelasSemana] = useState([])
   // Tela de "dia concluído" (compartilhável)
   const [conclusaoDiaAberta, setConclusaoDiaAberta] = useState(false)
   // Tela de encerramento da Jornada de 30 dias — celebração com aprendizados e CTA para upgrade
@@ -234,6 +245,8 @@ export function AppProvider({ children }) {
         }
         const tarefas = await carregarTarefasHoje(userId, hoje)
         if (!cancelado) setTarefasHoje(tarefas)
+        const eventosEstrela = await carregarEstrelas(userId, diasDaSemana(hoje))
+        if (!cancelado) setEstrelasSemana(eventosEstrela)
       })
     }
 
@@ -242,6 +255,48 @@ export function AppProvider({ children }) {
       cancelado = true
     }
   }, [userId, hoje])
+
+  // ── Estrelas do Dia ──
+  const metasEstrela = useMemo(
+    () => metasCumpridas(tarefasHoje, { jogouHoje: tarefasHoje.jogo }),
+    [tarefasHoje],
+  )
+  const semanaEstrelas = useMemo(() => estrelasDaSemana(hoje, estrelasSemana), [hoje, estrelasSemana])
+  const estrelaHojeAcesa = semanaEstrelas.find((d) => d.hoje)?.acesa ?? false
+
+  // Acende a estrela assim que as 2 micro-metas são cumpridas (1x por dia, dedup no banco)
+  useEffect(() => {
+    if (!userId || estrelaHojeAcesa || !ganhouEstrelaHoje(metasEstrela)) return
+    let cancelado = false
+    async function acender() {
+      const ganho = await concederSementes(userId, 'estrela_dia', hoje)
+      if (cancelado || ganho === 0) return
+      setGame((g) => (g ? { ...g, sementes: g.sementes + ganho } : g))
+      setGanhoSementes({ qtd: ganho, tipo: 'estrela_dia' })
+      setTimeout(() => setGanhoSementes(null), 3000)
+      const atualizadas = [...estrelasSemana, { ref: hoje }]
+      setEstrelasSemana(atualizadas)
+      // Sétima estrela da semana: a constelação fecha e vale um bônus
+      if (constelacaoCompleta(estrelasDaSemana(hoje, atualizadas))) {
+        const bonus = await concederSementes(userId, 'constelacao', diasDaSemana(hoje)[0])
+        if (!cancelado && bonus > 0) {
+          setGame((g) => (g ? { ...g, sementes: g.sementes + bonus } : g))
+          setGanhoSementes({ qtd: bonus, tipo: 'constelacao' })
+          setTimeout(() => setGanhoSementes(null), 3000)
+        }
+      }
+    }
+    acender()
+    return () => {
+      cancelado = true
+    }
+  }, [userId, hoje, metasEstrela, estrelaHojeAcesa])
+
+  // Lembrete local da estrela (só se a pessoa já autorizou notificações)
+  useEffect(() => {
+    if (!userId || !semanaEstrelas.length) return
+    lembrarEstrelaDoDia({ userId, hoje, estrelaAcesa: estrelaHojeAcesa, metas: metasEstrela, ingles })
+  }, [userId, hoje, estrelaHojeAcesa, metasEstrela, semanaEstrelas.length, ingles])
 
   const diaCompleto = tarefasHoje.refeicao && tarefasHoje.agua && tarefasHoje.dica
 
@@ -354,34 +409,31 @@ export function AppProvider({ children }) {
     await premiar('joguinho', hoje)
   }
 
-  // +10 🌱 por fazer 300+ pontos no Jogo das Escolhas (1x por dia)
-  async function registrarJogoAvatar() {
-    await premiar('jogo_avatar', hoje)
+  // +10 🌱 por concluir uma missão do Monte Seu Prato com 1+ estrela (1x por dia)
+  async function registrarJogoPrato() {
+    await premiar('jogo_prato', hoje)
   }
 
-  // +10 🌱 por fazer 300+ pontos no Jogo do Treino (1x por dia)
-  async function registrarJogoTreino() {
-    await premiar('jogo_treino', hoje)
+  // +10 🌱 por rodada concluída em cada jogo educativo (1x por dia, por jogo)
+  async function registrarJogoVerdadeiroFalso() {
+    await premiar('jogo_vf', hoje)
   }
 
-  // +15 🌱 por revelar todas as cartas do Jardim de Afirmações (1x por dia)
-  async function registrarJogoMente() {
-    await premiar('jogo_mente', hoje)
+  async function registrarJogoTroca() {
+    await premiar('jogo_troca', hoje)
   }
 
-  // +10 🌱 por fazer 300+ pontos no Restaurante Saudável (1x por dia)
-  async function registrarJogoRestaurante() {
-    await premiar('jogo_restaurante', hoje)
+  async function registrarJogoSaciedade() {
+    await premiar('jogo_saciedade', hoje)
   }
 
-  // +10 🌱 por fazer 300+ pontos no Jogo da Poda (1x por dia)
-  async function registrarJogoPoda() {
-    await premiar('jogo_poda', hoje)
+  async function registrarJogoRotulos() {
+    await premiar('jogo_rotulos', hoje)
   }
 
-  // +10 🌱 por acertar 16 desafios no Jogo do Plantio (1x por dia)
-  async function registrarJogoPlantio() {
-    await premiar('jogo_plantio', hoje)
+  // +5 🌱 pelo Momento MWA do dia (1x por dia)
+  async function registrarMomentoMwa() {
+    await premiar('momento_mwa', hoje)
   }
 
   async function comprarSkin(categoria, skinId, preco) {
@@ -662,6 +714,9 @@ export function AppProvider({ children }) {
     game,
     ganhoSementes,
     tarefasHoje,
+    metasEstrela,
+    semanaEstrelas,
+    estrelaHojeAcesa,
     diaCompleto,
     conclusaoDiaAberta,
     abrirConclusaoDia,
@@ -673,12 +728,13 @@ export function AppProvider({ children }) {
     marcarDicaLida,
     registrarCompartilhamento,
     registrarJoguinho,
-    registrarJogoAvatar,
-    registrarJogoTreino,
-    registrarJogoMente,
-    registrarJogoRestaurante,
-    registrarJogoPoda,
-    registrarJogoPlantio,
+    registrarJogoPrato,
+    registrarJogoVerdadeiroFalso,
+    registrarJogoTroca,
+    registrarJogoSaciedade,
+    registrarJogoRotulos,
+    registrarMomentoMwa,
+    userId,
     registrarIndicacao,
     comprarSkin,
     equiparSkin,

@@ -38,6 +38,27 @@ test('encontra alimentos dos EUA em inglês e português', () => {
   assert.equal(buscarAlimentos(ALIMENTOS, 'pbj')[0]?.nome, 'Peanut butter and jelly sandwich')
 })
 
+test('busca encontra por plural e singular', () => {
+  const sonho = { nome: 'Sonho de Valsa', marca: 'Lacta', categoria: 'Doces e sobremesas', aliases: ['bombom'] }
+  const pacoca = { nome: 'Paçoca rolha', categoria: 'Doces e sobremesas', aliases: [] }
+  assert.deepEqual(buscarAlimentos([sonho], 'bombons'), [sonho])
+  assert.deepEqual(buscarAlimentos([pacoca], 'pacocas'), [pacoca])
+  assert.deepEqual(buscarAlimentos([sonho], 'sonhos de valsa'), [sonho])
+})
+
+test('busca tolera uma palavra extra (ex.: "chocolate Bis")', () => {
+  const bis = { nome: 'Bis ao leite', marca: 'Lacta', categoria: 'Doces e sobremesas', aliases: [] }
+  assert.deepEqual(buscarAlimentos([bis], 'chocolate bis'), [bis])
+  assert.deepEqual(buscarAlimentos([bis], 'bis lacta'), [bis])
+})
+
+test('itens aguardando validação de rótulo não aparecem na busca padrão', () => {
+  const pendente = { nome: 'Produto de marca sem rótulo confirmado', categoria: 'Doces e sobremesas', situacao: 'aguardando_validacao', aliases: [] }
+  const validado = { nome: 'Produto de marca com rótulo confirmado', categoria: 'Doces e sobremesas', situacao: 'validado', aliases: [] }
+  assert.deepEqual(buscarAlimentos([pendente, validado], 'produto de marca'), [validado])
+  assert.deepEqual(buscarAlimentos([pendente], ''), [])
+})
+
 test('converte cup, fl oz e oz', () => {
   const bebida = ALIMENTOS.find((a) => a.id === 'us-057')
   const solido = ALIMENTOS.find((a) => a.id === 'us-003')

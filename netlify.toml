@@ -1,0 +1,10 @@
+# Configuração de publicação do MWA no Netlify
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# App de página única (React/Vite): toda rota cai no index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -7,6 +7,11 @@ const TERRA = '#8A6A48'
 const CAULE = '#5C8A3F'
 const FOLHA = '#7CA85C'
 
+// Lista dos coroaId aceitos pelo switch abaixo — mantida em sincronia manual
+// com os `case` labels. Usada por src/data/farm/integridade.test.js para
+// checar que todo PILARES[].coroaId tem um desenho correspondente aqui.
+export const COROAS_SUPORTADAS = ['tomate', 'flor-azul', 'girassol', 'lavanda', 'trigo', 'milho', 'erva', 'laranjeira']
+
 function Coroa({ coroaId, cor, escala }) {
   const deslocamentoY = 34 - 18 * escala
   const transformBase = `translate(32 ${deslocamentoY}) scale(${escala})`
