@@ -183,14 +183,10 @@ export default function ConclusaoDia() {
             {TAREFAS.map((t) => (
               <div
                 key={t.chave}
-                className={`rounded-xl p-4 transition-all text-center border ${
-                  tarefasHoje[t.chave]
-                    ? 'bg-white/20 border-white/40'
-                    : 'bg-white/10 border-white/20 opacity-50'
-                }`}
+                className="rounded-xl p-4 transition-all text-center border bg-white/20 border-white/40"
               >
-                <p className={`text-2xl mb-1 ${!tarefasHoje[t.chave] ? 'opacity-60' : ''}`}>{t.emoji}</p>
-                <p className={`text-[9px] font-bold leading-tight text-white ${!tarefasHoje[t.chave] ? 'opacity-70' : ''}`}>{t.label}</p>
+                <p className="text-2xl mb-1">{t.emoji}</p>
+                <p className="text-[9px] font-normal leading-tight text-white">{t.label}</p>
               </div>
             ))}
           </div>
@@ -201,7 +197,7 @@ export default function ConclusaoDia() {
           <div className="relative mt-5 rounded-xl bg-white/10 px-4 py-3 backdrop-blur-sm border border-white/20">
             <div className="flex items-center justify-between gap-2">
               <p className="text-xs font-bold uppercase tracking-wide text-white/70">Estrelas</p>
-              <p className="text-[9px] text-white/60">{totalEstrelasSemanais} de {semanaEstrelas.length}</p>
+              <p className="text-[9px] font-normal text-white/60">{totalEstrelasSemanais} de {semanaEstrelas.length}</p>
             </div>
             <div className="flex items-center justify-center gap-1.5 mt-2">
               {semanaEstrelas.map((dia, idx) => (
@@ -225,37 +221,37 @@ export default function ConclusaoDia() {
             {/* Calorias */}
             <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
               <p className="text-3xl text-center">🔥</p>
-              <p className="mt-2 text-center text-sm font-bold text-white">{totaisHoje.calorias}</p>
-              <p className="text-center text-[10px] text-white/80">Calorias</p>
+              <p className="mt-2 text-center text-sm font-normal text-white">{totaisHoje.calorias}</p>
+              <p className="text-center text-[10px] font-normal text-white/80">Calorias</p>
             </div>
 
             {/* Proteína */}
             <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
               <p className="text-3xl text-center">🥚</p>
-              <p className="mt-2 text-center text-sm font-bold text-white">{totaisHoje.proteina}</p>
-              <p className="text-center text-[10px] text-white/80">Proteína (g)</p>
+              <p className="mt-2 text-center text-sm font-normal text-white">{totaisHoje.proteina}</p>
+              <p className="text-center text-[10px] font-normal text-white/80">Proteína (g)</p>
             </div>
 
             {/* Carboidrato */}
             <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
               <p className="text-3xl text-center">🌾</p>
-              <p className="mt-2 text-center text-sm font-bold text-white">{totaisHoje.carbos}</p>
-              <p className="text-center text-[10px] text-white/80">Carboidrato (g)</p>
+              <p className="mt-2 text-center text-sm font-normal text-white">{totaisHoje.carbos}</p>
+              <p className="text-center text-[10px] font-normal text-white/80">Carboidrato (g)</p>
             </div>
 
             {/* Gordura */}
             <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
               <p className="text-3xl text-center">🥑</p>
-              <p className="mt-2 text-center text-sm font-bold text-white">{totaisHoje.gordura}</p>
-              <p className="text-center text-[10px] text-white/80">Gordura (g)</p>
+              <p className="mt-2 text-center text-sm font-normal text-white">{totaisHoje.gordura}</p>
+              <p className="text-center text-[10px] font-normal text-white/80">Gordura (g)</p>
             </div>
           </div>
         </div>
 
         {/* Sementes - PEQUENO, EMBAIXO */}
         <div className="relative mt-4 rounded-lg bg-white/12 px-3 py-2 border border-white/20 text-center" role="status" aria-live="polite">
-          <p className="text-2xl font-bold text-ouro leading-none">+{tarefasHoje.sementesHoje}</p>
-          <p className="text-[9px] font-bold uppercase tracking-wide text-white/75 mt-0.5">🌱 Sementes</p>
+          <p className="text-2xl font-normal text-ouro leading-none">+{tarefasHoje.sementesHoje}</p>
+          <p className="text-[9px] font-normal uppercase tracking-wide text-white/75 mt-0.5">🌱 Sementes</p>
         </div>
 
         {/* Footer motivacional */}
