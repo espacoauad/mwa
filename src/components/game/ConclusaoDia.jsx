@@ -21,8 +21,15 @@ const TAREFAS = [
   { chave: 'exercicio', emoji: '💪', label: 'Exercício' },
 ]
 
+const MACROS_LABELS = [
+  { chave: 'calorias', emoji: '🔥', label: 'Calorias', unidade: 'kcal' },
+  { chave: 'proteina', emoji: '🥚', label: 'Proteína', unidade: 'g' },
+  { chave: 'carbos', emoji: '🌾', label: 'Carbos', unidade: 'g' },
+  { chave: 'gordura', emoji: '🥑', label: 'Gordura', unidade: 'g' },
+]
+
 export default function ConclusaoDia() {
-  const { usuario, diaAtual, game, tarefasHoje, fecharConclusaoDia, registrarCompartilhamento } = useApp()
+  const { usuario, diaAtual, game, tarefasHoje, totaisHoje, fecharConclusaoDia, registrarCompartilhamento } = useApp()
   const [compartilhando, setCompartilhando] = useState(false)
   const [aviso, setAviso] = useState(null)
   const cardRef = useRef(null)
@@ -171,8 +178,22 @@ export default function ConclusaoDia() {
           </div>
         )}
 
+        {/* Resumo de Macros */}
+        <div className="relative mt-6 rounded-2xl bg-white/10 p-4">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-white/60">Resumo Nutricional</p>
+          <div className="grid grid-cols-4 gap-2">
+            {MACROS_LABELS.map((m) => (
+              <div key={m.chave} className="rounded-lg bg-white/5 p-2.5 text-center">
+                <p className="text-sm">{m.emoji}</p>
+                <p className="mt-1 text-xs font-bold text-white">{totaisHoje[m.chave]}</p>
+                <p className="text-[9px] text-white/60">{m.unidade}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Checklist do dia */}
-        <div className="relative mt-6 grid grid-cols-4 gap-2">
+        <div className="relative mt-5 grid grid-cols-4 gap-2">
           {TAREFAS.map((t) => (
             <div
               key={t.chave}
