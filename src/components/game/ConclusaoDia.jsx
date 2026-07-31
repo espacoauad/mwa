@@ -248,10 +248,11 @@ export default function ConclusaoDia() {
           </div>
         </div>
 
-        {/* Sementes - PEQUENO, EMBAIXO */}
-        <div className="relative mt-4 rounded-lg bg-white/12 px-3 py-2 border border-white/20 text-center" role="status" aria-live="polite">
-          <p className="text-2xl font-normal text-ouro leading-none">+{tarefasHoje.sementesHoje}</p>
-          <p className="text-[9px] font-normal uppercase tracking-wide text-white/75 mt-0.5">🌱 Sementes</p>
+        {/* Sementes - UMA LINHA SÓ */}
+        <div className="relative mt-4 rounded-lg bg-white/12 px-4 py-2.5 border border-white/20 text-center" role="status" aria-live="polite">
+          <p className="text-lg font-normal text-ouro inline-block">
+            +{tarefasHoje.sementesHoje} <span className="text-white/80 text-sm ml-1.5">🌱 Sementes</span>
+          </p>
         </div>
 
         {/* Footer motivacional */}
