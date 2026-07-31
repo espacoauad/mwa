@@ -176,25 +176,39 @@ export default function ConclusaoDia() {
         </p>
         <p className="relative mx-auto mt-2 max-w-xs text-xs leading-relaxed text-white/85">{mensagem}</p>
 
-        {/* Sementes - MELHOR POSICIONADO */}
-        <div className="relative mt-5 rounded-2xl bg-gradient-to-r from-green-600/30 to-ouro/20 px-5 py-4 border border-ouro/40" role="status" aria-live="polite">
-          <p className="text-4xl font-bold text-ouro">+{tarefasHoje.sementesHoje}</p>
-          <p className="mt-0.5 text-xs font-bold uppercase tracking-wide text-white">🌱 Sementes</p>
+        {/* Tarefas Completadas - DESTAQUE PRINCIPAL */}
+        <div className="relative mt-5 space-y-2">
+          <p className="text-xs font-bold uppercase tracking-widest text-white/70">Tarefas Completadas</p>
+          <div className="grid grid-cols-4 gap-2.5">
+            {TAREFAS.map((t) => (
+              <div
+                key={t.chave}
+                className={`rounded-xl p-4 transition-all text-center ${
+                  tarefasHoje[t.chave]
+                    ? 'bg-white/20 border border-white/40'
+                    : 'bg-white/8 border border-white/15 opacity-45'
+                }`}
+              >
+                <p className="text-2xl mb-1">{t.emoji}</p>
+                <p className="text-[9px] font-bold leading-tight text-white">{t.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Estrelas da Semana - NOVO */}
+        {/* Estrelas da Semana - BRANDO */}
         {semanaEstrelas && semanaEstrelas.length > 0 && (
-          <div className="relative mt-4 rounded-2xl bg-gradient-to-r from-yellow-600/20 to-yellow-400/10 px-5 py-3 border border-yellow-400/30">
-            <p className="text-xs font-bold uppercase tracking-wide text-yellow-200 mb-2">Estrelas da Semana</p>
-            <div className="flex items-center justify-center gap-2">
+          <div className="relative mt-5 rounded-xl bg-white/10 px-4 py-3 backdrop-blur-sm border border-white/20">
+            <p className="text-xs font-bold uppercase tracking-wide text-white/70 mb-2.5 text-center">Estrelas da Semana</p>
+            <div className="flex items-center justify-center gap-2.5">
               {semanaEstrelas.map((dia, idx) => (
-                <div key={idx} className={`flex items-center justify-center rounded-full ${dia.acesa ? 'bg-yellow-400 text-yellow-900' : 'bg-white/10 text-white/40'} w-8 h-8 text-lg`}>
-                  ⭐
+                <div key={idx} className="flex items-center justify-center w-7 h-7">
+                  <p className={`text-xl ${dia.acesa ? 'text-ouro' : 'text-white/25'}`}>⭐</p>
                 </div>
               ))}
             </div>
             {totalEstrelasSemanais > 0 && (
-              <p className="mt-2 text-center text-xs text-white/80">{totalEstrelasSemanais} de {semanaEstrelas.length} estrelas conquistadas</p>
+              <p className="mt-2 text-center text-[10px] text-white/70">{totalEstrelasSemanais} de {semanaEstrelas.length} estrelas</p>
             )}
           </div>
         )}
@@ -207,7 +221,7 @@ export default function ConclusaoDia() {
         )}
 
         {/* Macros - CARDS CLAROS E LIMPOS */}
-        <div className="relative mt-6 space-y-2">
+        <div className="relative mt-5 space-y-2">
           <p className="text-xs font-bold uppercase tracking-widest text-white/70">Nutrição do Dia</p>
           <div className="grid grid-cols-2 gap-3">
             {/* Calorias */}
@@ -240,24 +254,10 @@ export default function ConclusaoDia() {
           </div>
         </div>
 
-        {/* Checklist do dia - MELHOR DESTAQUE */}
-        <div className="relative mt-5 space-y-2">
-          <p className="text-xs font-bold uppercase tracking-widest text-white/70">Tarefas Completadas</p>
-          <div className="grid grid-cols-4 gap-2">
-            {TAREFAS.map((t) => (
-              <div
-                key={t.chave}
-                className={`rounded-lg p-3 transition-all ${
-                  tarefasHoje[t.chave]
-                    ? 'bg-gradient-to-br from-white/20 to-white/10 ring-1 ring-white/40'
-                    : 'bg-white/5 opacity-40'
-                }`}
-              >
-                <p className="text-xl">{t.emoji}</p>
-                <p className="mt-1 text-[8px] font-bold leading-tight text-white">{t.label}</p>
-              </div>
-            ))}
-          </div>
+        {/* Sementes - PEQUENO, EMBAIXO */}
+        <div className="relative mt-4 rounded-lg bg-white/15 px-4 py-2 border border-white/25 text-center" role="status" aria-live="polite">
+          <p className="text-2xl font-bold text-ouro">+{tarefasHoje.sementesHoje}</p>
+          <p className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/80">🌱 Sementes</p>
         </div>
 
         {/* Footer motivacional */}
