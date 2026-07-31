@@ -110,6 +110,7 @@ function pesagemDoBanco(p) {
     peso: Number(p.peso),
     medidas: p.medidas ?? {},
     fotos: p.fotos ?? {},
+    bioimpedancia: p.bioimpedancia ?? null,
   }
 }
 
@@ -622,6 +623,7 @@ export function AppProvider({ children }) {
         peso: pesagem.peso,
         medidas: pesagem.medidas ?? {},
         fotos: pesagem.fotos ?? {},
+        bioimpedancia: pesagem.bioimpedancia ?? null,
       })
       .select()
       .single()
