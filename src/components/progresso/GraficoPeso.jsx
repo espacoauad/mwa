@@ -27,19 +27,19 @@ export default function GraficoPeso({ pontos }) {
       {linhas.map((v) => (
         <g key={v}>
           <line x1={M.left} x2={W - M.right} y1={escalaY(v)} y2={escalaY(v)} stroke="#E8E4DC" strokeWidth="1" />
-          <text x={M.left - 6} y={escalaY(v) + 3} textAnchor="end" fontSize="9" fill="#344528CC">
+          <text x={M.left - 6} y={escalaY(v) + 3} textAnchor="end" fontSize="9" fill="#08402FCC">
             {v}
           </text>
         </g>
       ))}
 
       {/* Linha da série */}
-      <path d={caminho} fill="none" stroke="#344528" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+      <path d={caminho} fill="none" stroke="#08402F" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
 
       {/* Pontos com anel + rótulo direto */}
       {pontos.map((p, i) => (
         <g key={i}>
-          <circle cx={escalaX(i)} cy={escalaY(p.peso)} r="5" fill="#344528" stroke="#FFFFFF" strokeWidth="2">
+          <circle cx={escalaX(i)} cy={escalaY(p.peso)} r="5" fill="#08402F" stroke="#FFFFFF" strokeWidth="2">
             <title>{`${p.rotulo}: ${p.peso.toLocaleString(locale)} kg`}</title>
           </circle>
           <text
@@ -48,11 +48,11 @@ export default function GraficoPeso({ pontos }) {
             textAnchor="middle"
             fontSize="10"
             fontWeight="600"
-            fill="#344528"
+            fill="#08402F"
           >
             {p.peso.toLocaleString(locale)}
           </text>
-          <text x={escalaX(i)} y={H - 8} textAnchor="middle" fontSize="9" fill="#344528CC">
+          <text x={escalaX(i)} y={H - 8} textAnchor="middle" fontSize="9" fill="#08402FCC">
             {p.rotulo}
           </text>
         </g>

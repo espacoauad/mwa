@@ -55,7 +55,7 @@ export default function VersiculoDoDiaModal({ onFechar }) {
           {/* CONTEÚDO PRINCIPAL */}
           <div
             className="relative px-6 py-8 space-y-6"
-            style={{ background: 'linear-gradient(160deg, #344528 0%, #4A5F3A 55%, #879B55 100%)' }}
+            style={{ background: 'linear-gradient(160deg, #08402F 0%, #486E42 55%, #879B55 100%)' }}
           >
             {/* Decoração de canto */}
             <div className="absolute -top-20 -right-20 w-40 h-40 bg-ouro/15 rounded-full blur-3xl" />

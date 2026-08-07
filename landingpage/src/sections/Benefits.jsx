@@ -7,7 +7,7 @@ const imagine = [
   'Vestir aquela roupa que hoje está apertada.',
   'Saber exatamente o que comer e por quê — sem depender de modismos.',
   'Olhar para a balança e perceber que finalmente está no caminho.',
-  'Sentir orgulho de ter sustentado uma rotina saudável por 30 dias.',
+  'Sentir orgulho de ter sustentado uma rotina saudável por 90 dias.',
   'Entender que você não precisa recomeçar do zero nunca mais.',
 ]
 
@@ -19,7 +19,7 @@ export default function Benefits() {
       <div className="mx-auto max-w-2xl">
         <Reveal className="text-center">
           <Eyebrow>A transformação</Eyebrow>
-          <Title>Imagine como será daqui a 30 dias.</Title>
+          <Title>Imagine como será daqui a 90 dias.</Title>
         </Reveal>
         <div className="mt-10 space-y-3">
           {imagine.map((item, i) => (

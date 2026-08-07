@@ -6,7 +6,7 @@ import { BRAND } from '../config.js'
 import { track } from '../lib/analytics.js'
 
 const included = [
-  'Acesso completo ao aplicativo durante 30 dias',
+  'Acesso completo ao aplicativo durante 90 dias',
   'Acompanhamento diário da alimentação',
   'Controle de água, peso, evolução e metas',
   'Cálculo personalizado de calorias e macronutrientes',
@@ -63,7 +63,7 @@ export default function Offer() {
               </li>
             ))}
           </ul>
-          <CtaButton className="mt-10 w-full">Quero começar meus 30 dias</CtaButton>
+          <CtaButton className="mt-10 w-full">Quero começar meus 90 dias</CtaButton>
 
           <div className="mt-8 flex items-start gap-3 rounded-2xl bg-sage/10 p-4 text-left">
             <ShieldCheck size={24} aria-hidden="true" className="shrink-0 text-sage" />
@@ -76,9 +76,9 @@ export default function Offer() {
           <div className="mt-3 flex items-start gap-3 rounded-2xl bg-gold/10 p-4 text-left">
             <Sparkles size={24} aria-hidden="true" className="shrink-0 text-gold" />
             <p className="text-xs leading-relaxed text-ink/80 md:text-sm">
-              <strong className="text-forest">Sua evolução pode continuar:</strong> no checkout,
-              você pode adicionar o <strong>MWA | Programa de 90 Dias</strong> em condição especial
-              para alunas — e a continuidade também fica disponível dentro do aplicativo.
+              <strong className="text-forest">Quer acelerar seus resultados?</strong> Durante os
+              90 dias, você pode adicionar a <strong>Sessão Estratégica Individual</strong> comigo
+              — R$ 297, opcional, contratada quando quiser dentro do aplicativo.
             </p>
           </div>
 

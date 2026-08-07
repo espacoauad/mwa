@@ -11,7 +11,7 @@ const features = [
   { id: 'hoje', label: 'Acompanhe seu dia', desc: 'Calorias, água e macros calculados automaticamente para o seu corpo e objetivo.', Screen: ScreenHoje },
   { id: 'refeicoes', label: 'Registre refeições', desc: 'Banco de alimentos pronto: escolha, toque e os nutrientes são somados na hora.', Screen: ScreenRefeicoes },
   { id: 'progresso', label: 'Veja sua evolução', desc: 'Pesagens, medidas e fotos de antes e depois — sua transformação registrada.', Screen: ScreenProgresso },
-  { id: 'dicas', label: 'Aprenda todos os dias', desc: 'Uma orientação exclusiva da nutricionista por dia, durante os 30 dias.', Screen: ScreenDica },
+  { id: 'dicas', label: 'Aprenda todos os dias', desc: 'Uma orientação exclusiva da nutricionista por dia, durante os 90 dias.', Screen: ScreenDica },
   { id: 'macros', label: 'Calculadora de macros', desc: 'Consulte qualquer alimento em segundos, sem decorar tabela nutricional.', Screen: ScreenMacros },
   { id: 'exercicio', label: 'Atividade física', desc: 'Registre treinos e veja as calorias gastas somadas às metas do dia.', Screen: ScreenExercicio },
   { id: 'jogos', label: 'Jogos que motivam', desc: 'Cumpra metas, jogue e personalize seu avatar. Leveza para sustentar o processo.', Screen: ScreenJogos },
@@ -164,7 +164,7 @@ export default function AppShowcase() {
       </div>
 
       <div className="mt-14 text-center">
-        <CtaButton variant="gold">Quero começar meus 30 dias</CtaButton>
+        <CtaButton variant="gold">Quero começar meus 90 dias</CtaButton>
       </div>
     </Section>
   )

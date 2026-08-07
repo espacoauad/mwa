@@ -26,7 +26,7 @@ export default function Hero() {
           <GoldRule className="hero-enter hero-enter-delay-2 mx-auto my-8 md:mx-0" />
 
           <p className="hero-enter hero-enter-delay-2 mx-auto max-w-xl text-base leading-relaxed text-ink/80 md:mx-0 md:text-lg">
-            Não é uma dieta. Em <strong className="font-semibold text-forest">30 dias</strong>,
+            Um caminho completo para o seu bem-estar. Em <strong className="font-semibold text-forest">90 dias</strong>,
             um passo por dia, o MWA guia você pelo aplicativo para mudar sua relação com a
             comida e construir hábitos que permanecem — sem restrição, sem culpa.
           </p>
@@ -37,7 +37,7 @@ export default function Hero() {
           </p>
 
           <div className="hero-enter hero-enter-delay-4 mt-10">
-            <CtaButton>Quero começar meus 30 dias</CtaButton>
+            <CtaButton>Quero começar meus 90 dias</CtaButton>
             <p className="mt-6 text-xs leading-relaxed text-mist md:text-sm">
               Desenvolvido por Wanessa Auad — Nutricionista · CRN-1/27939
             </p>
@@ -48,10 +48,10 @@ export default function Hero() {
           <img
             src={logoMWA}
             alt="MWA — My Wellness Approach"
-            width={600}
-            height={708}
+            width={570}
+            height={600}
             fetchPriority="high"
-            className="w-64 max-w-full drop-shadow-[0_10px_16px_rgba(42,59,31,0.12)] sm:w-72 md:w-full md:max-w-[26rem]"
+            className="w-64 max-w-full drop-shadow-[0_10px_16px_rgba(8,64,47,0.12)] sm:w-72 md:w-full md:max-w-[26rem]"
           />
         </div>
       </div>
