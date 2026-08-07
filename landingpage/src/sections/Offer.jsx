@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Check, ShieldCheck, Sparkles } from 'lucide-react'
+import { Check, ShieldCheck } from 'lucide-react'
 import { Section, Eyebrow, CtaButton } from '../components/ui.jsx'
 import Reveal from '../components/Reveal.jsx'
 import { BRAND } from '../config.js'
@@ -70,15 +70,6 @@ export default function Offer() {
             <p className="text-xs leading-relaxed text-ink/80 md:text-sm">
               <strong className="text-forest">Garantia incondicional de 7 dias.</strong> Se sentir
               que não é para você, devolvemos 100% do valor. Sem burocracia, sem perguntas.
-            </p>
-          </div>
-
-          <div className="mt-3 flex items-start gap-3 rounded-2xl bg-gold/10 p-4 text-left">
-            <Sparkles size={24} aria-hidden="true" className="shrink-0 text-gold" />
-            <p className="text-xs leading-relaxed text-ink/80 md:text-sm">
-              <strong className="text-forest">Quer acelerar seus resultados?</strong> Durante os
-              90 dias, você pode adicionar a <strong>Sessão Estratégica Individual</strong> comigo
-              — R$ 297, opcional, contratada quando quiser dentro do aplicativo.
             </p>
           </div>
 

@@ -7,8 +7,7 @@ const faqs = [
   ['Preciso baixar na loja de aplicativos?', 'Não. O app funciona direto no navegador do celular e pode ser adicionado à tela inicial em um toque, sem ocupar memória.'],
   ['É um PDF ou e-book?', 'Não. O MWA é uma experiência guiada pelo aplicativo, com registros, conteúdos, metas e acompanhamento diário.'],
   ['Por quanto tempo terei acesso?', 'O acesso da Jornada é de 90 dias, começando quando você criar sua conta.'],
-  ['O que é a Sessão Estratégica Individual?', 'É um encontro individual comigo para destravar os seus desafios específicos dentro da Jornada. É opcional, pode ser contratada a qualquer momento durante os 90 dias, por R$ 297.'],
-  ['Existe mensalidade?', 'Não. A Jornada de 90 Dias é pagamento único de R$ 197. A Sessão Estratégica Individual (R$ 297) é opcional e à parte.'],
+  ['Existe mensalidade?', 'Não. A Jornada de 90 Dias é pagamento único de R$ 197.'],
   ['E se eu não gostar?', 'Você tem 7 dias de garantia incondicional. Basta pedir reembolso e devolvemos 100% do valor, sem perguntas.'],
   ['Posso compartilhar meu acesso?', 'Não. O acesso é individual e pessoal.'],
   [
@@ -22,7 +21,7 @@ const faqs = [
         >
           atendimento@metodomwa.com.br
         </a>
-        .
+        . Dentro do aplicativo você também encontra um canal de dúvidas pelo WhatsApp.
       </>
     ),
   ],

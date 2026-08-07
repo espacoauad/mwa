@@ -1,5 +1,5 @@
 import { CtaButton, GoldRule } from '../components/ui.jsx'
-import logoMWA from '../assets/logo-mwa.png'
+import logoMWA from '../assets/logo-mwa-completo.png'
 
 export default function Hero() {
   return (
@@ -47,9 +47,9 @@ export default function Hero() {
         <div className="hero-enter hero-enter-delay-3 flex justify-center md:justify-end">
           <img
             src={logoMWA}
-            alt="MWA — My Wellness Approach"
-            width={570}
-            height={600}
+            alt="MWA — My Wellness App"
+            width={800}
+            height={800}
             fetchPriority="high"
             className="w-64 max-w-full drop-shadow-[0_10px_16px_rgba(8,64,47,0.12)] sm:w-72 md:w-full md:max-w-[26rem]"
           />

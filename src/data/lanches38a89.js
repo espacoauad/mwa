@@ -382,11 +382,11 @@ export const LANCHES_38_89 = [
   {
     dia: 75,
     icone: '🥚',
-    titulo: 'Clara de Ovo com Melado',
+    titulo: 'Claras de Ovo com Maçã',
     proteina: '~11g',
-    descricao: 'Baixíssima caloria + docinho natural. Leve.',
-    ingredientes: ['3 claras cozidas', '1 colher melado natural'],
-    preparo: 'Cozinhe claras, corte, regue com melado.',
+    descricao: 'Baixíssima caloria + docinho natural da fruta. Leve e prática.',
+    ingredientes: ['3 claras cozidas', '1 maçã média'],
+    preparo: 'Cozinhe as claras e corte a maçã em fatias. Sirva juntas.',
     produto: null,
   },
   {
