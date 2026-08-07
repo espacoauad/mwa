@@ -12,9 +12,11 @@
 export const HOTMART = {
   // Cole aqui os links de checkout de cada produto (Hotmart → produto → oferta):
   checkout: {
+    // Oferta principal: primeiro ciclo de 90 dias por R$ 197
     programa90d: 'https://pay.hotmart.com/SEU-CHECKOUT-90D',
+    // Oferta exclusiva: novo ciclo de 90 dias por R$ 127
+    renovacao90d: 'https://pay.hotmart.com/SEU-CHECKOUT-RENOVACAO-90D',
     sessao: 'https://pay.hotmart.com/SEU-CHECKOUT-SESSAO',
-    // 21d é vendido pela landing page na Hotmart (não precisa de botão no app)
   },
 
   // Contatos de suporte mostrados na tela "Sessão adquirida":
@@ -31,7 +33,7 @@ export function linkWhatsappSuporte() {
   return `https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappMsg)}`
 }
 
-// Abre o checkout do produto informado ('programa90d' | 'sessao')
+// Abre o checkout do produto informado ('programa90d' | 'renovacao90d' | 'sessao')
 export function abrirCheckout(produto) {
   const url = HOTMART.checkout[produto]
   if (!url) return

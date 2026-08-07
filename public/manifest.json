@@ -1,12 +1,12 @@
 {
-  "name": "MWA — Método Wanessa Auad",
+  "name": "MWA — My Wellness App",
   "short_name": "MWA",
-  "description": "Transformação de hábitos em 21 dias · My Wellness Approach",
+  "description": "Transformação de hábitos em 90 dias · My Wellness App",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#F5F1E8",
-  "theme_color": "#344528",
+  "theme_color": "#08402F",
   "orientation": "portrait-primary",
   "icons": [
     {

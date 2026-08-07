@@ -6,7 +6,7 @@ export default function FinalCta() {
     <Section className="bg-forest-deep" lazy intrinsicHeight={490}>
       <Reveal className="mx-auto max-w-2xl text-center">
         <Title light>
-          Os próximos 30 dias vão passar de qualquer forma.
+          Os próximos 90 dias vão passar de qualquer forma.
           <br />
           <em className="italic text-gold-soft">A diferença será a decisão que você toma hoje.</em>
         </Title>

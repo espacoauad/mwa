@@ -1,9 +1,8 @@
 import { useState, lazy, Suspense } from 'react'
-import { RotateCcw, Mail, Phone, AtSign, Globe, Crown, FlaskConical, BadgeCheck, LogOut, Camera, Star, Share2 } from 'lucide-react'
+import { RotateCcw, Mail, Phone, AtSign, Globe, FlaskConical, BadgeCheck, LogOut, Camera, Star, Share2 } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { NIVEIS_ATIVIDADE, OBJETIVOS } from '../../utils/calculos.js'
 import { PRODUTOS, CONTATO, formatarPreco, linkSessao } from '../../utils/ofertas.js'
-import { abrirCheckout } from '../../lib/hotmart.js'
 import { NUTRICIONISTA, AVISO_CRN } from '../../data/legal.js'
 import { calcularEstrelas } from '../../utils/hallDaFama.js'
 import { redimensionarImagem } from '../../lib/imagem.js'
@@ -23,7 +22,6 @@ export default function Perfil() {
   const { ingles, idioma, locale } = useIdioma()
   const {
     usuario,
-    programa90Ativo,
     metas,
     diaAtual,
     totalDias,
@@ -261,30 +259,9 @@ export default function Perfil() {
         <div className="mt-3 flex flex-col gap-2.5">
           <div className="rounded-lg bg-sage-claro p-3.5">
             <p className="text-xs font-bold uppercase text-sage">{ingles ? 'Your current plan' : 'Seu plano atual'}</p>
-            <p className="font-semibold text-verde">
-              {programa90Ativo ? PRODUTOS.upgrade.nome : PRODUTOS.programa.nome}
-            </p>
+            <p className="font-semibold text-verde">{PRODUTOS.programa.nome}</p>
             <p className="text-xs text-verde/60">{ingles ? 'day' : 'dia'} {diaAtual} {ingles ? 'of' : 'de'} {totalDias}</p>
           </div>
-          {!programa90Ativo && (
-            <div>
-              <button
-                type="button"
-                onClick={() => abrirCheckout('programa90d')}
-                className="block w-full rounded-lg border-2 border-ouro/60 p-3.5 text-left transition-colors hover:bg-ouro-claro"
-              >
-                <span className="flex items-center gap-1.5 text-xs font-bold uppercase text-ouro">
-                  <Crown size={12} /> {ingles ? 'Continue your transformation' : 'Continue sua transformação'}
-                </span>
-                <span className="block font-semibold text-verde">{PRODUTOS.upgrade.nome}</span>
-                <span className="block text-xs text-verde/60">
-                  {diaAtual >= 6 && diaAtual <= 10
-                    ? `${formatarPreco(PRODUTOS.upgrade.preco)} (${ingles ? 'special offer valid through day 10' : 'condição especial válida até o dia 10'})`
-                    : `${formatarPreco(PRODUTOS.upgrade.preco)}`}
-                </span>
-              </button>
-            </div>
-          )}
           <div className="rounded-lg border-2 border-sage/25 bg-white p-3.5 text-left">
             <p className="text-xs font-semibold text-verde/60 mb-2">{ingles ? 'One-on-one mentoring with Wanessa Auad' : 'Mentoria individual com Wanessa Auad'}</p>
             <BotaoPagamento

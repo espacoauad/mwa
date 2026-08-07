@@ -162,6 +162,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
       {/* Bioimpedancia Evolution Section */}
       {(() => {
         const metricas = {
+          imc: [],
           percentualGordura: [],
           percentualMusculo: [],
           gorduraVisceral: [],
@@ -189,6 +190,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
         if (metricsComDados.length === 0) return null
 
         const labels = {
+          imc: 'IMC',
           percentualGordura: '% Gordura Corporal',
           percentualMusculo: '% Músculo',
           gorduraVisceral: 'Gordura Visceral',
@@ -198,6 +200,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
         }
 
         const units = {
+          imc: '',
           percentualGordura: '%',
           percentualMusculo: '%',
           gorduraVisceral: '',
@@ -207,6 +210,7 @@ export default function SeuProgresso({ usuario, pesagens }) {
         }
 
         const melhorEhMenor = {
+          imc: true,
           percentualGordura: true,
           percentualMusculo: false,
           gorduraVisceral: true,

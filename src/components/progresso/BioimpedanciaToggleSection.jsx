@@ -61,7 +61,7 @@ export default function BioimpedanciaToggleSection({
                   placeholder={`${metrica.minVal}-${metrica.maxVal}`}
                   min={metrica.minVal}
                   max={metrica.maxVal}
-                  step={metrica.key.includes('percentual') ? '0.1' : '0.5'}
+                  step={metrica.key.includes('percentual') || metrica.key === 'imc' ? '0.1' : '0.5'}
                   value={value}
                   onChange={(e) => onValueChange(metrica.key, e.target.value)}
                   className={`ml-auto w-24 rounded border px-2 py-1 text-sm text-verde transition-colors ${

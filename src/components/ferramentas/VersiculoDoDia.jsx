@@ -26,7 +26,7 @@ export default function VersiculoDoDia() {
       {/* CARTÃO PRINCIPAL — fundo escuro sólido para garantir contraste com o texto claro */}
       <div
         className="relative rounded-3xl overflow-hidden"
-        style={{ background: 'linear-gradient(160deg, #344528 0%, #4A5F3A 55%, #879B55 100%)' }}
+        style={{ background: 'linear-gradient(160deg, #08402F 0%, #486E42 55%, #879B55 100%)' }}
       >
         {/* Border com brilho */}
         <div className="absolute inset-0 rounded-3xl border border-ouro/30" />

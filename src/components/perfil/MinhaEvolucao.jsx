@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { X } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
-import { pesagensComRotulo, proporcaoCinturaQuadril, estagioPostura, corConquista } from '../../utils/evolucao.js'
+import { pesagensComRotulo } from '../../utils/evolucao.js'
 import GraficoLinha from './GraficoLinha.jsx'
-import AvatarManequim from './AvatarManequim.jsx'
+import AvatarEvolucaoRealista, { calcularEstagioCorporal } from './AvatarEvolucaoRealista.jsx'
 
 const FOTO_LABELS = { frente: 'Frente', costas: 'Costas', latEsq: 'Lateral esq.', latDir: 'Lateral dir.' }
 
@@ -32,8 +32,12 @@ export default function MinhaEvolucao({ onFechar }) {
   const ultima = temHistorico ? comRotulo[comRotulo.length - 1].pesagem : null
   const pesoAtual = ultima?.peso ?? usuario?.peso ?? null
   const medidasAtuais = ultima?.medidas ?? usuario?.medidas ?? {}
-  const proporcaoAtual = proporcaoCinturaQuadril(medidasAtuais)
-  const ultimoIndice = Math.max(0, comRotulo.length - 1)
+  const sexoAvatar = usuario?.sexo === 'masculino' ? 'masculino' : 'feminino'
+  const estagioAtual = calcularEstagioCorporal({
+    peso: pesoAtual,
+    altura: usuario?.altura,
+    cintura: medidasAtuais.cintura,
+  })
 
   const pontosPeso = comRotulo.map(({ pesagem, rotulo }) => ({ rotulo, valor: pesagem.peso ?? null }))
   const pontosCintura = comRotulo.map(({ pesagem, rotulo }) => ({ rotulo, valor: pesagem.medidas?.cintura ?? null }))
@@ -64,23 +68,27 @@ export default function MinhaEvolucao({ onFechar }) {
 
         {/* Estado atual */}
         <section className="mt-5 rounded-2xl bg-white p-5 shadow-sm shadow-verde/5">
-          <p className="text-sm font-semibold text-verde/60">Seu estado atual</p>
-          <div className="mt-3 flex items-center gap-4">
-            <AvatarManequim
-              proporcao={proporcaoAtual}
-              estagioPostura={estagioPostura(ultimoIndice, comRotulo.length)}
-              corAcento={corConquista(ultimoIndice)}
-              tamanho="lg"
-            />
-            <div className="flex-1">
-              <p className="text-3xl font-bold text-verde">{pesoAtual != null ? `${pesoAtual} kg` : '—'}</p>
-              <ul className="mt-2 flex flex-col gap-0.5 text-sm text-verde/70">
-                <li>Cintura: {medidasAtuais.cintura ?? '—'} cm</li>
-                <li>Quadril: {medidasAtuais.quadril ?? '—'} cm</li>
-                <li>Peito: {medidasAtuais.peito ?? '—'} cm</li>
-              </ul>
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h2 className="font-semibold text-verde">Avatar de evolução</h2>
+              <p className="text-xs text-verde/55">Representação visual do resultado atual.</p>
             </div>
+            <span className="rounded-full bg-sage-claro px-3 py-1 text-[11px] font-bold text-verde">Atual</span>
           </div>
+          <div className="mt-3 flex justify-center">
+            <AvatarEvolucaoRealista sexo={sexoAvatar} estagio={estagioAtual} mostrarEtapas />
+          </div>
+          <p className="mt-2 text-center text-xl font-bold text-verde">
+            {pesoAtual != null ? `${pesoAtual} kg` : 'Aguardando pesagem'}
+          </p>
+          <ul className="mt-2 flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs text-verde/65">
+            <li>Cintura: {medidasAtuais.cintura ?? '—'} cm</li>
+            <li>Quadril: {medidasAtuais.quadril ?? '—'} cm</li>
+            <li>Peito: {medidasAtuais.peito ?? '—'} cm</li>
+          </ul>
+          <p className="mt-3 text-center text-[11px] leading-relaxed text-verde/50">
+            Estimado a partir do peso, IMC e circunferência de cintura disponíveis. Ilustrativo; não substitui avaliação clínica.
+          </p>
         </section>
 
         {!temTimelineComparativa && (
@@ -106,11 +114,14 @@ export default function MinhaEvolucao({ onFechar }) {
                 {comRotulo.map(({ pesagem, rotulo }, indice) => (
                   <div key={pesagem.id} className="flex w-40 shrink-0 flex-col items-center gap-2 rounded-2xl bg-white p-3 shadow-sm shadow-verde/5">
                     <p className="text-xs font-bold uppercase tracking-wide text-verde/60">{rotulo}</p>
-                    <AvatarManequim
-                      proporcao={proporcaoCinturaQuadril(pesagem.medidas)}
-                      estagioPostura={estagioPostura(indice, comRotulo.length)}
-                      corAcento={corConquista(indice)}
-                      tamanho="sm"
+                    <AvatarEvolucaoRealista
+                      sexo={sexoAvatar}
+                      estagio={calcularEstagioCorporal({
+                        peso: pesagem.peso,
+                        altura: usuario?.altura,
+                        cintura: pesagem.medidas?.cintura,
+                      })}
+                      tamanho="pequeno"
                     />
                     <div className="grid grid-cols-2 gap-1">
                       {Object.entries(FOTO_LABELS).map(([id, rotuloFoto]) => {

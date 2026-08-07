@@ -271,7 +271,7 @@ export default function LandingVendas() {
       <section className="py-16">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <h3 className="mb-3 font-serif text-3xl font-bold italic text-verde">
-            Seu ecossistema de bem-estar.
+            Um caminho completo para o seu bem-estar.
           </h3>
           <p className="mb-10 text-xl font-semibold text-verde/80">
             Tudo se conecta para ajudar você a criar hábitos que permanecem.
@@ -582,7 +582,7 @@ export default function LandingVendas() {
                 </p>
                 <div
                   className="relative overflow-hidden rounded-2xl border border-ouro/30 p-4 text-center"
-                  style={{ background: 'linear-gradient(160deg, #344528 0%, #4A5F3A 55%, #879B55 100%)' }}
+                  style={{ background: 'linear-gradient(160deg, #08402F 0%, #486E42 55%, #879B55 100%)' }}
                 >
                   <p className="text-[8px] font-bold uppercase tracking-wider text-ouro-claro">Respeito ao corpo</p>
                   <p className="mt-2 font-serif text-[11px] italic leading-snug text-white">
@@ -838,7 +838,7 @@ export default function LandingVendas() {
         <LogoMWA variante="simbolo" className="mx-auto mb-2 h-10 w-10" />
         <p className="font-serif text-lg font-bold italic text-verde">MWA · My Wellness App</p>
         <p className="mt-1 text-xs uppercase tracking-[0.2em] text-verde/40">My Wellness Approach</p>
-        <p className="mx-auto mt-3 max-w-xs text-sm text-verde/70">Seu ecossistema para criar hábitos de bem-estar.</p>
+        <p className="mx-auto mt-3 max-w-xs text-sm text-verde/70">Um caminho completo para o seu bem-estar.</p>
         <div className="mx-auto mt-6 max-w-2xl space-y-2 border-t border-cinza px-4 pt-5 text-left">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-verde/60">Avisos importantes</p>
           <p className="text-[11px] leading-relaxed text-verde/60">

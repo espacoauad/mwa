@@ -23,13 +23,13 @@ export default function AnelHidratacao({ consumidoMl, metaMl, onClickAdicionar }
   const preenchido = (Math.min(pctAnimado, 100) / 100) * circ
 
   // Estado visual e micro-copy educativa
-  let estado = { frase: ingles ? 'Start gently. Small sips are also an act of care.' : 'Comece com calma. Pequenos goles também constroem cuidado.', tipo: 'inicio', cor: '#C9963B' }
+  let estado = { frase: ingles ? 'Start gently. Small sips are also an act of care.' : 'Comece com calma. Pequenos goles também constroem cuidado.', tipo: 'inicio', cor: '#C59F4F' }
   if (pct >= 40 && pct < 80) {
     estado = { frase: ingles ? 'Your body responds better when your routine supports it.' : 'Seu corpo responde melhor quando a rotina apoia.', tipo: 'progresso', cor: '#879B55' }
   } else if (pct >= 80 && pct < 100) {
     estado = { frase: ingles ? 'You are close to your target. Consistency comes one sip at a time.' : 'Você está perto da meta. Consistência também se bebe.', tipo: 'proximidade', cor: '#879B55' }
   } else if (pct >= 100) {
-    estado = { frase: ingles ? 'Target reached. Another quiet act of care for yourself.' : 'Meta concluída. Mais um cuidado silencioso por você.', tipo: 'conquista', cor: '#344528' }
+    estado = { frase: ingles ? 'Target reached. Another quiet act of care for yourself.' : 'Meta concluída. Mais um cuidado silencioso por você.', tipo: 'conquista', cor: '#08402F' }
   }
 
   const corTexto = pct >= 100 ? 'text-ouro' : 'text-verde/70'

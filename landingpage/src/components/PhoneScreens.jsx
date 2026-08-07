@@ -6,7 +6,7 @@ export function ScreenHoje() {
   return (
     <div className="p-4">
       <p className="mb-1 text-left font-display text-sm font-bold italic text-forest">Olá, Maria 🌿</p>
-      <p className="mb-3 text-left text-[10px] text-forest/60">Dia 7 de 30 — você está indo bem!</p>
+      <p className="mb-3 text-left text-[10px] text-forest/60">Dia 7 de 90 — você está indo bem!</p>
       <div className="relative mx-auto mb-3 flex h-28 w-28 items-center justify-center rounded-full" style={{ background: 'conic-gradient(#879B55 0% 68%, #E8E4DC 68% 100%)' }}>
         <div className="flex flex-col items-center justify-center rounded-full bg-cream" style={{ width: '5.5rem', height: '5.5rem' }}>
           <p className="text-lg font-bold text-forest">1.240</p>
@@ -115,7 +115,7 @@ export function ScreenDica() {
   return (
     <div className="p-4">
       <p className="mb-1 text-left font-display text-sm font-bold italic text-forest">Dica do dia</p>
-      <p className="mb-3 text-left text-[10px] text-forest/60">Dia 4 de 30 · Hidratação</p>
+      <p className="mb-3 text-left text-[10px] text-forest/60">Dia 4 de 90 · Hidratação</p>
       <div className="rounded-lg bg-white p-3 text-left">
         <p className="text-2xl">💧</p>
         <p className="mt-1 text-[11px] font-bold leading-snug text-forest">
@@ -239,7 +239,7 @@ export function ScreenReflexao() {
       </p>
       <div
         className="relative overflow-hidden rounded-2xl border border-gold/30 p-4 text-center"
-        style={{ background: 'linear-gradient(160deg, #2A3B1F 0%, #4A5F3A 55%, #879B55 100%)' }}
+        style={{ background: 'linear-gradient(160deg, #08402F 0%, #486E42 55%, #879B55 100%)' }}
       >
         <p className="text-[8px] font-bold uppercase tracking-wider text-gold-soft">Respeito ao corpo</p>
         <p className="mt-2 font-display text-[11px] italic leading-snug text-white">

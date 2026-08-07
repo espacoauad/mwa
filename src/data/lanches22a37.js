@@ -33,12 +33,12 @@ export const LANCHES_22_37 = [
   {
     dia: 24,
     icone: '🧀',
-    titulo: 'Requeijão com cenoura e rabanete',
+    titulo: 'Ricota temperada com cenoura e rabanete',
     proteina: '~7g',
     descricao:
-      'Requeijão light é proteína concentrada. Com cenoura e rabanete crus, vira um lanche crocante que sacia por horas.',
-    ingredientes: ['4 colheres de sopa de requeijão light', 'Cenoura em palitos (1 cenoura média)', 'Rabanete em fatias finas (4–5)', 'Sal e pimenta a gosto'],
-    preparo: 'Coloque o requeijão num potinho e use cenoura e rabanete como "colher". Crocante e satisfatório.',
+      'Ricota temperada é uma opção leve e proteica, sem a gordura extra do requeijão. Com cenoura e rabanete crus, vira um lanche crocante que sacia por horas.',
+    ingredientes: ['4 colheres de sopa de ricota fresca', 'Ervas, sal e limão a gosto', 'Cenoura em palitos (1 cenoura média)', 'Rabanete em fatias finas (4–5)'],
+    preparo: 'Amasse a ricota com sal, ervas e um fio de limão até ficar cremosa. Use cenoura e rabanete como "colher". Crocante e satisfatório.',
     produto: null,
   },
   {
@@ -66,23 +66,23 @@ export const LANCHES_22_37 = [
   {
     dia: 27,
     icone: '🥞',
-    titulo: 'Panqueca de aveia com melado',
+    titulo: 'Panqueca de aveia com mel',
     proteina: '~12g',
     descricao:
-      'Aveia proteica é satisfatória. Com um fio de melado natural, satisfaz vontade de doce sem culpa.',
-    ingredientes: ['½ xícara de aveia em flocos', '1 ovo inteiro', '100ml de leite', 'Canela, 1 colher de chá de melado natural', 'Sal uma pitada'],
-    preparo: 'Bata tudo no liquidificador, despeje na frigideira quente e doure dos dois lados. Em 5 minutos está pronto.',
+      'Aveia proteica é satisfatória. Com um fio de mel, satisfaz vontade de doce sem culpa.',
+    ingredientes: ['½ xícara de aveia em flocos', '1 ovo inteiro', '100ml de leite', '1 colher de chá de fermento em pó', 'Canela, 1 colher de chá de mel', 'Sal uma pitada'],
+    preparo: 'Bata tudo no liquidificador. Unte a frigideira com um fio de óleo ou manteiga para não pregar, despeje em fogo médio e doure dos dois lados. Em 5 minutos está pronto.',
     produto: null,
   },
   {
     dia: 28,
-    icone: '🫘',
-    titulo: 'Feijão cozido com melado',
-    proteina: '~8g',
+    icone: '🍲',
+    titulo: 'Feijão com carne moída',
+    proteina: '~26g',
     descricao:
-      'Feijão é proteína vegetal, carboidrato lento e fibra. Com melado, traz aquele docinho saudável sem açúcar refinado.',
-    ingredientes: ['½ xícara de feijão cozido (já temperado do almoço)', '1 colher de chá de melado natural', 'Canela a gosto'],
-    preparo: 'Misture o feijão com melado numa tigela. Pode comer quente ou em temperatura ambiente. Doce natural garantido.',
+      'Combinação clássica: o feijão traz fibra e carboidrato lento, a carne moída completa com proteína de alto valor biológico. Refeição robusta e saciante.',
+    ingredientes: ['½ xícara de feijão cozido (já temperado do almoço)', '80g de carne moída cozida', 'Temperos a gosto (alho, cebola, cheiro-verde)'],
+    preparo: 'Refogue a carne moída temperada até dourar, misture com o feijão cozido e sirva quente.',
     produto: null,
   },
   {

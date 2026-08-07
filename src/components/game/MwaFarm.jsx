@@ -1,190 +1,227 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { X, Sprout } from 'lucide-react'
+import { Droplets, Hand, LockKeyhole, Sparkles, Sprout, X } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 import { resumoFazenda } from '../../utils/farm/crescimento.js'
+import farmFase1 from '../../assets/farm/mwa-farm-fase-1.png'
+import farmFase2 from '../../assets/farm/mwa-farm-fase-2.png'
+import farmFase3 from '../../assets/farm/mwa-farm-fase-3.png'
+import farmFase4 from '../../assets/farm/mwa-farm-fase-4.png'
 import PlantaFazenda from './svg/PlantaFazenda.jsx'
-import AnimalFazendaSvg from './svg/AnimalFazendaSvg.jsx'
 
-// MWA FARM — a fazenda cresce sozinha ao longo da jornada (derivada de
-// diaAtual), sem nenhuma tarefa obrigatória. Tocar numa planta ou bichinho só
-// mostra informação; nada aqui concede ou consome sementes.
+const ESTAGIOS = ['Uma intenção foi plantada', 'Sua constância criou raízes', 'Seu cuidado está florescendo', 'Este hábito já faz parte da sua vida']
+const ESTAGIOS_EN = ['An intention was planted', 'Your consistency has taken root', 'Your care is blooming', 'This habit is now part of your life']
+const MENSAGENS = [
+  'Toda transformação começa quando você decide cuidar de si mais uma vez.',
+  'Talvez você ainda não perceba todas as mudanças, mas o seu jardim já percebe.',
+  'Sua dedicação está transformando pequenas escolhas em uma nova forma de viver.',
+  'Você não está apenas cumprindo tarefas. Está cultivando a vida que deseja viver.',
+]
+const MENSAGENS_EN = [
+  'Every transformation begins when you choose to care for yourself one more time.',
+  'You may not notice every change yet, but your garden already does.',
+  'Your dedication is turning small choices into a new way of living.',
+  'You are not just completing tasks. You are cultivating the life you want to live.',
+]
 
-const NOMES_ESTAGIO = ['Semente', 'Broto', 'Floração', 'Plena']
-const NOMES_ESTAGIO_EN = ['Seed', 'Sprout', 'Blooming', 'Full grown']
+// Mapeamento nominal: cada hotspot pertence a um cenário específico.
+// Nunca depende da ordem de PILARES, evitando "água" abrir outro hábito.
+// As áreas são invisíveis para preservar a ilustração sem elementos flutuantes.
+const AREAS_POR_ID = {
+  hidratacao: { left: '5%', top: '10%', width: '29%', height: '20%' },
+  alimentacao: { left: '33%', top: '11%', width: '31%', height: '18%' },
+  macros: { left: '65%', top: '20%', width: '31%', height: '18%' },
+  digestao: { left: '4%', top: '31%', width: '34%', height: '18%' },
+  calorias: { left: '64%', top: '34%', width: '32%', height: '18%' },
+  movimento: { left: '4%', top: '50%', width: '38%', height: '17%' },
+  sono: { left: '56%', top: '50%', width: '40%', height: '18%' },
+  planejamento: { left: '55%', top: '70%', width: '41%', height: '18%' },
+}
 
-const EMOJI_DECORACAO = {
-  cerca: '🌾',
-  colmeia: '🍯',
-  celeiro: '🏚️',
-  espantalho: '🎃',
-  bandeirinhas: '🎏',
-  placa90: '🏆',
+const FASES_FARM = [farmFase1, farmFase2, farmFase3, farmFase4]
+
+function mensagemDoDia(dia, ingles) {
+  const indice = dia >= 76 ? 3 : dia >= 46 ? 2 : dia >= 21 ? 1 : 0
+  return (ingles ? MENSAGENS_EN : MENSAGENS)[indice]
+}
+
+function chaveCuidado(dia) {
+  return `mwa-farm-cuidado-dia-${dia}`
+}
+
+function lerCuidados(dia) {
+  try {
+    return JSON.parse(localStorage.getItem(chaveCuidado(dia)) || '[]')
+  } catch {
+    return []
+  }
 }
 
 export default function MwaFarm({ onFechar }) {
   const { ingles } = useIdioma()
-  const { diaAtual } = useApp()
-  const [selecionado, setSelecionado] = useState(null) // { titulo, texto } | null
+  const { diaAtual, game } = useApp()
+  const [selecionado, setSelecionado] = useState(null)
+  const [cuidados, setCuidados] = useState([])
   const dialogRef = useRef(null)
+  const dia = Math.min(90, Math.max(1, diaAtual ?? 1))
+  const resumo = useMemo(() => resumoFazenda(dia), [dia])
+  const percentual = Math.round((dia / 90) * 100)
+  const indiceFase = dia <= 22 ? 0 : dia <= 45 ? 1 : dia <= 68 ? 2 : 3
+  const inicioFase = [1, 23, 46, 69][indiceFase]
+  const fimFase = [22, 45, 68, 90][indiceFase]
+  const progressoFase = (dia - inicioFase) / Math.max(1, fimFase - inicioFase)
+  const imagemAtual = FASES_FARM[indiceFase]
+  const imagemSeguinte = FASES_FARM[Math.min(3, indiceFase + 1)]
 
-  // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
+  useEffect(() => setCuidados(lerCuidados(dia)), [dia])
+  useEffect(() => dialogRef.current?.focus(), [])
   useEffect(() => {
-    if (!onFechar) return
     function aoTeclar(e) {
-      if (e.key === 'Escape') onFechar()
+      if (e.key !== 'Escape') return
+      if (selecionado) setSelecionado(null)
+      else onFechar?.()
     }
     window.addEventListener('keydown', aoTeclar)
     return () => window.removeEventListener('keydown', aoTeclar)
-  }, [onFechar])
+  }, [onFechar, selecionado])
 
-  useEffect(() => {
-    dialogRef.current?.focus()
-  }, [])
-
-  const resumo = useMemo(() => resumoFazenda(diaAtual), [diaAtual])
-  const animais = resumo.decoracoes.filter((d) => d.tipo === 'animal')
-  const decoracoes = resumo.decoracoes.filter((d) => d.tipo === 'decoracao')
-  const diaExibido = diaAtual ?? 1
-
-  function tocarPilar(pilar) {
+  function abrirPilar(pilar) {
+    if (!pilar.liberado) {
+      setSelecionado({
+        ...pilar,
+        bloqueado: true,
+        titulo: ingles ? `This garden awakens on day ${pilar.diaLiberacao}` : `Este canteiro desperta no dia ${pilar.diaLiberacao}`,
+        texto: ingles ? 'Keep caring for what is already growing.' : 'Continue cuidando do que já está crescendo.',
+      })
+      return
+    }
     setSelecionado({
+      ...pilar,
       titulo: ingles ? pilar.tituloHabitoEN : pilar.tituloHabito,
+      nome: ingles ? pilar.nomeEN : pilar.nome,
       texto: ingles ? pilar.textoEducativoEN : pilar.textoEducativo,
+      estagioTexto: (ingles ? ESTAGIOS_EN : ESTAGIOS)[pilar.estagio],
     })
   }
 
-  function tocarAnimal(animal) {
-    setSelecionado({
-      titulo: ingles ? animal.nomeEN : animal.nome,
-      texto: ingles
-        ? `Arrived on day ${animal.dia} of your journey.`
-        : `Chegou no dia ${animal.dia} da sua jornada.`,
-    })
+  function cuidar(pilar) {
+    if (!pilar?.liberado || cuidados.includes(pilar.id)) return
+    const novos = [...cuidados, pilar.id]
+    setCuidados(novos)
+    localStorage.setItem(chaveCuidado(dia), JSON.stringify(novos))
+    setSelecionado({ ...pilar, concluidoAgora: true })
   }
+
+  const liberados = resumo.pilares.filter((p) => p.liberado)
+  const todosCuidados = liberados.length > 0 && liberados.every((p) => cuidados.includes(p.id))
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-verde/70 p-4 backdrop-blur-sm"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="mwa-farm-titulo"
-    >
-      <div ref={dialogRef} tabIndex={-1} className="max-h-[92vh] w-full max-w-md overflow-y-auto rounded-3xl bg-creme outline-none">
-        {/* Cabeçalho */}
-        <div className="flex items-center justify-between gap-3 bg-verde px-5 py-4">
-          <div>
-            <h2 id="mwa-farm-titulo" className="font-serif text-lg font-semibold italic text-creme">
-              MWA FARM
-            </h2>
-            <p className="text-[11px] text-creme/70">
-              {ingles ? `Day ${diaExibido} of your journey` : `Dia ${diaExibido} da sua jornada`}
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={onFechar}
-            aria-label={ingles ? 'Close' : 'Fechar'}
-            className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-full bg-creme/15 text-creme hover:bg-creme/25"
-          >
-            <X size={18} />
-          </button>
-        </div>
-
-        {/* Cena */}
-        <div className="relative overflow-hidden bg-gradient-to-b from-sky-200 to-sage-claro p-4">
-          <div className="absolute right-4 top-3 h-8 w-8 rounded-full bg-ouro" aria-hidden="true" />
-
-          {/* Decorações ambientais (não interativas) */}
-          {decoracoes.length > 0 && (
-            <div className="relative mb-2 flex flex-wrap gap-2" aria-hidden="true">
-              {decoracoes.map((d) => (
-                <span key={d.id} className="text-2xl" title={ingles ? d.nomeEN : d.nome}>
-                  {EMOJI_DECORACAO[d.id] ?? '✨'}
-                </span>
-              ))}
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#102f20]/90 p-2 backdrop-blur-md sm:p-4" role="dialog" aria-modal="true">
+      <div ref={dialogRef} tabIndex={-1} className="mx-auto w-full max-w-md overflow-hidden rounded-[2rem] border border-[#f8dda0]/70 bg-[#f9efd7] shadow-2xl outline-none">
+        <header className="relative z-30 bg-gradient-to-br from-[#f9edce] via-[#fff9e8] to-[#eed7a5] px-4 pb-4 pt-4 text-[#285332] shadow-lg">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h2 className="font-serif text-2xl font-black tracking-wide">MWA FARM</h2>
+              <p className="text-[11px] font-bold uppercase tracking-[.18em] text-[#72915b]">
+                {ingles ? 'Plant. Care. Watch it grow.' : 'Plante. Cuide. Veja florescer.'}
+              </p>
             </div>
-          )}
-
-          {/* Bichinhos (interativos) */}
-          {animais.length > 0 && (
-            <div className="relative mb-3 flex flex-wrap gap-3">
-              {animais.map((a) => (
-                <button
-                  key={a.id}
-                  type="button"
-                  onClick={() => tocarAnimal(a)}
-                  aria-label={ingles ? a.nomeEN : a.nome}
-                  className="mwa-farm-bob rounded-full transition-transform active:scale-90"
-                >
-                  <AnimalFazendaSvg id={a.id} tamanho={40} />
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Canteiros dos 8 pilares */}
-          <div className="relative grid grid-cols-4 gap-2">
-            {resumo.pilares.map((pilar) => {
-              const bloqueado = !pilar.liberado
-              return (
-                <button
-                  key={pilar.id}
-                  type="button"
-                  onClick={() => !bloqueado && tocarPilar(pilar)}
-                  disabled={bloqueado}
-                  aria-label={
-                    bloqueado
-                      ? ingles ? `Unlocks on day ${pilar.diaLiberacao}` : `Libera no dia ${pilar.diaLiberacao}`
-                      : ingles ? pilar.tituloHabitoEN : pilar.tituloHabito
-                  }
-                  className={`flex flex-col items-center gap-1 rounded-xl p-2 transition-transform ${
-                    bloqueado ? 'cursor-not-allowed bg-white/40 opacity-60' : 'bg-white/70 active:scale-95'
-                  }`}
-                >
-                  {bloqueado ? (
-                    <>
-                      <Sprout size={28} className="text-verde/25" aria-hidden="true" />
-                      <span className="text-[9px] text-verde/50">
-                        {ingles ? `Day ${pilar.diaLiberacao}` : `Dia ${pilar.diaLiberacao}`}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="mwa-farm-balanco">
-                        <PlantaFazenda estagio={pilar.estagio} cor={pilar.cor} coroaId={pilar.coroaId} tamanho={40} />
-                      </span>
-                      <span className="text-[9px] font-semibold text-verde/70">
-                        {ingles ? NOMES_ESTAGIO_EN[pilar.estagio] : NOMES_ESTAGIO[pilar.estagio]}
-                      </span>
-                    </>
-                  )}
-                </button>
-              )
-            })}
+            <button type="button" onClick={onFechar} aria-label={ingles ? 'Close' : 'Fechar'} className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d6b974] bg-white/70">
+              <X size={18} />
+            </button>
           </div>
-        </div>
-
-        {/* Cartão de informação ao tocar — o wrapper com role="status" fica
-            sempre montado (mesmo vazio) para que leitores de tela percebam a
-            MUDANÇA de conteúdo e anunciem; um live region que só aparece já
-            preenchido costuma ser ignorado por assistive tech. */}
-        <div role="status" aria-live="polite">
-          {selecionado && (
-            <div className="p-5">
-              <div className="rounded-2xl bg-white p-4">
-                <p className="font-serif text-base font-semibold italic text-verde">{selecionado.titulo}</p>
-                <p className="mt-1 text-xs leading-relaxed text-verde/80">{selecionado.texto}</p>
+          <div className="mt-3 flex items-center gap-3">
+            <div className="min-w-0 flex-1">
+              <div className="mb-1 flex justify-between text-xs font-black"><span>{ingles ? `Day ${dia} of 90` : `Dia ${dia} de 90`}</span><span>{percentual}%</span></div>
+              <div className="h-3 overflow-hidden rounded-full border border-[#cba95e] bg-[#6b5535]/20">
+                <div className="h-full rounded-full bg-gradient-to-r from-[#79bd55] to-[#3d8b4c] transition-all duration-700" style={{ width: `${percentual}%` }} />
               </div>
             </div>
-          )}
-        </div>
+            <span className="rounded-full border border-[#d4b565] bg-white/75 px-3 py-2 text-xs font-black">🌱 {game?.sementes ?? 0}</span>
+          </div>
+        </header>
 
-        <p className="px-5 pb-5 pt-2 text-center text-[11px] text-verde/50">
-          {ingles
-            ? 'Your farm grows on its own as your journey unfolds.'
-            : 'Sua fazenda cresce sozinha conforme sua jornada avança.'}
-        </p>
+        <main className="mwa-farm-mundo relative aspect-[2/3] overflow-hidden">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${imagemAtual})`,
+              filter: indiceFase === 3 ? `saturate(${1 + progressoFase * 0.08}) brightness(${1 + progressoFase * 0.04})` : undefined,
+            }}
+          />
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
+            style={{
+              backgroundImage: `url(${imagemSeguinte})`,
+              opacity: indiceFase === 3 ? 0 : progressoFase,
+            }}
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#163a25]/20" />
+
+          {resumo.pilares.map((pilar) => {
+            const area = AREAS_POR_ID[pilar.id]
+            if (!area) return null
+            return (
+              <div key={pilar.id}>
+                <button
+                  type="button"
+                  onClick={() => abrirPilar(pilar)}
+                  style={{ left: area.left, top: area.top, width: area.width, height: area.height }}
+                  className={`mwa-farm-hotspot absolute z-10 rounded-[35%] transition ${pilar.liberado ? 'hover:bg-white/10 focus:bg-white/10' : 'bg-[#24352b]/20'}`}
+                  aria-label={pilar.liberado ? (ingles ? pilar.tituloHabitoEN : pilar.tituloHabito) : `${pilar.nome}, ${ingles ? 'locked' : 'bloqueado'}`}
+                >
+                  <span className="sr-only">
+                    {pilar.liberado
+                      ? (ingles ? 'Open habit garden' : 'Abrir canteiro do hábito')
+                      : (ingles ? `Unlocks on day ${pilar.diaLiberacao}` : `Libera no dia ${pilar.diaLiberacao}`)}
+                  </span>
+                </button>
+              </div>
+            )
+          })}
+
+        </main>
+
+        <section className="relative z-30 border-t-2 border-[#f4d992] bg-[#fff8e8] px-5 py-4 text-center shadow-[0_-8px_24px_rgba(35,75,43,.14)]">
+          <Sparkles className="mx-auto mb-1 text-[#d4a538]" size={19} />
+          <p className="font-serif text-base font-black italic leading-snug text-[#315c3a]">
+            {todosCuidados ? (ingles ? 'Your whole farm was cared for today. Come back tomorrow to keep growing!' : 'Toda a sua fazenda foi cuidada hoje. Volte amanhã para continuar florescendo!') : mensagemDoDia(dia, ingles)}
+          </p>
+          <p className="mt-1 text-[10px] font-bold uppercase tracking-[.14em] text-[#8e7443]">
+            {ingles ? `${cuidados.length} of ${liberados.length} gardens cared for today` : `${cuidados.length} de ${liberados.length} canteiros cuidados hoje`}
+          </p>
+        </section>
+
+        {selecionado && (
+          <div className="fixed inset-0 z-[60] flex items-end justify-center bg-[#102f20]/55 p-3 backdrop-blur-sm" onClick={() => setSelecionado(null)}>
+            <section className="w-full max-w-md rounded-[2rem] border-4 border-[#f4d992] bg-[#fff9e9] p-5 shadow-2xl" onClick={(e) => e.stopPropagation()} role="status" aria-live="polite">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#e5f0d2]">
+                  {selecionado.bloqueado ? <LockKeyhole className="text-[#6a7957]" /> : selecionado.animal ? <Sparkles className="text-[#c08e2f]" /> : <PlantaFazenda estagio={selecionado.estagio} cor={selecionado.cor} coroaId={selecionado.coroaId} tamanho={52} />}
+                </div>
+                <button type="button" onClick={() => setSelecionado(null)} className="flex h-10 w-10 items-center justify-center rounded-full bg-[#315c3a]/10 text-[#315c3a]"><X size={18} /></button>
+              </div>
+              {selecionado.nome && <p className="mt-4 text-xs font-black uppercase tracking-widest text-[#c08e2f]">{selecionado.nome}</p>}
+              <h3 className="mt-1 font-serif text-2xl font-black italic leading-tight text-[#315c3a]">{selecionado.concluidoAgora ? (ingles ? 'Care complete!' : 'Cuidado concluído!') : selecionado.titulo}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#315c3a]/80">
+                {selecionado.concluidoAgora ? (ingles ? 'Your attention today became growth for tomorrow.' : 'O cuidado de hoje se transformou no crescimento de amanhã.') : selecionado.texto}
+              </p>
+              {selecionado.estagioTexto && !selecionado.concluidoAgora && (
+                <div className="mt-4 flex items-center gap-2 rounded-xl bg-[#e7f0d8] p-3 text-sm font-bold text-[#315c3a]"><Sparkles size={16} className="text-[#c08e2f]" /> {selecionado.estagioTexto}</div>
+              )}
+              {selecionado.liberado && !selecionado.concluidoAgora && (
+                <button
+                  type="button"
+                  disabled={cuidados.includes(selecionado.id)}
+                  onClick={() => cuidar(selecionado)}
+                  className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#5aa75d] to-[#2f7543] px-5 py-3 font-black text-white shadow-lg disabled:cursor-default disabled:opacity-60"
+                >
+                  {cuidados.includes(selecionado.id) ? <><Sparkles size={18} />{ingles ? 'Cared for today' : 'Cuidado hoje'}</> : selecionado.estagio === 0 ? <><Sprout size={18} />{ingles ? 'Plant today' : 'Plantar hoje'}</> : selecionado.estagio === 3 ? <><Hand size={18} />{ingles ? 'Harvest today' : 'Colher hoje'}</> : <><Droplets size={18} />{ingles ? 'Water today' : 'Regar hoje'}</>}
+                </button>
+              )}
+            </section>
+          </div>
+        )}
       </div>
     </div>
   )

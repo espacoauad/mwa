@@ -59,7 +59,7 @@ export function useConfeti() {
   function celebrarFogos() {
     const duration = 4000
     const animationEnd = Date.now() + duration
-    const cores = ['#879B55', '#C9963B', '#344528', '#ffffff']
+    const cores = ['#879B55', '#C59F4F', '#08402F', '#ffffff']
 
     function disparo() {
       const timeLeft = animationEnd - Date.now()

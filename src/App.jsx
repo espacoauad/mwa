@@ -13,7 +13,7 @@ import Ferramentas from './components/ferramentas/Ferramentas.jsx'
 import Perfil from './components/perfil/Perfil.jsx'
 import ModalRefeicao from './components/alimentacao/ModalRefeicao.jsx'
 import LembretePesagem from './components/progresso/LembretePesagem.jsx'
-import AcessoBloqueado from './components/layout/AcessoBloqueado.jsx'
+import Conclusao90Dias from './components/game/Conclusao90Dias.jsx'
 import AdminApp from './components/admin/AdminApp.jsx'
 import LandingVendas from './components/vendas/LandingVendas.jsx'
 import ResgateCupom from './components/vendas/ResgateCupom.jsx'
@@ -40,7 +40,7 @@ function AppInner() {
   const [mostrarLembretePesagem, setMostrarLembretePesagem] = useState(false)
   const [jaMostrarLembrete, setJaMostrarLembrete] = useState(false)
 
-  // Verifica se acesso deve ser bloqueado (dia 90 sem programa 90d ativo)
+  // Ao terminar o ciclo, a comemoração do dia 90 permanece até a renovação.
   const acessoBloqueado = usuario && diaAtual === 90 && !programa90Ativo
 
   // Ao voltar do checkout, o Mercado Pago adiciona ?pagamento= na URL
@@ -96,7 +96,7 @@ function AppInner() {
 
   // Bloqueia acesso se chegou ao dia 90 sem programa 90d ativo
   if (acessoBloqueado) {
-    return <AcessoBloqueado usuario={usuario} />
+    return <Conclusao90Dias persistente />
   }
 
   const telas = {

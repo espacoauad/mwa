@@ -85,13 +85,13 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
       {/* SVG do gráfico */}
       <svg viewBox="0 0 200 200" className="h-48 w-48 md:h-56 md:w-56">
         {/* Anel de Proteína (externo, Verde Profundo) */}
-        {desenharAnel(raios.proteina, proteinaAnimada, metaProteina, '#344528', opacidadeProteina)}
+        {desenharAnel(raios.proteina, proteinaAnimada, metaProteina, '#08402F', opacidadeProteina)}
 
         {/* Anel de Carboidratos (meio, Sage) */}
         {desenharAnel(raios.carbos, carbosAnimados, metaCarbos, '#879B55', opacidadeCarbos)}
 
         {/* Anel de Gordura (interno, Dourado) */}
-        {desenharAnel(raios.gordura, gorduraAnimada, metaGordura, '#D4AF7A', opacidadeGordura)}
+        {desenharAnel(raios.gordura, gorduraAnimada, metaGordura, '#C59F4F', opacidadeGordura)}
       </svg>
 
       {/* Rótulos dos macros */}

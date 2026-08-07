@@ -69,7 +69,7 @@ export function percentualMeta(consumido, meta) {
 // Semáforo das metas: verde atingida, amarelo próxima, vermelho longe
 export function statusMeta(pct) {
   if (pct >= 100) return { cor: '#879B55', nome: 'atingida' }
-  if (pct >= 60) return { cor: '#C9963B', nome: 'quase lá' }
+  if (pct >= 60) return { cor: '#C59F4F', nome: 'quase lá' }
   return { cor: '#B0563C', nome: 'em andamento' }
 }
 

@@ -14,7 +14,6 @@ import SeuProgresso from './SeuProgresso.jsx'
 import EstrelasDoDia from './EstrelasDoDia.jsx'
 
 const MomentoMwa = lazy(() => import('./MomentoMwa.jsx'))
-import CardUpgrade from '../upgrade/CardUpgrade.jsx'
 import Avatar from '../game/Avatar.jsx'
 import CarregandoFallback from '../ui/CarregandoFallback.jsx'
 import LogoMWA from '../ui/LogoMWA.jsx'
@@ -31,7 +30,6 @@ export default function Hoje({ irParaDicas }) {
   const { ingles, locale } = useIdioma()
   const {
     usuario,
-    programa90Ativo,
     metas,
     diaAtual,
     totalDias,
@@ -192,7 +190,7 @@ export default function Hoje({ irParaDicas }) {
         </div>
       </header>
 
-      <main className="-mt-8 px-5">
+      <main className="relative z-10 -mt-8 px-5">
         {/* Banner: dia concluído */}
         {diaCompleto && (
           <button
@@ -372,9 +370,6 @@ export default function Hoje({ irParaDicas }) {
             {avisoCompartilhar}
           </p>
         )}
-
-        {/* Oferta de upgrade conforme o cronograma (some quando o Programa de 90 Dias já está ativo) */}
-        {!programa90Ativo && <CardUpgrade dia={diaAtual} />}
       </main>
 
       {/* Botão flutuante: adicionar refeição */}
