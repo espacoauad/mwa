@@ -17,6 +17,7 @@ export default function ModalRefeicaoAberta() {
     removerItemRefeicao, removerRefeicaoCompleta, atualizarFotoRefeicao, fecharModalRefeicao,
   } = useApp()
   const [enviandoFoto, setEnviandoFoto] = useState(false)
+  const [erroFoto, setErroFoto] = useState(null)
   const refeicao = refeicoesHoje.find((r) => r.id === modalRefeicao.refeicaoId)
 
   if (!refeicao) return null
@@ -26,10 +27,15 @@ export default function ModalRefeicaoAberta() {
     const arquivo = e.target.files?.[0]
     if (!arquivo) return
     setEnviandoFoto(true)
+    setErroFoto(null)
     try {
       await atualizarFotoRefeicao(refeicao.id, arquivo)
+    } catch (erro) {
+      setErroFoto(ingles ? 'Failed to upload photo. Please try again.' : 'Falha ao enviar foto. Tente novamente.')
+      console.error('Erro ao fazer upload de foto:', erro)
     } finally {
       setEnviandoFoto(false)
+      e.target.value = ''
     }
   }
 
@@ -57,11 +63,14 @@ export default function ModalRefeicaoAberta() {
           <button type="button" aria-label={ingles ? 'Close' : 'Fechar'} onClick={fecharModalRefeicao} className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white text-verde/60"><X size={18} /></button>
         </div>
 
-        <label className="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed border-sage/40 bg-white p-4 focus-within:border-sage focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2">
-          {refeicao.fotoUrl ? <img src={refeicao.fotoUrl} alt={ingles ? 'Meal' : 'Foto da refeição'} className="h-14 w-14 rounded-lg object-cover" /> : <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-sage-claro text-sage"><Camera size={22} /></span>}
-          <span className="text-sm font-medium text-verde/70">{enviandoFoto ? (ingles ? 'Sending…' : 'Enviando…') : refeicao.fotoUrl ? (ingles ? 'Change meal photo' : 'Trocar foto da refeição') : (ingles ? 'Add meal photo 📸' : 'Adicionar foto da refeição 📸')}</span>
-          <input type="file" accept="image/*" capture="environment" onChange={escolherFoto} disabled={enviandoFoto} className="sr-only" />
-        </label>
+        <div>
+          <label className="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed border-sage/40 bg-white p-4 focus-within:border-sage focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2">
+            {refeicao.fotoUrl ? <img src={refeicao.fotoUrl} alt={ingles ? 'Meal' : 'Foto da refeição'} className="h-14 w-14 rounded-lg object-cover" /> : <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-sage-claro text-sage"><Camera size={22} /></span>}
+            <span className="text-sm font-medium text-verde/70">{enviandoFoto ? (ingles ? 'Sending…' : 'Enviando…') : refeicao.fotoUrl ? (ingles ? 'Change meal photo' : 'Trocar foto da refeição') : (ingles ? 'Add meal photo 📸' : 'Adicionar foto da refeição 📸')}</span>
+            <input type="file" accept="image/*" capture="environment" onChange={escolherFoto} disabled={enviandoFoto} className="sr-only" />
+          </label>
+          {erroFoto && <p className="mt-2 rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700">{erroFoto}</p>}
+        </div>
 
         {totais.calorias > 0 && (
           <div className="mt-3 grid grid-cols-5 gap-1 rounded-lg bg-verde p-3 text-center text-white">
