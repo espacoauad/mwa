@@ -14,3 +14,11 @@ export async function uploadFotoRefeicao(userId, refeicaoId, arquivo) {
 export async function removerFotoRefeicao(userId, refeicaoId) {
   await supabase.storage.from('fotos-refeicoes').remove([`${userId}/${refeicaoId}.jpg`])
 }
+
+// LGPD: direito de exclusão — apaga todas as fotos de refeição da pessoa no Storage.
+export async function limparFotosRefeicoesDoUsuario(userId) {
+  const { data: arquivos, error } = await supabase.storage.from('fotos-refeicoes').list(userId)
+  if (error || !arquivos?.length) return
+  const caminhos = arquivos.map((arquivo) => `${userId}/${arquivo.name}`)
+  await supabase.storage.from('fotos-refeicoes').remove(caminhos)
+}

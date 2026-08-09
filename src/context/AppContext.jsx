@@ -22,7 +22,7 @@ import {
 } from '../utils/jogos/estrelas.js'
 import { lembrarEstrelaDoDia } from '../utils/notificacaoEstrela.js'
 import { itemDoBanco, itemParaBanco, refeicaoDoBanco, totaisDaRefeicao } from '../utils/refeicoes.js'
-import { uploadFotoRefeicao, removerFotoRefeicao } from '../lib/storage.js'
+import { uploadFotoRefeicao, removerFotoRefeicao, limparFotosRefeicoesDoUsuario } from '../lib/storage.js'
 import { horarioAgora } from '../utils/calculos.js'
 
 const AppContext = createContext(null)
@@ -521,6 +521,12 @@ export function AppProvider({ children }) {
   // Apaga todos os dados do programa (mantém o login). Usado por "refazer cadastro".
   async function apagarDadosPrograma(tipoAcao) {
     await supabase.from('mwa_lgpd_auditoria').insert({ user_id: userId, tipo_acao: tipoAcao, detalhes: {} })
+    // best-effort: falha ao limpar fotos no Storage não pode travar a exclusão dos dados no banco
+    try {
+      await limparFotosRefeicoesDoUsuario(userId)
+    } catch (erro) {
+      console.warn('[MWA] não foi possível limpar as fotos de refeições no Storage:', erro)
+    }
     await Promise.all([
       supabase.from('mwa_refeicoes').delete().eq('user_id', userId),
       supabase.from('mwa_exercicios').delete().eq('user_id', userId),
