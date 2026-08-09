@@ -13,7 +13,7 @@ const TEXTOS = {
     idioma: 'Idioma', portugues: 'Português', ingles: 'Inglês', email: 'E-mail', senha: 'Senha',
     senhaPlaceholder: 'Mínimo 6 caracteres', aguarde: 'Aguarde…', entrar: 'Entrar', criarConta: 'Criar conta',
     irCadastrar: 'Primeira vez aqui? Criar conta', irEntrar: 'Já tenho conta — entrar',
-    cadastroCriado: 'Cadastro criado! Enviamos um link de confirmação para o seu e-mail. Depois de confirmar, volte aqui e entre.',
+    cadastroCriado: 'Cadastro criado! Enviamos um link de confirmação para o seu e-mail (dê uma olhada também na caixa de spam/lixo eletrônico). Depois de confirmar, volte aqui e entre.',
     erros: {
       'Invalid login credentials': 'E-mail ou senha incorretos.',
       'User already registered': 'Este e-mail já tem cadastro. Use "Entrar".',
@@ -27,7 +27,7 @@ const TEXTOS = {
     idioma: 'Language', portugues: 'Portuguese', ingles: 'English', email: 'Email', senha: 'Password',
     senhaPlaceholder: 'At least 6 characters', aguarde: 'Please wait…', entrar: 'Sign in', criarConta: 'Create account',
     irCadastrar: 'New here? Create an account', irEntrar: 'I already have an account — sign in',
-    cadastroCriado: 'Account created! We sent a confirmation link to your email. After confirming, come back here and sign in.',
+    cadastroCriado: 'Account created! We sent a confirmation link to your email (also check your spam/junk folder). After confirming, come back here and sign in.',
     erros: {
       'Invalid login credentials': 'Incorrect email or password.',
       'User already registered': 'This email is already registered. Select “Sign in”.',
