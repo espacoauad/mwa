@@ -1179,6 +1179,7 @@ git commit -m "feat: adiciona tela da refeicao aberta com foto, itens e horario"
 **Files:**
 - Modify: `src/App.jsx`
 - Modify: `src/components/alimentacao/Alimentacao.jsx`
+- Modify: `src/components/ferramentas/Ferramentas.jsx`
 - Delete: `src/components/alimentacao/ModalRefeicao.jsx`
 
 **Interfaces:**
@@ -1334,6 +1335,34 @@ export default function Alimentacao() {
 git rm src/components/alimentacao/ModalRefeicao.jsx
 ```
 
+- [ ] **Step 2b: Corrigir o terceiro consumidor de `abrirModalRefeicao` — `Ferramentas.jsx`**
+
+Esse arquivo tem um botão de atalho "Adicionar ao meu dia" que também chamava o modal antigo diretamente (achado durante a implementação da Task 5 — não estava listado nas Interfaces originais deste plano).
+
+Localizar, em `src/components/ferramentas/Ferramentas.jsx`:
+
+```javascript
+  const { abrirModalRefeicao } = useApp()
+```
+
+Trocar por:
+
+```javascript
+  const { abrirEscolhaRefeicao } = useApp()
+```
+
+Localizar:
+
+```javascript
+            <Botao variante="ouro" onClick={() => abrirModalRefeicao()}>
+```
+
+Trocar por:
+
+```javascript
+            <Botao variante="ouro" onClick={() => abrirEscolhaRefeicao()}>
+```
+
 - [ ] **Step 3: Verificação manual — fluxo completo no navegador**
 
 Run: `npm run dev`, abrir o app, logar com uma conta de teste.
@@ -1354,7 +1383,7 @@ Expected: todos os 10 passos se comportam como descrito, sem erros no console do
 - [ ] **Step 4: Commit**
 
 ```bash
-git add src/App.jsx src/components/alimentacao/Alimentacao.jsx
+git add src/App.jsx src/components/alimentacao/Alimentacao.jsx src/components/ferramentas/Ferramentas.jsx
 git commit -m "feat: liga fluxo de refeicoes agrupadas no App e na lista do dia"
 ```
 
