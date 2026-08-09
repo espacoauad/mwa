@@ -499,7 +499,7 @@ export function AppProvider({ children }) {
   async function exportarDados() {
     const [perfil, refs, exs, pesos, agua, auditoria] = await Promise.all([
       supabase.from('mwa_perfis').select('*').eq('id', userId).maybeSingle(),
-      supabase.from('mwa_refeicoes').select('*').eq('user_id', userId).order('data'),
+      supabase.from('mwa_refeicoes').select('*, mwa_refeicoes_itens(*)').eq('user_id', userId).order('data'),
       supabase.from('mwa_exercicios').select('*').eq('user_id', userId).order('data'),
       supabase.from('mwa_pesagens').select('*').eq('user_id', userId).order('data'),
       supabase.from('mwa_agua').select('*').eq('user_id', userId).order('data'),
