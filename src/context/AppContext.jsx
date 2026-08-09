@@ -22,6 +22,8 @@ import {
 } from '../utils/jogos/estrelas.js'
 import { lembrarEstrelaDoDia } from '../utils/notificacaoEstrela.js'
 import { itemDoBanco, itemParaBanco, refeicaoDoBanco, totaisDaRefeicao } from '../utils/refeicoes.js'
+import { uploadFotoRefeicao, removerFotoRefeicao } from '../lib/storage.js'
+import { horarioAgora } from '../utils/calculos.js'
 
 const AppContext = createContext(null)
 
@@ -94,7 +96,7 @@ export function AppProvider({ children }) {
   const [exercicios, setExercicios] = useState([])
   const [pesagens, setPesagens] = useState([])
   const [aguaMl, setAguaMl] = useState(0)
-  const [modalRefeicao, setModalRefeicao] = useState({ aberto: false, inicial: null })
+  const [modalRefeicao, setModalRefeicao] = useState({ etapa: null, refeicaoId: null, itemInicial: null })
   // Modo demonstração: permite pré-visualizar qualquer dia do programa (ofertas, informativos)
   const [simuladorDia, setSimuladorDia] = useState(null)
   // Gamificação: sementes, avatar equipado e skins compradas
@@ -562,28 +564,79 @@ export function AppProvider({ children }) {
     ])
   }
 
-  async function adicionarRefeicao(refeicao) {
+  async function obterOuCriarRefeicao(tipo) {
+    const existente = refeicoesHoje.find((r) => r.tipo === tipo)
+    if (existente) return existente
+
     const { data, error } = await supabase
       .from('mwa_refeicoes')
-      .insert({ user_id: userId, data: hoje, ...refeicaoParaBanco(refeicao) })
+      .insert({ user_id: userId, data: hoje, tipo, horario: horarioAgora() })
       .select()
       .single()
-    if (!error) {
-      setRefeicoes((rs) => [...rs, refeicaoDoBanco(data)])
-      await registrarSessao(userId, 'atividade', { acao: 'refeicao_adicionada', tipo: refeicao.tipo })
-      // +5 🌱 por tipo de refeição por dia (café, almoço, jantar...)
-      await premiar('refeicao', `${hoje}:${refeicao.tipo}`)
+    if (error) throw error
+
+    const nova = refeicaoDoBanco(data, [])
+    setRefeicoes((rs) => [...rs, nova])
+    await registrarSessao(userId, 'atividade', { acao: 'refeicao_criada', tipo })
+    return nova
+  }
+
+  async function adicionarItemRefeicao(refeicaoId, item) {
+    const { data, error } = await supabase
+      .from('mwa_refeicoes_itens')
+      .insert({ refeicao_id: refeicaoId, ...itemParaBanco(item) })
+      .select()
+      .single()
+    if (error) throw error
+
+    const novoItem = itemDoBanco(data)
+    setRefeicoes((rs) =>
+      rs.map((r) => (r.id === refeicaoId ? { ...r, itens: [...r.itens, novoItem] } : r)),
+    )
+    const refeicao = refeicoesHoje.find((r) => r.id === refeicaoId)
+    if (refeicao) await premiar('refeicao', `${hoje}:${refeicao.tipo}`)
+  }
+
+  async function atualizarItemRefeicao(refeicaoId, itemId, dados) {
+    setRefeicoes((rs) =>
+      rs.map((r) =>
+        r.id === refeicaoId
+          ? { ...r, itens: r.itens.map((i) => (i.id === itemId ? { ...i, ...dados } : i)) }
+          : r,
+      ),
+    )
+    await supabase.from('mwa_refeicoes_itens').update(itemParaBanco(dados)).eq('id', itemId)
+  }
+
+  async function removerItemRefeicao(refeicaoId, itemId) {
+    const refeicao = refeicoes.find((r) => r.id === refeicaoId)
+    const itensRestantes = (refeicao?.itens ?? []).filter((i) => i.id !== itemId)
+
+    if (itensRestantes.length === 0) {
+      // Sem alimentos, a refeição inteira some da lista
+      setRefeicoes((rs) => rs.filter((r) => r.id !== refeicaoId))
+      await supabase.from('mwa_refeicoes_itens').delete().eq('id', itemId)
+      await supabase.from('mwa_refeicoes').delete().eq('id', refeicaoId)
+      if (refeicao?.fotoUrl) await removerFotoRefeicao(userId, refeicaoId)
+    } else {
+      setRefeicoes((rs) =>
+        rs.map((r) => (r.id === refeicaoId ? { ...r, itens: itensRestantes } : r)),
+      )
+      await supabase.from('mwa_refeicoes_itens').delete().eq('id', itemId)
     }
   }
 
-  async function atualizarRefeicao(id, dados) {
-    setRefeicoes((rs) => rs.map((r) => (r.id === id ? { ...r, ...dados } : r)))
-    await supabase.from('mwa_refeicoes').update(refeicaoParaBanco(dados)).eq('id', id)
+  async function removerRefeicaoCompleta(refeicaoId) {
+    const refeicao = refeicoes.find((r) => r.id === refeicaoId)
+    setRefeicoes((rs) => rs.filter((r) => r.id !== refeicaoId))
+    await supabase.from('mwa_refeicoes').delete().eq('id', refeicaoId)
+    if (refeicao?.fotoUrl) await removerFotoRefeicao(userId, refeicaoId)
   }
 
-  async function removerRefeicao(id) {
-    setRefeicoes((rs) => rs.filter((r) => r.id !== id))
-    await supabase.from('mwa_refeicoes').delete().eq('id', id)
+  async function atualizarFotoRefeicao(refeicaoId, arquivo) {
+    const url = await uploadFotoRefeicao(userId, refeicaoId, arquivo)
+    setRefeicoes((rs) => rs.map((r) => (r.id === refeicaoId ? { ...r, fotoUrl: url } : r)))
+    await supabase.from('mwa_refeicoes').update({ foto_url: url }).eq('id', refeicaoId)
   }
 
   async function adicionarExercicio(exercicio) {
@@ -670,12 +723,25 @@ export function AppProvider({ children }) {
     }
   }
 
-  function abrirModalRefeicao(inicial = null) {
-    setModalRefeicao({ aberto: true, inicial })
+  function abrirEscolhaRefeicao() {
+    setModalRefeicao({ etapa: 'escolher', refeicaoId: null, itemInicial: null })
+  }
+
+  async function abrirRefeicaoDoDia(tipo) {
+    const refeicao = await obterOuCriarRefeicao(tipo)
+    setModalRefeicao({ etapa: 'aberta', refeicaoId: refeicao.id, itemInicial: null })
+  }
+
+  function abrirAdicionarAlimento(itemInicial = null) {
+    setModalRefeicao((m) => ({ ...m, etapa: 'alimento', itemInicial }))
+  }
+
+  function voltarParaRefeicaoAberta() {
+    setModalRefeicao((m) => ({ ...m, etapa: 'aberta', itemInicial: null }))
   }
 
   function fecharModalRefeicao() {
-    setModalRefeicao({ aberto: false, inicial: null })
+    setModalRefeicao({ etapa: null, refeicaoId: null, itemInicial: null })
   }
 
   const valor = {
@@ -702,14 +768,20 @@ export function AppProvider({ children }) {
     reiniciar,
     deletarConta,
     sair,
-    adicionarRefeicao,
-    atualizarRefeicao,
-    removerRefeicao,
+    obterOuCriarRefeicao,
+    adicionarItemRefeicao,
+    atualizarItemRefeicao,
+    removerItemRefeicao,
+    removerRefeicaoCompleta,
+    atualizarFotoRefeicao,
     adicionarExercicio,
     removerExercicio,
     adicionarPesagem,
     adicionarAgua,
-    abrirModalRefeicao,
+    abrirEscolhaRefeicao,
+    abrirRefeicaoDoDia,
+    abrirAdicionarAlimento,
+    voltarParaRefeicaoAberta,
     fecharModalRefeicao,
     atualizarFotoPerfil,
     atualizarIdioma,
