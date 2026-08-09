@@ -62,13 +62,17 @@ export default function Conclusao90Dias({ persistente = false }) {
     let cancelado = false
     supabase
       .from('mwa_refeicoes')
-      .select('data, calorias')
+      .select('data, mwa_refeicoes_itens(calorias)')
       .eq('user_id', userId)
       .then(({ data }) => {
         if (cancelado || !data) return
         const porDia = {}
         for (const r of data) {
-          porDia[r.data] = (porDia[r.data] ?? 0) + Number(r.calorias)
+          const caloriasRefeicao = (r.mwa_refeicoes_itens ?? []).reduce(
+            (soma, item) => soma + Number(item.calorias),
+            0,
+          )
+          porDia[r.data] = (porDia[r.data] ?? 0) + caloriasRefeicao
         }
         const dias = Object.values(porDia).filter((total) => total > 0)
         const economia = dias.reduce((soma, consumido) => soma + (metas.tdee - consumido), 0)
