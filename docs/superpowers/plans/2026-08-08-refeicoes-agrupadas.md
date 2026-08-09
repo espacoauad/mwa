@@ -1411,3 +1411,9 @@ Repetir os 10 passos do Step 3 da Task 9, dessa vez em `https://app.metodomwa.co
 ```bash
 git push origin main
 ```
+
+---
+
+## Nota pós-implementação (Task 9)
+
+Durante a Task 9, o implementador encontrou um QUARTO consumidor do modal antigo não listado no plano original: `src/components/hoje/Hoje.jsx` também chamava `abrirModalRefeicao()` (um atalho "Adicionar refeição" na tela Hoje). Foi corrigido junto, trocando por `abrirEscolhaRefeicao()`, mesmo padrão usado em `Ferramentas.jsx`.
