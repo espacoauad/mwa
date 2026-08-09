@@ -21,6 +21,7 @@ import {
   metasCumpridas,
 } from '../utils/jogos/estrelas.js'
 import { lembrarEstrelaDoDia } from '../utils/notificacaoEstrela.js'
+import { itemDoBanco, itemParaBanco, refeicaoDoBanco, totaisDaRefeicao } from '../utils/refeicoes.js'
 
 const AppContext = createContext(null)
 
@@ -56,37 +57,6 @@ function programaDoBanco(p) {
     dataFim: p.data_fim,
     status: p.status,
     origem: p.origem,
-  }
-}
-
-function refeicaoDoBanco(r) {
-  return {
-    id: r.id,
-    data: r.data,
-    horario: r.horario,
-    tipo: r.tipo,
-    nome: r.nome,
-    calorias: Number(r.calorias),
-    proteina: Number(r.proteina),
-    carbos: Number(r.carbos),
-    gordura: Number(r.gordura),
-    fibras: Number(r.fibras),
-    ...(r.detalhes ?? {}),
-  }
-}
-
-function refeicaoParaBanco(ref) {
-  const { id, data, horario, tipo, nome, calorias, proteina, carbos, gordura, fibras, ...detalhes } = ref
-  return {
-    horario,
-    tipo,
-    nome: nome ?? null,
-    calorias: calorias ?? 0,
-    proteina: proteina ?? 0,
-    carbos: carbos ?? 0,
-    gordura: gordura ?? 0,
-    fibras: fibras ?? 0,
-    detalhes,
   }
 }
 
@@ -220,7 +190,7 @@ export function AppProvider({ children }) {
       const [perfil, progs, refs, exs, pesos, agua] = await Promise.all([
         supabase.from('mwa_perfis').select('*').eq('id', userId).maybeSingle(),
         supabase.from('mwa_programas').select('*').eq('user_id', userId),
-        supabase.from('mwa_refeicoes').select('*').eq('user_id', userId).eq('data', hoje),
+        supabase.from('mwa_refeicoes').select('*, mwa_refeicoes_itens(*)').eq('user_id', userId).eq('data', hoje),
         supabase.from('mwa_exercicios').select('*').eq('user_id', userId).eq('data', hoje),
         supabase.from('mwa_pesagens').select('*').eq('user_id', userId).order('data'),
         supabase.from('mwa_agua').select('ml').eq('user_id', userId).eq('data', hoje).maybeSingle(),
@@ -228,7 +198,7 @@ export function AppProvider({ children }) {
       if (cancelado) return
       setUsuario(perfil.data ? perfilParaUsuario(perfil.data) : null)
       setProgramas((progs.data ?? []).map(programaDoBanco))
-      setRefeicoes((refs.data ?? []).map(refeicaoDoBanco))
+      setRefeicoes((refs.data ?? []).map((r) => refeicaoDoBanco(r, r.mwa_refeicoes_itens)))
       setExercicios((exs.data ?? []).map(exercicioDoBanco))
       setPesagens((pesos.data ?? []).map(pesagemDoBanco))
       setAguaMl(agua.data?.ml ?? 0)
@@ -366,12 +336,13 @@ export function AppProvider({ children }) {
 
   const totaisHoje = useMemo(() => {
     const t = { calorias: 0, proteina: 0, carbos: 0, gordura: 0, fibras: 0 }
-    for (const r of refeicoesHoje) {
-      t.calorias += r.calorias
-      t.proteina += r.proteina
-      t.carbos += r.carbos
-      t.gordura += r.gordura
-      t.fibras += r.fibras
+    for (const refeicao of refeicoesHoje) {
+      const totaisRefeicao = totaisDaRefeicao(refeicao)
+      t.calorias += totaisRefeicao.calorias
+      t.proteina += totaisRefeicao.proteina
+      t.carbos += totaisRefeicao.carbos
+      t.gordura += totaisRefeicao.gordura
+      t.fibras += totaisRefeicao.fibras
     }
     return {
       calorias: Math.round(t.calorias),
