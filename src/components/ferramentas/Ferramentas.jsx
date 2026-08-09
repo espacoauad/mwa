@@ -24,7 +24,7 @@ const MwaFarm = lazy(() => import('../game/MwaFarm.jsx'))
 
 function CalculadoraMacros() {
   const { ingles } = useIdioma()
-  const { abrirModalRefeicao } = useApp()
+  const { abrirEscolhaRefeicao } = useApp()
   const [busca, setBusca] = useState('')
   const [alimentoId, setAlimentoId] = useState(null)
   const [quantidade, setQuantidade] = useState('')
@@ -103,7 +103,7 @@ function CalculadoraMacros() {
             </div>
           )}
           <div className="mt-3">
-            <Botao variante="ouro" onClick={() => abrirModalRefeicao()}>
+            <Botao variante="ouro" onClick={() => abrirEscolhaRefeicao()}>
               {ingles ? 'Add to my day →' : 'Adicionar ao meu dia →'}
             </Botao>
           </div>

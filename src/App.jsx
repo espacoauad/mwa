@@ -11,7 +11,9 @@ import Progresso from './components/progresso/Progresso.jsx'
 import Dicas from './components/dicas/Dicas.jsx'
 import Ferramentas from './components/ferramentas/Ferramentas.jsx'
 import Perfil from './components/perfil/Perfil.jsx'
-import ModalRefeicao from './components/alimentacao/ModalRefeicao.jsx'
+import ModalEscolherRefeicao from './components/alimentacao/ModalEscolherRefeicao.jsx'
+import ModalRefeicaoAberta from './components/alimentacao/ModalRefeicaoAberta.jsx'
+import ModalAdicionarAlimento from './components/alimentacao/ModalAdicionarAlimento.jsx'
 import LembretePesagem from './components/progresso/LembretePesagem.jsx'
 import Conclusao90Dias from './components/game/Conclusao90Dias.jsx'
 import AdminApp from './components/admin/AdminApp.jsx'
@@ -124,7 +126,9 @@ function AppInner() {
       <BotaoWhatsApp />
       <TabBar aba={aba} onMudar={setAba} />
       <ModoDeRevisao />
-      {modalRefeicao.aberto && <ModalRefeicao />}
+      {modalRefeicao.etapa === 'escolher' && <ModalEscolherRefeicao />}
+      {modalRefeicao.etapa === 'aberta' && <ModalRefeicaoAberta />}
+      {modalRefeicao.etapa === 'alimento' && <ModalAdicionarAlimento />}
       {mostrarLembretePesagem && (
         <LembretePesagem
           onFechar={() => setMostrarLembretePesagem(false)}

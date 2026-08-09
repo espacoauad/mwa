@@ -38,7 +38,7 @@ export default function Hoje({ irParaDicas }) {
     gastoExercicios,
     aguaMl,
     adicionarAgua,
-    abrirModalRefeicao,
+    abrirEscolhaRefeicao,
     game,
     registrarCompartilhamento,
     diaCompleto,
@@ -380,7 +380,7 @@ export default function Hoje({ irParaDicas }) {
         transition={reduzido ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 20, delay: 0.3 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => abrirModalRefeicao()}
+        onClick={() => abrirEscolhaRefeicao()}
         className="fixed bottom-20 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 rounded-full bg-ouro px-5 py-3.5 font-semibold text-verde-escuro shadow-lg shadow-ouro/40"
       >
         <Plus size={20} strokeWidth={2.5} /> {ingles ? 'Add meal' : 'Adicionar refeição'}
