@@ -28,6 +28,7 @@ const ALIMENTOS_BASE = [
   { id: 'patinho', nome: 'Carne bovina magra (patinho)', categoria: 'Proteínas', kcal: 190, prot: 32, carb: 0, gord: 6.5, fibra: 0, porcao: 100 },
   { id: 'carne-moida', nome: 'Carne moída refogada', categoria: 'Proteínas', kcal: 212, prot: 26, carb: 0, gord: 12, fibra: 0, porcao: 100 },
   { id: 'ovo', nome: 'Ovo cozido', categoria: 'Proteínas', kcal: 146, prot: 13, carb: 0.6, gord: 9.5, fibra: 0, porcao: 100 },
+  { id: 'clara-ovo', nome: 'Clara de ovo cozida', categoria: 'Proteínas', kcal: 52, prot: 11, carb: 0.7, gord: 0.2, fibra: 0, porcao: 33, medidas: [{ id: 'g', nome: 'g', plural: 'g', base: 1 }, { id: 'porcao', nome: 'porção sugerida', plural: 'porções sugeridas', base: 33 }, { id: 'un', nome: 'unidade', plural: 'unidades', base: 33 }] },
   { id: 'tilapia', nome: 'Tilápia grelhada', categoria: 'Proteínas', kcal: 96, prot: 20, carb: 0, gord: 1.7, fibra: 0, porcao: 120 },
   { id: 'atum', nome: 'Atum em lata (água)', categoria: 'Proteínas', kcal: 116, prot: 26, carb: 0, gord: 1, fibra: 0, porcao: 80 },
   { id: 'salmao', nome: 'Salmão grelhado', categoria: 'Proteínas', kcal: 208, prot: 20, carb: 0, gord: 13, fibra: 0, porcao: 100 },
@@ -123,7 +124,7 @@ function prepararAlimento(alimento) {
   if (/pizza/.test(nome)) medidasPadrao.push({ id: 'fatia', nome: 'fatia', plural: 'fatias', base: alimento.porcao })
   if (/feijão|lentilha|grão-de-bico|sopa|caldo/.test(nome)) medidasPadrao.push({ id: 'concha', nome: 'concha', plural: 'conchas', base: alimento.porcao })
   if (/iogurte/.test(nome)) medidasPadrao.push({ id: 'pote', nome: 'pote', plural: 'potes', base: alimento.porcao })
-  if (/azeite|manteiga|margarina|maionese|molho|açúcar|mel|creme de leite|farinha|pasta de|geleia|requeijão|cacau|achocolatado/.test(nome)) {
+  if (/azeite|manteiga|margarina|maionese|molho|açúcar|\bmel\b|creme de leite|farinha|pasta de|geleia|requeijão|cacau|achocolatado|ketchup|mostarda|shoyu/.test(nome)) {
     const colherSopa = alimento.porcao
     medidasPadrao.push({ id: 'colher', nome: 'colher de sopa', plural: 'colheres de sopa', base: colherSopa })
     medidasPadrao.push({ id: 'colher-sobremesa', nome: 'colher de sobremesa', plural: 'colheres de sobremesa', base: Math.round((colherSopa * 2) / 3) })

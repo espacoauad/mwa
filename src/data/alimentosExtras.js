@@ -184,6 +184,20 @@ Feijão tropeiro|Refeições prontas|180|8.0|18.0|8.0|4.0|150|feijao tropeiro,tr
 Pastel de queijo frito|Refeições prontas|320|9.0|30.0|18.0|1.5|100|pastel queijo
 Enroladinho de queijo|Refeições prontas|400|10.0|40.0|22.0|1.5|40|enroladinho,palito de queijo
 Biscoito de queijo|Refeições prontas|480|8.0|55.0|25.0|1.0|30|biscoito de queijo,biscoito queijo
+Ovo frito|Proteínas|196|13.6|0.6|15.4|0|50|ovo frito
+Ovo mexido|Proteínas|168|12.0|1.5|12.5|0|100|ovo mexido
+Frango desfiado cozido|Proteínas|165|29.0|0|4.5|0|100|frango desfiado,frango cozido
+Picanha grelhada|Proteínas|289|26.0|0|20.0|0|120|picanha
+Filé mignon grelhado|Proteínas|201|30.0|0|8.0|0|120|file mignon,filet mignon
+Batata-doce assada|Carboidratos|90|1.5|21.0|0.1|2.5|150|batata doce assada
+Pão árabe|Carboidratos|275|9.0|55.0|1.5|2.3|60|pao arabe,pao sirio
+Pipoca sem óleo|Carboidratos|375|11.0|74.0|4.5|15.0|25|pipoca,pipoca estourada
+Vitamina de frutas|Bebidas|85|3.0|15.0|1.8|1.0|250|vitamina,vitamina de banana
+Chá verde|Bebidas|1|0|0.2|0|0|200|cha verde
+Chá mate|Bebidas|2|0|0.4|0|0|200|cha mate,mate
+Shoyu|Molhos e complementos|60|6.0|8.0|0|0.8|15|shoyu,molho de soja
+Polpa de frutas vermelhas|Frutas|45|0.8|10.0|0.3|3.0|100|polpa frutas vermelhas,polpa mix berries
+Polpa de cajá|Frutas|55|0.6|13.0|0.2|1.5|100|polpa caja,caja
 `.trim()
 
 const liquidos = new Set(['Bebidas'])
