@@ -25,6 +25,7 @@ const LojaAvatar = lazy(() => import('../game/LojaAvatar.jsx'))
 const ConclusaoDia = lazy(() => import('../game/ConclusaoDia.jsx'))
 const Conclusao30Dias = lazy(() => import('../game/Conclusao30Dias.jsx'))
 const Conclusao90Dias = lazy(() => import('../game/Conclusao90Dias.jsx'))
+const ModoRecomecar = lazy(() => import('../game/ModoRecomecar.jsx'))
 
 export default function Hoje({ irParaDicas }) {
   const { ingles, locale } = useIdioma()
@@ -47,6 +48,7 @@ export default function Hoje({ irParaDicas }) {
     conclusao30Aberta,
     fecharConclusao30,
     conclusao90Aberta,
+    modoRecomecarAberto,
     atualizarFotoPerfil,
   } = useApp()
   const [lojaAberta, setLojaAberta] = useState(false)
@@ -404,6 +406,13 @@ export default function Hoje({ irParaDicas }) {
       {conclusaoDiaAberta && (
         <Suspense fallback={<CarregandoFallback />}>
           <ConclusaoDia />
+        </Suspense>
+      )}
+
+      {/* Modo Recomeçar: acolhimento sem culpa ao voltar após dias sem abrir o app */}
+      {modoRecomecarAberto && (
+        <Suspense fallback={<CarregandoFallback />}>
+          <ModoRecomecar />
         </Suspense>
       )}
 
