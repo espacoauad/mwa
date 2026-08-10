@@ -1,5 +1,6 @@
 import Botao from '../ui/Botao.jsx'
 import { calcularMetas, OBJETIVOS } from '../../utils/calculos.js'
+import { montarFraseRecepcao } from '../../utils/personalizacao.js'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 const OBJETIVO_EN = { emagrecer: 'lose weight', manter: 'maintain your weight', ganhar: 'build muscle' }
@@ -14,6 +15,7 @@ export default function TelaMetas({ dados, finalizar, voltar }) {
   })
   const objetivo = OBJETIVOS.find((o) => o.id === dados.objetivo)
   const primeiroNome = dados.nome.trim().split(' ')[0]
+  const { foco, sentimento } = montarFraseRecepcao(dados)
 
   const METAS_LISTA = [
     { label: ingles ? 'Calories' : 'Calorias', valor: `${metas.calorias.toLocaleString(locale)} kcal`, emoji: '🔥' },
@@ -33,6 +35,15 @@ export default function TelaMetas({ dados, finalizar, voltar }) {
         <p className="mt-3 text-verde/70">
           {ingles ? <>Your targets for your goal to <strong>{OBJETIVO_EN[objetivo?.id]}</strong> {objetivo?.emoji} are ready.</> : <>Suas metas para o objetivo <strong>{objetivo?.label.toLowerCase()}</strong> {objetivo?.emoji} foram calculadas.</>}
         </p>
+        {foco && sentimento && (
+          <p className="mt-4 text-verde/80">
+            {ingles ? (
+              <>{primeiroNome}, over the next 90 days, your focus will be <strong>{foco}</strong>, so you can end up feeling <strong>{sentimento}</strong>.</>
+            ) : (
+              <>{primeiroNome}, nos próximos 90 dias, seu foco será <strong>{foco}</strong>, para você terminar se sentindo <strong>{sentimento}</strong>.</>
+            )}
+          </p>
+        )}
       </div>
 
       <div className="rounded-2xl bg-verde p-5 text-white">
