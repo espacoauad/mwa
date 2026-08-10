@@ -178,6 +178,12 @@ Molho branco|Molhos e complementos|145|4.0|9.0|10.0|0.3|60|bechamel,molho
 Açúcar|Molhos e complementos|387|0|100|0|0|5|acucar
 Mel|Molhos e complementos|304|0.3|82.4|0|0.2|15|mel
 Creme de leite|Molhos e complementos|221|2.2|4.5|22.0|0|30|creme leite
+Pamonha|Carboidratos|150|3.0|30.0|2.5|2.0|150|pamonha
+Broa de milho|Carboidratos|290|5.0|55.0|6.0|2.0|50|broa,broa de milho
+Feijão tropeiro|Refeições prontas|180|8.0|18.0|8.0|4.0|150|feijao tropeiro,tropeiro
+Pastel de queijo frito|Refeições prontas|320|9.0|30.0|18.0|1.5|100|pastel queijo
+Enroladinho de queijo|Refeições prontas|400|10.0|40.0|22.0|1.5|40|enroladinho,palito de queijo
+Biscoito de queijo|Refeições prontas|480|8.0|55.0|25.0|1.0|30|biscoito de queijo,biscoito queijo
 `.trim()
 
 const liquidos = new Set(['Bebidas'])
