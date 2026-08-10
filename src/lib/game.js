@@ -72,6 +72,52 @@ function ontemISO(hojeISO) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 
+// Quantos dias inteiros se passaram desde o último acesso registrado.
+// Retorna null se a pessoa nunca acessou (ultimo_dia_acesso ainda não definido).
+export function diasSemAcessar(ultimoDiaAcesso, hojeISO) {
+  if (!ultimoDiaAcesso) return null
+  const umDiaMs = 24 * 60 * 60 * 1000
+  const ultimo = new Date(`${ultimoDiaAcesso}T00:00:00`)
+  const hoje = new Date(`${hojeISO}T00:00:00`)
+  return Math.round((hoje - ultimo) / umDiaMs)
+}
+
+// ── Modo Recomeçar: acolhimento sem culpa quando a pessoa some do app ──
+const LIMIAR_RECOMECAR = 2
+
+// Chamado com o `game` ainda não atualizado por registrarAcessoDiario nesta sessão
+// (ou seja, antes de ultimo_dia_acesso virar hoje) — é essa a janela em que o gap
+// real ainda é visível. Marca recomecar_pendente=true se o gap é grande o bastante.
+export async function avaliarModoRecomecar(userId, game, hojeISO) {
+  if (game.recomecar_pendente) return game
+  const gap = diasSemAcessar(game.ultimo_dia_acesso, hojeISO)
+  if (gap === null || gap < LIMIAR_RECOMECAR) return game
+
+  const { data } = await supabase
+    .from('mwa_game')
+    .update({ recomecar_pendente: true })
+    .eq('user_id', userId)
+    .select()
+    .single()
+  return data ?? game
+}
+
+// Registra a escolha da pessoa no Modo Recomeçar (só para histórico, sem sementes)
+// e limpa o flag pendente.
+export async function resolverModoRecomecar(userId, opcao, hojeISO) {
+  await supabase
+    .from('mwa_game_eventos')
+    .insert({ user_id: userId, tipo: `modo_recomecar_${opcao}`, ref: hojeISO, sementes: 0 })
+
+  const { data } = await supabase
+    .from('mwa_game')
+    .update({ recomecar_pendente: false })
+    .eq('user_id', userId)
+    .select()
+    .single()
+  return data ?? null
+}
+
 // Chamado uma vez por sessão (quando o app carrega, já com o usuário logado).
 // Atualiza a sequência de dias e credita o bônus do dia, sem duplicar.
 export async function registrarAcessoDiario(userId, game, hojeISO) {
