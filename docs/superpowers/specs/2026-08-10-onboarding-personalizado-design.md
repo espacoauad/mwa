@@ -44,7 +44,9 @@ Formato do jsonb:
   "foco": "rotina",
   "focoOutro": null,
   "obstaculo": "cobranca",
+  "obstaculoOutro": null,
   "rotina": "corrida",
+  "rotinaOutro": null,
   "sentimentoEsperado": "orgulhosa",
   "sentimentoEsperadoOutro": null,
   "sono": "cansada",
@@ -58,9 +60,11 @@ Formato do jsonb:
 Campos de hábitos (`sono`, `hidratacao`, `habitosAlimentares`, `intestino`,
 `disposicao`) ficam `null` se a tela de Hábitos for pulada inteira ou se a
 pergunta específica for respondida como "Prefiro não responder". Campos
-`focoOutro`/`sentimentoEsperadoOutro` só têm valor quando a opção "Outro"
-foi escolhida na respectiva pergunta; nesse caso o campo principal
-(`foco`/`sentimentoEsperado`) guarda a string `'outro'`.
+`focoOutro`/`obstaculoOutro`/`rotinaOutro`/`sentimentoEsperadoOutro` só têm
+valor quando a opção "Outro" foi escolhida na respectiva pergunta (todas as
+4 perguntas da tela de Personalização aceitam "Outro", por isso são 4
+campos `*Outro`, não 2); nesse caso o campo principal correspondente
+guarda a string `'outro'`.
 
 ## Perguntas
 
