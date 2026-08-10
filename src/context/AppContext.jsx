@@ -13,6 +13,8 @@ import {
   registrarAcessoDiario,
   carregarTarefasHoje,
   carregarEstrelas,
+  avaliarModoRecomecar,
+  resolverModoRecomecar,
 } from '../lib/game.js'
 import {
   diasDaSemana,
@@ -114,6 +116,8 @@ export function AppProvider({ children }) {
   const [conclusao30Aberta, setConclusao30Aberta] = useState(false)
   // Tela de encerramento do programa (dia 90) — celebração final com conquistas e déficit total
   const [conclusao90Aberta, setConclusao90Aberta] = useState(false)
+  // Modo Recomeçar: acolhimento ao voltar após dias sem abrir o app
+  const [modoRecomecarAberto, setModoRecomecarAberto] = useState(false)
 
   const hoje = dataHojeISO()
   const userId = sessao?.user?.id ?? null
@@ -209,8 +213,12 @@ export function AppProvider({ children }) {
       // Gamificação carrega depois, sem segurar a tela
       carregarGame(userId).then(async (g) => {
         if (cancelado || !g) return
+        // Modo Recomeçar: precisa avaliar o gap ANTES de registrarAcessoDiario,
+        // porque essa função sobrescreve ultimo_dia_acesso para hoje.
+        const gAvaliado = await avaliarModoRecomecar(userId, g, hoje)
+        if (cancelado) return
         // Acelerador de sementes: bônus por acessar em dias seguidos, sem falhar
-        const { game: gAtualizado, bonus } = await registrarAcessoDiario(userId, g, hoje)
+        const { game: gAtualizado, bonus } = await registrarAcessoDiario(userId, gAvaliado, hoje)
         if (cancelado) return
         setGame(gAtualizado)
         if (bonus > 0) {
@@ -290,6 +298,11 @@ export function AppProvider({ children }) {
       cancelado = true
     }
   }, [userId, hoje, metasEstrela, estrelaHojeAcesa])
+
+  // Modo Recomeçar: abre sempre que o banco marcar o flag como pendente
+  useEffect(() => {
+    if (game?.recomecar_pendente) setModoRecomecarAberto(true)
+  }, [game?.recomecar_pendente])
 
   // Lembrete local da estrela (só se a pessoa já autorizou notificações)
   useEffect(() => {
@@ -394,6 +407,16 @@ export function AppProvider({ children }) {
 
   function fecharConclusaoDia() {
     setConclusaoDiaAberta(false)
+  }
+
+  async function escolherOpcaoRecomecar(opcao) {
+    if (!userId) return
+    const atualizado = await resolverModoRecomecar(userId, opcao, hoje)
+    if (atualizado) setGame(atualizado)
+  }
+
+  function fecharModoRecomecar() {
+    setModoRecomecarAberto(false)
   }
 
   async function marcarDicaLida(dia) {
@@ -803,6 +826,9 @@ export function AppProvider({ children }) {
     conclusaoDiaAberta,
     abrirConclusaoDia,
     fecharConclusaoDia,
+    modoRecomecarAberto,
+    escolherOpcaoRecomecar,
+    fecharModoRecomecar,
     conclusao30Aberta,
     fecharConclusao30,
     conclusao90Aberta,
