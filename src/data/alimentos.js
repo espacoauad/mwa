@@ -110,6 +110,14 @@ function medidasColher(porcaoGramas, colherSopa, extras = []) {
   ]
 }
 
+// Queijos cremosos/pastosos: não são fatiados, e a "porção sugerida" deles é
+// maior que 1 colher de sopa real — por isso têm peso de colher próprio aqui,
+// em vez de usar a regra automática (que reaproveitaria a porção inteira).
+const COLHER_EXPLICITO = {
+  'queijo cottage': 20,
+  'cream cheese': 15,
+}
+
 function prepararAlimento(alimento) {
   const unidadeBase = alimento.unidadeBase ?? 'g'
   const medidasPadrao = [
@@ -117,15 +125,16 @@ function prepararAlimento(alimento) {
     { id: 'porcao', nome: 'porção sugerida', plural: 'porções sugeridas', base: alimento.porcao },
   ]
   const nome = alimento.nome.toLowerCase()
+  const colherExplicito = COLHER_EXPLICITO[nome]
   if (unidadeBase === 'ml') medidasPadrao.push({ id: 'copo', nome: 'copo', plural: 'copos', base: 200 })
   if (alimento.categoria === 'Frutas') medidasPadrao.push({ id: 'un', nome: 'unidade média', plural: 'unidades médias', base: alimento.porcao })
-  if (/queijo|pão|torrada/.test(nome)) medidasPadrao.push({ id: 'fatia', nome: 'fatia', plural: 'fatias', base: alimento.porcao })
+  if (/queijo|pão|torrada/.test(nome) && !colherExplicito) medidasPadrao.push({ id: 'fatia', nome: 'fatia', plural: 'fatias', base: alimento.porcao })
   if (/ovo/.test(nome)) medidasPadrao.push({ id: 'un', nome: 'unidade', plural: 'unidades', base: 50 })
   if (/pizza/.test(nome)) medidasPadrao.push({ id: 'fatia', nome: 'fatia', plural: 'fatias', base: alimento.porcao })
   if (/feijão|lentilha|grão-de-bico|sopa|caldo/.test(nome)) medidasPadrao.push({ id: 'concha', nome: 'concha', plural: 'conchas', base: alimento.porcao })
   if (/iogurte/.test(nome)) medidasPadrao.push({ id: 'pote', nome: 'pote', plural: 'potes', base: alimento.porcao })
-  if (/azeite|manteiga|margarina|maionese|molho|açúcar|\bmel\b|creme de leite|farinha|pasta de|geleia|requeijão|cacau|achocolatado|ketchup|mostarda|shoyu/.test(nome)) {
-    const colherSopa = alimento.porcao
+  if (colherExplicito || /azeite|manteiga|margarina|maionese|molho|açúcar|\bmel\b|creme de leite|farinha|pasta de|geleia|requeijão|cacau|achocolatado|ketchup|mostarda|shoyu/.test(nome)) {
+    const colherSopa = colherExplicito ?? alimento.porcao
     medidasPadrao.push({ id: 'colher', nome: 'colher de sopa', plural: 'colheres de sopa', base: colherSopa })
     medidasPadrao.push({ id: 'colher-sobremesa', nome: 'colher de sobremesa', plural: 'colheres de sobremesa', base: Math.round((colherSopa * 2) / 3) })
     medidasPadrao.push({ id: 'colher-cha', nome: 'colher de chá', plural: 'colheres de chá', base: Math.round(colherSopa / 3) })
