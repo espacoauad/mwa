@@ -1,4 +1,5 @@
 import { TrendingDown, TrendingUp, Minus } from 'lucide-react'
+import { historicoSemanal as calcularHistoricoSemanal } from '../../utils/evolucao.js'
 
 export default function SeuProgresso({ usuario, pesagens }) {
   // Se não há pesagens, mostrar placeholder
@@ -56,22 +57,10 @@ export default function SeuProgresso({ usuario, pesagens }) {
   medidas.sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta))
 
   // Dados de histórico semanal (últimas 3 semanas ou todas se <3)
-  const historicoSemanal = pesagens.slice(-3).map((p, i) => {
-    const pesagemAnterior = i === 0 ? (pesagens.length > 3 ? pesagens[pesagens.length - 4] : { peso: pesoInicial }) : pesagens[pesagens.length - 3 + i - 1]
-    const deltaSemana = Math.round((p.peso - pesagemAnterior.peso) * 10) / 10
-    const corDelta = deltaSemana <= 0 ? 'text-sage' : 'text-ouro'
-
-    // Medida principal da semana (cintura)
-    const medidasSemana = p.medidas?.cintura ? `${p.medidas.cintura} cm` : '—'
-
-    return {
-      semana: p.semana,
-      peso: p.peso,
-      delta: deltaSemana,
-      corDelta,
-      medidas: medidasSemana,
-    }
-  })
+  const historicoSemanal = calcularHistoricoSemanal(pesagens, pesoInicial).map((s) => ({
+    ...s,
+    corDelta: s.delta <= 0 ? 'text-sage' : 'text-ouro',
+  }))
 
   return (
     <section className="mwa-sombra-premium mt-4 rounded-2xl bg-white p-8">
