@@ -4,10 +4,12 @@ import TelaConsentimento from './TelaConsentimento.jsx'
 import TelaContato from './TelaContato.jsx'
 import TelaBiometria from './TelaBiometria.jsx'
 import TelaCorporais from './TelaCorporais.jsx'
+import TelaPersonalizacao from './TelaPersonalizacao.jsx'
+import TelaHabitos from './TelaHabitos.jsx'
 import TelaMetas from './TelaMetas.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
-const TOTAL_TELAS = 5
+const TOTAL_TELAS = 7
 
 export default function OnboardingFlow() {
   const { sessao, concluirOnboarding } = useApp()
@@ -28,6 +30,19 @@ export default function OnboardingFlow() {
     nivelAtividade: '',
     objetivo: '',
     medidas: { cintura: '', quadril: '', peito: '', braco: '', coxa: '' },
+    foco: '',
+    focoOutro: '',
+    obstaculo: '',
+    obstaculoOutro: '',
+    rotina: '',
+    rotinaOutro: '',
+    sentimentoEsperado: '',
+    sentimentoEsperadoOutro: '',
+    sono: '',
+    hidratacao: '',
+    habitosAlimentares: '',
+    intestino: '',
+    disposicao: '',
   })
 
   function atualizar(campo, valor) {
@@ -64,7 +79,9 @@ export default function OnboardingFlow() {
     <TelaContato key="1" dados={dados} atualizar={atualizar} avancar={avancar} />,
     <TelaBiometria key="2" dados={dados} atualizar={atualizar} avancar={avancar} voltar={voltar} />,
     <TelaCorporais key="3" dados={dados} atualizarMedida={atualizarMedida} avancar={avancar} voltar={voltar} />,
-    <TelaMetas key="4" dados={dados} finalizar={finalizar} voltar={voltar} />,
+    <TelaPersonalizacao key="4" dados={dados} atualizar={atualizar} avancar={avancar} voltar={voltar} />,
+    <TelaHabitos key="5" dados={dados} atualizar={atualizar} avancar={avancar} voltar={voltar} />,
+    <TelaMetas key="6" dados={dados} finalizar={finalizar} voltar={voltar} />,
   ]
 
   return (

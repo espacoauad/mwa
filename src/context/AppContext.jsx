@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase.js'
 import { calcularMetas, dataHojeISO, diaDoPrograma, totalDiasPrograma, programa90Ativo as calcularPrograma90Ativo } from '../utils/calculos.js'
+import { montarPersonalizacaoParaSalvar } from '../utils/personalizacao.js'
 import { registrarSessao } from '../lib/sessoes.js'
 import { calcularEstrelas } from '../utils/hallDaFama.js'
 import { useIdioma } from './IdiomaContext.jsx'
@@ -470,6 +471,7 @@ export function AppProvider({ children }) {
         consentimento_registrado_em: agora,
         data_inicio: agora,
         idioma,
+        personalizacao: montarPersonalizacaoParaSalvar(dados),
       })
       .select()
       .single()

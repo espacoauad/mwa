@@ -18,6 +18,7 @@ const DADOS_EN = [
   { titulo: 'Biometric information', itens: 'weight, height, age, sex, and body measurements' },
   { titulo: 'Food routine', itens: 'meals, water, and exercise logged in the app' },
   { titulo: 'Progress', itens: 'weekly weigh-ins and progress photos' },
+  { titulo: 'Habits and motivation', itens: 'sleep, hydration, bowel function, energy levels, eating habits, and your personal goals' },
 ]
 
 const USOS_EN = [
@@ -25,6 +26,7 @@ const USOS_EN = [
   'Track your progress throughout the program',
   'Send program information and reminders',
   'Provide support through WhatsApp',
+  'Personalize your in-app experience',
 ]
 
 export default function TelaConsentimento({ dados, atualizar, avancar }) {
