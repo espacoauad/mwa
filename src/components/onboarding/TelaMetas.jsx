@@ -15,7 +15,7 @@ export default function TelaMetas({ dados, finalizar, voltar }) {
   })
   const objetivo = OBJETIVOS.find((o) => o.id === dados.objetivo)
   const primeiroNome = dados.nome.trim().split(' ')[0]
-  const { foco, sentimento } = montarFraseRecepcao(dados)
+  const { foco, sentimento } = montarFraseRecepcao(dados, ingles)
 
   const METAS_LISTA = [
     { label: ingles ? 'Calories' : 'Calorias', valor: `${metas.calorias.toLocaleString(locale)} kcal`, emoji: '🔥' },

@@ -2,11 +2,13 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { montarFraseRecepcao, montarPersonalizacaoParaSalvar, OPCOES_FOCO, OPCOES_SENTIMENTO_ESPERADO } from './personalizacao.js'
 
-test('OPCOES_FOCO e OPCOES_SENTIMENTO_ESPERADO tem 4 opcoes cada, todas com fragmento', () => {
+test('OPCOES_FOCO e OPCOES_SENTIMENTO_ESPERADO tem 4 opcoes cada, todas com fragmento e fragmentoEn', () => {
   assert.equal(OPCOES_FOCO.length, 4)
   assert.equal(OPCOES_SENTIMENTO_ESPERADO.length, 4)
   assert.ok(OPCOES_FOCO.every((o) => typeof o.fragmento === 'string' && o.fragmento.length > 0))
   assert.ok(OPCOES_SENTIMENTO_ESPERADO.every((o) => typeof o.fragmento === 'string' && o.fragmento.length > 0))
+  assert.ok(OPCOES_FOCO.every((o) => typeof o.fragmentoEn === 'string' && o.fragmentoEn.length > 0))
+  assert.ok(OPCOES_SENTIMENTO_ESPERADO.every((o) => typeof o.fragmentoEn === 'string' && o.fragmentoEn.length > 0))
 })
 
 test('montarFraseRecepcao usa o fragmento da opcao escolhida', () => {
@@ -35,6 +37,31 @@ test('montarFraseRecepcao retorna null quando a resposta esta vazia', () => {
   const { foco, sentimento } = montarFraseRecepcao({ foco: '', focoOutro: '', sentimentoEsperado: '', sentimentoEsperadoOutro: '' })
   assert.equal(foco, null)
   assert.equal(sentimento, null)
+})
+
+test('montarFraseRecepcao usa o fragmento em ingles quando ingles=true', () => {
+  const { foco, sentimento } = montarFraseRecepcao(
+    {
+      foco: 'rotina',
+      focoOutro: '',
+      sentimentoEsperado: 'orgulhosa',
+      sentimentoEsperadoOutro: '',
+    },
+    true,
+  )
+  assert.equal(foco, 'your routine and consistency')
+  assert.equal(sentimento, 'proud of staying consistent')
+})
+
+test('montarFraseRecepcao usa o fragmento em portugues por padrao (ingles omitido)', () => {
+  const { foco, sentimento } = montarFraseRecepcao({
+    foco: 'rotina',
+    focoOutro: '',
+    sentimentoEsperado: 'orgulhosa',
+    sentimentoEsperadoOutro: '',
+  })
+  assert.equal(foco, 'sua rotina e constância')
+  assert.equal(sentimento, 'orgulhosa de ter sido constante')
 })
 
 test('montarPersonalizacaoParaSalvar normaliza habitos pulados para null', () => {

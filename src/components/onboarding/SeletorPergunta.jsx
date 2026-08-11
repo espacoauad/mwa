@@ -50,6 +50,8 @@ export default function SeletorPergunta({
           value={valorOutro}
           onChange={(e) => aoMudarOutro(e.target.value)}
           placeholder={placeholderOutro}
+          aria-label={`${titulo} — ${ingles ? 'Other' : 'Outro'}`}
+          maxLength={80}
           className="mt-2 w-full rounded-lg border-2 border-sage/30 bg-white px-4 py-3 text-sm font-medium text-verde outline-none transition-colors focus:border-sage"
         />
       )}

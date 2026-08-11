@@ -4,10 +4,10 @@
 // calculos.js/TelaMetas.jsx.
 
 export const OPCOES_FOCO = [
-  { id: 'alimentacao', label: 'Sua relação com a alimentação', fragmento: 'sua relação com a alimentação' },
-  { id: 'corpo', label: 'Seu corpo e disposição', fragmento: 'seu corpo e disposição' },
-  { id: 'rotina', label: 'Sua rotina e constância', fragmento: 'sua rotina e constância' },
-  { id: 'emocional', label: 'Sua relação emocional com a comida', fragmento: 'sua relação emocional com a comida' },
+  { id: 'alimentacao', label: 'Sua relação com a alimentação', fragmento: 'sua relação com a alimentação', fragmentoEn: 'your relationship with food' },
+  { id: 'corpo', label: 'Seu corpo e disposição', fragmento: 'seu corpo e disposição', fragmentoEn: 'your body and energy' },
+  { id: 'rotina', label: 'Sua rotina e constância', fragmento: 'sua rotina e constância', fragmentoEn: 'your routine and consistency' },
+  { id: 'emocional', label: 'Sua relação emocional com a comida', fragmento: 'sua relação emocional com a comida', fragmentoEn: 'your emotional relationship with food' },
 ]
 
 export const OPCOES_OBSTACULO = [
@@ -21,14 +21,14 @@ export const OPCOES_ROTINA = [
   { id: 'corrida', label: 'Corrida, sem tempo pra mim' },
   { id: 'organizada_sem_foco', label: 'Organizada, mas sem espaço pra me cuidar' },
   { id: 'tranquila_sem_constancia', label: 'Tranquila, mas sem constância' },
-  { id: 'bagunçada', label: 'Bagunçada, quero recomeçar' },
+  { id: 'baguncada', label: 'Bagunçada, quero recomeçar' },
 ]
 
 export const OPCOES_SENTIMENTO_ESPERADO = [
-  { id: 'leve', label: 'Mais leve e disposta', fragmento: 'mais leve e disposta' },
-  { id: 'orgulhosa', label: 'Orgulhosa de ter sido constante', fragmento: 'orgulhosa de ter sido constante' },
-  { id: 'tranquila', label: 'Com uma relação mais tranquila com a comida', fragmento: 'com uma relação mais tranquila com a comida' },
-  { id: 'confiante', label: 'Mais confiante com meu corpo', fragmento: 'mais confiante com meu corpo' },
+  { id: 'leve', label: 'Mais leve e disposta', fragmento: 'mais leve e disposta', fragmentoEn: 'lighter and more energetic' },
+  { id: 'orgulhosa', label: 'Orgulhosa de ter sido constante', fragmento: 'orgulhosa de ter sido constante', fragmentoEn: 'proud of staying consistent' },
+  { id: 'tranquila', label: 'Com uma relação mais tranquila com a comida', fragmento: 'com uma relação mais tranquila com a comida', fragmentoEn: 'a calmer relationship with food' },
+  { id: 'confiante', label: 'Mais confiante com meu corpo', fragmento: 'mais confiante com seu corpo', fragmentoEn: 'more confident in your body' },
 ]
 
 export const OPCOES_SONO = [
@@ -72,14 +72,17 @@ export const OPCOES_DISPOSICAO = [
 
 // Monta os dois fragmentos usados na frase de recepção da tela final do
 // onboarding (TelaMetas.jsx). Retorna null para um fragmento se a
-// resposta correspondente ainda não foi preenchida.
-export function montarFraseRecepcao(dados) {
+// resposta correspondente ainda não foi preenchida. Quando `ingles` é
+// true, usa o fragmento em inglês (fragmentoEn) em vez do português —
+// o texto livre de "outro" não é traduzido, pois é escrito pela usuária.
+export function montarFraseRecepcao(dados, ingles = false) {
+  const campoFragmento = ingles ? 'fragmentoEn' : 'fragmento'
   const foco = dados.foco === 'outro'
     ? (dados.focoOutro || null)
-    : (OPCOES_FOCO.find((o) => o.id === dados.foco)?.fragmento ?? null)
+    : (OPCOES_FOCO.find((o) => o.id === dados.foco)?.[campoFragmento] ?? null)
   const sentimento = dados.sentimentoEsperado === 'outro'
     ? (dados.sentimentoEsperadoOutro || null)
-    : (OPCOES_SENTIMENTO_ESPERADO.find((o) => o.id === dados.sentimentoEsperado)?.fragmento ?? null)
+    : (OPCOES_SENTIMENTO_ESPERADO.find((o) => o.id === dados.sentimentoEsperado)?.[campoFragmento] ?? null)
   return { foco, sentimento }
 }
 

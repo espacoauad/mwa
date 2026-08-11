@@ -21,7 +21,7 @@ const ROTINA_EN = {
   corrida: 'Busy, no time for myself',
   organizada_sem_foco: 'Organized, but no room to take care of myself',
   tranquila_sem_constancia: 'Calm, but not consistent',
-  bagunçada: 'Messy, I want a fresh start',
+  baguncada: 'Messy, I want a fresh start',
 }
 
 const SENTIMENTO_EN = {
