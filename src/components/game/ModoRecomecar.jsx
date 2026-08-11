@@ -38,6 +38,12 @@ export default function ModoRecomecar() {
     dialogRef.current?.focus()
   }, [])
 
+  // a11y: quando a tela troca para a resposta, o botão que tinha foco é desmontado
+  // e o foco cairia no <body> — devolve o foco ao diálogo (que continua montado).
+  useEffect(() => {
+    if (opcaoEscolhida) dialogRef.current?.focus()
+  }, [opcaoEscolhida])
+
   async function escolher(chave) {
     setOpcaoEscolhida(chave)
     await escolherOpcaoRecomecar(chave)
@@ -88,7 +94,12 @@ export default function ModoRecomecar() {
           </>
         ) : (
           <>
-            <p id="modo-recomecar-titulo" className="text-base leading-relaxed text-white">
+            <p
+              id="modo-recomecar-titulo"
+              role="status"
+              aria-live="polite"
+              className="text-base leading-relaxed text-white"
+            >
               {resposta.mensagem}
             </p>
             <button

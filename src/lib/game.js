@@ -105,9 +105,10 @@ export async function avaliarModoRecomecar(userId, game, hojeISO) {
 // Registra a escolha da pessoa no Modo Recomeçar (só para histórico, sem sementes)
 // e limpa o flag pendente.
 export async function resolverModoRecomecar(userId, opcao, hojeISO) {
-  await supabase
+  const { error } = await supabase
     .from('mwa_game_eventos')
     .insert({ user_id: userId, tipo: `modo_recomecar_${opcao}`, ref: hojeISO, sementes: 0 })
+  if (error) return null
 
   const { data } = await supabase
     .from('mwa_game')
