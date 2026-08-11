@@ -6,6 +6,7 @@ import { abrirCheckout } from '../../lib/hotmart.js'
 import { PRODUTOS, formatarPreco } from '../../utils/ofertas.js'
 import { useConfeti } from '../../hooks/useConfeti.js'
 import LogoMWA from '../ui/LogoMWA.jsx'
+import { montarFraseRecepcao } from '../../utils/personalizacao.js'
 import CertificadoConclusao from './CertificadoConclusao.jsx'
 
 /**
@@ -98,6 +99,14 @@ export default function Conclusao90Dias({ persistente = false }) {
   const diferencaPeso = pesoInicial && pesoAtual ? Math.round((pesoInicial - pesoAtual) * 10) / 10 : null
   const totalSementes = game?.sementes ?? 0
   const kgEquivalentes = caloriasEconomizadas ? Math.round((caloriasEconomizadas / 7700) * 10) / 10 : null
+  const { foco, sentimento } = montarFraseRecepcao(usuario?.personalizacao ?? {})
+  const primeiraPesagem = pesagens[0]
+  const ultimaPesagem = pesagens[pesagens.length - 1]
+  const mostrarFotosCapsula =
+    pesagens.length >= 2 &&
+    primeiraPesagem?.id !== ultimaPesagem?.id &&
+    Boolean(primeiraPesagem?.fotos?.frente) &&
+    Boolean(ultimaPesagem?.fotos?.frente)
 
   // Posições fixas (não recalculadas a cada render) para o céu estrelado - MAIS CELEBRATIVO
   const estrelas = useMemo(
@@ -213,6 +222,42 @@ export default function Conclusao90Dias({ persistente = false }) {
           <p className="text-lg font-bold text-white/95">consolidou a transformação.</p>
           <p className="mt-2 text-sm italic text-white/80">Você não é mais alguém que tenta. Você é alguém que é.</p>
         </div>
+
+        {/* Cápsula do Tempo — relembra a intenção do dia 1 */}
+        {foco && sentimento && (
+          <div className="w-full max-w-sm rounded-3xl border-2 border-ouro/40 bg-white/10 p-6 backdrop-blur-md">
+            <p className="mb-3 text-center text-xs font-bold uppercase tracking-widest text-ouro/80">
+              Cápsula do Tempo
+            </p>
+            <p className="text-center text-sm leading-relaxed text-white/90">
+              No primeiro dia, seu foco era <strong className="text-ouro">{foco}</strong>, e você esperava terminar se sentindo <strong className="text-ouro">{sentimento}</strong>.
+            </p>
+            {mostrarFotosCapsula && (
+              <div className="mt-4 grid grid-cols-2 gap-3">
+                <div className="text-center">
+                  <img
+                    src={primeiraPesagem.fotos.frente}
+                    alt="Foto do dia 1"
+                    className="aspect-[3/4] w-full rounded-xl object-cover"
+                  />
+                  <p className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-white/60">Dia 1</p>
+                </div>
+                <div className="text-center">
+                  <img
+                    src={ultimaPesagem.fotos.frente}
+                    alt="Foto de hoje"
+                    className="aspect-[3/4] w-full rounded-xl object-cover"
+                  />
+                  <p className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-white/60">Hoje</p>
+                </div>
+              </div>
+            )}
+            <p className="mt-5 text-center text-sm italic leading-relaxed text-white/85">
+              "Quando você começou, escreveu o que esperava sentir ao final desses 90 dias. Hoje, esse dia chegou. Não importa se cada meta foi cumprida à risca — o que importa é a constância que você construiu, dia após dia, e isso já é a maior prova de que você é capaz de sustentar uma mudança de verdade. Estou muito orgulhosa de você."
+            </p>
+            <p className="mt-2 text-center text-xs font-semibold text-ouro/70">Com carinho, Wanessa</p>
+          </div>
+        )}
 
         {/* Números da jornada - PREMIUM CELEBRATIVO */}
         <div className="grid w-full max-w-sm grid-cols-3 gap-3">
