@@ -7,6 +7,7 @@ import { PRODUTOS, formatarPreco } from '../../utils/ofertas.js'
 import { useConfeti } from '../../hooks/useConfeti.js'
 import LogoMWA from '../ui/LogoMWA.jsx'
 import { montarFraseRecepcao } from '../../utils/personalizacao.js'
+import { pesagensComRotulo } from '../../utils/evolucao.js'
 import CertificadoConclusao from './CertificadoConclusao.jsx'
 
 /**
@@ -23,6 +24,7 @@ export default function Conclusao90Dias({ persistente = false }) {
   const [diasRegistrados, setDiasRegistrados] = useState(0)
   const [reveladas, setReveladas] = useState(() => new Set())
   const [certificadoAberto, setCertificadoAberto] = useState(false)
+  const [fotosCapsulaComErro, setFotosCapsulaComErro] = useState(() => new Set())
   const dialogRef = useRef(null)
 
   // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
@@ -100,13 +102,14 @@ export default function Conclusao90Dias({ persistente = false }) {
   const totalSementes = game?.sementes ?? 0
   const kgEquivalentes = caloriasEconomizadas ? Math.round((caloriasEconomizadas / 7700) * 10) / 10 : null
   const { foco, sentimento } = montarFraseRecepcao(usuario?.personalizacao ?? {})
-  const primeiraPesagem = pesagens[0]
-  const ultimaPesagem = pesagens[pesagens.length - 1]
+  const pesagensRotuladas = pesagensComRotulo(pesagens, 90)
+  const primeiraPesagemCapsula = pesagensRotuladas[0]
+  const ultimaPesagemCapsula = pesagensRotuladas[pesagensRotuladas.length - 1]
   const mostrarFotosCapsula =
-    pesagens.length >= 2 &&
-    primeiraPesagem?.id !== ultimaPesagem?.id &&
-    Boolean(primeiraPesagem?.fotos?.frente) &&
-    Boolean(ultimaPesagem?.fotos?.frente)
+    pesagensRotuladas.length >= 2 &&
+    primeiraPesagemCapsula?.pesagem?.id !== ultimaPesagemCapsula?.pesagem?.id &&
+    Boolean(primeiraPesagemCapsula?.pesagem?.fotos?.frente) &&
+    Boolean(ultimaPesagemCapsula?.pesagem?.fotos?.frente)
 
   // Posições fixas (não recalculadas a cada render) para o céu estrelado - MAIS CELEBRATIVO
   const estrelas = useMemo(
@@ -235,20 +238,48 @@ export default function Conclusao90Dias({ persistente = false }) {
             {mostrarFotosCapsula && (
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <div className="text-center">
-                  <img
-                    src={primeiraPesagem.fotos.frente}
-                    alt="Foto do dia 1"
-                    className="aspect-[3/4] w-full rounded-xl object-cover"
-                  />
-                  <p className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-white/60">Dia 1</p>
+                  {!fotosCapsulaComErro.has('inicial') ? (
+                    <img
+                      src={primeiraPesagemCapsula.pesagem.fotos.frente}
+                      alt={`Foto de ${primeiraPesagemCapsula.rotulo}`}
+                      className="aspect-[3/4] w-full rounded-xl object-cover"
+                      onError={() =>
+                        setFotosCapsulaComErro((atual) => {
+                          if (atual.has('inicial')) return atual
+                          const proximo = new Set(atual)
+                          proximo.add('inicial')
+                          return proximo
+                        })
+                      }
+                    />
+                  ) : (
+                    <span className="flex aspect-[3/4] w-full items-center justify-center rounded-xl bg-creme text-[10px] text-verde/40">
+                      Sem foto
+                    </span>
+                  )}
+                  <p className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-white/60">{primeiraPesagemCapsula.rotulo}</p>
                 </div>
                 <div className="text-center">
-                  <img
-                    src={ultimaPesagem.fotos.frente}
-                    alt="Foto de hoje"
-                    className="aspect-[3/4] w-full rounded-xl object-cover"
-                  />
-                  <p className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-white/60">Hoje</p>
+                  {!fotosCapsulaComErro.has('final') ? (
+                    <img
+                      src={ultimaPesagemCapsula.pesagem.fotos.frente}
+                      alt={`Foto de ${ultimaPesagemCapsula.rotulo}`}
+                      className="aspect-[3/4] w-full rounded-xl object-cover"
+                      onError={() =>
+                        setFotosCapsulaComErro((atual) => {
+                          if (atual.has('final')) return atual
+                          const proximo = new Set(atual)
+                          proximo.add('final')
+                          return proximo
+                        })
+                      }
+                    />
+                  ) : (
+                    <span className="flex aspect-[3/4] w-full items-center justify-center rounded-xl bg-creme text-[10px] text-verde/40">
+                      Sem foto
+                    </span>
+                  )}
+                  <p className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-white/60">{ultimaPesagemCapsula.rotulo}</p>
                 </div>
               </div>
             )}
