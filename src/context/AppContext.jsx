@@ -51,6 +51,7 @@ function perfilParaUsuario(p) {
     role: p.role ?? 'user',
     fotoUrl: p.foto_url ?? null,
     idioma: p.idioma ?? 'pt-BR',
+    personalizacao: p.personalizacao ?? {},
   }
 }
 
