@@ -86,9 +86,16 @@ vazio, sem erro.
    - a primeira e a última pesagem não forem a mesma (evita comparar uma
      foto única consigo mesma).
 
-   Mostra as duas fotos lado a lado, com rótulos "Dia 1" e "Dia 90" (ou o
-   dia real da última pesagem, se for diferente de 90 — mas rotulado
-   "Hoje" por simplicidade, já que essa tela só aparece no dia 90).
+   Mostra as duas fotos lado a lado, com o rótulo do marco real de cada
+   pesagem (`pesagensComRotulo`, já existe em `src/utils/evolucao.js` e já
+   é usada em `MinhaEvolucao.jsx`) — **não** "Dia 1"/"Hoje". O calendário de
+   pesagens do MWA é fixo nos dias 15/30/45/60/75/90 (`getDiasPesagem`); não
+   existe pesagem no dia 1, então a primeira pesagem de alguém no programa
+   de 90 dias é sempre rotulada "Dia 15" — a mesma foto já é rotulada assim
+   em Minha Evolução, e os dois rótulos precisam bater. (Achado da revisão
+   final: a primeira versão desta spec pedia "Dia 1"/"Hoje", o que estava
+   factualmente errado e contradizia o rótulo já usado em Minha Evolução
+   para a mesma foto.)
 
 3. **Mensagem de encerramento** — texto fixo, igual para todas as pessoas,
    sem interpolação de nome (o restante da tela já usa `primeiroNome` em
