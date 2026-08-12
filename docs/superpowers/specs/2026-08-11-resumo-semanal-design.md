@@ -49,15 +49,23 @@ um contador (0-7) por métrica:
    contador ≥ 3), não há pontos fortes nem ponto de atenção — mostra
    apenas a mensagem acolhedora genérica (ver Copy).
 4. **Ponto de atenção**: a métrica com o menor contador entre as 4 (última
-   da lista ordenada). Se o contador dessa métrica for **igual** ao
-   contador da métrica mais forte (primeira da lista ordenada) — ou seja,
-   as 4 métricas empataram no mesmo valor — não mostrar ponto de atenção:
-   não faz sentido apontar fraqueza numa semana onde tudo foi igual.
-   (Checar igualdade contra a mais forte, não contra os pontos fortes
-   selecionados — numa semana com as 4 métricas empatadas, os "pontos
-   fortes" pegam só as 2 primeiras da lista por causa do corte em `slice(0,
-   2)`, então a métrica mais fraca nunca estaria literalmente *dentro* da
-   lista de pontos fortes mesmo tendo o mesmo valor que elas.)
+   da lista ordenada). Não mostrar ponto de atenção quando:
+   - o contador da métrica mais fraca for **igual** ao contador da métrica
+     mais forte (primeira da lista ordenada) — as 4 métricas empataram no
+     mesmo valor, então não faz sentido apontar fraqueza numa semana onde
+     tudo foi igual; **ou**
+   - o contador da métrica mais fraca já for **≥ 3** (o mesmo piso usado
+     para elegibilidade a ponto forte, `PISO_PONTO_FORTE`) — numa semana
+     quase toda forte (ex: 5/5/5/4), chamar a métrica de 4 dias de "o que
+     mais ficou pra trás" é crítica indevida numa semana boa. Só mostrar
+     ponto de atenção quando a métrica mais fraca realmente ficou abaixo
+     do piso de força (achado da revisão final, 2026-08-11).
+
+   (Checar igualdade/piso contra a métrica em si, não contra os pontos
+   fortes selecionados — numa semana com as 4 métricas empatadas, os
+   "pontos fortes" pegam só as 2 primeiras da lista por causa do corte em
+   `slice(0, 2)`, então a métrica mais fraca nunca estaria literalmente
+   *dentro* da lista de pontos fortes mesmo tendo o mesmo valor que elas.)
 
 ## Copy
 
