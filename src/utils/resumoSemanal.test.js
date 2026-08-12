@@ -90,18 +90,34 @@ test('semana quase toda forte (5/5/5/4) não gera ponto de atenção — a mais 
   assert.equal(resultado.pontoAtencao, null)
 })
 
-test('metrica mais fraca exatamente no piso (3) ainda gera ponto de atencao normalmente quando as outras sao maiores', () => {
-  const refeicoesPorDia = mapaDe(DIAS, [true, true, true, true, true, false, false]) // 5
-  const aguaPorDia = mapaDe(DIAS, [2000, 2000, 2000, 2000, 1000, 1000, 1000]) // 4
-  const proteinaPorDia = mapaDe(DIAS, [50, 50, 50, 0, 0, 0, 0]) // 3
-  const exercicioPorDia = mapaDe(DIAS, [true, false, false, false, false, false, false]) // 1
+test('metrica mais fraca exatamente no piso (3) suprime o ponto de atencao', () => {
+  const refeicoesPorDia = mapaDe(DIAS, [true, true, true, true, true, true, false]) // 6
+  const aguaPorDia = mapaDe(DIAS, [2000, 2000, 2000, 2000, 2000, 1000, 1000]) // 5
+  const proteinaPorDia = mapaDe(DIAS, [50, 50, 50, 50, 0, 0, 0]) // 4
+  const exercicioPorDia = mapaDe(DIAS, [true, true, true, false, false, false, false]) // 3
 
   const resultado = calcularResumoSemanal({
     dias: DIAS, refeicoesPorDia, proteinaPorDia, aguaPorDia, exercicioPorDia,
     metaProteina: 50, metaAguaMl: 2000,
   })
 
-  assert.deepEqual(resultado.pontoAtencao, { chave: 'exercicio', n: 1 })
+  assert.deepEqual(resultado.contadores, { refeicao: 6, agua: 5, proteina: 4, exercicio: 3 })
+  assert.equal(resultado.pontoAtencao, null)
+})
+
+test('metrica mais fraca abaixo do piso (2) ainda gera ponto de atencao normalmente', () => {
+  const refeicoesPorDia = mapaDe(DIAS, [true, true, true, true, true, true, false]) // 6
+  const aguaPorDia = mapaDe(DIAS, [2000, 2000, 2000, 2000, 2000, 1000, 1000]) // 5
+  const proteinaPorDia = mapaDe(DIAS, [50, 50, 50, 50, 0, 0, 0]) // 4
+  const exercicioPorDia = mapaDe(DIAS, [true, true, false, false, false, false, false]) // 2
+
+  const resultado = calcularResumoSemanal({
+    dias: DIAS, refeicoesPorDia, proteinaPorDia, aguaPorDia, exercicioPorDia,
+    metaProteina: 50, metaAguaMl: 2000,
+  })
+
+  assert.deepEqual(resultado.contadores, { refeicao: 6, agua: 5, proteina: 4, exercicio: 2 })
+  assert.deepEqual(resultado.pontoAtencao, { chave: 'exercicio', n: 2 })
 })
 
 test('ATENCAO_FRASE usa "nenhum dos 7 dias" quando o contador é 0, não "0 dos 7 dias"', () => {

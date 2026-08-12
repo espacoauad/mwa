@@ -39,6 +39,8 @@ export default function ResumoSemanal() {
     const primeiroDia = dias[0]
     const ultimoDia = dias[dias.length - 1]
 
+    setErro(false)
+
     Promise.all([
       supabase
         .from('mwa_refeicoes')
