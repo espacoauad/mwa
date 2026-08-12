@@ -109,6 +109,22 @@ daquele registro, salvando `UPDATE` na linha existente em vez de
 reativamente de `mwa_pesagens`, refletem a edição automaticamente sem
 lógica extra.
 
+## Recompensas do jogo (sementes, estrela do dia)
+
+As funções de escrita (`obterOuCriarRefeicao`/`adicionarItemRefeicao`,
+`adicionarExercicio`, `adicionarAgua`, `adicionarPesagem`) chamam
+`premiar(tipo, ref)` internamente, e `premiar` sempre marca
+`tarefasHoje[tipo] = true` — mesmo que o lançamento seja de um dia
+passado. Sem tratamento, editar um dia antigo marcaria a tarefa de
+**hoje** como concluída por engano (possível disparo indevido da tela de
+"dia concluído").
+
+**Decisão:** lançamentos feitos com `diaVisualizado !== hoje` não geram
+nenhuma recompensa — sem sementes, sem marcar tarefa, sem estrela do dia.
+O sistema de recompensas continua se comportando exatamente como hoje
+quando `diaVisualizado === hoje`; ao editar um dia passado, essas
+chamadas de `premiar(...)` são simplesmente puladas.
+
 ## Casos extremos
 
 - **Dia sem lançamentos:** ao visualizar um dia passado vazio, as telas
