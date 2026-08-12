@@ -75,11 +75,11 @@ export default function Hoje({ irParaDicas }) {
   // Compartilhar: abre o menu nativo do celular (Instagram, WhatsApp...) e premia com sementes
   async function compartilhar() {
     const texto = ingles
-      ? `I’m on day ${diaAtual} of my transformation with MWA — Método Wanessa Auad! 🌿 Join me: https://metodomwa.com.br`
-      : `Estou no dia ${diaAtual} da minha transformação com o MWA — Método Wanessa Auad! 🌿 Vem comigo: https://metodomwa.com.br`
+      ? `I’m on day ${diaAtual} of my transformation with MWA — My Wellness App! 🌿 Join me: https://metodomwa.com.br`
+      : `Estou no dia ${diaAtual} da minha transformação com o MWA — My Wellness App! 🌿 Vem comigo: https://metodomwa.com.br`
     try {
       if (navigator.share) {
-        await navigator.share({ title: 'MWA — Método Wanessa Auad', text: texto })
+        await navigator.share({ title: 'MWA — My Wellness App', text: texto })
       } else {
         await navigator.clipboard.writeText(texto)
         setAvisoCompartilhar(ingles ? 'Text copied! Paste it into your Instagram story 📲' : 'Texto copiado! Cole nos seus stories do Instagram 📲')

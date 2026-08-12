@@ -556,7 +556,9 @@
       "Bash(cp \"branding/mwa-v8-variantes/mwa-simbolo-reverso-branco.png\" src/assets/simbolo-mwa-claro.png)",
       "Bash(node tmp/check-dims.cjs src/assets/logo-mwa.png src/assets/logo-mwa-clara.png src/assets/simbolo-mwa.png src/assets/simbolo-mwa-claro.png)",
       "Bash(node tmp/resize-app-assets.cjs)",
-      "Bash(node tmp/check-dims.cjs public/apple-touch-icon.png public/favicon.png public/icon-192x192.png public/icon-512x512.png)"
+      "Bash(node tmp/check-dims.cjs public/apple-touch-icon.png public/favicon.png public/icon-192x192.png public/icon-512x512.png)",
+      "mcp__6a44cad9-913e-461b-856a-59f5f5d07b69__get_logs",
+      "mcp__4ffbb2bd-c419-49a2-a106-66096c2dccc2__netlify-deploy-services-reader"
     ]
   }
 }

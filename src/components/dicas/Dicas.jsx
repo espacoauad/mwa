@@ -87,7 +87,7 @@ export default function Dicas({ irPara }) {
 
       <div className="mt-4 pb-4">
         {secao === 'informativo' && informativo && (
-          <InformativoDoDia informativo={informativo} dia={diaAtual} irPara={irPara} />
+          <InformativoDoDia informativo={informativo} dia={diaAtual} totalDias={totalDias} irPara={irPara} />
         )}
         {secao === 'informativo' && !informativo && (
           <article className="rounded-2xl bg-white p-6 text-center shadow-sm shadow-verde/5">

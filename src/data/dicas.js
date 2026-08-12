@@ -9,7 +9,7 @@ export const DICAS = [
     dia: 1,
     tema: 'Introdução',
     icone: '🌱',
-    titulo: 'Bem-vinda aos seus 30 dias!',
+    titulo: 'Bem-vinda à sua jornada!',
     conteudo:
       'Hoje começa a sua Jornada de 30 Dias. Ela não promete instalar um hábito para sempre em um mês — nenhum programa sério promete isso. Ela constrói a fundação e prova, na prática, que é possível. Por isso existe a continuidade de 90 dias: é nela que o hábito se consolida de verdade. Seu corpo gasta energia até em repouso: essa é a sua TMB (Taxa Metabólica Basal). Somando suas atividades diárias, chegamos ao seu TDEE, o total de calorias que você gasta por dia. Suas metas foram calculadas a partir desses números e do seu objetivo: para emagrecer com saúde, é preciso consumir um pouco menos calorias do que você gasta — isso se chama déficit calórico, e é o único mecanismo real por trás de qualquer emagrecimento, não importa o nome da dieta da vez. Não busque perfeição: busque constância. Registrar o que você come já muda o seu comportamento alimentar — estudos mostram que quem anota, emagrece mais.',
     dicaPratica: 'Registre TODAS as refeições de hoje, mesmo as que "não contam" — consciência vem antes da mudança. E o foco dos seus próximos 30 dias será entender e aplicar, na prática, quatro conceitos que sustentam todo o método: análise de macros (como proteína, carboidrato e gordura se distribuem no seu prato), controle de calorias (quanto você realmente consome), déficit calórico (a base fisiológica de todo emagrecimento) e densidade nutricional (escolher alimentos que entregam mais nutriente por caloria). Se quiser revisitar cada um desses conceitos a qualquer momento, encontre o guia completo em Ferramentas → Reforçando Conceitos.',
