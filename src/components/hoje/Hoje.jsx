@@ -26,6 +26,7 @@ const ConclusaoDia = lazy(() => import('../game/ConclusaoDia.jsx'))
 const Conclusao30Dias = lazy(() => import('../game/Conclusao30Dias.jsx'))
 const Conclusao90Dias = lazy(() => import('../game/Conclusao90Dias.jsx'))
 const ModoRecomecar = lazy(() => import('../game/ModoRecomecar.jsx'))
+const ResumoSemanal = lazy(() => import('../game/ResumoSemanal.jsx'))
 
 export default function Hoje({ irParaDicas }) {
   const { ingles, locale } = useIdioma()
@@ -49,6 +50,7 @@ export default function Hoje({ irParaDicas }) {
     fecharConclusao30,
     conclusao90Aberta,
     modoRecomecarAberto,
+    resumoSemanalAberto,
     atualizarFotoPerfil,
   } = useApp()
   const [lojaAberta, setLojaAberta] = useState(false)
@@ -413,6 +415,13 @@ export default function Hoje({ irParaDicas }) {
       {modoRecomecarAberto && (
         <Suspense fallback={<CarregandoFallback />}>
           <ModoRecomecar />
+        </Suspense>
+      )}
+
+      {/* Retrato da Semana: resumo inteligente aberto aos domingos */}
+      {resumoSemanalAberto && (
+        <Suspense fallback={<CarregandoFallback />}>
+          <ResumoSemanal />
         </Suspense>
       )}
 
