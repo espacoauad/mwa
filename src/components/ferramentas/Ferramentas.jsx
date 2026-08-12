@@ -9,7 +9,6 @@ import CarregandoFallback from '../ui/CarregandoFallback.jsx'
 import LenteConsciencia from './LenteConsciencia.jsx'
 import VersiculoDoDiaModal from './VersiculoDoDiaModal.jsx'
 import ReforcandoConceitos from './ReforcandoConceitos.jsx'
-import { diaLiberacaoJogo, jogoLiberado } from '../../utils/jogosLiberacao.js'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Jogos de gamificação só abrem sob interação — carregados sob demanda para
@@ -280,30 +279,20 @@ const JOGOS_EN = {
   colheita: ['Harvest Game', 'A breather for your mind: match 3 fruits and relax. 300+ points = +10 🌱 per day'],
 }
 
-function CardJogo({ jogo, diaAtual, ingles, onAbrir }) {
-  const liberado = jogoLiberado(jogo.id, diaAtual)
+function CardJogo({ jogo, ingles, onAbrir }) {
   return (
     <button
       type="button"
-      onClick={liberado ? () => onAbrir(jogo.id) : undefined}
-      disabled={!liberado}
-      className={`mt-3 flex w-full items-center gap-4 rounded-2xl p-5 text-left transition-transform ${
-        liberado
-          ? 'bg-gradient-to-r from-sage-claro to-ouro-claro active:scale-[0.99]'
-          : 'cursor-not-allowed bg-cinza/50 opacity-70'
-      }`}
+      onClick={() => onAbrir(jogo.id)}
+      className="mt-3 flex w-full items-center gap-4 rounded-2xl bg-gradient-to-r from-sage-claro to-ouro-claro p-5 text-left transition-transform active:scale-[0.99]"
     >
-      <span className="text-3xl">{liberado ? jogo.emoji : '🔒'}</span>
+      <span className="text-3xl">{jogo.emoji}</span>
       <span className="flex-1">
         <span className="block font-serif text-lg font-semibold italic text-verde">
           {ingles ? JOGOS_EN[jogo.id][0] : jogo.titulo}
         </span>
         <span className="text-sm text-verde/80">
-          {liberado
-            ? ingles ? JOGOS_EN[jogo.id][1] : jogo.desc
-            : ingles
-              ? `Unlocks on day ${diaLiberacaoJogo(jogo.id)} of your program`
-              : `Libera no dia ${diaLiberacaoJogo(jogo.id)} do seu programa`}
+          {ingles ? JOGOS_EN[jogo.id][1] : jogo.desc}
         </span>
       </span>
     </button>
@@ -312,7 +301,6 @@ function CardJogo({ jogo, diaAtual, ingles, onAbrir }) {
 
 export default function Ferramentas() {
   const { ingles } = useIdioma()
-  const { diaAtual } = useApp()
   // Um único estado guarda qual jogo está aberto (null = nenhum)
   const [jogoAtivo, setJogoAtivo] = useState(null)
   const [lenteAberta, setLenteAberta] = useState(false)
@@ -376,7 +364,7 @@ export default function Ferramentas() {
           : 'Aprenda brincando o que você usa em cada refeição.'}
       </p>
       {JOGOS_NUTRICAO.map((jogo) => (
-        <CardJogo key={jogo.id} jogo={jogo} diaAtual={diaAtual} ingles={ingles} onAbrir={setJogoAtivo} />
+        <CardJogo key={jogo.id} jogo={jogo} ingles={ingles} onAbrir={setJogoAtivo} />
       ))}
 
       {/* Prateleira B — pausa leve */}
@@ -387,7 +375,7 @@ export default function Ferramentas() {
         {ingles ? 'A light break, with no lesson attached.' : 'Um respiro leve, sem lição para aprender.'}
       </p>
       {JOGOS_PAUSA.map((jogo) => (
-        <CardJogo key={jogo.id} jogo={jogo} diaAtual={diaAtual} ingles={ingles} onAbrir={setJogoAtivo} />
+        <CardJogo key={jogo.id} jogo={jogo} ingles={ingles} onAbrir={setJogoAtivo} />
       ))}
 
       {/* A Lente da Consciência: ferramenta de pausa guiada */}
