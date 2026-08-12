@@ -119,6 +119,8 @@ export function AppProvider({ children }) {
   const [conclusao90Aberta, setConclusao90Aberta] = useState(false)
   // Modo Recomeçar: acolhimento ao voltar após dias sem abrir o app
   const [modoRecomecarAberto, setModoRecomecarAberto] = useState(false)
+  // Retrato da Semana: resumo semanal aberto aos domingos
+  const [resumoSemanalAberto, setResumoSemanalAberto] = useState(false)
 
   const hoje = dataHojeISO()
   const userId = sessao?.user?.id ?? null
@@ -344,6 +346,18 @@ export function AppProvider({ children }) {
     setConclusao90Aberta(true)
   }, [diaAtual, programa90Ativo, programas, userId])
 
+  // Aos domingos, mostra o "Retrato da Semana" — 1x por semana.
+  useEffect(() => {
+    if (!userId) return
+    const diaSemana = new Date(`${hoje}T00:00:00`).getDay()
+    if (diaSemana !== 0) return
+    const segundaDaSemana = diasDaSemana(hoje)[0]
+    const chave = `mwa_resumo_semanal_${userId}_${segundaDaSemana}`
+    if (localStorage.getItem(chave)) return
+    localStorage.setItem(chave, '1')
+    setResumoSemanalAberto(true)
+  }, [hoje, userId])
+
   const refeicoesHoje = useMemo(
     () => refeicoes.filter((r) => r.data === hoje).sort((a, b) => (a.horario ?? '').localeCompare(b.horario ?? '')),
     [refeicoes, hoje],
@@ -418,6 +432,10 @@ export function AppProvider({ children }) {
 
   function fecharModoRecomecar() {
     setModoRecomecarAberto(false)
+  }
+
+  function fecharResumoSemanal() {
+    setResumoSemanalAberto(false)
   }
 
   async function marcarDicaLida(dia) {
@@ -834,6 +852,8 @@ export function AppProvider({ children }) {
     fecharConclusao30,
     conclusao90Aberta,
     fecharConclusao90,
+    resumoSemanalAberto,
+    fecharResumoSemanal,
     marcarDicaLida,
     registrarCompartilhamento,
     registrarJoguinho,
