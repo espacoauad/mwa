@@ -8,15 +8,19 @@ export const FORTE_FRAGMENTO = {
   exercicio: 'registrou exercícios',
 }
 
+function emDias(n) {
+  return n === 0 ? 'nenhum dos 7 dias' : `${n} dos 7 dias`
+}
+
 export const ATENCAO_FRASE = {
   refeicao: (n) =>
-    `O registro das refeições foi o que mais ficou de lado essa semana — só ${n} dos 7 dias. Que tal focar só em registrar o café da manhã na próxima semana? Não precisa ser tudo de uma vez.`,
+    `O registro das refeições foi o que mais ficou de lado essa semana — só ${emDias(n)}. Que tal focar só em registrar o café da manhã na próxima semana? Não precisa ser tudo de uma vez.`,
   agua: (n) =>
-    `A água foi o que mais escapou essa semana — a meta só foi batida em ${n} dos 7 dias. Uma sugestão simples: deixe uma garrafa cheia visível na mesa, ela lembra por você.`,
+    `A água foi o que mais escapou essa semana — a meta só foi batida em ${emDias(n)}. Uma sugestão simples: deixe uma garrafa cheia visível na mesa, ela lembra por você.`,
   proteina: (n) =>
-    `A meta de proteína só foi batida em ${n} dos 7 dias essa semana. Vale reforçar uma fonte de proteína em cada refeição principal — não precisa ser perfeito, só mais presente.`,
+    `A meta de proteína só foi batida em ${emDias(n)} essa semana. Vale reforçar uma fonte de proteína em cada refeição principal — não precisa ser perfeito, só mais presente.`,
   exercicio: (n) =>
-    `O exercício foi o que mais ficou pra trás essa semana — só ${n} dos 7 dias. Comece pequeno: 15 minutos já contam.`,
+    `O exercício foi o que mais ficou pra trás essa semana — só ${emDias(n)}. Comece pequeno: 15 minutos já contam.`,
 }
 
 export const MENSAGEM_SEMANA_PARADA =
@@ -54,10 +58,42 @@ export function calcularResumoSemanal({
   if (!semanaParada) {
     const maisFraca = ordenado[ordenado.length - 1]
     const maisForte = ordenado[0]
-    if (contadores[maisFraca] !== contadores[maisForte]) {
+    const empateTotal = contadores[maisFraca] === contadores[maisForte]
+    const maisFracaJaEhForte = contadores[maisFraca] >= PISO_PONTO_FORTE
+    if (!empateTotal && !maisFracaJaEhForte) {
       pontoAtencao = { chave: maisFraca, n: contadores[maisFraca] }
     }
   }
 
   return { contadores, pontosFortes, pontoAtencao, semanaParada }
+}
+
+// Agrega as linhas brutas do Supabase (já filtradas pela semana) nos mapas
+// data -> valor que calcularResumoSemanal espera. Isolado do componente
+// porque soma proteína entre múltiplas refeições do mesmo dia — a parte
+// mais fácil de quebrar silenciosamente, e a única sem cobertura de teste
+// possível dentro de um arquivo .jsx neste repositório.
+export function agregarSemana({ refeicoesRows, aguaRows, exerciciosRows }) {
+  const refeicoesPorDia = new Map()
+  const proteinaPorDia = new Map()
+  for (const r of refeicoesRows ?? []) {
+    refeicoesPorDia.set(r.data, true)
+    const proteinaRefeicao = (r.mwa_refeicoes_itens ?? []).reduce(
+      (soma, item) => soma + Number(item.proteina),
+      0,
+    )
+    proteinaPorDia.set(r.data, (proteinaPorDia.get(r.data) ?? 0) + proteinaRefeicao)
+  }
+
+  const aguaPorDia = new Map()
+  for (const a of aguaRows ?? []) {
+    aguaPorDia.set(a.data, a.ml)
+  }
+
+  const exercicioPorDia = new Map()
+  for (const e of exerciciosRows ?? []) {
+    exercicioPorDia.set(e.data, true)
+  }
+
+  return { refeicoesPorDia, proteinaPorDia, aguaPorDia, exercicioPorDia }
 }

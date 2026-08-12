@@ -418,8 +418,10 @@ export default function Hoje({ irParaDicas }) {
         </Suspense>
       )}
 
-      {/* Retrato da Semana: resumo inteligente aberto aos domingos */}
-      {resumoSemanalAberto && (
+      {/* Retrato da Semana: resumo inteligente aberto aos domingos — adiado
+          se o Modo Recomeçar também estiver pendente, pra não empilhar dois
+          modais de decisão ao mesmo tempo */}
+      {resumoSemanalAberto && !modoRecomecarAberto && (
         <Suspense fallback={<CarregandoFallback />}>
           <ResumoSemanal />
         </Suspense>

@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase.js'
 import { diasDaSemana } from '../../utils/jogos/estrelas.js'
 import {
   calcularResumoSemanal,
+  agregarSemana,
   FORTE_FRAGMENTO,
   ATENCAO_FRASE,
   MENSAGEM_SEMANA_PARADA,
@@ -13,6 +14,7 @@ import {
 export default function ResumoSemanal() {
   const { sessao, metas, hoje, fecharResumoSemanal } = useApp()
   const [resumo, setResumo] = useState(null)
+  const [erro, setErro] = useState(false)
   const dialogRef = useRef(null)
 
   const dias = useMemo(() => diasDaSemana(hoje), [hoje])
@@ -58,27 +60,16 @@ export default function ResumoSemanal() {
         .lte('data', ultimoDia),
     ]).then(([refeicoesRes, aguaRes, exerciciosRes]) => {
       if (cancelado) return
-
-      const refeicoesPorDia = new Map()
-      const proteinaPorDia = new Map()
-      for (const r of refeicoesRes.data ?? []) {
-        refeicoesPorDia.set(r.data, true)
-        const proteinaRefeicao = (r.mwa_refeicoes_itens ?? []).reduce(
-          (soma, item) => soma + Number(item.proteina),
-          0,
-        )
-        proteinaPorDia.set(r.data, (proteinaPorDia.get(r.data) ?? 0) + proteinaRefeicao)
+      if (refeicoesRes.error || aguaRes.error || exerciciosRes.error) {
+        setErro(true)
+        return
       }
 
-      const aguaPorDia = new Map()
-      for (const a of aguaRes.data ?? []) {
-        aguaPorDia.set(a.data, a.ml)
-      }
-
-      const exercicioPorDia = new Map()
-      for (const e of exerciciosRes.data ?? []) {
-        exercicioPorDia.set(e.data, true)
-      }
+      const { refeicoesPorDia, proteinaPorDia, aguaPorDia, exercicioPorDia } = agregarSemana({
+        refeicoesRows: refeicoesRes.data,
+        aguaRows: aguaRes.data,
+        exerciciosRows: exerciciosRes.data,
+      })
 
       setResumo(
         calcularResumoSemanal({
@@ -91,6 +82,8 @@ export default function ResumoSemanal() {
           metaAguaMl: metas.aguaL * 1000,
         }),
       )
+    }).catch(() => {
+      if (!cancelado) setErro(true)
     })
 
     return () => {
@@ -124,7 +117,9 @@ export default function ResumoSemanal() {
           Retrato da sua semana
         </p>
 
-        {!resumo ? (
+        {erro ? (
+          <p className="mt-6 text-sm text-white/70">Não consegui carregar o resumo dessa semana agora. Tente de novo mais tarde.</p>
+        ) : !resumo ? (
           <p className="mt-6 text-sm text-white/70">Calculando...</p>
         ) : resumo.semanaParada ? (
           <p className="mt-6 text-base leading-relaxed text-white">{MENSAGEM_SEMANA_PARADA}</p>
