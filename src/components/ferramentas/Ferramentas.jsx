@@ -354,7 +354,7 @@ export default function Ferramentas() {
         </span>
       </button>
 
-      {/* Prateleira A — jogos de nutrição, liberados aos poucos */}
+      {/* Prateleira A — jogos de nutrição */}
       <h2 className="mt-8 font-serif text-lg font-semibold italic text-verde">
         {ingles ? 'Nutrition games' : 'Jogos de Nutrição'}
       </h2>

@@ -59,9 +59,25 @@ function lerCuidados(dia) {
 
 const CHAVE_CONTAGENS = 'mwa-farm-contagens'
 
+function migrarContagensDeCuidadosAntigos() {
+  const contagens = {}
+  for (let dia = 1; dia <= 90; dia++) {
+    for (const pilarId of lerCuidados(dia)) {
+      contagens[pilarId] = (contagens[pilarId] ?? 0) + 1
+    }
+  }
+  return contagens
+}
+
 function lerContagens() {
+  const bruto = localStorage.getItem(CHAVE_CONTAGENS)
+  if (bruto === null) {
+    const migradas = migrarContagensDeCuidadosAntigos()
+    localStorage.setItem(CHAVE_CONTAGENS, JSON.stringify(migradas))
+    return migradas
+  }
   try {
-    return JSON.parse(localStorage.getItem(CHAVE_CONTAGENS) || '{}')
+    return JSON.parse(bruto)
   } catch {
     return {}
   }
@@ -110,10 +126,14 @@ export default function MwaFarm({ onFechar }) {
     if (!pilar || cuidados.includes(pilar.id)) return
     const novos = [...cuidados, pilar.id]
     setCuidados(novos)
-    localStorage.setItem(chaveCuidado(dia), JSON.stringify(novos))
     const novasContagens = { ...contagens, [pilar.id]: (contagens[pilar.id] ?? 0) + 1 }
     setContagens(novasContagens)
-    localStorage.setItem(CHAVE_CONTAGENS, JSON.stringify(novasContagens))
+    try {
+      localStorage.setItem(chaveCuidado(dia), JSON.stringify(novos))
+      localStorage.setItem(CHAVE_CONTAGENS, JSON.stringify(novasContagens))
+    } catch {
+      // ignora falha de armazenamento (quota excedida, navegação privada, etc.)
+    }
     setSelecionado({ ...pilar, estagio: estagioDoPilar(pilar.id, novasContagens), concluidoAgora: true })
   }
 
