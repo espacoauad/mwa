@@ -73,7 +73,9 @@ function lerContagens() {
   const bruto = localStorage.getItem(CHAVE_CONTAGENS)
   if (bruto === null) {
     const migradas = migrarContagensDeCuidadosAntigos()
-    localStorage.setItem(CHAVE_CONTAGENS, JSON.stringify(migradas))
+    try {
+      localStorage.setItem(CHAVE_CONTAGENS, JSON.stringify(migradas))
+    } catch {}
     return migradas
   }
   try {
