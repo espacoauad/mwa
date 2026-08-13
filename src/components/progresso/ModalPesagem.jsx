@@ -22,13 +22,18 @@ const MEDIDAS = [
   { id: 'peito', pt: 'Peito', en: 'Chest' },
 ]
 
-export default function ModalPesagem({ semana, onFechar }) {
+export default function ModalPesagem({ semana, pesagemExistente, onFechar }) {
   const { ingles } = useIdioma()
-  const { adicionarPesagem } = useApp()
+  const { adicionarPesagem, atualizarPesagem } = useApp()
   const { celebrarGrande } = useConfeti()
-  const [peso, setPeso] = useState('')
-  const [fotos, setFotos] = useState({})
-  const [medidas, setMedidas] = useState({ cintura: '', quadril: '', peito: '' })
+  const editando = Boolean(pesagemExistente)
+  const [peso, setPeso] = useState(pesagemExistente ? String(pesagemExistente.peso) : '')
+  const [fotos, setFotos] = useState(pesagemExistente?.fotos ?? {})
+  const [medidas, setMedidas] = useState({
+    cintura: pesagemExistente?.medidas?.cintura ? String(pesagemExistente.medidas.cintura) : '',
+    quadril: pesagemExistente?.medidas?.quadril ? String(pesagemExistente.medidas.quadril) : '',
+    peito: pesagemExistente?.medidas?.peito ? String(pesagemExistente.medidas.peito) : '',
+  })
   const [bioimpedanciaToggles, setBioimpedanciaToggles] = useState({
     percentualGordura: false,
     percentualMusculo: false,
@@ -46,6 +51,8 @@ export default function ModalPesagem({ semana, onFechar }) {
     circAbdominalCm: '',
   })
   const [bioimpedanciaErros, setBioimpedanciaErros] = useState({})
+  const [salvando, setSalvando] = useState(false)
+  const [erroSalvar, setErroSalvar] = useState(null)
   const dialogRef = useRef(null)
 
   useEffect(() => {
@@ -91,7 +98,7 @@ export default function ModalPesagem({ semana, onFechar }) {
 
   const valido = Number(peso) >= 30 && Number(peso) <= 300
 
-  function salvar() {
+  async function salvar() {
     const bioDataAtivos = Object.entries(bioimpedanciaValues)
       .filter(([key]) => bioimpedanciaToggles[key])
       .reduce((acc, [key, val]) => {
@@ -106,9 +113,7 @@ export default function ModalPesagem({ semana, onFechar }) {
     }
 
     const bioimpedanciaFiltrada = filterBioimpedanciaData(bioDataAtivos)
-
-    adicionarPesagem({
-      semana,
+    const dados = {
       peso: Number(peso),
       fotos,
       medidas: {
@@ -117,7 +122,24 @@ export default function ModalPesagem({ semana, onFechar }) {
         peito: Number(medidas.peito) || null,
       },
       bioimpedancia: bioimpedanciaFiltrada,
-    })
+    }
+
+    if (editando) {
+      setSalvando(true)
+      setErroSalvar(null)
+      try {
+        await atualizarPesagem(pesagemExistente.id, dados)
+        onFechar()
+      } catch (erro) {
+        setErroSalvar(ingles ? 'Failed to save changes. Please try again.' : 'Falha ao salvar as alterações. Tente novamente.')
+        console.error('Erro ao atualizar pesagem:', erro)
+      } finally {
+        setSalvando(false)
+      }
+      return
+    }
+
+    adicionarPesagem({ semana, ...dados })
     const prefereMenosMovimento = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
     if (prefereMenosMovimento) {
       onFechar()
@@ -139,7 +161,11 @@ export default function ModalPesagem({ semana, onFechar }) {
         aria-labelledby="modal-pesagem-titulo"
       >
         <div className="mb-5 flex items-center justify-between">
-          <h2 id="modal-pesagem-titulo" className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Weigh-in — week' : 'Pesagem — semana'} {semana}</h2>
+          <h2 id="modal-pesagem-titulo" className="font-serif text-xl font-semibold italic text-verde">
+            {editando
+              ? (ingles ? 'Edit weigh-in' : 'Editar pesagem')
+              : `${ingles ? 'Weigh-in — week' : 'Pesagem — semana'} ${semana}`}
+          </h2>
           <button
             type="button"
             aria-label={ingles ? 'Close' : 'Fechar'}
@@ -202,9 +228,11 @@ export default function ModalPesagem({ semana, onFechar }) {
           validacoes={bioimpedanciaErros}
         />
 
+        {erroSalvar && <p className="mt-4 rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700">{erroSalvar}</p>}
+
         <div className="mt-5">
-          <Botao onClick={salvar} disabled={!valido}>
-            {ingles ? 'Save weigh-in' : 'Salvar pesagem'}
+          <Botao onClick={salvar} disabled={!valido || salvando}>
+            {editando ? (ingles ? 'Save changes' : 'Salvar alterações') : (ingles ? 'Save weigh-in' : 'Salvar pesagem')}
           </Botao>
         </div>
       </div>

@@ -11,6 +11,7 @@ export default function Progresso() {
   const { ingles, locale } = useIdioma()
   const { usuario, pesagens, diaAtual } = useApp()
   const [modalAberto, setModalAberto] = useState(false)
+  const [pesagemEmEdicao, setPesagemEmEdicao] = useState(null)
 
   const pontos = [
     { rotulo: ingles ? 'Start' : 'Início', peso: usuario.peso },
@@ -87,7 +88,12 @@ export default function Progresso() {
             const delta = Math.round((p.peso - pesoAnterior) * 10) / 10
             const fotos = [p.fotos?.frente, p.fotos?.costas, p.fotos?.latEsq, p.fotos?.latDir].filter(Boolean)
             return (
-              <div key={p.id} className="rounded-2xl bg-white p-4 shadow-sm shadow-verde/5">
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => setPesagemEmEdicao(p)}
+                className="w-full rounded-2xl bg-white p-4 text-left shadow-sm shadow-verde/5 transition-transform active:scale-[0.99]"
+              >
                 <div className="flex items-center justify-between">
                   <p className="font-semibold text-verde">{ingles ? 'Week' : 'Semana'} {p.semana}</p>
                   <p className="text-sm text-verde/60">
@@ -109,7 +115,7 @@ export default function Progresso() {
                     <Camera size={12} /> {ingles ? 'No photos this week' : 'Sem fotos nesta semana'}
                   </p>
                 )}
-              </div>
+              </button>
             )
           })}
         </div>
@@ -126,6 +132,9 @@ export default function Progresso() {
       )}
 
       {modalAberto && <ModalPesagem semana={proximaSemana} onFechar={() => setModalAberto(false)} />}
+      {pesagemEmEdicao && (
+        <ModalPesagem pesagemExistente={pesagemEmEdicao} onFechar={() => setPesagemEmEdicao(null)} />
+      )}
     </div>
   )
 }
