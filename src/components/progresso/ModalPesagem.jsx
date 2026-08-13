@@ -22,6 +22,15 @@ const MEDIDAS = [
   { id: 'peito', pt: 'Peito', en: 'Chest' },
 ]
 
+const BIOIMPEDANCIA_CHAVES = [
+  'percentualGordura',
+  'percentualMusculo',
+  'gorduraVisceral',
+  'idadeMetabolica',
+  'toraxCm',
+  'circAbdominalCm',
+]
+
 export default function ModalPesagem({ semana, pesagemExistente, onFechar }) {
   const { ingles } = useIdioma()
   const { adicionarPesagem, atualizarPesagem } = useApp()
@@ -34,21 +43,23 @@ export default function ModalPesagem({ semana, pesagemExistente, onFechar }) {
     quadril: pesagemExistente?.medidas?.quadril ? String(pesagemExistente.medidas.quadril) : '',
     peito: pesagemExistente?.medidas?.peito ? String(pesagemExistente.medidas.peito) : '',
   })
-  const [bioimpedanciaToggles, setBioimpedanciaToggles] = useState({
-    percentualGordura: false,
-    percentualMusculo: false,
-    gorduraVisceral: false,
-    idadeMetabolica: false,
-    toraxCm: false,
-    circAbdominalCm: false,
+  // Ao editar uma pesagem existente, prefila toggles/valores com o que já
+  // estava salvo — senão o toggle "desligado" some silenciosamente com dados
+  // de bioimpedância reais ao salvar (ver atualizarPesagem, que sobrescreve
+  // bioimpedancia inteira a cada UPDATE).
+  const [bioimpedanciaToggles, setBioimpedanciaToggles] = useState(() => {
+    const bio = pesagemExistente?.bioimpedancia ?? {}
+    return BIOIMPEDANCIA_CHAVES.reduce((acc, chave) => {
+      acc[chave] = bio[chave] !== undefined && bio[chave] !== null
+      return acc
+    }, {})
   })
-  const [bioimpedanciaValues, setBioimpedanciaValues] = useState({
-    percentualGordura: '',
-    percentualMusculo: '',
-    gorduraVisceral: '',
-    idadeMetabolica: '',
-    toraxCm: '',
-    circAbdominalCm: '',
+  const [bioimpedanciaValues, setBioimpedanciaValues] = useState(() => {
+    const bio = pesagemExistente?.bioimpedancia ?? {}
+    return BIOIMPEDANCIA_CHAVES.reduce((acc, chave) => {
+      acc[chave] = bio[chave] !== undefined && bio[chave] !== null ? String(bio[chave]) : ''
+      return acc
+    }, {})
   })
   const [bioimpedanciaErros, setBioimpedanciaErros] = useState({})
   const [salvando, setSalvando] = useState(false)

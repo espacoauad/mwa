@@ -99,7 +99,14 @@ export function AppProvider({ children }) {
   const [refeicoes, setRefeicoes] = useState([])
   const [exercicios, setExercicios] = useState([])
   const [pesagens, setPesagens] = useState([])
-  const [aguaMl, setAguaMl] = useState(0)
+  // Água carrega o dia a que pertence junto com o valor, para que uma troca
+  // rápida de dia (fetch assíncrono ainda em voo) nunca vaze o total de um
+  // dia errado numa leitura ou escrita — ver aguaMl derivado abaixo.
+  const [agua, setAgua] = useState({ data: null, ml: 0 })
+  // true durante o fetch de refeições/exercícios/água do dia visualizado —
+  // evita que a pessoa tente registrar algo antes desse fetch resolver
+  // (o que poderia colidir com uma linha já existente no banco).
+  const [carregandoDia, setCarregandoDia] = useState(false)
   const [diaVisualizado, setDiaVisualizado] = useState(() => dataHojeISO())
   const [modalRefeicao, setModalRefeicao] = useState({ etapa: null, refeicaoId: null, itemInicial: null })
   // Modo demonstração: permite pré-visualizar qualquer dia do programa (ofertas, informativos)
@@ -131,6 +138,10 @@ export function AppProvider({ children }) {
   const programa90Ativo = calcularPrograma90Ativo(programas) !== null
   const estaVendoHoje = diaVisualizado === hoje
   const dataInicioPrograma = usuario ? dataInicioDoPrograma(programas, usuario.dataInicio) : hoje
+  // Só usa o valor de água carregado se ele pertence ao dia visualizado atual —
+  // caso contrário (fetch do novo dia ainda em voo) trata como vazio, em vez de
+  // vazar o total do dia anterior.
+  const aguaMl = agua.data === diaVisualizado ? agua.ml : 0
 
   // Monitora Modo de Revisão no sessionStorage e sincroniza simuladorDia
   useEffect(() => {
@@ -186,7 +197,7 @@ export function AppProvider({ children }) {
         setRefeicoes([])
         setExercicios([])
         setPesagens([])
-        setAguaMl(0)
+        setAgua({ data: null, ml: 0 })
         setDiaVisualizado(dataHojeISO())
         setCarregando(false)
       }
@@ -248,7 +259,8 @@ export function AppProvider({ children }) {
     let cancelado = false
 
     async function carregarDadosDoDia() {
-      const [refs, exs, agua] = await Promise.all([
+      setCarregandoDia(true)
+      const [refs, exs, resAgua] = await Promise.all([
         supabase.from('mwa_refeicoes').select('*, mwa_refeicoes_itens(*)').eq('user_id', userId).eq('data', diaVisualizado),
         supabase.from('mwa_exercicios').select('*').eq('user_id', userId).eq('data', diaVisualizado),
         supabase.from('mwa_agua').select('ml').eq('user_id', userId).eq('data', diaVisualizado).maybeSingle(),
@@ -258,7 +270,8 @@ export function AppProvider({ children }) {
       if (cancelado) return
       setRefeicoes((refs.data ?? []).map((r) => refeicaoDoBanco(r, r.mwa_refeicoes_itens)))
       setExercicios((exs.data ?? []).map(exercicioDoBanco))
-      setAguaMl(agua.data?.ml ?? 0)
+      setAgua({ data: diaVisualizado, ml: resAgua.data?.ml ?? 0 })
+      setCarregandoDia(false)
     }
 
     carregarDadosDoDia()
@@ -616,7 +629,7 @@ export function AppProvider({ children }) {
     setRefeicoes([])
     setExercicios([])
     setPesagens([])
-    setAguaMl(0)
+    setAgua({ data: null, ml: 0 })
   }
 
   async function reiniciar() {
@@ -791,6 +804,7 @@ export function AppProvider({ children }) {
         bioimpedancia: dados.bioimpedancia ?? null,
       })
       .eq('id', pesagemId)
+      .eq('user_id', userId)
       .select()
       .single()
     if (error) throw error
@@ -817,7 +831,7 @@ export function AppProvider({ children }) {
 
   async function adicionarAgua(ml) {
     const novo = Math.max(0, aguaMl + ml)
-    setAguaMl(novo)
+    setAgua({ data: diaVisualizado, ml: novo })
     await supabase.from('mwa_agua').upsert({ user_id: userId, data: diaVisualizado, ml: novo })
     // +10 🌱 quando bate a meta de água do dia
     if (estaVendoHoje && metas && novo >= metas.aguaL * 1000) {
@@ -859,6 +873,7 @@ export function AppProvider({ children }) {
     diaVisualizado,
     estaVendoHoje,
     dataInicioPrograma,
+    carregandoDia,
     mudarDiaVisualizado,
     voltarParaHoje,
     refeicoesHoje,

@@ -12,7 +12,7 @@ const REFEICOES_EN = {
 }
 
 export default function Alimentacao() {
-  const { refeicoesHoje, totaisHoje, metas, removerRefeicaoCompleta, abrirEscolhaRefeicao, abrirRefeicaoDoDia } = useApp()
+  const { refeicoesHoje, totaisHoje, metas, removerRefeicaoCompleta, abrirEscolhaRefeicao, abrirRefeicaoDoDia, carregandoDia } = useApp()
   const { ingles, locale } = useIdioma()
   const [expandida, setExpandida] = useState(null)
 
@@ -100,7 +100,8 @@ export default function Alimentacao() {
       <button
         type="button"
         onClick={abrirEscolhaRefeicao}
-        className="fixed bottom-20 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 rounded-full bg-ouro px-5 py-3.5 font-semibold text-verde-escuro shadow-lg shadow-ouro/40 transition-transform hover:scale-105 active:scale-95"
+        disabled={carregandoDia}
+        className="fixed bottom-20 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 rounded-full bg-ouro px-5 py-3.5 font-semibold text-verde-escuro shadow-lg shadow-ouro/40 transition-transform hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
       >
         <Plus size={20} strokeWidth={2.5} /> {ingles ? 'Add meal' : 'Adicionar refeição'}
       </button>

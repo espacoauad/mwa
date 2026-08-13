@@ -41,6 +41,7 @@ export default function Hoje({ irParaDicas }) {
     gastoExercicios,
     aguaMl,
     adicionarAgua,
+    carregandoDia,
     abrirEscolhaRefeicao,
     game,
     registrarCompartilhamento,
@@ -297,7 +298,7 @@ export default function Hoje({ irParaDicas }) {
           <p className="mb-6 text-xs text-verde/80">
             {ingles ? 'Strategic hydration helps your body perform at its full capacity' : 'A hidratação estratégica sinaliza ao seu corpo que ele pode funcionar em plena capacidade'}
           </p>
-          <AnelHidratacao consumidoMl={aguaMl} metaMl={metas.aguaMl} onClickAdicionar={adicionarAgua} />
+          <AnelHidratacao consumidoMl={aguaMl} metaMl={metas.aguaMl} onClickAdicionar={adicionarAgua} desabilitado={carregandoDia} />
         </motion.section>
 
         {/* Informativo do dia */}

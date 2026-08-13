@@ -116,7 +116,7 @@ function CalculadoraMacros() {
 
 function CalculadoraExercicio() {
   const { ingles, locale } = useIdioma()
-  const { usuario, exerciciosHoje, gastoExercicios, adicionarExercicio, removerExercicio } = useApp()
+  const { usuario, exerciciosHoje, gastoExercicios, adicionarExercicio, removerExercicio, carregandoDia } = useApp()
   const [tipoId, setTipoId] = useState('caminhada')
   const [intensidade, setIntensidade] = useState('moderada')
   const [duracao, setDuracao] = useState('')
@@ -192,7 +192,7 @@ function CalculadoraExercicio() {
       )}
 
       <div className="mt-3">
-        <Botao onClick={registrar} disabled={!gasto}>
+        <Botao onClick={registrar} disabled={!gasto || carregandoDia}>
           {ingles ? 'Log in my day' : 'Registrar no meu dia'}
         </Botao>
       </div>
