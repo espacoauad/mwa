@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Plus, Trash2, Camera, ChevronDown } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { totaisDaRefeicao } from '../../utils/refeicoes.js'
+import SeletorDeDia from '../ui/SeletorDeDia.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 const REFEICOES_EN = {
@@ -17,7 +18,8 @@ export default function Alimentacao() {
 
   return (
     <div className="px-5 pt-10">
-      <h1 className="font-serif text-2xl font-semibold italic text-verde">{ingles ? 'Today’s nutrition' : 'Alimentação de hoje'}</h1>
+      <SeletorDeDia />
+      <h1 className="mt-3 font-serif text-2xl font-semibold italic text-verde">{ingles ? "Today’s nutrition" : "Alimentação de hoje"}</h1>
       <p className="mt-1 text-sm text-verde/60">
         {totaisHoje.calorias.toLocaleString(locale)} {ingles ? 'of' : 'de'} {metas.calorias.toLocaleString(locale)} kcal ·{' '}
         {refeicoesHoje.length} {refeicoesHoje.length === 1 ? (ingles ? 'meal' : 'refeição') : (ingles ? 'meals' : 'refeições')}

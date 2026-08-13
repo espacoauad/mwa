@@ -9,6 +9,7 @@ import CarregandoFallback from '../ui/CarregandoFallback.jsx'
 import LenteConsciencia from './LenteConsciencia.jsx'
 import VersiculoDoDiaModal from './VersiculoDoDiaModal.jsx'
 import ReforcandoConceitos from './ReforcandoConceitos.jsx'
+import SeletorDeDia from '../ui/SeletorDeDia.jsx'
 import { diaLiberacaoJogo, jogoLiberado } from '../../utils/jogosLiberacao.js'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
@@ -323,7 +324,8 @@ export default function Ferramentas() {
 
   return (
     <div className="px-5 pt-10">
-      <h1 className="font-serif text-2xl font-semibold italic text-verde">{ingles ? 'Tools' : 'Ferramentas'}</h1>
+      <SeletorDeDia />
+      <h1 className="mt-3 font-serif text-2xl font-semibold italic text-verde">{ingles ? 'Tools' : 'Ferramentas'}</h1>
       <p className="mb-4 mt-1 text-sm text-verde/80">{ingles ? 'Calculators and resources for your daily routine.' : 'Calculadoras para o seu dia a dia.'}</p>
       <CalculadoraMacros />
       <CalculadoraExercicio />

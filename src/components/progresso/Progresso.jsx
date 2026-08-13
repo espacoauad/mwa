@@ -4,6 +4,7 @@ import { useApp } from '../../context/AppContext.jsx'
 import GraficoPeso from './GraficoPeso.jsx'
 import ModalPesagem from './ModalPesagem.jsx'
 import Botao from '../ui/Botao.jsx'
+import SeletorDeDia from '../ui/SeletorDeDia.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 export default function Progresso() {
@@ -26,7 +27,8 @@ export default function Progresso() {
 
   return (
     <div className="px-5 pt-10">
-      <h1 className="font-serif text-2xl font-semibold italic text-verde">{ingles ? 'Your progress' : 'Seu progresso'}</h1>
+      <SeletorDeDia />
+      <h1 className="mt-3 font-serif text-2xl font-semibold italic text-verde">{ingles ? 'Your progress' : 'Seu progresso'}</h1>
       <p className="mt-1 text-sm text-verde/60">{ingles ? 'Weigh-ins and photos every 7 days — compare like with like.' : 'Pesagem e fotos a cada 7 dias — compare o comparável.'}</p>
 
       {/* Resumo do peso */}
