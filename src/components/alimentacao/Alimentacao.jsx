@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Plus, Trash2, Camera, ChevronDown } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { totaisDaRefeicao } from '../../utils/refeicoes.js'
+import SeletorDeDia from '../ui/SeletorDeDia.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 const REFEICOES_EN = {
@@ -11,13 +12,14 @@ const REFEICOES_EN = {
 }
 
 export default function Alimentacao() {
-  const { refeicoesHoje, totaisHoje, metas, removerRefeicaoCompleta, abrirEscolhaRefeicao, abrirRefeicaoDoDia } = useApp()
+  const { refeicoesHoje, totaisHoje, metas, removerRefeicaoCompleta, abrirEscolhaRefeicao, abrirRefeicaoDoDia, carregandoDia } = useApp()
   const { ingles, locale } = useIdioma()
   const [expandida, setExpandida] = useState(null)
 
   return (
     <div className="px-5 pt-10">
-      <h1 className="font-serif text-2xl font-semibold italic text-verde">{ingles ? 'Today’s nutrition' : 'Alimentação de hoje'}</h1>
+      <SeletorDeDia />
+      <h1 className="mt-3 font-serif text-2xl font-semibold italic text-verde">{ingles ? "Today’s nutrition" : "Alimentação de hoje"}</h1>
       <p className="mt-1 text-sm text-verde/60">
         {totaisHoje.calorias.toLocaleString(locale)} {ingles ? 'of' : 'de'} {metas.calorias.toLocaleString(locale)} kcal ·{' '}
         {refeicoesHoje.length} {refeicoesHoje.length === 1 ? (ingles ? 'meal' : 'refeição') : (ingles ? 'meals' : 'refeições')}
@@ -98,7 +100,8 @@ export default function Alimentacao() {
       <button
         type="button"
         onClick={abrirEscolhaRefeicao}
-        className="fixed bottom-20 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 rounded-full bg-ouro px-5 py-3.5 font-semibold text-verde-escuro shadow-lg shadow-ouro/40 transition-transform hover:scale-105 active:scale-95"
+        disabled={carregandoDia}
+        className="fixed bottom-20 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 rounded-full bg-ouro px-5 py-3.5 font-semibold text-verde-escuro shadow-lg shadow-ouro/40 transition-transform hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
       >
         <Plus size={20} strokeWidth={2.5} /> {ingles ? 'Add meal' : 'Adicionar refeição'}
       </button>

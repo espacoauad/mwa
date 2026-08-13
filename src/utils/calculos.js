@@ -125,6 +125,14 @@ export function diaDoPrograma(programas, dataInicioFallback) {
   return Math.min(30, Math.max(1, diaCorrido))
 }
 
+// Mesma data-âncora usada por diaDoPrograma, em formato AAAA-MM-DD — usada
+// para limitar até onde a navegação de dias passados pode retroceder.
+export function dataInicioDoPrograma(programas, dataInicioFallback) {
+  const p21 = (programas ?? []).find((p) => p.tipo === '21d')
+  const inicio = p21?.dataInicio ?? dataInicioFallback
+  return inicio.slice(0, 10)
+}
+
 // Total de dias do programa da cliente, para exibição de progresso (barra, "Dia X de Y").
 export function totalDiasPrograma(programas) {
   return programa90Ativo(programas) ? 90 : 30

@@ -17,6 +17,7 @@ const MomentoMwa = lazy(() => import('./MomentoMwa.jsx'))
 import Avatar from '../game/Avatar.jsx'
 import CarregandoFallback from '../ui/CarregandoFallback.jsx'
 import LogoMWA from '../ui/LogoMWA.jsx'
+import SeletorDeDia from '../ui/SeletorDeDia.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Telas de gamificação (loja/conclusões) só abrem sob interação — carregadas
@@ -40,6 +41,7 @@ export default function Hoje({ irParaDicas }) {
     gastoExercicios,
     aguaMl,
     adicionarAgua,
+    carregandoDia,
     abrirEscolhaRefeicao,
     game,
     registrarCompartilhamento,
@@ -95,11 +97,6 @@ export default function Hoje({ irParaDicas }) {
   const progresso = Math.round((diaAtual / totalDias) * 100)
   const dica = diaAtual <= 30 ? dicaDoDia(diaAtual) : dicaDoDia90(diaAtual)
   const informativo = informativoDoDia(diaAtual)
-  const dataFormatada = new Date().toLocaleDateString(locale, {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-  })
 
   const linhasResumo = [
     { label: ingles ? 'Calories' : 'Calorias', consumido: totaisHoje.calorias, meta: metas.calorias, unidade: 'kcal' },
@@ -123,7 +120,7 @@ export default function Hoje({ irParaDicas }) {
         </div>
         <div className="relative z-10 mt-2 flex items-start justify-between gap-3">
           <div>
-            <p className="text-sm capitalize text-white/60">{dataFormatada}</p>
+            <SeletorDeDia tema="escuro" />
             <h1 className="mt-1 font-serif text-2xl font-semibold italic">{ingles ? 'Hello' : 'Olá'}, {primeiroNome} 🌿</h1>
           </div>
           {/* Foto real (toque para trocar) + avatar gamificado logo abaixo (toque abre a loja) */}
@@ -301,7 +298,7 @@ export default function Hoje({ irParaDicas }) {
           <p className="mb-6 text-xs text-verde/80">
             {ingles ? 'Strategic hydration helps your body perform at its full capacity' : 'A hidratação estratégica sinaliza ao seu corpo que ele pode funcionar em plena capacidade'}
           </p>
-          <AnelHidratacao consumidoMl={aguaMl} metaMl={metas.aguaMl} onClickAdicionar={adicionarAgua} />
+          <AnelHidratacao consumidoMl={aguaMl} metaMl={metas.aguaMl} onClickAdicionar={adicionarAgua} desabilitado={carregandoDia} />
         </motion.section>
 
         {/* Informativo do dia */}

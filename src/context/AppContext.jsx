@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase.js'
-import { calcularMetas, dataHojeISO, diaDoPrograma, totalDiasPrograma, programa90Ativo as calcularPrograma90Ativo } from '../utils/calculos.js'
+import { calcularMetas, dataHojeISO, diaDoPrograma, totalDiasPrograma, dataInicioDoPrograma, programa90Ativo as calcularPrograma90Ativo } from '../utils/calculos.js'
 import { montarPersonalizacaoParaSalvar } from '../utils/personalizacao.js'
 import { registrarSessao } from '../lib/sessoes.js'
 import { calcularEstrelas } from '../utils/hallDaFama.js'
@@ -99,7 +99,15 @@ export function AppProvider({ children }) {
   const [refeicoes, setRefeicoes] = useState([])
   const [exercicios, setExercicios] = useState([])
   const [pesagens, setPesagens] = useState([])
-  const [aguaMl, setAguaMl] = useState(0)
+  // Água carrega o dia a que pertence junto com o valor, para que uma troca
+  // rápida de dia (fetch assíncrono ainda em voo) nunca vaze o total de um
+  // dia errado numa leitura ou escrita — ver aguaMl derivado abaixo.
+  const [agua, setAgua] = useState({ data: null, ml: 0 })
+  // true durante o fetch de refeições/exercícios/água do dia visualizado —
+  // evita que a pessoa tente registrar algo antes desse fetch resolver
+  // (o que poderia colidir com uma linha já existente no banco).
+  const [carregandoDia, setCarregandoDia] = useState(false)
+  const [diaVisualizado, setDiaVisualizado] = useState(() => dataHojeISO())
   const [modalRefeicao, setModalRefeicao] = useState({ etapa: null, refeicaoId: null, itemInicial: null })
   // Modo demonstração: permite pré-visualizar qualquer dia do programa (ofertas, informativos)
   const [simuladorDia, setSimuladorDia] = useState(null)
@@ -128,6 +136,12 @@ export function AppProvider({ children }) {
   const diaAtual = usuario ? (simuladorDia ?? diaDoPrograma(programas, usuario.dataInicio)) : 1
   const totalDias = totalDiasPrograma(programas)
   const programa90Ativo = calcularPrograma90Ativo(programas) !== null
+  const estaVendoHoje = diaVisualizado === hoje
+  const dataInicioPrograma = usuario ? dataInicioDoPrograma(programas, usuario.dataInicio) : hoje
+  // Só usa o valor de água carregado se ele pertence ao dia visualizado atual —
+  // caso contrário (fetch do novo dia ainda em voo) trata como vazio, em vez de
+  // vazar o total do dia anterior.
+  const aguaMl = agua.data === diaVisualizado ? agua.ml : 0
 
   // Monitora Modo de Revisão no sessionStorage e sincroniza simuladorDia
   useEffect(() => {
@@ -183,7 +197,8 @@ export function AppProvider({ children }) {
         setRefeicoes([])
         setExercicios([])
         setPesagens([])
-        setAguaMl(0)
+        setAgua({ data: null, ml: 0 })
+        setDiaVisualizado(dataHojeISO())
         setCarregando(false)
       }
     })
@@ -197,21 +212,15 @@ export function AppProvider({ children }) {
 
     async function carregar() {
       setCarregando(true)
-      const [perfil, progs, refs, exs, pesos, agua] = await Promise.all([
+      const [perfil, progs, pesos] = await Promise.all([
         supabase.from('mwa_perfis').select('*').eq('id', userId).maybeSingle(),
         supabase.from('mwa_programas').select('*').eq('user_id', userId),
-        supabase.from('mwa_refeicoes').select('*, mwa_refeicoes_itens(*)').eq('user_id', userId).eq('data', hoje),
-        supabase.from('mwa_exercicios').select('*').eq('user_id', userId).eq('data', hoje),
         supabase.from('mwa_pesagens').select('*').eq('user_id', userId).order('data'),
-        supabase.from('mwa_agua').select('ml').eq('user_id', userId).eq('data', hoje).maybeSingle(),
       ])
       if (cancelado) return
       setUsuario(perfil.data ? perfilParaUsuario(perfil.data) : null)
       setProgramas((progs.data ?? []).map(programaDoBanco))
-      setRefeicoes((refs.data ?? []).map((r) => refeicaoDoBanco(r, r.mwa_refeicoes_itens)))
-      setExercicios((exs.data ?? []).map(exercicioDoBanco))
       setPesagens((pesos.data ?? []).map(pesagemDoBanco))
-      setAguaMl(agua.data?.ml ?? 0)
       setCarregando(false)
       // Gamificação carrega depois, sem segurar a tela
       carregarGame(userId).then(async (g) => {
@@ -240,6 +249,36 @@ export function AppProvider({ children }) {
       cancelado = true
     }
   }, [userId, hoje])
+
+  // Busca refeições, exercícios e água do dia visualizado — reexecuta toda
+  // vez que a pessoa navega para outro dia. Efeito separado do carregamento
+  // de perfil/programas/pesagens para não reexecutar gamificação (sementes,
+  // streaks, Modo Recomeçar) a cada troca de dia.
+  useEffect(() => {
+    if (!userId) return
+    let cancelado = false
+
+    async function carregarDadosDoDia() {
+      setCarregandoDia(true)
+      const [refs, exs, resAgua] = await Promise.all([
+        supabase.from('mwa_refeicoes').select('*, mwa_refeicoes_itens(*)').eq('user_id', userId).eq('data', diaVisualizado),
+        supabase.from('mwa_exercicios').select('*').eq('user_id', userId).eq('data', diaVisualizado),
+        supabase.from('mwa_agua').select('ml').eq('user_id', userId).eq('data', diaVisualizado).maybeSingle(),
+      ])
+      // Guard: se diaVisualizado mudou de novo antes desta resposta chegar,
+      // descarta — evita sobrescrever a tela com dados do dia errado.
+      if (cancelado) return
+      setRefeicoes((refs.data ?? []).map((r) => refeicaoDoBanco(r, r.mwa_refeicoes_itens)))
+      setExercicios((exs.data ?? []).map(exercicioDoBanco))
+      setAgua({ data: diaVisualizado, ml: resAgua.data?.ml ?? 0 })
+      setCarregandoDia(false)
+    }
+
+    carregarDadosDoDia()
+    return () => {
+      cancelado = true
+    }
+  }, [userId, diaVisualizado])
 
   // Ao voltar do checkout da Hotmart, atualiza o ciclo sem exigir que a cliente
   // feche e abra o aplicativo. O webhook continua sendo a única fonte de
@@ -359,11 +398,11 @@ export function AppProvider({ children }) {
   }, [hoje, userId])
 
   const refeicoesHoje = useMemo(
-    () => refeicoes.filter((r) => r.data === hoje).sort((a, b) => (a.horario ?? '').localeCompare(b.horario ?? '')),
-    [refeicoes, hoje],
+    () => refeicoes.filter((r) => r.data === diaVisualizado).sort((a, b) => (a.horario ?? '').localeCompare(b.horario ?? '')),
+    [refeicoes, diaVisualizado],
   )
 
-  const exerciciosHoje = useMemo(() => exercicios.filter((e) => e.data === hoje), [exercicios, hoje])
+  const exerciciosHoje = useMemo(() => exercicios.filter((e) => e.data === diaVisualizado), [exercicios, diaVisualizado])
 
   const totaisHoje = useMemo(() => {
     const t = { calorias: 0, proteina: 0, carbos: 0, gordura: 0, fibras: 0 }
@@ -436,6 +475,14 @@ export function AppProvider({ children }) {
 
   function fecharResumoSemanal() {
     setResumoSemanalAberto(false)
+  }
+
+  function mudarDiaVisualizado(data) {
+    setDiaVisualizado(data)
+  }
+
+  function voltarParaHoje() {
+    setDiaVisualizado(hoje)
   }
 
   async function marcarDicaLida(dia) {
@@ -582,7 +629,7 @@ export function AppProvider({ children }) {
     setRefeicoes([])
     setExercicios([])
     setPesagens([])
-    setAguaMl(0)
+    setAgua({ data: null, ml: 0 })
   }
 
   async function reiniciar() {
@@ -620,7 +667,7 @@ export function AppProvider({ children }) {
 
     const { data, error } = await supabase
       .from('mwa_refeicoes')
-      .insert({ user_id: userId, data: hoje, tipo, horario: horarioAgora() })
+      .insert({ user_id: userId, data: diaVisualizado, tipo, horario: horarioAgora() })
       .select()
       .single()
     if (error) throw error
@@ -644,7 +691,7 @@ export function AppProvider({ children }) {
       rs.map((r) => (r.id === refeicaoId ? { ...r, itens: [...r.itens, novoItem] } : r)),
     )
     const refeicao = refeicoesHoje.find((r) => r.id === refeicaoId)
-    if (refeicao) await premiar('refeicao', `${hoje}:${refeicao.tipo}`)
+    if (estaVendoHoje && refeicao) await premiar('refeicao', `${hoje}:${refeicao.tipo}`)
   }
 
   async function atualizarItemRefeicao(refeicaoId, itemId, dados) {
@@ -694,7 +741,7 @@ export function AppProvider({ children }) {
       .from('mwa_exercicios')
       .insert({
         user_id: userId,
-        data: hoje,
+        data: diaVisualizado,
         tipo: exercicio.tipo,
         emoji: exercicio.emoji,
         intensidade: exercicio.intensidade,
@@ -707,7 +754,7 @@ export function AppProvider({ children }) {
       setExercicios((es) => [...es, exercicioDoBanco(data)])
       await registrarSessao(userId, 'atividade', { acao: 'exercicio_adicionado', tipo: exercicio.tipo })
       // +10 🌱 uma vez por dia
-      await premiar('exercicio', hoje)
+      if (estaVendoHoje) await premiar('exercicio', hoje)
     }
   }
 
@@ -747,6 +794,25 @@ export function AppProvider({ children }) {
     }
   }
 
+  async function atualizarPesagem(pesagemId, dados) {
+    const { data, error } = await supabase
+      .from('mwa_pesagens')
+      .update({
+        peso: dados.peso,
+        medidas: dados.medidas ?? {},
+        fotos: dados.fotos ?? {},
+        bioimpedancia: dados.bioimpedancia ?? null,
+      })
+      .eq('id', pesagemId)
+      .eq('user_id', userId)
+      .select()
+      .single()
+    if (error) throw error
+    const atualizada = pesagemDoBanco(data)
+    setPesagens((ps) => ps.map((p) => (p.id === pesagemId ? atualizada : p)))
+    return atualizada
+  }
+
   // Indica uma amiga pelo WhatsApp — recompensa limitada a 3x por dia
   async function registrarIndicacao() {
     if (!userId) return 0
@@ -765,10 +831,10 @@ export function AppProvider({ children }) {
 
   async function adicionarAgua(ml) {
     const novo = Math.max(0, aguaMl + ml)
-    setAguaMl(novo)
-    await supabase.from('mwa_agua').upsert({ user_id: userId, data: hoje, ml: novo })
+    setAgua({ data: diaVisualizado, ml: novo })
+    await supabase.from('mwa_agua').upsert({ user_id: userId, data: diaVisualizado, ml: novo })
     // +10 🌱 quando bate a meta de água do dia
-    if (metas && novo >= metas.aguaL * 1000) {
+    if (estaVendoHoje && metas && novo >= metas.aguaL * 1000) {
       await premiar('agua', hoje)
     }
   }
@@ -804,6 +870,12 @@ export function AppProvider({ children }) {
     diaAtual,
     totalDias,
     hoje,
+    diaVisualizado,
+    estaVendoHoje,
+    dataInicioPrograma,
+    carregandoDia,
+    mudarDiaVisualizado,
+    voltarParaHoje,
     refeicoesHoje,
     exerciciosHoje,
     totaisHoje,
@@ -827,6 +899,7 @@ export function AppProvider({ children }) {
     adicionarExercicio,
     removerExercicio,
     adicionarPesagem,
+    atualizarPesagem,
     adicionarAgua,
     abrirEscolhaRefeicao,
     abrirRefeicaoDoDia,
