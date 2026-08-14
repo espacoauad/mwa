@@ -44,9 +44,11 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
   }
 
   // Função: Desenha um arco entre dois ângulos (0–360) numa cor. Usada tanto
-  // pelos anéis de macro (sempre de 0 até o ângulo atual) quanto pelo anel de
-  // calorias (que precisa de um segundo segmento começando onde o primeiro termina).
-  function desenharArco(raio, espessura, anguloInicio, anguloFim, cor) {
+  // pelos anéis de macro (sempre de 0 até o ângulo atual, ponta arredondada)
+  // quanto pelo anel de calorias (dois segmentos adjacentes, ponta reta —
+  // ponta arredondada distorceria o tamanho visual de cada segmento na
+  // fronteira entre eles).
+  function desenharArco(raio, espessura, anguloInicio, anguloFim, cor, linecap = 'round') {
     if (anguloFim <= anguloInicio) return null
     const pontoInicio = calcularPontoFinal(raio, anguloInicio)
     const pontoFim = calcularPontoFinal(raio, anguloFim)
@@ -57,7 +59,7 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
         fill="none"
         stroke={cor}
         strokeWidth={espessura}
-        strokeLinecap="round"
+        strokeLinecap={linecap}
       />
     )
   }
@@ -75,20 +77,27 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
     )
   }
 
-  // Anel de calorias: segmento "comida" (verde-escuro, ou terracota de alerta
-  // se a comida sozinha já ultrapassar a meta) + segmento "ganho pelo
-  // exercício" (dourado), emendado logo depois, até fechar em no máximo 360°.
+  // Anel de calorias: o segmento de consumo (verde-escuro, ou terracota de
+  // alerta) reflete as calorias LÍQUIDAS (comida menos exercício) — exercício
+  // encolhe esse segmento, nunca aumenta o preenchimento. O segmento dourado
+  // ("coberto pelo exercício") preenche a diferença até onde a comida sozinha
+  // chegaria, e nunca passa daí — a área colorida total nunca cresce por
+  // causa do exercício, só muda de cor.
   function desenharAnelCalorias() {
-    const anguloComida = percentualParaAngulo(caloriasAnimadas, metaCalorias)
-    const anguloTotal = percentualParaAngulo(caloriasAnimadas + caloriasQueimadasAnimadas, metaCalorias)
-    const acimaDaMeta = metaCalorias > 0 && caloriasAnimadas > metaCalorias
-    const corComida = acimaDaMeta ? '#B0563C' : '#052A1F'
+    const netCaloriasAnimado = caloriasAnimadas - caloriasQueimadasAnimadas
+    const anguloConsumo = percentualParaAngulo(Math.max(netCaloriasAnimado, 0), metaCalorias)
+    const anguloComidaBruta = percentualParaAngulo(caloriasAnimadas, metaCalorias)
+    // A cor de alerta usa os valores finais (não animados) pra não piscar de
+    // cor durante a contagem — só o preenchimento (ângulos) anima suavemente.
+    const netCaloriasFinal = calorias - caloriasQueimadas
+    const acimaDaMeta = metaCalorias > 0 && netCaloriasFinal > metaCalorias
+    const corConsumo = acimaDaMeta ? '#B0563C' : '#052A1F'
 
     return (
       <g key="anel-calorias">
         <circle cx={centro} cy={centro} r={raios.calorias} fill="none" stroke="#E8E4DC" strokeWidth={espessuraCalorias} opacity="0.4" />
-        {desenharArco(raios.calorias, espessuraCalorias, 0, anguloComida, corComida)}
-        {desenharArco(raios.calorias, espessuraCalorias, anguloComida, anguloTotal, '#C59F4F')}
+        {desenharArco(raios.calorias, espessuraCalorias, 0, anguloConsumo, corConsumo, 'butt')}
+        {desenharArco(raios.calorias, espessuraCalorias, anguloConsumo, anguloComidaBruta, '#C59F4F', 'butt')}
       </g>
     )
   }
@@ -102,6 +111,7 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
   const caloriasInteiro = Math.round(caloriasAnimadas)
   const metaCaloriasInteiro = Math.round(metaCalorias)
   const caloriasQueimadasInteiro = Math.round(caloriasQueimadasAnimadas)
+  const acimaDaMetaTexto = metaCalorias > 0 && calorias - caloriasQueimadas > metaCalorias
 
   return (
     <div className="flex flex-col items-center gap-4 py-4">
@@ -110,14 +120,16 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
         <p className="font-serif text-3xl font-bold text-verde">{caloriasInteiro}</p>
         <p className="mt-0.5 text-xs text-verde/80 tracking-wide">de {metaCaloriasInteiro} kcal</p>
         {caloriasQueimadasInteiro > 0 && (
-          <p className="mt-0.5 text-xs font-semibold text-ouro">+{caloriasQueimadasInteiro} kcal do exercício</p>
+          <p className="mt-0.5 text-xs font-semibold text-ouro">
+            {ingles ? `+${caloriasQueimadasInteiro} kcal from exercise` : `+${caloriasQueimadasInteiro} kcal do exercício`}
+          </p>
         )}
       </div>
 
       <div className="h-px w-16 bg-ouro/30" />
 
       {/* SVG do gráfico */}
-      <svg viewBox="0 0 200 200" className="h-48 w-48 md:h-56 md:w-56">
+      <svg viewBox="0 0 200 200" className="h-48 w-48 md:h-56 md:w-56" aria-hidden="true">
         {/* Anel de Calorias (mais externo, mais grosso) */}
         {desenharAnelCalorias()}
 
@@ -159,6 +171,13 @@ export default function GraficoMacros({ proteina = 0, carbos = 0, gordura = 0, m
           </p>
           <p className="mt-0.5 text-[10px] text-verde/80">de {Math.round(metaGordura)}g</p>
         </div>
+      </div>
+
+      {/* Resumo acessível (leitor de tela) */}
+      <div className="sr-only" role="status" aria-live="polite">
+        {ingles
+          ? `Calories: ${caloriasInteiro} of ${metaCaloriasInteiro} kcal.${caloriasQueimadasInteiro > 0 ? ` ${caloriasQueimadasInteiro} kcal covered by exercise.` : ''} ${acimaDaMetaTexto ? 'Over your goal, even after exercise.' : 'Within your goal.'}`
+          : `Calorias: ${caloriasInteiro} de ${metaCaloriasInteiro} kcal.${caloriasQueimadasInteiro > 0 ? ` ${caloriasQueimadasInteiro} kcal cobertas pelo exercício.` : ''} ${acimaDaMetaTexto ? 'Acima da meta, mesmo com o exercício.' : 'Dentro da meta.'}`}
       </div>
     </div>
   )
