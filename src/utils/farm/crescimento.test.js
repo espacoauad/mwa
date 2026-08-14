@@ -1,48 +1,29 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { diaLiberacaoPilar, pilarLiberado, estagioDoPilar, decoracoesLiberadas, resumoFazenda } from './crescimento.js'
+import { estagioDoPilar, decoracoesLiberadas, resumoFazenda } from './crescimento.js'
 import { PILARES } from '../../data/farm/pilares.js'
 import { DECORACOES } from '../../data/farm/decoracoes.js'
 
-test('os 8 pilares liberam a cada 4 dias, começando no dia 1', () => {
-  const dias = PILARES.map((p) => diaLiberacaoPilar(p.id))
-  assert.deepEqual(dias, [1, 5, 9, 13, 17, 21, 25, 29])
+test('estagioDoPilar começa em semente (0) sem nenhum cuidado', () => {
+  const pilar = PILARES[0].id
+  assert.equal(estagioDoPilar(pilar, {}), 0)
+  assert.equal(estagioDoPilar(pilar, { [pilar]: 0 }), 0)
 })
 
-test('pilarLiberado respeita o dia exato de liberação (nem antes, nem depois)', () => {
-  const segundoPilar = PILARES[1].id // libera no dia 5
-  assert.equal(pilarLiberado(segundoPilar, 4), false)
-  assert.equal(pilarLiberado(segundoPilar, 5), true)
-  assert.equal(pilarLiberado(segundoPilar, 6), true)
+test('estagioDoPilar avança 1 estágio a cada 10 cuidados e satura em 3 (plena)', () => {
+  const pilar = PILARES[0].id
+  assert.equal(estagioDoPilar(pilar, { [pilar]: 9 }), 0) // ainda semente
+  assert.equal(estagioDoPilar(pilar, { [pilar]: 10 }), 1) // broto
+  assert.equal(estagioDoPilar(pilar, { [pilar]: 20 }), 2) // floração
+  assert.equal(estagioDoPilar(pilar, { [pilar]: 30 }), 3) // plena
+  assert.equal(estagioDoPilar(pilar, { [pilar]: 500 }), 3) // satura, nunca passa de 3
 })
 
-test('id desconhecido não quebra: cai no dia 1', () => {
-  assert.equal(diaLiberacaoPilar('inexistente'), 1)
-})
-
-test('estagioDoPilar retorna -1 antes da liberação', () => {
-  const ultimoPilar = PILARES[7].id // libera no dia 29
-  assert.equal(estagioDoPilar(ultimoPilar, 28), -1)
-})
-
-test('estagioDoPilar começa em semente (0) no próprio dia da liberação', () => {
-  const primeiroPilar = PILARES[0].id // libera no dia 1
-  assert.equal(estagioDoPilar(primeiroPilar, 1), 0)
-})
-
-test('estagioDoPilar avança 1 estágio a cada 20 dias e satura em 3 (plena)', () => {
-  const primeiroPilar = PILARES[0].id // libera no dia 1
-  assert.equal(estagioDoPilar(primeiroPilar, 20), 0) // 19 dias depois, ainda semente
-  assert.equal(estagioDoPilar(primeiroPilar, 21), 1) // 20 dias depois, vira broto
-  assert.equal(estagioDoPilar(primeiroPilar, 41), 2) // floração
-  assert.equal(estagioDoPilar(primeiroPilar, 61), 3) // plena
-  assert.equal(estagioDoPilar(primeiroPilar, 90), 3) // satura, nunca regride
-})
-
-test('o último pilar (liberado no dia 29) atinge a fase plena por volta do dia 89', () => {
-  const ultimoPilar = PILARES[7].id
-  assert.equal(estagioDoPilar(ultimoPilar, 88), 2)
-  assert.equal(estagioDoPilar(ultimoPilar, 89), 3)
+test('estagioDoPilar tolera contagens ausentes, undefined ou id desconhecido sem quebrar', () => {
+  const pilar = PILARES[0].id
+  assert.equal(estagioDoPilar(pilar, undefined), 0)
+  assert.equal(estagioDoPilar(pilar, {}), 0)
+  assert.equal(estagioDoPilar('inexistente', { [pilar]: 50 }), 0)
 })
 
 test('decoracoesLiberadas cresce exatamente nos limites dos marcos', () => {
@@ -53,25 +34,20 @@ test('decoracoesLiberadas cresce exatamente nos limites dos marcos', () => {
   assert.equal(decoracoesLiberadas(90).length, DECORACOES.length) // tudo liberado
 })
 
-test('resumoFazenda agrega os 8 pilares (com estágio e liberação) e as decorações', () => {
-  const resumo = resumoFazenda(30)
+test('resumoFazenda agrega os 8 pilares (com estagio) e as decorações', () => {
+  const contagens = { [PILARES[0].id]: 15, [PILARES[7].id]: 5 }
+  const resumo = resumoFazenda(contagens, 30)
   assert.equal(resumo.pilares.length, 8)
-  assert.ok(resumo.pilares.every((p) => 'liberado' in p && 'estagio' in p && 'diaLiberacao' in p))
-  assert.equal(resumo.pilares[0].liberado, true) // libera no dia 1
-  assert.equal(resumo.pilares[7].liberado, true) // libera no dia 29, dia atual é 30
+  assert.ok(resumo.pilares.every((p) => 'estagio' in p))
+  assert.equal(resumo.pilares.find((p) => p.id === PILARES[0].id).estagio, 1) // 15 cuidados = broto
+  assert.equal(resumo.pilares.find((p) => p.id === PILARES[7].id).estagio, 0) // 5 cuidados = semente
   assert.ok(Array.isArray(resumo.decoracoes))
   assert.equal(resumo.decoracoes.length, decoracoesLiberadas(30).length)
 })
 
-test('resumoFazenda com diaAtual ausente assume o dia 1', () => {
-  const resumo = resumoFazenda(undefined)
-  assert.equal(resumo.pilares[0].estagio, 0) // primeiro pilar, dia 1, estágio semente
-  assert.equal(resumo.pilares[1].liberado, false) // segundo pilar só libera no dia 5
-})
-
-test('as funções primitivas do motor também toleram diaAtual indefinido', () => {
-  const primeiroPilar = PILARES[0].id // libera no dia 1
-  assert.equal(estagioDoPilar(primeiroPilar, undefined), 0) // dia 1 assumido, próprio dia da liberação
-  assert.equal(pilarLiberado(primeiroPilar, undefined), true)
-  assert.equal(decoracoesLiberadas(undefined).length, decoracoesLiberadas(1).length)
+test('resumoFazenda com contagens e diaAtual ausentes não quebra', () => {
+  const resumo = resumoFazenda(undefined, undefined)
+  assert.equal(resumo.pilares.length, 8)
+  assert.ok(resumo.pilares.every((p) => p.estagio === 0))
+  assert.equal(resumo.decoracoes.length, decoracoesLiberadas(1).length)
 })

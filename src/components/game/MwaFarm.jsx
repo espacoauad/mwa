@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Droplets, Hand, LockKeyhole, Sparkles, Sprout, X } from 'lucide-react'
+import { Droplets, Hand, Sparkles, Sprout, X } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
-import { resumoFazenda } from '../../utils/farm/crescimento.js'
+import { resumoFazenda, estagioDoPilar } from '../../utils/farm/crescimento.js'
 import farmFase1 from '../../assets/farm/mwa-farm-fase-1.png'
 import farmFase2 from '../../assets/farm/mwa-farm-fase-2.png'
 import farmFase3 from '../../assets/farm/mwa-farm-fase-3.png'
@@ -57,14 +57,43 @@ function lerCuidados(dia) {
   }
 }
 
+const CHAVE_CONTAGENS = 'mwa-farm-contagens'
+
+function migrarContagensDeCuidadosAntigos() {
+  const contagens = {}
+  for (let dia = 1; dia <= 90; dia++) {
+    for (const pilarId of lerCuidados(dia)) {
+      contagens[pilarId] = (contagens[pilarId] ?? 0) + 1
+    }
+  }
+  return contagens
+}
+
+function lerContagens() {
+  const bruto = localStorage.getItem(CHAVE_CONTAGENS)
+  if (bruto === null) {
+    const migradas = migrarContagensDeCuidadosAntigos()
+    try {
+      localStorage.setItem(CHAVE_CONTAGENS, JSON.stringify(migradas))
+    } catch {}
+    return migradas
+  }
+  try {
+    return JSON.parse(bruto)
+  } catch {
+    return {}
+  }
+}
+
 export default function MwaFarm({ onFechar }) {
   const { ingles } = useIdioma()
   const { diaAtual, game } = useApp()
   const [selecionado, setSelecionado] = useState(null)
   const [cuidados, setCuidados] = useState([])
+  const [contagens, setContagens] = useState(lerContagens)
   const dialogRef = useRef(null)
   const dia = Math.min(90, Math.max(1, diaAtual ?? 1))
-  const resumo = useMemo(() => resumoFazenda(dia), [dia])
+  const resumo = useMemo(() => resumoFazenda(contagens, dia), [contagens, dia])
   const percentual = Math.round((dia / 90) * 100)
   const indiceFase = dia <= 22 ? 0 : dia <= 45 ? 1 : dia <= 68 ? 2 : 3
   const inicioFase = [1, 23, 46, 69][indiceFase]
@@ -86,15 +115,6 @@ export default function MwaFarm({ onFechar }) {
   }, [onFechar, selecionado])
 
   function abrirPilar(pilar) {
-    if (!pilar.liberado) {
-      setSelecionado({
-        ...pilar,
-        bloqueado: true,
-        titulo: ingles ? `This garden awakens on day ${pilar.diaLiberacao}` : `Este canteiro desperta no dia ${pilar.diaLiberacao}`,
-        texto: ingles ? 'Keep caring for what is already growing.' : 'Continue cuidando do que já está crescendo.',
-      })
-      return
-    }
     setSelecionado({
       ...pilar,
       titulo: ingles ? pilar.tituloHabitoEN : pilar.tituloHabito,
@@ -105,15 +125,21 @@ export default function MwaFarm({ onFechar }) {
   }
 
   function cuidar(pilar) {
-    if (!pilar?.liberado || cuidados.includes(pilar.id)) return
+    if (!pilar || cuidados.includes(pilar.id)) return
     const novos = [...cuidados, pilar.id]
     setCuidados(novos)
-    localStorage.setItem(chaveCuidado(dia), JSON.stringify(novos))
-    setSelecionado({ ...pilar, concluidoAgora: true })
+    const novasContagens = { ...contagens, [pilar.id]: (contagens[pilar.id] ?? 0) + 1 }
+    setContagens(novasContagens)
+    try {
+      localStorage.setItem(chaveCuidado(dia), JSON.stringify(novos))
+      localStorage.setItem(CHAVE_CONTAGENS, JSON.stringify(novasContagens))
+    } catch {
+      // ignora falha de armazenamento (quota excedida, navegação privada, etc.)
+    }
+    setSelecionado({ ...pilar, estagio: estagioDoPilar(pilar.id, novasContagens), concluidoAgora: true })
   }
 
-  const liberados = resumo.pilares.filter((p) => p.liberado)
-  const todosCuidados = liberados.length > 0 && liberados.every((p) => cuidados.includes(p.id))
+  const todosCuidados = resumo.pilares.length > 0 && resumo.pilares.every((p) => cuidados.includes(p.id))
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-[#102f20]/90 p-2 backdrop-blur-md sm:p-4" role="dialog" aria-modal="true">
@@ -167,14 +193,10 @@ export default function MwaFarm({ onFechar }) {
                   type="button"
                   onClick={() => abrirPilar(pilar)}
                   style={{ left: area.left, top: area.top, width: area.width, height: area.height }}
-                  className={`mwa-farm-hotspot absolute z-10 rounded-[35%] transition ${pilar.liberado ? 'hover:bg-white/10 focus:bg-white/10' : 'bg-[#24352b]/20'}`}
-                  aria-label={pilar.liberado ? (ingles ? pilar.tituloHabitoEN : pilar.tituloHabito) : `${pilar.nome}, ${ingles ? 'locked' : 'bloqueado'}`}
+                  className="mwa-farm-hotspot absolute z-10 rounded-[35%] transition hover:bg-white/10 focus:bg-white/10"
+                  aria-label={ingles ? pilar.tituloHabitoEN : pilar.tituloHabito}
                 >
-                  <span className="sr-only">
-                    {pilar.liberado
-                      ? (ingles ? 'Open habit garden' : 'Abrir canteiro do hábito')
-                      : (ingles ? `Unlocks on day ${pilar.diaLiberacao}` : `Libera no dia ${pilar.diaLiberacao}`)}
-                  </span>
+                  <span className="sr-only">{ingles ? 'Open habit garden' : 'Abrir canteiro do hábito'}</span>
                 </button>
               </div>
             )
@@ -187,8 +209,13 @@ export default function MwaFarm({ onFechar }) {
           <p className="font-serif text-base font-black italic leading-snug text-[#315c3a]">
             {todosCuidados ? (ingles ? 'Your whole farm was cared for today. Come back tomorrow to keep growing!' : 'Toda a sua fazenda foi cuidada hoje. Volte amanhã para continuar florescendo!') : mensagemDoDia(dia, ingles)}
           </p>
+          {!todosCuidados && (
+            <p className="mt-1 text-xs font-bold text-[#5c8a4a]">
+              {ingles ? 'Care for your plots to watch them bloom.' : 'Cuide dos canteiros para vê-los florescer.'}
+            </p>
+          )}
           <p className="mt-1 text-[10px] font-bold uppercase tracking-[.14em] text-[#8e7443]">
-            {ingles ? `${cuidados.length} of ${liberados.length} gardens cared for today` : `${cuidados.length} de ${liberados.length} canteiros cuidados hoje`}
+            {ingles ? `${cuidados.length} of ${resumo.pilares.length} gardens cared for today` : `${cuidados.length} de ${resumo.pilares.length} canteiros cuidados hoje`}
           </p>
         </section>
 
@@ -197,7 +224,7 @@ export default function MwaFarm({ onFechar }) {
             <section className="w-full max-w-md rounded-[2rem] border-4 border-[#f4d992] bg-[#fff9e9] p-5 shadow-2xl" onClick={(e) => e.stopPropagation()} role="status" aria-live="polite">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#e5f0d2]">
-                  {selecionado.bloqueado ? <LockKeyhole className="text-[#6a7957]" /> : selecionado.animal ? <Sparkles className="text-[#c08e2f]" /> : <PlantaFazenda estagio={selecionado.estagio} cor={selecionado.cor} coroaId={selecionado.coroaId} tamanho={52} />}
+                  {selecionado.animal ? <Sparkles className="text-[#c08e2f]" /> : <PlantaFazenda estagio={selecionado.estagio} cor={selecionado.cor} coroaId={selecionado.coroaId} tamanho={52} />}
                 </div>
                 <button type="button" onClick={() => setSelecionado(null)} className="flex h-10 w-10 items-center justify-center rounded-full bg-[#315c3a]/10 text-[#315c3a]"><X size={18} /></button>
               </div>
@@ -209,7 +236,7 @@ export default function MwaFarm({ onFechar }) {
               {selecionado.estagioTexto && !selecionado.concluidoAgora && (
                 <div className="mt-4 flex items-center gap-2 rounded-xl bg-[#e7f0d8] p-3 text-sm font-bold text-[#315c3a]"><Sparkles size={16} className="text-[#c08e2f]" /> {selecionado.estagioTexto}</div>
               )}
-              {selecionado.liberado && !selecionado.concluidoAgora && (
+              {!selecionado.concluidoAgora && (
                 <button
                   type="button"
                   disabled={cuidados.includes(selecionado.id)}
