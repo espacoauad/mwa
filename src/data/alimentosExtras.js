@@ -199,6 +199,31 @@ Shoyu|Molhos e complementos|60|6.0|8.0|0|0.8|15|shoyu,molho de soja
 Polpa de frutas vermelhas|Frutas|45|0.8|10.0|0.3|3.0|100|polpa frutas vermelhas,polpa mix berries
 Polpa de cajá|Frutas|55|0.6|13.0|0.2|1.5|100|polpa caja,caja
 Quiche de alho-poró|Refeições prontas|233|5.8|18.3|15.0|1.0|120|quiche alho poro,quiche de alho poro,torta de alho poro
+Quibe assado|Refeições prontas|205|12.0|19.0|8.5|2.3|100|kibe assado,quibe forno
+Quibe cru|Refeições prontas|200|13.5|14.0|10.0|2.0|100|kibe cru,kibe nayyeh,quibe tartare
+Disco de carne|Proteínas|220|17.5|1.0|16.0|0|90|disco de hamburguer,hamburguer cru,carne para hamburguer
+Enroladinho de salsicha|Refeições prontas|370|8.5|32.0|22.0|1.2|40|rocambole de salsicha,salsicha enrolada,salgado de salsicha
+Americano|Refeições prontas|230|11.0|24.0|10.0|1.5|220|sanduiche americano,sanduba americano
+Cheeseburguer|Refeições prontas|290|14.5|24.0|15.5|1.2|150|cheese burguer,cheeseburger
+Cheese bacon|Refeições prontas|310|16.0|22.0|18.5|1.2|180|cheese bacon burguer,x-bacon,xbacon
+X-salada|Refeições prontas|250|12.5|24.0|11.5|1.6|200|xsalada,x salada,hamburguer salada
+Misto quente|Refeições prontas|300|13.0|29.0|14.0|1.5|100|sanduiche misto,misto
+Pão com ovo|Refeições prontas|260|10.5|29.0|11.0|1.5|120|pao com ovo frito,sanduiche de ovo,pao ovo
+Pastel de presunto e queijo|Refeições prontas|310|10.0|30.0|17.0|1.3|100|pastel presunto queijo,pastel presunto e queijo
+Pastel de frango|Refeições prontas|290|11.0|30.0|14.0|1.3|100|pastel de frango frito,pastel frango
+Espetinho|Proteínas|205|24.0|1.0|11.0|0|100|espeto,churrasquinho,espetinho misto,churrasco de espeto
+Churros|Doces e sobremesas|380|5.0|48.0|18.0|1.5|60|churro,churros doce,churros recheado
+Picolé de chocolate|Doces e sobremesas|180|2.5|24.0|8.0|1.0|65|picole chocolate,sorvete picole chocolate
+Picolé de creme|Doces e sobremesas|170|2.8|21.0|8.0|0|65|picole creme,picole de creme
+Picolé de morango|Doces e sobremesas|95|0.5|22.0|0.3|0.5|65|picole morango,picole de fruta,picole de frutas
+Risole de milho|Refeições prontas|290|6.0|28.0|17.0|1.5|60|risoles de milho,risole,risole frito
+Açaí na tigela|Doces e sobremesas|130|1.8|22.0|3.5|2.5|300|acai na tigela,acai bowl,tigela de acai
+Espetinho de carne|Proteínas|215|26.0|0.5|11.5|0|100|espeto de carne,churrasquinho de carne
+Espetinho de frango com bacon|Proteínas|235|25.0|1.0|14.0|0|100|espeto de frango com bacon,churrasquinho frango bacon
+Espetinho de queijo coalho|Laticínios|330|22.0|2.5|25.5|0|80|espeto de queijo coalho,churrasquinho queijo coalho,queijo coalho grelhado
+Pizza portuguesa|Refeições prontas|250|11.0|30.0|9.0|1.8|120|pizza portuguesa
+Pizza quatro queijos|Refeições prontas|280|13.0|28.0|13.0|1.5|120|pizza 4 queijos,pizza quatro queijos
+Pizza marguerita|Refeições prontas|240|10.0|30.0|9.0|1.8|120|pizza margherita,pizza marguerita,pizza de tomate e manjericao
 `.trim()
 
 const liquidos = new Set(['Bebidas'])
