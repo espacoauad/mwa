@@ -1,5 +1,6 @@
 // Bichinhos decorativos da MWA FARM — aparecem em marcos de dias fixos,
 // sem relação com os pilares. Ilustração simples e fofa (estilo Township).
+import { IDS_ANIMAIS } from './idsAnimais.js'
 
 const CORES = {
   galinha: { corpo: '#F6E9D2', crista: '#E2574C', bico: '#E8973F' },
@@ -94,4 +95,4 @@ export default function AnimalFazendaSvg({ id, tamanho = 48, rotulo, className =
   )
 }
 
-export const IDS_ANIMAIS = Object.keys(ANIMAIS)
+export { IDS_ANIMAIS }
