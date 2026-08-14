@@ -12,7 +12,7 @@ const REFEICOES_EN = {
 }
 
 export default function Alimentacao() {
-  const { refeicoesHoje, totaisHoje, metas, removerRefeicaoCompleta, abrirEscolhaRefeicao, abrirRefeicaoDoDia, carregandoDia } = useApp()
+  const { refeicoesHoje, totaisHoje, metas, removerRefeicaoCompleta, removerItemRefeicao, abrirEscolhaRefeicao, abrirRefeicaoDoDia, carregandoDia } = useApp()
   const { ingles, locale } = useIdioma()
   const [expandida, setExpandida] = useState(null)
 
@@ -70,9 +70,17 @@ export default function Alimentacao() {
                   <div className="border-t border-cinza px-4 pb-4 pt-3">
                     <ul className="flex flex-col gap-1.5">
                       {r.itens.map((item) => (
-                        <li key={item.id} className="flex items-center justify-between text-sm text-verde/80">
-                          <span className="truncate">{item.nome}</span>
+                        <li key={item.id} className="flex items-center gap-2 text-sm text-verde/80">
+                          <span className="min-w-0 flex-1 truncate">{item.nome}</span>
                           <span className="shrink-0 text-verde/60">{item.calorias} kcal</span>
+                          <button
+                            type="button"
+                            aria-label={`${ingles ? 'Delete' : 'Excluir'} ${item.nome}`}
+                            onClick={() => removerItemRefeicao(r.id, item.id)}
+                            className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md text-verde/40 hover:bg-red-50 hover:text-red-700"
+                          >
+                            <Trash2 size={13} />
+                          </button>
                         </li>
                       ))}
                     </ul>
