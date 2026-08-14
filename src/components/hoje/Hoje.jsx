@@ -255,6 +255,7 @@ export default function Hoje({ irParaDicas }) {
             metaGordura={metas.gordura}
             calorias={totaisHoje.calorias}
             metaCalorias={metas.calorias}
+            caloriasQueimadas={gastoExercicios}
           />
           {/* Metas complementares embaixo */}
           <div className="mt-6 border-t border-ouro/20 pt-4">
