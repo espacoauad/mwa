@@ -131,6 +131,7 @@ function prepararAlimento(alimento) {
   if (/queijo|pão|torrada/.test(nome) && !colherExplicito) medidasPadrao.push({ id: 'fatia', nome: 'fatia', plural: 'fatias', base: alimento.porcao })
   if (/ovo/.test(nome)) medidasPadrao.push({ id: 'un', nome: 'unidade', plural: 'unidades', base: 50 })
   if (/pizza/.test(nome)) medidasPadrao.push({ id: 'fatia', nome: 'fatia', plural: 'fatias', base: alimento.porcao })
+  if (/quiche/.test(nome)) medidasPadrao.push({ id: 'un', nome: 'unidade', plural: 'unidades', base: alimento.porcao })
   if (/feijão|lentilha|grão-de-bico|sopa|caldo/.test(nome)) medidasPadrao.push({ id: 'concha', nome: 'concha', plural: 'conchas', base: alimento.porcao })
   if (/iogurte/.test(nome)) medidasPadrao.push({ id: 'pote', nome: 'pote', plural: 'potes', base: alimento.porcao })
   if (colherExplicito || /azeite|manteiga|margarina|maionese|molho|açúcar|\bmel\b|creme de leite|farinha|pasta de|geleia|requeijão|cacau|achocolatado|ketchup|mostarda|shoyu/.test(nome)) {

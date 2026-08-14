@@ -198,6 +198,7 @@ Chá mate|Bebidas|2|0|0.4|0|0|200|cha mate,mate
 Shoyu|Molhos e complementos|60|6.0|8.0|0|0.8|15|shoyu,molho de soja
 Polpa de frutas vermelhas|Frutas|45|0.8|10.0|0.3|3.0|100|polpa frutas vermelhas,polpa mix berries
 Polpa de cajá|Frutas|55|0.6|13.0|0.2|1.5|100|polpa caja,caja
+Quiche de alho-poró|Refeições prontas|233|5.8|18.3|15.0|1.0|120|quiche alho poro,quiche de alho poro,torta de alho poro
 `.trim()
 
 const liquidos = new Set(['Bebidas'])
