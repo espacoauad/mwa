@@ -23,7 +23,6 @@ import {
   ganhouEstrelaHoje,
   metasCumpridas,
 } from '../utils/jogos/estrelas.js'
-import { lembrarEstrelaDoDia } from '../utils/notificacaoEstrela.js'
 import { itemDoBanco, itemParaBanco, refeicaoDoBanco, totaisDaRefeicao } from '../utils/refeicoes.js'
 import { uploadFotoRefeicao, removerFotoRefeicao, limparFotosRefeicoesDoUsuario } from '../lib/storage.js'
 import { horarioAgora } from '../utils/calculos.js'
@@ -345,12 +344,6 @@ export function AppProvider({ children }) {
   useEffect(() => {
     if (game?.recomecar_pendente) setModoRecomecarAberto(true)
   }, [game?.recomecar_pendente])
-
-  // Lembrete local da estrela (só se a pessoa já autorizou notificações)
-  useEffect(() => {
-    if (!userId || !semanaEstrelas.length) return
-    lembrarEstrelaDoDia({ userId, hoje, estrelaAcesa: estrelaHojeAcesa, metas: metasEstrela, ingles })
-  }, [userId, hoje, estrelaHojeAcesa, metasEstrela, semanaEstrelas.length, ingles])
 
   const diaCompleto = tarefasHoje.refeicao && tarefasHoje.agua && tarefasHoje.dica
 

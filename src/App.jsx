@@ -24,6 +24,7 @@ import ModoDeRevisao from './components/admin/MododeRevisao.jsx'
 import { ehDiaPesagem } from './utils/pesagensReminder.js'
 import { configurarNotificacoesPesagem } from './utils/notificacoesReminder.js'
 import { lembrarFuncaoDoDia } from './utils/notificacaoFuncoes.js'
+import { garantirInscricaoPush } from './utils/pushSubscricao.js'
 
 // Fluxo de cadastro (onboarding) é pesado e só é usado uma vez por pessoa —
 // carregado sob demanda para reduzir o bundle principal.
@@ -81,6 +82,26 @@ function AppInner() {
       lembrarFuncaoDoDia({ userId, hoje, diaAtual, ingles, onAbrir: setAba })
     }
   }, [sessao, usuario, diaAtual, hoje, ingles, acessoBloqueado])
+
+  // Garante a inscrição push do dispositivo atual (sem pedir permissão de novo)
+  useEffect(() => {
+    const userId = sessao?.user?.id
+    if (usuario && userId) {
+      garantirInscricaoPush(userId)
+    }
+  }, [sessao, usuario])
+
+  // Toque numa notificação push -> navega pra aba indicada
+  useEffect(() => {
+    if (!('serviceWorker' in navigator)) return
+    function aoReceberMensagem(evento) {
+      if (evento.data?.tipo === 'push-click') {
+        setAba(evento.data.aba || 'ferramentas')
+      }
+    }
+    navigator.serviceWorker.addEventListener('message', aoReceberMensagem)
+    return () => navigator.serviceWorker.removeEventListener('message', aoReceberMensagem)
+  }, [])
 
   if (carregando) {
     return (
