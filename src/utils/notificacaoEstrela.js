@@ -31,13 +31,19 @@ export function lembrarEstrelaDoDia({ userId, hoje, estrelaAcesa, metas, ingles 
   if (localStorage.getItem(chave)) return false
 
   const texto = mensagemLembrete(metas, false)[ingles ? 'en' : 'pt']
-  new Notification(ingles ? '⭐ Your star is waiting' : '⭐ Sua estrela está esperando', {
-    body: texto,
-    icon: '/icon-192x192.png',
-    badge: '/icon-192x192.png',
-    tag: `estrela_${hoje}`,
-    requireInteraction: false,
-  })
   localStorage.setItem(chave, '1')
+  try {
+    new Notification(ingles ? '⭐ Your star is waiting' : '⭐ Sua estrela está esperando', {
+      body: texto,
+      icon: '/icon-192x192.png',
+      badge: '/icon-192x192.png',
+      tag: `estrela_${hoje}`,
+      requireInteraction: false,
+    })
+  } catch {
+    // Chrome Android e apps instalados no iOS não suportam o construtor
+    // Notification() sem service worker — falha silenciosa, sem crashar o app.
+    return false
+  }
   return true
 }

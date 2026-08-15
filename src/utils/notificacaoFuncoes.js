@@ -125,19 +125,25 @@ export function lembrarFuncaoDoDia({ userId, hoje, diaAtual, ingles = false, onA
   const mensagem = mensagemFuncao(tipo, diaAtual, ingles)
   if (!mensagem) return false
 
-  const notificacao = new Notification(mensagem.titulo, {
-    body: mensagem.corpo,
-    icon: '/icon-192x192.png',
-    badge: '/icon-192x192.png',
-    tag: `funcao_${hoje}`,
-    requireInteraction: false,
-  })
-  if (onAbrir) {
-    notificacao.onclick = () => {
-      window.focus()
-      onAbrir('ferramentas')
-    }
-  }
   localStorage.setItem(chave, '1')
+  try {
+    const notificacao = new Notification(mensagem.titulo, {
+      body: mensagem.corpo,
+      icon: '/icon-192x192.png',
+      badge: '/icon-192x192.png',
+      tag: `funcao_${hoje}`,
+      requireInteraction: false,
+    })
+    if (onAbrir) {
+      notificacao.onclick = () => {
+        window.focus()
+        onAbrir('ferramentas')
+      }
+    }
+  } catch {
+    // Chrome Android e apps instalados no iOS não suportam o construtor
+    // Notification() sem service worker — falha silenciosa, sem crashar o app.
+    return false
+  }
   return true
 }

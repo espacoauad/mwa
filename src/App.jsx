@@ -77,10 +77,10 @@ function AppInner() {
   // exercício, Fazenda, Lente da Consciência, jogo da semana, Versículo)
   useEffect(() => {
     const userId = sessao?.user?.id
-    if (usuario && diaAtual && hoje && userId) {
+    if (usuario && diaAtual && hoje && userId && !acessoBloqueado && usuario.role !== 'admin') {
       lembrarFuncaoDoDia({ userId, hoje, diaAtual, ingles, onAbrir: setAba })
     }
-  }, [sessao, usuario, diaAtual, hoje, ingles])
+  }, [sessao, usuario, diaAtual, hoje, ingles, acessoBloqueado])
 
   if (carregando) {
     return (
