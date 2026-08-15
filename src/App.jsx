@@ -23,6 +23,7 @@ import PreviewLanches from './components/dicas/PreviewLanches.jsx'
 import ModoDeRevisao from './components/admin/MododeRevisao.jsx'
 import { ehDiaPesagem } from './utils/pesagensReminder.js'
 import { configurarNotificacoesPesagem } from './utils/notificacoesReminder.js'
+import { lembrarFuncaoDoDia } from './utils/notificacaoFuncoes.js'
 
 // Fluxo de cadastro (onboarding) é pesado e só é usado uma vez por pessoa —
 // carregado sob demanda para reduzir o bundle principal.
@@ -35,7 +36,7 @@ const AVISOS_PAGAMENTO = {
 }
 
 function AppInner() {
-  const { sessao, carregando, usuario, modalRefeicao, ganhoSementes, diaAtual, totalDias, programa90Ativo } = useApp()
+  const { sessao, carregando, usuario, modalRefeicao, ganhoSementes, diaAtual, totalDias, programa90Ativo, hoje } = useApp()
   const { ingles } = useIdioma()
   const [aba, setAba] = useState('hoje')
   const [avisoPagamento, setAvisoPagamento] = useState(null)
@@ -71,6 +72,15 @@ function AppInner() {
       configurarNotificacoesPesagem(diaAtual, totalDias, userId)
     }
   }, [sessao, usuario, diaAtual, totalDias])
+
+  // Lembrete diário rotativo das funções do app (Reforçando Conceitos,
+  // exercício, Fazenda, Lente da Consciência, jogo da semana, Versículo)
+  useEffect(() => {
+    const userId = sessao?.user?.id
+    if (usuario && diaAtual && hoje && userId) {
+      lembrarFuncaoDoDia({ userId, hoje, diaAtual, ingles, onAbrir: setAba })
+    }
+  }, [sessao, usuario, diaAtual, hoje, ingles])
 
   if (carregando) {
     return (
