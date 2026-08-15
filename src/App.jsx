@@ -5,6 +5,7 @@ import TelaAuth from './components/auth/TelaAuth.jsx'
 import CarregandoFallback from './components/ui/CarregandoFallback.jsx'
 import TabBar from './components/layout/TabBar.jsx'
 import BotaoWhatsApp from './components/layout/BotaoWhatsApp.jsx'
+import AvisoInstalarIOS from './components/layout/AvisoInstalarIOS.jsx'
 import Hoje from './components/hoje/Hoje.jsx'
 import Alimentacao from './components/alimentacao/Alimentacao.jsx'
 import Progresso from './components/progresso/Progresso.jsx'
@@ -155,6 +156,7 @@ function AppInner() {
       )}
       <div className="pb-28">{telas[aba]}</div>
       <BotaoWhatsApp />
+      <AvisoInstalarIOS />
       <TabBar aba={aba} onMudar={setAba} />
       <ModoDeRevisao />
       {modalRefeicao.etapa === 'escolher' && <ModalEscolherRefeicao />}
