@@ -79,6 +79,8 @@ export default function JogoCorridaEscolha({ onFechar }) {
   const rodandoRef = useRef(false)
   const spawnTimeoutRef = useRef(null)
   const fimTimeoutRef = useRef(null)
+  const feedbackTimeoutRef = useRef(null)
+  const beliscadoTimeoutRef = useRef(null)
   const inicioRef = useRef(0)
   const proximoIdRef = useRef(0)
   const pistaItemAnteriorRef = useRef(null)
@@ -163,6 +165,8 @@ export default function JogoCorridaEscolha({ onFechar }) {
     rodandoRef.current = false
     if (spawnTimeoutRef.current) clearTimeout(spawnTimeoutRef.current)
     if (fimTimeoutRef.current) clearTimeout(fimTimeoutRef.current)
+    if (feedbackTimeoutRef.current) clearTimeout(feedbackTimeoutRef.current)
+    if (beliscadoTimeoutRef.current) clearTimeout(beliscadoTimeoutRef.current)
   }
 
   function criarItem(decorrido) {
@@ -211,7 +215,8 @@ export default function JogoCorridaEscolha({ onFechar }) {
   function mostrarFeedback(texto, tipo) {
     const id = ++feedbackIdRef.current
     setFeedback({ id, texto, tipo })
-    setTimeout(() => setFeedback((f) => (f?.id === id ? null : f)), 500)
+    if (feedbackTimeoutRef.current) clearTimeout(feedbackTimeoutRef.current)
+    feedbackTimeoutRef.current = setTimeout(() => setFeedback((f) => (f?.id === id ? null : f)), 500)
   }
 
   function resolverChegada(entrada, colidiu) {
@@ -226,7 +231,8 @@ export default function JogoCorridaEscolha({ onFechar }) {
       setItensNaoSaudaveisComidos((v) => v + 1)
       mostrarFeedback('!', 'naoSaudavel')
       setBeliscado(true)
-      setTimeout(() => setBeliscado(false), 300)
+      if (beliscadoTimeoutRef.current) clearTimeout(beliscadoTimeoutRef.current)
+      beliscadoTimeoutRef.current = setTimeout(() => setBeliscado(false), 300)
     }
   }
 
