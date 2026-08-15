@@ -413,21 +413,31 @@ export default function JogoCorridaEscolha({ onFechar }) {
               </div>
             </div>
 
-            {itensNaoSaudaveisComidos > 0 ? (
-              <p className="mt-2 text-xs font-semibold text-[#B0563C]">
+            {kcalTotal === 0 ? (
+              <p className="mx-auto mt-2 max-w-[280px] text-sm leading-relaxed text-verde/75">
                 {ingles
-                  ? `+${Math.round(kcalNaoSaudavel)} kcal for not dodging ${itensNaoSaudaveisComidos} item${itensNaoSaudaveisComidos > 1 ? 's' : ''}`
-                  : `+${Math.round(kcalNaoSaudavel)} kcal por não desviar de ${itensNaoSaudaveisComidos} ${itensNaoSaudaveisComidos > 1 ? 'itens' : 'item'}`}
+                  ? "You didn't catch anything this run — not even the healthy items. Try again and go for the fruits and veggies!"
+                  : 'Você não comeu nada nessa corrida — nem o saudável, nem o resto. Bora tentar pegar as frutas e verduras na próxima?'}
               </p>
             ) : (
-              <p className="mt-2 text-xs font-semibold text-verde-escuro">
-                {ingles ? 'Perfect dodge — no unhealthy item eaten!' : 'Desvio perfeito — nenhum item não saudável comido!'}
-              </p>
-            )}
+              <>
+                {itensNaoSaudaveisComidos > 0 ? (
+                  <p className="mt-2 text-xs font-semibold text-[#B0563C]">
+                    {ingles
+                      ? `+${Math.round(kcalNaoSaudavel)} kcal for not dodging ${itensNaoSaudaveisComidos} item${itensNaoSaudaveisComidos > 1 ? 's' : ''}`
+                      : `+${Math.round(kcalNaoSaudavel)} kcal por não desviar de ${itensNaoSaudaveisComidos} ${itensNaoSaudaveisComidos > 1 ? 'itens' : 'item'}`}
+                  </p>
+                ) : (
+                  <p className="mt-2 text-xs font-semibold text-verde-escuro">
+                    {ingles ? 'Perfect dodge — no unhealthy item eaten!' : 'Desvio perfeito — nenhum item não saudável comido!'}
+                  </p>
+                )}
 
-            <p className="mx-auto mt-3 max-w-[280px] text-sm leading-relaxed text-verde/75">
-              {ingles ? mensagem.en : mensagem.pt}
-            </p>
+                <p className="mx-auto mt-3 max-w-[280px] text-sm leading-relaxed text-verde/75">
+                  {ingles ? mensagem.en : mensagem.pt}
+                </p>
+              </>
+            )}
 
             {recorde && (
               <p className="mt-2 text-xs font-semibold text-ouro">
