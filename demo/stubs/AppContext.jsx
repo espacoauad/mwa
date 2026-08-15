@@ -14,6 +14,7 @@ const RECOMPENSAS_SIMULADAS = [
   'registrarJogoTroca',
   'registrarJogoSaciedade',
   'registrarJogoRotulos',
+  'registrarJogoCorrida',
   'registrarJoguinho',
   'registrarMomentoMwa',
 ]

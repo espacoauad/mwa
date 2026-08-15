@@ -521,6 +521,10 @@ export function AppProvider({ children }) {
     await premiar('jogo_rotulos', hoje)
   }
 
+  async function registrarJogoCorrida() {
+    await premiar('jogo_corrida', hoje)
+  }
+
   // +5 🌱 pelo Momento MWA do dia (1x por dia)
   async function registrarMomentoMwa() {
     await premiar('momento_mwa', hoje)
@@ -935,6 +939,7 @@ export function AppProvider({ children }) {
     registrarJogoTroca,
     registrarJogoSaciedade,
     registrarJogoRotulos,
+    registrarJogoCorrida,
     registrarMomentoMwa,
     userId,
     registrarIndicacao,
