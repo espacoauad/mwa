@@ -199,6 +199,48 @@ Shoyu|Molhos e complementos|60|6.0|8.0|0|0.8|15|shoyu,molho de soja
 Polpa de frutas vermelhas|Frutas|45|0.8|10.0|0.3|3.0|100|polpa frutas vermelhas,polpa mix berries
 Polpa de cajá|Frutas|55|0.6|13.0|0.2|1.5|100|polpa caja,caja
 Quiche de alho-poró|Refeições prontas|233|5.8|18.3|15.0|1.0|120|quiche alho poro,quiche de alho poro,torta de alho poro
+Espumante brut|Bebidas|76|0.1|1.5|0|0|150|espumante,espumante brut,champagne brut
+Espumante demi sec|Bebidas|85|0.1|5.0|0|0|150|espumante demi sec,champagne demi sec
+Espumante moscatel|Bebidas|75|0.1|9.0|0|0|150|espumante moscatel,moscatel espumante
+Vinho branco seco|Bebidas|82|0.1|2.6|0|0|150|vinho branco,vinho branco seco
+Vinho branco suave|Bebidas|90|0.1|6.0|0|0|150|vinho branco suave
+Vinho branco doce|Bebidas|110|0.1|12.0|0|0|150|vinho branco doce
+Vinho tinto seco|Bebidas|85|0.1|2.6|0|0|150|vinho tinto,vinho tinto seco
+Vinho tinto suave|Bebidas|92|0.1|6.0|0|0|150|vinho tinto suave
+Vinho tinto doce|Bebidas|112|0.1|12.0|0|0|150|vinho tinto doce
+Aperol spritz|Bebidas|80|0|8.0|0|0|200|aperol,aperol spritz
+Gin tônica|Bebidas|75|0|7.0|0|0|200|gin tonica,gin e tonica
+Água tônica|Bebidas|34|0|8.8|0|0|200|agua tonica,tonica
+Moscow mule|Bebidas|90|0|9.0|0|0|200|moscow mule
+Cosmopolitan|Bebidas|125|0|10.0|0|0|150|cosmopolitan,cosmo
+Whisky|Bebidas|250|0|0|0|0|50|whisky,uisque,whiskey
+Vodka|Bebidas|231|0|0|0|0|50|vodka
+Gin|Bebidas|263|0|0|0|0|50|gin
+Cerveja (pilsen)|Bebidas|43|0.5|3.6|0|0|350|cerveja,pilsen,lager
+Chopp|Bebidas|40|0.4|3.2|0|0|300|chopp,chope
+Frango à parmegiana|Refeições prontas|215|14.0|12.0|12.0|0.8|200|frango a parmegiana,frango parmegiana,parmegiana de frango
+Filé à parmegiana|Refeições prontas|220|16.0|10.0|13.0|0.7|200|file a parmegiana,file parmegiana,parmegiana de file,carne a parmegiana
+Nhoque à bolonhesa|Refeições prontas|175|6.0|26.0|5.0|2.0|300|nhoque a bolonhesa,nhoque bolonhesa
+Nhoque quatro queijos|Refeições prontas|195|7.0|24.0|8.0|1.8|300|nhoque quatro queijos,nhoque 4 queijos
+Molho branco|Molhos e complementos|110|3.0|6.0|8.5|0.1|60|molho branco,bechamel
+Molho quatro queijos|Molhos e complementos|160|7.0|5.0|13.0|0|60|molho quatro queijos,molho 4 queijos
+Molho de tomate|Molhos e complementos|35|1.5|7.0|0.5|1.5|60|molho de tomate,molho tomate
+Molho à bolonhesa|Molhos e complementos|95|6.0|6.0|5.0|1.2|100|molho a bolonhesa,molho bolonhesa,molho de carne
+Macarrão à bolonhesa|Refeições prontas|140|6.0|20.0|4.0|1.5|300|macarrao a bolonhesa,macarrao bolonhesa,espaguete a bolonhesa
+Macarrão aos quatro queijos|Refeições prontas|175|7.0|22.0|7.0|1.3|300|macarrao quatro queijos,macarrao 4 queijos
+Risoto de queijo|Refeições prontas|170|5.0|24.0|6.0|0.8|250|risoto de queijo,risoto queijo
+Risoto de carne|Refeições prontas|165|8.0|21.0|5.5|0.9|250|risoto de carne,risoto carne
+Risoto de cogumelos|Refeições prontas|150|4.5|22.0|5.0|1.2|250|risoto de cogumelos,risoto cogumelos,risoto funghi
+Risoto de frutos do mar|Refeições prontas|155|9.0|20.0|4.5|0.8|250|risoto de frutos do mar,risoto frutos do mar,risoto de camarao
+Pescada grelhada|Proteínas|90|18.0|0|1.5|0|120|pescada,pescada grelhada
+Robalo grelhado|Proteínas|97|19.0|0|2.0|0|120|robalo,robalo grelhado
+Bacalhau cozido|Proteínas|105|23.0|0|1.0|0|120|bacalhau,bacalhau dessalgado,bacalhau cozido
+Merluza grelhada|Proteínas|85|17.0|0|1.3|0|120|merluza,merluza grelhada
+Camarão grelhado|Proteínas|99|20.0|0.5|1.4|0|100|camarao,camarao grelhado,camarao refogado
+Burrata|Laticínios|300|15.0|3.0|25.0|0|100|burrata
+Bruschetta|Refeições prontas|180|4.5|24.0|7.0|2.0|80|bruschetta,brusqueta
+Mussarela de búfala|Laticínios|253|16.7|2.0|20.0|0|100|mussarela de bufala,muçarela de bufala,mozzarela de bufala,bufala
+Carpaccio|Refeições prontas|180|20.0|1.0|11.0|0.3|100|carpaccio,carpaccio de carne
 Quibe assado|Refeições prontas|205|12.0|19.0|8.5|2.3|100|kibe assado,quibe forno
 Quibe cru|Refeições prontas|200|13.5|14.0|10.0|2.0|100|kibe cru,kibe nayyeh,quibe tartare
 Disco de carne|Proteínas|220|17.5|1.0|16.0|0|90|disco de hamburguer,hamburguer cru,carne para hamburguer
