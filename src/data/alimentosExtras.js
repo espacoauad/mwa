@@ -139,6 +139,27 @@ Achocolatado com leite|Bebidas|83|3.2|12.0|2.5|0.5|200|nescau,toddy,chocolate
 Prato feito com carne|Refeições prontas|152|9.0|17.0|5.5|2.4|400|pf,marmita
 Feijoada|Refeições prontas|117|8.7|11.6|4.5|5.1|300|feijoada
 Strogonoff de frango|Refeições prontas|176|13.0|6.0|11.0|0.5|200|estrogonofe,frango
+Strogonoff de carne|Refeições prontas|190|12.0|6.5|13.0|0.5|200|estrogonofe de carne,estrogonofe carne,strogonoff carne
+Filé à catupiry|Refeições prontas|230|17.0|4.0|16.0|0.2|200|file a catupiry,file catupiry,carne com catupiry
+Frango à catupiry|Refeições prontas|200|16.0|5.0|13.0|0.2|200|frango a catupiry,frango catupiry
+Camarão ao alho e óleo|Proteínas|140|18.0|2.0|7.0|0.2|150|camarao ao alho e oleo,camarao alho e oleo
+Bolinho de arroz|Refeições prontas|230|5.0|28.0|11.0|0.8|40|bolinho de arroz,bolinho arroz
+Bolinho de bacalhau|Refeições prontas|250|12.0|18.0|15.0|0.8|40|bolinho de bacalhau,bolinho bacalhau,pastel de bacalhau
+Mandioca assada|Carboidratos|145|0.7|34.0|0.2|1.8|100|mandioca assada,aipim assado,macaxeira assada
+Gorgonzola|Laticínios|330|19.0|2.0|27.0|0|30|gorgonzola
+Brie|Laticínios|334|20.8|0.5|27.7|0|30|brie,queijo brie
+Gouda|Laticínios|356|24.9|2.2|27.4|0|30|gouda,queijo gouda
+Salame|Proteínas|407|22.0|1.6|34.0|0|30|salame,salaminho
+Presunto de Parma|Proteínas|268|25.0|0|18.0|0|30|presunto de parma,presunto parma,prosciutto
+Costela ao barbecue|Refeições prontas|320|22.0|10.0|20.0|0.3|150|costela barbecue,costela bbq,costela ao molho barbecue
+Churrasco misto|Refeições prontas|250|22.0|1.0|17.0|0|200|churrasco,churrasco misto,rodizio
+Frango a passarinho|Refeições prontas|280|20.0|8.0|19.0|0.3|150|frango a passarinho,frango passarinho,frango frito a passarinho
+Croissant|Carboidratos|406|8.2|45.8|21.0|2.6|60|croissant
+Bolo simples|Doces e sobremesas|310|5.0|45.0|12.0|0.8|80|bolo simples,bolo de baunilha,pao de lo
+Bolo de chocolate sem cobertura|Doces e sobremesas|340|5.0|48.0|14.0|2.0|80|bolo de chocolate sem cobertura,bolo chocolate sem cobertura
+Bolo de cenoura sem cobertura|Doces e sobremesas|300|4.0|42.0|12.0|1.3|80|bolo de cenoura sem cobertura,bolo cenoura sem cobertura
+Bolo de fubá|Doces e sobremesas|330|6.0|50.0|12.0|1.5|80|bolo de fuba,bolo fuba
+Bolo de milho|Doces e sobremesas|280|5.5|42.0|9.0|1.8|80|bolo de milho,bolo milho
 Escondidinho de carne|Refeições prontas|180|9.0|20.0|7.0|1.5|250|escondidinho
 Lasanha à bolonhesa|Refeições prontas|170|9.0|16.0|8.0|1.3|250|lasanha bolonhesa
 Pizza de muçarela|Refeições prontas|266|11.0|33.0|10.0|2.3|120|pizza mussarela
