@@ -19,6 +19,7 @@ const JogoVerdadeiroFalso = lazy(() => import('../game/JogoVerdadeiroFalso.jsx')
 const JogoTrocaInteligente = lazy(() => import('../game/JogoTrocaInteligente.jsx'))
 const JogoBatalhaSaciedade = lazy(() => import('../game/JogoBatalhaSaciedade.jsx'))
 const JogoDetetiveRotulos = lazy(() => import('../game/JogoDetetiveRotulos.jsx'))
+const JogoCorridaEscolha = lazy(() => import('../game/JogoCorridaEscolha.jsx'))
 const JogoColheita = lazy(() => import('../game/JogoColheita.jsx'))
 const MwaFarm = lazy(() => import('../game/MwaFarm.jsx'))
 
@@ -259,6 +260,12 @@ const JOGOS_NUTRICAO = [
     titulo: 'Detetive dos Rótulos',
     desc: 'Aprenda a ler a tabela nutricional e a diferença entre porção e embalagem. Rodada = +10 🌱 por dia',
   },
+  {
+    id: 'corrida',
+    emoji: '🏃',
+    titulo: 'Corrida da Escolha',
+    desc: 'Desvie das besteiras e pegue o que é saudável nas 3 pistas da trilha. Corrida concluída = +10 🌱 por dia',
+  },
 ]
 
 // Prateleira B — pausa leve, sem promessa educativa
@@ -277,6 +284,7 @@ const JOGOS_EN = {
   troca: ['Smart Swap', 'Improve a meal without giving it up and see the impact of each swap. Round done = +10 🌱 per day'],
   saciedade: ['Satiety Battle', 'Same calories, different hunger: find out what makes a meal last longer. Round = +10 🌱 per day'],
   rotulos: ['Label Detective', 'Learn to read the nutrition table and the difference between serving and package. Round = +10 🌱 per day'],
+  corrida: ['The Choice Run', 'Dodge the junk and catch what is healthy across 3 lanes on the trail. Run done = +10 🌱 per day'],
   colheita: ['Harvest Game', 'A breather for your mind: match 3 fruits and relax. 300+ points = +10 🌱 per day'],
 }
 
@@ -424,6 +432,7 @@ export default function Ferramentas() {
         {jogoAtivo === 'troca' && <JogoTrocaInteligente onFechar={fecharJogo} />}
         {jogoAtivo === 'saciedade' && <JogoBatalhaSaciedade onFechar={fecharJogo} />}
         {jogoAtivo === 'rotulos' && <JogoDetetiveRotulos onFechar={fecharJogo} />}
+        {jogoAtivo === 'corrida' && <JogoCorridaEscolha onFechar={fecharJogo} />}
         {jogoAtivo === 'colheita' && <JogoColheita onFechar={fecharJogo} />}
         {jogoAtivo === 'fazenda' && <MwaFarm onFechar={fecharJogo} />}
       </Suspense>
