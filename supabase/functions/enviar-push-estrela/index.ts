@@ -24,12 +24,6 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
-webpush.setVapidDetails(
-  Deno.env.get("VAPID_SUBJECT")!,
-  Deno.env.get("VAPID_PUBLIC_KEY")!,
-  Deno.env.get("VAPID_PRIVATE_KEY")!,
-);
-
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
@@ -60,6 +54,17 @@ Deno.serve(async (req) => {
     return json({ erro: "não autorizado" }, 401);
   }
 
+  // Init tardio: só configura o VAPID depois que a chamada já passou pela
+  // checagem do x-cron-secret, pra uma requisição não autorizada/malformada
+  // sempre receber um 401 limpo, mesmo que algum segredo VAPID esteja
+  // ausente/rotacionando — em vez de derrubar o worker inteiro (500) antes
+  // da checagem de auth rodar.
+  webpush.setVapidDetails(
+    Deno.env.get("VAPID_SUBJECT")!,
+    Deno.env.get("VAPID_PUBLIC_KEY")!,
+    Deno.env.get("VAPID_PRIVATE_KEY")!,
+  );
+
   const hoje = new Date().toISOString().slice(0, 10);
 
   const { data: programas, error: erroProgramas } = await supabase
@@ -71,29 +76,32 @@ Deno.serve(async (req) => {
   const userIds = [...new Set((programas ?? []).map((p) => p.user_id))];
   if (userIds.length === 0) return json({ enviados: 0 });
 
-  const { data: acesas } = await supabase
+  const { data: acesas, error: erroAcesas } = await supabase
     .from("mwa_game_eventos")
     .select("user_id")
     .eq("tipo", "estrela_dia")
     .eq("ref", hoje)
     .in("user_id", userIds);
+  if (erroAcesas) return json({ erro: erroAcesas.message }, 500);
   const jaAcesa = new Set((acesas ?? []).map((e) => e.user_id));
 
-  const { data: jaEnviados } = await supabase
+  const { data: jaEnviados, error: erroJaEnviados } = await supabase
     .from("mwa_push_log")
     .select("user_id")
     .eq("tipo", "estrela_dia")
     .eq("data", hoje)
     .in("user_id", userIds);
+  if (erroJaEnviados) return json({ erro: erroJaEnviados.message }, 500);
   const jaEnviado = new Set((jaEnviados ?? []).map((e) => e.user_id));
 
   const pendentes = userIds.filter((id) => !jaAcesa.has(id) && !jaEnviado.has(id));
   if (pendentes.length === 0) return json({ enviados: 0 });
 
-  const { data: perfis } = await supabase
+  const { data: perfis, error: erroPerfis } = await supabase
     .from("mwa_perfis")
     .select("id, idioma")
     .in("id", pendentes);
+  if (erroPerfis) return json({ erro: erroPerfis.message }, 500);
   const idiomaPorUsuario = new Map((perfis ?? []).map((p) => [p.id, p.idioma]));
 
   const { data: inscricoes, error: erroInscricoes } = await supabase
@@ -103,6 +111,7 @@ Deno.serve(async (req) => {
   if (erroInscricoes) return json({ erro: erroInscricoes.message }, 500);
 
   let enviados = 0;
+  let falhas = 0;
   for (const inscricao of inscricoes ?? []) {
     const ingles = idiomaPorUsuario.get(inscricao.user_id) === "en-US";
     const payload = JSON.stringify({
@@ -132,8 +141,9 @@ Deno.serve(async (req) => {
       } else {
         console.error("falha ao enviar push", inscricao.user_id, erro);
       }
+      falhas++;
     }
   }
 
-  return json({ enviados, candidatos: pendentes.length });
+  return json({ enviados, falhas, candidatos: pendentes.length });
 });
