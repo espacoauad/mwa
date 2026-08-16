@@ -68,6 +68,7 @@ export default function JogoCorridaEscolha({ onFechar }) {
   const [kcalSaudavel, setKcalSaudavel] = useState(0)
   const [kcalNaoSaudavel, setKcalNaoSaudavel] = useState(0)
   const [itensNaoSaudaveisComidos, setItensNaoSaudaveisComidos] = useState(0)
+  const [itensComidosNaoSaudaveis, setItensComidosNaoSaudaveis] = useState([])
   const [beliscado, setBeliscado] = useState(false)
   const [feedback, setFeedback] = useState(null)
   const [barraAnimando, setBarraAnimando] = useState(false)
@@ -204,6 +205,9 @@ export default function JogoCorridaEscolha({ onFechar }) {
     setKcalSaudavel(0)
     setKcalNaoSaudavel(0)
     setItensNaoSaudaveisComidos(0)
+    setItensComidosNaoSaudaveis([])
+    setFeedback(null)
+    setBeliscado(false)
     setPremioDado(false)
     setFase('rodando')
     inicioRef.current = Date.now()
@@ -229,6 +233,7 @@ export default function JogoCorridaEscolha({ onFechar }) {
     } else {
       setKcalNaoSaudavel((v) => v + kcal)
       setItensNaoSaudaveisComidos((v) => v + 1)
+      setItensComidosNaoSaudaveis((atuais) => [...atuais, { svgId: entrada.item.svgId, nome: entrada.item.alimento.nome, kcal }])
       mostrarFeedback('!', 'naoSaudavel')
       setBeliscado(true)
       if (beliscadoTimeoutRef.current) clearTimeout(beliscadoTimeoutRef.current)
@@ -437,6 +442,27 @@ export default function JogoCorridaEscolha({ onFechar }) {
                   {ingles ? mensagem.en : mensagem.pt}
                 </p>
               </>
+            )}
+
+            {itensComidosNaoSaudaveis.length > 0 && (
+              <div className="mt-4 rounded-xl bg-white p-3 text-left">
+                <p className="text-center text-xs font-semibold text-verde/80">
+                  {ingles
+                    ? "It's easy to eat without thinking — here's what weighed you down:"
+                    : 'É fácil comer sem pensar — foi isso que pesou:'}
+                </p>
+                <ul className="mt-2 space-y-1.5">
+                  {[...itensComidosNaoSaudaveis]
+                    .sort((a, b) => b.kcal - a.kcal)
+                    .map((item, indice) => (
+                      <li key={indice} className="flex items-center gap-2 text-xs text-verde/80">
+                        <ItemNaoSaudavelSvg id={item.svgId} tamanho={20} />
+                        <span className="flex-1">{item.nome}</span>
+                        <span className="font-semibold text-[#B0563C]">{Math.round(item.kcal)} kcal</span>
+                      </li>
+                    ))}
+                </ul>
+              </div>
             )}
 
             {recorde && (

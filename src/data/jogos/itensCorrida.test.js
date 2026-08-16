@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { ITENS_CORRIDA, sortearItem } from './itensCorrida.js'
+import { kcalDoItem } from '../../utils/jogos/corrida.js'
 
 test('a lista tem 10 itens saudáveis e 10 não saudáveis, sem svgId repetido', () => {
   const saudaveis = ITENS_CORRIDA.filter((i) => i.tipo === 'saudavel')
@@ -26,4 +27,10 @@ test('sortearItem sempre devolve um item da lista, com os dois tipos aparecendo'
     vistos.add(item.tipo)
   }
   assert.equal(vistos.size, 2)
+})
+
+test('kcalDoItem calcula uma caloria positiva para todo item do catálogo', () => {
+  for (const item of ITENS_CORRIDA) {
+    assert.ok(kcalDoItem(item) > 0, `kcal zerada ou inválida para ${item.svgId}`)
+  }
 })
