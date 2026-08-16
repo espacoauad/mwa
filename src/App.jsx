@@ -37,6 +37,12 @@ const AVISOS_PAGAMENTO = {
   falha: { texto: '❌ O pagamento não foi concluído. Você pode tentar novamente quando quiser.', estilo: 'border-red-300 bg-red-50 text-red-800' },
 }
 
+// Mantida em sincronia com as chaves de `telas` (abaixo, dentro de AppInner).
+// Não referenciamos `telas` diretamente aqui porque ela só existe depois dos
+// retornos antecipados (usuário deslogado, onboarding, admin...) — se o efeito
+// de ?aba= disparasse antes disso, `telas` ainda estaria em TDZ.
+const ABAS_VALIDAS = ['hoje', 'alimentacao', 'progresso', 'dicas', 'ferramentas', 'perfil']
+
 function AppInner() {
   const { sessao, carregando, usuario, modalRefeicao, ganhoSementes, diaAtual, totalDias, programa90Ativo, hoje } = useApp()
   const { ingles } = useIdioma()
@@ -64,7 +70,9 @@ function AppInner() {
     const abaPush = new URLSearchParams(window.location.search).get('aba')
     if (abaPush) {
       window.history.replaceState({}, '', window.location.pathname)
-      setAba(abaPush)
+      if (ABAS_VALIDAS.includes(abaPush)) {
+        setAba(abaPush)
+      }
     }
   }, [])
 
@@ -96,15 +104,19 @@ function AppInner() {
   }, [sessao, usuario, diaAtual, hoje, ingles, acessoBloqueado])
 
   // Garante a inscrição push do dispositivo atual (sem pedir permissão de novo).
-  // Depende só do id do usuário — não do objeto `usuario` inteiro, cuja
-  // identidade muda a cada atualização de perfil (foto, idioma etc), o que
-  // reexecutaria o registro do service worker + upsert no Supabase à toa.
+  // Depende do id do usuário e de `usuario` ter terminado de carregar (booleano) —
+  // não do objeto `usuario` inteiro, cuja identidade muda a cada atualização de
+  // perfil (foto, idioma etc), o que reexecutaria o registro do service worker +
+  // upsert no Supabase à toa. `sessao` costuma ficar disponível antes de `usuario`
+  // terminar de carregar (são efeitos assíncronos separados em AppContext), então
+  // sem o `!!usuario` aqui o efeito dispararia uma única vez com `usuario` ainda
+  // nulo e nunca mais rodaria — a inscrição push nunca aconteceria.
   useEffect(() => {
     const userId = sessao?.user?.id
     if (usuario && userId) {
       garantirInscricaoPush(userId)
     }
-  }, [sessao?.user?.id])
+  }, [sessao?.user?.id, !!usuario])
 
   // Toque numa notificação push -> navega pra aba indicada
   useEffect(() => {
