@@ -32,7 +32,7 @@ self.addEventListener('notificationclick', (event) => {
           return cliente.focus()
         }
       }
-      if (self.clients.openWindow) return self.clients.openWindow('/')
+      if (self.clients.openWindow) return self.clients.openWindow('/?aba=' + aba)
     })
   )
 })

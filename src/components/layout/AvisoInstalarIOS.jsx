@@ -21,7 +21,7 @@ export default function AvisoInstalarIOS() {
   }
 
   return (
-    <div className="fixed inset-x-4 bottom-20 z-40 flex items-center justify-between gap-3 rounded-2xl border border-verde/20 bg-white p-3 text-sm text-verde shadow-lg">
+    <div className="fixed inset-x-4 bottom-36 z-40 flex items-center justify-between gap-3 rounded-2xl border border-verde/20 bg-white p-3 text-sm text-verde shadow-lg">
       <p>📲 Adicione o MWA à tela de início para receber lembretes mesmo com o app fechado.</p>
       <button type="button" onClick={dispensar} className="shrink-0 font-semibold text-verde/70">
         Entendi

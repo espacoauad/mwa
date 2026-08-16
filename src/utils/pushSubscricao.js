@@ -37,8 +37,8 @@ export function inscricaoParaLinha(userId, subscription) {
 // Garante que o dispositivo atual tenha uma inscrição push salva —
 // idempotente, seguro de chamar toda vez que o app carrega.
 export async function garantirInscricaoPush(userId) {
-  if (!userId || !suportaPush() || Notification.permission !== 'granted') return false
   try {
+    if (!userId || !suportaPush() || Notification.permission !== 'granted') return false
     const registration = await registrarServiceWorker()
     if (!registration) return false
     let subscription = await registration.pushManager.getSubscription()
@@ -54,6 +54,23 @@ export async function garantirInscricaoPush(userId) {
   } catch {
     // Navegador sem suporte completo, ou pessoa negou no meio do fluxo —
     // falha silenciosa, sem crashar o app (mesmo padrão dos lembretes locais).
+    return false
+  }
+}
+
+// Desfaz a inscrição push do dispositivo atual — usada no logout e na
+// exclusão/reinício de conta, pra um dispositivo compartilhado ou reutilizado
+// não continuar recebendo push da conta anterior. Best-effort: mesmo padrão
+// defensivo de garantirInscricaoPush, nunca deixa o chamador quebrar por isso.
+export async function removerInscricaoPush() {
+  if (!suportaPush()) return false
+  try {
+    const registration = await navigator.serviceWorker.getRegistration()
+    if (!registration) return false
+    const subscription = await registration.pushManager.getSubscription()
+    if (!subscription) return false
+    return await subscription.unsubscribe()
+  } catch {
     return false
   }
 }

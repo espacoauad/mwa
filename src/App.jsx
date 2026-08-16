@@ -57,6 +57,17 @@ function AppInner() {
     }
   }, [])
 
+  // App aberto a partir do toque numa notificação push com o app fechado —
+  // o service worker cold-starta em /?aba=..., já que nesse caso não existe
+  // uma janela controlada pra receber o postMessage de 'push-click'.
+  useEffect(() => {
+    const abaPush = new URLSearchParams(window.location.search).get('aba')
+    if (abaPush) {
+      window.history.replaceState({}, '', window.location.pathname)
+      setAba(abaPush)
+    }
+  }, [])
+
   // Verifica se é dia de pesagem e mostra lembrete
   useEffect(() => {
     if (usuario && diaAtual && !jaMostrarLembrete && totalDias) {
@@ -84,13 +95,16 @@ function AppInner() {
     }
   }, [sessao, usuario, diaAtual, hoje, ingles, acessoBloqueado])
 
-  // Garante a inscrição push do dispositivo atual (sem pedir permissão de novo)
+  // Garante a inscrição push do dispositivo atual (sem pedir permissão de novo).
+  // Depende só do id do usuário — não do objeto `usuario` inteiro, cuja
+  // identidade muda a cada atualização de perfil (foto, idioma etc), o que
+  // reexecutaria o registro do service worker + upsert no Supabase à toa.
   useEffect(() => {
     const userId = sessao?.user?.id
     if (usuario && userId) {
       garantirInscricaoPush(userId)
     }
-  }, [sessao, usuario])
+  }, [sessao?.user?.id])
 
   // Toque numa notificação push -> navega pra aba indicada
   useEffect(() => {

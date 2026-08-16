@@ -65,16 +65,21 @@ Deno.serve(async (req) => {
     Deno.env.get("VAPID_PRIVATE_KEY")!,
   );
 
-  const hoje = new Date().toISOString().slice(0, 10);
+  // en-CA formata como YYYY-MM-DD (ordem ISO) — calculado já no fuso de
+  // Brasília, pra uma chamada manual/antecipada entre 21h BRT e 0h UTC não
+  // computar a data de amanhã (o que gravaria o log no dia errado e
+  // suprimiria o envio real desse dia).
+  const hoje = new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
 
   const { data: programas, error: erroProgramas } = await supabase
     .from("mwa_programas")
     .select("user_id")
-    .eq("status", "ativo");
+    .eq("status", "ativo")
+    .or(`data_fim.is.null,data_fim.gte.${hoje}`);
   if (erroProgramas) return json({ erro: erroProgramas.message }, 500);
 
   const userIds = [...new Set((programas ?? []).map((p) => p.user_id))];
-  if (userIds.length === 0) return json({ enviados: 0 });
+  if (userIds.length === 0) return json({ enviados: 0, falhas: 0, candidatos: 0 });
 
   const { data: acesas, error: erroAcesas } = await supabase
     .from("mwa_game_eventos")
@@ -94,15 +99,20 @@ Deno.serve(async (req) => {
   if (erroJaEnviados) return json({ erro: erroJaEnviados.message }, 500);
   const jaEnviado = new Set((jaEnviados ?? []).map((e) => e.user_id));
 
-  const pendentes = userIds.filter((id) => !jaAcesa.has(id) && !jaEnviado.has(id));
-  if (pendentes.length === 0) return json({ enviados: 0 });
+  const pendentesComAdmin = userIds.filter((id) => !jaAcesa.has(id) && !jaEnviado.has(id));
+  if (pendentesComAdmin.length === 0) return json({ enviados: 0, falhas: 0, candidatos: 0 });
 
   const { data: perfis, error: erroPerfis } = await supabase
     .from("mwa_perfis")
-    .select("id, idioma")
-    .in("id", pendentes);
+    .select("id, idioma, role")
+    .in("id", pendentesComAdmin);
   if (erroPerfis) return json({ erro: erroPerfis.message }, 500);
   const idiomaPorUsuario = new Map((perfis ?? []).map((p) => [p.id, p.idioma]));
+  // Contas admin não devem receber o push — mesma exclusão já feita no
+  // lembrete local equivalente (função do dia) no client.
+  const idsAdmin = new Set((perfis ?? []).filter((p) => p.role === "admin").map((p) => p.id));
+  const pendentes = pendentesComAdmin.filter((id) => !idsAdmin.has(id));
+  if (pendentes.length === 0) return json({ enviados: 0, falhas: 0, candidatos: 0 });
 
   const { data: inscricoes, error: erroInscricoes } = await supabase
     .from("mwa_push_inscricoes")

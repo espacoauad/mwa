@@ -26,6 +26,7 @@ import {
 import { itemDoBanco, itemParaBanco, refeicaoDoBanco, totaisDaRefeicao } from '../utils/refeicoes.js'
 import { uploadFotoRefeicao, removerFotoRefeicao, limparFotosRefeicoesDoUsuario } from '../lib/storage.js'
 import { horarioAgora } from '../utils/calculos.js'
+import { removerInscricaoPush } from '../utils/pushSubscricao.js'
 
 const AppContext = createContext(null)
 
@@ -611,11 +612,21 @@ export function AppProvider({ children }) {
     } catch (erro) {
       console.warn('[MWA] não foi possível limpar as fotos de refeições no Storage:', erro)
     }
+    // best-effort: desfaz a inscrição push do dispositivo atual — a conta em
+    // auth.users nunca é de fato apagada por este fluxo (só a linha de perfil
+    // e os dados), então sem isso a pessoa continuaria recebendo o push diário
+    // mesmo após "excluir conta"/"reiniciar".
+    try {
+      await removerInscricaoPush()
+    } catch (erro) {
+      console.warn('[MWA] não foi possível remover a inscrição push:', erro)
+    }
     await Promise.all([
       supabase.from('mwa_refeicoes').delete().eq('user_id', userId),
       supabase.from('mwa_exercicios').delete().eq('user_id', userId),
       supabase.from('mwa_pesagens').delete().eq('user_id', userId),
       supabase.from('mwa_agua').delete().eq('user_id', userId),
+      supabase.from('mwa_push_inscricoes').delete().eq('user_id', userId),
     ])
     await supabase.from('mwa_perfis').delete().eq('id', userId)
     setUsuario(null)
@@ -636,6 +647,14 @@ export function AppProvider({ children }) {
   }
 
   async function sair() {
+    // best-effort: desfaz a inscrição push do dispositivo antes de sair, pra um
+    // próximo login (de outra pessoa, no mesmo aparelho) começar limpo em vez
+    // de herdar em silêncio o push desta conta.
+    try {
+      await removerInscricaoPush()
+    } catch (erro) {
+      console.warn('[MWA] não foi possível remover a inscrição push:', erro)
+    }
     await supabase.auth.signOut()
   }
 
