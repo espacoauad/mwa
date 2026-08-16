@@ -152,6 +152,25 @@ body {
   animation: mwa-farm-bob 2.2s ease-in-out infinite;
 }
 
+/* Corrida da Escolha: tremor rápido do avatar ao "comer" algo não saudável */
+@keyframes mwa-corrida-belisco {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-8deg);
+  }
+  75% {
+    transform: rotate(8deg);
+  }
+}
+
+.mwa-corrida-belisco {
+  display: inline-block;
+  animation: mwa-corrida-belisco 0.3s ease-in-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mwa-estrela,
   .mwa-estrela-cadente,
@@ -159,7 +178,8 @@ body {
   .mwa-medalha-raios,
   .mwa-brilho,
   .mwa-farm-balanco,
-  .mwa-farm-bob {
+  .mwa-farm-bob,
+  .mwa-corrida-belisco {
     animation: none !important;
   }
 }

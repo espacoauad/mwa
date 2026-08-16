@@ -44,3 +44,10 @@ test('toda recompensa tem valor positivo e rótulo', () => {
     assert.ok(r.label?.length > 0, `${tipo} sem rótulo`)
   }
 })
+
+test('toda recompensa de jogo usada em AppContext.jsx existe em RECOMPENSAS', () => {
+  const chavesEsperadas = ['jogo_prato', 'jogo_vf', 'jogo_troca', 'jogo_saciedade', 'jogo_rotulos', 'jogo_corrida', 'joguinho', 'momento_mwa']
+  for (const chave of chavesEsperadas) {
+    assert.ok(RECOMPENSAS[chave], `RECOMPENSAS está sem a chave "${chave}" usada por um jogo`)
+  }
+})

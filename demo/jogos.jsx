@@ -9,6 +9,7 @@ import JogoVerdadeiroFalso from '../src/components/game/JogoVerdadeiroFalso.jsx'
 import JogoTrocaInteligente from '../src/components/game/JogoTrocaInteligente.jsx'
 import JogoBatalhaSaciedade from '../src/components/game/JogoBatalhaSaciedade.jsx'
 import JogoDetetiveRotulos from '../src/components/game/JogoDetetiveRotulos.jsx'
+import JogoCorridaEscolha from '../src/components/game/JogoCorridaEscolha.jsx'
 import MomentoMwa from '../src/components/hoje/MomentoMwa.jsx'
 
 const JOGOS = [
@@ -17,6 +18,7 @@ const JOGOS = [
   ['troca', 'Troca Inteligente', JogoTrocaInteligente],
   ['saciedade', 'Batalha da Saciedade', JogoBatalhaSaciedade],
   ['rotulos', 'Detetive dos Rótulos', JogoDetetiveRotulos],
+  ['corrida', 'Corrida da Escolha', JogoCorridaEscolha],
   ['momento', 'Momento MWA', MomentoMwa],
 ]
 

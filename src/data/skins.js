@@ -17,6 +17,7 @@ export const RECOMPENSAS = {
   jogo_troca: { sementes: 10, label: 'Troca Inteligente: rodada concluída' },
   jogo_saciedade: { sementes: 10, label: 'Batalha da Saciedade: rodada concluída' },
   jogo_rotulos: { sementes: 10, label: 'Detetive dos Rótulos: rodada concluída' },
+  jogo_corrida: { sementes: 10, label: 'Corrida da Escolha: corrida concluída' },
   estrela_dia: { sementes: 5, label: 'Estrela do dia conquistada' },
   constelacao: { sementes: 25, label: 'Constelação da semana completa' },
   momento_mwa: { sementes: 5, label: 'Momento MWA do dia' },
