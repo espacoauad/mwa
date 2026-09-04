@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { X, ChevronDown, BookOpen } from 'lucide-react'
 import { CONCEITOS_NUTRICIONAIS } from '../../data/conceitosNutricionais.js'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Apêndice de conceitos nutricionais: glossário com o que é e por que o MWA
 // trabalha cada tema, para reforçar o conhecimento aplicado ao longo dos 30 dias.
 export default function ReforcandoConceitos({ onFechar }) {
+  const { ingles } = useIdioma()
   const [abertoId, setAbertoId] = useState(CONCEITOS_NUTRICIONAIS[0].id)
   const dialogRef = useRef(null)
 
@@ -43,11 +45,11 @@ export default function ReforcandoConceitos({ onFechar }) {
             <div className="rounded-full bg-sage-claro p-2">
               <BookOpen size={20} className="text-sage" strokeWidth={1.5} />
             </div>
-            <h1 id="conceitos-titulo" className="font-serif text-xl font-semibold italic text-verde">Reforçando Conceitos</h1>
+            <h1 id="conceitos-titulo" className="font-serif text-xl font-semibold italic text-verde">{ingles ? 'Reinforcing Concepts' : 'Reforçando Conceitos'}</h1>
           </div>
           <button
             type="button"
-            aria-label="Fechar"
+            aria-label={ingles ? 'Close' : 'Fechar'}
             onClick={onFechar}
             className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white text-verde/60"
           >
@@ -55,8 +57,9 @@ export default function ReforcandoConceitos({ onFechar }) {
           </button>
         </div>
         <p className="mb-5 text-sm text-verde/80">
-          Um pequeno guia com os conceitos que sustentam todo o método MWA — o que cada um significa e por que
-          trabalhamos com ele ao longo da sua jornada aqui.
+          {ingles
+            ? "A small guide to the concepts behind the whole MWA method — what each one means and why we work with it throughout your journey here."
+            : 'Um pequeno guia com os conceitos que sustentam todo o método MWA — o que cada um significa e por que trabalhamos com ele ao longo da sua jornada aqui.'}
         </p>
 
         {/* Acordeão de conceitos */}
@@ -79,7 +82,7 @@ export default function ReforcandoConceitos({ onFechar }) {
                 >
                   <span className="flex items-center gap-3">
                     <span className="text-xl">{c.emoji}</span>
-                    <span className="font-serif text-base font-semibold italic text-verde">{c.titulo}</span>
+                    <span className="font-serif text-base font-semibold italic text-verde">{ingles ? c.tituloEn : c.titulo}</span>
                   </span>
                   <ChevronDown
                     size={18}
@@ -93,14 +96,14 @@ export default function ReforcandoConceitos({ onFechar }) {
                   className="space-y-3 border-t border-cinza px-4 pb-4 pt-3"
                 >
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wide text-verde/80">O que é</p>
-                    <p className="mt-1 text-sm leading-relaxed text-verde/80">{c.oQueE}</p>
+                    <p className="text-xs font-bold uppercase tracking-wide text-verde/80">{ingles ? 'What it is' : 'O que é'}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-verde/80">{ingles ? c.oQueEEn : c.oQueE}</p>
                   </div>
                   <div className="rounded-lg bg-sage-claro/40 p-3">
                     <p className="text-xs font-bold uppercase tracking-wide text-sage">
-                      Por que tratamos disso no programa
+                      {ingles ? 'Why we cover this in the program' : 'Por que tratamos disso no programa'}
                     </p>
-                    <p className="mt-1 text-sm leading-relaxed text-verde/80">{c.porQue}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-verde/80">{ingles ? c.porQueEn : c.porQue}</p>
                   </div>
                 </div>
 
@@ -110,7 +113,9 @@ export default function ReforcandoConceitos({ onFechar }) {
         </div>
 
         <p className="mt-5 text-center text-[11px] text-verde/80">
-          Volte aqui sempre que quiser relembrar o porquê por trás de cada escolha. 💚
+          {ingles
+            ? 'Come back here anytime you want to remember the why behind each choice. 💚'
+            : 'Volte aqui sempre que quiser relembrar o porquê por trás de cada escolha. 💚'}
         </p>
       </div>
     </div>

@@ -207,8 +207,8 @@ function AppInner() {
 export default function App() {
   // Páginas públicas (fora do app logado)
   const rota = window.location.pathname
-  if (rota === '/vendas') return <LandingVendas />
-  if (rota === '/resgate') return <ResgateCupom />
+  if (rota === '/vendas') return <IdiomaProvider><LandingVendas /></IdiomaProvider>
+  if (rota === '/resgate') return <IdiomaProvider><ResgateCupom /></IdiomaProvider>
   if (rota === '/preview-lanches') return <IdiomaProvider><PreviewLanches /></IdiomaProvider>
 
   return (

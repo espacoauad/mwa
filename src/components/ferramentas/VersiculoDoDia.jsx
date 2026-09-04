@@ -1,4 +1,5 @@
 import { useApp } from '../../context/AppContext.jsx'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 import versiculos from '../../data/versiculos.js'
 
 /**
@@ -8,6 +9,7 @@ import versiculos from '../../data/versiculos.js'
  */
 export default function VersiculoDoDia() {
   const { diaAtual, totalDias } = useApp()
+  const { ingles } = useIdioma()
 
   // Encontra o versículo do dia atual (garantir que dia 1 = índice 0)
   const versiculoHoje = versiculos.find(v => v.dia === diaAtual) || versiculos[0]
@@ -19,8 +21,8 @@ export default function VersiculoDoDia() {
     <div className="space-y-4">
       {/* CABEÇALHO — fora do cartão escuro, por isso em tom verde (legível no fundo claro da tela) */}
       <div className="text-center">
-        <p className="text-xs font-bold uppercase tracking-widest text-verde mb-2">✨ Versículo do Dia</p>
-        <p className="text-xs text-verde/80">Dia {diaAtual} de {totalDias}</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-verde mb-2">✨ {ingles ? 'Verse of the Day' : 'Versículo do Dia'}</p>
+        <p className="text-xs text-verde/80">{ingles ? `Day ${diaAtual} of ${totalDias}` : `Dia ${diaAtual} de ${totalDias}`}</p>
       </div>
 
       {/* CARTÃO PRINCIPAL — fundo escuro sólido para garantir contraste com o texto claro */}
@@ -39,16 +41,16 @@ export default function VersiculoDoDia() {
           {/* TEXTO DO VERSÍCULO */}
           <div className="text-center space-y-4">
             <p className="text-sm text-ouro uppercase tracking-wider font-bold">
-              {versiculoHoje.tema}
+              {ingles ? versiculoHoje.temaEn : versiculoHoje.tema}
             </p>
 
             <p className="font-serif text-lg leading-relaxed text-white italic">
-              "{versiculoHoje.texto}"
+              "{ingles ? versiculoHoje.textoEn : versiculoHoje.texto}"
             </p>
 
             {/* REFERÊNCIA BÍBLICA */}
             <p className="text-base font-bold text-ouro">
-              — {versiculoHoje.referencia}
+              — {ingles ? versiculoHoje.referenciaEn : versiculoHoje.referencia}
             </p>
           </div>
 
@@ -57,16 +59,16 @@ export default function VersiculoDoDia() {
 
           {/* REFLEXÃO DO DIA */}
           <div className="bg-black/15 backdrop-blur rounded-2xl p-4 border border-white/15">
-            <p className="text-xs font-semibold uppercase tracking-wider text-ouro mb-2">💭 Reflexão</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-ouro mb-2">💭 {ingles ? 'Reflection' : 'Reflexão'}</p>
             <p className="text-xs leading-relaxed text-white/95">
-              {versiculoHoje.reflexao}
+              {ingles ? versiculoHoje.reflexaoEn : versiculoHoje.reflexao}
             </p>
           </div>
 
           {/* PROGRESSO VISUAL */}
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <p className="text-xs font-semibold text-white/90">Sua jornada</p>
+              <p className="text-xs font-semibold text-white/90">{ingles ? 'Your journey' : 'Sua jornada'}</p>
               <p className="text-xs font-bold text-ouro">{progresso}%</p>
             </div>
             <div
@@ -75,7 +77,7 @@ export default function VersiculoDoDia() {
               aria-valuenow={progresso}
               aria-valuemin={0}
               aria-valuemax={100}
-              aria-label="Sua jornada"
+              aria-label={ingles ? 'Your journey' : 'Sua jornada'}
             >
               <div
                 className="h-full bg-gradient-to-r from-ouro to-sage transition-all duration-300"
@@ -89,7 +91,9 @@ export default function VersiculoDoDia() {
       {/* CTA INSPIRADOR */}
       <div className="bg-gradient-to-r from-verde to-verde-escuro rounded-2xl p-4 text-center border border-sage/30">
         <p className="text-xs font-semibold text-white">
-          🙏 Comece hoje lembrando: você é digno de cuidado, amor e transformação.
+          {ingles
+            ? '🙏 Start today by remembering: you are worthy of care, love and transformation.'
+            : '🙏 Comece hoje lembrando: você é digno de cuidado, amor e transformação.'}
         </p>
       </div>
     </div>
