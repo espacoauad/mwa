@@ -60,19 +60,6 @@ export function calcularMetas(dados) {
   return { tmb, tdee, calorias, proteina, carboidrato, gordura, fibras, aguaMl, aguaL, copos }
 }
 
-// Percentual de uma meta atingida (0–100+, sem teto para mostrar excesso)
-export function percentualMeta(consumido, meta) {
-  if (!meta) return 0
-  return Math.round((consumido / meta) * 100)
-}
-
-// Semáforo das metas: verde atingida, amarelo próxima, vermelho longe
-export function statusMeta(pct) {
-  if (pct >= 100) return { cor: '#879B55', nome: 'atingida' }
-  if (pct >= 60) return { cor: '#C59F4F', nome: 'quase lá' }
-  return { cor: '#B0563C', nome: 'em andamento' }
-}
-
 export function dataHojeISO() {
   const d = new Date()
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`

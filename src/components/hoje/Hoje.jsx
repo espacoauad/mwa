@@ -7,7 +7,6 @@ import { dicaDoDia } from '../../data/dicas.js'
 import { dicaDoDia as dicaDoDia90 } from '../../data/dicas90.js'
 import { informativoDoDia } from '../../data/informativos.js'
 import { redimensionarImagem } from '../../lib/imagem.js'
-import AnelMeta from './AnelMeta.jsx'
 import AnelHidratacao from './AnelHidratacao.jsx'
 import GraficoMacros from './GraficoMacros.jsx'
 import SeuProgresso from './SeuProgresso.jsx'
@@ -242,7 +241,7 @@ export default function Hoje({ irParaDicas }) {
           </button>
         </motion.div>
 
-        {/* Painel Premium: Macronutrientes em Anéis Concêntricos */}
+        {/* Painel Premium: Macronutrientes em barras de progresso */}
         <motion.section variants={itemEntrada} className="mwa-sombra-premium rounded-2xl bg-white p-7">
           <h2 className="mb-1 text-sm font-semibold text-verde/60">{ingles ? 'Your intake today' : 'Seu consumo de hoje'}</h2>
           <p className="mb-6 text-xs text-verde/80">{ingles ? 'Macronutrients at a glance — protein is the focus' : 'Macronutrientes em destaque — proteína é o foco'}</p>
@@ -250,17 +249,15 @@ export default function Hoje({ irParaDicas }) {
             proteina={totaisHoje.proteina}
             carbos={totaisHoje.carbos}
             gordura={totaisHoje.gordura}
+            fibras={totaisHoje.fibras}
             metaProteina={metas.proteina}
             metaCarbos={metas.carboidrato}
             metaGordura={metas.gordura}
+            metaFibras={metas.fibras}
             calorias={totaisHoje.calorias}
             metaCalorias={metas.calorias}
             caloriasQueimadas={gastoExercicios}
           />
-          {/* Metas complementares embaixo */}
-          <div className="mt-6 border-t border-ouro/20 pt-4">
-            <AnelMeta label={ingles ? 'Fiber' : 'Fibras'} consumido={totaisHoje.fibras} meta={metas.fibras} unidade="g" />
-          </div>
         </motion.section>
 
         {/* Seção: Seu Progresso */}
