@@ -2,15 +2,17 @@
 // Cada pilar usa a mesma "planta-base" (caule + folhas), variando só a cor
 // de destaque e a "coroa" (flor/fruto/espiga) no topo — assim 8 pilares × 4
 // estágios não exigem 32 ilustrações desenhadas do zero.
+import { COROAS_SUPORTADAS } from './coroasSuportadas.js'
 
 const TERRA = '#8A6A48'
 const CAULE = '#5C8A3F'
 const FOLHA = '#7CA85C'
 
 // Lista dos coroaId aceitos pelo switch abaixo — mantida em sincronia manual
-// com os `case` labels. Usada por src/data/farm/integridade.test.js para
-// checar que todo PILARES[].coroaId tem um desenho correspondente aqui.
-export const COROAS_SUPORTADAS = ['tomate', 'flor-azul', 'girassol', 'lavanda', 'trigo', 'milho', 'erva', 'laranjeira']
+// com os `case` labels (ver coroasSuportadas.js). Usada por
+// src/data/farm/integridade.test.js para checar que todo PILARES[].coroaId
+// tem um desenho correspondente aqui.
+export { COROAS_SUPORTADAS }
 
 function Coroa({ coroaId, cor, escala }) {
   const deslocamentoY = 34 - 18 * escala

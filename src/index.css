@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Paleta do programa */
-  --color-verde: #344528;
-  --color-verde-escuro: #263219;
+  /* Paleta do programa — extraída do logotipo aprovado (v8) */
+  --color-verde: #08402f;
+  --color-verde-escuro: #052a1f;
   --color-sage: #879b55;
   --color-sage-claro: #eef2e2;
-  --color-ouro: #d4af7a;
-  --color-ouro-claro: #f6ecdd;
+  --color-ouro: #c59f4f;
+  --color-ouro-claro: #f0e7d3;
   --color-creme: #f5f1e8;
   --color-cinza: #e8e4dc;
 
-  --font-sans: "Poppins", system-ui, -apple-system, sans-serif;
-  --font-serif: "Lora", Georgia, serif;
-  --color-ouro-glow: rgba(212, 175, 122, 0.35);
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --color-ouro-glow: rgba(197, 159, 79, 0.35);
 }
 
 body {
@@ -152,6 +152,25 @@ body {
   animation: mwa-farm-bob 2.2s ease-in-out infinite;
 }
 
+/* Corrida da Escolha: tremor rápido do avatar ao "comer" algo não saudável */
+@keyframes mwa-corrida-belisco {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-8deg);
+  }
+  75% {
+    transform: rotate(8deg);
+  }
+}
+
+.mwa-corrida-belisco {
+  display: inline-block;
+  animation: mwa-corrida-belisco 0.3s ease-in-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mwa-estrela,
   .mwa-estrela-cadente,
@@ -159,7 +178,8 @@ body {
   .mwa-medalha-raios,
   .mwa-brilho,
   .mwa-farm-balanco,
-  .mwa-farm-bob {
+  .mwa-farm-bob,
+  .mwa-corrida-belisco {
     animation: none !important;
   }
 }

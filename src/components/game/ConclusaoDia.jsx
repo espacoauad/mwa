@@ -15,18 +15,29 @@ const MENSAGENS = [
 ]
 
 const TAREFAS = [
-  { chave: 'refeicao', emoji: '🍽️', label: 'Refeição' },
+  { chave: 'refeicao', emoji: '🥗', label: 'Refeição' },
   { chave: 'agua', emoji: '💧', label: 'Água' },
   { chave: 'dica', emoji: '💡', label: 'Dica do dia' },
   { chave: 'exercicio', emoji: '💪', label: 'Exercício' },
 ]
 
+const MACROS_LABELS = [
+  { chave: 'calorias', emoji: '🔥', label: 'Calorias', unidade: 'kcal' },
+  { chave: 'proteina', emoji: '🥚', label: 'Proteína', unidade: 'g' },
+  { chave: 'carbos', emoji: '🌾', label: 'Carbos', unidade: 'g' },
+  { chave: 'gordura', emoji: '🥑', label: 'Gordura', unidade: 'g' },
+]
+
 export default function ConclusaoDia() {
-  const { usuario, diaAtual, game, tarefasHoje, fecharConclusaoDia, registrarCompartilhamento } = useApp()
+  const { usuario, diaAtual, game, tarefasHoje, totaisHoje, semanaEstrelas, fecharConclusaoDia, registrarCompartilhamento } = useApp()
   const [compartilhando, setCompartilhando] = useState(false)
   const [aviso, setAviso] = useState(null)
   const cardRef = useRef(null)
   const dialogRef = useRef(null)
+
+  // Contar estrelas acesas na semana
+  const estrelasDiaHoje = semanaEstrelas?.find((d) => d.hoje)?.acesa ? 1 : 0
+  const totalEstrelasSemanais = semanaEstrelas?.filter((d) => d.acesa)?.length ?? 0
 
   // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
   useEffect(() => {
@@ -61,12 +72,16 @@ export default function ConclusaoDia() {
         }
         const arquivo = new File([blob], `mwa-dia-${diaAtual}.png`, { type: 'image/png' })
 
+        // Mensagem com link de compra (compatível com WhatsApp, email, etc)
+        const linkCompra = 'https://metodomwa.com.br'
+        const textoCompartilhamento = `Estou no dia ${diaAtual} da minha transformação com o MWA — Método Wanessa Auad! 🌿\n\nMacros de hoje:\n🔥 ${totaisHoje.calorias} kcal | 🥚 ${totaisHoje.proteina}g proteína | 🌾 ${totaisHoje.carbos}g carbos\n\n✨ Sementes conquistadas: +${tarefasHoje.sementesHoje} 🌱\n\nVem comigo: ${linkCompra}`
+
         if (navigator.canShare?.({ files: [arquivo] })) {
           try {
             await navigator.share({
               files: [arquivo],
               title: 'MWA — Método Wanessa Auad',
-              text: `Concluí o dia ${diaAtual} do meu MWA! 🌿`,
+              text: textoCompartilhamento,
             })
             await registrarCompartilhamento()
           } catch {
@@ -108,84 +123,141 @@ export default function ConclusaoDia() {
         <X size={20} />
       </button>
 
-      {/* Cartão compartilhável */}
+      {/* Cartão compartilhável - REDESIGN */}
       <div
         ref={(el) => {
           cardRef.current = el
           dialogRef.current = el
         }}
         tabIndex={-1}
-        className="relative w-full max-w-sm shrink-0 overflow-hidden rounded-[2rem] px-8 pb-10 pt-8 text-center outline-none"
-        style={{ background: 'linear-gradient(160deg, #344528 0%, #4A5F3A 45%, #879B55 100%)' }}
+        className="relative w-full max-w-sm shrink-0 overflow-hidden rounded-[2.5rem] px-6 pb-8 pt-6 text-center outline-none"
+        style={{ background: 'linear-gradient(135deg, #5a8a50 0%, #6d9a5f 40%, #7db567 100%)' }}
       >
-        {/* Decoração */}
-        <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-        <div className="pointer-events-none absolute -bottom-14 -right-10 h-48 w-48 rounded-full bg-ouro/20 blur-2xl" />
+        {/* Decoração premium */}
+        <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-white/8 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-20 -right-12 h-60 w-60 rounded-full bg-ouro/15 blur-3xl" />
 
-        <div className="relative flex items-center justify-center gap-1.5">
-          <LogoMWA variante="simbolo" tema="claro" className="h-4 w-4" />
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/50">My Wellness Approach</p>
+        {/* Header com logo */}
+        <div className="relative flex items-center justify-center gap-2">
+          <LogoMWA variante="simbolo" tema="claro" className="h-5 w-5" />
+          <p className="text-[9px] font-bold uppercase tracking-widest text-white/60">MWA - My Wellness App</p>
         </div>
 
-        <p id="conclusao-dia-titulo" className="relative mt-4 font-serif text-2xl font-bold italic text-ouro">
-          Dia {diaAtual} concluído! 🎉
+        {/* Dia concluído - destaque grande */}
+        <p id="conclusao-dia-titulo" className="relative mt-3 font-serif text-3xl font-bold italic text-white">
+          Dia {diaAtual}
         </p>
+        <p className="relative text-sm text-ouro font-semibold">Concluído com sucesso! 🎉</p>
 
+        {/* Foto do usuário - GRANDE E DESTACADA */}
         {game && (
-          <div className="relative mt-5 flex justify-center">
+          <div className="relative mt-6 flex justify-center">
             {usuario?.fotoUrl ? (
               <div className="relative">
-                <div className="h-24 w-24 overflow-hidden rounded-full ring-4 ring-ouro/60">
+                <div className="h-32 w-32 overflow-hidden rounded-full ring-4 ring-ouro/80 shadow-lg">
                   <img src={usuario.fotoUrl} alt={usuario.nome} className="h-full w-full object-cover" />
                 </div>
-                {/* Avatar do jogo como selo, sobre a foto real */}
-                <div className="absolute -bottom-1 -right-1 rounded-full bg-verde-escuro p-0.5 ring-2 ring-white/30">
-                  <Avatar avatar={game.avatar} tamanho="sm" />
+                {/* Avatar do jogo como selo */}
+                <div className="absolute -bottom-2 -right-2 rounded-full bg-ouro p-1 ring-3 ring-white/30 shadow-md">
+                  <Avatar avatar={game.avatar} tamanho="md" />
                 </div>
               </div>
             ) : (
-              <div className="rounded-full bg-white/10 p-1.5 ring-4 ring-ouro/40">
+              <div className="rounded-full bg-white/15 p-2 ring-4 ring-ouro/60 shadow-lg">
                 <Avatar avatar={game.avatar} tamanho="lg" />
               </div>
             )}
           </div>
         )}
 
-        <p className="relative mt-4 text-lg font-semibold text-white">
+        {/* Mensagem personalizada */}
+        <p className="relative mt-5 text-base font-semibold text-white">
           {primeiroNome ? `Parabéns, ${primeiroNome}!` : 'Parabéns!'}
         </p>
-        <p className="relative mx-auto mt-1 max-w-[240px] text-sm leading-relaxed text-white/80">{mensagem}</p>
+        <p className="relative mx-auto mt-2 max-w-xs text-xs leading-relaxed text-white/85">{mensagem}</p>
 
-        {/* Sementes ganhas hoje */}
-        <div className="relative mt-6 rounded-2xl bg-white/10 p-4" role="status" aria-live="polite">
-          <p className="text-3xl font-bold text-ouro">+{tarefasHoje.sementesHoje} 🌱</p>
-          <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-white/60">
-            sementes conquistadas hoje
-          </p>
+        {/* Tarefas Completadas - DESTAQUE PRINCIPAL */}
+        <div className="relative mt-5 space-y-2">
+          <p className="text-xs font-bold uppercase tracking-widest text-white/70">Tarefas Completadas</p>
+          <div className="grid grid-cols-4 gap-2.5">
+            {TAREFAS.map((t) => (
+              <div
+                key={t.chave}
+                className="rounded-xl p-4 transition-all text-center border bg-white/20 border-white/40"
+              >
+                <p className="text-2xl mb-1">{t.emoji}</p>
+                <p className="text-[11px] font-normal leading-tight text-white">{t.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Sequência */}
-        {sequencia > 1 && (
-          <div className="relative mt-3 inline-flex items-center gap-1.5 rounded-full bg-ouro px-4 py-1.5 text-sm font-bold text-verde-escuro">
-            <Flame size={15} /> {sequencia} dias seguidos
+        {/* Estrelas da Semana - BRANDO */}
+        {semanaEstrelas && semanaEstrelas.length > 0 && (
+          <div className="relative mt-5 rounded-xl bg-white/10 px-4 py-3 backdrop-blur-sm border border-white/20">
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-xs font-bold uppercase tracking-wide text-white/70">Estrelas</p>
+              <p className="text-[9px] font-normal text-white/60">{totalEstrelasSemanais} de {semanaEstrelas.length}</p>
+            </div>
+            <div className="flex items-center justify-center gap-1.5 mt-2">
+              {semanaEstrelas.map((dia, idx) => (
+                <p key={idx} className={`text-lg ${dia.acesa ? 'opacity-100' : 'opacity-20'}`} style={{ filter: 'brightness(2) saturate(0)' }}>⭐</p>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* Checklist do dia */}
-        <div className="relative mt-6 grid grid-cols-4 gap-2">
-          {TAREFAS.map((t) => (
-            <div
-              key={t.chave}
-              className={`rounded-xl p-2.5 ${tarefasHoje[t.chave] ? 'bg-white/20' : 'bg-white/5 opacity-40'}`}
-            >
-              <p className="text-lg">{t.emoji}</p>
-              <p className="mt-0.5 text-[9px] font-semibold leading-tight text-white">{t.label}</p>
+        {/* Sequência com destaque */}
+        {sequencia > 1 && (
+          <div className="relative mt-3 inline-flex items-center gap-2 rounded-full bg-ouro px-5 py-2 text-sm font-bold text-verde shadow-md">
+            <Flame size={16} /> {sequencia} dias seguidos
+          </div>
+        )}
+
+        {/* Macros - CARDS CLAROS E LIMPOS */}
+        <div className="relative mt-5 space-y-2">
+          <p className="text-xs font-bold uppercase tracking-widest text-white/70">Nutrição do Dia</p>
+          <div className="grid grid-cols-2 gap-3">
+            {/* Calorias */}
+            <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
+              <p className="text-3xl text-center">🔥</p>
+              <p className="mt-2 text-center text-sm font-normal text-white">{totaisHoje.calorias}</p>
+              <p className="text-center text-[10px] font-normal text-white/80">Calorias</p>
             </div>
-          ))}
+
+            {/* Proteína */}
+            <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
+              <p className="text-3xl text-center">🥚</p>
+              <p className="mt-2 text-center text-sm font-normal text-white">{totaisHoje.proteina}</p>
+              <p className="text-center text-[10px] font-normal text-white/80">Proteína (g)</p>
+            </div>
+
+            {/* Carboidrato */}
+            <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
+              <p className="text-3xl text-center">🌾</p>
+              <p className="mt-2 text-center text-sm font-normal text-white">{totaisHoje.carbos}</p>
+              <p className="text-center text-[10px] font-normal text-white/80">Carboidrato (g)</p>
+            </div>
+
+            {/* Gordura */}
+            <div className="rounded-xl bg-white/25 px-4 py-4 backdrop-blur-sm border border-white/30">
+              <p className="text-3xl text-center">🥑</p>
+              <p className="mt-2 text-center text-sm font-normal text-white">{totaisHoje.gordura}</p>
+              <p className="text-center text-[10px] font-normal text-white/80">Gordura (g)</p>
+            </div>
+          </div>
         </div>
 
-        <p className="relative mx-auto mt-6 max-w-[220px] font-serif text-sm italic leading-snug text-white/60">
-          Mais do que um método, um estilo de vida que transforma.
+        {/* Sementes - UMA LINHA SÓ */}
+        <div className="relative mt-4 rounded-lg bg-white/12 px-4 py-2.5 border border-white/20 text-center" role="status" aria-live="polite">
+          <p className="text-lg font-normal text-ouro inline-block">
+            +{tarefasHoje.sementesHoje} <span className="text-white/80 text-sm ml-1.5">🌱 Sementes</span>
+          </p>
+        </div>
+
+        {/* Footer motivacional */}
+        <p className="relative mx-auto mt-4 max-w-xs font-serif text-[11px] italic leading-relaxed text-white/60">
+          Transforme hábitos, cultive resultados! ✨
         </p>
       </div>
 

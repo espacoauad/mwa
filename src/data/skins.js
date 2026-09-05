@@ -17,6 +17,7 @@ export const RECOMPENSAS = {
   jogo_troca: { sementes: 10, label: 'Troca Inteligente: rodada concluída' },
   jogo_saciedade: { sementes: 10, label: 'Batalha da Saciedade: rodada concluída' },
   jogo_rotulos: { sementes: 10, label: 'Detetive dos Rótulos: rodada concluída' },
+  jogo_corrida: { sementes: 10, label: 'Corrida da Escolha: corrida concluída' },
   estrela_dia: { sementes: 5, label: 'Estrela do dia conquistada' },
   constelacao: { sementes: 25, label: 'Constelação da semana completa' },
   momento_mwa: { sementes: 5, label: 'Momento MWA do dia' },
@@ -56,8 +57,8 @@ export const FUNDOS = [
   { id: 'rosa', nome: 'Rosé', preco: 90, css: 'linear-gradient(135deg, #F9E3E3, #E8A0A8)' },
   { id: 'por-do-sol', nome: 'Pôr do Sol', preco: 120, css: 'linear-gradient(135deg, #F7D9B0, #E58F65)' },
   { id: 'oceano', nome: 'Oceano', preco: 150, css: 'linear-gradient(135deg, #B8E0DD, #3E8E8B)' },
-  { id: 'floresta', nome: 'Floresta', preco: 180, css: 'linear-gradient(135deg, #879B55, #344528)' },
-  { id: 'dourado', nome: 'Dourado Real', preco: 250, css: 'linear-gradient(135deg, #F3E5C8, #D4AF7A)' },
+  { id: 'floresta', nome: 'Floresta', preco: 180, css: 'linear-gradient(135deg, #879B55, #08402F)' },
+  { id: 'dourado', nome: 'Dourado Real', preco: 250, css: 'linear-gradient(135deg, #F3E5C8, #C59F4F)' },
   { id: 'noite', nome: 'Noite Estrelada', preco: 300, css: 'linear-gradient(135deg, #3D4663, #131A33)' },
   // Coleção Elegante
   { id: 'marmore', nome: 'Mármore', preco: 400, css: 'linear-gradient(135deg, #F7F5F0, #D9D5CC)', elegante: true },

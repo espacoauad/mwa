@@ -1,6 +1,15 @@
 // Constantes de métricas
 export const BIOIMPEDANCIA_METRICAS = [
   {
+    key: 'imc',
+    label: 'IMC',
+    unidade: '',
+    minVal: 10,
+    maxVal: 60,
+    dica: 'Índice de Massa Corporal medido pelo equipamento',
+    melhorEhMenor: true,
+  },
+  {
     key: 'percentualGordura',
     label: '% Gordura Corporal',
     unidade: '%',

@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* Paleta MWA — editorial wellness */
-  --color-forest: #2a3b1f;
-  --color-forest-deep: #1c2614;
+  /* Paleta MWA — extraída do logotipo aprovado (v8) */
+  --color-forest: #08402f;
+  --color-forest-deep: #052a1f;
   --color-sage: #879b55;
-  --color-gold: #c9a55c;
-  --color-gold-soft: #ddbe85;
+  --color-gold: #c59f4f;
+  --color-gold-soft: #d9c18d;
   --color-cream: #f5f1e8;
   --color-offwhite: #faf7f0;
   --color-sand: #e8e4dc;
-  --color-ink: #2a3b1f;
+  --color-ink: #08402f;
   --color-mist: #6f7a66;
 
   --font-display: "Fraunces", Georgia, serif;

@@ -1,5 +1,5 @@
 /**
- * 90 Versículos Bíblicos (NVI)
+ * 90 Versículos Bíblicos (NVI) — com tradução em inglês (estilo NIV) para cada campo
  * Para "Versículo do Dia" em Ferramentas
  * Temas: Saúde, Corpo, Mente, Espírito, Alimentação, Consistência, Cuidado, Amor, Contribuição
  * Cada versículo tem uma reflexão personalizada
@@ -10,638 +10,998 @@ export const versiculos = [
   {
     dia: 1,
     texto: "Graças dou-te porque de modo assombrosamente maravilhoso fui feito; maravilhosos são os teus feitos.",
+    textoEn: "I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well.",
     referencia: "Salmos 139:14",
+    referenciaEn: "Psalm 139:14",
     tema: "Autoaceitação",
-    reflexao: "Você não é um erro. Seu corpo, com todas as suas imperfeições, é uma obra-prima. Hoje, reconheça isso."
+    temaEn: "Self-acceptance",
+    reflexao: "Você não é um erro. Seu corpo, com todas as suas imperfeições, é uma obra-prima. Hoje, reconheça isso.",
+    reflexaoEn: "You are not a mistake. Your body, with all its imperfections, is a masterpiece. Recognize that today."
   },
   {
     dia: 2,
     texto: "Ou não sabem que o corpo de vocês é templo do Espírito Santo que habita em vocês?",
+    textoEn: "Do you not know that your body is a temple of the Holy Spirit who dwells in you?",
     referencia: "1 Coríntios 6:19",
+    referenciaEn: "1 Corinthians 6:19",
     tema: "Respeito ao corpo",
-    reflexao: "Seu corpo é sagrado. Cada escolha alimentar é um ato de devoção. Cuide dele como você cuidaria de um templo."
+    temaEn: "Respect for the body",
+    reflexao: "Seu corpo é sagrado. Cada escolha alimentar é um ato de devoção. Cuide dele como você cuidaria de um templo.",
+    reflexaoEn: "Your body is sacred. Every food choice is an act of devotion. Care for it as you would a temple."
   },
   {
     dia: 3,
     texto: "Portanto, se alguém está em Cristo, é nova criação. As coisas antigas já se foram; eis que surgiram coisas novas!",
+    textoEn: "Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!",
     referencia: "2 Coríntios 5:17",
+    referenciaEn: "2 Corinthians 5:17",
     tema: "Transformação",
-    reflexao: "Você não é mais quem era ontem. Cada dia é um novo começo. Deixe o passado para trás e abrace essa nova versão de si mesma."
+    temaEn: "Transformation",
+    reflexao: "Você não é mais quem era ontem. Cada dia é um novo começo. Deixe o passado para trás e abrace essa nova versão de si mesma.",
+    reflexaoEn: "You are no longer who you were yesterday. Every day is a new beginning. Leave the past behind and embrace this new version of yourself."
   },
   {
     dia: 4,
     texto: "Acima de tudo, guarde o seu coração, pois dele procedem as fontes da vida.",
+    textoEn: "Above all else, guard your heart, for everything you do flows from it.",
     referencia: "Provérbios 4:23",
+    referenciaEn: "Proverbs 4:23",
     tema: "Cuidar de si",
-    reflexao: "Proteja sua paz mental como se fosse seu bem mais precioso. Tudo o que você cria flui de um coração saudável."
+    temaEn: "Taking care of yourself",
+    reflexao: "Proteja sua paz mental como se fosse seu bem mais precioso. Tudo o que você cria flui de um coração saudável.",
+    reflexaoEn: "Protect your peace of mind as your most precious asset. Everything you create flows from a healthy heart."
   },
   {
     dia: 5,
     texto: "Porque Deus não nos deu espírito de covardia, mas de poder, de amor e de disciplina.",
+    textoEn: "For God did not give us a spirit of fear, but of power, of love, and of self-discipline.",
     referencia: "2 Timóteo 1:7",
+    referenciaEn: "2 Timothy 1:7",
     tema: "Disciplina e força",
-    reflexao: "Você tem força dentro de você. A disciplina não é punição — é amor por si mesma. Use-a hoje."
+    temaEn: "Discipline and strength",
+    reflexao: "Você tem força dentro de você. A disciplina não é punição — é amor por si mesma. Use-a hoje.",
+    reflexaoEn: "You have strength within you. Discipline is not punishment — it's love for yourself. Use it today."
   },
   {
     dia: 6,
     texto: "Você é precioso e honrado à minha vista, e eu o amo.",
+    textoEn: "Since you are precious and honored in my sight, and because I love you...",
     referencia: "Isaías 43:4",
+    referenciaEn: "Isaiah 43:4",
     tema: "Autorrespeito",
-    reflexao: "Não espere que outros a cuidem. Seja sua própria prioridade. O cuidado que você dedica a si é um reflexo do que você merece."
+    temaEn: "Self-respect",
+    reflexao: "Não espere que outros a cuidem. Seja sua própria prioridade. O cuidado que você dedica a si é um reflexo do que você merece.",
+    reflexaoEn: "Don't wait for others to take care of you. Be your own priority. The care you give yourself reflects what you deserve."
   },
   {
     dia: 7,
     texto: "Então Deus viu tudo o que tinha feito, e tudo era muito bom.",
+    textoEn: "God saw all that he had made, and it was very good.",
     referencia: "Gênesis 1:31",
+    referenciaEn: "Genesis 1:31",
     tema: "Gratidão pelo corpo",
-    reflexao: "Pause hoje e agradeça. Seu corpo funciona diariamente para você. Essa é uma graça que merece reconhecimento."
+    temaEn: "Gratitude for your body",
+    reflexao: "Pause hoje e agradeça. Seu corpo funciona diariamente para você. Essa é uma graça que merece reconhecimento.",
+    reflexaoEn: "Pause today and give thanks. Your body works for you every day. That's a grace worth acknowledging."
   },
   {
     dia: 8,
     texto: "E a paz de Deus, que excede todo o entendimento, guardará os seus corações e as suas mentes em Cristo Jesus.",
+    textoEn: "And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
     referencia: "Filipenses 4:7",
+    referenciaEn: "Philippians 4:7",
     tema: "Paz interior",
-    reflexao: "A alegria não vem da perfeição. Vem da paz com quem você é agora. Busque essa paz hoje."
+    temaEn: "Inner peace",
+    reflexao: "A alegria não vem da perfeição. Vem da paz com quem você é agora. Busque essa paz hoje.",
+    reflexaoEn: "Joy doesn't come from perfection. It comes from peace with who you are right now. Seek that peace today."
   },
   {
     dia: 9,
     texto: "Tudo o que vocês fizerem, trabalhem nisso com toda a alma, como para o Senhor e não para os homens.",
+    textoEn: "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.",
     referencia: "Colossenses 3:23",
+    referenciaEn: "Colossians 3:23",
     tema: "Dedicação",
-    reflexao: "Cada refeição que você escolhe bem, cada movimento que faz, é para você mesma. Trabalhe com propósito, não com pressão."
+    temaEn: "Dedication",
+    reflexao: "Cada refeição que você escolhe bem, cada movimento que faz, é para você mesma. Trabalhe com propósito, não com pressão.",
+    reflexaoEn: "Every meal you choose well, every movement you make, is for yourself. Work with purpose, not pressure."
   },
   {
     dia: 10,
     texto: "Não me importo com a minha vida; o que importa é que eu termine a corrida e complete a tarefa que o Senhor Jesus me confiou.",
+    textoEn: "I consider my life worth nothing to me; my only aim is to finish the race and complete the task the Lord Jesus has given me.",
     referencia: "Atos 20:24",
+    referenciaEn: "Acts 20:24",
     tema: "Propósito",
-    reflexao: "Sua jornada tem propósito. Você não está aqui por acaso. Termine o que começou com fé."
+    temaEn: "Purpose",
+    reflexao: "Sua jornada tem propósito. Você não está aqui por acaso. Termine o que começou com fé.",
+    reflexaoEn: "Your journey has purpose. You're not here by accident. Finish what you started with faith."
   },
   {
     dia: 11,
     texto: "Instruam-se uns aos outros com toda a sabedoria que Cristo oferece.",
+    textoEn: "Teach and instruct one another with all the wisdom Christ offers.",
     referencia: "Colossenses 3:16",
+    referenciaEn: "Colossians 3:16",
     tema: "Aprendizado",
-    reflexao: "Cada dia você aprende algo novo sobre nutrição, sobre seu corpo, sobre você mesma. Valorize esse aprendizado."
+    temaEn: "Learning",
+    reflexao: "Cada dia você aprende algo novo sobre nutrição, sobre seu corpo, sobre você mesma. Valorize esse aprendizado.",
+    reflexaoEn: "Every day you learn something new about nutrition, about your body, about yourself. Value that learning."
   },
   {
     dia: 12,
     texto: "Ao entardecer, que a sua mente descanse; a paz virá quando você soltar o que não pode controlar.",
+    textoEn: "As evening falls, let your mind rest; peace will come when you release what you cannot control.",
     referencia: "Filipenses 4:6-7",
+    referenciaEn: "Philippians 4:6-7",
     tema: "Serenidade",
-    reflexao: "Você não precisa controlar tudo. Solte a culpa, a ansiedade, a perfeição. Deixe a paz tomar conta."
+    temaEn: "Serenity",
+    reflexao: "Você não precisa controlar tudo. Solte a culpa, a ansiedade, a perfeição. Deixe a paz tomar conta.",
+    reflexaoEn: "You don't need to control everything. Release the guilt, the anxiety, the need for perfection. Let peace take over."
   },
   {
     dia: 13,
     texto: "Meu coração e minha carne exultam no Deus vivo!",
+    textoEn: "My heart and my flesh cry out, rejoicing in the living God!",
     referencia: "Salmos 84:2",
+    referenciaEn: "Psalm 84:2",
     tema: "Alegria",
-    reflexao: "Você tem razão para celebrar. Cada dia que você cuida de si é uma vitória que merece alegria."
+    temaEn: "Joy",
+    reflexao: "Você tem razão para celebrar. Cada dia que você cuida de si é uma vitória que merece alegria.",
+    reflexaoEn: "You have reason to celebrate. Every day you take care of yourself is a victory worth celebrating."
   },
   {
     dia: 14,
     texto: "Porque somos obra-prima de Deus, criados em Cristo Jesus para fazer boas obras.",
+    textoEn: "For we are God's handiwork, created in Christ Jesus to do good works.",
     referencia: "Efésios 2:10",
+    referenciaEn: "Ephesians 2:10",
     tema: "Valor próprio",
-    reflexao: "Você é valiosa. Não pela aparência, não pelo peso, mas pelo simples fato de existir. Reconheça seu valor hoje."
+    temaEn: "Self-worth",
+    reflexao: "Você é valiosa. Não pela aparência, não pelo peso, mas pelo simples fato de existir. Reconheça seu valor hoje.",
+    reflexaoEn: "You are valuable. Not for your appearance, not for your weight, but simply because you exist. Recognize your worth today."
   },
   {
     dia: 15,
     texto: "O Senhor é a minha luz e a minha salvação. Quem temerei?",
+    textoEn: "The Lord is my light and my salvation — whom shall I fear?",
     referencia: "Salmos 27:1",
+    referenciaEn: "Psalm 27:1",
     tema: "Coragem",
-    reflexao: "Você é mais forte do que pensa. Não tema o processo. O medo desaparece quando você se move com fé."
+    temaEn: "Courage",
+    reflexao: "Você é mais forte do que pensa. Não tema o processo. O medo desaparece quando você se move com fé.",
+    reflexaoEn: "You are stronger than you think. Don't fear the process. Fear disappears when you move with faith."
   },
   {
     dia: 16,
     texto: "Portanto, preparem a mente para agir; tenham domínio próprio; coloquem toda a sua esperança no favor que será dado a vocês.",
+    textoEn: "Therefore, prepare your minds for action; be self-controlled; set your hope fully on the grace to be given you.",
     referencia: "1 Pedro 1:13",
+    referenciaEn: "1 Peter 1:13",
     tema: "Controle mental",
-    reflexao: "Sua mente é uma ferramenta poderosa. Treine-a. Escolha pensamentos que a edifiquem, não que a derrotem."
+    temaEn: "Mental control",
+    reflexao: "Sua mente é uma ferramenta poderosa. Treine-a. Escolha pensamentos que a edifiquem, não que a derrotem.",
+    reflexaoEn: "Your mind is a powerful tool. Train it. Choose thoughts that build you up, not ones that defeat you."
   },
   {
     dia: 17,
     texto: "Abençoado é o homem que não anda conforme o conselho dos ímpios.",
+    textoEn: "Blessed is the one who does not walk in step with the wicked.",
     referencia: "Salmos 1:1",
+    referenciaEn: "Psalm 1:1",
     tema: "Boas escolhas",
-    reflexao: "Nem todos os conselhos que você recebe são para você. Filtre tudo através da sabedoria e do amor por si mesma."
+    temaEn: "Good choices",
+    reflexao: "Nem todos os conselhos que você recebe são para você. Filtre tudo através da sabedoria e do amor por si mesma.",
+    reflexaoEn: "Not all the advice you receive is meant for you. Filter everything through wisdom and love for yourself."
   },
   {
     dia: 18,
     texto: "Melhor é ter um punhado com tranquilidade do que dois punhados à custa de muito trabalho; é correr atrás do vento.",
+    textoEn: "Better one handful with tranquility than two handfuls with toil and chasing after the wind.",
     referencia: "Eclesiastes 4:6",
+    referenciaEn: "Ecclesiastes 4:6",
     tema: "Simplicidade",
-    reflexao: "A vida saudável não precisa ser complicada. Simplicidade, consistência e paz valem mais que qualquer fórmula mágica."
+    temaEn: "Simplicity",
+    reflexao: "A vida saudável não precisa ser complicada. Simplicidade, consistência e paz valem mais que qualquer fórmula mágica.",
+    reflexaoEn: "A healthy life doesn't have to be complicated. Simplicity, consistency and peace are worth more than any magic formula."
   },
   {
     dia: 19,
     texto: "Porque é o Senhor que dá força; Ele capacita seus filhos.",
+    textoEn: "God gives power and strength to his people.",
     referencia: "Salmos 68:35",
+    referenciaEn: "Psalm 68:35",
     tema: "Força divina",
-    reflexao: "Você não está sozinha nessa jornada. A força que você precisa para hoje já está dentro de você."
+    temaEn: "Divine strength",
+    reflexao: "Você não está sozinha nessa jornada. A força que você precisa para hoje já está dentro de você.",
+    reflexaoEn: "You are not alone on this journey. The strength you need for today is already within you."
   },
   {
     dia: 20,
     texto: "Assim, eu insisto: vivam pela fé e não pelo que veem.",
+    textoEn: "So I insist: live by faith, not by what you see.",
     referencia: "2 Coríntios 5:7",
+    referenciaEn: "2 Corinthians 5:7",
     tema: "Fé na transformação",
-    reflexao: "Confie no processo. A balança não define seu progresso. Sua energia, sua roupa, seu espelho — esses também falam."
+    temaEn: "Faith in transformation",
+    reflexao: "Confie no processo. A balança não define seu progresso. Sua energia, sua roupa, seu espelho — esses também falam.",
+    reflexaoEn: "Trust the process. The scale doesn't define your progress. Your energy, your clothes, your mirror — those speak too."
   },
   {
     dia: 21,
     texto: "Porque o Senhor vê o seu coração e recompensa quem busca com sinceridade.",
+    textoEn: "For the Lord sees your heart and rewards those who seek him sincerely.",
     referencia: "1 Samuel 16:7",
+    referenciaEn: "1 Samuel 16:7",
     tema: "Recompensa interna",
-    reflexao: "Ninguém precisa ver seu esforço. O que importa é que você sabe a verdade sobre seu comprometimento."
+    temaEn: "Inner reward",
+    reflexao: "Ninguém precisa ver seu esforço. O que importa é que você sabe a verdade sobre seu comprometimento.",
+    reflexaoEn: "No one needs to see your effort. What matters is that you know the truth about your commitment."
   },
 
   // DIAS 22-42: CONSISTÊNCIA - Permanecer, disciplina, hábito
   {
     dia: 22,
     texto: "Não nos cansemos de fazer o bem, pois no tempo próprio colheremos se não desistirmos.",
+    textoEn: "Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up.",
     referencia: "Gálatas 6:9",
+    referenciaEn: "Galatians 6:9",
     tema: "Construção de hábitos",
-    reflexao: "Cada pequena escolha hoje planta uma semente para amanhã. Os hábitos são construídos repetição após repetição."
+    temaEn: "Building habits",
+    reflexao: "Cada pequena escolha hoje planta uma semente para amanhã. Os hábitos são construídos repetição após repetição.",
+    reflexaoEn: "Every small choice today plants a seed for tomorrow. Habits are built repetition after repetition."
   },
   {
     dia: 23,
     texto: "Persevere na oração, mantendo-se vigilante e agradecido.",
+    textoEn: "Devote yourselves to prayer, being watchful and thankful.",
     referencia: "Colossenses 4:2",
+    referenciaEn: "Colossians 4:2",
     tema: "Consistência",
-    reflexao: "A consistência é um ato de fé. Faça o mesmo hoje que fez ontem, mesmo que ninguém esteja vendo."
+    temaEn: "Consistency",
+    reflexao: "A consistência é um ato de fé. Faça o mesmo hoje que fez ontem, mesmo que ninguém esteja vendo.",
+    reflexaoEn: "Consistency is an act of faith. Do the same today that you did yesterday, even if no one is watching."
   },
   {
     dia: 24,
     texto: "O trabalho árduo leva à abundância, mas a preguiça leva à pobreza.",
+    textoEn: "Diligent hands bring wealth, but laziness leads to poverty.",
     referencia: "Provérbios 10:4",
+    referenciaEn: "Proverbs 10:4",
     tema: "Esforço",
-    reflexao: "Seu esforço não é em vão. Cada decisão certa acumula. A abundância vem do trabalho consistente."
+    temaEn: "Effort",
+    reflexao: "Seu esforço não é em vão. Cada decisão certa acumula. A abundância vem do trabalho consistente.",
+    reflexaoEn: "Your effort isn't in vain. Every right decision adds up. Abundance comes from consistent work."
   },
   {
     dia: 25,
     texto: "Não desistam. O final será melhor do que o começo.",
+    textoEn: "Do not give up. The end will be better than the beginning.",
     referencia: "Eclesiastes 7:8",
+    referenciaEn: "Ecclesiastes 7:8",
     tema: "Perseverança",
-    reflexao: "O melhor ainda está por vir. Você está apenas começando a colher os frutos do que plantou."
+    temaEn: "Perseverance",
+    reflexao: "O melhor ainda está por vir. Você está apenas começando a colher os frutos do que plantou.",
+    reflexaoEn: "The best is yet to come. You're just beginning to reap the fruits of what you planted."
   },
   {
     dia: 26,
     texto: "Permaneci fiel na obra do Senhor porque sabia que meu trabalho não era em vão.",
+    textoEn: "I remained faithful to the Lord's work because I knew my labor was not in vain.",
     referencia: "1 Coríntios 15:58",
+    referenciaEn: "1 Corinthians 15:58",
     tema: "Permanência",
-    reflexao: "Sua fidelidade a si mesma importa. Cada dia que você permanece no caminho é uma vitória que conta."
+    temaEn: "Staying the course",
+    reflexao: "Sua fidelidade a si mesma importa. Cada dia que você permanece no caminho é uma vitória que conta.",
+    reflexaoEn: "Your faithfulness to yourself matters. Every day you stay on the path is a victory that counts."
   },
   {
     dia: 27,
     texto: "Assim diz o Senhor: Não confiem nas próprias forças, mas em minha graça.",
+    textoEn: "Thus says the Lord: Do not trust in your own strength, but in my grace.",
     referencia: "Zacarias 4:6",
+    referenciaEn: "Zechariah 4:6",
     tema: "Confiança",
-    reflexao: "Quando você se sentir fraca, saiba que há uma força além da sua. Entregue os dias difíceis e confie."
+    temaEn: "Trust",
+    reflexao: "Quando você se sentir fraca, saiba que há uma força além da sua. Entregue os dias difíceis e confie.",
+    reflexaoEn: "When you feel weak, know there is a strength beyond your own. Surrender the hard days and trust."
   },
   {
     dia: 28,
     texto: "Porque o fruto do Espírito é: amor, alegria, paz, paciência, amabilidade, bondade, fidelidade, mansidão e domínio próprio.",
+    textoEn: "But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control.",
     referencia: "Gálatas 5:22-23",
+    referenciaEn: "Galatians 5:22-23",
     tema: "Fruto espiritual",
-    reflexao: "Você não está apenas perdendo peso — está cultivando frutos que duram: paz, domínio próprio, autoamor."
+    temaEn: "Spiritual fruit",
+    reflexao: "Você não está apenas perdendo peso — está cultivando frutos que duram: paz, domínio próprio, autoamor.",
+    reflexaoEn: "You're not just losing weight — you're cultivating fruit that lasts: peace, self-control, self-love."
   },
   {
     dia: 29,
     texto: "Aquele que é fiel no pouco, será fiel também no muito.",
+    textoEn: "Whoever is faithful in little will also be faithful in much.",
     referencia: "Lucas 16:10",
+    referenciaEn: "Luke 16:10",
     tema: "Lealdade com o processo",
-    reflexao: "Uma refeição bem escolhida, um dia consistente — esses 'poucos' são o que criam o 'muito'."
+    temaEn: "Loyalty to the process",
+    reflexao: "Uma refeição bem escolhida, um dia consistente — esses 'poucos' são o que criam o 'muito'.",
+    reflexaoEn: "A well-chosen meal, one consistent day — these 'littles' are what create the 'much'."
   },
   {
     dia: 30,
     texto: "Não fui eu que ordenei a você? Seja forte e corajoso! Não se apavore nem desanime, pois o Senhor, o seu Deus, estará com você por onde você andar.",
+    textoEn: "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.",
     referencia: "Josué 1:9",
+    referenciaEn: "Joshua 1:9",
     tema: "Coragem",
-    reflexao: "Você chegou até aqui. Seja forte e corajosa para o que vem a seguir — você não caminha sozinha."
+    temaEn: "Courage",
+    reflexao: "Você chegou até aqui. Seja forte e corajosa para o que vem a seguir — você não caminha sozinha.",
+    reflexaoEn: "You've made it this far. Be strong and courageous for what comes next — you don't walk alone."
   },
   {
     dia: 31,
     texto: "Eu posso todas as coisas por meio de Cristo que me fortalece.",
+    textoEn: "I can do all this through him who gives me strength.",
     referencia: "Filipenses 4:13",
+    referenciaEn: "Philippians 4:13",
     tema: "Força interior",
-    reflexao: "Você tem poder. Não é fraqueza pedir ajuda, é sabedoria. Use cada recurso que tem disponível."
+    temaEn: "Inner strength",
+    reflexao: "Você tem poder. Não é fraqueza pedir ajuda, é sabedoria. Use cada recurso que tem disponível.",
+    reflexaoEn: "You have power. Asking for help isn't weakness, it's wisdom. Use every resource you have available."
   },
   {
     dia: 32,
     texto: "A paciência produz caráter; o caráter produz esperança.",
+    textoEn: "Perseverance produces character, and character produces hope.",
     referencia: "Romanos 5:4",
+    referenciaEn: "Romans 5:4",
     tema: "Crescimento",
-    reflexao: "A transformação verdadeira não é rápida — é profunda. A paciência com você mesma é um ato de amor."
+    temaEn: "Growth",
+    reflexao: "A transformação verdadeira não é rápida — é profunda. A paciência com você mesma é um ato de amor.",
+    reflexaoEn: "True transformation isn't fast — it's deep. Patience with yourself is an act of love."
   },
   {
     dia: 33,
     texto: "Vocês corriam bem. Quem os impediu de continuar obedecendo à verdade?",
+    textoEn: "You were running a good race. Who cut in on you and kept you from obeying the truth?",
     referencia: "Gálatas 5:7",
+    referenciaEn: "Galatians 5:7",
     tema: "Continuidade",
-    reflexao: "Você já provou que consegue. Agora prove que consegue continuar. O melhor prêmio é a consistência."
+    temaEn: "Continuity",
+    reflexao: "Você já provou que consegue. Agora prove que consegue continuar. O melhor prêmio é a consistência.",
+    reflexaoEn: "You've already proven you can do it. Now prove you can keep going. The best prize is consistency."
   },
   {
     dia: 34,
     texto: "Porque o desejo realizado é uma árvore da vida.",
+    textoEn: "A longing fulfilled is a tree of life.",
     referencia: "Provérbios 13:12",
+    referenciaEn: "Proverbs 13:12",
     tema: "Alcançar metas",
-    reflexao: "Cada meta alcançada planta uma árvore em seu coração. Você está criando um pomar de vitórias."
+    temaEn: "Reaching goals",
+    reflexao: "Cada meta alcançada planta uma árvore em seu coração. Você está criando um pomar de vitórias.",
+    reflexaoEn: "Every goal reached plants a tree in your heart. You're growing an orchard of victories."
   },
   {
     dia: 35,
     texto: "Não percam o ânimo. No tempo certo colherão se não desistirem.",
+    textoEn: "Do not lose heart. At the proper time you will reap a harvest if you do not give up.",
     referencia: "Gálatas 6:9",
+    referenciaEn: "Galatians 6:9",
     tema: "Esperança",
-    reflexao: "A colheita vem no tempo certo, não no seu tempo. Siga plantando com fé que o resultado virá."
+    temaEn: "Hope",
+    reflexao: "A colheita vem no tempo certo, não no seu tempo. Siga plantando com fé que o resultado virá.",
+    reflexaoEn: "The harvest comes at the right time, not on your schedule. Keep planting with faith that the result will come."
   },
   {
     dia: 36,
     texto: "Ninguém que põe a mão no arado e olha para trás é apto para o reino de Deus.",
+    textoEn: "No one who puts a hand to the plow and looks back is fit for service in the kingdom of God.",
     referencia: "Lucas 9:62",
+    referenciaEn: "Luke 9:62",
     tema: "Determinação",
-    reflexao: "Você fez um compromisso com você mesma. Honre esse compromisso a cada decisão que toma."
+    temaEn: "Determination",
+    reflexao: "Você fez um compromisso com você mesma. Honre esse compromisso a cada decisão que toma.",
+    reflexaoEn: "You made a commitment to yourself. Honor that commitment with every decision you make."
   },
   {
     dia: 37,
     texto: "Porque sou fraco, Ele é forte. Porque sou pequeno, Ele é grande.",
+    textoEn: "For when I am weak, then I am strong; when I am small, he is great.",
     referencia: "2 Coríntios 12:9-10",
+    referenciaEn: "2 Corinthians 12:9-10",
     tema: "Força na fraqueza",
-    reflexao: "Reconheça quando está fraca e procure a força que a sustenta. A fraqueza não é fracasso — é sabedoria."
+    temaEn: "Strength in weakness",
+    reflexao: "Reconheça quando está fraca e procure a força que a sustenta. A fraqueza não é fracasso — é sabedoria.",
+    reflexaoEn: "Recognize when you're weak and seek the strength that sustains you. Weakness is not failure — it's wisdom."
   },
   {
     dia: 38,
     texto: "É como árvore plantada à beira de águas correntes: dá fruto no tempo certo e suas folhas não murcham. Tudo o que ele faz prospera!",
+    textoEn: "That person is like a tree planted by streams of water, which yields its fruit in season and whose leaf does not wither — whatever they do prospers.",
     referencia: "Salmos 1:3",
+    referenciaEn: "Psalm 1:3",
     tema: "Estabilidade",
-    reflexao: "A paz vem da estabilidade. Não basta querer — é preciso ser firme, como uma rocha que não se move."
+    temaEn: "Stability",
+    reflexao: "A paz vem da estabilidade. Não basta querer — é preciso ser firme, como uma rocha que não se move.",
+    reflexaoEn: "Peace comes from stability. Wanting isn't enough — you have to be firm, like a rock that doesn't move."
   },
   {
     dia: 39,
     texto: "Cada dia você escolhe: render-se ou persistir. Escolha a persistência.",
+    textoEn: "Every day you choose: give up or persist. Choose to persist.",
     referencia: "Deuteronômio 30:19",
+    referenciaEn: "Deuteronomy 30:19",
     tema: "Escolha diária",
-    reflexao: "Você tem poder de escolha todos os dias. Que tipo de pessoa você quer ser? Escolha de novo hoje."
+    temaEn: "Daily choice",
+    reflexao: "Você tem poder de escolha todos os dias. Que tipo de pessoa você quer ser? Escolha de novo hoje.",
+    reflexaoEn: "You have the power to choose every day. What kind of person do you want to be? Choose again today."
   },
   {
     dia: 40,
     texto: "A vitória não vai aos fortes, mas aos que nunca deixam de lutar.",
+    textoEn: "Victory doesn't go to the strong, but to those who never stop fighting.",
     referencia: "Provérbios 24:16",
+    referenciaEn: "Proverbs 24:16",
     tema: "Vitória pela persistência",
-    reflexao: "Você não precisa ser perfeita. Apenas não desista. A vitória pertence a quem tenta de novo."
+    temaEn: "Victory through persistence",
+    reflexao: "Você não precisa ser perfeita. Apenas não desista. A vitória pertence a quem tenta de novo.",
+    reflexaoEn: "You don't have to be perfect. Just don't give up. Victory belongs to those who try again."
   },
   {
     dia: 41,
     texto: "Bem-aventurado aquele que persevera; pois receberá a coroa da vida.",
+    textoEn: "Blessed is the one who perseveres, for that person will receive the crown of life.",
     referencia: "Tiago 1:12",
+    referenciaEn: "James 1:12",
     tema: "Recompensa final",
-    reflexao: "Você está construindo uma coroa. Cada dia de perseverança é uma joia. Continue brilhando."
+    temaEn: "Final reward",
+    reflexao: "Você está construindo uma coroa. Cada dia de perseverança é uma joia. Continue brilhando.",
+    reflexaoEn: "You're building a crown. Every day of perseverance is a jewel. Keep shining."
   },
   {
     dia: 42,
     texto: "Você já percorreu metade do caminho. A força que te trouxe até aqui te levará até o fim.",
+    textoEn: "You've come halfway. The strength that brought you here will carry you to the end.",
     referencia: "Filipenses 1:6",
+    referenciaEn: "Philippians 1:6",
     tema: "Confiança na metade",
-    reflexao: "42 dias! Você é mais forte do que era. A mesma força que a trouxe aqui a levará para frente."
+    temaEn: "Confidence at the halfway point",
+    reflexao: "42 dias! Você é mais forte do que era. A mesma força que a trouxe aqui a levará para frente.",
+    reflexaoEn: "42 days! You're stronger than you were. The same strength that brought you here will carry you forward."
   },
 
   // DIAS 43-63: MENTE E ESPÍRITO - Transformação interior, sabedoria
   {
     dia: 43,
     texto: "Renovo da mente é renovo da vida. Controle seus pensamentos.",
+    textoEn: "Renewing the mind renews life. Take control of your thoughts.",
     referencia: "Romanos 12:2",
+    referenciaEn: "Romans 12:2",
     tema: "Transformação mental",
-    reflexao: "Seus pensamentos moldam como você enxerga sua realidade. Comece a pensar como alguém que merece saúde."
+    temaEn: "Mental transformation",
+    reflexao: "Seus pensamentos moldam como você enxerga sua realidade. Comece a pensar como alguém que merece saúde.",
+    reflexaoEn: "Your thoughts shape how you see your reality. Start thinking like someone who deserves health."
   },
   {
     dia: 44,
     texto: "Guardai-vos de toda forma de ganância; a vida não consiste em ter muito.",
+    textoEn: "Watch out! Be on your guard against all kinds of greed; life does not consist in an abundance of possessions.",
     referencia: "Lucas 12:15",
+    referenciaEn: "Luke 12:15",
     tema: "Desprendimento",
-    reflexao: "Solte a ideia de que mais é melhor. A vida saudável é simples: escolhas conscientes, dia após dia."
+    temaEn: "Letting go",
+    reflexao: "Solte a ideia de que mais é melhor. A vida saudável é simples: escolhas conscientes, dia após dia.",
+    reflexaoEn: "Let go of the idea that more is better. A healthy life is simple: conscious choices, day after day."
   },
   {
     dia: 45,
     texto: "Levamos cativo todo pensamento, para torná-lo obediente a Cristo.",
+    textoEn: "We take captive every thought to make it obedient to Christ.",
     referencia: "2 Coríntios 10:5",
+    referenciaEn: "2 Corinthians 10:5",
     tema: "Poder do pensamento",
-    reflexao: "A forma como você fala consigo mesma importa. Comece hoje a pensar como alguém que já está se transformando."
+    temaEn: "The power of thought",
+    reflexao: "A forma como você fala consigo mesma importa. Comece hoje a pensar como alguém que já está se transformando.",
+    reflexaoEn: "How you talk to yourself matters. Start today thinking like someone who is already transforming."
   },
   {
     dia: 46,
     texto: "Abra mão do ódio para com você mesmo. Você é digno de amor.",
+    textoEn: "Let go of hatred toward yourself. You are worthy of love.",
     referencia: "Mateus 22:39",
+    referenciaEn: "Matthew 22:39",
     tema: "Auto-compaixão",
-    reflexao: "Se você não se ama, ninguém mais vai conseguir convencer você do contrário. Comece agora: seja gentil consigo mesma."
+    temaEn: "Self-compassion",
+    reflexao: "Se você não se ama, ninguém mais vai conseguir convencer você do contrário. Comece agora: seja gentil consigo mesma.",
+    reflexaoEn: "If you don't love yourself, no one else will be able to convince you otherwise. Start now: be gentle with yourself."
   },
   {
     dia: 47,
     texto: "Não se conformem com este mundo, mas sejam transformados pela renovação da sua mente.",
+    textoEn: "Do not conform to the pattern of this world, but be transformed by the renewing of your mind.",
     referencia: "Romanos 12:2",
+    referenciaEn: "Romans 12:2",
     tema: "Renovação",
-    reflexao: "Você não precisa ser como os outros. Sua transformação é única. Renove sua mente para sua própria verdade."
+    temaEn: "Renewal",
+    reflexao: "Você não precisa ser como os outros. Sua transformação é única. Renove sua mente para sua própria verdade.",
+    reflexaoEn: "You don't need to be like others. Your transformation is unique. Renew your mind for your own truth."
   },
   {
     dia: 48,
     texto: "Porque Deus não é Deus de confusão, mas de paz.",
+    textoEn: "For God is not a God of disorder but of peace.",
     referencia: "1 Coríntios 14:33",
+    referenciaEn: "1 Corinthians 14:33",
     tema: "Paz mental",
-    reflexao: "A confusão não vem de Deus, vem do medo. Escolha a paz em cada pensamento que você permite."
+    temaEn: "Peace of mind",
+    reflexao: "A confusão não vem de Deus, vem do medo. Escolha a paz em cada pensamento que você permite.",
+    reflexaoEn: "Confusion doesn't come from God, it comes from fear. Choose peace in every thought you allow."
   },
   {
     dia: 49,
     texto: "O temor do Senhor é o princípio da sabedoria, e o conhecimento do Santo é entendimento.",
+    textoEn: "The fear of the Lord is the beginning of wisdom, and knowledge of the Holy One is understanding.",
     referencia: "Provérbios 9:10",
+    referenciaEn: "Proverbs 9:10",
     tema: "Sabedoria",
-    reflexao: "Seja humilde com seu corpo. Ouça o que ele te diz. Há sabedoria em cada fome, em cada fadiga."
+    temaEn: "Wisdom",
+    reflexao: "Seja humilde com seu corpo. Ouça o que ele te diz. Há sabedoria em cada fome, em cada fadiga.",
+    reflexaoEn: "Be humble with your body. Listen to what it tells you. There is wisdom in every hunger, in every fatigue."
   },
   {
     dia: 50,
     texto: "Porque o Senhor conhece os desejos do meu coração e abençoa o meu caminho.",
+    textoEn: "For the Lord knows the desires of my heart and blesses my path.",
     referencia: "Salmos 37:4",
+    referenciaEn: "Psalm 37:4",
     tema: "Alinhamento com Deus",
-    reflexao: "Seus desejos importam. Alinhe seu coração com o que é bom — saúde, paz, amor próprio."
+    temaEn: "Alignment with God",
+    reflexao: "Seus desejos importam. Alinhe seu coração com o que é bom — saúde, paz, amor próprio.",
+    reflexaoEn: "Your desires matter. Align your heart with what is good — health, peace, self-love."
   },
   {
     dia: 51,
     texto: "Sua mente é um jardim; cuide bem dele. Retire as ervas daninhas do negativismo.",
+    textoEn: "Your mind is a garden; tend it well. Pull out the weeds of negativity.",
     referencia: "Provérbios 4:23",
+    referenciaEn: "Proverbs 4:23",
     tema: "Higiene mental",
-    reflexao: "Que pensamentos você está permitindo crescer? Retire o negativismo, a culpa, o medo. Plante esperança."
+    temaEn: "Mental hygiene",
+    reflexao: "Que pensamentos você está permitindo crescer? Retire o negativismo, a culpa, o medo. Plante esperança.",
+    reflexaoEn: "What thoughts are you letting grow? Pull out negativity, guilt, fear. Plant hope."
   },
   {
     dia: 52,
     texto: "Vinde a mim todos que estais cansados, e eu vos aliviarei.",
+    textoEn: "Come to me, all you who are weary and burdened, and I will give you rest.",
     referencia: "Mateus 11:28",
+    referenciaEn: "Matthew 11:28",
     tema: "Descanso",
-    reflexao: "Você não precisa carregar esse peso sozinha. Descanse quando precisar. O descanso é parte do processo."
+    temaEn: "Rest",
+    reflexao: "Você não precisa carregar esse peso sozinha. Descanse quando precisar. O descanso é parte do processo.",
+    reflexaoEn: "You don't have to carry this weight alone. Rest when you need to. Rest is part of the process."
   },
   {
     dia: 53,
     texto: "A ansiedade pesa sobre o coração do homem, mas uma palavra amável o alegra.",
+    textoEn: "Anxiety weighs down the heart, but a kind word cheers it up.",
     referencia: "Provérbios 12:25",
+    referenciaEn: "Proverbs 12:25",
     tema: "Gentileza com a mente",
-    reflexao: "Fale com você mesma como falaria com uma amiga. Palavras amáveis curam o coração mais do que qualquer dieta."
+    temaEn: "Kindness toward your mind",
+    reflexao: "Fale com você mesma como falaria com uma amiga. Palavras amáveis curam o coração mais do que qualquer dieta.",
+    reflexaoEn: "Talk to yourself the way you'd talk to a friend. Kind words heal the heart more than any diet."
   },
   {
     dia: 54,
     texto: "Porque a morte e a vida estão no poder da língua; quem a usar bem colherá seus frutos.",
+    textoEn: "The tongue has the power of life and death, and those who love it will eat its fruit.",
     referencia: "Provérbios 18:21",
+    referenciaEn: "Proverbs 18:21",
     tema: "Poder das palavras",
-    reflexao: "As palavras que você diz sobre si mesma moldam como você se enxerga. Escolha usá-las para construir, não destruir."
+    temaEn: "The power of words",
+    reflexao: "As palavras que você diz sobre si mesma moldam como você se enxerga. Escolha usá-las para construir, não destruir.",
+    reflexaoEn: "The words you say about yourself shape how you see yourself. Choose to use them to build, not destroy."
   },
   {
     dia: 55,
     texto: "Pensem em tudo o que é verdadeiro, nobre, correto, puro, amável e louvável.",
+    textoEn: "Whatever is true, whatever is noble, whatever is right, whatever is pure, whatever is lovely, whatever is admirable — think about such things.",
     referencia: "Filipenses 4:8",
+    referenciaEn: "Philippians 4:8",
     tema: "Seleção de pensamentos",
-    reflexao: "Você controla o que pensa. Escolha pensamentos que elevam, não que derrubam. Seja seletiva com sua mente."
+    temaEn: "Choosing your thoughts",
+    reflexao: "Você controla o que pensa. Escolha pensamentos que elevam, não que derrubam. Seja seletiva com sua mente.",
+    reflexaoEn: "You control what you think. Choose thoughts that lift you up, not ones that tear you down. Be selective with your mind."
   },
   {
     dia: 56,
     texto: "Porque a paz de Deus, que ultrapassa todo entendimento, guardará o seu coração.",
+    textoEn: "And the peace of God, which transcends all understanding, will guard your heart.",
     referencia: "Filipenses 4:7",
+    referenciaEn: "Philippians 4:7",
     tema: "Proteção emocional",
-    reflexao: "Deixe a paz guardar seu coração. Não precisa entender tudo. Confie e descanse."
+    temaEn: "Emotional protection",
+    reflexao: "Deixe a paz guardar seu coração. Não precisa entender tudo. Confie e descanse.",
+    reflexaoEn: "Let peace guard your heart. You don't have to understand everything. Trust and rest."
   },
   {
     dia: 57,
     texto: "Aquele que conquista a si mesmo é maior do que aquele que conquista uma cidade.",
+    textoEn: "Whoever conquers themselves is greater than one who conquers a city.",
     referencia: "Provérbios 16:32",
+    referenciaEn: "Proverbs 16:32",
     tema: "Autodomínio",
-    reflexao: "Conquistar a si mesma é a maior vitória. Cada vez que você vence um impulso, você se torna maior."
+    temaEn: "Self-mastery",
+    reflexao: "Conquistar a si mesma é a maior vitória. Cada vez que você vence um impulso, você se torna maior.",
+    reflexaoEn: "Conquering yourself is the greatest victory. Every time you overcome an impulse, you become greater."
   },
   {
     dia: 58,
     texto: "Porque o espírito está pronto, mas o corpo é fraco. Sustente ambos.",
+    textoEn: "The spirit is willing, but the flesh is weak. Sustain both.",
     referencia: "Mateus 26:41",
+    referenciaEn: "Matthew 26:41",
     tema: "Equilíbrio corpo-espírito",
-    reflexao: "Sua vontade é forte, mas seu corpo precisa de comida, água, descanso. Cuide dos dois igualmente."
+    temaEn: "Balance between body and spirit",
+    reflexao: "Sua vontade é forte, mas seu corpo precisa de comida, água, descanso. Cuide dos dois igualmente.",
+    reflexaoEn: "Your will is strong, but your body needs food, water, rest. Care for both equally."
   },
   {
     dia: 59,
     texto: "Entregue o seu caminho ao Senhor; confie nele, e ele agirá.",
+    textoEn: "Commit your way to the Lord; trust in him, and he will act.",
     referencia: "Salmos 37:5",
+    referenciaEn: "Psalm 37:5",
     tema: "Confiança",
-    reflexao: "Quando você confia, você relaxa. E é no relaxamento que a transformação verdadeira acontece."
+    temaEn: "Trust",
+    reflexao: "Quando você confia, você relaxa. E é no relaxamento que a transformação verdadeira acontece.",
+    reflexaoEn: "When you trust, you relax. And it's in relaxing that true transformation happens."
   },
   {
     dia: 60,
     texto: "A humildade vem antes da honra. Reconheça seu caminho e siga com graça.",
+    textoEn: "Humility comes before honor. Acknowledge your path and walk it with grace.",
     referencia: "Provérbios 15:33",
+    referenciaEn: "Proverbs 15:33",
     tema: "Humildade",
-    reflexao: "Seja humilde com seu progresso. Honre a jornada, não apenas o destino. A honra virá pela graça."
+    temaEn: "Humility",
+    reflexao: "Seja humilde com seu progresso. Honre a jornada, não apenas o destino. A honra virá pela graça.",
+    reflexaoEn: "Be humble about your progress. Honor the journey, not just the destination. Honor will come through grace."
   },
   {
     dia: 61,
     texto: "Não se amoldem ao padrão deste mundo, mas transformem-se pela renovação da sua mente, para que sejam capazes de experimentar e comprovar a boa, agradável e perfeita vontade de Deus.",
+    textoEn: "Do not conform to the pattern of this world, but be transformed by the renewing of your mind, so that you may test and approve what God's will is — his good, pleasing and perfect will.",
     referencia: "Romanos 12:2",
+    referenciaEn: "Romans 12:2",
     tema: "Fluxo mental",
-    reflexao: "Não fique presa em um pensamento. Deixe sua mente fluir como um rio — sempre em movimento, sempre renovada."
+    temaEn: "Mental flow",
+    reflexao: "Não fique presa em um pensamento. Deixe sua mente fluir como um rio — sempre em movimento, sempre renovada.",
+    reflexaoEn: "Don't get stuck on one thought. Let your mind flow like a river — always moving, always renewed."
   },
   {
     dia: 62,
     texto: "Porque pela fé, eu vejo o que os olhos não conseguem ver.",
+    textoEn: "By faith, I see what the eyes cannot see.",
     referencia: "Hebreus 11:1",
+    referenciaEn: "Hebrews 11:1",
     tema: "Visão espiritual",
-    reflexao: "Veja a pessoa que você está se tornando. A fé vê além do presente. Confie nessa visão."
+    temaEn: "Spiritual vision",
+    reflexao: "Veja a pessoa que você está se tornando. A fé vê além do presente. Confie nessa visão.",
+    reflexaoEn: "See the person you're becoming. Faith sees beyond the present. Trust that vision."
   },
   {
     dia: 63,
     texto: "Mas os que esperam no Senhor renovam as suas forças. Voam alto como águias; correm e não ficam exaustos, andam e não se cansam.",
+    textoEn: "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.",
     referencia: "Isaías 40:31",
+    referenciaEn: "Isaiah 40:31",
     tema: "Força espiritual",
-    reflexao: "Você não é mais a mesma. Seu espírito cresceu. Cada dia você está mais sábia, mais forte, mais inteira."
+    temaEn: "Spiritual strength",
+    reflexao: "Você não é mais a mesma. Seu espírito cresceu. Cada dia você está mais sábia, mais forte, mais inteira.",
+    reflexaoEn: "You're not the same anymore. Your spirit has grown. Every day you're wiser, stronger, more whole."
   },
 
   // DIAS 64-90: TRANSFORMAÇÃO PROFUNDA - Cuidado integral, amor, contribuição
   {
     dia: 64,
     texto: "Ame o Senhor seu Deus com todo o seu coração, alma e mente.",
+    textoEn: "Love the Lord your God with all your heart and with all your soul and with all your mind.",
     referencia: "Mateus 22:37",
+    referenciaEn: "Matthew 22:37",
     tema: "Amor supremo",
-    reflexao: "Se você ama Deus, comece a amar o que Ele criou: você mesma. Amor total — coração, alma, mente."
+    temaEn: "Supreme love",
+    reflexao: "Se você ama Deus, comece a amar o que Ele criou: você mesma. Amor total — coração, alma, mente.",
+    reflexaoEn: "If you love God, start loving what He created: yourself. Total love — heart, soul, mind."
   },
   {
     dia: 65,
     texto: "E o segundo mandamento é como o primeiro: Ame seu próximo como a si mesmo.",
+    textoEn: "And the second is like it: 'Love your neighbor as yourself.'",
     referencia: "Mateus 22:39",
+    referenciaEn: "Matthew 22:39",
     tema: "Amor ao próximo",
-    reflexao: "Você não consegue amar outros enquanto não ama a si mesma. O amor próprio não é egoísmo — é um mandamento."
+    temaEn: "Love for others",
+    reflexao: "Você não consegue amar outros enquanto não ama a si mesma. O amor próprio não é egoísmo — é um mandamento.",
+    reflexaoEn: "You can't love others while you don't love yourself. Self-love isn't selfishness — it's a commandment."
   },
   {
     dia: 66,
     texto: "Amado, desejo que te vá bem em todas as coisas, e que tenhas saúde, assim como bem vai à tua alma.",
+    textoEn: "Dear friend, I pray that you may enjoy good health and that all may go well with you, even as your soul is getting along well.",
     referencia: "3 João 1:2",
+    referenciaEn: "3 John 1:2",
     tema: "Autocuidado como missão",
-    reflexao: "Sua transformação é sua contribuição. Quando você brilha, outros têm permissão para brilhar também."
+    temaEn: "Self-care as a mission",
+    reflexao: "Sua transformação é sua contribuição. Quando você brilha, outros têm permissão para brilhar também.",
+    reflexaoEn: "Your transformation is your contribution. When you shine, others get permission to shine too."
   },
   {
     dia: 67,
     texto: "Porque Deus amou o mundo de tal maneira que... você também é digno desse amor.",
+    textoEn: "For God so loved the world that... you too are worthy of that love.",
     referencia: "João 3:16",
+    referenciaEn: "John 3:16",
     tema: "Digno de amor",
-    reflexao: "O amor que Deus tem pelo mundo inclui você. Você é digna do mesmo amor que o Criador oferece ao universo."
+    temaEn: "Worthy of love",
+    reflexao: "O amor que Deus tem pelo mundo inclui você. Você é digna do mesmo amor que o Criador oferece ao universo.",
+    reflexaoEn: "The love God has for the world includes you. You are worthy of the same love the Creator offers the universe."
   },
   {
     dia: 68,
     texto: "Acaso não sabem que o corpo de vocês é santuário do Espírito Santo que habita em vocês, que lhes foi dado por Deus, e que vocês não são de si mesmos? Vocês foram comprados por alto preço. Portanto, glorifiquem a Deus com o seu próprio corpo.",
+    textoEn: "Do you not know that your bodies are a sanctuary of the Holy Spirit, who is in you, whom you have received from God? You are not your own; you were bought at a price. Therefore honor God with your bodies.",
     referencia: "1 Coríntios 6:19-20",
+    referenciaEn: "1 Corinthians 6:19-20",
     tema: "Alimentação consciente",
-    reflexao: "Cada refeição é uma oportunidade de dizer 'eu me amo'. Escolha como se estivesse honrando sua vida."
+    temaEn: "Mindful eating",
+    reflexao: "Cada refeição é uma oportunidade de dizer 'eu me amo'. Escolha como se estivesse honrando sua vida.",
+    reflexaoEn: "Every meal is a chance to say 'I love myself.' Choose as if you were honoring your life."
   },
   {
     dia: 69,
     texto: "Porque toda boa dádiva vem de cima. Agradeça seu corpo e sua mente.",
+    textoEn: "Every good and perfect gift comes from above. Be thankful for your body and mind.",
     referencia: "Tiago 1:17",
+    referenciaEn: "James 1:17",
     tema: "Gratidão",
-    reflexao: "Seu corpo funciona para você enquanto dorme, enquanto trabalha. É uma dádiva. Agradeça sinceramente."
+    temaEn: "Gratitude",
+    reflexao: "Seu corpo funciona para você enquanto dorme, enquanto trabalha. É uma dádiva. Agradeça sinceramente.",
+    reflexaoEn: "Your body works for you while you sleep, while you work. It's a gift. Give sincere thanks."
   },
   {
     dia: 70,
     texto: "Você é luz do mundo. Deixe sua transformação brilhar.",
+    textoEn: "You are the light of the world. Let your transformation shine.",
     referencia: "Mateus 5:14",
+    referenciaEn: "Matthew 5:14",
     tema: "Impacto pessoal",
-    reflexao: "Sua transformação não é invisível. As pessoas veem. Use sua luz para inspirar outros a se transformarem."
+    temaEn: "Personal impact",
+    reflexao: "Sua transformação não é invisível. As pessoas veem. Use sua luz para inspirar outros a se transformarem.",
+    reflexaoEn: "Your transformation isn't invisible. People notice. Use your light to inspire others to transform too."
   },
   {
     dia: 71,
     texto: "Cada um exerça o dom que recebeu para servir aos outros, administrando fielmente a graça de Deus nas suas múltiplas formas.",
+    textoEn: "Each of you should use whatever gift you have received to serve others, as faithful stewards of God's grace in its various forms.",
     referencia: "1 Pedro 4:10",
+    referenciaEn: "1 Peter 4:10",
     tema: "Energia para servir",
-    reflexao: "Cuidar de si não é egoísmo — é preparação. Você precisa estar bem para levar bem aos outros."
+    temaEn: "Energy to serve",
+    reflexao: "Cuidar de si não é egoísmo — é preparação. Você precisa estar bem para levar bem aos outros.",
+    reflexaoEn: "Taking care of yourself isn't selfish — it's preparation. You need to be well to bring good to others."
   },
   {
     dia: 72,
     texto: "O verdadeiro amor é paciente, é bondoso. Seja assim consigo mesmo.",
+    textoEn: "True love is patient, love is kind. Be that way toward yourself.",
     referencia: "1 Coríntios 13:4",
+    referenciaEn: "1 Corinthians 13:4",
     tema: "Auto-amor",
-    reflexao: "Aplique a definição de amor verdadeiro a si mesma. Seja paciente, bondosa, compreensiva com você."
+    temaEn: "Self-love",
+    reflexao: "Aplique a definição de amor verdadeiro a si mesma. Seja paciente, bondosa, compreensiva com você.",
+    reflexaoEn: "Apply the definition of true love to yourself. Be patient, kind, understanding with yourself."
   },
   {
     dia: 73,
     texto: "Porque tudo o que vocês fazem, façam de todo o coração, como para o Senhor.",
+    textoEn: "Whatever you do, work at it with all your heart, as working for the Lord.",
     referencia: "Colossenses 3:23",
+    referenciaEn: "Colossians 3:23",
     tema: "Propósito elevado",
-    reflexao: "Sua transformação não é vanidade — é adoração. Cuide de si mesma como um ato de fé."
+    temaEn: "Higher purpose",
+    reflexao: "Sua transformação não é vaidade — é adoração. Cuide de si mesma como um ato de fé.",
+    reflexaoEn: "Your transformation isn't vanity — it's worship. Take care of yourself as an act of faith."
   },
   {
     dia: 74,
     texto: "Fale em favor daqueles que não podem se defender; garanta justiça para os que estão aflitos.",
+    textoEn: "Speak up for those who cannot speak for themselves; ensure justice for those who are afflicted.",
     referencia: "Provérbios 31:8",
+    referenciaEn: "Proverbs 31:8",
     tema: "Cuidado amplo",
-    reflexao: "Sua jornada te dá forças para também ser voz por quem ainda não encontrou a própria. Cuidar de si é o primeiro passo para cuidar de quem precisa."
+    temaEn: "Wider care",
+    reflexao: "Sua jornada te dá forças para também ser voz por quem ainda não encontrou a própria. Cuidar de si é o primeiro passo para cuidar de quem precisa.",
+    reflexaoEn: "Your journey gives you the strength to also be a voice for those who haven't yet found their own. Caring for yourself is the first step toward caring for those in need."
   },
   {
     dia: 75,
     texto: "Porque você foi criado à imagem e semelhança de Deus. Honre essa criação.",
+    textoEn: "Because you were created in the image and likeness of God. Honor that creation.",
     referencia: "Gênesis 1:27",
+    referenciaEn: "Genesis 1:27",
     tema: "Imagem divina",
-    reflexao: "Você é imagem de Deus. Cada ato de cuidado é um ato de adoração a essa imagem divina em você."
+    temaEn: "Divine image",
+    reflexao: "Você é imagem de Deus. Cada ato de cuidado é um ato de adoração a essa imagem divina em você.",
+    reflexaoEn: "You are the image of God. Every act of self-care is an act of worship to that divine image in you."
   },
   {
     dia: 76,
     texto: "A compaixão começa com você. Seja gentil consigo mesmo.",
+    textoEn: "Compassion begins with you. Be gentle with yourself.",
     referencia: "Colossenses 3:12",
+    referenciaEn: "Colossians 3:12",
     tema: "Compaixão própria",
-    reflexao: "Você não consegue ser compassiva com outros se for cruel consigo mesma. Comece a compaixão aqui."
+    temaEn: "Self-compassion",
+    reflexao: "Você não consegue ser compassiva com outros se for cruel consigo mesma. Comece a compaixão aqui.",
+    reflexaoEn: "You can't be compassionate toward others if you're cruel to yourself. Start compassion here."
   },
   {
     dia: 77,
     texto: "Tu o fizeste um pouco menor do que os anjos e o coroaste com glória e com honra.",
+    textoEn: "You made them a little lower than the angels and crowned them with glory and honor.",
     referencia: "Salmos 8:5",
+    referenciaEn: "Psalm 8:5",
     tema: "Valor integral",
-    reflexao: "Você não é um número na balança. Você é um ser completo que importa profundamente."
+    temaEn: "Whole worth",
+    reflexao: "Você não é um número na balança. Você é um ser completo que importa profundamente.",
+    reflexaoEn: "You are not a number on the scale. You are a whole being who matters deeply."
   },
   {
     dia: 78,
     texto: "Vá à formiga, ó preguiçoso! Observe os caminhos dela e seja sábio!",
+    textoEn: "Go to the ant, you sluggard; consider its ways and be wise!",
     referencia: "Provérbios 6:6",
+    referenciaEn: "Proverbs 6:6",
     tema: "Responsabilidade futura",
-    reflexao: "Cada escolha hoje é um investimento no seu futuro. Você está construindo a pessoa que será amanhã."
+    temaEn: "Responsibility for the future",
+    reflexao: "Cada escolha hoje é um investimento no seu futuro. Você está construindo a pessoa que será amanhã.",
+    reflexaoEn: "Every choice today is an investment in your future. You're building the person you'll be tomorrow."
   },
   {
     dia: 79,
     texto: "Porque o amor cobre uma multidão de pecados. Comece amando você.",
+    textoEn: "Above all, love covers over a multitude of sins. Start by loving yourself.",
     referencia: "1 Pedro 4:8",
+    referenciaEn: "1 Peter 4:8",
     tema: "Perdão de si mesmo",
-    reflexao: "Você cometeu erros? Tudo bem. O amor perdoa, e você merece ser coberta pelo seu próprio amor."
+    temaEn: "Self-forgiveness",
+    reflexao: "Você cometeu erros? Tudo bem. O amor perdoa, e você merece ser coberta pelo seu próprio amor.",
+    reflexaoEn: "Did you make mistakes? That's okay. Love forgives, and you deserve to be covered by your own love."
   },
   {
     dia: 80,
     texto: "Você é um instrumento de Deus. Mantenha esse instrumento afinado.",
+    textoEn: "You are an instrument of God. Keep that instrument in tune.",
     referencia: "2 Timóteo 2:21",
+    referenciaEn: "2 Timothy 2:21",
     tema: "Manutenção espiritual",
-    reflexao: "Um instrumento bem cuidado produz melhor música. Mantenha-se afinada através do cuidado e da oração."
+    temaEn: "Spiritual maintenance",
+    reflexao: "Um instrumento bem cuidado produz melhor música. Mantenha-se afinada através do cuidado e da oração.",
+    reflexaoEn: "A well-cared-for instrument makes better music. Stay in tune through care and prayer."
   },
   {
     dia: 81,
     texto: "Se um membro sofre, todos os outros sofrem com ele; se um membro é honrado, todos os outros se alegram com ele.",
+    textoEn: "If one part suffers, every part suffers with it; if one part is honored, every part rejoices with it.",
     referencia: "1 Coríntios 12:26",
+    referenciaEn: "1 Corinthians 12:26",
     tema: "Impacto em rede",
-    reflexao: "Sua transformação afeta todos ao seu redor. Você não está apenas se salvando — está salvando sua família."
+    temaEn: "Ripple effect",
+    reflexao: "Sua transformação afeta todos ao seu redor. Você não está apenas se salvando — está salvando sua família.",
+    reflexaoEn: "Your transformation affects everyone around you. You're not just saving yourself — you're saving your family too."
   },
   {
     dia: 82,
     texto: "Portanto, irmãos, peço, pelas misericórdias de Deus, que ofereçam o corpo de vocês como sacrifício vivo, santo e agradável a Deus: este é o culto racional de vocês.",
+    textoEn: "Therefore, I urge you, in view of God's mercy, to offer your bodies as a living sacrifice, holy and pleasing to God — this is your true and proper worship.",
     referencia: "Romanos 12:1",
+    referenciaEn: "Romans 12:1",
     tema: "Cuidado como oração",
-    reflexao: "Cada comida que você escolhe bem é uma oração. Cada movimento é adoração. Ore com sua vida."
+    temaEn: "Care as prayer",
+    reflexao: "Cada comida que você escolhe bem é uma oração. Cada movimento é adoração. Ore com sua vida.",
+    reflexaoEn: "Every meal you choose well is a prayer. Every movement is worship. Pray with your life."
   },
   {
     dia: 83,
     texto: "Porque a generosidade começa em casa. Seja generoso consigo.",
+    textoEn: "Generosity begins at home. Be generous with yourself.",
     referencia: "1 Timóteo 5:8",
+    referenciaEn: "1 Timothy 5:8",
     tema: "Generosidade própria",
-    reflexao: "Você não consegue ser generosa com outros enquanto nega generosidade a si mesma. Comece em casa."
+    temaEn: "Generosity toward yourself",
+    reflexao: "Você não consegue ser generosa com outros enquanto nega generosidade a si mesma. Comece em casa.",
+    reflexaoEn: "You can't be generous with others while denying generosity to yourself. Start at home."
   },
   {
     dia: 84,
     texto: "Melhor é um pedaço seco de pão, com tranquilidade, do que uma casa cheia de banquetes, com desavenças.",
+    textoEn: "Better a dry crust with peace and quiet than a house full of feasting, with strife.",
     referencia: "Provérbios 17:1",
+    referenciaEn: "Proverbs 17:1",
     tema: "Riqueza verdadeira",
-    reflexao: "Dinheiro não traz saúde, mas saúde traz felicidade. Você está investindo no melhor que existe."
+    temaEn: "True wealth",
+    reflexao: "Dinheiro não traz saúde, mas saúde traz felicidade. Você está investindo no melhor que existe.",
+    reflexaoEn: "Money doesn't bring health, but health brings happiness. You're investing in the best thing there is."
   },
   {
     dia: 85,
     texto: "Porque você merece descanso. Não é preguiça, é sabedoria.",
+    textoEn: "Because you deserve rest. It's not laziness, it's wisdom.",
     referencia: "Êxodo 20:9-10",
+    referenciaEn: "Exodus 20:9-10",
     tema: "Descanso merecido",
-    reflexao: "O descanso é sagrado. Você merece pausar. Não é fraqueza descansar — é parte do design de Deus."
+    temaEn: "Well-earned rest",
+    reflexao: "O descanso é sagrado. Você merece pausar. Não é fraqueza descansar — é parte do design de Deus.",
+    reflexaoEn: "Rest is sacred. You deserve to pause. Resting isn't weakness — it's part of God's design."
   },
   {
     dia: 86,
     texto: "Que sua vida seja um testemunho de transformação e amor.",
+    textoEn: "Let your life be a testimony of transformation and love.",
     referencia: "Tito 2:7",
+    referenciaEn: "Titus 2:7",
     tema: "Testemunho vivo",
-    reflexao: "Sua história é inspiradora. Continue vivendo de forma que outros vejam a transformação e queiram a mesma."
+    temaEn: "Living testimony",
+    reflexao: "Sua história é inspiradora. Continue vivendo de forma que outros vejam a transformação e queiram a mesma.",
+    reflexaoEn: "Your story is inspiring. Keep living in a way that others see the transformation and want the same."
   },
   {
     dia: 87,
     texto: "Porque o Senhor não quer sua destruição, mas sua vida abundante.",
+    textoEn: "For the Lord does not want your destruction, but your life in abundance.",
     referencia: "João 10:10",
+    referenciaEn: "John 10:10",
     tema: "Vida plena",
-    reflexao: "Deus quer você viva, inteira, abundante. Não quer sacrifício — quer florescimento. Floresça."
+    temaEn: "Full life",
+    reflexao: "Deus quer você viva, inteira, abundante. Não quer sacrifício — quer florescimento. Floresça.",
+    reflexaoEn: "God wants you alive, whole, abundant. He doesn't want sacrifice — He wants flourishing. Flourish."
   },
   {
     dia: 88,
     texto: "Continue plantando sementes de esperança; em breve colherá a colheita.",
+    textoEn: "Keep planting seeds of hope; soon you will reap the harvest.",
     referencia: "Gálatas 6:7-9",
+    referenciaEn: "Galatians 6:7-9",
     tema: "Semeadura e colheita",
-    reflexao: "Cada dia é uma semente. A colheita vem. Você está no caminho certo. Continue plantando."
+    temaEn: "Sowing and reaping",
+    reflexao: "Cada dia é uma semente. A colheita vem. Você está no caminho certo. Continue plantando.",
+    reflexaoEn: "Every day is a seed. The harvest comes. You're on the right path. Keep planting."
   },
   {
     dia: 89,
     texto: "Meus irmãos, considerem motivo de grande alegria o fato de passarem por diversas provações; assim, vocês saberão que a prova da sua fé produz perseverança. No entanto, a perseverança deve ter ação completa, a fim de que vocês sejam perfeitos e íntegros, sem que lhes falte coisa alguma.",
+    textoEn: "Consider it pure joy whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance. Let perseverance finish its work so that you may be mature and complete, not lacking anything.",
     referencia: "Tiago 1:2-4",
+    referenciaEn: "James 1:2-4",
     tema: "Significado do percurso",
-    reflexao: "O aprendizado que você ganhou é tão valioso quanto o peso que perdeu. Aprecie ambos."
+    temaEn: "Meaning of the journey",
+    reflexao: "O aprendizado que você ganhou é tão valioso quanto o peso que perdeu. Aprecie ambos.",
+    reflexaoEn: "The learning you gained is just as valuable as the weight you lost. Appreciate both."
   },
   {
     dia: 90,
     texto: "Combati o bom combate, terminei a corrida, guardei a fé.",
+    textoEn: "I have fought the good fight, I have finished the race, I have kept the faith.",
     referencia: "2 Timóteo 4:7",
+    referenciaEn: "2 Timothy 4:7",
     tema: "Conclusão 90 dias",
-    reflexao: "Você fez! 90 dias de fé, disciplina e amor. Agora a verdadeira vida saudável começa."
+    temaEn: "90-day conclusion",
+    reflexao: "Você fez! 90 dias de fé, disciplina e amor. Agora a verdadeira vida saudável começa.",
+    reflexaoEn: "You did it! 90 days of faith, discipline and love. Now true healthy living begins."
   }
 ]
 

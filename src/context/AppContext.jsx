@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase.js'
-import { calcularMetas, dataHojeISO, diaDoPrograma, totalDiasPrograma, programa90Ativo as calcularPrograma90Ativo } from '../utils/calculos.js'
+import { calcularMetas, dataHojeISO, diaDoPrograma, totalDiasPrograma, dataInicioDoPrograma, programa90Ativo as calcularPrograma90Ativo } from '../utils/calculos.js'
+import { montarPersonalizacaoParaSalvar } from '../utils/personalizacao.js'
 import { registrarSessao } from '../lib/sessoes.js'
 import { calcularEstrelas } from '../utils/hallDaFama.js'
 import { useIdioma } from './IdiomaContext.jsx'
@@ -12,6 +13,8 @@ import {
   registrarAcessoDiario,
   carregarTarefasHoje,
   carregarEstrelas,
+  avaliarModoRecomecar,
+  resolverModoRecomecar,
 } from '../lib/game.js'
 import {
   diasDaSemana,
@@ -20,7 +23,10 @@ import {
   ganhouEstrelaHoje,
   metasCumpridas,
 } from '../utils/jogos/estrelas.js'
-import { lembrarEstrelaDoDia } from '../utils/notificacaoEstrela.js'
+import { itemDoBanco, itemParaBanco, refeicaoDoBanco, totaisDaRefeicao } from '../utils/refeicoes.js'
+import { uploadFotoRefeicao, removerFotoRefeicao, limparFotosRefeicoesDoUsuario } from '../lib/storage.js'
+import { horarioAgora } from '../utils/calculos.js'
+import { removerInscricaoPush } from '../utils/pushSubscricao.js'
 
 const AppContext = createContext(null)
 
@@ -45,6 +51,7 @@ function perfilParaUsuario(p) {
     role: p.role ?? 'user',
     fotoUrl: p.foto_url ?? null,
     idioma: p.idioma ?? 'pt-BR',
+    personalizacao: p.personalizacao ?? {},
   }
 }
 
@@ -56,37 +63,6 @@ function programaDoBanco(p) {
     dataFim: p.data_fim,
     status: p.status,
     origem: p.origem,
-  }
-}
-
-function refeicaoDoBanco(r) {
-  return {
-    id: r.id,
-    data: r.data,
-    horario: r.horario,
-    tipo: r.tipo,
-    nome: r.nome,
-    calorias: Number(r.calorias),
-    proteina: Number(r.proteina),
-    carbos: Number(r.carbos),
-    gordura: Number(r.gordura),
-    fibras: Number(r.fibras),
-    ...(r.detalhes ?? {}),
-  }
-}
-
-function refeicaoParaBanco(ref) {
-  const { id, data, horario, tipo, nome, calorias, proteina, carbos, gordura, fibras, ...detalhes } = ref
-  return {
-    horario,
-    tipo,
-    nome: nome ?? null,
-    calorias: calorias ?? 0,
-    proteina: proteina ?? 0,
-    carbos: carbos ?? 0,
-    gordura: gordura ?? 0,
-    fibras: fibras ?? 0,
-    detalhes,
   }
 }
 
@@ -123,8 +99,16 @@ export function AppProvider({ children }) {
   const [refeicoes, setRefeicoes] = useState([])
   const [exercicios, setExercicios] = useState([])
   const [pesagens, setPesagens] = useState([])
-  const [aguaMl, setAguaMl] = useState(0)
-  const [modalRefeicao, setModalRefeicao] = useState({ aberto: false, inicial: null })
+  // Água carrega o dia a que pertence junto com o valor, para que uma troca
+  // rápida de dia (fetch assíncrono ainda em voo) nunca vaze o total de um
+  // dia errado numa leitura ou escrita — ver aguaMl derivado abaixo.
+  const [agua, setAgua] = useState({ data: null, ml: 0 })
+  // true durante o fetch de refeições/exercícios/água do dia visualizado —
+  // evita que a pessoa tente registrar algo antes desse fetch resolver
+  // (o que poderia colidir com uma linha já existente no banco).
+  const [carregandoDia, setCarregandoDia] = useState(false)
+  const [diaVisualizado, setDiaVisualizado] = useState(() => dataHojeISO())
+  const [modalRefeicao, setModalRefeicao] = useState({ etapa: null, refeicaoId: null, itemInicial: null })
   // Modo demonstração: permite pré-visualizar qualquer dia do programa (ofertas, informativos)
   const [simuladorDia, setSimuladorDia] = useState(null)
   // Gamificação: sementes, avatar equipado e skins compradas
@@ -137,10 +121,14 @@ export function AppProvider({ children }) {
   const [estrelasSemana, setEstrelasSemana] = useState([])
   // Tela de "dia concluído" (compartilhável)
   const [conclusaoDiaAberta, setConclusaoDiaAberta] = useState(false)
-  // Tela de encerramento da Jornada de 30 dias — celebração com aprendizados e CTA para upgrade
+  // Tela comemorativa do primeiro marco da Jornada de 90 dias
   const [conclusao30Aberta, setConclusao30Aberta] = useState(false)
   // Tela de encerramento do programa (dia 90) — celebração final com conquistas e déficit total
   const [conclusao90Aberta, setConclusao90Aberta] = useState(false)
+  // Modo Recomeçar: acolhimento ao voltar após dias sem abrir o app
+  const [modoRecomecarAberto, setModoRecomecarAberto] = useState(false)
+  // Retrato da Semana: resumo semanal aberto aos domingos
+  const [resumoSemanalAberto, setResumoSemanalAberto] = useState(false)
 
   const hoje = dataHojeISO()
   const userId = sessao?.user?.id ?? null
@@ -148,6 +136,12 @@ export function AppProvider({ children }) {
   const diaAtual = usuario ? (simuladorDia ?? diaDoPrograma(programas, usuario.dataInicio)) : 1
   const totalDias = totalDiasPrograma(programas)
   const programa90Ativo = calcularPrograma90Ativo(programas) !== null
+  const estaVendoHoje = diaVisualizado === hoje
+  const dataInicioPrograma = usuario ? dataInicioDoPrograma(programas, usuario.dataInicio) : hoje
+  // Só usa o valor de água carregado se ele pertence ao dia visualizado atual —
+  // caso contrário (fetch do novo dia ainda em voo) trata como vazio, em vez de
+  // vazar o total do dia anterior.
+  const aguaMl = agua.data === diaVisualizado ? agua.ml : 0
 
   // Monitora Modo de Revisão no sessionStorage e sincroniza simuladorDia
   useEffect(() => {
@@ -203,7 +197,8 @@ export function AppProvider({ children }) {
         setRefeicoes([])
         setExercicios([])
         setPesagens([])
-        setAguaMl(0)
+        setAgua({ data: null, ml: 0 })
+        setDiaVisualizado(dataHojeISO())
         setCarregando(false)
       }
     })
@@ -217,27 +212,25 @@ export function AppProvider({ children }) {
 
     async function carregar() {
       setCarregando(true)
-      const [perfil, progs, refs, exs, pesos, agua] = await Promise.all([
+      const [perfil, progs, pesos] = await Promise.all([
         supabase.from('mwa_perfis').select('*').eq('id', userId).maybeSingle(),
         supabase.from('mwa_programas').select('*').eq('user_id', userId),
-        supabase.from('mwa_refeicoes').select('*').eq('user_id', userId).eq('data', hoje),
-        supabase.from('mwa_exercicios').select('*').eq('user_id', userId).eq('data', hoje),
         supabase.from('mwa_pesagens').select('*').eq('user_id', userId).order('data'),
-        supabase.from('mwa_agua').select('ml').eq('user_id', userId).eq('data', hoje).maybeSingle(),
       ])
       if (cancelado) return
       setUsuario(perfil.data ? perfilParaUsuario(perfil.data) : null)
       setProgramas((progs.data ?? []).map(programaDoBanco))
-      setRefeicoes((refs.data ?? []).map(refeicaoDoBanco))
-      setExercicios((exs.data ?? []).map(exercicioDoBanco))
       setPesagens((pesos.data ?? []).map(pesagemDoBanco))
-      setAguaMl(agua.data?.ml ?? 0)
       setCarregando(false)
       // Gamificação carrega depois, sem segurar a tela
       carregarGame(userId).then(async (g) => {
         if (cancelado || !g) return
+        // Modo Recomeçar: precisa avaliar o gap ANTES de registrarAcessoDiario,
+        // porque essa função sobrescreve ultimo_dia_acesso para hoje.
+        const gAvaliado = await avaliarModoRecomecar(userId, g, hoje)
+        if (cancelado) return
         // Acelerador de sementes: bônus por acessar em dias seguidos, sem falhar
-        const { game: gAtualizado, bonus } = await registrarAcessoDiario(userId, g, hoje)
+        const { game: gAtualizado, bonus } = await registrarAcessoDiario(userId, gAvaliado, hoje)
         if (cancelado) return
         setGame(gAtualizado)
         if (bonus > 0) {
@@ -256,6 +249,61 @@ export function AppProvider({ children }) {
       cancelado = true
     }
   }, [userId, hoje])
+
+  // Busca refeições, exercícios e água do dia visualizado — reexecuta toda
+  // vez que a pessoa navega para outro dia. Efeito separado do carregamento
+  // de perfil/programas/pesagens para não reexecutar gamificação (sementes,
+  // streaks, Modo Recomeçar) a cada troca de dia.
+  useEffect(() => {
+    if (!userId) return
+    let cancelado = false
+
+    async function carregarDadosDoDia() {
+      setCarregandoDia(true)
+      const [refs, exs, resAgua] = await Promise.all([
+        supabase.from('mwa_refeicoes').select('*, mwa_refeicoes_itens(*)').eq('user_id', userId).eq('data', diaVisualizado),
+        supabase.from('mwa_exercicios').select('*').eq('user_id', userId).eq('data', diaVisualizado),
+        supabase.from('mwa_agua').select('ml').eq('user_id', userId).eq('data', diaVisualizado).maybeSingle(),
+      ])
+      // Guard: se diaVisualizado mudou de novo antes desta resposta chegar,
+      // descarta — evita sobrescrever a tela com dados do dia errado.
+      if (cancelado) return
+      setRefeicoes((refs.data ?? []).map((r) => refeicaoDoBanco(r, r.mwa_refeicoes_itens)))
+      setExercicios((exs.data ?? []).map(exercicioDoBanco))
+      setAgua({ data: diaVisualizado, ml: resAgua.data?.ml ?? 0 })
+      setCarregandoDia(false)
+    }
+
+    carregarDadosDoDia()
+    return () => {
+      cancelado = true
+    }
+  }, [userId, diaVisualizado])
+
+  // Ao voltar do checkout da Hotmart, atualiza o ciclo sem exigir que a cliente
+  // feche e abra o aplicativo. O webhook continua sendo a única fonte de
+  // liberação; o navegador apenas relê o estado já confirmado no servidor.
+  useEffect(() => {
+    if (!userId) return
+    let cancelado = false
+    async function atualizarProgramas() {
+      const { data } = await supabase
+        .from('mwa_programas')
+        .select('*')
+        .eq('user_id', userId)
+      if (!cancelado && data) setProgramas(data.map(programaDoBanco))
+    }
+    function aoRetomar() {
+      if (document.visibilityState === 'visible') atualizarProgramas()
+    }
+    window.addEventListener('focus', atualizarProgramas)
+    document.addEventListener('visibilitychange', aoRetomar)
+    return () => {
+      cancelado = true
+      window.removeEventListener('focus', atualizarProgramas)
+      document.removeEventListener('visibilitychange', aoRetomar)
+    }
+  }, [userId])
 
   // ── Estrelas do Dia ──
   const metasEstrela = useMemo(
@@ -293,11 +341,10 @@ export function AppProvider({ children }) {
     }
   }, [userId, hoje, metasEstrela, estrelaHojeAcesa])
 
-  // Lembrete local da estrela (só se a pessoa já autorizou notificações)
+  // Modo Recomeçar: abre sempre que o banco marcar o flag como pendente
   useEffect(() => {
-    if (!userId || !semanaEstrelas.length) return
-    lembrarEstrelaDoDia({ userId, hoje, estrelaAcesa: estrelaHojeAcesa, metas: metasEstrela, ingles })
-  }, [userId, hoje, estrelaHojeAcesa, metasEstrela, semanaEstrelas.length, ingles])
+    if (game?.recomecar_pendente) setModoRecomecarAberto(true)
+  }, [game?.recomecar_pendente])
 
   const diaCompleto = tarefasHoje.refeicao && tarefasHoje.agua && tarefasHoje.dica
 
@@ -310,42 +357,56 @@ export function AppProvider({ children }) {
     setConclusaoDiaAberta(true)
   }, [diaCompleto, userId, hoje])
 
-  // Ao chegar no dia 30 sem programa 90d ativo, abre a tela de encerramento da
-  // Jornada de 30 Dias com aprendizados, certificado e CTA para upgrade — só 1x.
+  // Ao chegar no dia 30, celebra o primeiro marco da Jornada de 90 Dias.
   useEffect(() => {
-    if (diaAtual !== 30 || programa90Ativo || !userId) return
-    const chave = `mwa_30_concluido_${userId}`
+    if (diaAtual !== 30 || !userId) return
+    const cicloId = calcularPrograma90Ativo(programas)?.id ?? 'inicial'
+    const chave = `mwa_30_concluido_${userId}_${cicloId}`
     if (localStorage.getItem(chave)) return
     localStorage.setItem(chave, '1')
     setConclusao30Aberta(true)
-  }, [diaAtual, programa90Ativo, userId])
+  }, [diaAtual, programas, userId])
 
   // Ao chegar no dia 90 (fim do programa de 90 dias pago), abre a tela de
   // encerramento com estrelas, conquistas interativas e o total economizado no
   // déficit — só 1x.
   useEffect(() => {
     if (diaAtual !== 90 || !programa90Ativo || !userId) return
-    const chave = `mwa_90_concluido_${userId}`
+    const cicloId = calcularPrograma90Ativo(programas)?.id ?? 'inicial'
+    const chave = `mwa_90_concluido_${userId}_${cicloId}`
     if (localStorage.getItem(chave)) return
     localStorage.setItem(chave, '1')
     setConclusao90Aberta(true)
-  }, [diaAtual, programa90Ativo, userId])
+  }, [diaAtual, programa90Ativo, programas, userId])
+
+  // Aos domingos, mostra o "Retrato da Semana" — 1x por semana.
+  useEffect(() => {
+    if (!userId) return
+    const diaSemana = new Date(`${hoje}T00:00:00`).getDay()
+    if (diaSemana !== 0) return
+    const segundaDaSemana = diasDaSemana(hoje)[0]
+    const chave = `mwa_resumo_semanal_${userId}_${segundaDaSemana}`
+    if (localStorage.getItem(chave)) return
+    localStorage.setItem(chave, '1')
+    setResumoSemanalAberto(true)
+  }, [hoje, userId])
 
   const refeicoesHoje = useMemo(
-    () => refeicoes.filter((r) => r.data === hoje).sort((a, b) => (a.horario ?? '').localeCompare(b.horario ?? '')),
-    [refeicoes, hoje],
+    () => refeicoes.filter((r) => r.data === diaVisualizado).sort((a, b) => (a.horario ?? '').localeCompare(b.horario ?? '')),
+    [refeicoes, diaVisualizado],
   )
 
-  const exerciciosHoje = useMemo(() => exercicios.filter((e) => e.data === hoje), [exercicios, hoje])
+  const exerciciosHoje = useMemo(() => exercicios.filter((e) => e.data === diaVisualizado), [exercicios, diaVisualizado])
 
   const totaisHoje = useMemo(() => {
     const t = { calorias: 0, proteina: 0, carbos: 0, gordura: 0, fibras: 0 }
-    for (const r of refeicoesHoje) {
-      t.calorias += r.calorias
-      t.proteina += r.proteina
-      t.carbos += r.carbos
-      t.gordura += r.gordura
-      t.fibras += r.fibras
+    for (const refeicao of refeicoesHoje) {
+      const totaisRefeicao = totaisDaRefeicao(refeicao)
+      t.calorias += totaisRefeicao.calorias
+      t.proteina += totaisRefeicao.proteina
+      t.carbos += totaisRefeicao.carbos
+      t.gordura += totaisRefeicao.gordura
+      t.fibras += totaisRefeicao.fibras
     }
     return {
       calorias: Math.round(t.calorias),
@@ -396,6 +457,28 @@ export function AppProvider({ children }) {
     setConclusaoDiaAberta(false)
   }
 
+  async function escolherOpcaoRecomecar(opcao) {
+    if (!userId) return
+    const atualizado = await resolverModoRecomecar(userId, opcao, hoje)
+    if (atualizado) setGame(atualizado)
+  }
+
+  function fecharModoRecomecar() {
+    setModoRecomecarAberto(false)
+  }
+
+  function fecharResumoSemanal() {
+    setResumoSemanalAberto(false)
+  }
+
+  function mudarDiaVisualizado(data) {
+    setDiaVisualizado(data)
+  }
+
+  function voltarParaHoje() {
+    setDiaVisualizado(hoje)
+  }
+
   async function marcarDicaLida(dia) {
     await premiar('dica', `dia-${dia}`)
   }
@@ -430,6 +513,10 @@ export function AppProvider({ children }) {
 
   async function registrarJogoRotulos() {
     await premiar('jogo_rotulos', hoje)
+  }
+
+  async function registrarJogoCorrida() {
+    await premiar('jogo_corrida', hoje)
   }
 
   // +5 🌱 pelo Momento MWA do dia (1x por dia)
@@ -471,6 +558,7 @@ export function AppProvider({ children }) {
         consentimento_registrado_em: agora,
         data_inicio: agora,
         idioma,
+        personalizacao: montarPersonalizacaoParaSalvar(dados),
       })
       .select()
       .single()
@@ -481,14 +569,17 @@ export function AppProvider({ children }) {
       tipo_acao: 'consentimento',
       detalhes: { consentimento_lgpd: true, ciente_aviso_crn: true },
     })
-    // Programa 21d — fonte de verdade do contador de dias (mwa_programas)
-    const { data: prog } = await supabase
+    // Vincula à conta a compra inicial de 90 dias aprovada pela Hotmart.
+    // O webhook já deixou a compra aguardando a criação da conta.
+    const { data: vinculo } = await supabase.functions.invoke('hotmart-vincular', {
+      body: { email_compra: dados.email },
+    })
+    const { data: progs } = await supabase
       .from('mwa_programas')
-      .insert({ user_id: userId, tipo: '21d', data_inicio: agora, origem: 'onboarding', status: 'ativo' })
-      .select()
-      .single()
+      .select('*')
+      .eq('user_id', userId)
     setUsuario(perfilParaUsuario(data))
-    if (prog) setProgramas((atual) => [...atual, programaDoBanco(prog)])
+    if (vinculo?.liberado && progs) setProgramas(progs.map(programaDoBanco))
     // +50 🌱 de boas-vindas
     await premiar('boas_vindas', 'unico')
   }
@@ -497,7 +588,7 @@ export function AppProvider({ children }) {
   async function exportarDados() {
     const [perfil, refs, exs, pesos, agua, auditoria] = await Promise.all([
       supabase.from('mwa_perfis').select('*').eq('id', userId).maybeSingle(),
-      supabase.from('mwa_refeicoes').select('*').eq('user_id', userId).order('data'),
+      supabase.from('mwa_refeicoes').select('*, mwa_refeicoes_itens(*)').eq('user_id', userId).order('data'),
       supabase.from('mwa_exercicios').select('*').eq('user_id', userId).order('data'),
       supabase.from('mwa_pesagens').select('*').eq('user_id', userId).order('data'),
       supabase.from('mwa_agua').select('*').eq('user_id', userId).order('data'),
@@ -519,18 +610,34 @@ export function AppProvider({ children }) {
   // Apaga todos os dados do programa (mantém o login). Usado por "refazer cadastro".
   async function apagarDadosPrograma(tipoAcao) {
     await supabase.from('mwa_lgpd_auditoria').insert({ user_id: userId, tipo_acao: tipoAcao, detalhes: {} })
+    // best-effort: falha ao limpar fotos no Storage não pode travar a exclusão dos dados no banco
+    try {
+      await limparFotosRefeicoesDoUsuario(userId)
+    } catch (erro) {
+      console.warn('[MWA] não foi possível limpar as fotos de refeições no Storage:', erro)
+    }
+    // best-effort: desfaz a inscrição push do dispositivo atual — a conta em
+    // auth.users nunca é de fato apagada por este fluxo (só a linha de perfil
+    // e os dados), então sem isso a pessoa continuaria recebendo o push diário
+    // mesmo após "excluir conta"/"reiniciar".
+    try {
+      await removerInscricaoPush()
+    } catch (erro) {
+      console.warn('[MWA] não foi possível remover a inscrição push:', erro)
+    }
     await Promise.all([
       supabase.from('mwa_refeicoes').delete().eq('user_id', userId),
       supabase.from('mwa_exercicios').delete().eq('user_id', userId),
       supabase.from('mwa_pesagens').delete().eq('user_id', userId),
       supabase.from('mwa_agua').delete().eq('user_id', userId),
+      supabase.from('mwa_push_inscricoes').delete().eq('user_id', userId),
     ])
     await supabase.from('mwa_perfis').delete().eq('id', userId)
     setUsuario(null)
     setRefeicoes([])
     setExercicios([])
     setPesagens([])
-    setAguaMl(0)
+    setAgua({ data: null, ml: 0 })
   }
 
   async function reiniciar() {
@@ -544,6 +651,14 @@ export function AppProvider({ children }) {
   }
 
   async function sair() {
+    // best-effort: desfaz a inscrição push do dispositivo antes de sair, pra um
+    // próximo login (de outra pessoa, no mesmo aparelho) começar limpo em vez
+    // de herdar em silêncio o push desta conta.
+    try {
+      await removerInscricaoPush()
+    } catch (erro) {
+      console.warn('[MWA] não foi possível remover a inscrição push:', erro)
+    }
     await supabase.auth.signOut()
   }
 
@@ -562,28 +677,79 @@ export function AppProvider({ children }) {
     ])
   }
 
-  async function adicionarRefeicao(refeicao) {
+  async function obterOuCriarRefeicao(tipo) {
+    const existente = refeicoesHoje.find((r) => r.tipo === tipo)
+    if (existente) return existente
+
     const { data, error } = await supabase
       .from('mwa_refeicoes')
-      .insert({ user_id: userId, data: hoje, ...refeicaoParaBanco(refeicao) })
+      .insert({ user_id: userId, data: diaVisualizado, tipo, horario: horarioAgora() })
       .select()
       .single()
-    if (!error) {
-      setRefeicoes((rs) => [...rs, refeicaoDoBanco(data)])
-      await registrarSessao(userId, 'atividade', { acao: 'refeicao_adicionada', tipo: refeicao.tipo })
-      // +5 🌱 por tipo de refeição por dia (café, almoço, jantar...)
-      await premiar('refeicao', `${hoje}:${refeicao.tipo}`)
+    if (error) throw error
+
+    const nova = refeicaoDoBanco(data, [])
+    setRefeicoes((rs) => [...rs, nova])
+    await registrarSessao(userId, 'atividade', { acao: 'refeicao_criada', tipo })
+    return nova
+  }
+
+  async function adicionarItemRefeicao(refeicaoId, item) {
+    const { data, error } = await supabase
+      .from('mwa_refeicoes_itens')
+      .insert({ refeicao_id: refeicaoId, ...itemParaBanco(item) })
+      .select()
+      .single()
+    if (error) throw error
+
+    const novoItem = itemDoBanco(data)
+    setRefeicoes((rs) =>
+      rs.map((r) => (r.id === refeicaoId ? { ...r, itens: [...r.itens, novoItem] } : r)),
+    )
+    const refeicao = refeicoesHoje.find((r) => r.id === refeicaoId)
+    if (estaVendoHoje && refeicao) await premiar('refeicao', `${hoje}:${refeicao.tipo}`)
+  }
+
+  async function atualizarItemRefeicao(refeicaoId, itemId, dados) {
+    setRefeicoes((rs) =>
+      rs.map((r) =>
+        r.id === refeicaoId
+          ? { ...r, itens: r.itens.map((i) => (i.id === itemId ? { ...i, ...dados } : i)) }
+          : r,
+      ),
+    )
+    await supabase.from('mwa_refeicoes_itens').update(itemParaBanco(dados)).eq('id', itemId)
+  }
+
+  async function removerItemRefeicao(refeicaoId, itemId) {
+    const refeicao = refeicoes.find((r) => r.id === refeicaoId)
+    const itensRestantes = (refeicao?.itens ?? []).filter((i) => i.id !== itemId)
+
+    if (itensRestantes.length === 0) {
+      // Sem alimentos, a refeição inteira some da lista
+      setRefeicoes((rs) => rs.filter((r) => r.id !== refeicaoId))
+      await supabase.from('mwa_refeicoes_itens').delete().eq('id', itemId)
+      await supabase.from('mwa_refeicoes').delete().eq('id', refeicaoId)
+      if (refeicao?.fotoUrl) await removerFotoRefeicao(userId, refeicaoId)
+    } else {
+      setRefeicoes((rs) =>
+        rs.map((r) => (r.id === refeicaoId ? { ...r, itens: itensRestantes } : r)),
+      )
+      await supabase.from('mwa_refeicoes_itens').delete().eq('id', itemId)
     }
   }
 
-  async function atualizarRefeicao(id, dados) {
-    setRefeicoes((rs) => rs.map((r) => (r.id === id ? { ...r, ...dados } : r)))
-    await supabase.from('mwa_refeicoes').update(refeicaoParaBanco(dados)).eq('id', id)
+  async function removerRefeicaoCompleta(refeicaoId) {
+    const refeicao = refeicoes.find((r) => r.id === refeicaoId)
+    setRefeicoes((rs) => rs.filter((r) => r.id !== refeicaoId))
+    await supabase.from('mwa_refeicoes').delete().eq('id', refeicaoId)
+    if (refeicao?.fotoUrl) await removerFotoRefeicao(userId, refeicaoId)
   }
 
-  async function removerRefeicao(id) {
-    setRefeicoes((rs) => rs.filter((r) => r.id !== id))
-    await supabase.from('mwa_refeicoes').delete().eq('id', id)
+  async function atualizarFotoRefeicao(refeicaoId, arquivo) {
+    const url = await uploadFotoRefeicao(userId, refeicaoId, arquivo)
+    setRefeicoes((rs) => rs.map((r) => (r.id === refeicaoId ? { ...r, fotoUrl: url } : r)))
+    await supabase.from('mwa_refeicoes').update({ foto_url: url }).eq('id', refeicaoId)
   }
 
   async function adicionarExercicio(exercicio) {
@@ -591,7 +757,7 @@ export function AppProvider({ children }) {
       .from('mwa_exercicios')
       .insert({
         user_id: userId,
-        data: hoje,
+        data: diaVisualizado,
         tipo: exercicio.tipo,
         emoji: exercicio.emoji,
         intensidade: exercicio.intensidade,
@@ -604,7 +770,7 @@ export function AppProvider({ children }) {
       setExercicios((es) => [...es, exercicioDoBanco(data)])
       await registrarSessao(userId, 'atividade', { acao: 'exercicio_adicionado', tipo: exercicio.tipo })
       // +10 🌱 uma vez por dia
-      await premiar('exercicio', hoje)
+      if (estaVendoHoje) await premiar('exercicio', hoje)
     }
   }
 
@@ -644,6 +810,25 @@ export function AppProvider({ children }) {
     }
   }
 
+  async function atualizarPesagem(pesagemId, dados) {
+    const { data, error } = await supabase
+      .from('mwa_pesagens')
+      .update({
+        peso: dados.peso,
+        medidas: dados.medidas ?? {},
+        fotos: dados.fotos ?? {},
+        bioimpedancia: dados.bioimpedancia ?? null,
+      })
+      .eq('id', pesagemId)
+      .eq('user_id', userId)
+      .select()
+      .single()
+    if (error) throw error
+    const atualizada = pesagemDoBanco(data)
+    setPesagens((ps) => ps.map((p) => (p.id === pesagemId ? atualizada : p)))
+    return atualizada
+  }
+
   // Indica uma amiga pelo WhatsApp — recompensa limitada a 3x por dia
   async function registrarIndicacao() {
     if (!userId) return 0
@@ -662,20 +847,33 @@ export function AppProvider({ children }) {
 
   async function adicionarAgua(ml) {
     const novo = Math.max(0, aguaMl + ml)
-    setAguaMl(novo)
-    await supabase.from('mwa_agua').upsert({ user_id: userId, data: hoje, ml: novo })
+    setAgua({ data: diaVisualizado, ml: novo })
+    await supabase.from('mwa_agua').upsert({ user_id: userId, data: diaVisualizado, ml: novo })
     // +10 🌱 quando bate a meta de água do dia
-    if (metas && novo >= metas.aguaL * 1000) {
+    if (estaVendoHoje && metas && novo >= metas.aguaL * 1000) {
       await premiar('agua', hoje)
     }
   }
 
-  function abrirModalRefeicao(inicial = null) {
-    setModalRefeicao({ aberto: true, inicial })
+  function abrirEscolhaRefeicao() {
+    setModalRefeicao({ etapa: 'escolher', refeicaoId: null, itemInicial: null })
+  }
+
+  async function abrirRefeicaoDoDia(tipo) {
+    const refeicao = await obterOuCriarRefeicao(tipo)
+    setModalRefeicao({ etapa: 'aberta', refeicaoId: refeicao.id, itemInicial: null })
+  }
+
+  function abrirAdicionarAlimento(itemInicial = null) {
+    setModalRefeicao((m) => ({ ...m, etapa: 'alimento', itemInicial }))
+  }
+
+  function voltarParaRefeicaoAberta() {
+    setModalRefeicao((m) => ({ ...m, etapa: 'aberta', itemInicial: null }))
   }
 
   function fecharModalRefeicao() {
-    setModalRefeicao({ aberto: false, inicial: null })
+    setModalRefeicao({ etapa: null, refeicaoId: null, itemInicial: null })
   }
 
   const valor = {
@@ -688,6 +886,12 @@ export function AppProvider({ children }) {
     diaAtual,
     totalDias,
     hoje,
+    diaVisualizado,
+    estaVendoHoje,
+    dataInicioPrograma,
+    carregandoDia,
+    mudarDiaVisualizado,
+    voltarParaHoje,
     refeicoesHoje,
     exerciciosHoje,
     totaisHoje,
@@ -702,14 +906,21 @@ export function AppProvider({ children }) {
     reiniciar,
     deletarConta,
     sair,
-    adicionarRefeicao,
-    atualizarRefeicao,
-    removerRefeicao,
+    obterOuCriarRefeicao,
+    adicionarItemRefeicao,
+    atualizarItemRefeicao,
+    removerItemRefeicao,
+    removerRefeicaoCompleta,
+    atualizarFotoRefeicao,
     adicionarExercicio,
     removerExercicio,
     adicionarPesagem,
+    atualizarPesagem,
     adicionarAgua,
-    abrirModalRefeicao,
+    abrirEscolhaRefeicao,
+    abrirRefeicaoDoDia,
+    abrirAdicionarAlimento,
+    voltarParaRefeicaoAberta,
     fecharModalRefeicao,
     atualizarFotoPerfil,
     atualizarIdioma,
@@ -723,10 +934,15 @@ export function AppProvider({ children }) {
     conclusaoDiaAberta,
     abrirConclusaoDia,
     fecharConclusaoDia,
+    modoRecomecarAberto,
+    escolherOpcaoRecomecar,
+    fecharModoRecomecar,
     conclusao30Aberta,
     fecharConclusao30,
     conclusao90Aberta,
     fecharConclusao90,
+    resumoSemanalAberto,
+    fecharResumoSemanal,
     marcarDicaLida,
     registrarCompartilhamento,
     registrarJoguinho,
@@ -735,6 +951,7 @@ export function AppProvider({ children }) {
     registrarJogoTroca,
     registrarJogoSaciedade,
     registrarJogoRotulos,
+    registrarJogoCorrida,
     registrarMomentoMwa,
     userId,
     registrarIndicacao,

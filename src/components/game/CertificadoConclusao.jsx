@@ -138,7 +138,7 @@ export default function CertificadoConclusao({ dias = 30, titulo, onFechar }) {
                   width="2"
                   height="16"
                   rx="1"
-                  fill="#d4af7a"
+                  fill="#C59F4F"
                   opacity="0.5"
                   transform={`rotate(${i * 22.5} 50 50)`}
                 />
@@ -147,7 +147,7 @@ export default function CertificadoConclusao({ dias = 30, titulo, onFechar }) {
             {/* Disco da medalha */}
             <div
               className="mwa-medalha absolute inset-[14px] flex flex-col items-center justify-center rounded-full border-4 border-ouro shadow-lg"
-              style={{ background: 'radial-gradient(circle at 35% 30%, #f6e4c3 0%, #d4af7a 55%, #b98f52 100%)' }}
+              style={{ background: 'radial-gradient(circle at 35% 30%, #EFE3C7 0%, #C59F4F 55%, #9E7F3F 100%)' }}
             >
               <span className="font-serif text-2xl font-bold leading-none text-verde-escuro">{dias}</span>
               <span className="text-[7px] font-bold uppercase tracking-widest text-verde-escuro/70">dias</span>

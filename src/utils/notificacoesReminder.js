@@ -57,7 +57,7 @@ export function ehDia24hAntesPesagem(diaAtual, totalDiasPrograma) {
  * @param {string} userId - ID do usuário (para verificar se já foi notificado hoje)
  */
 export async function enviarNotificacao24hPesagem(diaAtual, totalDiasPrograma, userId) {
-  if (Notification.permission !== 'granted') {
+  if (!('Notification' in window) || Notification.permission !== 'granted') {
     return
   }
 
@@ -91,6 +91,9 @@ export async function enviarNotificacao24hPesagem(diaAtual, totalDiasPrograma, u
  * Chamado no AppInner quando usuário está logado
  */
 export function configurarNotificacoesPesagem(diaAtual, totalDiasPrograma, userId) {
+  // iOS Safari fora de app instalado na tela de início não tem a API Notification
+  if (!('Notification' in window)) return
+
   // Tenta solicitar permissão (silenciosamente, não força)
   if (Notification.permission === 'default') {
     solicitarPermissaoNotificacao().catch(() => {

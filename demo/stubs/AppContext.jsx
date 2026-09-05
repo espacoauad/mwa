@@ -14,6 +14,7 @@ const RECOMPENSAS_SIMULADAS = [
   'registrarJogoTroca',
   'registrarJogoSaciedade',
   'registrarJogoRotulos',
+  'registrarJogoCorrida',
   'registrarJoguinho',
   'registrarMomentoMwa',
 ]
@@ -80,7 +81,7 @@ export function DemoFerramentasProvider({ diaAtual = 20, children }) {
     gastoExercicios: exerciciosHoje.reduce((s, e) => s + (e.gastoCalorico ?? 0), 0),
     adicionarExercicio,
     removerExercicio,
-    abrirModalRefeicao: () => console.log('[demo] abrirModalRefeicao chamado'),
+    abrirEscolhaRefeicao: () => console.log('[demo] abrirEscolhaRefeicao chamado'),
   }
   return <DemoContext.Provider value={valor}>{children}</DemoContext.Provider>
 }

@@ -21,7 +21,7 @@ const pillars = [
   {
     icon: HeartHandshake,
     title: 'Acompanhamento',
-    text: 'Informação sem prática não transforma. Durante os 30 dias, o app guia, registra e mostra sua evolução — todos os dias.',
+    text: 'Informação sem prática não transforma. Durante os 90 dias, o app guia, registra e mostra sua evolução — todos os dias.',
   },
 ]
 

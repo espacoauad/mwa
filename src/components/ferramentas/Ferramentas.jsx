@@ -9,7 +9,7 @@ import CarregandoFallback from '../ui/CarregandoFallback.jsx'
 import LenteConsciencia from './LenteConsciencia.jsx'
 import VersiculoDoDiaModal from './VersiculoDoDiaModal.jsx'
 import ReforcandoConceitos from './ReforcandoConceitos.jsx'
-import { diaLiberacaoJogo, jogoLiberado } from '../../utils/jogosLiberacao.js'
+import SeletorDeDia from '../ui/SeletorDeDia.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Jogos de gamificação só abrem sob interação — carregados sob demanda para
@@ -19,12 +19,13 @@ const JogoVerdadeiroFalso = lazy(() => import('../game/JogoVerdadeiroFalso.jsx')
 const JogoTrocaInteligente = lazy(() => import('../game/JogoTrocaInteligente.jsx'))
 const JogoBatalhaSaciedade = lazy(() => import('../game/JogoBatalhaSaciedade.jsx'))
 const JogoDetetiveRotulos = lazy(() => import('../game/JogoDetetiveRotulos.jsx'))
+const JogoCorridaEscolha = lazy(() => import('../game/JogoCorridaEscolha.jsx'))
 const JogoColheita = lazy(() => import('../game/JogoColheita.jsx'))
 const MwaFarm = lazy(() => import('../game/MwaFarm.jsx'))
 
 function CalculadoraMacros() {
   const { ingles } = useIdioma()
-  const { abrirModalRefeicao } = useApp()
+  const { abrirEscolhaRefeicao } = useApp()
   const [busca, setBusca] = useState('')
   const [alimentoId, setAlimentoId] = useState(null)
   const [quantidade, setQuantidade] = useState('')
@@ -103,7 +104,7 @@ function CalculadoraMacros() {
             </div>
           )}
           <div className="mt-3">
-            <Botao variante="ouro" onClick={() => abrirModalRefeicao()}>
+            <Botao variante="ouro" onClick={() => abrirEscolhaRefeicao()}>
               {ingles ? 'Add to my day →' : 'Adicionar ao meu dia →'}
             </Botao>
           </div>
@@ -115,7 +116,7 @@ function CalculadoraMacros() {
 
 function CalculadoraExercicio() {
   const { ingles, locale } = useIdioma()
-  const { usuario, exerciciosHoje, gastoExercicios, adicionarExercicio, removerExercicio } = useApp()
+  const { usuario, exerciciosHoje, gastoExercicios, adicionarExercicio, removerExercicio, carregandoDia } = useApp()
   const [tipoId, setTipoId] = useState('caminhada')
   const [intensidade, setIntensidade] = useState('moderada')
   const [duracao, setDuracao] = useState('')
@@ -191,7 +192,7 @@ function CalculadoraExercicio() {
       )}
 
       <div className="mt-3">
-        <Botao onClick={registrar} disabled={!gasto}>
+        <Botao onClick={registrar} disabled={!gasto || carregandoDia}>
           {ingles ? 'Log in my day' : 'Registrar no meu dia'}
         </Botao>
       </div>
@@ -259,6 +260,12 @@ const JOGOS_NUTRICAO = [
     titulo: 'Detetive dos Rótulos',
     desc: 'Aprenda a ler a tabela nutricional e a diferença entre porção e embalagem. Rodada = +10 🌱 por dia',
   },
+  {
+    id: 'corrida',
+    emoji: '🏃',
+    titulo: 'Corrida da Escolha',
+    desc: 'Desvie das besteiras e pegue o que é saudável nas 3 pistas da trilha. Corrida concluída = +10 🌱 por dia',
+  },
 ]
 
 // Prateleira B — pausa leve, sem promessa educativa
@@ -277,33 +284,24 @@ const JOGOS_EN = {
   troca: ['Smart Swap', 'Improve a meal without giving it up and see the impact of each swap. Round done = +10 🌱 per day'],
   saciedade: ['Satiety Battle', 'Same calories, different hunger: find out what makes a meal last longer. Round = +10 🌱 per day'],
   rotulos: ['Label Detective', 'Learn to read the nutrition table and the difference between serving and package. Round = +10 🌱 per day'],
+  corrida: ['The Choice Run', 'Dodge the junk and catch what is healthy across 3 lanes on the trail. Run done = +10 🌱 per day'],
   colheita: ['Harvest Game', 'A breather for your mind: match 3 fruits and relax. 300+ points = +10 🌱 per day'],
 }
 
-function CardJogo({ jogo, diaAtual, ingles, onAbrir }) {
-  const liberado = jogoLiberado(jogo.id, diaAtual)
+function CardJogo({ jogo, ingles, onAbrir }) {
   return (
     <button
       type="button"
-      onClick={liberado ? () => onAbrir(jogo.id) : undefined}
-      disabled={!liberado}
-      className={`mt-3 flex w-full items-center gap-4 rounded-2xl p-5 text-left transition-transform ${
-        liberado
-          ? 'bg-gradient-to-r from-sage-claro to-ouro-claro active:scale-[0.99]'
-          : 'cursor-not-allowed bg-cinza/50 opacity-70'
-      }`}
+      onClick={() => onAbrir(jogo.id)}
+      className="mt-3 flex w-full items-center gap-4 rounded-2xl bg-gradient-to-r from-sage-claro to-ouro-claro p-5 text-left transition-transform active:scale-[0.99]"
     >
-      <span className="text-3xl">{liberado ? jogo.emoji : '🔒'}</span>
+      <span className="text-3xl">{jogo.emoji}</span>
       <span className="flex-1">
         <span className="block font-serif text-lg font-semibold italic text-verde">
           {ingles ? JOGOS_EN[jogo.id][0] : jogo.titulo}
         </span>
         <span className="text-sm text-verde/80">
-          {liberado
-            ? ingles ? JOGOS_EN[jogo.id][1] : jogo.desc
-            : ingles
-              ? `Unlocks on day ${diaLiberacaoJogo(jogo.id)} of your program`
-              : `Libera no dia ${diaLiberacaoJogo(jogo.id)} do seu programa`}
+          {ingles ? JOGOS_EN[jogo.id][1] : jogo.desc}
         </span>
       </span>
     </button>
@@ -312,7 +310,6 @@ function CardJogo({ jogo, diaAtual, ingles, onAbrir }) {
 
 export default function Ferramentas() {
   const { ingles } = useIdioma()
-  const { diaAtual } = useApp()
   // Um único estado guarda qual jogo está aberto (null = nenhum)
   const [jogoAtivo, setJogoAtivo] = useState(null)
   const [lenteAberta, setLenteAberta] = useState(false)
@@ -323,7 +320,8 @@ export default function Ferramentas() {
 
   return (
     <div className="px-5 pt-10">
-      <h1 className="font-serif text-2xl font-semibold italic text-verde">{ingles ? 'Tools' : 'Ferramentas'}</h1>
+      <SeletorDeDia />
+      <h1 className="mt-3 font-serif text-2xl font-semibold italic text-verde">{ingles ? 'Tools' : 'Ferramentas'}</h1>
       <p className="mb-4 mt-1 text-sm text-verde/80">{ingles ? 'Calculators and resources for your daily routine.' : 'Calculadoras para o seu dia a dia.'}</p>
       <CalculadoraMacros />
       <CalculadoraExercicio />
@@ -366,7 +364,7 @@ export default function Ferramentas() {
         </span>
       </button>
 
-      {/* Prateleira A — jogos de nutrição, liberados aos poucos */}
+      {/* Prateleira A — jogos de nutrição */}
       <h2 className="mt-8 font-serif text-lg font-semibold italic text-verde">
         {ingles ? 'Nutrition games' : 'Jogos de Nutrição'}
       </h2>
@@ -376,7 +374,7 @@ export default function Ferramentas() {
           : 'Aprenda brincando o que você usa em cada refeição.'}
       </p>
       {JOGOS_NUTRICAO.map((jogo) => (
-        <CardJogo key={jogo.id} jogo={jogo} diaAtual={diaAtual} ingles={ingles} onAbrir={setJogoAtivo} />
+        <CardJogo key={jogo.id} jogo={jogo} ingles={ingles} onAbrir={setJogoAtivo} />
       ))}
 
       {/* Prateleira B — pausa leve */}
@@ -387,7 +385,7 @@ export default function Ferramentas() {
         {ingles ? 'A light break, with no lesson attached.' : 'Um respiro leve, sem lição para aprender.'}
       </p>
       {JOGOS_PAUSA.map((jogo) => (
-        <CardJogo key={jogo.id} jogo={jogo} diaAtual={diaAtual} ingles={ingles} onAbrir={setJogoAtivo} />
+        <CardJogo key={jogo.id} jogo={jogo} ingles={ingles} onAbrir={setJogoAtivo} />
       ))}
 
       {/* A Lente da Consciência: ferramenta de pausa guiada */}
@@ -434,6 +432,7 @@ export default function Ferramentas() {
         {jogoAtivo === 'troca' && <JogoTrocaInteligente onFechar={fecharJogo} />}
         {jogoAtivo === 'saciedade' && <JogoBatalhaSaciedade onFechar={fecharJogo} />}
         {jogoAtivo === 'rotulos' && <JogoDetetiveRotulos onFechar={fecharJogo} />}
+        {jogoAtivo === 'corrida' && <JogoCorridaEscolha onFechar={fecharJogo} />}
         {jogoAtivo === 'colheita' && <JogoColheita onFechar={fecharJogo} />}
         {jogoAtivo === 'fazenda' && <MwaFarm onFechar={fecharJogo} />}
       </Suspense>

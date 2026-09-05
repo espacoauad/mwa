@@ -7,17 +7,16 @@ import { dicaDoDia } from '../../data/dicas.js'
 import { dicaDoDia as dicaDoDia90 } from '../../data/dicas90.js'
 import { informativoDoDia } from '../../data/informativos.js'
 import { redimensionarImagem } from '../../lib/imagem.js'
-import AnelMeta from './AnelMeta.jsx'
 import AnelHidratacao from './AnelHidratacao.jsx'
 import GraficoMacros from './GraficoMacros.jsx'
 import SeuProgresso from './SeuProgresso.jsx'
 import EstrelasDoDia from './EstrelasDoDia.jsx'
 
 const MomentoMwa = lazy(() => import('./MomentoMwa.jsx'))
-import CardUpgrade from '../upgrade/CardUpgrade.jsx'
 import Avatar from '../game/Avatar.jsx'
 import CarregandoFallback from '../ui/CarregandoFallback.jsx'
 import LogoMWA from '../ui/LogoMWA.jsx'
+import SeletorDeDia from '../ui/SeletorDeDia.jsx'
 import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 // Telas de gamificação (loja/conclusões) só abrem sob interação — carregadas
@@ -26,12 +25,13 @@ const LojaAvatar = lazy(() => import('../game/LojaAvatar.jsx'))
 const ConclusaoDia = lazy(() => import('../game/ConclusaoDia.jsx'))
 const Conclusao30Dias = lazy(() => import('../game/Conclusao30Dias.jsx'))
 const Conclusao90Dias = lazy(() => import('../game/Conclusao90Dias.jsx'))
+const ModoRecomecar = lazy(() => import('../game/ModoRecomecar.jsx'))
+const ResumoSemanal = lazy(() => import('../game/ResumoSemanal.jsx'))
 
 export default function Hoje({ irParaDicas }) {
   const { ingles, locale } = useIdioma()
   const {
     usuario,
-    programa90Ativo,
     metas,
     diaAtual,
     totalDias,
@@ -40,7 +40,8 @@ export default function Hoje({ irParaDicas }) {
     gastoExercicios,
     aguaMl,
     adicionarAgua,
-    abrirModalRefeicao,
+    carregandoDia,
+    abrirEscolhaRefeicao,
     game,
     registrarCompartilhamento,
     diaCompleto,
@@ -49,6 +50,8 @@ export default function Hoje({ irParaDicas }) {
     conclusao30Aberta,
     fecharConclusao30,
     conclusao90Aberta,
+    modoRecomecarAberto,
+    resumoSemanalAberto,
     atualizarFotoPerfil,
   } = useApp()
   const [lojaAberta, setLojaAberta] = useState(false)
@@ -73,11 +76,11 @@ export default function Hoje({ irParaDicas }) {
   // Compartilhar: abre o menu nativo do celular (Instagram, WhatsApp...) e premia com sementes
   async function compartilhar() {
     const texto = ingles
-      ? `I’m on day ${diaAtual} of my transformation with MWA — Método Wanessa Auad! 🌿 Join me: https://metodomwa.com.br`
-      : `Estou no dia ${diaAtual} da minha transformação com o MWA — Método Wanessa Auad! 🌿 Vem comigo: https://metodomwa.com.br`
+      ? `I’m on day ${diaAtual} of my transformation with MWA — My Wellness App! 🌿 Join me: https://metodomwa.com.br`
+      : `Estou no dia ${diaAtual} da minha transformação com o MWA — My Wellness App! 🌿 Vem comigo: https://metodomwa.com.br`
     try {
       if (navigator.share) {
-        await navigator.share({ title: 'MWA — Método Wanessa Auad', text: texto })
+        await navigator.share({ title: 'MWA — My Wellness App', text: texto })
       } else {
         await navigator.clipboard.writeText(texto)
         setAvisoCompartilhar(ingles ? 'Text copied! Paste it into your Instagram story 📲' : 'Texto copiado! Cole nos seus stories do Instagram 📲')
@@ -93,11 +96,6 @@ export default function Hoje({ irParaDicas }) {
   const progresso = Math.round((diaAtual / totalDias) * 100)
   const dica = diaAtual <= 30 ? dicaDoDia(diaAtual) : dicaDoDia90(diaAtual)
   const informativo = informativoDoDia(diaAtual)
-  const dataFormatada = new Date().toLocaleDateString(locale, {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-  })
 
   const linhasResumo = [
     { label: ingles ? 'Calories' : 'Calorias', consumido: totaisHoje.calorias, meta: metas.calorias, unidade: 'kcal' },
@@ -121,7 +119,7 @@ export default function Hoje({ irParaDicas }) {
         </div>
         <div className="relative z-10 mt-2 flex items-start justify-between gap-3">
           <div>
-            <p className="text-sm capitalize text-white/60">{dataFormatada}</p>
+            <SeletorDeDia tema="escuro" />
             <h1 className="mt-1 font-serif text-2xl font-semibold italic">{ingles ? 'Hello' : 'Olá'}, {primeiroNome} 🌿</h1>
           </div>
           {/* Foto real (toque para trocar) + avatar gamificado logo abaixo (toque abre a loja) */}
@@ -192,7 +190,7 @@ export default function Hoje({ irParaDicas }) {
         </div>
       </header>
 
-      <main className="-mt-8 px-5">
+      <main className="relative z-10 -mt-8 px-5">
         {/* Banner: dia concluído */}
         {diaCompleto && (
           <button
@@ -243,7 +241,7 @@ export default function Hoje({ irParaDicas }) {
           </button>
         </motion.div>
 
-        {/* Painel Premium: Macronutrientes em Anéis Concêntricos */}
+        {/* Painel Premium: Macronutrientes em barras de progresso */}
         <motion.section variants={itemEntrada} className="mwa-sombra-premium rounded-2xl bg-white p-7">
           <h2 className="mb-1 text-sm font-semibold text-verde/60">{ingles ? 'Your intake today' : 'Seu consumo de hoje'}</h2>
           <p className="mb-6 text-xs text-verde/80">{ingles ? 'Macronutrients at a glance — protein is the focus' : 'Macronutrientes em destaque — proteína é o foco'}</p>
@@ -251,16 +249,15 @@ export default function Hoje({ irParaDicas }) {
             proteina={totaisHoje.proteina}
             carbos={totaisHoje.carbos}
             gordura={totaisHoje.gordura}
+            fibras={totaisHoje.fibras}
             metaProteina={metas.proteina}
             metaCarbos={metas.carboidrato}
             metaGordura={metas.gordura}
+            metaFibras={metas.fibras}
             calorias={totaisHoje.calorias}
             metaCalorias={metas.calorias}
+            caloriasQueimadas={gastoExercicios}
           />
-          {/* Metas complementares embaixo */}
-          <div className="mt-6 border-t border-ouro/20 pt-4">
-            <AnelMeta label={ingles ? 'Fiber' : 'Fibras'} consumido={totaisHoje.fibras} meta={metas.fibras} unidade="g" />
-          </div>
         </motion.section>
 
         {/* Seção: Seu Progresso */}
@@ -299,7 +296,7 @@ export default function Hoje({ irParaDicas }) {
           <p className="mb-6 text-xs text-verde/80">
             {ingles ? 'Strategic hydration helps your body perform at its full capacity' : 'A hidratação estratégica sinaliza ao seu corpo que ele pode funcionar em plena capacidade'}
           </p>
-          <AnelHidratacao consumidoMl={aguaMl} metaMl={metas.aguaMl} onClickAdicionar={adicionarAgua} />
+          <AnelHidratacao consumidoMl={aguaMl} metaMl={metas.aguaMl} onClickAdicionar={adicionarAgua} desabilitado={carregandoDia} />
         </motion.section>
 
         {/* Informativo do dia */}
@@ -372,9 +369,6 @@ export default function Hoje({ irParaDicas }) {
             {avisoCompartilhar}
           </p>
         )}
-
-        {/* Oferta de upgrade conforme o cronograma (some quando o Programa de 90 Dias já está ativo) */}
-        {!programa90Ativo && <CardUpgrade dia={diaAtual} />}
       </main>
 
       {/* Botão flutuante: adicionar refeição */}
@@ -385,7 +379,7 @@ export default function Hoje({ irParaDicas }) {
         transition={reduzido ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 20, delay: 0.3 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => abrirModalRefeicao()}
+        onClick={() => abrirEscolhaRefeicao()}
         className="fixed bottom-20 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 rounded-full bg-ouro px-5 py-3.5 font-semibold text-verde-escuro shadow-lg shadow-ouro/40"
       >
         <Plus size={20} strokeWidth={2.5} /> {ingles ? 'Add meal' : 'Adicionar refeição'}
@@ -409,6 +403,22 @@ export default function Hoje({ irParaDicas }) {
       {conclusaoDiaAberta && (
         <Suspense fallback={<CarregandoFallback />}>
           <ConclusaoDia />
+        </Suspense>
+      )}
+
+      {/* Modo Recomeçar: acolhimento sem culpa ao voltar após dias sem abrir o app */}
+      {modoRecomecarAberto && (
+        <Suspense fallback={<CarregandoFallback />}>
+          <ModoRecomecar />
+        </Suspense>
+      )}
+
+      {/* Retrato da Semana: resumo inteligente aberto aos domingos — adiado
+          se o Modo Recomeçar também estiver pendente, pra não empilhar dois
+          modais de decisão ao mesmo tempo */}
+      {resumoSemanalAberto && !modoRecomecarAberto && (
+        <Suspense fallback={<CarregandoFallback />}>
+          <ResumoSemanal />
         </Suspense>
       )}
 

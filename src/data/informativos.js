@@ -186,7 +186,7 @@ export const INFORMATIVOS = [
       },
     ],
     dica: 'Você já deu os primeiros passos. Agora, imagine transformar esse esforço inicial em um estilo de vida que não exige recomeços. Essa é a proposta do Programa de 90 Dias: consolidar o que você aprendeu em hábitos automáticos que duram a vida toda. A partir de hoje, você tem uma condição especial de continuidade por R$ 97 — disponível até o dia 10 💚',
-    cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
+    cta: null,
   },
   {
     dia: 7,
@@ -206,7 +206,7 @@ export const INFORMATIVOS = [
       },
     ],
     dica: 'Uma semana completa é muito mais do que parece, querida. Nesses 7 dias, seu corpo reduziu a retenção de líquidos (por isso a barriga menos inchada), começou a se adaptar ao maior consumo de proteína e já registra os primeiros sinais de flexibilidade metabólica — sua energia mais estável ao longo do dia é prova disso. Registre sua pesagem e suas fotos hoje: elas contam uma história que o espelho sozinho não mostra. E se você já sente que quer ir além dos 30 dias, saiba que a condição especial do MWA | Programa de 90 Dias por R$ 97 está ativa até o dia 10 — quero que você tenha essa oportunidade enquanto ainda está disponível. Siga firme, você está exatamente onde precisa estar. 💪💚',
-    cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
+    cta: null,
   },
   {
     dia: 8,
@@ -299,7 +299,7 @@ export const INFORMATIVOS = [
       },
     ],
     dica: 'Note que a caloria dos dois pães é quase idêntica — a diferença real está na fibra. No pão francês, o processo de refino remove o farelo e o gérmen do trigo, levando embora a maior parte da fibra e deixando um carboidrato que vira glicose rapidamente. No integral, a fibra remanescente forma uma barreira física que desacelera a digestão, prolonga a saciedade e evita o pico glicêmico que, horas depois, se transforma em fome novamente. É uma troca simples que, mantida todos os dias, faz diferença real na balança e na disposição.\n\n⚠️ Ponto de atenção: não é porque é integral que emagrece. Ser integral já favorece e beneficia — mais fibra, mais saciedade, glicemia mais estável — mas o alimento ainda contém calorias, e é essa conta que precisa ser lembrada e contabilizada para que você atinja o déficit calórico. Troque o pão francês pelo integral com consciência do benefício, mas continue registrando a porção aqui no app. Escolha melhor SEM esquecer de contar.\n\n⏰ E hoje é também o último dia da condição especial do MWA | Programa de 90 Dias por R$ 97 — se seu coração já sabe que quer continuar, esta é a hora de decidir. Depois de hoje, esse valor não estará mais disponível. 🌾',
-    cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
+    cta: null,
   },
   {
     dia: 11,
@@ -737,7 +737,7 @@ export const INFORMATIVOS = [
       },
     ],
     dica: 'Em 30 dias, você não seguiu uma dieta — você começou a reconstruir. Cada vez que contabilizou macros, respeitou seu déficit calórico, escolheu densidade nutricional, honrou a fibra, e pausou antes de comer, você fortaleceu circuitos neurais. E 30 repetições transformam-se em automação. Mas aqui está a verdade que a ciência do comportamento comprova: 30 dias criam o gatilho, e 90 dias consolidam a identidade. Você já quebrou a inércia. Você já provou que consegue. Os próximos 60 dias não vão repetir o que você aprendeu aqui — vão aprofundá-lo até que ele se torne tão parte de você que recuar fique impossível. Hábitos mudam vidas. Repetição constrói excelência. E excelência é escolher continuar, não porque você tem que ser perfeita, mas porque agora você sabe que merecia isso desde o início. 💚',
-    cta: { label: 'Continuar por 90 dias', tipo: 'upgrade' },
+    cta: null,
   },
   {
     dia: 31,

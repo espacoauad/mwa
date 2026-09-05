@@ -47,7 +47,7 @@ export default function About() {
               através da educação alimentar. Antes de virar método, essa abordagem foi a minha
               própria jornada.
             </p>
-            <p>Durante os 30 dias, você aprende comigo a:</p>
+            <p>Durante os 90 dias, você aprende comigo a:</p>
           </Reveal>
           <Reveal delay={180} className="mt-4 grid gap-2 sm:grid-cols-2">
             {learnings.map((item) => (

@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { supabase } from '../../lib/supabase.js'
+import { useIdioma } from '../../context/IdiomaContext.jsx'
 
 export default function ResgateCupom() {
+  const { ingles } = useIdioma()
   const [cupom, setCupom] = useState('')
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
@@ -24,14 +26,14 @@ export default function ResgateCupom() {
         .maybeSingle()
 
       if (cupomError || !cupomData) {
-        setMensagem('❌ Cupom inválido ou expirado')
+        setMensagem(ingles ? '❌ Invalid or expired coupon' : '❌ Cupom inválido ou expirado')
         setEtapa('erro')
         setCarregando(false)
         return
       }
 
       if (cupomData.usado) {
-        setMensagem('❌ Este cupom já foi usado')
+        setMensagem(ingles ? '❌ This coupon has already been used' : '❌ Este cupom já foi usado')
         setEtapa('erro')
         setCarregando(false)
         return
@@ -39,9 +41,9 @@ export default function ResgateCupom() {
 
       // Cupom válido! Ir pra etapa de criar conta
       setEtapa('criando')
-      setMensagem('✅ Cupom válido! Agora crie sua conta.')
+      setMensagem(ingles ? '✅ Valid coupon! Now create your account.' : '✅ Cupom válido! Agora crie sua conta.')
     } catch (err) {
-      setMensagem('❌ Erro ao validar: ' + err.message)
+      setMensagem((ingles ? '❌ Validation error: ' : '❌ Erro ao validar: ') + err.message)
       setEtapa('erro')
     } finally {
       setCarregando(false)
@@ -64,7 +66,7 @@ export default function ResgateCupom() {
       })
 
       if (authError) {
-        setMensagem('❌ Erro: ' + authError.message)
+        setMensagem((ingles ? '❌ Error: ' : '❌ Erro: ') + authError.message)
         setEtapa('erro')
         setCarregando(false)
         return
@@ -81,14 +83,14 @@ export default function ResgateCupom() {
         .eq('codigo', cupom.toUpperCase())
 
       setEtapa('sucesso')
-      setMensagem('✅ Conta criada com sucesso!')
+      setMensagem(ingles ? '✅ Account created successfully!' : '✅ Conta criada com sucesso!')
 
       // Redirecionar pra app em 3 segundos (onboarding completa o perfil)
       setTimeout(() => {
         window.location.href = '/?acesso=novo'
       }, 3000)
     } catch (err) {
-      setMensagem('❌ Erro ao criar conta: ' + err.message)
+      setMensagem((ingles ? '❌ Error creating account: ' : '❌ Erro ao criar conta: ') + err.message)
       setEtapa('erro')
     } finally {
       setCarregando(false)
@@ -100,7 +102,7 @@ export default function ResgateCupom() {
       <header className="border-b border-cinza bg-white">
         <div className="mx-auto max-w-md px-4 py-4">
           <h1 className="font-serif text-2xl font-bold italic text-verde">MWA 🌿</h1>
-          <p className="text-xs text-verde/60">Resgate seu acesso</p>
+          <p className="text-xs text-verde/60">{ingles ? 'Redeem your access' : 'Resgate seu acesso'}</p>
         </div>
       </header>
 
@@ -109,16 +111,16 @@ export default function ResgateCupom() {
         {etapa === 'cupom' && (
           <div className="rounded-lg border-2 border-sage-claro bg-white p-8">
             <h2 className="mb-2 font-serif text-2xl font-bold italic text-verde">
-              Bem-vindo!
+              {ingles ? 'Welcome!' : 'Bem-vindo!'}
             </h2>
             <p className="mb-6 text-sm text-verde/70">
-              Digite o código que você recebeu por email para ativar seu acesso.
+              {ingles ? 'Enter the code you received by email to activate your access.' : 'Digite o código que você recebeu por email para ativar seu acesso.'}
             </p>
 
             <form onSubmit={validarCupom} className="space-y-4">
               <div>
                 <label className="block text-sm font-semibold text-verde">
-                  Seu Código de Acesso
+                  {ingles ? 'Your Access Code' : 'Seu Código de Acesso'}
                 </label>
                 <input
                   type="text"
@@ -136,14 +138,14 @@ export default function ResgateCupom() {
                 disabled={carregando || !cupom}
                 className="w-full rounded-lg bg-verde px-4 py-3 font-bold text-white hover:bg-verde/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {carregando ? 'Validando...' : 'Validar Cupom'}
+                {carregando ? (ingles ? 'Validating...' : 'Validando...') : (ingles ? 'Validate Coupon' : 'Validar Cupom')}
               </button>
             </form>
 
             <p className="mt-6 text-center text-xs text-verde/60">
-              Não recebeu o código?{' '}
+              {ingles ? "Didn't receive the code? " : 'Não recebeu o código? '}
               <a href="https://wa.me/5562994246775" className="font-semibold text-verde hover:underline">
-                Chame no WhatsApp
+                {ingles ? 'Message us on WhatsApp' : 'Chame no WhatsApp'}
               </a>
             </p>
           </div>
@@ -153,20 +155,20 @@ export default function ResgateCupom() {
         {etapa === 'criando' && (
           <div className="rounded-lg border-2 border-sage-claro bg-white p-8">
             <h2 className="mb-2 font-serif text-2xl font-bold italic text-verde">
-              Crie sua Conta
+              {ingles ? 'Create your Account' : 'Crie sua Conta'}
             </h2>
             <p className="mb-6 text-sm text-verde/70">
-              Use essas credenciais para acessar o app.
+              {ingles ? 'Use these credentials to access the app.' : 'Use essas credenciais para acessar o app.'}
             </p>
 
             <form onSubmit={criarConta} className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-verde">Email</label>
+                <label className="block text-sm font-semibold text-verde">{ingles ? 'Email' : 'Email'}</label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="seu@email.com"
+                  placeholder={ingles ? 'you@email.com' : 'seu@email.com'}
                   className="mt-2 w-full rounded-lg border border-cinza px-4 py-2 focus:border-verde focus:outline-none"
                   required
                   disabled={carregando}
@@ -174,7 +176,7 @@ export default function ResgateCupom() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-verde">Senha</label>
+                <label className="block text-sm font-semibold text-verde">{ingles ? 'Password' : 'Senha'}</label>
                 <input
                   type="password"
                   value={senha}
@@ -185,7 +187,7 @@ export default function ResgateCupom() {
                   disabled={carregando}
                   minLength={8}
                 />
-                <p className="mt-1 text-xs text-verde/60">Mín. 8 caracteres</p>
+                <p className="mt-1 text-xs text-verde/60">{ingles ? 'Min. 8 characters' : 'Mín. 8 caracteres'}</p>
               </div>
 
               <button
@@ -193,7 +195,7 @@ export default function ResgateCupom() {
                 disabled={carregando || !email || !senha}
                 className="w-full rounded-lg bg-verde px-4 py-3 font-bold text-white hover:bg-verde/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {carregando ? 'Criando conta...' : 'Criar Conta'}
+                {carregando ? (ingles ? 'Creating account...' : 'Criando conta...') : (ingles ? 'Create Account' : 'Criar Conta')}
               </button>
             </form>
           </div>
@@ -204,13 +206,13 @@ export default function ResgateCupom() {
           <div className="rounded-lg border-2 border-green-300 bg-green-50 p-8 text-center">
             <p className="mb-4 text-4xl">✅</p>
             <h2 className="mb-2 font-serif text-2xl font-bold italic text-verde">
-              Pronto!
+              {ingles ? 'All set!' : 'Pronto!'}
             </h2>
             <p className="mb-4 text-sm text-verde/70">
-              Sua conta foi criada com sucesso. Você será redirecionado em instantes...
+              {ingles ? 'Your account was created successfully. You will be redirected shortly...' : 'Sua conta foi criada com sucesso. Você será redirecionado em instantes...'}
             </p>
             <p className="text-xs text-verde/60">
-              Você tem <strong>30 dias</strong> de acesso completo ao app MWA.
+              {ingles ? <>You have <strong>30 days</strong> of full access to the MWA app.</> : <>Você tem <strong>30 dias</strong> de acesso completo ao app MWA.</>}
             </p>
           </div>
         )}
@@ -228,7 +230,7 @@ export default function ResgateCupom() {
               }}
               className="w-full rounded-lg bg-verde px-4 py-3 font-bold text-white hover:bg-verde/90 transition-colors"
             >
-              Tentar Novamente
+              {ingles ? 'Try Again' : 'Tentar Novamente'}
             </button>
           </div>
         )}

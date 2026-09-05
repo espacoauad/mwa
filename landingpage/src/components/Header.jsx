@@ -24,7 +24,7 @@ export default function Header() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <a href="#" aria-label="MWA — voltar ao topo" className="flex items-center gap-2">
-          <img src={logoMWA} alt="MWA" width={31} height={36} className="h-9 w-auto" />
+          <img src={logoMWA} alt="MWA" width={34} height={36} className="h-9 w-auto" />
         </a>
         <div className="flex items-center gap-6">
           <a

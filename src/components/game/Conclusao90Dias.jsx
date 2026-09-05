@@ -3,8 +3,11 @@ import { X, Repeat, TrendingDown, Sparkles, Flame, Lock, Award } from 'lucide-re
 import { useApp } from '../../context/AppContext.jsx'
 import { supabase } from '../../lib/supabase.js'
 import { abrirCheckout } from '../../lib/hotmart.js'
+import { PRODUTOS, formatarPreco } from '../../utils/ofertas.js'
 import { useConfeti } from '../../hooks/useConfeti.js'
 import LogoMWA from '../ui/LogoMWA.jsx'
+import { montarFraseRecepcao } from '../../utils/personalizacao.js'
+import { pesagensComRotulo } from '../../utils/evolucao.js'
 import CertificadoConclusao from './CertificadoConclusao.jsx'
 
 /**
@@ -13,7 +16,7 @@ import CertificadoConclusao from './CertificadoConclusao.jsx'
  * Cada conquista começa "trancada": ao tocar, revela o aprendizado por trás
  * dela — incluindo o total de calorias economizadas ao longo do déficit.
  */
-export default function Conclusao90Dias() {
+export default function Conclusao90Dias({ persistente = false }) {
   const { usuario, sessao, metas, game, pesagens, fecharConclusao90 } = useApp()
   const { celebrarVitoria, celebrarFogos } = useConfeti()
   const [totalRefeicoes, setTotalRefeicoes] = useState(0)
@@ -21,17 +24,18 @@ export default function Conclusao90Dias() {
   const [diasRegistrados, setDiasRegistrados] = useState(0)
   const [reveladas, setReveladas] = useState(() => new Set())
   const [certificadoAberto, setCertificadoAberto] = useState(false)
+  const [fotosCapsulaComErro, setFotosCapsulaComErro] = useState(() => new Set())
   const dialogRef = useRef(null)
 
   // a11y: fecha com Esc e move o foco para o diálogo assim que ele é aberto
   useEffect(() => {
     function aoTeclar(e) {
       // se o certificado estiver aberto por cima, deixa o Esc dele agir sozinho
-      if (e.key === 'Escape' && !certificadoAberto) fecharConclusao90()
+      if (e.key === 'Escape' && !certificadoAberto && !persistente) fecharConclusao90()
     }
     window.addEventListener('keydown', aoTeclar)
     return () => window.removeEventListener('keydown', aoTeclar)
-  }, [fecharConclusao90, certificadoAberto])
+  }, [fecharConclusao90, certificadoAberto, persistente])
 
   useEffect(() => {
     dialogRef.current?.focus()
@@ -61,13 +65,17 @@ export default function Conclusao90Dias() {
     let cancelado = false
     supabase
       .from('mwa_refeicoes')
-      .select('data, calorias')
+      .select('data, mwa_refeicoes_itens(calorias)')
       .eq('user_id', userId)
       .then(({ data }) => {
         if (cancelado || !data) return
         const porDia = {}
         for (const r of data) {
-          porDia[r.data] = (porDia[r.data] ?? 0) + Number(r.calorias)
+          const caloriasRefeicao = (r.mwa_refeicoes_itens ?? []).reduce(
+            (soma, item) => soma + Number(item.calorias),
+            0,
+          )
+          porDia[r.data] = (porDia[r.data] ?? 0) + caloriasRefeicao
         }
         const dias = Object.values(porDia).filter((total) => total > 0)
         const economia = dias.reduce((soma, consumido) => soma + (metas.tdee - consumido), 0)
@@ -93,6 +101,15 @@ export default function Conclusao90Dias() {
   const diferencaPeso = pesoInicial && pesoAtual ? Math.round((pesoInicial - pesoAtual) * 10) / 10 : null
   const totalSementes = game?.sementes ?? 0
   const kgEquivalentes = caloriasEconomizadas ? Math.round((caloriasEconomizadas / 7700) * 10) / 10 : null
+  const { foco, sentimento } = montarFraseRecepcao(usuario?.personalizacao ?? {})
+  const pesagensRotuladas = pesagensComRotulo(pesagens, 90)
+  const primeiraPesagemCapsula = pesagensRotuladas[0]
+  const ultimaPesagemCapsula = pesagensRotuladas[pesagensRotuladas.length - 1]
+  const mostrarFotosCapsula =
+    pesagensRotuladas.length >= 2 &&
+    primeiraPesagemCapsula?.pesagem?.id !== ultimaPesagemCapsula?.pesagem?.id &&
+    Boolean(primeiraPesagemCapsula?.pesagem?.fotos?.frente) &&
+    Boolean(ultimaPesagemCapsula?.pesagem?.fotos?.frente)
 
   // Posições fixas (não recalculadas a cada render) para o céu estrelado - MAIS CELEBRATIVO
   const estrelas = useMemo(
@@ -151,7 +168,7 @@ export default function Conclusao90Dias() {
   }
 
   function refazer90Dias() {
-    abrirCheckout('programa90d')
+    abrirCheckout('renovacao90d')
   }
 
   return (
@@ -181,14 +198,16 @@ export default function Conclusao90Dias() {
         ))}
       </div>
 
-      <button
-        type="button"
-        onClick={fecharConclusao90}
-        className="fixed right-4 top-4 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
-        aria-label="Fechar"
-      >
-        <X size={20} />
-      </button>
+      {!persistente && (
+        <button
+          type="button"
+          onClick={fecharConclusao90}
+          className="fixed right-4 top-4 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
+          aria-label="Fechar"
+        >
+          <X size={20} />
+        </button>
+      )}
 
       <div className="relative z-10 flex flex-col items-center gap-6 p-4 pb-10">
         <div className="w-full max-w-sm pt-10 text-center">
@@ -206,6 +225,70 @@ export default function Conclusao90Dias() {
           <p className="text-lg font-bold text-white/95">consolidou a transformação.</p>
           <p className="mt-2 text-sm italic text-white/80">Você não é mais alguém que tenta. Você é alguém que é.</p>
         </div>
+
+        {/* Cápsula do Tempo — relembra a intenção do dia 1 */}
+        {foco && sentimento && (
+          <div className="w-full max-w-sm rounded-3xl border-2 border-ouro/40 bg-white/10 p-6 backdrop-blur-md">
+            <p className="mb-3 text-center text-xs font-bold uppercase tracking-widest text-ouro/80">
+              Cápsula do Tempo
+            </p>
+            <p className="text-center text-sm leading-relaxed text-white/90">
+              No primeiro dia, seu foco era <strong className="text-ouro">{foco}</strong>, e você esperava terminar se sentindo <strong className="text-ouro">{sentimento}</strong>.
+            </p>
+            {mostrarFotosCapsula && (
+              <div className="mt-4 grid grid-cols-2 gap-3">
+                <div className="text-center">
+                  {!fotosCapsulaComErro.has('inicial') ? (
+                    <img
+                      src={primeiraPesagemCapsula.pesagem.fotos.frente}
+                      alt={`Foto de ${primeiraPesagemCapsula.rotulo}`}
+                      className="aspect-[3/4] w-full rounded-xl object-cover"
+                      onError={() =>
+                        setFotosCapsulaComErro((atual) => {
+                          if (atual.has('inicial')) return atual
+                          const proximo = new Set(atual)
+                          proximo.add('inicial')
+                          return proximo
+                        })
+                      }
+                    />
+                  ) : (
+                    <span className="flex aspect-[3/4] w-full items-center justify-center rounded-xl bg-creme text-[10px] text-verde/40">
+                      Sem foto
+                    </span>
+                  )}
+                  <p className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-white/60">{primeiraPesagemCapsula.rotulo}</p>
+                </div>
+                <div className="text-center">
+                  {!fotosCapsulaComErro.has('final') ? (
+                    <img
+                      src={ultimaPesagemCapsula.pesagem.fotos.frente}
+                      alt={`Foto de ${ultimaPesagemCapsula.rotulo}`}
+                      className="aspect-[3/4] w-full rounded-xl object-cover"
+                      onError={() =>
+                        setFotosCapsulaComErro((atual) => {
+                          if (atual.has('final')) return atual
+                          const proximo = new Set(atual)
+                          proximo.add('final')
+                          return proximo
+                        })
+                      }
+                    />
+                  ) : (
+                    <span className="flex aspect-[3/4] w-full items-center justify-center rounded-xl bg-creme text-[10px] text-verde/40">
+                      Sem foto
+                    </span>
+                  )}
+                  <p className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-white/60">{ultimaPesagemCapsula.rotulo}</p>
+                </div>
+              </div>
+            )}
+            <p className="mt-5 text-center text-sm italic leading-relaxed text-white/85">
+              "Quando você começou, escreveu o que esperava sentir ao final desses 90 dias. Hoje, esse dia chegou. Não importa se cada meta foi cumprida à risca — o que importa é a constância que você construiu, dia após dia, e isso já é a maior prova de que você é capaz de sustentar uma mudança de verdade. Estou muito orgulhosa de você."
+            </p>
+            <p className="mt-2 text-center text-xs font-semibold text-ouro/70">Com carinho, Wanessa</p>
+          </div>
+        )}
 
         {/* Números da jornada - PREMIUM CELEBRATIVO */}
         <div className="grid w-full max-w-sm grid-cols-3 gap-3">
@@ -306,8 +389,21 @@ export default function Conclusao90Dias() {
           </p>
         </div>
 
-        {/* CTA - GRANDE DESTAQUE */}
+        {/* Oferta exclusiva para um novo ciclo */}
         <div className="w-full max-w-sm space-y-3 pb-4">
+          <div className="rounded-2xl border border-ouro/40 bg-white/10 p-5 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-ouro">
+              Condição exclusiva para participantes
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-white/85">
+              Preserve todo o seu histórico e comece uma nova jornada de 90 dias com novas metas.
+            </p>
+            <div className="mt-3 flex items-end justify-center gap-2">
+              <span className="pb-1 text-sm text-white/55 line-through">{formatarPreco(PRODUTOS.programa.preco)}</span>
+              <span className="font-serif text-4xl font-black text-ouro">{formatarPreco(PRODUTOS.renovacao.preco)}</span>
+            </div>
+            <p className="mt-1 text-xs text-white/55">pagamento único · sem renovação automática</p>
+          </div>
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-ouro via-ouro to-ouro/80 rounded-3xl blur opacity-75"></div>
             <button
@@ -316,18 +412,20 @@ export default function Conclusao90Dias() {
               className="relative flex w-full items-center justify-center gap-3 rounded-3xl bg-gradient-to-r from-ouro via-ouro/95 to-ouro px-6 py-5 font-black text-verde-escuro transition-all active:scale-[0.97] hover:shadow-2xl hover:shadow-ouro/50 shadow-xl shadow-ouro/40"
             >
               <Repeat size={22} />
-              <span className="text-base uppercase tracking-wide">Próximo ciclo de 90 dias</span>
+              <span className="text-base uppercase tracking-wide">Começar um novo ciclo</span>
               <span className="text-lg">🚀</span>
             </button>
           </div>
-          <p className="text-xs text-white/60 text-center">A verdade já é sua. Agora é só repetir.</p>
-          <button
-            type="button"
-            onClick={fecharConclusao90}
-            className="w-full rounded-2xl px-6 py-3 text-sm font-semibold text-ouro/80 hover:text-ouro hover:bg-white/10 transition-all border border-white/20 hover:border-ouro/40"
-          >
-            Explorar outras seções
-          </button>
+          <p className="text-xs text-white/60 text-center">A verdade já é sua. Agora é só continuar evoluindo.</p>
+          {!persistente && (
+            <button
+              type="button"
+              onClick={fecharConclusao90}
+              className="w-full rounded-2xl px-6 py-3 text-sm font-semibold text-ouro/80 hover:text-ouro hover:bg-white/10 transition-all border border-white/20 hover:border-ouro/40"
+            >
+              Explorar outras seções
+            </button>
+          )}
         </div>
 
         <div className="flex items-center gap-1.5 text-white/40">

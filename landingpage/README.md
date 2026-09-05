@@ -1,4 +1,4 @@
-# MWA — Landing Page (Jornada de 21 Dias)
+# MWA — Landing Page (Jornada de 90 Dias)
 
 Landing page premium da marca MWA (Método Wanessa Auad | My Wellness Approach), construída com React + Vite + Tailwind CSS v4, seguindo o Brand Book oficial.
 

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import {
   pesagensOrdenadas,
   pesagensComRotulo,
+  historicoSemanal,
   proporcaoCinturaQuadril,
   estagioPostura,
   corConquista,
@@ -44,6 +45,57 @@ test('pesagensComRotulo cai para "Pesagem N" além dos marcos disponíveis', () 
   ]
   const resultado = pesagensComRotulo(pesagens, totalDias)
   assert.deepEqual(resultado.map((r) => r.rotulo), ['Dia 15', 'Dia 30', 'Pesagem 3'])
+})
+
+test('historicoSemanal com 1 pesagem usa o peso inicial como base', () => {
+  const pesagens = [{ semana: 15, peso: 70, medidas: {} }]
+  const resultado = historicoSemanal(pesagens, 75)
+  assert.deepEqual(resultado, [{ semana: 15, peso: 70, delta: -5, medidas: '—' }])
+})
+
+test('historicoSemanal com exatamente 2 pesagens não quebra e encadeia os deltas corretamente', () => {
+  // Bug original: pesagens[pesagens.length - 3 + i - 1] dava pesagens[-1] (undefined) para i=1 quando length=2
+  const pesagens = [
+    { semana: 15, peso: 74, medidas: {} },
+    { semana: 30, peso: 70, medidas: {} },
+  ]
+  const resultado = historicoSemanal(pesagens, 75)
+  assert.deepEqual(resultado, [
+    { semana: 15, peso: 74, delta: -1, medidas: '—' },
+    { semana: 30, peso: 70, delta: -4, medidas: '—' },
+  ])
+})
+
+test('historicoSemanal com 3 pesagens usa o peso inicial como base da primeira e encadeia as demais', () => {
+  const pesagens = [
+    { semana: 15, peso: 74, medidas: {} },
+    { semana: 30, peso: 70, medidas: {} },
+    { semana: 45, peso: 68, medidas: {} },
+  ]
+  const resultado = historicoSemanal(pesagens, 75)
+  assert.deepEqual(resultado.map((r) => r.delta), [-1, -4, -2])
+})
+
+test('historicoSemanal com mais de 3 pesagens usa só as últimas 3, encadeadas a partir da pesagem anterior à janela', () => {
+  const pesagens = [
+    { semana: 15, peso: 74, medidas: {} },
+    { semana: 30, peso: 70, medidas: {} },
+    { semana: 45, peso: 68, medidas: {} },
+    { semana: 60, peso: 65, medidas: {} },
+  ]
+  const resultado = historicoSemanal(pesagens, 75)
+  // janela = semanas 30/45/60; base da semana 30 é a pesagem da semana 15 (70 -> 74 = -4), não o peso inicial
+  assert.deepEqual(resultado.map((r) => ({ semana: r.semana, delta: r.delta })), [
+    { semana: 30, delta: -4 },
+    { semana: 45, delta: -2 },
+    { semana: 60, delta: -3 },
+  ])
+})
+
+test('historicoSemanal usa a medida de cintura da pesagem quando disponível', () => {
+  const pesagens = [{ semana: 15, peso: 70, medidas: { cintura: 80 } }]
+  const resultado = historicoSemanal(pesagens, 75)
+  assert.equal(resultado[0].medidas, '80 cm')
 })
 
 test('proporcaoCinturaQuadril calcula a razão arredondada', () => {

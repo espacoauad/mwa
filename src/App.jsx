@@ -5,15 +5,18 @@ import TelaAuth from './components/auth/TelaAuth.jsx'
 import CarregandoFallback from './components/ui/CarregandoFallback.jsx'
 import TabBar from './components/layout/TabBar.jsx'
 import BotaoWhatsApp from './components/layout/BotaoWhatsApp.jsx'
+import AvisoInstalarIOS from './components/layout/AvisoInstalarIOS.jsx'
 import Hoje from './components/hoje/Hoje.jsx'
 import Alimentacao from './components/alimentacao/Alimentacao.jsx'
 import Progresso from './components/progresso/Progresso.jsx'
 import Dicas from './components/dicas/Dicas.jsx'
 import Ferramentas from './components/ferramentas/Ferramentas.jsx'
 import Perfil from './components/perfil/Perfil.jsx'
-import ModalRefeicao from './components/alimentacao/ModalRefeicao.jsx'
+import ModalEscolherRefeicao from './components/alimentacao/ModalEscolherRefeicao.jsx'
+import ModalRefeicaoAberta from './components/alimentacao/ModalRefeicaoAberta.jsx'
+import ModalAdicionarAlimento from './components/alimentacao/ModalAdicionarAlimento.jsx'
 import LembretePesagem from './components/progresso/LembretePesagem.jsx'
-import AcessoBloqueado from './components/layout/AcessoBloqueado.jsx'
+import Conclusao90Dias from './components/game/Conclusao90Dias.jsx'
 import AdminApp from './components/admin/AdminApp.jsx'
 import LandingVendas from './components/vendas/LandingVendas.jsx'
 import ResgateCupom from './components/vendas/ResgateCupom.jsx'
@@ -21,6 +24,8 @@ import PreviewLanches from './components/dicas/PreviewLanches.jsx'
 import ModoDeRevisao from './components/admin/MododeRevisao.jsx'
 import { ehDiaPesagem } from './utils/pesagensReminder.js'
 import { configurarNotificacoesPesagem } from './utils/notificacoesReminder.js'
+import { lembrarFuncaoDoDia } from './utils/notificacaoFuncoes.js'
+import { garantirInscricaoPush } from './utils/pushSubscricao.js'
 
 // Fluxo de cadastro (onboarding) é pesado e só é usado uma vez por pessoa —
 // carregado sob demanda para reduzir o bundle principal.
@@ -32,15 +37,21 @@ const AVISOS_PAGAMENTO = {
   falha: { texto: '❌ O pagamento não foi concluído. Você pode tentar novamente quando quiser.', estilo: 'border-red-300 bg-red-50 text-red-800' },
 }
 
+// Mantida em sincronia com as chaves de `telas` (abaixo, dentro de AppInner).
+// Não referenciamos `telas` diretamente aqui porque ela só existe depois dos
+// retornos antecipados (usuário deslogado, onboarding, admin...) — se o efeito
+// de ?aba= disparasse antes disso, `telas` ainda estaria em TDZ.
+const ABAS_VALIDAS = ['hoje', 'alimentacao', 'progresso', 'dicas', 'ferramentas', 'perfil']
+
 function AppInner() {
-  const { sessao, carregando, usuario, modalRefeicao, ganhoSementes, diaAtual, totalDias, programa90Ativo } = useApp()
+  const { sessao, carregando, usuario, modalRefeicao, ganhoSementes, diaAtual, totalDias, programa90Ativo, hoje } = useApp()
   const { ingles } = useIdioma()
   const [aba, setAba] = useState('hoje')
   const [avisoPagamento, setAvisoPagamento] = useState(null)
   const [mostrarLembretePesagem, setMostrarLembretePesagem] = useState(false)
   const [jaMostrarLembrete, setJaMostrarLembrete] = useState(false)
 
-  // Verifica se acesso deve ser bloqueado (dia 90 sem programa 90d ativo)
+  // Ao terminar o ciclo, a comemoração do dia 90 permanece até a renovação.
   const acessoBloqueado = usuario && diaAtual === 90 && !programa90Ativo
 
   // Ao voltar do checkout, o Mercado Pago adiciona ?pagamento= na URL
@@ -49,6 +60,19 @@ function AppInner() {
     if (status) {
       window.history.replaceState({}, '', window.location.pathname)
       setAvisoPagamento(AVISOS_PAGAMENTO[status] ?? null)
+    }
+  }, [])
+
+  // App aberto a partir do toque numa notificação push com o app fechado —
+  // o service worker cold-starta em /?aba=..., já que nesse caso não existe
+  // uma janela controlada pra receber o postMessage de 'push-click'.
+  useEffect(() => {
+    const abaPush = new URLSearchParams(window.location.search).get('aba')
+    if (abaPush) {
+      window.history.replaceState({}, '', window.location.pathname)
+      if (ABAS_VALIDAS.includes(abaPush)) {
+        setAba(abaPush)
+      }
     }
   }, [])
 
@@ -69,6 +93,42 @@ function AppInner() {
       configurarNotificacoesPesagem(diaAtual, totalDias, userId)
     }
   }, [sessao, usuario, diaAtual, totalDias])
+
+  // Lembrete diário rotativo das funções do app (Reforçando Conceitos,
+  // exercício, Fazenda, Lente da Consciência, jogo da semana, Versículo)
+  useEffect(() => {
+    const userId = sessao?.user?.id
+    if (usuario && diaAtual && hoje && userId && !acessoBloqueado && usuario.role !== 'admin') {
+      lembrarFuncaoDoDia({ userId, hoje, diaAtual, ingles, onAbrir: setAba })
+    }
+  }, [sessao, usuario, diaAtual, hoje, ingles, acessoBloqueado])
+
+  // Garante a inscrição push do dispositivo atual (sem pedir permissão de novo).
+  // Depende do id do usuário e de `usuario` ter terminado de carregar (booleano) —
+  // não do objeto `usuario` inteiro, cuja identidade muda a cada atualização de
+  // perfil (foto, idioma etc), o que reexecutaria o registro do service worker +
+  // upsert no Supabase à toa. `sessao` costuma ficar disponível antes de `usuario`
+  // terminar de carregar (são efeitos assíncronos separados em AppContext), então
+  // sem o `!!usuario` aqui o efeito dispararia uma única vez com `usuario` ainda
+  // nulo e nunca mais rodaria — a inscrição push nunca aconteceria.
+  useEffect(() => {
+    const userId = sessao?.user?.id
+    if (usuario && userId) {
+      garantirInscricaoPush(userId)
+    }
+  }, [sessao?.user?.id, !!usuario])
+
+  // Toque numa notificação push -> navega pra aba indicada
+  useEffect(() => {
+    if (!('serviceWorker' in navigator)) return
+    function aoReceberMensagem(evento) {
+      if (evento.data?.tipo === 'push-click') {
+        setAba(evento.data.aba || 'ferramentas')
+      }
+    }
+    navigator.serviceWorker.addEventListener('message', aoReceberMensagem)
+    return () => navigator.serviceWorker.removeEventListener('message', aoReceberMensagem)
+  }, [])
 
   if (carregando) {
     return (
@@ -96,7 +156,7 @@ function AppInner() {
 
   // Bloqueia acesso se chegou ao dia 90 sem programa 90d ativo
   if (acessoBloqueado) {
-    return <AcessoBloqueado usuario={usuario} />
+    return <Conclusao90Dias persistente />
   }
 
   const telas = {
@@ -122,9 +182,12 @@ function AppInner() {
       )}
       <div className="pb-28">{telas[aba]}</div>
       <BotaoWhatsApp />
+      <AvisoInstalarIOS />
       <TabBar aba={aba} onMudar={setAba} />
       <ModoDeRevisao />
-      {modalRefeicao.aberto && <ModalRefeicao />}
+      {modalRefeicao.etapa === 'escolher' && <ModalEscolherRefeicao />}
+      {modalRefeicao.etapa === 'aberta' && <ModalRefeicaoAberta />}
+      {modalRefeicao.etapa === 'alimento' && <ModalAdicionarAlimento />}
       {mostrarLembretePesagem && (
         <LembretePesagem
           onFechar={() => setMostrarLembretePesagem(false)}
@@ -144,8 +207,8 @@ function AppInner() {
 export default function App() {
   // Páginas públicas (fora do app logado)
   const rota = window.location.pathname
-  if (rota === '/vendas') return <LandingVendas />
-  if (rota === '/resgate') return <ResgateCupom />
+  if (rota === '/vendas') return <IdiomaProvider><LandingVendas /></IdiomaProvider>
+  if (rota === '/resgate') return <IdiomaProvider><ResgateCupom /></IdiomaProvider>
   if (rota === '/preview-lanches') return <IdiomaProvider><PreviewLanches /></IdiomaProvider>
 
   return (

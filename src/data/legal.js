@@ -15,6 +15,7 @@ export const DADOS_COLETADOS = [
   { titulo: 'Dados biométricos', itens: 'peso, altura, idade, sexo e medidas corporais' },
   { titulo: 'Rotina alimentar', itens: 'refeições, água e exercícios registrados no app' },
   { titulo: 'Progresso', itens: 'pesagens semanais e fotos de acompanhamento' },
+  { titulo: 'Hábitos e motivação', itens: 'sono, hidratação, funcionamento intestinal, disposição, hábitos alimentares e seus objetivos pessoais' },
 ]
 
 export const USOS_DADOS = [
@@ -22,6 +23,7 @@ export const USOS_DADOS = [
   'Acompanhar seu progresso durante o programa',
   'Enviar informativos e lembretes do programa',
   'Prestar suporte pelo WhatsApp',
+  'Personalizar sua experiência e recepção no aplicativo',
 ]
 
 export const POLITICA_PRIVACIDADE = {
@@ -34,11 +36,11 @@ export const POLITICA_PRIVACIDADE = {
     },
     {
       titulo: '2. Dados que coletamos',
-      texto: 'Coletamos apenas o necessário para o seu acompanhamento: dados de identificação e contato (nome, e-mail, WhatsApp), dados biométricos (peso, altura, idade, sexo, medidas corporais), registros de rotina alimentar (refeições, água, exercícios) e registros de progresso (pesagens e fotos de acompanhamento).',
+      texto: 'Coletamos apenas o necessário para o seu acompanhamento: dados de identificação e contato (nome, e-mail, WhatsApp), dados biométricos (peso, altura, idade, sexo, medidas corporais), registros de rotina alimentar (refeições, água, exercícios), registros de progresso (pesagens e fotos de acompanhamento) e dados de hábitos e motivação (sono, hidratação, funcionamento intestinal, disposição, hábitos alimentares e seus objetivos pessoais).',
     },
     {
       titulo: '3. Para que usamos seus dados',
-      texto: 'Usamos seus dados exclusivamente para: calcular suas metas nutricionais, acompanhar seu progresso durante o programa, enviar informativos e lembretes, e prestar suporte. Não usamos seus dados para nenhuma outra finalidade sem novo consentimento.',
+      texto: 'Usamos seus dados exclusivamente para: calcular suas metas nutricionais, acompanhar seu progresso durante o programa, enviar informativos e lembretes, prestar suporte e personalizar sua experiência e recepção no aplicativo. Não usamos seus dados para nenhuma outra finalidade sem novo consentimento.',
     },
     {
       titulo: '4. Compartilhamento',

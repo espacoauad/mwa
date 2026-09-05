@@ -18,13 +18,13 @@ export default function LogoMWA({ variante = 'completa', tema = 'escuro', classN
   }
 
   if (variante === 'wordmark') {
-    const corPrincipal = tema === 'claro' ? '#F5F1E8' : '#344528'
-    const corTagline = tema === 'claro' ? '#D4AF7A' : '#879b55'
+    const corPrincipal = tema === 'claro' ? '#FFFFFF' : '#08402F'
+    const corTagline = tema === 'claro' ? '#E3C486' : '#879b55'
     return (
       <div className={`text-center ${className}`}>
         <p className="font-serif text-4xl font-bold tracking-wide">
           <span style={{ color: corPrincipal }}>M</span>
-          <span style={{ color: '#c49b62' }}>W</span>
+          <span style={{ color: '#C59F4F' }}>W</span>
           <span style={{ color: corPrincipal }}>A</span>
         </p>
         <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.25em]" style={{ color: corTagline }}>

@@ -57,7 +57,7 @@ const perfis = {
   A: {
     titulo: 'Fundação pronta',
     texto:
-      'Você já tem base — o que falta é método para a consistência virar resultado. Os 30 dias do MWA organizam o que você já sabe em prática diária.',
+      'Você já tem base — o que falta é método para a consistência virar resultado. Os 90 dias do MWA organizam o que você já sabe em prática diária.',
   },
   B: {
     titulo: 'Piloto automático',
@@ -306,7 +306,7 @@ export default function Quiz() {
               <p className="mt-4 text-sm leading-relaxed text-ink/80 md:text-base">
                 {perfis[perfilResultado].texto}
               </p>
-              <CtaButton className="mt-8">Quero começar meus 30 dias</CtaButton>
+              <CtaButton className="mt-8">Quero começar meus 90 dias</CtaButton>
             </div>
           )}
         </div>

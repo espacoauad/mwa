@@ -17,6 +17,30 @@ export function pesagensComRotulo(pesagens, totalDias) {
   }))
 }
 
+// Histórico das últimas 3 pesagens com o delta de peso em relação à
+// pesagem imediatamente anterior (ou ao peso inicial, para a primeira
+// pesagem da lista completa). Usa o índice real de cada pesagem dentro do
+// array completo — não a posição dentro da janela dos últimos 3 — para que
+// o cálculo funcione com qualquer quantidade de pesagens, incluindo 1 ou 2.
+// Pressupõe `pesagens` em ordem cronológica crescente (garantido hoje pelo
+// `.order('data')` do carregamento em AppContext.jsx) — use
+// `pesagensOrdenadas` antes de chamar esta função se essa garantia não valer.
+export function historicoSemanal(pesagens, pesoInicial) {
+  const janela = pesagens.slice(-3)
+  const inicioJanela = pesagens.length - janela.length
+  return janela.map((pesagem, indice) => {
+    const indiceReal = inicioJanela + indice
+    const pesagemAnterior = indiceReal > 0 ? pesagens[indiceReal - 1] : { peso: pesoInicial }
+    const delta = Math.round((pesagem.peso - pesagemAnterior.peso) * 10) / 10
+    return {
+      semana: pesagem.semana,
+      peso: pesagem.peso,
+      delta,
+      medidas: pesagem.medidas?.cintura ? `${pesagem.medidas.cintura} cm` : '—',
+    }
+  })
+}
+
 // Razão cintura/quadril arredondada, ou null se alguma medida estiver ausente.
 export function proporcaoCinturaQuadril(medidas) {
   const cintura = medidas?.cintura

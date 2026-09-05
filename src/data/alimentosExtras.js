@@ -139,6 +139,27 @@ Achocolatado com leite|Bebidas|83|3.2|12.0|2.5|0.5|200|nescau,toddy,chocolate
 Prato feito com carne|Refeições prontas|152|9.0|17.0|5.5|2.4|400|pf,marmita
 Feijoada|Refeições prontas|117|8.7|11.6|4.5|5.1|300|feijoada
 Strogonoff de frango|Refeições prontas|176|13.0|6.0|11.0|0.5|200|estrogonofe,frango
+Strogonoff de carne|Refeições prontas|190|12.0|6.5|13.0|0.5|200|estrogonofe de carne,estrogonofe carne,strogonoff carne
+Filé à catupiry|Refeições prontas|230|17.0|4.0|16.0|0.2|200|file a catupiry,file catupiry,carne com catupiry
+Frango à catupiry|Refeições prontas|200|16.0|5.0|13.0|0.2|200|frango a catupiry,frango catupiry
+Camarão ao alho e óleo|Proteínas|140|18.0|2.0|7.0|0.2|150|camarao ao alho e oleo,camarao alho e oleo
+Bolinho de arroz|Refeições prontas|230|5.0|28.0|11.0|0.8|40|bolinho de arroz,bolinho arroz
+Bolinho de bacalhau|Refeições prontas|250|12.0|18.0|15.0|0.8|40|bolinho de bacalhau,bolinho bacalhau,pastel de bacalhau
+Mandioca assada|Carboidratos|145|0.7|34.0|0.2|1.8|100|mandioca assada,aipim assado,macaxeira assada
+Gorgonzola|Laticínios|330|19.0|2.0|27.0|0|30|gorgonzola
+Brie|Laticínios|334|20.8|0.5|27.7|0|30|brie,queijo brie
+Gouda|Laticínios|356|24.9|2.2|27.4|0|30|gouda,queijo gouda
+Salame|Proteínas|407|22.0|1.6|34.0|0|30|salame,salaminho
+Presunto de Parma|Proteínas|268|25.0|0|18.0|0|30|presunto de parma,presunto parma,prosciutto
+Costela ao barbecue|Refeições prontas|320|22.0|10.0|20.0|0.3|150|costela barbecue,costela bbq,costela ao molho barbecue
+Churrasco misto|Refeições prontas|250|22.0|1.0|17.0|0|200|churrasco,churrasco misto,rodizio
+Frango a passarinho|Refeições prontas|280|20.0|8.0|19.0|0.3|150|frango a passarinho,frango passarinho,frango frito a passarinho
+Croissant|Carboidratos|406|8.2|45.8|21.0|2.6|60|croissant
+Bolo simples|Doces e sobremesas|310|5.0|45.0|12.0|0.8|80|bolo simples,bolo de baunilha,pao de lo
+Bolo de chocolate sem cobertura|Doces e sobremesas|340|5.0|48.0|14.0|2.0|80|bolo de chocolate sem cobertura,bolo chocolate sem cobertura
+Bolo de cenoura sem cobertura|Doces e sobremesas|300|4.0|42.0|12.0|1.3|80|bolo de cenoura sem cobertura,bolo cenoura sem cobertura
+Bolo de fubá|Doces e sobremesas|330|6.0|50.0|12.0|1.5|80|bolo de fuba,bolo fuba
+Bolo de milho|Doces e sobremesas|280|5.5|42.0|9.0|1.8|80|bolo de milho,bolo milho
 Escondidinho de carne|Refeições prontas|180|9.0|20.0|7.0|1.5|250|escondidinho
 Lasanha à bolonhesa|Refeições prontas|170|9.0|16.0|8.0|1.3|250|lasanha bolonhesa
 Pizza de muçarela|Refeições prontas|266|11.0|33.0|10.0|2.3|120|pizza mussarela
@@ -178,6 +199,94 @@ Molho branco|Molhos e complementos|145|4.0|9.0|10.0|0.3|60|bechamel,molho
 Açúcar|Molhos e complementos|387|0|100|0|0|5|acucar
 Mel|Molhos e complementos|304|0.3|82.4|0|0.2|15|mel
 Creme de leite|Molhos e complementos|221|2.2|4.5|22.0|0|30|creme leite
+Pamonha|Carboidratos|150|3.0|30.0|2.5|2.0|150|pamonha
+Broa de milho|Carboidratos|290|5.0|55.0|6.0|2.0|50|broa,broa de milho
+Feijão tropeiro|Refeições prontas|180|8.0|18.0|8.0|4.0|150|feijao tropeiro,tropeiro
+Pastel de queijo frito|Refeições prontas|320|9.0|30.0|18.0|1.5|100|pastel queijo
+Enroladinho de queijo|Refeições prontas|400|10.0|40.0|22.0|1.5|40|enroladinho,palito de queijo
+Biscoito de queijo|Refeições prontas|480|8.0|55.0|25.0|1.0|30|biscoito de queijo,biscoito queijo
+Ovo frito|Proteínas|196|13.6|0.6|15.4|0|50|ovo frito
+Ovo mexido|Proteínas|168|12.0|1.5|12.5|0|100|ovo mexido
+Frango desfiado cozido|Proteínas|165|29.0|0|4.5|0|100|frango desfiado,frango cozido
+Picanha grelhada|Proteínas|289|26.0|0|20.0|0|120|picanha
+Filé mignon grelhado|Proteínas|201|30.0|0|8.0|0|120|file mignon,filet mignon
+Batata-doce assada|Carboidratos|90|1.5|21.0|0.1|2.5|150|batata doce assada
+Pão árabe|Carboidratos|275|9.0|55.0|1.5|2.3|60|pao arabe,pao sirio
+Pipoca sem óleo|Carboidratos|375|11.0|74.0|4.5|15.0|25|pipoca,pipoca estourada
+Vitamina de frutas|Bebidas|85|3.0|15.0|1.8|1.0|250|vitamina,vitamina de banana
+Chá verde|Bebidas|1|0|0.2|0|0|200|cha verde
+Chá mate|Bebidas|2|0|0.4|0|0|200|cha mate,mate
+Shoyu|Molhos e complementos|60|6.0|8.0|0|0.8|15|shoyu,molho de soja
+Polpa de frutas vermelhas|Frutas|45|0.8|10.0|0.3|3.0|100|polpa frutas vermelhas,polpa mix berries
+Polpa de cajá|Frutas|55|0.6|13.0|0.2|1.5|100|polpa caja,caja
+Quiche de alho-poró|Refeições prontas|233|5.8|18.3|15.0|1.0|120|quiche alho poro,quiche de alho poro,torta de alho poro
+Espumante brut|Bebidas|76|0.1|1.5|0|0|150|espumante,espumante brut,champagne brut
+Espumante demi sec|Bebidas|85|0.1|5.0|0|0|150|espumante demi sec,champagne demi sec
+Espumante moscatel|Bebidas|75|0.1|9.0|0|0|150|espumante moscatel,moscatel espumante
+Vinho branco seco|Bebidas|82|0.1|2.6|0|0|150|vinho branco,vinho branco seco
+Vinho branco suave|Bebidas|90|0.1|6.0|0|0|150|vinho branco suave
+Vinho branco doce|Bebidas|110|0.1|12.0|0|0|150|vinho branco doce
+Vinho tinto seco|Bebidas|85|0.1|2.6|0|0|150|vinho tinto,vinho tinto seco
+Vinho tinto suave|Bebidas|92|0.1|6.0|0|0|150|vinho tinto suave
+Vinho tinto doce|Bebidas|112|0.1|12.0|0|0|150|vinho tinto doce
+Aperol spritz|Bebidas|80|0|8.0|0|0|200|aperol,aperol spritz
+Gin tônica|Bebidas|75|0|7.0|0|0|200|gin tonica,gin e tonica
+Água tônica|Bebidas|34|0|8.8|0|0|200|agua tonica,tonica
+Moscow mule|Bebidas|90|0|9.0|0|0|200|moscow mule
+Cosmopolitan|Bebidas|125|0|10.0|0|0|150|cosmopolitan,cosmo
+Whisky|Bebidas|250|0|0|0|0|50|whisky,uisque,whiskey
+Vodka|Bebidas|231|0|0|0|0|50|vodka
+Gin|Bebidas|263|0|0|0|0|50|gin
+Cerveja (pilsen)|Bebidas|43|0.5|3.6|0|0|350|cerveja,pilsen,lager
+Chopp|Bebidas|40|0.4|3.2|0|0|300|chopp,chope
+Frango à parmegiana|Refeições prontas|215|14.0|12.0|12.0|0.8|200|frango a parmegiana,frango parmegiana,parmegiana de frango
+Filé à parmegiana|Refeições prontas|220|16.0|10.0|13.0|0.7|200|file a parmegiana,file parmegiana,parmegiana de file,carne a parmegiana
+Nhoque à bolonhesa|Refeições prontas|175|6.0|26.0|5.0|2.0|300|nhoque a bolonhesa,nhoque bolonhesa
+Nhoque quatro queijos|Refeições prontas|195|7.0|24.0|8.0|1.8|300|nhoque quatro queijos,nhoque 4 queijos
+Molho branco|Molhos e complementos|110|3.0|6.0|8.5|0.1|60|molho branco,bechamel
+Molho quatro queijos|Molhos e complementos|160|7.0|5.0|13.0|0|60|molho quatro queijos,molho 4 queijos
+Molho de tomate|Molhos e complementos|35|1.5|7.0|0.5|1.5|60|molho de tomate,molho tomate
+Molho à bolonhesa|Molhos e complementos|95|6.0|6.0|5.0|1.2|100|molho a bolonhesa,molho bolonhesa,molho de carne
+Macarrão à bolonhesa|Refeições prontas|140|6.0|20.0|4.0|1.5|300|macarrao a bolonhesa,macarrao bolonhesa,espaguete a bolonhesa
+Macarrão aos quatro queijos|Refeições prontas|175|7.0|22.0|7.0|1.3|300|macarrao quatro queijos,macarrao 4 queijos
+Risoto de queijo|Refeições prontas|170|5.0|24.0|6.0|0.8|250|risoto de queijo,risoto queijo
+Risoto de carne|Refeições prontas|165|8.0|21.0|5.5|0.9|250|risoto de carne,risoto carne
+Risoto de cogumelos|Refeições prontas|150|4.5|22.0|5.0|1.2|250|risoto de cogumelos,risoto cogumelos,risoto funghi
+Risoto de frutos do mar|Refeições prontas|155|9.0|20.0|4.5|0.8|250|risoto de frutos do mar,risoto frutos do mar,risoto de camarao
+Pescada grelhada|Proteínas|90|18.0|0|1.5|0|120|pescada,pescada grelhada
+Robalo grelhado|Proteínas|97|19.0|0|2.0|0|120|robalo,robalo grelhado
+Bacalhau cozido|Proteínas|105|23.0|0|1.0|0|120|bacalhau,bacalhau dessalgado,bacalhau cozido
+Merluza grelhada|Proteínas|85|17.0|0|1.3|0|120|merluza,merluza grelhada
+Camarão grelhado|Proteínas|99|20.0|0.5|1.4|0|100|camarao,camarao grelhado,camarao refogado
+Burrata|Laticínios|300|15.0|3.0|25.0|0|100|burrata
+Bruschetta|Refeições prontas|180|4.5|24.0|7.0|2.0|80|bruschetta,brusqueta
+Mussarela de búfala|Laticínios|253|16.7|2.0|20.0|0|100|mussarela de bufala,muçarela de bufala,mozzarela de bufala,bufala
+Carpaccio|Refeições prontas|180|20.0|1.0|11.0|0.3|100|carpaccio,carpaccio de carne
+Quibe assado|Refeições prontas|205|12.0|19.0|8.5|2.3|100|kibe assado,quibe forno
+Quibe cru|Refeições prontas|200|13.5|14.0|10.0|2.0|100|kibe cru,kibe nayyeh,quibe tartare
+Disco de carne|Proteínas|220|17.5|1.0|16.0|0|90|disco de hamburguer,hamburguer cru,carne para hamburguer
+Enroladinho de salsicha|Refeições prontas|370|8.5|32.0|22.0|1.2|40|rocambole de salsicha,salsicha enrolada,salgado de salsicha
+Americano|Refeições prontas|230|11.0|24.0|10.0|1.5|220|sanduiche americano,sanduba americano
+Cheeseburguer|Refeições prontas|290|14.5|24.0|15.5|1.2|150|cheese burguer,cheeseburger
+Cheese bacon|Refeições prontas|310|16.0|22.0|18.5|1.2|180|cheese bacon burguer,x-bacon,xbacon
+X-salada|Refeições prontas|250|12.5|24.0|11.5|1.6|200|xsalada,x salada,hamburguer salada
+Misto quente|Refeições prontas|300|13.0|29.0|14.0|1.5|100|sanduiche misto,misto
+Pão com ovo|Refeições prontas|260|10.5|29.0|11.0|1.5|120|pao com ovo frito,sanduiche de ovo,pao ovo
+Pastel de presunto e queijo|Refeições prontas|310|10.0|30.0|17.0|1.3|100|pastel presunto queijo,pastel presunto e queijo
+Pastel de frango|Refeições prontas|290|11.0|30.0|14.0|1.3|100|pastel de frango frito,pastel frango
+Espetinho|Proteínas|205|24.0|1.0|11.0|0|100|espeto,churrasquinho,espetinho misto,churrasco de espeto
+Churros|Doces e sobremesas|380|5.0|48.0|18.0|1.5|60|churro,churros doce,churros recheado
+Picolé de chocolate|Doces e sobremesas|180|2.5|24.0|8.0|1.0|65|picole chocolate,sorvete picole chocolate
+Picolé de creme|Doces e sobremesas|170|2.8|21.0|8.0|0|65|picole creme,picole de creme
+Picolé de morango|Doces e sobremesas|95|0.5|22.0|0.3|0.5|65|picole morango,picole de fruta,picole de frutas
+Risole de milho|Refeições prontas|290|6.0|28.0|17.0|1.5|60|risoles de milho,risole,risole frito
+Açaí na tigela|Doces e sobremesas|130|1.8|22.0|3.5|2.5|300|acai na tigela,acai bowl,tigela de acai
+Espetinho de carne|Proteínas|215|26.0|0.5|11.5|0|100|espeto de carne,churrasquinho de carne
+Espetinho de frango com bacon|Proteínas|235|25.0|1.0|14.0|0|100|espeto de frango com bacon,churrasquinho frango bacon
+Espetinho de queijo coalho|Laticínios|330|22.0|2.5|25.5|0|80|espeto de queijo coalho,churrasquinho queijo coalho,queijo coalho grelhado
+Pizza portuguesa|Refeições prontas|250|11.0|30.0|9.0|1.8|120|pizza portuguesa
+Pizza quatro queijos|Refeições prontas|280|13.0|28.0|13.0|1.5|120|pizza 4 queijos,pizza quatro queijos
+Pizza marguerita|Refeições prontas|240|10.0|30.0|9.0|1.8|120|pizza margherita,pizza marguerita,pizza de tomate e manjericao
 `.trim()
 
 const liquidos = new Set(['Bebidas'])

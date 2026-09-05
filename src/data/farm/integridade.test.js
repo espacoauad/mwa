@@ -2,8 +2,8 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { PILARES } from './pilares.js'
 import { DECORACOES } from './decoracoes.js'
-import { COROAS_SUPORTADAS } from '../../components/game/svg/PlantaFazenda.jsx'
-import { IDS_ANIMAIS } from '../../components/game/svg/AnimalFazendaSvg.jsx'
+import { COROAS_SUPORTADAS } from '../../components/game/svg/coroasSuportadas.js'
+import { IDS_ANIMAIS } from '../../components/game/svg/idsAnimais.js'
 
 test('todo coroaId de PILARES tem um desenho correspondente em PlantaFazenda', () => {
   for (const pilar of PILARES) {

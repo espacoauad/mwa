@@ -60,19 +60,6 @@ export function calcularMetas(dados) {
   return { tmb, tdee, calorias, proteina, carboidrato, gordura, fibras, aguaMl, aguaL, copos }
 }
 
-// Percentual de uma meta atingida (0–100+, sem teto para mostrar excesso)
-export function percentualMeta(consumido, meta) {
-  if (!meta) return 0
-  return Math.round((consumido / meta) * 100)
-}
-
-// Semáforo das metas: verde atingida, amarelo próxima, vermelho longe
-export function statusMeta(pct) {
-  if (pct >= 100) return { cor: '#879B55', nome: 'atingida' }
-  if (pct >= 60) return { cor: '#C9963B', nome: 'quase lá' }
-  return { cor: '#B0563C', nome: 'em andamento' }
-}
-
 export function dataHojeISO() {
   const d = new Date()
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
@@ -123,6 +110,14 @@ export function diaDoPrograma(programas, dataInicioFallback) {
     return Math.min(90, Math.max(1, diaCorrido))
   }
   return Math.min(30, Math.max(1, diaCorrido))
+}
+
+// Mesma data-âncora usada por diaDoPrograma, em formato AAAA-MM-DD — usada
+// para limitar até onde a navegação de dias passados pode retroceder.
+export function dataInicioDoPrograma(programas, dataInicioFallback) {
+  const p21 = (programas ?? []).find((p) => p.tipo === '21d')
+  const inicio = p21?.dataInicio ?? dataInicioFallback
+  return inicio.slice(0, 10)
 }
 
 // Total de dias do programa da cliente, para exibição de progresso (barra, "Dia X de Y").

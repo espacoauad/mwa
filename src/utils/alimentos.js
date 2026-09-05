@@ -53,3 +53,43 @@ export function formatarMedida(medida, quantidade) {
   if (!medida) return ''
   return Number(quantidade) === 1 ? medida.nome : (medida.plural ?? medida.nome)
 }
+
+// Nomes de unidade de medida ("colher de sopa", "porção sugerida"...) são um
+// conjunto finito reaproveitado por centenas de alimentos — traduzido aqui
+// numa tabela única em vez de duplicar nomeEn em cada item/medida.
+const MEDIDA_NOME_EN = {
+  'g': 'g', 'ml': 'ml', 'kg': 'kg',
+  'porção sugerida': 'suggested serving', 'porções sugeridas': 'suggested servings',
+  'porção cadastrada': 'logged serving', 'porções cadastradas': 'logged servings',
+  'colher de sopa': 'tablespoon', 'colheres de sopa': 'tablespoons',
+  'colher de sobremesa': 'dessert spoon', 'colheres de sobremesa': 'dessert spoons',
+  'colher de chá': 'teaspoon', 'colheres de chá': 'teaspoons',
+  'copo': 'cup (glass)', 'copos': 'cups (glasses)',
+  'unidade': 'unit', 'unidades': 'units',
+  'unidade média': 'medium unit', 'unidades médias': 'medium units',
+  'fatia': 'slice', 'fatias': 'slices',
+  'concha': 'ladle', 'conchas': 'ladles',
+  'pote': 'tub', 'potes': 'tubs',
+  'dose': 'scoop', 'doses': 'scoops',
+  'medida': 'scoop', 'medidas': 'scoops',
+  'medida (dosador)': 'scoop', 'medidas (dosador)': 'scoops',
+  'lata (350ml)': 'can (350ml)', 'latas (350ml)': 'cans (350ml)',
+  'long neck (355ml)': 'long neck (355ml)', 'long necks (355ml)': 'long necks (355ml)',
+  'oz (onça)': 'oz', 'oz (onças)': 'oz',
+  'cup (xícara americana)': 'cup', 'cups (xícaras americanas)': 'cups',
+  'fl oz': 'fl oz',
+  'serving (porção)': 'serving', 'servings (porções)': 'servings',
+}
+
+export function traduzirMedida(nomeMedida, ingles) {
+  if (!ingles || !nomeMedida) return nomeMedida
+  return MEDIDA_NOME_EN[nomeMedida] ?? nomeMedida
+}
+
+// Nome de exibição do alimento: usa nomeEn quando existir (alimentos
+// genéricos) e cai para o nome original em produtos de marca (Herbalife,
+// Vitarela...), cujo nome de produto não é traduzido — como qualquer marca.
+export function nomeAlimento(alimento, ingles) {
+  if (!alimento) return ''
+  return (ingles && alimento.nomeEn) ? alimento.nomeEn : alimento.nome
+}
