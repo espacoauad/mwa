@@ -101,6 +101,46 @@ export default function JogoColheita({ onFechar }) {
     return dr + dc === 1
   }
 
+  // Arrastar/deslizar: guarda a célula e o ponto onde o gesto começou.
+  // Não precisa de estado (não deve causar re-render a cada pixel de movimento).
+  const origemArrasteRef = useRef(null)
+  const LIMIAR_ARRASTE = 18 // px — distância mínima pra considerar um deslize
+
+  function aoPressionarCelula(e, i) {
+    if (processando || fim) return
+    // Alguns navegadores (Safari em particular) podem lançar aqui em cenários
+    // raros de multi-touch — a captura é só uma melhoria, não essencial.
+    try { e.currentTarget.setPointerCapture(e.pointerId) } catch { /* segue sem captura */ }
+    origemArrasteRef.current = { indice: i, x: e.clientX, y: e.clientY }
+  }
+
+  function aoMoverCelula(e) {
+    const origem = origemArrasteRef.current
+    if (!origem || processando || fim) return
+    const dx = e.clientX - origem.x
+    const dy = e.clientY - origem.y
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < LIMIAR_ARRASTE) return
+
+    const linha = Math.floor(origem.indice / N)
+    const coluna = origem.indice % N
+    let alvo = null
+    if (Math.abs(dx) > Math.abs(dy)) {
+      if (dx > 0 && coluna < N - 1) alvo = origem.indice + 1
+      else if (dx < 0 && coluna > 0) alvo = origem.indice - 1
+    } else {
+      if (dy > 0 && linha < N - 1) alvo = origem.indice + N
+      else if (dy < 0 && linha > 0) alvo = origem.indice - N
+    }
+
+    origemArrasteRef.current = null // consome o gesto — só uma troca por arraste
+    setSelecionada(null)
+    if (alvo !== null) tentarTroca(origem.indice, alvo)
+  }
+
+  function aoSoltarCelula() {
+    origemArrasteRef.current = null
+  }
+
   async function resolverCascatas(b) {
     let atual = b
     let ganhoTotal = 0
@@ -119,27 +159,16 @@ export default function JogoColheita({ onFechar }) {
     return ganhoTotal
   }
 
-  async function tocar(i) {
-    if (processando || fim) return
-    if (selecionada === null) {
-      setSelecionada(i)
-      return
-    }
-    if (selecionada === i) {
-      setSelecionada(null)
-      return
-    }
-    if (!saoVizinhas(selecionada, i)) {
-      setSelecionada(i)
-      return
-    }
+  // Troca duas células vizinhas e resolve as cascatas resultantes. Usada
+  // tanto pelo deslize (gesto principal) quanto pelo toque duplo (fallback
+  // de acessibilidade para teclado/mouse sem arrastar).
+  async function tentarTroca(a, bIdx) {
+    if (processando || fim || !saoVizinhas(a, bIdx)) return
 
-    // Troca as duas frutas
     setProcessando(true)
     const trocado = [...tabuleiro]
-    ;[trocado[selecionada], trocado[i]] = [trocado[i], trocado[selecionada]]
+    ;[trocado[a], trocado[bIdx]] = [trocado[bIdx], trocado[a]]
     setTabuleiro(trocado)
-    setSelecionada(null)
     await pausa(250)
 
     if (acharCombinacoes(trocado).size === 0) {
@@ -163,6 +192,25 @@ export default function JogoColheita({ onFechar }) {
       }
     }
     setProcessando(false)
+  }
+
+  function tocar(i) {
+    if (processando || fim) return
+    if (selecionada === null) {
+      setSelecionada(i)
+      return
+    }
+    if (selecionada === i) {
+      setSelecionada(null)
+      return
+    }
+    if (!saoVizinhas(selecionada, i)) {
+      setSelecionada(i)
+      return
+    }
+    const origem = selecionada
+    setSelecionada(null)
+    tentarTroca(origem, i)
   }
 
   function reiniciar() {
@@ -212,12 +260,16 @@ export default function JogoColheita({ onFechar }) {
 
         {/* Tabuleiro */}
         <div className="relative">
-          <div className="grid grid-cols-6 gap-1.5 rounded-2xl bg-white p-2.5">
+          <div className="grid grid-cols-6 gap-1.5 rounded-2xl bg-white p-2.5" style={{ touchAction: 'none' }}>
             {tabuleiro.map((fruta, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => tocar(i)}
+                onPointerDown={(e) => aoPressionarCelula(e, i)}
+                onPointerMove={aoMoverCelula}
+                onPointerUp={aoSoltarCelula}
+                onPointerCancel={aoSoltarCelula}
                 className={`flex aspect-square items-center justify-center rounded-lg text-2xl transition-all duration-200 motion-reduce:transition-none ${
                   selecionada === i
                     ? 'scale-110 bg-ouro-claro ring-2 ring-ouro'
@@ -261,7 +313,7 @@ export default function JogoColheita({ onFechar }) {
         </div>
 
         <p className="mt-3 text-center text-[11px] text-verde/70">
-          Toque numa fruta e depois na vizinha para trocá-las de lugar.
+          {ingles ? 'Swipe a fruit up, down, left or right to swap it with its neighbor.' : 'Deslize uma fruta para cima, baixo, esquerda ou direita para trocá-la com a vizinha.'}
         </p>
       </div>
     </div>
