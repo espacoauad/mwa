@@ -6,8 +6,8 @@ export default function BotaoWhatsApp() {
   const { diaAtual } = useApp()
   const { ingles } = useIdioma()
   const mensagem = encodeURIComponent(ingles
-    ? `Hello! I’m an MWA participant | 30-Day Journey, Day ${diaAtual}.`
-    : `Olá! Sou aluna do MWA | Jornada de 30 Dias, Dia ${diaAtual}.`)
+    ? `Hello! I’m an MWA participant | 90-Day Journey, Day ${diaAtual}.`
+    : `Olá! Sou aluna do MWA | Jornada de 90 Dias, Dia ${diaAtual}.`)
   const link = `https://wa.me/5562994246775?text=${mensagem}`
 
   return (

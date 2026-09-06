@@ -5,12 +5,12 @@
 // - Idempotente: o mesmo evento nunca é processado 2x (índice único no banco).
 // - Trata os 8 eventos: aprovada, completa, pendente, cancelada, expirada,
 //   reembolso, chargeback, expirada.  Aprovação libera; reembolso/chargeback bloqueia.
-// - Diferencia os 3 produtos pelo product.id oficial (secrets HOTMART_PROD_*).
+// - Diferencia os produtos pelo product.id oficial (secrets HOTMART_PROD_*).
+//   Único produto à venda hoje: o Programa de 90 Dias.
 // - Acesso NUNCA é liberado pelo navegador — só por aqui.
 //
 // Secrets necessários (Edge Functions → Secrets):
 //   HOTMART_HOTTOK          token do webhook (obrigatório)
-//   HOTMART_PROD_21D        product.id do programa 21 dias
 //   HOTMART_PROD_90D        product.id do programa 90 dias
 //   HOTMART_PROD_SESSAO     product.id da sessão individual
 //   SITE_URL               ex.: https://metodomwa.com.br  (link de resgate)
@@ -25,7 +25,6 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 
 const HOTTOK = Deno.env.get("HOTMART_HOTTOK") ?? "";
 const MAP_PRODUTO: Record<string, string> = {
-  [Deno.env.get("HOTMART_PROD_21D") ?? "__21d__"]: "21d",
   [Deno.env.get("HOTMART_PROD_90D") ?? "__90d__"]: "90d",
   [Deno.env.get("HOTMART_PROD_SESSAO") ?? "__sessao__"]: "sessao",
 };
@@ -93,28 +92,6 @@ async function enviarEmail(to: string, subject: string, html: string) {
 }
 
 // ── liberações ──────────────────────────────────────────────────────────────
-async function liberar21d(compra: any) {
-  // Cliente nova: gera cupom, envia e-mail de resgate
-  const codigo = `MWA-${Date.now()}-${crypto.randomUUID().slice(0, 6)}`.toUpperCase();
-  await supabase.from("mwa_cupons").insert({
-    codigo, ativo: true, usado: false, origem: "hotmart",
-    detalhes: { compra_id: compra.id, buyer_email: compra.buyer_email, produto: "21d" },
-  });
-  await supabase.from("mwa_compras").update({
-    liberado: true, liberado_em: new Date().toISOString(),
-    detalhes: { ...compra.detalhes, cupom: codigo },
-  }).eq("id", compra.id);
-
-  const site = Deno.env.get("SITE_URL") ?? "https://metodomwa.com.br";
-  await enviarEmail(
-    compra.buyer_email,
-    "Seu acesso ao MWA — Programa 21 dias",
-    `<p>Olá! Seu acesso ao <b>Programa 21 dias</b> está liberado.</p>
-     <p>Seu código: <b>${codigo}</b></p>
-     <p>Resgate e crie sua conta: <a href="${site}/resgate?cupom=${codigo}">${site}/resgate</a></p>`,
-  );
-}
-
 async function liberar90d(compra: any) {
   // Cliente já logada: vincula pela e-mail e cria o programa de 90 dias
   const { data: perfil } = await supabase
@@ -186,7 +163,7 @@ async function bloquear(compra: any, novoStatus: string) {
     status: novoStatus, liberado: false,
     sessao_status: compra.produto === "sessao" ? "reembolsada" : compra.sessao_status,
   }).eq("id", compra.id);
-  // revoga programa (21d/90d) ligado a esta compra
+  // revoga o programa (90d) ligado a esta compra
   await supabase.from("mwa_programas")
     .update({ status: "cancelado" }).eq("compra_id", compra.id);
 }
@@ -255,8 +232,7 @@ Deno.serve(async (req) => {
       case "PURCHASE_COMPLETE": {
         const compra = await upsertCompra(ev, produto, ev.event === "PURCHASE_COMPLETE" ? "completa" : "aprovada");
         if (!compra.liberado) {
-          if (produto === "21d") await liberar21d(compra);
-          else if (produto === "90d") await liberar90d(compra);
+          if (produto === "90d") await liberar90d(compra);
           else if (produto === "sessao") await registrarSessao(compra);
         }
         break;

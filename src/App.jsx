@@ -18,8 +18,6 @@ import ModalAdicionarAlimento from './components/alimentacao/ModalAdicionarAlime
 import LembretePesagem from './components/progresso/LembretePesagem.jsx'
 import Conclusao90Dias from './components/game/Conclusao90Dias.jsx'
 import AdminApp from './components/admin/AdminApp.jsx'
-import LandingVendas from './components/vendas/LandingVendas.jsx'
-import ResgateCupom from './components/vendas/ResgateCupom.jsx'
 import PreviewLanches from './components/dicas/PreviewLanches.jsx'
 import ModoDeRevisao from './components/admin/MododeRevisao.jsx'
 import { ehDiaPesagem } from './utils/pesagensReminder.js'
@@ -207,8 +205,6 @@ function AppInner() {
 export default function App() {
   // Páginas públicas (fora do app logado)
   const rota = window.location.pathname
-  if (rota === '/vendas') return <LandingVendas />
-  if (rota === '/resgate') return <ResgateCupom />
   if (rota === '/preview-lanches') return <IdiomaProvider><PreviewLanches /></IdiomaProvider>
 
   return (
