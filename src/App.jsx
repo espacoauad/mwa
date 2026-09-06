@@ -95,7 +95,7 @@ function AppInner() {
   }, [sessao, usuario, diaAtual, totalDias])
 
   // Lembrete diário rotativo das funções do app (Reforçando Conceitos,
-  // exercício, Fazenda, Lente da Consciência, jogo da semana, Versículo)
+  // exercício, Lente da Consciência, jogo da semana, Versículo)
   useEffect(() => {
     const userId = sessao?.user?.id
     if (usuario && diaAtual && hoje && userId && !acessoBloqueado && usuario.role !== 'admin') {

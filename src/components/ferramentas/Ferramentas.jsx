@@ -2,6 +2,7 @@ import { lazy, Suspense, useMemo, useState } from 'react'
 import { Calculator, Flame, Trash2, Search, BookOpen } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { ALIMENTOS, macrosDoAlimento } from '../../data/alimentos.js'
+import { nomeAlimento } from '../../utils/alimentos.js'
 import { TIPOS_EXERCICIO, INTENSIDADES, calcularGastoCalorico } from '../../data/exercicios.js'
 import Botao from '../ui/Botao.jsx'
 import CampoNumero from '../ui/CampoNumero.jsx'
@@ -21,7 +22,6 @@ const JogoBatalhaSaciedade = lazy(() => import('../game/JogoBatalhaSaciedade.jsx
 const JogoDetetiveRotulos = lazy(() => import('../game/JogoDetetiveRotulos.jsx'))
 const JogoCorridaEscolha = lazy(() => import('../game/JogoCorridaEscolha.jsx'))
 const JogoColheita = lazy(() => import('../game/JogoColheita.jsx'))
-const MwaFarm = lazy(() => import('../game/MwaFarm.jsx'))
 
 function CalculadoraMacros() {
   const { ingles } = useIdioma()
@@ -70,12 +70,12 @@ function CalculadoraMacros() {
                 onClick={() => {
                   setAlimentoId(a.id)
                   setQuantidade(String(a.porcao))
-                  setBusca(a.nome)
+                  setBusca(nomeAlimento(a, ingles))
                 }}
                 className="w-full px-3 py-2.5 text-left text-sm text-verde/80 transition-colors hover:bg-sage-claro"
               >
                 {a.suplemento && '🌿 '}
-                {a.nome}
+                {nomeAlimento(a, ingles)}
               </button>
             </li>
           ))}
@@ -124,6 +124,13 @@ function CalculadoraExercicio() {
   const gasto = calcularGastoCalorico(tipoId, intensidade, Number(duracao), usuario.peso)
   const tipo = TIPOS_EXERCICIO.find((t) => t.id === tipoId)
 
+  // Exercícios já registrados guardam o nome em português; traduz na exibição
+  // buscando o tipo correspondente pelo nome salvo.
+  function nomeTipoRegistrado(nomeSalvo) {
+    if (!ingles) return nomeSalvo
+    return TIPOS_EXERCICIO.find((t) => t.nome === nomeSalvo)?.nomeEn ?? nomeSalvo
+  }
+
   function registrar() {
     adicionarExercicio({
       tipo: tipo.nome,
@@ -153,7 +160,7 @@ function CalculadoraExercicio() {
         >
           {TIPOS_EXERCICIO.map((t) => (
             <option key={t.id} value={t.id}>
-              {t.emoji} {t.nome}
+              {t.emoji} {ingles ? t.nomeEn : t.nome}
             </option>
           ))}
         </select>
@@ -167,12 +174,12 @@ function CalculadoraExercicio() {
               key={i.id}
               type="button"
               onClick={() => setIntensidade(i.id)}
-              title={i.descricao}
+              title={ingles ? i.descricaoEn : i.descricao}
               className={`rounded-lg border-2 py-2.5 text-sm font-semibold transition-all ${
                 intensidade === i.id ? 'border-sage bg-sage-claro text-verde' : 'border-sage/25 bg-white text-verde/80'
               }`}
             >
-              {i.label}
+              {ingles ? i.labelEn : i.label}
             </button>
           ))}
         </div>
@@ -206,13 +213,13 @@ function CalculadoraExercicio() {
             {exerciciosHoje.map((e) => (
               <li key={e.id} className="flex items-center justify-between rounded-lg bg-creme px-3 py-2 text-sm">
                 <span className="font-medium text-verde">
-                  {e.emoji} {e.tipo} · {e.duracaoMin} min
+                  {e.emoji} {nomeTipoRegistrado(e.tipo)} · {e.duracaoMin} min
                 </span>
                 <span className="flex items-center gap-2">
                   <strong className="text-verde">{e.gastoCalorico} kcal</strong>
                   <button
                     type="button"
-                    aria-label={`${ingles ? 'Delete' : 'Excluir'} ${e.tipo}`}
+                    aria-label={`${ingles ? 'Delete' : 'Excluir'} ${nomeTipoRegistrado(e.tipo)}`}
                     onClick={() => removerExercicio(e.id)}
                     className="flex min-h-11 min-w-11 items-center justify-center text-verde/40 hover:text-red-700"
                   >
@@ -347,23 +354,6 @@ export default function Ferramentas() {
         </span>
       </button>
 
-      {/* MWA FARM: fazenda animada que cresce sozinha ao longo da jornada */}
-      <button
-        type="button"
-        onClick={() => setJogoAtivo('fazenda')}
-        className="mt-4 flex w-full items-center gap-4 rounded-2xl bg-gradient-to-r from-sky-100 to-sage-claro p-5 text-left transition-transform active:scale-[0.99]"
-      >
-        <span className="text-3xl">🌻</span>
-        <span className="flex-1">
-          <span className="block font-serif text-lg font-semibold italic text-verde">MWA FARM</span>
-          <span className="text-sm text-verde/80">
-            {ingles
-              ? 'Watch your farm grow on its own, day by day, as your journey unfolds.'
-              : 'Veja sua fazenda crescer sozinha, dia a dia, conforme sua jornada avança.'}
-          </span>
-        </span>
-      </button>
-
       {/* Prateleira A — jogos de nutrição */}
       <h2 className="mt-8 font-serif text-lg font-semibold italic text-verde">
         {ingles ? 'Nutrition games' : 'Jogos de Nutrição'}
@@ -434,7 +424,6 @@ export default function Ferramentas() {
         {jogoAtivo === 'rotulos' && <JogoDetetiveRotulos onFechar={fecharJogo} />}
         {jogoAtivo === 'corrida' && <JogoCorridaEscolha onFechar={fecharJogo} />}
         {jogoAtivo === 'colheita' && <JogoColheita onFechar={fecharJogo} />}
-        {jogoAtivo === 'fazenda' && <MwaFarm onFechar={fecharJogo} />}
       </Suspense>
       {lenteAberta && <LenteConsciencia onFechar={() => setLenteAberta(false)} />}
       {versiculoAberto && <VersiculoDoDiaModal onFechar={() => setVersiculoAberto(false)} />}

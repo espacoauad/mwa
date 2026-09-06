@@ -1,5 +1,5 @@
 // Lembrete diário rotativo das funções do app (Reforçando Conceitos,
-// exercício, MWA Farm, Lente da Consciência, um jogo diferente cada
+// exercício, Lente da Consciência, um jogo diferente cada
 // sexta, Versículo do Dia aos domingos) — dispara na primeira abertura
 // do app do dia, sem esperar horário (diferente do lembrete da Estrela
 // do Dia, que espera até 18h). Reaproveita a permissão de notificação já
@@ -8,8 +8,7 @@
 // Os 6 jogos abaixo são copiados de src/components/ferramentas/Ferramentas.jsx
 // (JOGOS_NUTRICAO + JOGOS_PAUSA) em vez de importados de lá: este arquivo
 // é carregado por `node --test`, que não interpreta .jsx — importar um
-// .jsx direto quebra com ERR_UNKNOWN_FILE_EXTENSION (mesmo problema já
-// corrigido antes para src/data/farm/integridade.test.js).
+// .jsx direto quebra com ERR_UNKNOWN_FILE_EXTENSION.
 const JOGOS_SEXTA = [
   {
     id: 'prato',
@@ -61,10 +60,10 @@ export function podeNotificar() {
 
 // Decide qual função lembrar hoje, a partir do dia da semana real
 // (calendário, não dia do programa). Retorna um id fixo, ou null nos
-// dias sem lembrete (sábado).
+// dias sem lembrete (quarta e sábado).
 export function funcaoDoDia(dataISO) {
   const diaSemana = new Date(`${dataISO}T00:00:00`).getDay() // 0=domingo .. 6=sábado
-  const mapa = { 0: 'versiculo', 1: 'conceitos', 2: 'exercicio', 3: 'fazenda', 4: 'lente', 5: 'jogo', 6: null }
+  const mapa = { 0: 'versiculo', 1: 'conceitos', 2: 'exercicio', 3: null, 4: 'lente', 5: 'jogo', 6: null }
   return mapa[diaSemana]
 }
 
@@ -86,11 +85,6 @@ function mensagemFuncao(tipo, diaAtual, ingles) {
     return ingles
       ? { titulo: '🔥 Have you exercised today?', corpo: 'Log it and see how it helps your calorie goal.' }
       : { titulo: '🔥 Já fez exercício hoje?', corpo: 'Registre e veja quanto isso ajuda na sua meta de calorias.' }
-  }
-  if (tipo === 'fazenda') {
-    return ingles
-      ? { titulo: '🌻 Your farm is growing', corpo: 'Are you planting habits to watch your results bloom?' }
-      : { titulo: '🌻 Sua fazenda está crescendo', corpo: 'Está plantando hábitos pra ver seu resultado florescer?' }
   }
   if (tipo === 'lente') {
     return ingles

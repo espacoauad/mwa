@@ -6,7 +6,7 @@ test('funcaoDoDia mapeia cada dia da semana pra função certa', () => {
   assert.equal(funcaoDoDia('2026-08-16'), 'versiculo') // domingo
   assert.equal(funcaoDoDia('2026-08-17'), 'conceitos') // segunda
   assert.equal(funcaoDoDia('2026-08-18'), 'exercicio') // terça
-  assert.equal(funcaoDoDia('2026-08-19'), 'fazenda') // quarta
+  assert.equal(funcaoDoDia('2026-08-19'), null) // quarta
   assert.equal(funcaoDoDia('2026-08-20'), 'lente') // quinta
   assert.equal(funcaoDoDia('2026-08-21'), 'jogo') // sexta
   assert.equal(funcaoDoDia('2026-08-22'), null) // sábado

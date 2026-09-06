@@ -85,9 +85,3 @@ export function DemoFerramentasProvider({ diaAtual = 20, children }) {
   }
   return <DemoContext.Provider value={valor}>{children}</DemoContext.Provider>
 }
-
-// Provider simples para o demo da MWA FARM: só precisa de diaAtual variável,
-// nada mais do que MwaFarm.jsx consome (useApp() -> { diaAtual }).
-export function DemoFarmProvider({ diaAtual, children }) {
-  return <DemoContext.Provider value={{ diaAtual }}>{children}</DemoContext.Provider>
-}
